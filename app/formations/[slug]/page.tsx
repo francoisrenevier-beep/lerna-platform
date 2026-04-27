@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
 type Module = {
   id: string
@@ -21,21 +21,26 @@ type Formation = {
   duree_estimee_minutes: number
 }
 
-export default function FormationDetailPage({ params }: any) {
+export default function FormationDetailPage() {
   const [formation, setFormation] = useState<Formation | null>(null)
   const [modules, setModules] = useState<Module[]>([])
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
-  const [errorMsg, setErrorMsg] = useState("")
+  const [slug, setSlug] = useState("")
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
+    const parts = pathname.split("/")
+    const currentSlug = parts[parts.length - 1]
+    setSlug(currentSlug)
+
     const getData = async () => {
       try {
         const { data: f, error: fError } = await supabase
           .from("formations")
           .select("id, titre, description, categorie, niveau, duree_estimee_minutes")
-          .eq("slug", params.slug)
+          .eq("slug", currentSlug)
           .single()
 
         if (fError || !f) {
@@ -55,27 +60,18 @@ export default function FormationDetailPage({ params }: any) {
         if (m) setModules(m)
         setLoading(false)
       } catch (e) {
-        setErrorMsg("Erreur de chargement")
+        setNotFound(true)
         setLoading(false)
       }
     }
     getData()
-  }, [params.slug])
+  }, [pathname])
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center flex-col gap-2">
         <p className="text-[#1B2D5B] text-sm">Chargement...</p>
-        <p className="text-xs text-gray-400">URL: {process.env.NEXT_PUBLIC_SUPABASE_URL}</p>
-      </div>
-    )
-  }
-
-  if (errorMsg) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <p className="text-red-500 text-lg font-bold mb-2">{errorMsg}</p>
-        <a href="/formations" className="text-[#3DBFA0] hover:underline text-sm">Retour aux formations</a>
+        <p className="text-xs text-gray-400">slug detecte: {slug}</p>
       </div>
     )
   }
@@ -84,7 +80,7 @@ export default function FormationDetailPage({ params }: any) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
         <p className="text-[#1B2D5B] text-lg font-bold mb-2">Formation introuvable</p>
-        <p className="text-gray-400 text-sm mb-4">slug: {params.slug}</p>
+        <p className="text-gray-400 text-sm mb-4">slug: {slug}</p>
         <a href="/formations" className="text-[#3DBFA0] hover:underline text-sm">Retour aux formations</a>
       </div>
     )
