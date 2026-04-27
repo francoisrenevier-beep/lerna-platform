@@ -25,41 +25,67 @@ export default function FormationDetailPage({ params }: { params: { slug: string
   const [formation, setFormation] = useState<Formation | null>(null)
   const [modules, setModules] = useState<Module[]>([])
   const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
+  const [errorMsg, setErrorMsg] = useState("")
   const router = useRouter()
 
   useEffect(() => {
     const getData = async () => {
-      const result = await supabase.auth.getUser()
-      const user = result.data.user
-      if (!user) {
-        router.push("/connexion")
-        return
+      try {
+        const { data: f, error: fError } = await supabase
+          .from("formations")
+          .select("id, titre, description, categorie, niveau, duree_estimee_minutes")
+          .eq("slug", params.slug)
+          .single()
+
+        if (fError || !f) {
+          setNotFound(true)
+          setLoading(false)
+          return
+        }
+
+        setFormation(f)
+
+        const { data: m } = await supabase
+          .from("modules")
+          .select("id, titre, description, ordre, duree_minutes")
+          .eq("formation_id", f.id)
+          .order("ordre")
+
+        if (m) setModules(m)
+        setLoading(false)
+      } catch (e) {
+        setErrorMsg("Erreur de chargement")
+        setLoading(false)
       }
-      const { data: f } = await supabase
-        .from("formations")
-        .select("id, titre, description, categorie, niveau, duree_estimee_minutes")
-        .eq("slug", params.slug)
-        .single()
-      if (!f) {
-        router.push("/formations")
-        return
-      }
-      setFormation(f)
-      const { data: m } = await supabase
-        .from("modules")
-        .select("id, titre, description, ordre, duree_minutes")
-        .eq("formation_id", f.id)
-        .order("ordre")
-      if (m) setModules(m)
-      setLoading(false)
     }
     getData()
-  }, [params.slug, router])
+  }, [params.slug])
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center flex-col gap-2">
         <p className="text-[#1B2D5B] text-sm">Chargement...</p>
+        <p className="text-xs text-gray-400">URL: {process.env.NEXT_PUBLIC_SUPABASE_URL}</p>
+      </div>
+    )
+  }
+
+  if (errorMsg) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p className="text-red-500 text-lg font-bold mb-2">{errorMsg}</p>
+        <a href="/formations" className="text-[#3DBFA0] hover:underline text-sm">Retour aux formations</a>
+      </div>
+    )
+  }
+
+  if (notFound) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p className="text-[#1B2D5B] text-lg font-bold mb-2">Formation introuvable</p>
+        <p className="text-gray-400 text-sm mb-4">slug: {params.slug}</p>
+        <a href="/formations" className="text-[#3DBFA0] hover:underline text-sm">Retour aux formations</a>
       </div>
     )
   }
