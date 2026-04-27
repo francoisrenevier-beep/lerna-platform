@@ -21,7 +21,7 @@ type Formation = {
   duree_estimee_minutes: number
 }
 
-export default function FormationDetailPage({ params }: { params: { slug: string } }) {
+export default function FormationDetailPage({ params }: any) {
   const [formation, setFormation] = useState<Formation | null>(null)
   const [modules, setModules] = useState<Module[]>([])
   const [loading, setLoading] = useState(true)
