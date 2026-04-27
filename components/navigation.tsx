@@ -39,7 +39,7 @@ export function Navigation() {
               Tarifs
             </a>
             <a
-              href="#connexion"
+              href="/connexion"
               className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
             >
               Connexion
@@ -94,7 +94,7 @@ export function Navigation() {
               Tarifs
             </a>
             <a
-              href="#connexion"
+              href="/connexion"
               className="block py-2 text-sm font-medium text-foreground/80"
             >
               Connexion
