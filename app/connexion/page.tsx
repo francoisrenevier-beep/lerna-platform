@@ -22,7 +22,7 @@ export default function ConnexionPage() {
     if (error) {
       setMessage("Erreur : " + error.message)
     } else {
-      router.push("/app/dashboard")
+      router.push("/dashboard")
     }
     setLoading(false)
   }
