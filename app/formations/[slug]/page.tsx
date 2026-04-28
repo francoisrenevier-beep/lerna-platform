@@ -193,7 +193,7 @@ export default function FormationDetailPage() {
                 className={`bg-white rounded-xl border shadow-sm p-5 flex items-center gap-4 ${accessible ? "border-gray-100 cursor-pointer hover:shadow-md transition-shadow" : "border-gray-100 opacity-50 cursor-not-allowed"}`}
                 onClick={function() {
                   if (accessible && formation) {
-                    router.push("/formations/" + formation.id + "/modules/" + m.id)
+                    router.push("/formations/" + formation.slug + "/modules/" + m.id)
                   }
                 }}
               >
