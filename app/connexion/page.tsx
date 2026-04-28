@@ -87,14 +87,16 @@ export default function ConnexionPage() {
       return
     }
 
-    const { error: liaisonError } = await supabase
-      .from("institution_profils")
-      .insert({
-        profil_id: authData.user.id,
-        institution_id: institution.id,
-        role: "collaborateur",
-        statut: "actif"
-      })
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+const { error: liaisonError } = await supabase
+  .from("institution_profils")
+  .insert({
+    profil_id: authData.user.id,
+    institution_id: institution.id,
+    role: "collaborateur",
+    statut: "actif"
+  })
 
     if (liaisonError) {
       setMessageType("error")
