@@ -5,6 +5,9 @@ import { supabase } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
 import { Module1PPH } from "@/app/modules/pph-module-1"
 import { Module2PPH } from "@/app/modules/pph-module-2"
+import { Module3PPH } from "@/app/modules/pph-module-3"
+import { Module4PPH } from "@/app/modules/pph-module-4"
+import { Module5PPH } from "@/app/modules/pph-module-5"
 
 type ModuleSimple = {
   id: string
@@ -21,6 +24,9 @@ type FormationType = {
 const MODULE_COMPONENTS: Record<string, React.ComponentType> = {
   "f8bd6cc6-b91e-4542-a9c4-53001ddd9090": Module1PPH,
   "bd21a4e9-09bb-4d41-9631-51ed75088eec": Module2PPH,
+  "fa177ae1-c657-46cb-a607-549ba13c8afc": Module3PPH,
+  "d9e48c2e-b354-48e6-9cfe-a699ea31cba2": Module4PPH,
+  "e5c5678a-957c-49a0-9d30-dbf63cea7565": Module5PPH,
 }
 
 export default function ModulePage() {
