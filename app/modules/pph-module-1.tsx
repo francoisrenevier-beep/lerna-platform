@@ -5,6 +5,7 @@ import { PullQuote } from "@/components/module/PullQuote"
 import { HighlightBox } from "@/components/module/HighlightBox"
 import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
+import { TableauComparaison } from "@/components/module/TableauComparaison"
 
 export function Module1PPH() {
   return (
