@@ -103,33 +103,14 @@ export function Module1PPH() {
         <SectionModule eyebrow="Section 1.4" titre="PPH et CIF : convergences et divergences">
           <Texte>Le modele PPH a fortement influence la Classification Internationale du Fonctionnement (CIF) de l OMS (2001). Toutefois, une divergence fondamentale demeure.</Texte>
 
-          <TableauComparaison
-            titre="PPH vs CIF"
-            colonnes={[
-              {
-                titre: "Critere",
-                contenu: ["Nature", "Objectif", "Distinction cle", "Responsabilite"]
-              },
-              {
-                titre: "PPH (Fougeyrollas)",
-                contenu: [
-                  "Modele explicatif",
-                  "Comprendre la dynamique personne-environnement",
-                  "Separe aptitudes et situation de handicap",
-                  "Renvoyee a l environnement"
-                ]
-              },
-              {
-                titre: "CIF (OMS 2001)",
-                contenu: [
-                  "Classification internationale",
-                  "Categoriser les situations",
-                  "Ne distingue pas activite et participation",
-                  "Partagee personne et environnement"
-                ]
-              }
-            ]}
-          />
+          <HighlightBox label="Comparaison PPH vs CIF" couleur="bleu">
+  <Liste couleur="bleu" items={[
+    "PPH : modele explicatif — comprendre la dynamique",
+    "CIF : classification — categoriser les situations",
+    "PPH : separe aptitudes et situation de handicap",
+    "CIF : ne distingue pas activite et participation"
+  ]} />
+</HighlightBox>
 
           <PullQuote>
             En operant cette distinction, le PPH rend impossible l attribution a la personne de la responsabilite des situations de handicap.
