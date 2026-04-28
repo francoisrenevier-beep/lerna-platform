@@ -1,19 +1,16 @@
-
+cat > /tmp/lecteur.py << 'ENDSCRIPT'
+code = '''
 "use client"
 
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
+import { Module1PPH } from "@/app/modules/pph-module-1"
 
-type ModuleType = {
+type ModuleSimple = {
   id: string
   titre: string
-  description: string
-  contenu: string
   ordre: number
-  duree_minutes: number
-  type: string
-  formation_id: string
 }
 
 type FormationType = {
@@ -22,16 +19,17 @@ type FormationType = {
   slug: string
 }
 
-type ModuleSimple = {
-  id: string
-  titre: string
-  ordre: number
+const MODULE_COMPONENTS: Record<string, React.ComponentType> = {
+  "f8bd6cc6-b91e-4542-a9c4-53001ddd9090": Module1PPH,
 }
 
 export default function ModulePage() {
-  const [moduleActuel, setModuleActuel] = useState<ModuleType | null>(null)
   const [formation, setFormation] = useState<FormationType | null>(null)
   const [listeModules, setListeModules] = useState<ModuleSimple[]>([])
+  const [moduleId, setModuleId] = useState("")
+  const [moduleTitre, setModuleTitre] = useState("")
+  const [moduleOrdre, setModuleOrdre] = useState(0)
+  const [moduleDuree, setModuleDuree] = useState(0)
   const [statut, setStatut] = useState("non_commence")
   const [loading, setLoading] = useState(true)
   const [userId, setUserId] = useState<string | null>(null)
@@ -47,8 +45,9 @@ export default function ModulePage() {
       setUserId(user.id)
 
       const parts = pathname.split("/")
-      const moduleId = parts[parts.length - 1]
+      const modId = parts[parts.length - 1]
       const slug = parts[parts.length - 3]
+      setModuleId(modId)
 
       const { data: f } = await supabase
         .from("formations")
@@ -60,11 +59,13 @@ export default function ModulePage() {
 
       const { data: m } = await supabase
         .from("modules")
-        .select("id, titre, description, contenu, ordre, duree_minutes, type, formation_id")
-        .eq("id", moduleId)
+        .select("id, titre, ordre, duree_minutes")
+        .eq("id", modId)
         .single()
       if (!m) { router.push("/formations/" + slug); return }
-      setModuleActuel(m)
+      setModuleTitre(m.titre)
+      setModuleOrdre(m.ordre)
+      setModuleDuree(m.duree_minutes)
 
       const { data: allMods } = await supabase
         .from("modules")
@@ -77,13 +78,13 @@ export default function ModulePage() {
         .from("progression")
         .select("statut")
         .eq("profil_id", user.id)
-        .eq("module_id", moduleId)
+        .eq("module_id", modId)
         .single()
       if (prog) setStatut(prog.statut)
       else {
         await supabase.from("progression").upsert({
           profil_id: user.id,
-          module_id: moduleId,
+          module_id: modId,
           formation_id: f.id,
           statut: "en_cours"
         }, { onConflict: "profil_id,module_id" })
@@ -96,18 +97,18 @@ export default function ModulePage() {
   }, [pathname, router])
 
   const marquerTermine = async () => {
-    if (!userId || !moduleActuel || !formation) return
+    if (!userId || !formation) return
     setSaving(true)
     await supabase.from("progression").upsert({
       profil_id: userId,
-      module_id: moduleActuel.id,
+      module_id: moduleId,
       formation_id: formation.id,
       statut: "termine"
     }, { onConflict: "profil_id,module_id" })
     setStatut("termine")
 
     const tries = listeModules.slice().sort(function(a, b) { return a.ordre - b.ordre })
-    const idx = tries.findIndex(function(m) { return m.id === moduleActuel.id })
+    const idx = tries.findIndex(function(m) { return m.id === moduleId })
     const modSuivant = tries[idx + 1]
 
     setSaving(false)
@@ -132,84 +133,85 @@ export default function ModulePage() {
   }
 
   const tries = listeModules.slice().sort(function(a, b) { return a.ordre - b.ordre })
-  const idx = tries.findIndex(function(m) { return m.id === moduleActuel?.id })
+  const idx = tries.findIndex(function(m) { return m.id === moduleId })
   const modPrev = tries[idx - 1]
   const modNext = tries[idx + 1]
   const formSlug = formation ? formation.slug : ""
+  const ModuleContent = MODULE_COMPONENTS[moduleId]
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col">
-        <div className="p-6 border-b border-white/10">
-          <h1 className="text-xl font-bold">LERNA</h1>
-        </div>
-        <div className="p-4 border-b border-white/10">
-          <p className="text-xs text-white/40 mb-1">Formation</p>
-          <p className="text-xs text-white/80 font-medium">{formation?.titre}</p>
-        </div>
-        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-          {tries.map(function(m, i) {
-            const estActif = m.id === moduleActuel?.id
-            return (
-              <div key={i} className={"flex items-center gap-2 px-3 py-2 rounded-lg text-xs " + (estActif ? "bg-white/10 text-white font-medium" : "text-white/50")}>
-                <span className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">{m.ordre}</span>
-                <span>{m.titre}</span>
-              </div>
-            )
-          })}
-        </nav>
-        <div className="p-4 border-t border-white/10">
-          <a href={"/formations/" + formSlug} className="text-xs text-white/50 hover:text-white">
-            Retour a la formation
+    <div className="min-h-screen bg-white">
+      <div className="sticky top-0 z-50 bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-4">
+          <a href={"/formations/" + formSlug} className="text-[#3DBFA0] hover:text-[#2ea88b] text-sm">
+            ← Retour
           </a>
-        </div>
-      </aside>
-
-      <main className="flex-1 flex flex-col">
-        <div className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between">
+          <div className="h-4 w-px bg-gray-200" />
           <div>
-            <p className="text-xs text-gray-400">Module {moduleActuel?.ordre} sur {listeModules.length}</p>
-            <h2 className="text-lg font-bold text-[#1B2D5B]">{moduleActuel?.titre}</h2>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">{moduleActuel?.duree_minutes} min</span>
-            {statut === "termine" && (
-              <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-2 py-1 rounded-full">Termine</span>
-            )}
+            <p className="text-xs text-gray-400">{formation?.titre}</p>
+            <p className="text-sm font-semibold text-[#1B2D5B]">Module {moduleOrdre} — {moduleTitre}</p>
           </div>
         </div>
-
-        <div className="flex-1 p-8 max-w-3xl mx-auto w-full">
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8 mb-6">
-            {moduleActuel?.contenu?.split("\n").map(function(para, i) {
-              if (para.trim() === "") return <br key={i} />
-              return <p key={i} className="text-gray-700 mb-4 leading-relaxed">{para}</p>
-            })}
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div>
-              {modPrev && (
-                <a href={"/formations/" + formSlug + "/modules/" + modPrev.id} className="text-sm text-gray-400 hover:text-[#1B2D5B]">
-                  Module precedent
-                </a>
-              )}
-            </div>
-            <div className="flex gap-3">
-              {statut !== "termine" && (
-                <button onClick={marquerTermine} disabled={saving} className="bg-[#3DBFA0] text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-[#2ea88b] disabled:opacity-50">
-                  {saving ? "Enregistrement..." : "Marquer comme termine"}
-                </button>
-              )}
-              {statut === "termine" && modNext && (
-                <a href={"/formations/" + formSlug + "/modules/" + modNext.id} className="bg-[#1B2D5B] text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-[#152347]">
-                  Module suivant
-                </a>
-              )}
-            </div>
-          </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-gray-400">{moduleDuree} min</span>
+          {statut === "termine" ? (
+            <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-3 py-1 rounded-full">
+              Termine
+            </span>
+          ) : (
+            <button
+              onClick={marquerTermine}
+              disabled={saving}
+              className="bg-[#3DBFA0] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
+            >
+              {saving ? "..." : "Marquer comme termine"}
+            </button>
+          )}
+          {statut === "termine" && modNext && (
+            
+              href={"/formations/" + formSlug + "/modules/" + modNext.id}
+              className="bg-[#1B2D5B] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#152347] transition-colors"
+            >
+              Module suivant →
+            </a>
+          )}
         </div>
-      </main>
+      </div>
+
+      <div className="pb-20">
+        {ModuleContent ? (
+          <ModuleContent />
+        ) : (
+          <div className="max-w-3xl mx-auto px-8 py-12">
+            <p className="text-gray-500 text-center">Contenu en cours de preparation...</p>
+          </div>
+        )}
+      </div>
+
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-4 flex items-center justify-between">
+        <div>
+          {modPrev && (
+            <a href={"/formations/" + formSlug + "/modules/" + modPrev.id} className="text-sm text-gray-400 hover:text-[#1B2D5B]">
+              ← Module precedent
+            </a>
+          )}
+        </div>
+        <p className="text-xs text-gray-300">{moduleOrdre} / {listeModules.length}</p>
+        <div>
+          {modNext && statut === "termine" && (
+            <a href={"/formations/" + formSlug + "/modules/" + modNext.id} className="text-sm text-[#3DBFA0] hover:text-[#2ea88b] font-medium">
+              Module suivant →
+            </a>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
+'''
+
+with open('app/formations/[slug]/modules/[moduleId]/page.tsx', 'w') as f:
+    f.write(code)
+print('OK')
+ENDSCRIPT
+python3 /tmp/lecteur.py
