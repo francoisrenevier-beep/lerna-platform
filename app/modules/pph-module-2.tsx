@@ -5,6 +5,7 @@ import { PullQuote } from "@/components/module/PullQuote"
 import { HighlightBox } from "@/components/module/HighlightBox"
 import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
+import { Quiz } from "@/components/module/Quiz"
 
 export function Module2PPH() {
   return (
@@ -151,6 +152,55 @@ export function Module2PPH() {
         </SectionModule>
 
       </div>
+      <Quiz
+  questions={[
+    {
+      question: "Par quoi commence toujours une analyse PPH ?",
+      reponses: [
+        "Par l evaluation des deficiences de la personne",
+        "Par l identification de l habitude de vie ciblee",
+        "Par l analyse de l environnement physique",
+        "Par la consultation du dossier medical"
+      ],
+      bonneReponse: 1,
+      explication: "L analyse PPH commence toujours par l habitude de vie — ce que la personne souhaite realiser. On part de son projet, pas de ses deficiences."
+    },
+    {
+      question: "Combien de dimensions environnementales distingue le PPH ?",
+      reponses: [
+        "Deux : physique et social",
+        "Trois : physique, social et institutionnel",
+        "Quatre : physique, social, technologique et juridique",
+        "Cinq : physique, social, institutionnel, technologique et politique"
+      ],
+      bonneReponse: 3,
+      explication: "Le PPH distingue cinq dimensions environnementales : physique, social et humain, institutionnel et organisationnel, technologique, et politique et juridique."
+    },
+    {
+      question: "Une hypothese PPH relie :",
+      reponses: [
+        "Un diagnostic medical et un traitement",
+        "Une aptitude personnelle et un obstacle environnemental pour expliquer une restriction de participation",
+        "Un objectif professionnel et un resultat attendu",
+        "Une deficience et une incapacite"
+      ],
+      bonneReponse: 1,
+      explication: "Une hypothese PPH relie une aptitude (facteur personnel) avec un obstacle ou facilitateur environnemental pour expliquer comment la situation de handicap est produite."
+    },
+    {
+      question: "L etape 3 de l analyse PPH consiste a :",
+      reponses: [
+        "Lister toutes les deficiences de la personne",
+        "Evaluer la qualite de la participation",
+        "Reperer uniquement les aptitudes pertinentes pour l habitude de vie ciblee",
+        "Construire le plan d action"
+      ],
+      bonneReponse: 2,
+      explication: "L etape 3 consiste a reperer les aptitudes pertinentes — uniquement celles qui concernent l habitude de vie ciblee. On ne dresse pas un bilan exhaustif des deficiences."
+    }
+  ]}
+  onTermine={function() {}}
+/>
     </div>
   )
 }
