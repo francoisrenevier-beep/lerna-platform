@@ -6,6 +6,7 @@ import { HighlightBox } from "@/components/module/HighlightBox"
 import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { TableauComparaison } from "@/components/module/TableauComparaison"
+import { Quiz } from "@/components/module/Quiz"
 
 export function Module1PPH() {
   return (
@@ -137,6 +138,55 @@ export function Module1PPH() {
         </SectionModule>
 
       </div>
+      <Quiz
+  questions={[
+    {
+      question: "Selon le modele PPH, le handicap est :",
+      reponses: [
+        "Une caracteristique permanente de la personne",
+        "Une situation resultant de l interaction entre la personne et son environnement",
+        "Une deficience physique ou mentale",
+        "Un statut administratif reconnu par la loi"
+      ],
+      bonneReponse: 1,
+      explication: "Le PPH definit le handicap comme une situation produite par l interaction entre les facteurs personnels et les facteurs environnementaux — pas comme une caracteristique de la personne."
+    },
+    {
+      question: "Dans le modele PPH, l environnement peut etre :",
+      reponses: [
+        "Uniquement un obstacle a surmonter",
+        "Uniquement un facilitateur a valoriser",
+        "A la fois un obstacle ou un facilitateur selon le contexte",
+        "Neutre et sans influence sur la participation"
+      ],
+      bonneReponse: 2,
+      explication: "L environnement agit soit comme obstacle (il limite la realisation des habitudes de vie) soit comme facilitateur (il la soutient). Cette distinction est au coeur du PPH."
+    },
+    {
+      question: "Qu est-ce qu une habitude de vie dans le PPH ?",
+      reponses: [
+        "Une routine quotidienne imposee par l institution",
+        "Une activite courante ou un role social que la personne souhaite realiser",
+        "Un exercice de reeducation prescrit par un medecin",
+        "Un comportement automatique lie a une deficience"
+      ],
+      bonneReponse: 1,
+      explication: "Les habitudes de vie sont les activites courantes et roles sociaux que la personne souhaite ou doit realiser. Elles constituent le coeur de la participation sociale."
+    },
+    {
+      question: "La principale difference entre le PPH et le modele biomedical est :",
+      reponses: [
+        "Le PPH est plus recent",
+        "Le PPH attribue la responsabilite du handicap a l environnement, pas a la personne",
+        "Le PPH ne s interesse pas aux deficiences",
+        "Le PPH est utilise uniquement en France"
+      ],
+      bonneReponse: 1,
+      explication: "Le modele biomedical attribuait la responsabilite du desavantage a la personne. Le PPH deplace cette responsabilite vers l interaction personne-environnement, ce qui change radicalement la posture professionnelle."
+    }
+  ]}
+  onTermine={function() {}}
+/>
     </div>
   )
 }
