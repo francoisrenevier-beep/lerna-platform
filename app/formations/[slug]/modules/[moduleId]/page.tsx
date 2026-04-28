@@ -166,7 +166,7 @@ export default function ModulePage() {
             </button>
           )}
           {statut === "termine" && modNext && (
-            
+              <a
               href={"/formations/" + formSlug + "/modules/" + modNext.id}
               className="bg-[#1B2D5B] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#152347] transition-colors"
             >
