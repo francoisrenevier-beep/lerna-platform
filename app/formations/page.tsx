@@ -2,65 +2,64 @@
 
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
-import { useRouter } from "next/navigation"
-
-type Module = {
-  id: string
-  titre: string
-  description: string
-  ordre: number
-  duree_minutes: number
-}
+import { useRouter, usePathname } from "next/navigation"
 
 type Formation = {
   id: string
   titre: string
-  description: string
+  slug: string
+  description_courte: string
   categorie: string
   niveau: string
   duree_estimee_minutes: number
 }
 
-export default function FormationDetailPage({ params }: { params: { slug: string } }) {
-  const [formation, setFormation] = useState<Formation | null>(null)
-  const [modules, setModules] = useState<Module[]>([])
+function dureeFormat(minutes: number) {
+  if (minutes < 60) return minutes + " min"
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  return m > 0 ? h + "h" + m : h + "h"
+}
+
+export default function FormationsPage() {
+  const [formations, setFormations] = useState<Formation[]>([])
   const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
-  const [errorMsg, setErrorMsg] = useState("")
+  const [profil, setProfil] = useState<{prenom: string} | null>(null)
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const { data: f, error: fError } = await supabase
-          .from("formations")
-          .select("id, titre, description, categorie, niveau, duree_estimee_minutes")
-          .eq("slug", params.slug)
-          .single()
-
-        if (fError || !f) {
-          setNotFound(true)
-          setLoading(false)
-          return
-        }
-
-        setFormation(f)
-
-        const { data: m } = await supabase
-          .from("modules")
-          .select("id, titre, description, ordre, duree_minutes")
-          .eq("formation_id", f.id)
-          .order("ordre")
-
-        if (m) setModules(m)
-        setLoading(false)
-      } catch (e) {
-        setErrorMsg("Erreur de chargement")
-        setLoading(false)
+      const result = await supabase.auth.getUser()
+      const user = result.data.user
+      if (!user) {
+        router.push("/connexion")
+        return
       }
+
+      const { data: p } = await supabase
+        .from("profils")
+        .select("prenom")
+        .eq("id", user.id)
+        .single()
+      if (p) setProfil(p)
+
+      const { data } = await supabase
+        .from("formations")
+        .select("id, titre, slug, description_courte, categorie, niveau, duree_estimee_minutes")
+        .eq("est_publie", true)
+        .eq("est_privee", false)
+        .order("ordre")
+      if (data) setFormations(data)
+      setLoading(false)
     }
     getData()
-  }, [params.slug])
+  }, [router])
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    router.push("/")
+  }
 
   if (loading) {
     return (
@@ -70,31 +69,12 @@ export default function FormationDetailPage({ params }: { params: { slug: string
     )
   }
 
-  if (errorMsg) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <p className="text-red-500 text-lg font-bold mb-2">{errorMsg}</p>
-        <a href="/formations" className="text-[#3DBFA0] hover:underline text-sm">Retour aux formations</a>
-      </div>
-    )
-  }
-
-  if (notFound) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <p className="text-[#1B2D5B] text-lg font-bold mb-2">Formation introuvable</p>
-        <p className="text-gray-400 text-sm mb-4">slug: {params.slug}</p>
-        <a href="/formations" className="text-[#3DBFA0] hover:underline text-sm">Retour aux formations</a>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col">
         <div className="p-6 border-b border-white/10">
           <h1 className="text-xl font-bold">LERNA</h1>
-          <p className="text-xs text-white/50 mt-1">ancrer les competences</p>
+          <p className="text-xs text-white/50 mt-1">ancrer les compétences</p>
         </div>
         <nav className="flex-1 p-4 space-y-1">
           <a href="/dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
@@ -103,55 +83,63 @@ export default function FormationDetailPage({ params }: { params: { slug: string
           <a href="/formations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium">
             📚 Mes formations
           </a>
+          <a href="/progression" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
+            📈 Ma progression
+          </a>
+          <a href="/attestations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
+            🎓 Attestations
+          </a>
         </nav>
         <div className="p-4 border-t border-white/10">
           <button
-            onClick={async () => {
-              await supabase.auth.signOut()
-              router.push("/")
-            }}
+            onClick={handleLogout}
             className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors"
           >
-            Se deconnecter
+            → Se déconnecter
           </button>
         </div>
       </aside>
 
       <main className="flex-1 p-8">
-        <a href="/formations" className="text-sm text-[#3DBFA0] hover:underline mb-6 inline-block">
-          ← Retour aux formations
-        </a>
-
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8 mb-6">
-          <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-2 py-1 rounded-full">
-            {formation?.categorie}
-          </span>
-          <h2 className="text-2xl font-bold text-[#1B2D5B] mt-3 mb-2">{formation?.titre}</h2>
-          <p className="text-gray-500 text-sm mb-4">{formation?.description}</p>
-          <div className="flex gap-4 text-xs text-gray-400">
-            <span>Niveau : {formation?.niveau}</span>
-            <span>{formation?.duree_estimee_minutes} minutes</span>
-            <span>{modules.length} modules</span>
-          </div>
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-[#1B2D5B]">Catalogue des formations</h2>
+          <p className="text-gray-500 mt-1">Toutes les formations disponibles avec votre licence.</p>
         </div>
 
-        <h3 className="text-lg font-semibold text-[#1B2D5B] mb-4">Modules de la formation</h3>
-        <div className="space-y-3">
-          {modules.map(function(m) {
+        {formations.length === 0 && (
+          <div className="text-center py-20 text-gray-400">
+            <p className="text-4xl mb-3">📚</p>
+            <p className="text-sm">Aucune formation disponible pour le moment.</p>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {formations.map(function(f) {
             return (
-              <div
-                key={m.id}
-                className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center gap-4"
+              
+                key={f.id}
+                href={"/formations/" + f.slug}
+                className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 hover:shadow-md transition-shadow group block"
               >
-                <div className="w-10 h-10 rounded-full bg-[#3DBFA0]/10 text-[#3DBFA0] flex items-center justify-center font-bold text-sm flex-shrink-0">
-                  {m.ordre}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-2 py-1 rounded-full">
+                    {f.categorie}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    {dureeFormat(f.duree_estimee_minutes)}
+                  </span>
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-sm font-semibold text-[#1B2D5B]">{m.titre}</h4>
-                  <p className="text-xs text-gray-400 mt-1">{m.description}</p>
+                <h3 className="text-base font-semibold text-[#1B2D5B] mb-2 group-hover:text-[#3DBFA0] transition-colors">
+                  {f.titre}
+                </h3>
+                <p className="text-sm text-gray-500 mb-4">
+                  {f.description_courte}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-400 capitalize">{f.niveau}</span>
+                  <span className="text-xs font-medium text-[#3DBFA0]">Commencer →</span>
                 </div>
-                <span className="text-xs text-gray-400 flex-shrink-0">{m.duree_minutes} min</span>
-              </div>
+              </a>
             )
           })}
         </div>
