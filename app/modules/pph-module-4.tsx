@@ -4,6 +4,7 @@ import { ConceptBox } from "@/components/module/ConceptBox"
 import { PullQuote } from "@/components/module/PullQuote"
 import { HighlightBox } from "@/components/module/HighlightBox"
 import { Texte, Liste } from "@/components/module/Texte"
+import { Quiz } from "@/components/module/Quiz"
 
 export function Module4PPH() {
   return (
@@ -117,6 +118,55 @@ export function Module4PPH() {
         </SectionModule>
 
       </div>
+      <Quiz
+  questions={[
+    {
+      question: "Que signifie le S dans PPH-SMART ?",
+      reponses: [
+        "Simple",
+        "Specifique",
+        "Systematique",
+        "Structurel"
+      ],
+      bonneReponse: 1,
+      explication: "S signifie Specifique : l objectif est cible sur une seule habitude de vie concrete, dans un contexte precis, pour une personne donnee."
+    },
+    {
+      question: "Un objectif PPH-SMART vise principalement a :",
+      reponses: [
+        "Reeduquer la personne pour reduire ses deficiences",
+        "Mesurer la reduction des obstacles environnementaux et l amelioration de la participation sociale",
+        "Evaluer les competences professionnelles de l equipe",
+        "Etablir un diagnostic de la situation de handicap"
+      ],
+      bonneReponse: 1,
+      explication: "Un objectif PPH-SMART ne vise pas a reeduquer la personne. Il mesure la reduction des obstacles environnementaux et l amelioration de la participation sociale."
+    },
+    {
+      question: "Quelle est la difference entre l objectif de participation et l objectif environnemental ?",
+      reponses: [
+        "Il n y a pas de difference, c est la meme chose",
+        "L objectif de participation concerne la personne, l objectif environnemental concerne l action du professionnel",
+        "L objectif de participation est a long terme, l objectif environnemental est a court terme",
+        "L objectif environnemental est redige par le medecin, l objectif de participation par l educateur"
+      ],
+      bonneReponse: 1,
+      explication: "L objectif de participation decrit ce que la personne va pouvoir realiser. L objectif environnemental decrit ce que le professionnel va faire sur l environnement pour rendre cela possible."
+    },
+    {
+      question: "Pourquoi les objectifs flous sont-ils contre-productifs ?",
+      reponses: [
+        "Ils sont trop ambitieux pour etre atteints",
+        "Ils ne permettent pas d evaluer si on a reussi",
+        "Ils demandent trop de ressources",
+        "Ils ne respectent pas le cadre legal"
+      ],
+      bonneReponse: 1,
+      explication: "Les objectifs flous comme ameliorer l autonomie ne disent pas quelle autonomie, dans quel contexte, comment la mesurer et a quelle echeance. Sans ces precisions, il est impossible d evaluer le succes."
+    }
+  ]}
+  onTermine={function() {}}
+/>
     </div>
   )
 }
