@@ -1,5 +1,3 @@
-cat > /tmp/lecteur.py << 'ENDSCRIPT'
-code = '''
 "use client"
 
 import { useEffect, useState } from "react"
@@ -144,7 +142,7 @@ export default function ModulePage() {
       <div className="sticky top-0 z-50 bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-4">
           <a href={"/formations/" + formSlug} className="text-[#3DBFA0] hover:text-[#2ea88b] text-sm">
-            ← Retour
+            Retour
           </a>
           <div className="h-4 w-px bg-gray-200" />
           <div>
@@ -156,7 +154,7 @@ export default function ModulePage() {
           <span className="text-xs text-gray-400">{moduleDuree} min</span>
           {statut === "termine" ? (
             <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-3 py-1 rounded-full">
-              Termine
+              Terminé
             </span>
           ) : (
             <button
@@ -164,7 +162,7 @@ export default function ModulePage() {
               disabled={saving}
               className="bg-[#3DBFA0] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
             >
-              {saving ? "..." : "Marquer comme termine"}
+              {saving ? "..." : "Marquer comme terminé"}
             </button>
           )}
           {statut === "termine" && modNext && (
@@ -183,7 +181,7 @@ export default function ModulePage() {
           <ModuleContent />
         ) : (
           <div className="max-w-3xl mx-auto px-8 py-12">
-            <p className="text-gray-500 text-center">Contenu en cours de preparation...</p>
+            <p className="text-gray-500 text-center">Contenu en cours de préparation...</p>
           </div>
         )}
       </div>
@@ -192,14 +190,14 @@ export default function ModulePage() {
         <div>
           {modPrev && (
             <a href={"/formations/" + formSlug + "/modules/" + modPrev.id} className="text-sm text-gray-400 hover:text-[#1B2D5B]">
-              ← Module precedent
+              Module précédent
             </a>
           )}
         </div>
         <p className="text-xs text-gray-300">{moduleOrdre} / {listeModules.length}</p>
         <div>
           {modNext && statut === "termine" && (
-            <a href={"/formations/" + formSlug + "/modules/" + modNext.id} className="text-sm text-[#3DBFA0] hover:text-[#2ea88b] font-medium">
+            <a href={"/formations/" + formSlug + "/modules/" + modNext.id} className="text-sm text-[#3DBFA0] font-medium">
               Module suivant →
             </a>
           )}
@@ -208,10 +206,3 @@ export default function ModulePage() {
     </div>
   )
 }
-'''
-
-with open('app/formations/[slug]/modules/[moduleId]/page.tsx', 'w') as f:
-    f.write(code)
-print('OK')
-ENDSCRIPT
-python3 /tmp/lecteur.py
