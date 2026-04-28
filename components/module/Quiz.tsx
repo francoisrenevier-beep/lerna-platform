@@ -85,12 +85,9 @@ export function Quiz({ questions, onTermine }: QuizProps) {
           })}
         </div>
 
-        <button
-          onClick={onTermine}
-          className="w-full bg-[#3DBFA0] text-white py-3 rounded-lg font-medium hover:bg-[#2ea88b] transition-colors"
-        >
-          Valider le module et continuer
-        </button>
+        <p className="text-center text-sm text-gray-400 mt-4">
+  Utilisez le bouton en haut de la page pour valider le module.
+</p>
       </div>
     )
   }
