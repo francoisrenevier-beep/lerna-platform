@@ -4,6 +4,7 @@ import { ConceptBox } from "@/components/module/ConceptBox"
 import { PullQuote } from "@/components/module/PullQuote"
 import { HighlightBox } from "@/components/module/HighlightBox"
 import { Texte, Liste } from "@/components/module/Texte"
+import { Quiz } from "@/components/module/Quiz"
 
 export function Module5PPH() {
   return (
@@ -127,6 +128,55 @@ export function Module5PPH() {
         </SectionModule>
 
       </div>
+      <Quiz
+  questions={[
+    {
+      question: "Le changement fondamental opere par le PPH dans nos pratiques est :",
+      reponses: [
+        "De reparer a permettre",
+        "De soigner a reeduquer",
+        "D evaluer a planifier",
+        "De diagnostiquer a traiter"
+      ],
+      bonneReponse: 0,
+      explication: "Le PPH opere un passage de reparer (corriger les deficiences de la personne) a permettre (transformer l environnement pour que la personne realise ses habitudes de vie)."
+    },
+    {
+      question: "L autodetermination dans le PPH signifie :",
+      reponses: [
+        "La personne doit etre independante dans toutes ses activites",
+        "La personne decide seule sans soutien professionnel",
+        "La capacite de la personne a faire ses propres choix et a agir selon ses valeurs et projets",
+        "L absence de toute aide technique ou humaine"
+      ],
+      bonneReponse: 2,
+      explication: "L autodetermination est la capacite de la personne a faire ses propres choix et agir selon ses valeurs. Elle est la boussole de toute action PPH — on part de ce que la personne veut, pas de ce qu on pense bon pour elle."
+    },
+    {
+      question: "Le role du professionnel dans le PPH est celui de :",
+      reponses: [
+        "Therapeute qui soigne les deficiences",
+        "Evaluateur qui mesure les incapacites",
+        "Ingenieur de l environnement social qui transforme les obstacles en facilitateurs",
+        "Coordinateur administratif qui gere les dossiers"
+      ],
+      bonneReponse: 2,
+      explication: "Le PPH definit le professionnel comme un ingenieur de l environnement social — son role est d identifier les obstacles et de les transformer en facilitateurs pour ouvrir les portes du possible."
+    },
+    {
+      question: "Pour integrer le PPH des aujourd hui dans sa pratique, on peut :",
+      reponses: [
+        "Attendre une formation complementaire avant d agir",
+        "Utiliser le vocabulaire PPH, appliquer la methode d analyse et formuler un objectif PPH-SMART",
+        "Remplacer tous les outils existants par des outils PPH",
+        "Demander une validation institutionnelle avant toute action"
+      ],
+      bonneReponse: 1,
+      explication: "Le PPH peut etre integre progressivement : utiliser le vocabulaire dans les ecrits, appliquer la methode d analyse a une situation, formuler un objectif PPH-SMART. Pas besoin d attendre une transformation complete."
+    }
+  ]}
+  onTermine={function() {}}
+/>
     </div>
   )
 }
