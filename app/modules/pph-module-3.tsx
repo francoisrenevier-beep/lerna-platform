@@ -4,6 +4,7 @@ import { ConceptBox } from "@/components/module/ConceptBox"
 import { PullQuote } from "@/components/module/PullQuote"
 import { HighlightBox } from "@/components/module/HighlightBox"
 import { Texte, Liste } from "@/components/module/Texte"
+import { Quiz } from "@/components/module/Quiz"
 
 export function Module3PPH() {
   return (
@@ -143,6 +144,55 @@ export function Module3PPH() {
         </SectionModule>
 
       </div>
+      <Quiz
+  questions={[
+    {
+      question: "Quel est le levier d action prioritaire dans l approche PPH ?",
+      reponses: [
+        "Modifier le comportement de la personne",
+        "Agir sur l environnement",
+        "Augmenter les soins medicaux",
+        "Reduire les activites difficiles"
+      ],
+      bonneReponse: 1,
+      explication: "Le PPH place l environnement comme levier d action principal. Transformer les obstacles environnementaux en facilitateurs est plus efficace que de tenter de modifier la personne."
+    },
+    {
+      question: "Les trois principes d action du PPH sont :",
+      reponses: [
+        "Evaluer, planifier, executer",
+        "Diagnostiquer, traiter, reevaluer",
+        "Co-construire, pertinence contextuelle, durabilite",
+        "Observer, analyser, documenter"
+      ],
+      bonneReponse: 2,
+      explication: "Les trois principes d action PPH sont : co-construction avec la personne, pertinence contextuelle (agir sur des obstacles documentes) et durabilite des facilitateurs crees."
+    },
+    {
+      question: "La checklist de conception d une mesure sert a :",
+      reponses: [
+        "Evaluer les competences de la personne",
+        "Verifier qu une mesure environnementale est bien construite avant sa mise en oeuvre",
+        "Etablir un diagnostic medical",
+        "Planifier les soins infirmiers"
+      ],
+      bonneReponse: 1,
+      explication: "La checklist PPH permet de verifier que toutes les conditions sont reunies avant de mettre en place une mesure : habitude de vie identifiee, obstacle documente, co-construction, indicateurs definis, ressources disponibles."
+    },
+    {
+      question: "Dans l etude de cas de Sophie, les obstacles identifies etaient :",
+      reponses: [
+        "Ses capacites cognitives insuffisantes",
+        "Son manque de motivation",
+        "La salle inaccessible, la duree des reunions, le vocabulaire technique et l absence de supports visuels",
+        "Son refus de participer aux activites collectives"
+      ],
+      bonneReponse: 2,
+      explication: "Les obstacles etaient tous environnementaux : salle inaccessible en fauteuil, reunions trop longues sans pause, vocabulaire technique, absence de support visuel. Aucun ne concernait Sophie elle-meme."
+    }
+  ]}
+  onTermine={function() {}}
+/>
     </div>
   )
 }
