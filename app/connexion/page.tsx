@@ -99,11 +99,11 @@ const { error: liaisonError } = await supabase
   })
 
     if (liaisonError) {
-      setMessageType("error")
-      setMessage("Erreur lors du rattachement à l institution.")
-      setLoading(false)
-      return
-    }
+  setMessageType("error")
+  setMessage("Erreur rattachement : " + liaisonError.message + " - code: " + liaisonError.code)
+  setLoading(false)
+  return
+}
 
     setMessageType("success")
     setMessage("Compte créé avec succès. Vérifiez votre email pour confirmer votre inscription.")
