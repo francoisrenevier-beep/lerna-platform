@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
+import { Sidebar } from "@/components/Sidebar"
 
 type ModuleType = {
   id: string
@@ -117,7 +118,7 @@ export default function FormationDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col">
+      <Sidebar pageActive="formations" />
         <div className="p-6 border-b border-white/10">
           <h1 className="text-xl font-bold">LERNA</h1>
           <p className="text-xs text-white/50 mt-1">ancrer les competences</p>
