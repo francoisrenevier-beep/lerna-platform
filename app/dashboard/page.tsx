@@ -115,7 +115,6 @@ export default function DashboardPage() {
             → Se déconnecter
           </button>
         </div>
-      </aside>
 
       <main className="flex-1 p-8">
         <div className="mb-8">

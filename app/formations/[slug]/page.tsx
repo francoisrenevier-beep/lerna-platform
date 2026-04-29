@@ -142,7 +142,6 @@ export default function FormationDetailPage() {
             Se deconnecter
           </button>
         </div>
-      </aside>
 
       <main className="flex-1 p-8">
         <a href="/formations" className="text-sm text-[#3DBFA0] hover:underline mb-6 inline-block">
