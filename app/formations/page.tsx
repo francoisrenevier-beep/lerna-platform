@@ -67,16 +67,19 @@ export default function FormationsPage() {
           <p className="text-xs text-white/50 mt-1">ancrer les competences</p>
         </div>
         <nav className="flex-1 p-4 space-y-1">
-          <a href="/dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
-            Accueil
-          </a>
-          <a href="/formations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium">
-            Mes formations
-            <a href="/progression" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
-  📈 Ma progression
-</a>
-<a href="/attestations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
-  🎓 Attestations
+  <a href="/dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
+    Accueil
+  </a>
+  <a href="/formations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium">
+    Mes formations
+  </a>
+  <a href="/progression" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
+    Ma progression
+  </a>
+  <a href="/attestations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
+    Attestations
+  </a>
+</nav>
 </a>
           </a>
         </nav>
