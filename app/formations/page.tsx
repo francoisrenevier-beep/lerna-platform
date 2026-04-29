@@ -72,6 +72,12 @@ export default function FormationsPage() {
           </a>
           <a href="/formations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium">
             Mes formations
+            <a href="/progression" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
+  📈 Ma progression
+</a>
+<a href="/attestations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
+  🎓 Attestations
+</a>
           </a>
         </nav>
         <div className="p-4 border-t border-white/10">
