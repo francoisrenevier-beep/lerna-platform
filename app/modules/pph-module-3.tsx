@@ -11,9 +11,9 @@ export function Module3PPH() {
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={3}
-        categorie="Agir sur l environnement"
-        titre="Du diagnostic a l action"
-        titrePart2="transformer l environnement"
+        categorie="Agir sur l'environnement"
+        titre="Du diagnostic a l'action"
+        titrePart2="transformer l'environnement"
         sousTitre="Apprendre a traduire une analyse PPH en actions concretes sur les environnements physique, social et organisationnel."
         duree="40 minutes"
         niveau="Tous niveaux"
@@ -21,42 +21,42 @@ export function Module3PPH() {
 
       <div className="max-w-3xl mx-auto px-8 py-12">
 
-        <SectionModule eyebrow="Objectifs" titre="A l issue de ce module, vous serez en mesure de :">
+        <SectionModule eyebrow="Objectifs" titre="A l'issue de ce module, vous serez en mesure de :">
           <ConceptBox label="Competences visees" titre="Ce que vous allez apprendre">
             <Liste items={[
-              "Identifier les differents types d environnements dans le modele PPH",
-              "Mobiliser les leviers d action adaptes a chaque situation",
-              "Appliquer les trois principes d action du PPH",
-              "Concevoir une mesure environnementale a partir d une analyse PPH"
+              "Identifier les differents types d'environnements dans le modele PPH",
+              "Mobiliser les leviers d'action adaptes a chaque situation",
+              "Appliquer les trois principes d'action du PPH",
+              "Concevoir une mesure environnementale a partir d'une analyse PPH"
             ]} />
           </ConceptBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Introduction" titre="De l observation a la transformation">
-          <Texte>L analyse PPH n a de valeur que si elle debouche sur des actions concretes. Ce module franchit le pas entre comprendre et agir.</Texte>
+        <SectionModule eyebrow="Introduction" titre="De l'observation a la transformation">
+          <Texte>L'analyse PPH n'a de valeur que si elle debouche sur des actions concretes. Ce module franchit le pas entre comprendre et agir.</Texte>
           <PullQuote>
-            Le PPH nous invite a deplacer la focale : du deficit de la personne vers la responsabilite collective de l environnement.
+            Le PPH nous invite a deplacer la focale : du deficit de la personne vers la responsabilite collective de l'environnement.
           </PullQuote>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 3.1" titre="Les types d environnements dans le PPH">
-          <Texte>Le PPH distingue cinq grandes categories d environnements. Chacune offre des leviers d action specifiques.</Texte>
+        <SectionModule eyebrow="Section 3.1" titre="Les types d'environnements dans le PPH">
+          <Texte>Le PPH distingue cinq grandes categories d'environnements. Chacune offre des leviers d'action specifiques.</Texte>
           <HighlightBox label="Principe fondamental" couleur="bleu">
             <Texte>Tout facteur environnemental peut etre soit un obstacle soit un facilitateur — selon le contexte et la personne. Notre role est de transformer les obstacles en facilitateurs.</Texte>
           </HighlightBox>
-          <HighlightBox label="Les 5 types d environnements" couleur="vert">
+          <HighlightBox label="Les 5 types d'environnements" couleur="vert">
             <Liste items={[
               "Physique et architectural : accessibilite, amenagement des espaces, transports, equipements",
               "Social et humain : attitudes des proches et professionnels, soutiens disponibles, relations",
               "Institutionnel et organisationnel : regles, procedures, horaires, ressources humaines",
               "Technologique : outils, aides techniques, numerique, domotique",
-              "Politique et juridique : lois, droits, financement, politiques d inclusion"
+              "Politique et juridique : lois, droits, financement, politiques d'inclusion"
             ]} />
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 3.2" titre="Les leviers d action dans les pratiques professionnelles">
-          <Texte>Pour chaque type d environnement, des leviers d action concrets existent. Voici les principaux :</Texte>
+        <SectionModule eyebrow="Section 3.2" titre="Les leviers d'action dans les pratiques professionnelles">
+          <Texte>Pour chaque type d'environnement, des leviers d'action concrets existent. Voici les principaux :</Texte>
           <HighlightBox label="Levier materiel" couleur="bleu">
             <Liste couleur="bleu" items={[
               "Amenager les locaux pour une meilleure accessibilite",
@@ -83,15 +83,15 @@ export function Module3PPH() {
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 3.3" titre="Les trois principes d action du PPH">
+        <SectionModule eyebrow="Section 3.3" titre="Les trois principes d'action du PPH">
           <HighlightBox label="Principe 1 — Co-construction" couleur="bleu">
-            <Texte>Toute action doit etre construite avec la personne, pas pour elle. L autodetermination est le point de depart et l horizon de toute mesure PPH.</Texte>
+            <Texte>Toute action doit etre construite avec la personne, pas pour elle. L'autodetermination est le point de depart et l'horizon de toute mesure PPH.</Texte>
           </HighlightBox>
           <HighlightBox label="Principe 2 — Pertinence contextuelle" couleur="vert">
-            <Texte>Une action est pertinente si elle repond a un obstacle identifie dans l analyse PPH. On n agit pas sur des suppositions mais sur des obstacles constates et documentes.</Texte>
+            <Texte>Une action est pertinente si elle repond a un obstacle identifie dans l'analyse PPH. On n'agit pas sur des suppositions mais sur des obstacles constates et documentes.</Texte>
           </HighlightBox>
           <HighlightBox label="Principe 3 — Durabilite" couleur="jaune">
-            <Texte>Les facilitateurs crees doivent s inscrire dans la duree. Une action ponctuelle qui disparait n ameliore pas la participation sociale de facon durable.</Texte>
+            <Texte>Les facilitateurs crees doivent s'inscrire dans la duree. Une action ponctuelle qui disparait n'ameliore pas la participation sociale de facon durable.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -99,12 +99,12 @@ export function Module3PPH() {
           <HighlightBox label="Contexte" couleur="bleu">
             <Liste couleur="bleu" items={[
               "Sophie, 32 ans, travaille en atelier protege depuis 3 ans",
-              "Elle souhaite participer aux reunions d equipe hebdomadaires",
-              "Actuellement : elle n y assiste pas, les informations lui sont transmises par son referent",
+              "Elle souhaite participer aux reunions d'equipe hebdomadaires",
+              "Actuellement : elle n'y assiste pas, les informations lui sont transmises par son referent",
               "Habitude de vie visee : participation aux reunions collectives"
             ]} />
           </HighlightBox>
-          <Texte>L analyse PPH de la situation de Sophie revele plusieurs obstacles environnementaux : la salle de reunion n est pas accessible en fauteuil, les reunions durent 90 minutes sans pause, le vocabulaire utilise est tres technique, aucun support visuel n est utilise.</Texte>
+          <Texte>L'analyse PPH de la situation de Sophie revele plusieurs obstacles environnementaux : la salle de reunion n'est pas accessible en fauteuil, les reunions durent 90 minutes sans pause, le vocabulaire utilise est tres technique, aucun support visuel n'est utilise.</Texte>
           <HighlightBox label="Resultat attendu" couleur="vert">
             <Liste items={[
               "Salle de reunion accessible et amenagee avec espace fauteuil",
@@ -115,31 +115,31 @@ export function Module3PPH() {
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 3.5 — Outil pratique" titre="Checklist de conception d une mesure">
+        <SectionModule eyebrow="Section 3.5 — Outil pratique" titre="Checklist de conception d'une mesure">
           <HighlightBox label="Avant de mettre en place une mesure, verifiez :" couleur="vert">
             <Liste items={[
-              "L habitude de vie visee est clairement identifiee",
-              "L obstacle environnemental est documente par l analyse PPH",
+              "L'habitude de vie visee est clairement identifiee",
+              "L'obstacle environnemental est documente par l'analyse PPH",
               "La mesure a ete co-construite avec la personne concernee",
               "Des indicateurs de participation sociale ont ete definis",
-              "Un calendrier de mise en oeuvre et d evaluation est prevu",
+              "Un calendrier de mise en oeuvre et d'evaluation est prevu",
               "Les ressources necessaires sont identifiees et disponibles",
-              "L equipe est informee et formee a la mise en oeuvre"
+              "L'equipe est informee et formee a la mise en oeuvre"
             ]} />
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Conclusion" titre="Ce qu il faut retenir">
+        <SectionModule eyebrow="Conclusion" titre="Ce qu'il faut retenir">
           <HighlightBox label="Les points essentiels" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "Agir sur l environnement est plus efficace que de tenter de modifier la personne",
-              "Cinq types d environnements offrent autant de categories de leviers d action",
+              "Agir sur l'environnement est plus efficace que de tenter de modifier la personne",
+              "Cinq types d'environnements offrent autant de categories de leviers d'action",
               "Toute action doit etre co-construite, contextualisee et durable",
               "La checklist est un outil pratique pour concevoir des mesures robustes"
             ]} />
           </HighlightBox>
           <PullQuote>
-            Le PPH n est pas un modele d observation, c est un modele d action.
+            Le PPH n'est pas un modele d'observation, c'est un modele d'action.
           </PullQuote>
         </SectionModule>
 
@@ -147,18 +147,18 @@ export function Module3PPH() {
       <Quiz
   questions={[
     {
-      question: "Quel est le levier d action prioritaire dans l approche PPH ?",
+      question: "Quel est le levier d'action prioritaire dans l'approche PPH ?",
       reponses: [
         "Modifier le comportement de la personne",
-        "Agir sur l environnement",
+        "Agir sur l'environnement",
         "Augmenter les soins medicaux",
         "Reduire les activites difficiles"
       ],
       bonneReponse: 1,
-      explication: "Le PPH place l environnement comme levier d action principal. Transformer les obstacles environnementaux en facilitateurs est plus efficace que de tenter de modifier la personne."
+      explication: "Le PPH place l'environnement comme levier d'action principal. Transformer les obstacles environnementaux en facilitateurs est plus efficace que de tenter de modifier la personne."
     },
     {
-      question: "Les trois principes d action du PPH sont :",
+      question: "Les trois principes d'action du PPH sont :",
       reponses: [
         "Evaluer, planifier, executer",
         "Diagnostiquer, traiter, reevaluer",
@@ -166,13 +166,13 @@ export function Module3PPH() {
         "Observer, analyser, documenter"
       ],
       bonneReponse: 2,
-      explication: "Les trois principes d action PPH sont : co-construction avec la personne, pertinence contextuelle (agir sur des obstacles documentes) et durabilite des facilitateurs crees."
+      explication: "Les trois principes d'action PPH sont : co-construction avec la personne, pertinence contextuelle (agir sur des obstacles documentes) et durabilite des facilitateurs crees."
     },
     {
-      question: "La checklist de conception d une mesure sert a :",
+      question: "La checklist de conception d'une mesure sert a :",
       reponses: [
         "Evaluer les competences de la personne",
-        "Verifier qu une mesure environnementale est bien construite avant sa mise en oeuvre",
+        "Verifier qu'une mesure environnementale est bien construite avant sa mise en oeuvre",
         "Etablir un diagnostic medical",
         "Planifier les soins infirmiers"
       ],
@@ -180,11 +180,11 @@ export function Module3PPH() {
       explication: "La checklist PPH permet de verifier que toutes les conditions sont reunies avant de mettre en place une mesure : habitude de vie identifiee, obstacle documente, co-construction, indicateurs definis, ressources disponibles."
     },
     {
-      question: "Dans l etude de cas de Sophie, les obstacles identifies etaient :",
+      question: "Dans l'etude de cas de Sophie, les obstacles identifies etaient :",
       reponses: [
         "Ses capacites cognitives insuffisantes",
         "Son manque de motivation",
-        "La salle inaccessible, la duree des reunions, le vocabulaire technique et l absence de supports visuels",
+        "La salle inaccessible, la duree des reunions, le vocabulaire technique et l'absence de supports visuels",
         "Son refus de participer aux activites collectives"
       ],
       bonneReponse: 2,
