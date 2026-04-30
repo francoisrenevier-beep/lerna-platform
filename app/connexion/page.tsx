@@ -113,8 +113,7 @@ const { error: liaisonError } = await supabase
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-[#1B2D5B]">LERNA</h1>
-        <p className="text-gray-500 text-sm mt-1">ancrer les compétences sur le terrain</p>
+        <img src="/logo-lerna.svg" alt="LERNA" className="h-10 w-auto mx-auto" />
       </div>
 
       <div className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-sm p-8">
