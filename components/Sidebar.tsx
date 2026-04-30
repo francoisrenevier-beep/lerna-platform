@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
 type SidebarProps = {
-  pageActive: "dashboard" | "formations" | "progression" | "attestations"
+  pageActive: "dashboard" | "formations" | "catalogue" | "progression" | "attestations"
   institution?: string
   prenom?: string
 }
@@ -18,16 +18,17 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
   }
 
   const liens = [
-    { href: "/dashboard", label: "Accueil", emoji: "🏠", id: "dashboard" },
-    { href: "/formations", label: "Mes formations", emoji: "📚", id: "formations" },
-    { href: "/progression", label: "Ma progression", emoji: "📈", id: "progression" },
-    { href: "/attestations", label: "Attestations", emoji: "🎓", id: "attestations" },
+    { href: "/dashboard",    label: "Accueil",        emoji: "🏠", id: "dashboard"    },
+    { href: "/formations",   label: "Mes formations",  emoji: "🎯", id: "formations"   },
+    { href: "/catalogue",    label: "Catalogue",       emoji: "📚", id: "catalogue"    },
+    { href: "/progression",  label: "Ma progression",  emoji: "📈", id: "progression"  },
+    { href: "/attestations", label: "Attestations",    emoji: "🎓", id: "attestations" },
   ]
 
   return (
     <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col flex-shrink-0">
-      <div className="p-6 border-b border-white/10">
-        <img src="/logo-lerna.png" alt="LERNA" className="h-24 w-auto" />
+      <div className="bg-white border-b border-white/20">
+        <img src="/logo-lerna.png" alt="LERNA" className="w-full h-auto" />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
