@@ -27,7 +27,7 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
   return (
     <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col flex-shrink-0">
       <div className="p-6 border-b border-white/10">
-        <img src="/logo-lerna-blanc.svg" alt="LERNA" className="h-8 w-auto" />
+        <img src="/logo-lerna.png" alt="LERNA" className="h-8 w-auto" />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">

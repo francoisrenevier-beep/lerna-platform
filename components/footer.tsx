@@ -12,7 +12,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-3 sm:items-center">
           {/* Logo */}
           <div>
-            <img src="/logo-lerna-blanc.svg" alt="LERNA" className="h-7 w-auto" />
+            <img src="/logo-lerna.png" alt="LERNA" className="h-7 w-auto" />
           </div>
 
           {/* Links */}
