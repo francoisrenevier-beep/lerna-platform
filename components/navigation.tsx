@@ -10,11 +10,11 @@ export function Navigation() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-32 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/">
-              <img src="/logo-lerna.png" alt="LERNA" className="h-16 w-auto" />
+              <img src="/logo-lerna.png" alt="LERNA" className="h-28 w-auto" />
             </a>
           </div>
 
