@@ -13,9 +13,9 @@ export function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold tracking-tight text-primary">
-              LERNA
-            </span>
+            <a href="/">
+              <img src="/logo-lerna.png" alt="LERNA" className="h-8 w-auto" />
+            </a>
           </div>
 
           {/* Desktop Navigation */}

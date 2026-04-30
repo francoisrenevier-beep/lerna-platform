@@ -27,8 +27,7 @@ export function Sidebar({ pageActive, institution, prenom }: SidebarProps) {
   return (
     <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col flex-shrink-0">
       <div className="p-6 border-b border-white/10">
-        <h1 className="text-xl font-bold">LERNA</h1>
-        <p className="text-xs text-white/50 mt-1">ancrer les competences</p>
+        <img src="/logo-lerna.png" alt="LERNA" className="h-8 w-auto" />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
