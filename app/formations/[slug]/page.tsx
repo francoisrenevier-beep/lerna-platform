@@ -92,11 +92,6 @@ export default function FormationDetailPage() {
 
   const nbTermines = progression.filter(function(p) { return p.statut === "termine" }).length
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
-    router.push("/")
-  }
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -119,30 +114,6 @@ export default function FormationDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <Sidebar pageActive="formations" />
-        <div className="p-6 border-b border-white/10">
-          <h1 className="text-xl font-bold">LERNA</h1>
-          <p className="text-xs text-white/50 mt-1">ancrer les competences</p>
-        </div>
-        <nav className="flex-1 p-4 space-y-1">
-          <a href="/dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
-            Accueil
-          </a>
-          <a href="/formations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium">
-            Mes formations
-          </a>
-          <a href="/progression" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
-            Ma progression
-          </a>
-          <a href="/attestations" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
-            Attestations
-          </a>
-        </nav>
-        <div className="p-4 border-t border-white/10">
-          <button onClick={handleLogout} className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors">
-            Se deconnecter
-          </button>
-        </div>
-
       <main className="flex-1 p-8">
         <a href="/formations" className="text-sm text-[#3DBFA0] hover:underline mb-6 inline-block">
           Retour aux formations

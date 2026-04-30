@@ -66,7 +66,7 @@ export default function FormationsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {formations.map(function(formation, index) {
             return (
-              
+              <a
                 key={index}
                 href={"/formations/" + formation.slug}
                 className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 hover:shadow-md transition-shadow block"

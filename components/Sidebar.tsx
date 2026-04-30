@@ -35,7 +35,7 @@ export function Sidebar({ pageActive, institution, prenom }: SidebarProps) {
         {liens.map(function(lien) {
           const estActif = lien.id === pageActive
           return (
-            
+            <a
               key={lien.id}
               href={lien.href}
               className={
