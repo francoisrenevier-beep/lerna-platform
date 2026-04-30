@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { getCouleurEtiquette } from "@/lib/etiquettes"
 
 type Formation = {
   id: string
@@ -25,6 +26,7 @@ type Formation = {
 type ParcoursGroup = {
   parcours_id: string
   parcours_nom: string
+  domaine: string | null
   formations: Formation[]
   minOrdre: number
 }
@@ -40,6 +42,15 @@ function dureeFormat(minutes: number) {
   return m > 0 ? h + "h" + m : h + "h"
 }
 
+function Etiquette({ type, valeur }: { type: "domaine" | "thematique" | "public_cible"; valeur: string | null | undefined }) {
+  if (!valeur) return null
+  return (
+    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${getCouleurEtiquette(type, valeur)}`}>
+      {valeur}
+    </span>
+  )
+}
+
 function ParcoursCard({ group }: { group: ParcoursGroup }) {
   const totalMinutes = group.formations.reduce((sum, f) => sum + f.duree_estimee_minutes, 0)
   const sorted = [...group.formations].sort((a, b) => a.parcours_ordre - b.parcours_ordre)
@@ -47,9 +58,12 @@ function ParcoursCard({ group }: { group: ParcoursGroup }) {
   return (
     <div className="bg-white rounded-xl shadow-sm border-l-4 border-[#1B2D5B] p-6">
       <div className="flex items-center justify-between mb-4">
-        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#3DBFA0] px-3 py-1.5 rounded-full">
-          🎯 PARCOURS
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#3DBFA0] px-3 py-1.5 rounded-full">
+            🎯 PARCOURS
+          </span>
+          <Etiquette type="domaine" valeur={group.domaine} />
+        </div>
         <span className="text-xs text-gray-400">{dureeFormat(totalMinutes)} au total</span>
       </div>
       <h3 className="text-xl font-bold text-[#1B2D5B] mb-4">{group.parcours_nom}</h3>
@@ -66,6 +80,9 @@ function ParcoursCard({ group }: { group: ParcoursGroup }) {
             <p className="flex-1 text-sm font-medium text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors">
               {formation.titre}
             </p>
+            {formation.thematique && (
+              <Etiquette type="thematique" valeur={formation.thematique} />
+            )}
             <span className="text-xs text-gray-400 flex-shrink-0">
               {dureeFormat(formation.duree_estimee_minutes)}
             </span>
@@ -88,9 +105,7 @@ function FormationCard({ formation }: { formation: Formation }) {
       className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 hover:shadow-md transition-shadow block"
     >
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-2 py-1 rounded-full">
-          {formation.categorie}
-        </span>
+        <Etiquette type="domaine" valeur={formation.domaine ?? formation.categorie} />
         <span className="text-xs text-gray-400">
           {dureeFormat(formation.duree_estimee_minutes)}
         </span>
@@ -98,7 +113,13 @@ function FormationCard({ formation }: { formation: Formation }) {
       <h3 className="text-base font-semibold text-[#1B2D5B] mb-2">{formation.titre}</h3>
       <p className="text-sm text-gray-500 mb-4">{formation.description_courte}</p>
       <div className="flex items-center justify-between">
-        <span className="text-xs text-gray-400 capitalize">{formation.niveau}</span>
+        <div className="flex items-center gap-1.5 flex-wrap">
+          {formation.thematique && <Etiquette type="thematique" valeur={formation.thematique} />}
+          {formation.public_cible && <Etiquette type="public_cible" valeur={formation.public_cible} />}
+          {!formation.thematique && (
+            <span className="text-xs text-gray-400 capitalize">{formation.niveau}</span>
+          )}
+        </div>
         <span className="text-xs font-medium text-[#3DBFA0]">Commencer</span>
       </div>
     </a>
@@ -138,7 +159,6 @@ export default function FormationsPage() {
     )
   }
 
-  // Regrouper les formations par parcours_id
   const parcoursMap = new Map<string, ParcoursGroup>()
   const simpleFormations: Formation[] = []
 
@@ -152,6 +172,7 @@ export default function FormationsPage() {
         parcoursMap.set(formation.parcours_id, {
           parcours_id: formation.parcours_id,
           parcours_nom: formation.parcours_nom || formation.parcours_id,
+          domaine: formation.domaine,
           formations: [formation],
           minOrdre: formation.ordre,
         })
@@ -161,7 +182,6 @@ export default function FormationsPage() {
     }
   }
 
-  // Trier tous les éléments par ordre d'apparition
   const rawItems: { type: "parcours" | "formation"; id: string; minOrdre: number }[] = [
     ...Array.from(parcoursMap.values()).map((g) => ({
       type: "parcours" as const,
@@ -176,7 +196,6 @@ export default function FormationsPage() {
   ]
   rawItems.sort((a, b) => a.minOrdre - b.minOrdre)
 
-  // Regrouper les formations simples consécutives pour les afficher en grille
   const renderItems: RenderItem[] = []
   let pendingFormations: Formation[] = []
 

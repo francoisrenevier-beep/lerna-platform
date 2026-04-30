@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { getCouleurEtiquette } from "@/lib/etiquettes"
 
 type ModuleType = {
   id: string
@@ -23,6 +24,9 @@ type FormationType = {
   niveau: string
   duree_estimee_minutes: number
   slug: string
+  domaine: string | null
+  thematique: string | null
+  public_cible: string | null
 }
 
 type ProgressionType = {
@@ -52,7 +56,7 @@ export default function FormationDetailPage() {
 
       const { data: f } = await supabase
         .from("formations")
-        .select("id, titre, description, categorie, niveau, duree_estimee_minutes, slug")
+        .select("id, titre, description, categorie, niveau, duree_estimee_minutes, slug, domaine, thematique, public_cible")
         .eq("slug", slug)
         .single()
 
@@ -120,9 +124,28 @@ export default function FormationDetailPage() {
         </a>
 
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8 mb-6">
-          <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-2 py-1 rounded-full">
-            {formation?.categorie}
-          </span>
+          <div className="flex flex-wrap gap-2">
+            {formation?.domaine && (
+              <span className={`text-xs font-medium px-2 py-1 rounded-full ${getCouleurEtiquette("domaine", formation.domaine)}`}>
+                {formation.domaine}
+              </span>
+            )}
+            {formation?.thematique && (
+              <span className={`text-xs font-medium px-2 py-1 rounded-full ${getCouleurEtiquette("thematique", formation.thematique)}`}>
+                {formation.thematique}
+              </span>
+            )}
+            {formation?.public_cible && (
+              <span className={`text-xs font-medium px-2 py-1 rounded-full ${getCouleurEtiquette("public_cible", formation.public_cible)}`}>
+                {formation.public_cible}
+              </span>
+            )}
+            {!formation?.domaine && (
+              <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-2 py-1 rounded-full">
+                {formation?.categorie}
+              </span>
+            )}
+          </div>
           <h2 className="text-2xl font-bold text-[#1B2D5B] mt-3 mb-2">{formation?.titre}</h2>
           <p className="text-gray-500 text-sm mb-4">{formation?.description}</p>
           <div className="flex gap-6 text-xs text-gray-400">
