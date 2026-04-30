@@ -14,7 +14,7 @@ export function Navigation() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/">
-              <img src="/logo-lerna.png" alt="LERNA" className="h-8 w-auto" />
+              <img src="/logo-lerna.svg" alt="LERNA" className="h-8 w-auto" />
             </a>
           </div>
 
