@@ -28,7 +28,7 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
   return (
     <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col flex-shrink-0">
       <div className="bg-white border-b border-white/20">
-        <img src="/logo-lerna360-bleu.png" alt="LERNA360" className="w-full h-auto" />
+        <img src="/logo-lerna360-blanc.png" alt="LERNA360" className="w-full h-auto" />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
