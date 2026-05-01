@@ -10,11 +10,11 @@ export function Navigation() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-32 items-center justify-between">
+        <div className="flex h-36 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/">
-              <img src="/logo-lerna360-blanc.png" alt="LERNA360" className="h-28 w-auto" />
+              <img src="/logo-lerna360-blanc.png" alt="LERNA360" className="h-32 w-auto" />
             </a>
           </div>
 
@@ -22,25 +22,25 @@ export function Navigation() {
           <div className="hidden md:flex md:items-center md:gap-8">
             <a
               href="#formations"
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
             >
               Formations
             </a>
             <a
               href="#institutions"
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
             >
               Institutions
             </a>
             <a
               href="#tarifs"
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
             >
               Tarifs
             </a>
             <a
               href="/connexion"
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
             >
               Connexion
             </a>
