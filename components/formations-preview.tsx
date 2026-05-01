@@ -26,7 +26,7 @@ function FormationCard({ formation }: { formation: Formation }) {
 
   return (
     <a
-      href={"/formations/" + formation.slug}
+      href="/connexion"
       className="group flex flex-col rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="mb-3 flex items-center justify-between">
