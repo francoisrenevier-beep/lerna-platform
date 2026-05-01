@@ -1,10 +1,11 @@
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
-import { StatsBar } from "@/components/stats-bar"
+import { DefiSection } from "@/components/defi-section"
 import { HowItWorks } from "@/components/how-it-works"
 import { FormationsPreview } from "@/components/formations-preview"
-import { ForInstitutions } from "@/components/for-institutions"
-import { Testimonials } from "@/components/testimonials"
+import { PourquoiLerna } from "@/components/pourquoi-lerna"
+import { TarifsSection } from "@/components/tarifs-section"
+import { DemoForm } from "@/components/demo-form"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -12,11 +13,12 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <Navigation />
       <HeroSection />
-      <StatsBar />
+      <DefiSection />
       <HowItWorks />
       <FormationsPreview />
-      <ForInstitutions />
-      <Testimonials />
+      <PourquoiLerna />
+      <TarifsSection />
+      <DemoForm />
       <Footer />
     </main>
   )

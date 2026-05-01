@@ -1,4 +1,4 @@
-import { Building2, Users, Award } from "lucide-react"
+import { Building2, UserPlus, BookOpen } from "lucide-react"
 
 const steps = [
   {
@@ -6,21 +6,21 @@ const steps = [
     number: "1",
     title: "Votre institution souscrit une licence annuelle",
     description:
-      "Un abonnement simple qui donne accès à toutes les formations pour votre équipe.",
+      "Un abonnement simple et tout inclus qui donne accès à l'ensemble des formations pour votre équipe.",
   },
   {
-    icon: Users,
+    icon: UserPlus,
     number: "2",
-    title: "Vos collaborateurs accèdent librement à toutes les formations",
+    title: "Vos collaborateurs s'inscrivent avec le code institutionnel",
     description:
-      "Chaque membre de votre équipe peut se former selon ses besoins et disponibilités.",
+      "Chaque membre de l'équipe crée son compte en quelques secondes grâce au code fourni par l'institution.",
   },
   {
-    icon: Award,
+    icon: BookOpen,
     number: "3",
-    title: "Chacun progresse à son rythme et obtient ses attestations",
+    title: "Chacun accède aux formations et progresse à son rythme",
     description:
-      "Des parcours flexibles avec des attestations de complétion pour valoriser les acquis.",
+      "Des parcours flexibles, accessibles en tout temps, pour se former sans perturber l'organisation du service.",
   },
 ]
 
@@ -29,8 +29,8 @@ export function HowItWorks() {
     <section className="bg-background py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Comment ça fonctionne ?
+          <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">
+            Comment ça fonctionne&nbsp;?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             Un processus simple pour former toute votre équipe
@@ -43,18 +43,15 @@ export function HowItWorks() {
               key={index}
               className="relative rounded-2xl border border-border bg-card p-8 transition-shadow hover:shadow-lg"
             >
-              {/* Step number */}
-              <div className="absolute -top-4 left-8 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-foreground">
+              <div className="absolute -top-4 left-8 flex h-8 w-8 items-center justify-center rounded-full bg-[#3DBFA0] text-sm font-bold text-white">
                 {step.number}
               </div>
 
-              {/* Icon */}
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
-                <step.icon className="h-7 w-7 text-primary" />
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-[#1B2D5B]/10">
+                <step.icon className="h-7 w-7 text-[#1B2D5B]" />
               </div>
 
-              {/* Content */}
-              <h3 className="text-balance text-lg font-semibold text-foreground">
+              <h3 className="text-balance text-lg font-semibold text-[#1B2D5B]">
                 {step.title}
               </h3>
               <p className="mt-3 text-muted-foreground">{step.description}</p>

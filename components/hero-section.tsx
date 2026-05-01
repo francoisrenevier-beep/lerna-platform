@@ -86,9 +86,9 @@ export function HeroSection() {
               La formation continue, ancrée dans la réalité du terrain.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              LERNA propose aux institutions du travail social des parcours de
-              formation en ligne, conçus pour les professionnels du handicap, de
-              l&apos;éducation spécialisée et de l&apos;accompagnement social.
+              LERNA propose aux institutions du travail social une plateforme
+              e-learning pensée pour le terrain. Des formations courtes,
+              concrètes, suivies à son rythme — pour toute l&apos;équipe.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button
