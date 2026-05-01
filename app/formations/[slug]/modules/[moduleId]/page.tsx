@@ -8,6 +8,11 @@ import { Module2PPH } from "@/app/modules/pph-module-2"
 import { Module3PPH } from "@/app/modules/pph-module-3"
 import { Module4PPH } from "@/app/modules/pph-module-4"
 import { Module5PPH } from "@/app/modules/pph-module-5"
+import { Module1Ethique } from "@/app/modules/ethique-module-1"
+import { Module2Ethique } from "@/app/modules/ethique-module-2"
+import { Module3Ethique } from "@/app/modules/ethique-module-3"
+import { Module4Ethique } from "@/app/modules/ethique-module-4"
+import { Module5Ethique } from "@/app/modules/ethique-module-5"
 
 type ModuleSimple = {
   id: string
@@ -27,6 +32,11 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType> = {
   "fa177ae1-c657-46cb-a607-549ba13c8afc": Module3PPH,
   "d9e48c2e-b354-48e6-9cfe-a699ea31cba2": Module4PPH,
   "e5c5678a-957c-49a0-9d30-dbf63cea7565": Module5PPH,
+  "bb43e53c-9faa-4090-ba50-5471fecad068": Module1Ethique,
+  "92af6bc4-6611-4027-bfdb-312b7d443911": Module2Ethique,
+  "7cf2723e-71e4-40c1-99bc-3383aa05cdff": Module3Ethique,
+  "37901429-a08c-4f25-9743-2710bef94bb5": Module4Ethique,
+  "a040c6ee-fabd-47ac-92ab-490713000e0d": Module5Ethique,
 }
 
 export default function ModulePage() {
