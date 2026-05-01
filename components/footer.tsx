@@ -13,7 +13,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-3 sm:items-start">
           {/* Logo + info légale */}
           <div>
-            <img src="/logo-lerna.png" alt="LERNA" className="h-20 w-auto" />
+            <img src="/logo-lerna360-blanc.png" alt="LERNA360" className="h-20 w-auto" />
             <p className="mt-3 text-sm text-white/60">
               LERNA Sàrl — Suisse romande
               <br />

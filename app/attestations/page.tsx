@@ -125,7 +125,7 @@ function telechargerPDF(attestation: Attestation) {
 <body>
   <div class="page">
     <div class="bandeau"></div>
-    <div class="logo">LERNA</div>
+    <div class="logo">LERNA360</div>
     <div class="tagline">Ancrer les compétences</div>
     <div class="titre-doc">Attestation de formation</div>
     <div class="intro">certifie que la formation suivante a été complétée avec succès</div>
