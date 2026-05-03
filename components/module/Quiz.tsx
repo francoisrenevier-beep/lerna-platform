@@ -98,7 +98,18 @@ export function Quiz({ questions, onValiderModule }: QuizProps) {
 
         {reussi ? (
           <button
-            onClick={function() { setValidated(true); onValiderModule?.() }}
+            onClick={function() {
+              try {
+                localStorage.setItem("lerna_quiz_pending", JSON.stringify({
+                  questions,
+                  reponses: reponsesChoisies,
+                  score,
+                  total: questions.length,
+                }))
+              } catch {}
+              setValidated(true)
+              onValiderModule?.()
+            }}
             disabled={validated}
             className="w-full bg-[#3DBFA0] text-white py-3 rounded-lg font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
           >

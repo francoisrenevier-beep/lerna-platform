@@ -124,6 +124,18 @@ export default function ModulePage() {
     }, { onConflict: "profil_id,module_id" })
     setStatut("termine")
 
+    try {
+      const pending = localStorage.getItem("lerna_quiz_pending")
+      if (pending) {
+        const quizData = JSON.parse(pending)
+        const key = "lerna_quiz_" + formation.slug
+        const existing = JSON.parse(localStorage.getItem(key) || "[]")
+        existing.push({ ...quizData, moduleId, moduleTitre, savedAt: Date.now() })
+        localStorage.setItem(key, JSON.stringify(existing))
+        localStorage.removeItem("lerna_quiz_pending")
+      }
+    } catch {}
+
     const tries = listeModules.slice().sort(function(a, b) { return a.ordre - b.ordre })
     const idx = tries.findIndex(function(m) { return m.id === moduleId })
     const modSuivant = tries[idx + 1]
@@ -135,7 +147,7 @@ export default function ModulePage() {
         profil_id: userId,
         formation_id: formation.id
       }, { onConflict: "profil_id,formation_id" })
-      router.push("/formations/" + formation.slug + "?termine=1")
+      router.push("/formations/" + formation.slug + "/bilan")
     }
   }
 
