@@ -143,10 +143,11 @@ export default function ModulePage() {
     if (modSuivant) {
       router.push("/formations/" + formation.slug + "/modules/" + modSuivant.id)
     } else {
-      await supabase.from("attestations").upsert({
+      const { error: attError } = await supabase.from("attestations").upsert({
         profil_id: userId,
         formation_id: formation.id
       }, { onConflict: "profil_id,formation_id" })
+      if (attError) console.error("Erreur création attestation:", attError)
       router.push("/formations/" + formation.slug + "/bilan")
     }
   }

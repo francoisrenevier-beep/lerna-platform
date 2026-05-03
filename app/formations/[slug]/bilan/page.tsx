@@ -89,12 +89,22 @@ export default function BilanPage() {
         .single()
       if (profilData) setProfil(profilData)
 
-      const { data: att } = await supabase
+      let { data: att } = await supabase
         .from("attestations")
         .select("id, created_at")
         .eq("profil_id", user.id)
         .eq("formation_id", f.id)
-        .single()
+        .maybeSingle()
+
+      if (!att) {
+        const { data: newAtt } = await supabase
+          .from("attestations")
+          .upsert({ profil_id: user.id, formation_id: f.id }, { onConflict: "profil_id,formation_id" })
+          .select("id, created_at")
+          .single()
+        att = newAtt
+      }
+
       if (att) {
         setAttestationDate(att.created_at)
         setAttestationId(att.id)
