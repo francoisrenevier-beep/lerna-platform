@@ -7,7 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module2Ethique() {
+export function Module2Ethique({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -173,7 +173,7 @@ export function Module2Ethique() {
             explication: "Le paternalisme est le premier risque du care mal compris : agir pour le bien de l'autre en le privant de sa capacité de décision. C'est paradoxalement une atteinte à la dignité de la personne, même lorsque l'intention est bienveillante."
           }
         ]}
-        onTermine={function() {}}
+        onValiderModule={onValiderModule}
       />
     </div>
   )

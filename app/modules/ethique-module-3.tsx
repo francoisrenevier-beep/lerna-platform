@@ -7,7 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module3Ethique() {
+export function Module3Ethique({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -148,7 +148,7 @@ export function Module3Ethique() {
             explication: "Les trois approches ne sont pas concurrentes mais complémentaires. Mobilisées ensemble comme outils de questionnement, elles éclairent les conséquences (utilitarisme), les droits en jeu (déontologisme) et la posture professionnelle engagée (vertus) — sans prétendre éliminer la tension éthique."
           }
         ]}
-        onTermine={function() {}}
+        onValiderModule={onValiderModule}
       />
     </div>
   )

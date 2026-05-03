@@ -6,7 +6,7 @@ import { HighlightBox } from "@/components/module/HighlightBox"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module5PPH() {
+export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -175,7 +175,7 @@ export function Module5PPH() {
       explication: "Le PPH peut être intégré progressivement : utiliser le vocabulaire dans les écrits, appliquer la méthode d'analyse à une situation, formuler un objectif PPH-SMART. Pas besoin d'attendre une transformation complète."
     }
   ]}
-  onTermine={function() {}}
+  onValiderModule={onValiderModule}
 />
     </div>
   )

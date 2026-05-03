@@ -4,16 +4,23 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { numeroAttestation } from "@/lib/generateAttestation"
 
 type Attestation = {
   id: string
   created_at: string
   profil_id: string
   formation_id: string
+  pdf_url: string | null
   formations: {
     titre: string
     duree_estimee_minutes: number
   } | null
+}
+
+type Profil = {
+  prenom: string
+  nom: string
 }
 
 function formatDate(dateStr: string) {
@@ -31,137 +38,12 @@ function dureeHeures(minutes: number) {
   return h + "h" + m
 }
 
-function numeroAttestation(id: string) {
-  return "LERNA-" + id.slice(0, 8).toUpperCase()
-}
-
-function telechargerPDF(attestation: Attestation) {
-  if (!attestation.formations) return
-  const titre = attestation.formations.titre
-  const date = formatDate(attestation.created_at)
-  const duree = dureeHeures(attestation.formations.duree_estimee_minutes)
-  const numero = numeroAttestation(attestation.id)
-
-  const html = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Attestation — ${titre}</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Georgia, 'Times New Roman', serif; background: white; color: #1B2D5B; }
-    .page {
-      width: 210mm;
-      min-height: 297mm;
-      margin: 0 auto;
-      padding: 24mm 20mm;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #eee;
-    }
-    .bandeau {
-      width: 100%;
-      height: 6px;
-      background: linear-gradient(to right, #1B2D5B, #3DBFA0);
-      margin-bottom: 40px;
-      border-radius: 3px;
-    }
-    .logo { font-size: 36px; font-weight: bold; letter-spacing: 6px; color: #1B2D5B; margin-bottom: 6px; }
-    .tagline { font-size: 11px; color: #3DBFA0; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 56px; }
-    .titre-doc {
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #aaa;
-      margin-bottom: 40px;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-      padding: 12px 32px;
-    }
-    .intro { font-size: 15px; color: #666; margin-bottom: 20px; font-style: italic; }
-    .formation-titre {
-      font-size: 30px;
-      font-weight: bold;
-      color: #1B2D5B;
-      text-align: center;
-      margin-bottom: 40px;
-      line-height: 1.3;
-      max-width: 460px;
-    }
-    .separateur { width: 64px; height: 4px; background: #3DBFA0; margin: 0 auto 48px; border-radius: 2px; }
-    .infos { display: flex; gap: 64px; margin-bottom: 56px; }
-    .info-item { text-align: center; }
-    .info-label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #bbb;
-      margin-bottom: 6px;
-      font-family: Arial, sans-serif;
-    }
-    .info-valeur { font-size: 20px; font-weight: bold; color: #1B2D5B; }
-    .numero {
-      font-size: 9px;
-      color: #ccc;
-      letter-spacing: 2px;
-      font-family: monospace;
-      margin-top: 32px;
-    }
-    .bandeau-bas {
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(to right, #3DBFA0, #1B2D5B);
-      margin-top: 40px;
-      border-radius: 2px;
-    }
-    @media print {
-      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .page { border: none; }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <div class="bandeau"></div>
-    <div class="logo">LERNA360</div>
-    <div class="tagline">Ancrer les compétences</div>
-    <div class="titre-doc">Attestation de formation</div>
-    <div class="intro">certifie que la formation suivante a été complétée avec succès</div>
-    <div class="formation-titre">${titre}</div>
-    <div class="separateur"></div>
-    <div class="infos">
-      <div class="info-item">
-        <div class="info-label">Date d'obtention</div>
-        <div class="info-valeur">${date}</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Durée de formation</div>
-        <div class="info-valeur">${duree}</div>
-      </div>
-    </div>
-    <div class="numero">N° ${numero}</div>
-    <div class="bandeau-bas"></div>
-  </div>
-</body>
-</html>`
-
-  const fenetre = window.open("", "_blank")
-  if (fenetre) {
-    fenetre.document.write(html)
-    fenetre.document.close()
-    fenetre.focus()
-    setTimeout(function () {
-      fenetre.print()
-    }, 400)
-  }
-}
-
 export default function AttestationsPage() {
   const [attestations, setAttestations] = useState<Attestation[]>([])
+  const [profil, setProfil] = useState<Profil | null>(null)
   const [loading, setLoading] = useState(true)
   const [institution, setInstitution] = useState<string | undefined>(undefined)
+  const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -173,11 +55,13 @@ export default function AttestationsPage() {
         return
       }
 
-      const { data: profil } = await supabase
+      const { data: profilData } = await supabase
         .from("profils")
-        .select("prenom")
+        .select("prenom, nom")
         .eq("id", user.id)
         .single()
+
+      if (profilData) setProfil(profilData)
 
       const { data: institutionData } = await supabase
         .from("institution_profils")
@@ -193,7 +77,7 @@ export default function AttestationsPage() {
 
       const { data } = await supabase
         .from("attestations")
-        .select("id, created_at, profil_id, formation_id, formations(titre, duree_estimee_minutes)")
+        .select("id, created_at, profil_id, formation_id, pdf_url, formations(titre, duree_estimee_minutes)")
         .eq("profil_id", user.id)
         .order("created_at", { ascending: false })
 
@@ -202,6 +86,35 @@ export default function AttestationsPage() {
     }
     getData()
   }, [router])
+
+  const handleDownload = async (attestation: Attestation) => {
+    if (!profil) return
+    setDownloadingId(attestation.id)
+    try {
+      const { generateAttestationPDF } = await import("@/lib/generateAttestation")
+      const blob = await generateAttestationPDF({
+        prenom: profil.prenom,
+        nom: profil.nom,
+        formationTitre: attestation.formations?.titre ?? "Formation",
+        dureeMinutes: attestation.formations?.duree_estimee_minutes ?? 0,
+        dateObtention: attestation.created_at,
+        attestationId: attestation.id,
+      })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement("a")
+      link.href = url
+      link.download = `attestation-lerna-${attestation.id.slice(0, 8)}.pdf`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      setTimeout(() => URL.revokeObjectURL(url), 1000)
+    } catch (e) {
+      console.error("Erreur téléchargement PDF:", e)
+      alert("Erreur lors de la génération du PDF. Vérifiez la console.")
+    } finally {
+      setDownloadingId(null)
+    }
+  }
 
   if (loading) {
     return (
@@ -230,7 +143,13 @@ export default function AttestationsPage() {
         {nb === 0 ? (
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-16 text-center max-w-lg">
             <div className="w-16 h-16 rounded-full bg-[#3DBFA0]/10 flex items-center justify-center mx-auto mb-4">
-              <span className="text-3xl">🎓</span>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3DBFA0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
             </div>
             <h3 className="text-lg font-semibold text-[#1B2D5B] mb-2">Aucune attestation</h3>
             <p className="text-gray-500 text-sm mb-6">
@@ -247,57 +166,65 @@ export default function AttestationsPage() {
           <div className="flex flex-col gap-4 max-w-3xl">
             {attestations.map(function (attestation) {
               const f = attestation.formations
+              const isDownloading = downloadingId === attestation.id
               return (
                 <div
                   key={attestation.id}
-                  className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 flex items-center justify-between gap-6"
+                  className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden"
                 >
-                  <div className="flex items-center gap-5 min-w-0">
-                    <div className="w-12 h-12 rounded-xl bg-[#3DBFA0]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">🎓</span>
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-base font-semibold text-[#1B2D5B] truncate">
-                        {f ? f.titre : "Formation"}
-                      </h3>
-                      <div className="flex flex-wrap items-center gap-3 mt-1">
-                        <span className="text-xs text-gray-400">
-                          Obtenu le {formatDate(attestation.created_at)}
-                        </span>
-                        <span className="text-gray-200 text-xs">·</span>
-                        <span className="text-xs text-gray-400">
-                          {f ? dureeHeures(f.duree_estimee_minutes) : "—"}
-                        </span>
-                        <span className="text-gray-200 text-xs">·</span>
-                        <span className="text-xs font-mono text-[#3DBFA0]">
-                          N° {numeroAttestation(attestation.id)}
-                        </span>
+                  <div className="h-1 bg-gradient-to-r from-[#1B2D5B] to-[#3DBFA0]" />
+                  <div className="p-6 flex items-center justify-between gap-6">
+                    <div className="flex items-center gap-5 min-w-0">
+                      <div className="w-12 h-12 rounded-xl bg-[#3DBFA0]/10 flex items-center justify-center flex-shrink-0">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DBFA0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="8" r="6"/>
+                          <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+                        </svg>
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-base font-semibold text-[#1B2D5B] truncate">
+                          {f ? f.titre : "Formation"}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-3 mt-1">
+                          <span className="text-xs text-gray-400">
+                            Obtenu le {formatDate(attestation.created_at)}
+                          </span>
+                          <span className="text-gray-200 text-xs">·</span>
+                          <span className="text-xs text-gray-400">
+                            {f ? dureeHeures(f.duree_estimee_minutes) : "—"}
+                          </span>
+                          <span className="text-gray-200 text-xs">·</span>
+                          <span className="text-xs font-mono text-[#3DBFA0]">
+                            {numeroAttestation(attestation.id)}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <button
-                    onClick={function () {
-                      telechargerPDF(attestation)
-                    }}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1B2D5B] text-white text-sm font-medium hover:bg-[#1B2D5B]/90 transition-colors flex-shrink-0"
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                    <button
+                      onClick={() => handleDownload(attestation)}
+                      disabled={isDownloading}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1B2D5B] text-white text-sm font-medium hover:bg-[#1B2D5B]/90 transition-colors flex-shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <polyline points="7 10 12 15 17 10" />
-                      <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    Télécharger PDF
-                  </button>
+                      {isDownloading ? (
+                        <>
+                          <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                          </svg>
+                          Génération...
+                        </>
+                      ) : (
+                        <>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                          </svg>
+                          Télécharger PDF
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               )
             })}

@@ -6,7 +6,7 @@ import { HighlightBox } from "@/components/module/HighlightBox"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module3PPH() {
+export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -191,7 +191,7 @@ export function Module3PPH() {
       explication: "Les obstacles étaient tous environnementaux : salle inaccessible en fauteuil, réunions trop longues sans pause, vocabulaire technique, absence de support visuel. Aucun ne concernait Sophie elle-même."
     }
   ]}
-  onTermine={function() {}}
+  onValiderModule={onValiderModule}
 />
     </div>
   )

@@ -6,7 +6,7 @@ import { HighlightBox } from "@/components/module/HighlightBox"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module5Ethique() {
+export function Module5Ethique({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -169,7 +169,7 @@ export function Module5Ethique() {
             explication: "Cette formule synthétise l'ensemble de la formation : l'éthique n'est pas un état définitif que l'on atteint après formation. C'est une posture permanente, une manière d'exercer sa responsabilité au quotidien — dans chaque relation, chaque décision, chaque situation complexe rencontrée dans la pratique."
           }
         ]}
-        onTermine={function() {}}
+        onValiderModule={onValiderModule}
       />
     </div>
   )

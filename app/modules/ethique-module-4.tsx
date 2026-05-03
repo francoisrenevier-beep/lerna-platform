@@ -7,7 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module4Ethique() {
+export function Module4Ethique({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -186,7 +186,7 @@ export function Module4Ethique() {
             explication: "Le respect des désaccords est l'une des conditions de la délibération collective. La divergence enrichit la réflexion en révélant des angles morts et des valeurs que certains membres n'avaient pas perçus. La décision éthique n'est pas celle sur laquelle tout le monde est d'accord — c'est celle que tout le monde peut comprendre et respecter."
           }
         ]}
-        onTermine={function() {}}
+        onValiderModule={onValiderModule}
       />
     </div>
   )

@@ -7,7 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module1Ethique() {
+export function Module1Ethique({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -192,7 +192,7 @@ export function Module1Ethique() {
             explication: "L'éthique professionnelle est une compétence qui comprend la capacité à identifier les enjeux, expliciter les valeurs en tension, argumenter une décision, dialoguer et assumer l'incertitude. Elle se développe avec la pratique, la formation et la délibération collective."
           }
         ]}
-        onTermine={function() {}}
+        onValiderModule={onValiderModule}
       />
     </div>
   )

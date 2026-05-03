@@ -9,14 +9,15 @@ type Question = {
 
 type QuizProps = {
   questions: Question[]
-  onTermine: () => void
+  onValiderModule?: () => void
 }
 
-export function Quiz({ questions, onTermine }: QuizProps) {
+export function Quiz({ questions, onValiderModule }: QuizProps) {
   const [etape, setEtape] = useState<"quiz" | "resultat">("quiz")
   const [reponsesChoisies, setReponsesChoisies] = useState<number[]>(Array(questions.length).fill(-1))
   const [questionActuelle, setQuestionActuelle] = useState(0)
   const [reponseValidee, setReponseValidee] = useState(false)
+  const [validated, setValidated] = useState(false)
 
   const choisirReponse = (index: number) => {
     if (reponseValidee) return
@@ -39,9 +40,19 @@ export function Quiz({ questions, onTermine }: QuizProps) {
     }
   }
 
+  const resetQuiz = () => {
+    setEtape("quiz")
+    setReponsesChoisies(Array(questions.length).fill(-1))
+    setQuestionActuelle(0)
+    setReponseValidee(false)
+    setValidated(false)
+  }
+
   const score = reponsesChoisies.filter(function(r, i) {
     return r === questions[i].bonneReponse
   }).length
+
+  const reussi = score >= questions.length * 0.7
 
   const q = questions[questionActuelle]
   const reponseChoisie = reponsesChoisies[questionActuelle]
@@ -52,16 +63,16 @@ export function Quiz({ questions, onTermine }: QuizProps) {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8 mb-6">
         <div className="text-center mb-8">
           <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold"
-            style={{ backgroundColor: score >= questions.length * 0.6 ? "#3DBFA0" : "#f59e0b", color: "white" }}>
+            style={{ backgroundColor: reussi ? "#3DBFA0" : "#f59e0b", color: "white" }}>
             {score}/{questions.length}
           </div>
           <h3 className="text-xl font-bold text-[#1B2D5B] mb-2">
-            {score === questions.length ? "Parfait !" : score >= questions.length * 0.6 ? "Bien joue !" : "A revoir !"}
+            {score === questions.length ? "Parfait !" : reussi ? "Bien joue !" : "A revoir !"}
           </h3>
           <p className="text-gray-500 text-sm">
-            {score === questions.length
-              ? "Vous avez repondu correctement a toutes les questions."
-              : "Ce quiz est formatif — vous pouvez valider le module et revoir les notions."}
+            {reussi
+              ? "Vous avez obtenu au moins 70% — vous pouvez valider ce module."
+              : "Score insuffisant — il faut au moins 70% de bonnes reponses pour valider ce module."}
           </p>
         </div>
 
@@ -85,9 +96,22 @@ export function Quiz({ questions, onTermine }: QuizProps) {
           })}
         </div>
 
-        <p className="text-center text-sm text-gray-400 mt-4">
-  Utilisez le bouton en haut de la page pour valider le module.
-</p>
+        {reussi ? (
+          <button
+            onClick={function() { setValidated(true); onValiderModule?.() }}
+            disabled={validated}
+            className="w-full bg-[#3DBFA0] text-white py-3 rounded-lg font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
+          >
+            {validated ? "Validation en cours..." : "Valider ce module →"}
+          </button>
+        ) : (
+          <button
+            onClick={resetQuiz}
+            className="w-full bg-[#1B2D5B] text-white py-3 rounded-lg font-medium hover:bg-[#152347] transition-colors"
+          >
+            Reessayer le quiz
+          </button>
+        )}
       </div>
     )
   }

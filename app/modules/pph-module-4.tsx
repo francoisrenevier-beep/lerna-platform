@@ -6,7 +6,7 @@ import { HighlightBox } from "@/components/module/HighlightBox"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module4PPH() {
+export function Module4PPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -165,7 +165,7 @@ export function Module4PPH() {
       explication: "Les objectifs flous comme améliorer l'autonomie ne disent pas quelle autonomie, dans quel contexte, comment la mesurer et à quelle échéance. Sans ces précisions, il est impossible d'évaluer le succès."
     }
   ]}
-  onTermine={function() {}}
+  onValiderModule={onValiderModule}
 />
     </div>
   )

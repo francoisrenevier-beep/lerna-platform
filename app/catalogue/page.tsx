@@ -21,6 +21,7 @@ type Formation = {
   thematique: string | null
   public_cible: string | null
   ordre: number
+  est_a_venir: boolean
 }
 
 type ParcoursGroup = {
@@ -68,26 +69,46 @@ function ParcoursCard({ group }: { group: ParcoursGroup }) {
       </div>
       <h3 className="text-xl font-bold text-[#1B2D5B] mb-4">{group.parcours_nom}</h3>
       <div className="space-y-2 mb-5">
-        {sorted.map((formation, index) => (
-          <a
-            key={formation.id}
-            href={"/formations/" + formation.slug}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-          >
-            <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#1B2D5B]/10 text-[#1B2D5B] text-xs font-bold flex items-center justify-center">
-              {index + 1}
-            </span>
-            <p className="flex-1 text-sm font-medium text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors">
-              {formation.titre}
-            </p>
-            {formation.thematique && (
-              <Etiquette type="thematique" valeur={formation.thematique} />
-            )}
-            <span className="text-xs text-gray-400 flex-shrink-0">
-              {dureeFormat(formation.duree_estimee_minutes)}
-            </span>
-          </a>
-        ))}
+        {sorted.map((formation, index) => {
+          if (formation.est_a_venir) {
+            return (
+              <div
+                key={formation.id}
+                className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 opacity-70"
+              >
+                <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-200 text-gray-400 text-xs font-bold flex items-center justify-center">
+                  {index + 1}
+                </span>
+                <p className="flex-1 text-sm font-medium text-gray-400">
+                  {formation.titre}
+                </p>
+                <span className="text-xs font-bold text-white bg-[#1B2D5B] px-2.5 py-0.5 rounded-full tracking-wide flex-shrink-0">
+                  À venir
+                </span>
+              </div>
+            )
+          }
+          return (
+            <a
+              key={formation.id}
+              href={"/formations/" + formation.slug}
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+            >
+              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#1B2D5B]/10 text-[#1B2D5B] text-xs font-bold flex items-center justify-center">
+                {index + 1}
+              </span>
+              <p className="flex-1 text-sm font-medium text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors">
+                {formation.titre}
+              </p>
+              {formation.thematique && (
+                <Etiquette type="thematique" valeur={formation.thematique} />
+              )}
+              <span className="text-xs text-gray-400 flex-shrink-0">
+                {dureeFormat(formation.duree_estimee_minutes)}
+              </span>
+            </a>
+          )
+        })}
       </div>
       <div className="border-t pt-3">
         <span className="text-xs text-[#1B2D5B]/60 font-medium">
@@ -99,6 +120,32 @@ function ParcoursCard({ group }: { group: ParcoursGroup }) {
 }
 
 function FormationCard({ formation }: { formation: Formation }) {
+  if (formation.est_a_venir) {
+    return (
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 relative overflow-hidden">
+        <div className="flex items-center justify-between mb-3">
+          <Etiquette type="domaine" valeur={formation.domaine ?? formation.categorie} />
+          {formation.duree_estimee_minutes > 0 && (
+            <span className="text-xs text-gray-300">{dureeFormat(formation.duree_estimee_minutes)}</span>
+          )}
+        </div>
+        <h3 className="text-base font-semibold text-[#1B2D5B] mb-2">{formation.titre}</h3>
+        <div className="relative mb-4">
+          <p className="text-sm text-gray-500 blur-sm select-none">{formation.description_courte || "Description bientôt disponible."}</p>
+        </div>
+        <div className="flex items-center gap-1.5 flex-wrap">
+          {formation.thematique && <Etiquette type="thematique" valeur={formation.thematique} />}
+        </div>
+
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="bg-[#1B2D5B] text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full shadow-lg rotate-[-4deg] opacity-90">
+            À venir
+          </span>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <a
       href={"/formations/" + formation.slug}
@@ -141,11 +188,11 @@ export default function CataloguePage() {
       }
       const { data } = await supabase
         .from("formations")
-        .select("id, titre, slug, description_courte, categorie, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre")
-        .eq("est_publie", true)
+        .select("id, titre, slug, description_courte, categorie, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir")
         .eq("est_privee", false)
+        .or("est_publie.eq.true,est_a_venir.eq.true")
         .order("ordre")
-      if (data) setFormations(data)
+      if (data) setFormations(data as unknown as Formation[])
       setLoading(false)
     }
     getData()

@@ -24,9 +24,10 @@ type FormationType = {
   id: string
   titre: string
   slug: string
+  duree_estimee_minutes: number
 }
 
-const MODULE_COMPONENTS: Record<string, React.ComponentType> = {
+const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: () => void }>> = {
   "f8bd6cc6-b91e-4542-a9c4-53001ddd9090": Module1PPH,
   "bd21a4e9-09bb-4d41-9631-51ed75088eec": Module2PPH,
   "fa177ae1-c657-46cb-a607-549ba13c8afc": Module3PPH,
@@ -49,7 +50,7 @@ export default function ModulePage() {
   const [statut, setStatut] = useState("non_commence")
   const [loading, setLoading] = useState(true)
   const [userId, setUserId] = useState<string | null>(null)
-  const [saving, setSaving] = useState(false)
+
   const router = useRouter()
   const pathname = usePathname()
 
@@ -67,7 +68,7 @@ export default function ModulePage() {
 
       const { data: f } = await supabase
         .from("formations")
-        .select("id, titre, slug")
+        .select("id, titre, slug, duree_estimee_minutes")
         .eq("slug", slug)
         .single()
       if (!f) { router.push("/formations"); return }
@@ -96,8 +97,9 @@ export default function ModulePage() {
         .eq("profil_id", user.id)
         .eq("module_id", modId)
         .single()
-      if (prog) setStatut(prog.statut)
-      else {
+      if (prog) {
+        setStatut(prog.statut)
+      } else {
         await supabase.from("progression").upsert({
           profil_id: user.id,
           module_id: modId,
@@ -114,7 +116,6 @@ export default function ModulePage() {
 
   const marquerTermine = async () => {
     if (!userId || !formation) return
-    setSaving(true)
     await supabase.from("progression").upsert({
       profil_id: userId,
       module_id: moduleId,
@@ -126,8 +127,6 @@ export default function ModulePage() {
     const tries = listeModules.slice().sort(function(a, b) { return a.ordre - b.ordre })
     const idx = tries.findIndex(function(m) { return m.id === moduleId })
     const modSuivant = tries[idx + 1]
-
-    setSaving(false)
 
     if (modSuivant) {
       router.push("/formations/" + formation.slug + "/modules/" + modSuivant.id)
@@ -170,18 +169,10 @@ export default function ModulePage() {
         </div>
         <div className="flex items-center gap-3">
           <span className="text-xs text-gray-400">{moduleDuree} min</span>
-          {statut === "termine" ? (
+          {statut === "termine" && (
             <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-3 py-1 rounded-full">
               Terminé
             </span>
-          ) : (
-            <button
-              onClick={marquerTermine}
-              disabled={saving}
-              className="bg-[#3DBFA0] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
-            >
-              {saving ? "..." : "Marquer comme terminé"}
-            </button>
           )}
           {statut === "termine" && modNext && (
               <a
@@ -196,7 +187,7 @@ export default function ModulePage() {
 
       <div className="pb-20">
         {ModuleContent ? (
-          <ModuleContent />
+          <ModuleContent onValiderModule={marquerTermine} />
         ) : (
           <div className="max-w-3xl mx-auto px-8 py-12">
             <p className="text-gray-500 text-center">Contenu en cours de préparation...</p>

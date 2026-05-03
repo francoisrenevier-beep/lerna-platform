@@ -7,7 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
 
-export function Module2PPH() {
+export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
     <div className="min-h-screen bg-white">
       <HeroModule
@@ -199,7 +199,7 @@ export function Module2PPH() {
       explication: "L'étape 3 consiste à repérer les aptitudes pertinentes — uniquement celles qui concernent l'habitude de vie ciblée. On ne dresse pas un bilan exhaustif des déficiences."
     }
   ]}
-  onTermine={function() {}}
+  onValiderModule={onValiderModule}
 />
     </div>
   )
