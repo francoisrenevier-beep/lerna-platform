@@ -114,8 +114,9 @@ export default function AttestationsPage() {
       document.body.removeChild(link)
       setTimeout(() => URL.revokeObjectURL(url), 1000)
     } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
       console.error("Erreur téléchargement PDF:", e)
-      alert("Erreur lors de la génération du PDF. Vérifiez la console.")
+      alert("Erreur PDF : " + msg)
     } finally {
       setDownloadingId(null)
     }

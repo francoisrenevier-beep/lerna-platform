@@ -212,7 +212,8 @@ export async function generateAttestationPDF(data: AttestationData): Promise<Blo
   doc.setFillColor(...navy)
   doc.rect(0, 287, W, 10, 'F')
 
-  return doc.output('blob') as Blob
+  const buf = doc.output('arraybuffer')
+  return new Blob([buf], { type: 'application/pdf' })
 }
 
 export async function downloadPDFFromBlob(blob: Blob, filename: string) {

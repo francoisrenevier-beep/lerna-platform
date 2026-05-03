@@ -152,8 +152,9 @@ export default function BilanPage() {
       document.body.removeChild(link)
       setTimeout(() => URL.revokeObjectURL(url), 1000)
     } catch (e) {
-      console.error(e)
-      alert("Erreur lors de la génération de l'attestation.")
+      const msg = e instanceof Error ? e.message : String(e)
+      console.error("Erreur attestation:", e)
+      alert("Erreur attestation : " + msg)
     } finally {
       setDownloadingAttestation(false)
     }
@@ -184,8 +185,9 @@ export default function BilanPage() {
       document.body.removeChild(link)
       setTimeout(() => URL.revokeObjectURL(url), 1000)
     } catch (e) {
-      console.error(e)
-      alert("Erreur lors de la génération de la fiche mémo.")
+      const msg = e instanceof Error ? e.message : String(e)
+      console.error("Erreur fiche mémo:", e)
+      alert("Erreur fiche mémo : " + msg)
     } finally {
       setDownloadingMemo(false)
     }

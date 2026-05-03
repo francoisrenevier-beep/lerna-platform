@@ -228,5 +228,6 @@ export async function generateFicheMemo(data: FicheMemoData): Promise<Blob> {
     doc.text(i + " / " + pageCount, W - 20, 293, { align: "right" })
   }
 
-  return doc.output("blob") as Blob
+  const buf = doc.output("arraybuffer")
+  return new Blob([buf], { type: "application/pdf" })
 }
