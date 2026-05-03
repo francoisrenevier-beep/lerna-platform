@@ -146,7 +146,7 @@ export default function BilanPage() {
       const url = URL.createObjectURL(blob)
       const link = document.createElement("a")
       link.href = url
-      link.download = "attestation-lerna-" + attestationId.slice(0, 8) + ".pdf"
+      link.download = "attestation-lerna-" + (attestationId ?? formation.id).slice(0, 8) + ".pdf"
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
