@@ -119,7 +119,7 @@ export default function BilanPage() {
   }, [pathname, router])
 
   const handleDownloadAttestation = async () => {
-    if (!formation || !attestationId) return
+    if (!formation) return
     setDownloadingAttestation(true)
     try {
       const { generateAttestationPDF } = await import("@/lib/generateAttestation")
@@ -131,7 +131,7 @@ export default function BilanPage() {
         formationTitre: formation.titre,
         dureeMinutes: formation.duree_estimee_minutes,
         dateObtention: attestationDate ?? new Date().toISOString(),
-        attestationId,
+        attestationId: attestationId ?? formation.id,
       })
       const url = URL.createObjectURL(blob)
       const link = document.createElement("a")
@@ -223,7 +223,7 @@ export default function BilanPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={handleDownloadAttestation}
-            disabled={downloadingAttestation || !attestationId}
+            disabled={downloadingAttestation || !formation}
             className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 text-left hover:shadow-md transition-shadow disabled:opacity-50 disabled:cursor-not-allowed group"
           >
             <div className="w-10 h-10 rounded-lg bg-[#1B2D5B]/10 flex items-center justify-center mb-3 group-hover:bg-[#1B2D5B]/20 transition-colors">
