@@ -25,12 +25,31 @@ export default function ConnexionPage() {
     }
     setLoading(true)
     setMessage("")
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data: authData, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       setMessageType("error")
       setMessage("Email ou mot de passe incorrect.")
     } else {
-      router.push("/dashboard")
+      const userId = authData.user?.id
+      if (userId) {
+        const { data: ip } = await supabase
+          .from("institution_profils")
+          .select("role")
+          .eq("profil_id", userId)
+          .eq("statut", "actif")
+          .limit(1)
+          .single()
+        const role = ip?.role
+        if (role === "responsable") {
+          router.push("/institution/dashboard")
+        } else if (role === "admin") {
+          router.push("/admin/dashboard")
+        } else {
+          router.push("/dashboard")
+        }
+      } else {
+        router.push("/dashboard")
+      }
     }
     setLoading(false)
   }
