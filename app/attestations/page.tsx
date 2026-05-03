@@ -46,6 +46,7 @@ export default function AttestationsPage() {
   const [loading, setLoading] = useState(true)
   const [institution, setInstitution] = useState<string | undefined>(undefined)
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
+  const [userEmail, setUserEmail] = useState<string>("")
   const router = useRouter()
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function AttestationsPage() {
         router.push("/connexion")
         return
       }
+      setUserEmail(user.email ?? "")
 
       const { data: profilData } = await supabase
         .from("profils")
@@ -90,13 +92,14 @@ export default function AttestationsPage() {
   }, [router])
 
   const handleDownload = async (attestation: Attestation) => {
-    if (!profil) return
     setDownloadingId(attestation.id)
     try {
       const { generateAttestationPDF } = await import("@/lib/generateAttestation")
+      const prenom = profil?.prenom ?? userEmail.split("@")[0] ?? ""
+      const nom = profil?.nom ?? ""
       const blob = await generateAttestationPDF({
-        prenom: profil.prenom,
-        nom: profil.nom,
+        prenom,
+        nom,
         formationTitre: attestation.formations?.titre ?? "Formation",
         dureeMinutes: attestation.formations?.duree_estimee_minutes ?? 0,
         dateObtention: attestation.created_at,
