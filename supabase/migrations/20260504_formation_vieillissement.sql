@@ -39,7 +39,7 @@ values (
   'dad21cb5-e946-4e13-a175-8fbf3120cbc9',
   'Comprendre le vieillissement des personnes en situation de handicap',
   'Définitions, données démographiques, mécanismes de vieillissement prématuré et profils spécifiques par type de handicap.',
-  1, 45, 'cours'
+  1, 45, 'texte'
 ) on conflict (id) do nothing;
 
 -- Module 2
@@ -49,7 +49,7 @@ values (
   'dad21cb5-e946-4e13-a175-8fbf3120cbc9',
   'Reconnaître les signaux du vieillissement en institution',
   'Signes physiques, fonctionnels, cognitifs et comportementaux — et comment éviter le piège de l''overshadowing.',
-  2, 45, 'cours'
+  2, 45, 'texte'
 ) on conflict (id) do nothing;
 
 -- Module 3
@@ -59,7 +59,7 @@ values (
   'dad21cb5-e946-4e13-a175-8fbf3120cbc9',
   'L''accompagnement au quotidien : adapter les pratiques',
   'Réévaluer le projet personnalisé, adapter activités et rythmes, communiquer avec justesse, soutenir les proches et aborder la fin de vie.',
-  3, 50, 'cours'
+  3, 50, 'texte'
 ) on conflict (id) do nothing;
 
 -- Module 4
@@ -69,7 +69,7 @@ values (
   'dad21cb5-e946-4e13-a175-8fbf3120cbc9',
   'Gestion des situations complexes et comportements défis',
   'Comprendre avant d''intervenir : analyse fonctionnelle A-B-C, régulation en crise et postures professionnelles.',
-  4, 45, 'cours'
+  4, 45, 'texte'
 ) on conflict (id) do nothing;
 
 -- Module 5
@@ -79,7 +79,7 @@ values (
   'dad21cb5-e946-4e13-a175-8fbf3120cbc9',
   'Coordination interinstitutionnelle en Suisse romande',
   'Cartographie des acteurs, outils de coordination, conventions de collaboration et principes des transitions dignes.',
-  5, 40, 'cours'
+  5, 40, 'texte'
 ) on conflict (id) do nothing;
 
 -- Module 6
@@ -89,5 +89,5 @@ values (
   'dad21cb5-e946-4e13-a175-8fbf3120cbc9',
   'Culture institutionnelle et évolution des structures',
   'Évaluer la maturité de son institution, planifier les adaptations selon trois niveaux et comprendre le rôle de chaque professionnel.',
-  6, 40, 'cours'
+  6, 40, 'texte'
 ) on conflict (id) do nothing;
