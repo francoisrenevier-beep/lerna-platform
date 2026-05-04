@@ -90,20 +90,34 @@ export default function BilanPage() {
         .single()
       if (profilData) setProfil(profilData)
 
-      let { data: att } = await supabase
+      // created_at peut ne pas exister : on essaie avec puis sans
+      let att: { id: string; created_at?: string } | null = null
+      const { data: attWithDate, error: attDateErr } = await supabase
         .from("attestations")
         .select("id, created_at")
         .eq("profil_id", user.id)
         .eq("formation_id", f.id)
         .maybeSingle()
 
+      if (attDateErr?.message?.includes("created_at")) {
+        const { data: attNoDate } = await supabase
+          .from("attestations")
+          .select("id")
+          .eq("profil_id", user.id)
+          .eq("formation_id", f.id)
+          .maybeSingle()
+        att = attNoDate ?? null
+      } else {
+        att = attWithDate
+      }
+
       if (!att) {
-        const { data: newAtt } = await supabase
+        const { data: newAtt, error: upsertErr } = await supabase
           .from("attestations")
           .upsert({ profil_id: user.id, formation_id: f.id }, { onConflict: "profil_id,formation_id" })
-          .select("id, created_at")
+          .select("id")
           .single()
-        att = newAtt
+        if (!upsertErr) att = newAtt
       }
 
       if (att) {

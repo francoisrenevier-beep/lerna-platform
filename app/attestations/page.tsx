@@ -28,6 +28,7 @@ type Profil = {
 }
 
 function formatDate(dateStr: string) {
+  if (!dateStr) return "—"
   return new Date(dateStr).toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",
@@ -81,18 +82,35 @@ export default function AttestationsPage() {
         setInstitution(inst.nom)
       }
 
-      // Requête simple sans jointure pour éviter les erreurs PostgREST
-      const { data: attData, error: attError } = await supabase
+      // Requête sans jointure — created_at optionnel (peut ne pas exister)
+      let attData: AttestationRow[] | null = null
+      const { data: withDate, error: errWithDate } = await supabase
         .from("attestations")
         .select("id, created_at, profil_id, formation_id")
         .eq("profil_id", user.id)
-        .order("created_at", { ascending: false })
+        .order("id", { ascending: false })
 
-      if (attError) {
-        console.error("Erreur attestations:", attError)
-        setQueryError(attError.message)
+      if (errWithDate?.message?.includes("created_at")) {
+        // La colonne n'existe pas encore : requête sans elle
+        const { data: withoutDate, error: errWithout } = await supabase
+          .from("attestations")
+          .select("id, profil_id, formation_id")
+          .eq("profil_id", user.id)
+          .order("id", { ascending: false })
+        if (errWithout) {
+          console.error("Erreur attestations:", errWithout)
+          setQueryError(errWithout.message)
+          setLoading(false)
+          return
+        }
+        attData = (withoutDate ?? []).map((a) => ({ ...a, created_at: "" }))
+      } else if (errWithDate) {
+        console.error("Erreur attestations:", errWithDate)
+        setQueryError(errWithDate.message)
         setLoading(false)
         return
+      } else {
+        attData = withDate ?? []
       }
 
       if (!attData || attData.length === 0) {
