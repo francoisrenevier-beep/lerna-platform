@@ -72,17 +72,17 @@ export async function generateAttestation(data: AttestationData): Promise<string
   doc.setFillColor(...white)
   doc.rect(0, 0, W, H, 'F')
 
-  // ── Bande navy en-tête ─────────────────────────────────────────
+  // ── Bande navy en-tête (légèrement hors limites pour éviter les gaps) ──
   doc.setFillColor(...navy)
-  doc.rect(0, 0, W, headerH, 'F')
+  doc.rect(-1, -1, W + 2, headerH + 1, 'F')
 
   // ── Bande navy pied de page ────────────────────────────────────
   doc.setFillColor(...navy)
-  doc.rect(0, H - footerH, W, footerH, 'F')
+  doc.rect(-1, H - footerH, W + 2, footerH + 1, 'F')
 
   // ── Barre verte gauche (par-dessus tout) ──────────────────────
   doc.setFillColor(...teal)
-  doc.rect(0, 0, barW, H, 'F')
+  doc.rect(-1, -1, barW + 1, H + 2, 'F')
 
   // ── Logo blanc en haut à gauche ────────────────────────────────
   const logo = await loadLogoBase64('/logo-lerna360-blanc.png')
@@ -101,14 +101,14 @@ export async function generateAttestation(data: AttestationData): Promise<string
   // ── Titre dans l'en-tête ───────────────────────────────────────
   doc.setTextColor(...white)
   doc.setFont('helvetica', 'bold')
-  doc.setFontSize(7.5)
-  doc.setCharSpace(2.5)
-  doc.text('ATTESTATION DE SUIVI DE FORMATION', W / 2 + barW / 2, headerH / 2 - 2, { align: 'center' })
+  doc.setFontSize(8)
+  doc.setCharSpace(1.5)
+  doc.text('ATTESTATION DE SUIVI DE FORMATION', W / 2, headerH / 2 - 2, { align: 'center' })
   doc.setCharSpace(0)
   doc.setFont('helvetica', 'normal')
   doc.setFontSize(7)
   doc.setTextColor(61, 191, 160)
-  doc.text('Lerna360 Sarl — Suisse romande', W / 2 + barW / 2, headerH / 2 + 6, { align: 'center' })
+  doc.text('Lerna360 Sarl — Suisse romande', W / 2, headerH / 2 + 6, { align: 'center' })
 
   // ── Corps ──────────────────────────────────────────────────────
   let y = headerH + 18
@@ -117,7 +117,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
   doc.setTextColor(...gray)
   doc.setFont('helvetica', 'italic')
   doc.setFontSize(10)
-  doc.text('Nous attestons par la presente que', W / 2 + barW / 2, y, { align: 'center' })
+  doc.text('Nous attestons par la présente que', W / 2 + barW / 2, y, { align: 'center' })
   y += 14
 
   // Nom complet
@@ -139,7 +139,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
   doc.setTextColor(...gray)
   doc.setFont('helvetica', 'italic')
   doc.setFontSize(10)
-  doc.text('a suivi et complete avec succes la formation', W / 2 + barW / 2, y, { align: 'center' })
+  doc.text('a suivi et complété avec succès la formation', W / 2 + barW / 2, y, { align: 'center' })
   y += 10
 
   // ── Encadré formation ──────────────────────────────────────────
@@ -165,7 +165,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
   const info = [
     { label: 'DUREE', value: dureeHeures(data.dureeMinutes) },
     { label: "DATE D'OBTENTION", value: formatDateFr(data.dateObtention) },
-    { label: 'MODULES COMPLETES', value: String(data.nbModules) },
+    { label: 'MODULES COMPLÉTÉS', value: String(data.nbModules) },
   ]
   info.forEach((bloc, i) => {
     const bx = xL + infoGap + i * (infoW + infoGap)
@@ -225,7 +225,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
   doc.setTextColor(61, 191, 160)
   doc.setFont('helvetica', 'normal')
   doc.setFontSize(6.5)
-  doc.text('Numero de verification', xL, H - footerH / 2 + 2)
+  doc.text('Numéro de vérification', xL, H - footerH / 2 + 2)
 
   // ── Export base64 ──────────────────────────────────────────────
   const buf = doc.output('arraybuffer')

@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//mnt/**)",
+      "Read(//tmp/**)",
+      "Bash(ls /uploads/)",
+      "Read(//home/codespace/**)",
+      "Read(//home/**)",
+      "Bash(git pull *)",
+      "Bash(find / -name \"ChatGPT_Image*\")",
+      "Bash(find / -path \"*/uploads/*.png\")",
+      "Read(//var/tmp/**)",
+      "Bash(git rm *)",
+      "Bash(env)",
+      "Bash(supabase --version)",
+      "Bash(grep -v \"^$\")",
+      "Bash(xargs ls *)",
+      "Bash(git -C /workspaces/lerna-platform log --all --full-history --name-status -- \"supabase/migrations/*.sql\")",
+      "Bash(git -C /workspaces/lerna-platform log --all --oneline --follow -- \"supabase/\")",
+      "Bash(git -C /workspaces/lerna-platform log --all --oneline)",
+      "Bash(git -C /workspaces/lerna-platform show HEAD~10 --stat)",
+      "Bash(git -C /workspaces/lerna-platform log --all --grep=\"migration\\\\|schema\\\\|database\" --oneline)",
+      "Bash(git -C /workspaces/lerna-platform log --reverse --oneline)",
+      "Bash(git -C /workspaces/lerna-platform show --stat dc882d9)",
+      "Bash(git -C /workspaces/lerna-platform log --all --diff-filter=A -- \"*.sql\" --oneline)",
+      "Bash(git -C /workspaces/lerna-platform show 8f01747 --stat)",
+      "Bash(git -C /workspaces/lerna-platform show 8f01747)"
+    ]
+  }
+}

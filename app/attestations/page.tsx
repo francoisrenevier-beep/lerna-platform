@@ -19,6 +19,7 @@ type Attestation = {
   formations: {
     titre: string
     duree_estimee_minutes: number
+    slug: string
   } | null
 }
 
@@ -83,7 +84,7 @@ export default function AttestationsPage() {
 
       const { data } = await supabase
         .from("attestations")
-        .select("id, created_at, profil_id, formation_id, pdf_url, pdf_base64, nb_modules, formations(titre, duree_estimee_minutes)")
+        .select("id, created_at, profil_id, formation_id, pdf_url, pdf_base64, nb_modules, formations(titre, duree_estimee_minutes, slug)")
         .eq("profil_id", user.id)
         .order("created_at", { ascending: false })
 
@@ -184,6 +185,7 @@ export default function AttestationsPage() {
             {attestations.map(function (attestation) {
               const f = attestation.formations
               const isDownloading = downloadingId === attestation.id
+              const bilanHref = f?.slug ? `/formations/${f.slug}/bilan` : null
               return (
                 <div
                   key={attestation.id}
@@ -191,32 +193,66 @@ export default function AttestationsPage() {
                 >
                   <div className="h-1 bg-gradient-to-r from-[#1B2D5B] to-[#3DBFA0]" />
                   <div className="p-6 flex items-center justify-between gap-6">
-                    <div className="flex items-center gap-5 min-w-0">
-                      <div className="w-12 h-12 rounded-xl bg-[#3DBFA0]/10 flex items-center justify-center flex-shrink-0">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DBFA0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                          <circle cx="12" cy="8" r="6"/>
-                          <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
-                        </svg>
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="text-base font-semibold text-[#1B2D5B] truncate">
-                          {f ? f.titre : "Formation"}
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-3 mt-1">
-                          <span className="text-xs text-gray-400">
-                            Obtenu le {formatDate(attestation.created_at)}
-                          </span>
-                          <span className="text-gray-200 text-xs">·</span>
-                          <span className="text-xs text-gray-400">
-                            {f ? dureeHeures(f.duree_estimee_minutes) : "—"}
-                          </span>
-                          <span className="text-gray-200 text-xs">·</span>
-                          <span className="text-xs font-mono text-[#3DBFA0]">
-                            {numeroAttestation(attestation.id)}
-                          </span>
+
+                    {/* Zone cliquable → page de félicitations */}
+                    {bilanHref ? (
+                      <a
+                        href={bilanHref}
+                        className="flex items-center gap-5 min-w-0 flex-1 group"
+                      >
+                        <div className="w-12 h-12 rounded-xl bg-[#3DBFA0]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#3DBFA0]/20 transition-colors">
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DBFA0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="8" r="6"/>
+                            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="text-base font-semibold text-[#1B2D5B] truncate group-hover:text-[#3DBFA0] transition-colors">
+                            {f ? f.titre : "Formation"}
+                          </h3>
+                          <div className="flex flex-wrap items-center gap-3 mt-1">
+                            <span className="text-xs text-gray-400">
+                              Obtenu le {formatDate(attestation.created_at)}
+                            </span>
+                            <span className="text-gray-200 text-xs">·</span>
+                            <span className="text-xs text-gray-400">
+                              {f ? dureeHeures(f.duree_estimee_minutes) : "—"}
+                            </span>
+                            <span className="text-gray-200 text-xs">·</span>
+                            <span className="text-xs font-mono text-[#3DBFA0]">
+                              {numeroAttestation(attestation.id)}
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    ) : (
+                      <div className="flex items-center gap-5 min-w-0 flex-1">
+                        <div className="w-12 h-12 rounded-xl bg-[#3DBFA0]/10 flex items-center justify-center flex-shrink-0">
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DBFA0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="8" r="6"/>
+                            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="text-base font-semibold text-[#1B2D5B] truncate">
+                            {f ? f.titre : "Formation"}
+                          </h3>
+                          <div className="flex flex-wrap items-center gap-3 mt-1">
+                            <span className="text-xs text-gray-400">
+                              Obtenu le {formatDate(attestation.created_at)}
+                            </span>
+                            <span className="text-gray-200 text-xs">·</span>
+                            <span className="text-xs text-gray-400">
+                              {f ? dureeHeures(f.duree_estimee_minutes) : "—"}
+                            </span>
+                            <span className="text-gray-200 text-xs">·</span>
+                            <span className="text-xs font-mono text-[#3DBFA0]">
+                              {numeroAttestation(attestation.id)}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
 
                     <button
                       onClick={() => handleDownload(attestation)}
