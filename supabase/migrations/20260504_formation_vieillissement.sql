@@ -22,7 +22,7 @@ insert into formations (
   'Comprendre et accompagner le vieillissement des personnes en situation de handicap en institution.',
   'handicap-et-vieillissement',
   'Accompagnement',
-  'Tous niveaux',
+  'tous',
   270,
   'Handicap',
   'Vieillissement',
