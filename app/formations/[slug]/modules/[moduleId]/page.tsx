@@ -13,6 +13,12 @@ import { Module2Ethique } from "@/app/modules/ethique-module-2"
 import { Module3Ethique } from "@/app/modules/ethique-module-3"
 import { Module4Ethique } from "@/app/modules/ethique-module-4"
 import { Module5Ethique } from "@/app/modules/ethique-module-5"
+import { Module1Vieillissement } from "@/app/modules/vieillissement-module-1"
+import { Module2Vieillissement } from "@/app/modules/vieillissement-module-2"
+import { Module3Vieillissement } from "@/app/modules/vieillissement-module-3"
+import { Module4Vieillissement } from "@/app/modules/vieillissement-module-4"
+import { Module5Vieillissement } from "@/app/modules/vieillissement-module-5"
+import { Module6Vieillissement } from "@/app/modules/vieillissement-module-6"
 
 type ModuleSimple = {
   id: string
@@ -38,6 +44,12 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "7cf2723e-71e4-40c1-99bc-3383aa05cdff": Module3Ethique,
   "37901429-a08c-4f25-9743-2710bef94bb5": Module4Ethique,
   "a040c6ee-fabd-47ac-92ab-490713000e0d": Module5Ethique,
+  "7449447f-52e9-4e28-bcdf-58ff131ed7b1": Module1Vieillissement,
+  "d495c1de-4027-4843-9122-c0e9507c77b3": Module2Vieillissement,
+  "4c94dce0-ee04-455b-bec1-a50b27cdc875": Module3Vieillissement,
+  "1f71287e-788f-4c70-aa55-1f12a6330070": Module4Vieillissement,
+  "e3dc5ebd-abb7-4891-9090-52f1b000799e": Module5Vieillissement,
+  "e992ccab-7ab4-4641-8e01-781ef2112bd5": Module6Vieillissement,
 }
 
 export default function ModulePage() {
