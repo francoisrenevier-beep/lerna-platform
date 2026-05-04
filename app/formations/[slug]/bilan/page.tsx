@@ -92,7 +92,7 @@ export default function BilanPage() {
 
       let { data: att } = await supabase
         .from("attestations")
-        .select("id, created_at, pdf_base64")
+        .select("id, created_at")
         .eq("profil_id", user.id)
         .eq("formation_id", f.id)
         .maybeSingle()
@@ -101,7 +101,7 @@ export default function BilanPage() {
         const { data: newAtt } = await supabase
           .from("attestations")
           .upsert({ profil_id: user.id, formation_id: f.id }, { onConflict: "profil_id,formation_id" })
-          .select("id, created_at, pdf_base64")
+          .select("id, created_at")
           .single()
         att = newAtt
       }
@@ -109,7 +109,13 @@ export default function BilanPage() {
       if (att) {
         setAttestationDate(att.created_at)
         setAttestationId(att.id)
-        if (att.pdf_base64) setAttestationPdfBase64(att.pdf_base64)
+        // Récupérer pdf_base64 séparément (colonne optionnelle selon migration)
+        const { data: pdfData } = await supabase
+          .from("attestations")
+          .select("pdf_base64")
+          .eq("id", att.id)
+          .single()
+        if (pdfData?.pdf_base64) setAttestationPdfBase64(pdfData.pdf_base64)
       }
 
       const { data: mods } = await supabase

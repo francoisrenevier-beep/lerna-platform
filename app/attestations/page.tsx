@@ -82,12 +82,13 @@ export default function AttestationsPage() {
         setInstitution(inst.nom)
       }
 
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("attestations")
-        .select("id, created_at, profil_id, formation_id, pdf_url, pdf_base64, nb_modules, formations(titre, duree_estimee_minutes, slug)")
+        .select("id, created_at, profil_id, formation_id, formations(titre, duree_estimee_minutes, slug)")
         .eq("profil_id", user.id)
         .order("created_at", { ascending: false })
 
+      if (error) console.error("Erreur chargement attestations:", error)
       if (data) setAttestations(data as unknown as Attestation[])
       setLoading(false)
     }
@@ -100,8 +101,15 @@ export default function AttestationsPage() {
       const filename = `attestation-lerna-${attestation.id.slice(0, 8)}.pdf`
       const { downloadFromBase64, generateAttestation } = await import("@/lib/attestation")
 
-      if (attestation.pdf_base64) {
-        downloadFromBase64(attestation.pdf_base64, filename)
+      // Tenter de récupérer le PDF stocké en base64
+      const { data: attData } = await supabase
+        .from("attestations")
+        .select("pdf_base64, nb_modules")
+        .eq("id", attestation.id)
+        .single()
+
+      if (attData?.pdf_base64) {
+        downloadFromBase64(attData.pdf_base64, filename)
       } else {
         // Fallback : générer à la volée
         const { data: instData } = await supabase
@@ -120,7 +128,7 @@ export default function AttestationsPage() {
           dureeMinutes: attestation.formations?.duree_estimee_minutes ?? 0,
           dateObtention: attestation.created_at,
           attestationId: attestation.id,
-          nbModules: attestation.nb_modules ?? 0,
+          nbModules: attData?.nb_modules ?? 0,
           institution,
         })
         downloadFromBase64(base64, filename)
