@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
-import { numeroAttestation } from "@/lib/generateAttestation"
+import { numeroAttestation } from "@/lib/attestation"
 
 type Attestation = {
   id: string
@@ -14,6 +14,8 @@ type Attestation = {
   profil_id: string
   formation_id: string
   pdf_url: string | null
+  pdf_base64: string | null
+  nb_modules: number | null
   formations: {
     titre: string
     duree_estimee_minutes: number
@@ -81,7 +83,7 @@ export default function AttestationsPage() {
 
       const { data } = await supabase
         .from("attestations")
-        .select("id, created_at, profil_id, formation_id, pdf_url, formations(titre, duree_estimee_minutes)")
+        .select("id, created_at, profil_id, formation_id, pdf_url, pdf_base64, nb_modules, formations(titre, duree_estimee_minutes)")
         .eq("profil_id", user.id)
         .order("created_at", { ascending: false })
 
@@ -94,25 +96,34 @@ export default function AttestationsPage() {
   const handleDownload = async (attestation: Attestation) => {
     setDownloadingId(attestation.id)
     try {
-      const { generateAttestationPDF } = await import("@/lib/generateAttestation")
-      const prenom = profil?.prenom ?? userEmail.split("@")[0] ?? ""
-      const nom = profil?.nom ?? ""
-      const blob = await generateAttestationPDF({
-        prenom,
-        nom,
-        formationTitre: attestation.formations?.titre ?? "Formation",
-        dureeMinutes: attestation.formations?.duree_estimee_minutes ?? 0,
-        dateObtention: attestation.created_at,
-        attestationId: attestation.id,
-      })
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement("a")
-      link.href = url
-      link.download = `attestation-lerna-${attestation.id.slice(0, 8)}.pdf`
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
+      const filename = `attestation-lerna-${attestation.id.slice(0, 8)}.pdf`
+      const { downloadFromBase64, generateAttestation } = await import("@/lib/attestation")
+
+      if (attestation.pdf_base64) {
+        downloadFromBase64(attestation.pdf_base64, filename)
+      } else {
+        // Fallback : générer à la volée
+        const { data: instData } = await supabase
+          .from("institution_profils")
+          .select("institutions(nom)")
+          .eq("profil_id", attestation.profil_id)
+          .eq("statut", "actif")
+          .maybeSingle()
+        const institution = instData?.institutions
+          ? (instData.institutions as unknown as { nom: string }).nom
+          : undefined
+        const base64 = await generateAttestation({
+          prenom: profil?.prenom ?? userEmail.split("@")[0] ?? "",
+          nom: profil?.nom ?? "",
+          formationTitre: attestation.formations?.titre ?? "Formation",
+          dureeMinutes: attestation.formations?.duree_estimee_minutes ?? 0,
+          dateObtention: attestation.created_at,
+          attestationId: attestation.id,
+          nbModules: attestation.nb_modules ?? 0,
+          institution,
+        })
+        downloadFromBase64(base64, filename)
+      }
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e)
       console.error("Erreur téléchargement PDF:", e)

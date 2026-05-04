@@ -143,11 +143,50 @@ export default function ModulePage() {
     if (modSuivant) {
       router.push("/formations/" + formation.slug + "/modules/" + modSuivant.id)
     } else {
-      const { error: attError } = await supabase.from("attestations").upsert({
-        profil_id: userId,
-        formation_id: formation.id
-      }, { onConflict: "profil_id,formation_id" })
-      if (attError) console.error("Erreur création attestation:", attError)
+      // Créer l'attestation en base
+      const { data: attRow } = await supabase
+        .from("attestations")
+        .upsert({ profil_id: userId, formation_id: formation.id }, { onConflict: "profil_id,formation_id" })
+        .select("id, created_at")
+        .single()
+
+      // Générer et stocker le PDF en base64 (best-effort, non bloquant)
+      if (attRow) {
+        try {
+          const { data: profilData } = await supabase
+            .from("profils")
+            .select("prenom, nom")
+            .eq("id", userId)
+            .single()
+          const { data: instData } = await supabase
+            .from("institution_profils")
+            .select("institutions(nom)")
+            .eq("profil_id", userId)
+            .eq("statut", "actif")
+            .maybeSingle()
+          const institution = instData?.institutions
+            ? (instData.institutions as unknown as { nom: string }).nom
+            : undefined
+          const { generateAttestation } = await import("@/lib/attestation")
+          const pdf_base64 = await generateAttestation({
+            prenom: profilData?.prenom ?? "",
+            nom: profilData?.nom ?? "",
+            formationTitre: formation.titre,
+            dureeMinutes: formation.duree_estimee_minutes,
+            dateObtention: attRow.created_at,
+            attestationId: attRow.id,
+            nbModules: listeModules.length,
+            institution,
+          })
+          await supabase
+            .from("attestations")
+            .update({ pdf_base64, nb_modules: listeModules.length })
+            .eq("id", attRow.id)
+        } catch (e) {
+          console.error("Erreur génération PDF attestation:", e)
+        }
+      }
+
       router.push("/formations/" + formation.slug + "/bilan")
     }
   }

@@ -59,6 +59,7 @@ export default function BilanPage() {
   const [userEmail, setUserEmail] = useState("")
   const [attestationDate, setAttestationDate] = useState<string | null>(null)
   const [attestationId, setAttestationId] = useState<string | null>(null)
+  const [attestationPdfBase64, setAttestationPdfBase64] = useState<string | null>(null)
   const [quizRecap, setQuizRecap] = useState<QuizModule[]>([])
   const [loading, setLoading] = useState(true)
   const [downloadingAttestation, setDownloadingAttestation] = useState(false)
@@ -91,7 +92,7 @@ export default function BilanPage() {
 
       let { data: att } = await supabase
         .from("attestations")
-        .select("id, created_at")
+        .select("id, created_at, pdf_base64")
         .eq("profil_id", user.id)
         .eq("formation_id", f.id)
         .maybeSingle()
@@ -100,7 +101,7 @@ export default function BilanPage() {
         const { data: newAtt } = await supabase
           .from("attestations")
           .upsert({ profil_id: user.id, formation_id: f.id }, { onConflict: "profil_id,formation_id" })
-          .select("id, created_at")
+          .select("id, created_at, pdf_base64")
           .single()
         att = newAtt
       }
@@ -108,6 +109,7 @@ export default function BilanPage() {
       if (att) {
         setAttestationDate(att.created_at)
         setAttestationId(att.id)
+        if (att.pdf_base64) setAttestationPdfBase64(att.pdf_base64)
       }
 
       const { data: mods } = await supabase
@@ -132,25 +134,34 @@ export default function BilanPage() {
     if (!formation) return
     setDownloadingAttestation(true)
     try {
-      const { generateAttestationPDF } = await import("@/lib/generateAttestation")
-      const prenom = profil?.prenom ?? userEmail.split("@")[0] ?? ""
-      const nom = profil?.nom ?? ""
-      const blob = await generateAttestationPDF({
-        prenom,
-        nom,
-        formationTitre: formation.titre,
-        dureeMinutes: formation.duree_estimee_minutes,
-        dateObtention: attestationDate ?? new Date().toISOString(),
-        attestationId: attestationId ?? formation.id,
-      })
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement("a")
-      link.href = url
-      link.download = "attestation-lerna-" + (attestationId ?? formation.id).slice(0, 8) + ".pdf"
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
+      const filename = "attestation-lerna-" + (attestationId ?? formation.id).slice(0, 8) + ".pdf"
+      const { downloadFromBase64, generateAttestation } = await import("@/lib/attestation")
+
+      if (attestationPdfBase64) {
+        downloadFromBase64(attestationPdfBase64, filename)
+      } else {
+        // Fallback : générer à la volée
+        const { data: instData } = await supabase
+          .from("institution_profils")
+          .select("institutions(nom)")
+          .eq("profil_id", (await supabase.auth.getUser()).data.user!.id)
+          .eq("statut", "actif")
+          .maybeSingle()
+        const institution = instData?.institutions
+          ? (instData.institutions as unknown as { nom: string }).nom
+          : undefined
+        const base64 = await generateAttestation({
+          prenom: profil?.prenom ?? userEmail.split("@")[0] ?? "",
+          nom: profil?.nom ?? "",
+          formationTitre: formation.titre,
+          dureeMinutes: formation.duree_estimee_minutes,
+          dateObtention: attestationDate ?? new Date().toISOString(),
+          attestationId: attestationId ?? formation.id,
+          nbModules: modules.length,
+          institution,
+        })
+        downloadFromBase64(base64, filename)
+      }
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e)
       console.error("Erreur attestation:", e)
