@@ -8,19 +8,18 @@ import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
 import { numeroAttestation } from "@/lib/attestation"
 
-type Attestation = {
+type AttestationRow = {
   id: string
   created_at: string
   profil_id: string
   formation_id: string
-  pdf_url: string | null
-  pdf_base64: string | null
-  nb_modules: number | null
-  formations: {
-    titre: string
-    duree_estimee_minutes: number
-    slug: string
-  } | null
+}
+
+type Formation = {
+  id: string
+  titre: string
+  duree_estimee_minutes: number
+  slug: string
 }
 
 type Profil = {
@@ -44,9 +43,11 @@ function dureeHeures(minutes: number) {
 }
 
 export default function AttestationsPage() {
-  const [attestations, setAttestations] = useState<Attestation[]>([])
+  const [attestations, setAttestations] = useState<AttestationRow[]>([])
+  const [formations, setFormations] = useState<Record<string, Formation>>({})
   const [profil, setProfil] = useState<Profil | null>(null)
   const [loading, setLoading] = useState(true)
+  const [queryError, setQueryError] = useState<string | null>(null)
   const [institution, setInstitution] = useState<string | undefined>(undefined)
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const [userEmail, setUserEmail] = useState<string>("")
@@ -67,7 +68,6 @@ export default function AttestationsPage() {
         .select("prenom, nom")
         .eq("id", user.id)
         .single()
-
       if (profilData) setProfil(profilData)
 
       const { data: institutionData } = await supabase
@@ -76,60 +76,87 @@ export default function AttestationsPage() {
         .eq("profil_id", user.id)
         .eq("statut", "actif")
         .maybeSingle()
-
       if (institutionData?.institutions) {
         const inst = institutionData.institutions as unknown as { nom: string }
         setInstitution(inst.nom)
       }
 
-      const { data, error } = await supabase
+      // Requête simple sans jointure pour éviter les erreurs PostgREST
+      const { data: attData, error: attError } = await supabase
         .from("attestations")
-        .select("id, created_at, profil_id, formation_id, formations(titre, duree_estimee_minutes, slug)")
+        .select("id, created_at, profil_id, formation_id")
         .eq("profil_id", user.id)
         .order("created_at", { ascending: false })
 
-      if (error) console.error("Erreur chargement attestations:", error)
-      if (data) setAttestations(data as unknown as Attestation[])
+      if (attError) {
+        console.error("Erreur attestations:", attError)
+        setQueryError(attError.message)
+        setLoading(false)
+        return
+      }
+
+      if (!attData || attData.length === 0) {
+        setLoading(false)
+        return
+      }
+
+      setAttestations(attData)
+
+      // Charger les formations séparément
+      const formationIds = [...new Set(attData.map((a) => a.formation_id))]
+      const { data: formData, error: formError } = await supabase
+        .from("formations")
+        .select("id, titre, duree_estimee_minutes, slug")
+        .in("id", formationIds)
+
+      if (formError) {
+        console.error("Erreur formations:", formError)
+      } else if (formData) {
+        const map: Record<string, Formation> = {}
+        formData.forEach((f) => { map[f.id] = f })
+        setFormations(map)
+      }
+
       setLoading(false)
     }
     getData()
   }, [router])
 
-  const handleDownload = async (attestation: Attestation) => {
-    setDownloadingId(attestation.id)
+  const handleDownload = async (att: AttestationRow) => {
+    setDownloadingId(att.id)
     try {
-      const filename = `attestation-lerna-${attestation.id.slice(0, 8)}.pdf`
+      const filename = `attestation-lerna-${att.id.slice(0, 8)}.pdf`
       const { downloadFromBase64, generateAttestation } = await import("@/lib/attestation")
+      const f = formations[att.formation_id]
 
       // Tenter de récupérer le PDF stocké en base64
-      const { data: attData } = await supabase
+      const { data: pdfData } = await supabase
         .from("attestations")
         .select("pdf_base64, nb_modules")
-        .eq("id", attestation.id)
+        .eq("id", att.id)
         .single()
 
-      if (attData?.pdf_base64) {
-        downloadFromBase64(attData.pdf_base64, filename)
+      if (pdfData?.pdf_base64) {
+        downloadFromBase64(pdfData.pdf_base64, filename)
       } else {
-        // Fallback : générer à la volée
         const { data: instData } = await supabase
           .from("institution_profils")
           .select("institutions(nom)")
-          .eq("profil_id", attestation.profil_id)
+          .eq("profil_id", att.profil_id)
           .eq("statut", "actif")
           .maybeSingle()
-        const institution = instData?.institutions
+        const institutionNom = instData?.institutions
           ? (instData.institutions as unknown as { nom: string }).nom
           : undefined
         const base64 = await generateAttestation({
           prenom: profil?.prenom ?? userEmail.split("@")[0] ?? "",
           nom: profil?.nom ?? "",
-          formationTitre: attestation.formations?.titre ?? "Formation",
-          dureeMinutes: attestation.formations?.duree_estimee_minutes ?? 0,
-          dateObtention: attestation.created_at,
-          attestationId: attestation.id,
-          nbModules: attData?.nb_modules ?? 0,
-          institution,
+          formationTitre: f?.titre ?? "Formation",
+          dureeMinutes: f?.duree_estimee_minutes ?? 0,
+          dateObtention: att.created_at,
+          attestationId: att.id,
+          nbModules: pdfData?.nb_modules ?? 0,
+          institution: institutionNom,
         })
         downloadFromBase64(base64, filename)
       }
@@ -160,13 +187,22 @@ export default function AttestationsPage() {
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#1B2D5B]">Mes attestations</h2>
           <p className="text-gray-500 mt-1">
-            {nb === 0
+            {queryError
+              ? "Erreur de chargement"
+              : nb === 0
               ? "Aucune attestation pour le moment."
               : nb + " attestation" + (nb > 1 ? "s" : "") + " obtenue" + (nb > 1 ? "s" : "")}
           </p>
         </div>
 
-        {nb === 0 ? (
+        {queryError && (
+          <div className="bg-red-50 border border-red-200 rounded-xl p-4 max-w-2xl mb-6">
+            <p className="text-sm font-semibold text-red-700 mb-1">Erreur technique</p>
+            <p className="text-xs text-red-600 font-mono">{queryError}</p>
+          </div>
+        )}
+
+        {!queryError && nb === 0 ? (
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-16 text-center max-w-lg">
             <div className="w-16 h-16 rounded-full bg-[#3DBFA0]/10 flex items-center justify-center mx-auto mb-4">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3DBFA0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -190,19 +226,18 @@ export default function AttestationsPage() {
           </div>
         ) : (
           <div className="flex flex-col gap-4 max-w-3xl">
-            {attestations.map(function (attestation) {
-              const f = attestation.formations
-              const isDownloading = downloadingId === attestation.id
+            {attestations.map(function (att) {
+              const f = formations[att.formation_id]
+              const isDownloading = downloadingId === att.id
               const bilanHref = f?.slug ? `/formations/${f.slug}/bilan` : null
               return (
                 <div
-                  key={attestation.id}
+                  key={att.id}
                   className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden"
                 >
                   <div className="h-1 bg-gradient-to-r from-[#1B2D5B] to-[#3DBFA0]" />
                   <div className="p-6 flex items-center justify-between gap-6">
 
-                    {/* Zone cliquable → page de félicitations */}
                     {bilanHref ? (
                       <a
                         href={bilanHref}
@@ -220,7 +255,7 @@ export default function AttestationsPage() {
                           </h3>
                           <div className="flex flex-wrap items-center gap-3 mt-1">
                             <span className="text-xs text-gray-400">
-                              Obtenu le {formatDate(attestation.created_at)}
+                              Obtenu le {formatDate(att.created_at)}
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs text-gray-400">
@@ -228,7 +263,7 @@ export default function AttestationsPage() {
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs font-mono text-[#3DBFA0]">
-                              {numeroAttestation(attestation.id)}
+                              {numeroAttestation(att.id)}
                             </span>
                           </div>
                         </div>
@@ -247,7 +282,7 @@ export default function AttestationsPage() {
                           </h3>
                           <div className="flex flex-wrap items-center gap-3 mt-1">
                             <span className="text-xs text-gray-400">
-                              Obtenu le {formatDate(attestation.created_at)}
+                              Obtenu le {formatDate(att.created_at)}
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs text-gray-400">
@@ -255,7 +290,7 @@ export default function AttestationsPage() {
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs font-mono text-[#3DBFA0]">
-                              {numeroAttestation(attestation.id)}
+                              {numeroAttestation(att.id)}
                             </span>
                           </div>
                         </div>
@@ -263,7 +298,7 @@ export default function AttestationsPage() {
                     )}
 
                     <button
-                      onClick={() => handleDownload(attestation)}
+                      onClick={() => handleDownload(att)}
                       disabled={isDownloading}
                       className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1B2D5B] text-white text-sm font-medium hover:bg-[#1B2D5B]/90 transition-colors flex-shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
