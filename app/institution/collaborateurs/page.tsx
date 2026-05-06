@@ -11,8 +11,13 @@ type Collaborateur = {
   created_at: string
   prenom: string
   nom: string
-  nb_formations: number
-  nb_attestations: number
+  secteur: string | null
+  nb_formations_completes: number
+}
+
+type ModalConfirmation = {
+  profilId: string
+  nomComplet: string
 }
 
 function dateFormat(d: string) {
@@ -24,15 +29,17 @@ export default function CollaborateursPage() {
   const [institutionNom, setInstitutionNom] = useState("")
   const [codeAcces, setCodeAcces] = useState("")
   const [collaborateurs, setCollaborateurs] = useState<Collaborateur[]>([])
+  const [recherche, setRecherche] = useState("")
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [modal, setModal] = useState<ModalConfirmation | null>(null)
   const router = useRouter()
 
   const loadCollaborateurs = async (instId: string) => {
     const { data: ips } = await supabase
       .from("institution_profils")
-      .select("profil_id, statut, created_at, profils(prenom, nom)")
+      .select("profil_id, statut, created_at, secteur, profils(prenom, nom)")
       .eq("institution_id", instId)
       .eq("role", "collaborateur")
       .order("created_at", { ascending: false })
@@ -41,13 +48,7 @@ export default function CollaborateursPage() {
 
     const collabs: Collaborateur[] = await Promise.all(
       ips.map(async (ip) => {
-        const profil = ip.profils as { prenom: string; nom: string } | null
-
-        const { data: prog } = await supabase
-          .from("progression")
-          .select("formation_id")
-          .eq("profil_id", ip.profil_id)
-        const nbFormations = new Set(prog?.map((p) => p.formation_id) ?? []).size
+        const profil = ip.profils as unknown as { prenom: string; nom: string } | null
 
         const { count: nbAtt } = await supabase
           .from("attestations")
@@ -60,8 +61,8 @@ export default function CollaborateursPage() {
           created_at: ip.created_at,
           prenom: profil?.prenom || "",
           nom: profil?.nom || "",
-          nb_formations: nbFormations,
-          nb_attestations: nbAtt || 0,
+          secteur: ip.secteur || null,
+          nb_formations_completes: nbAtt || 0,
         }
       })
     )
@@ -84,7 +85,7 @@ export default function CollaborateursPage() {
 
       if (!ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
-      const inst = ip.institutions as { id: string; nom: string; code_acces: string }
+      const inst = ip.institutions as unknown as { id: string; nom: string; code_acces: string }
       setInstitutionId(inst.id)
       setInstitutionNom(inst.nom)
       setCodeAcces(inst.code_acces || "")
@@ -95,13 +96,25 @@ export default function CollaborateursPage() {
     getData()
   }, [router])
 
-  const toggleStatut = async (profilId: string, statutActuel: string) => {
+  const supprimerAcces = async (profilId: string) => {
     if (!institutionId) return
     setActionLoading(profilId)
-    const newStatut = statutActuel === "actif" ? "inactif" : "actif"
     await supabase
       .from("institution_profils")
-      .update({ statut: newStatut })
+      .update({ statut: "inactif" })
+      .eq("profil_id", profilId)
+      .eq("institution_id", institutionId)
+    setModal(null)
+    await loadCollaborateurs(institutionId)
+    setActionLoading(null)
+  }
+
+  const reactiver = async (profilId: string) => {
+    if (!institutionId) return
+    setActionLoading(profilId)
+    await supabase
+      .from("institution_profils")
+      .update({ statut: "actif" })
       .eq("profil_id", profilId)
       .eq("institution_id", institutionId)
     await loadCollaborateurs(institutionId)
@@ -113,6 +126,12 @@ export default function CollaborateursPage() {
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
+
+  const collaborateursFiltres = collaborateurs.filter((c) => {
+    if (!recherche) return true
+    const nom = `${c.prenom} ${c.nom}`.toLowerCase()
+    return nom.includes(recherche.toLowerCase())
+  })
 
   if (loading) {
     return (
@@ -126,7 +145,7 @@ export default function CollaborateursPage() {
     <div className="min-h-screen bg-gray-50 flex">
       <InstitutionSidebar pageActive="collaborateurs" institution={institutionNom} />
       <main className="flex-1 p-8">
-        <div className="flex items-start justify-between mb-8">
+        <div className="flex items-start justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-[#1B2D5B]">Mes collaborateurs</h2>
             <p className="text-gray-500 mt-1">{collaborateurs.length} collaborateur{collaborateurs.length !== 1 ? "s" : ""} dans votre institution.</p>
@@ -145,54 +164,71 @@ export default function CollaborateursPage() {
           </div>
         </div>
 
+        {/* Recherche */}
+        <div className="mb-4">
+          <input
+            type="text"
+            value={recherche}
+            onChange={(e) => setRecherche(e.target.value)}
+            placeholder="Rechercher par nom..."
+            className="w-full max-w-sm border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
+          />
+        </div>
+
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Collaborateur</th>
+                <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Secteur / Groupe</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Inscription</th>
                 <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Formations</th>
-                <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Attestations</th>
                 <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Statut</th>
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody>
-              {collaborateurs.map((c) => (
+              {collaborateursFiltres.map((c) => (
                 <tr
                   key={c.profil_id}
-                  className={`border-b border-gray-50 last:border-0 ${c.statut === "inactif" ? "opacity-50" : ""}`}
+                  className={`border-b border-gray-50 last:border-0 transition-opacity ${c.statut === "inactif" ? "opacity-40" : ""}`}
                 >
                   <td className="px-4 py-3">
                     <p className="font-medium text-[#1B2D5B]">{c.prenom} {c.nom}</p>
                   </td>
+                  <td className="px-4 py-3 text-gray-500 text-sm">{c.secteur || <span className="text-gray-300 italic">—</span>}</td>
                   <td className="px-4 py-3 text-gray-500">{dateFormat(c.created_at)}</td>
-                  <td className="px-4 py-3 text-center font-medium text-gray-700">{c.nb_formations}</td>
-                  <td className="px-4 py-3 text-center font-medium text-[#3DBFA0]">{c.nb_attestations}</td>
+                  <td className="px-4 py-3 text-center font-medium text-[#3DBFA0]">{c.nb_formations_completes}</td>
                   <td className="px-4 py-3 text-center">
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${c.statut === "actif" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"}`}>
                       {c.statut === "actif" ? "Actif" : "Inactif"}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <button
-                      onClick={() => toggleStatut(c.profil_id, c.statut)}
-                      disabled={actionLoading === c.profil_id}
-                      className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 ${
-                        c.statut === "actif"
-                          ? "bg-red-50 text-red-600 hover:bg-red-100"
-                          : "bg-green-50 text-green-600 hover:bg-green-100"
-                      }`}
-                    >
-                      {actionLoading === c.profil_id ? "..." : c.statut === "actif" ? "Désactiver" : "Réactiver"}
-                    </button>
+                    {c.statut === "actif" ? (
+                      <button
+                        onClick={() => setModal({ profilId: c.profil_id, nomComplet: `${c.prenom} ${c.nom}` })}
+                        disabled={actionLoading === c.profil_id}
+                        className="text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 bg-red-50 text-red-600 hover:bg-red-100"
+                      >
+                        Supprimer l'accès
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => reactiver(c.profil_id)}
+                        disabled={actionLoading === c.profil_id}
+                        className="text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 bg-green-50 text-green-600 hover:bg-green-100"
+                      >
+                        {actionLoading === c.profil_id ? "..." : "Réactiver"}
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
-              {collaborateurs.length === 0 && (
+              {collaborateursFiltres.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-8 text-center text-gray-400 text-sm">
-                    Aucun collaborateur inscrit pour le moment.
+                    {recherche ? "Aucun collaborateur ne correspond à cette recherche." : "Aucun collaborateur inscrit pour le moment."}
                   </td>
                 </tr>
               )}
@@ -200,6 +236,34 @@ export default function CollaborateursPage() {
           </table>
         </div>
       </main>
+
+      {/* Modal de confirmation */}
+      {modal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4">
+            <h3 className="text-lg font-bold text-[#1B2D5B] mb-3">Supprimer l'accès</h3>
+            <p className="text-sm text-gray-600 mb-6">
+              Êtes-vous sûr de vouloir supprimer l'accès de <span className="font-semibold text-[#1B2D5B]">{modal.nomComplet}</span> ?
+              Cette personne ne pourra plus se connecter à la plateforme.
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setModal(null)}
+                className="px-4 py-2 text-sm rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={() => supprimerAcces(modal.profilId)}
+                disabled={actionLoading === modal.profilId}
+                className="px-4 py-2 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors disabled:opacity-50 font-medium"
+              >
+                {actionLoading === modal.profilId ? "Suppression..." : "Supprimer l'accès"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

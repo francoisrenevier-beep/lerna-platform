@@ -26,9 +26,10 @@ function dateFormat(d: string | null | undefined) {
 
 export default function InstitutionDashboardPage() {
   const [institution, setInstitution] = useState<InstitutionData | null>(null)
-  const [nbCollaborateurs, setNbCollaborateurs] = useState(0)
-  const [nbFormations, setNbFormations] = useState(0)
+  const [nbCollaborateursActifs, setNbCollaborateursActifs] = useState(0)
+  const [nbFormationsCompletes, setNbFormationsCompletes] = useState(0)
   const [nbAttestations, setNbAttestations] = useState(0)
+  const [tauxMoyen, setTauxMoyen] = useState(0)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
@@ -48,37 +49,68 @@ export default function InstitutionDashboardPage() {
 
       if (!ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
-      const inst = ip.institutions as InstitutionData
+      const inst = ip.institutions as unknown as InstitutionData
       setInstitution(inst)
       const institutionId = inst.id
 
-      const { count: countCollab } = await supabase
+      // Collaborateurs actifs
+      const { count: countActifs } = await supabase
         .from("institution_profils")
         .select("profil_id", { count: "exact" })
         .eq("institution_id", institutionId)
         .eq("role", "collaborateur")
-      setNbCollaborateurs(countCollab || 0)
+        .eq("statut", "actif")
+      const nbActifs = countActifs || 0
+      setNbCollaborateursActifs(nbActifs)
 
-      const { count: countFormations } = await supabase
-        .from("formations")
-        .select("id", { count: "exact" })
-        .eq("est_publie", true)
-        .eq("est_privee", false)
-      setNbFormations(countFormations || 0)
-
-      const { data: collabIds } = await supabase
+      // IDs des collaborateurs (tous, pour les attestations)
+      const { data: collabIps } = await supabase
         .from("institution_profils")
         .select("profil_id")
         .eq("institution_id", institutionId)
         .eq("role", "collaborateur")
+      const collabIds = collabIps?.map((c) => c.profil_id) ?? []
 
-      if (collabIds && collabIds.length > 0) {
-        const ids = collabIds.map((c) => c.profil_id)
+      if (collabIds.length > 0) {
+        // Attestations obtenues (total)
         const { count: countAtt } = await supabase
           .from("attestations")
           .select("id", { count: "exact" })
-          .in("profil_id", ids)
+          .in("profil_id", collabIds)
         setNbAttestations(countAtt || 0)
+
+        // Formations complétées = formations distinctes avec au moins une attestation
+        const { data: attData } = await supabase
+          .from("attestations")
+          .select("formation_id")
+          .in("profil_id", collabIds)
+        const formationsDistinctes = new Set(attData?.map((a) => a.formation_id) ?? []).size
+        setNbFormationsCompletes(formationsDistinctes)
+
+        // Taux moyen de complétion
+        if (nbActifs > 0) {
+          const { data: formations } = await supabase
+            .from("formations")
+            .select("id")
+            .eq("est_publie", true)
+
+          const actifIds = collabIps
+            ?.filter((c) => {
+              // actifs only for rate calculation
+            })
+            .map((c) => c.profil_id) ?? collabIds
+
+          const { data: attActifs } = await supabase
+            .from("attestations")
+            .select("formation_id, profil_id")
+            .in("profil_id", collabIds)
+
+          const nbFormationsTotal = formations?.length || 0
+          if (nbFormationsTotal > 0 && attActifs) {
+            const taux = Math.round((attActifs.length / (nbFormationsTotal * nbActifs)) * 100)
+            setTauxMoyen(Math.min(taux, 100))
+          }
+        }
       }
 
       setLoading(false)
@@ -126,33 +158,36 @@ export default function InstitutionDashboardPage() {
           </div>
         </div>
 
-        {/* Statistiques */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        {/* 4 cartes de statistiques */}
+        <div className="grid grid-cols-2 gap-4 mb-6 xl:grid-cols-4">
           <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-            <p className="text-sm text-gray-500">Collaborateurs</p>
-            <p className="text-3xl font-bold text-[#1B2D5B] mt-1">{nbCollaborateurs}</p>
+            <p className="text-sm text-gray-500">Collaborateurs actifs</p>
+            <p className="text-3xl font-bold text-[#1B2D5B] mt-1">{nbCollaborateursActifs}</p>
           </div>
           <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-            <p className="text-sm text-gray-500">Formations disponibles</p>
-            <p className="text-3xl font-bold text-[#3DBFA0] mt-1">{nbFormations}</p>
+            <p className="text-sm text-gray-500">Formations complétées</p>
+            <p className="text-3xl font-bold text-[#3DBFA0] mt-1">{nbFormationsCompletes}</p>
+            <p className="text-xs text-gray-400 mt-1">formations distinctes</p>
           </div>
           <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
             <p className="text-sm text-gray-500">Attestations obtenues</p>
             <p className="text-3xl font-bold text-[#1B2D5B] mt-1">{nbAttestations}</p>
+          </div>
+          <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+            <p className="text-sm text-gray-500">Taux moyen de complétion</p>
+            <p className="text-3xl font-bold text-[#3DBFA0] mt-1">{tauxMoyen} %</p>
           </div>
         </div>
 
         {/* Liens rapides */}
         <div className="grid grid-cols-2 gap-4">
           <a href="/institution/collaborateurs" className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:border-[#3DBFA0] transition-colors group">
-            <span className="text-2xl">👥</span>
-            <p className="text-sm font-semibold text-[#1B2D5B] mt-2 group-hover:text-[#3DBFA0] transition-colors">Gérer les collaborateurs</p>
-            <p className="text-xs text-gray-400 mt-0.5">Activer, désactiver, consulter</p>
+            <p className="text-sm font-semibold text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors">Gérer les collaborateurs</p>
+            <p className="text-xs text-gray-400 mt-0.5">Activer, désactiver, consulter les secteurs</p>
           </a>
-          <a href="/institution/progression" className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:border-[#3DBFA0] transition-colors group">
-            <span className="text-2xl">📈</span>
-            <p className="text-sm font-semibold text-[#1B2D5B] mt-2 group-hover:text-[#3DBFA0] transition-colors">Progression de l'équipe</p>
-            <p className="text-xs text-gray-400 mt-0.5">Suivi par formation</p>
+          <a href="/institution/statistiques" className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:border-[#3DBFA0] transition-colors group">
+            <p className="text-sm font-semibold text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors">Voir les statistiques</p>
+            <p className="text-xs text-gray-400 mt-0.5">Progression par formation, attestations</p>
           </a>
         </div>
       </main>

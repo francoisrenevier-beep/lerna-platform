@@ -66,7 +66,7 @@ export default function DashboardPage() {
         .eq("statut", "actif")
         .limit(1)
         .single()
-      if (ip?.institutions) setInstitution(ip.institutions as Institution)
+      if (ip?.institutions) setInstitution(ip.institutions as unknown as Institution)
 
       const { count: countFormations } = await supabase
         .from("formations")

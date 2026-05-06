@@ -32,14 +32,32 @@ export default function ConnexionPage() {
     } else {
       const userId = authData.user?.id
       if (userId) {
-        const { data: ip } = await supabase
+        // Vérifie d'abord si l'utilisateur est inactif dans son institution
+        const { data: ipInactif } = await supabase
+          .from("institution_profils")
+          .select("statut")
+          .eq("profil_id", userId)
+          .eq("statut", "inactif")
+          .limit(1)
+          .single()
+
+        const { data: ipActif } = await supabase
           .from("institution_profils")
           .select("role")
           .eq("profil_id", userId)
           .eq("statut", "actif")
           .limit(1)
           .single()
-        const role = ip?.role
+
+        if (ipInactif && !ipActif) {
+          await supabase.auth.signOut()
+          setMessageType("error")
+          setMessage("Votre accès a été désactivé. Contactez votre responsable institution.")
+          setLoading(false)
+          return
+        }
+
+        const role = ipActif?.role
         if (role === "responsable") {
           router.push("/institution/dashboard")
         } else if (role === "admin") {

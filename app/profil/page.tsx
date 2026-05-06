@@ -7,9 +7,11 @@ import { Sidebar } from "@/components/Sidebar"
 
 export default function ProfilPage() {
   const [userId, setUserId] = useState<string | null>(null)
+  const [institutionProfilId, setInstitutionProfilId] = useState<string | null>(null)
   const [email, setEmail] = useState("")
   const [prenom, setPrenom] = useState("")
   const [nom, setNom] = useState("")
+  const [secteur, setSecteur] = useState("")
   const [institution, setInstitution] = useState("")
   const [dateInscription, setDateInscription] = useState("")
   const [nbFormationsCompletes, setNbFormationsCompletes] = useState(0)
@@ -49,14 +51,18 @@ export default function ProfilPage() {
 
       const { data: ip } = await supabase
         .from("institution_profils")
-        .select("institutions(nom)")
+        .select("profil_id, institution_id, secteur, institutions(nom)")
         .eq("profil_id", user.id)
         .eq("statut", "actif")
         .limit(1)
         .single()
-      if (ip?.institutions) {
-        const inst = ip.institutions as { nom: string }
-        setInstitution(inst.nom || "")
+      if (ip) {
+        setInstitutionProfilId(ip.institution_id)
+        setSecteur(ip.secteur || "")
+        if (ip.institutions) {
+          const inst = ip.institutions as unknown as { nom: string }
+          setInstitution(inst.nom || "")
+        }
       }
 
       const { count: countAttestations } = await supabase
@@ -81,6 +87,14 @@ export default function ProfilPage() {
       .from("profils")
       .update({ prenom, nom })
       .eq("id", userId)
+
+    if (!error && institutionProfilId) {
+      await supabase
+        .from("institution_profils")
+        .update({ secteur: secteur || null })
+        .eq("profil_id", userId)
+        .eq("institution_id", institutionProfilId)
+    }
 
     setSaving(false)
     if (error) {
@@ -155,7 +169,7 @@ export default function ProfilPage() {
               </div>
             </div>
 
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input
                 type="email"
@@ -164,6 +178,20 @@ export default function ProfilPage() {
                 className="w-full border border-gray-100 rounded-lg px-3 py-2 text-sm bg-gray-50 text-gray-400 cursor-not-allowed"
               />
             </div>
+
+            {institutionProfilId && (
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Secteur / Groupe de vie</label>
+                <input
+                  type="text"
+                  value={secteur}
+                  onChange={(e) => setSecteur(e.target.value)}
+                  placeholder="Ex : Foyer Les Tilleuls, Groupe B..."
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] focus:border-transparent"
+                />
+                <p className="text-xs text-gray-400 mt-1">Visible par le responsable de votre institution.</p>
+              </div>
+            )}
 
             {messageProfil && (
               <div

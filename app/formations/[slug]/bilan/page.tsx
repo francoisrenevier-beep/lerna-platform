@@ -121,7 +121,7 @@ export default function BilanPage() {
       }
 
       if (att) {
-        setAttestationDate(att.created_at)
+        setAttestationDate(att.created_at ?? null)
         setAttestationId(att.id)
         // Récupérer pdf_base64 séparément (colonne optionnelle selon migration)
         const { data: pdfData } = await supabase
