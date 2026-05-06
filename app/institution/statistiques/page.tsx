@@ -34,11 +34,11 @@ export default function StatistiquesPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const result = await supabase.auth.getUser()
-      const user = result.data.user
+      const { data: { session } } = await supabase.auth.getSession()
+      const user = session?.user
       if (!user) { router.push("/connexion"); return }
 
-      const { data: ip } = await supabase
+      const { data: ip, error: ipError } = await supabase
         .from("institution_profils")
         .select("role, institution_id")
         .eq("profil_id", user.id)
@@ -46,7 +46,7 @@ export default function StatistiquesPage() {
         .limit(1)
         .single()
 
-      if (!ip || ip.role !== "responsable") { router.push("/dashboard"); return }
+      if (ipError || !ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
       const { data: inst } = await supabase
         .from("institutions")

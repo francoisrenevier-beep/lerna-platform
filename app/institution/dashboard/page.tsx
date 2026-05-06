@@ -35,11 +35,11 @@ export default function InstitutionDashboardPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const result = await supabase.auth.getUser()
-      const user = result.data.user
+      const { data: { session } } = await supabase.auth.getSession()
+      const user = session?.user
       if (!user) { router.push("/connexion"); return }
 
-      const { data: ip } = await supabase
+      const { data: ip, error: ipError } = await supabase
         .from("institution_profils")
         .select("role, institution_id")
         .eq("profil_id", user.id)
@@ -47,7 +47,7 @@ export default function InstitutionDashboardPage() {
         .limit(1)
         .single()
 
-      if (!ip || ip.role !== "responsable") { router.push("/dashboard"); return }
+      if (ipError || !ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
       const institutionId = ip.institution_id
 
@@ -57,8 +57,7 @@ export default function InstitutionDashboardPage() {
         .eq("id", institutionId)
         .single()
 
-      if (!instData) { router.push("/dashboard"); return }
-      setInstitution(instData as InstitutionData)
+      setInstitution((instData ?? { id: institutionId, nom: "", statut: "", licence_expiration: null, code_acces: "" }) as InstitutionData)
 
 
       // Collaborateurs actifs
