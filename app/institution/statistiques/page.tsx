@@ -30,6 +30,7 @@ export default function StatistiquesPage() {
   const [lignes, setLignes] = useState<LigneFormation[]>([])
   const [dernieresAttestations, setDernieresAttestations] = useState<DerniereAttestation[]>([])
   const [loading, setLoading] = useState(true)
+  const [debug, setDebug] = useState<string[]>([])
   const router = useRouter()
 
   useEffect(() => {
@@ -72,6 +73,20 @@ export default function StatistiquesPage() {
         .select("id, titre")
         .eq("est_publie", true)
         .order("ordre")
+
+      // Test direct progression + attestations
+      const { data: testProg, error: testProgErr } = await supabase
+        .from("progression").select("profil_id, formation_id").in("profil_id", collabIds.length > 0 ? collabIds : ["00000000-0000-0000-0000-000000000000"])
+      const { data: testAtt, error: testAttErr } = await supabase
+        .from("attestations").select("profil_id, formation_id").in("profil_id", collabIds.length > 0 ? collabIds : ["00000000-0000-0000-0000-000000000000"])
+
+      setDebug([
+        `institutionId=${institutionId}`,
+        `collabIds(${collabIds.length})=${JSON.stringify(collabIds)}`,
+        `formations(${formations?.length ?? 0})`,
+        `progression(${testProg?.length ?? "err"}) err=${JSON.stringify(testProgErr)}`,
+        `attestations(${testAtt?.length ?? "err"}) err=${JSON.stringify(testAttErr)}`,
+      ])
 
       if (!formations) { setLoading(false); return }
 
@@ -170,6 +185,11 @@ export default function StatistiquesPage() {
           <h2 className="text-2xl font-bold text-[#1B2D5B]">Statistiques</h2>
           <p className="text-gray-500 mt-1">Progression et attestations de l'équipe.</p>
         </div>
+        {debug.length > 0 && (
+          <div className="mb-6 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-xs font-mono space-y-1">
+            {debug.map((d, i) => <div key={i} className="break-all text-yellow-800">{d}</div>)}
+          </div>
+        )}
 
         {/* Tableau récapitulatif par formation */}
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden mb-8">
