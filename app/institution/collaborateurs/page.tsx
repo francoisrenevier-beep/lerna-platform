@@ -92,19 +92,19 @@ export default function CollaborateursPage() {
 
       if (ipError || !ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
+      const institutionId = ip.institution_id
+      setInstitutionId(institutionId)
+
       const { data: inst } = await supabase
         .from("institutions")
-        .select("id, nom, code_acces")
-        .eq("id", ip.institution_id)
+        .select("nom, code_acces")
+        .eq("id", institutionId)
         .single()
 
-      if (!inst) { router.push("/dashboard"); return }
+      setInstitutionNom(inst?.nom || "")
+      setCodeAcces(inst?.code_acces || "")
 
-      setInstitutionId(inst.id)
-      setInstitutionNom(inst.nom)
-      setCodeAcces(inst.code_acces || "")
-
-      await loadCollaborateurs(inst.id)
+      await loadCollaborateurs(institutionId)
       setLoading(false)
     }
     getData()
