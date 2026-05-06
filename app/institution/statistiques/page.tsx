@@ -40,7 +40,7 @@ export default function StatistiquesPage() {
 
       const { data: ip } = await supabase
         .from("institution_profils")
-        .select("role, institution_id, institutions(id, nom)")
+        .select("role, institution_id")
         .eq("profil_id", user.id)
         .eq("statut", "actif")
         .limit(1)
@@ -48,7 +48,13 @@ export default function StatistiquesPage() {
 
       if (!ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
-      const inst = ip.institutions as unknown as { id: string; nom: string }
+      const { data: inst } = await supabase
+        .from("institutions")
+        .select("id, nom")
+        .eq("id", ip.institution_id)
+        .single()
+
+      if (!inst) { router.push("/dashboard"); return }
       setInstitutionNom(inst.nom)
 
       const { data: collabIps } = await supabase

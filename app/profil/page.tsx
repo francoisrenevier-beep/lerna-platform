@@ -51,7 +51,7 @@ export default function ProfilPage() {
 
       const { data: ip } = await supabase
         .from("institution_profils")
-        .select("profil_id, institution_id, secteur, institutions(nom)")
+        .select("institution_id, secteur")
         .eq("profil_id", user.id)
         .eq("statut", "actif")
         .limit(1)
@@ -59,10 +59,12 @@ export default function ProfilPage() {
       if (ip) {
         setInstitutionProfilId(ip.institution_id)
         setSecteur(ip.secteur || "")
-        if (ip.institutions) {
-          const inst = ip.institutions as unknown as { nom: string }
-          setInstitution(inst.nom || "")
-        }
+        const { data: inst } = await supabase
+          .from("institutions")
+          .select("nom")
+          .eq("id", ip.institution_id)
+          .single()
+        if (inst) setInstitution(inst.nom || "")
       }
 
       const { count: countAttestations } = await supabase

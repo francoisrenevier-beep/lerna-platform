@@ -77,7 +77,7 @@ export default function CollaborateursPage() {
 
       const { data: ip } = await supabase
         .from("institution_profils")
-        .select("role, institution_id, institutions(id, nom, code_acces)")
+        .select("role, institution_id")
         .eq("profil_id", user.id)
         .eq("statut", "actif")
         .limit(1)
@@ -85,7 +85,14 @@ export default function CollaborateursPage() {
 
       if (!ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
-      const inst = ip.institutions as unknown as { id: string; nom: string; code_acces: string }
+      const { data: inst } = await supabase
+        .from("institutions")
+        .select("id, nom, code_acces")
+        .eq("id", ip.institution_id)
+        .single()
+
+      if (!inst) { router.push("/dashboard"); return }
+
       setInstitutionId(inst.id)
       setInstitutionNom(inst.nom)
       setCodeAcces(inst.code_acces || "")

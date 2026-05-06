@@ -41,7 +41,7 @@ export default function InstitutionDashboardPage() {
 
       const { data: ip } = await supabase
         .from("institution_profils")
-        .select("role, institution_id, institutions(id, nom, statut, licence_expiration, code_acces)")
+        .select("role, institution_id")
         .eq("profil_id", user.id)
         .eq("statut", "actif")
         .limit(1)
@@ -49,9 +49,17 @@ export default function InstitutionDashboardPage() {
 
       if (!ip || ip.role !== "responsable") { router.push("/dashboard"); return }
 
-      const inst = ip.institutions as unknown as InstitutionData
-      setInstitution(inst)
-      const institutionId = inst.id
+      const institutionId = ip.institution_id
+
+      const { data: instData } = await supabase
+        .from("institutions")
+        .select("id, nom, statut, licence_expiration, code_acces")
+        .eq("id", institutionId)
+        .single()
+
+      if (!instData) { router.push("/dashboard"); return }
+      setInstitution(instData as InstitutionData)
+
 
       // Collaborateurs actifs
       const { count: countActifs } = await supabase
