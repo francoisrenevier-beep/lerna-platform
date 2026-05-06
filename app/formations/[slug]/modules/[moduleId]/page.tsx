@@ -19,6 +19,11 @@ import { Module3Vieillissement } from "@/app/modules/vieillissement-module-3"
 import { Module4Vieillissement } from "@/app/modules/vieillissement-module-4"
 import { Module5Vieillissement } from "@/app/modules/vieillissement-module-5"
 import { Module6Vieillissement } from "@/app/modules/vieillissement-module-6"
+import { Module1MDHPPH } from "@/app/modules/mdhpph-module-1"
+import { Module2MDHPPH } from "@/app/modules/mdhpph-module-2"
+import { Module3MDHPPH } from "@/app/modules/mdhpph-module-3"
+import { Module4MDHPPH } from "@/app/modules/mdhpph-module-4"
+import { Module5MDHPPH } from "@/app/modules/mdhpph-module-5"
 
 type ModuleSimple = {
   id: string
@@ -50,6 +55,11 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "1f71287e-788f-4c70-aa55-1f12a6330070": Module4Vieillissement,
   "e3dc5ebd-abb7-4891-9090-52f1b000799e": Module5Vieillissement,
   "e992ccab-7ab4-4641-8e01-781ef2112bd5": Module6Vieillissement,
+  "49289005-4480-4137-88fa-673bc0d2d287": Module1MDHPPH,
+  "acf8c260-ad54-4908-8629-3d33def88797": Module2MDHPPH,
+  "77b98c17-8566-407b-bd0a-196c8bc709b9": Module3MDHPPH,
+  "7befd05f-64e8-4d62-93e1-9dbd26aeef52": Module4MDHPPH,
+  "fe837bdc-855a-4a78-b2eb-8760881e3318": Module5MDHPPH,
 }
 
 export default function ModulePage() {
