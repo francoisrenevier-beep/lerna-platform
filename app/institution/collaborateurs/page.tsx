@@ -40,10 +40,9 @@ export default function CollaborateursPage() {
   const loadCollaborateurs = async (instId: string) => {
     const { data: ips, error: ipsError } = await supabase
       .from("institution_profils")
-      .select("profil_id, statut, created_at, secteur")
+      .select("profil_id, statut, secteur")
       .eq("institution_id", instId)
       .eq("role", "collaborateur")
-      .order("created_at", { ascending: false })
 
     setDebugInfo(`instId=${instId} | ips=${JSON.stringify(ips)} | err=${JSON.stringify(ipsError)}`)
     if (!ips || ips.length === 0) { setCollaborateurs([]); return }
@@ -67,7 +66,7 @@ export default function CollaborateursPage() {
         return {
           profil_id: ip.profil_id,
           statut: ip.statut,
-          created_at: ip.created_at,
+          created_at: (ip as any).created_at ?? "",
           prenom: profil?.prenom || "",
           nom: profil?.nom || "",
           secteur: ip.secteur || null,
