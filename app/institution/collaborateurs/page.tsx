@@ -39,16 +39,23 @@ export default function CollaborateursPage() {
   const loadCollaborateurs = async (instId: string) => {
     const { data: ips } = await supabase
       .from("institution_profils")
-      .select("profil_id, statut, created_at, secteur, profils(prenom, nom)")
+      .select("profil_id, statut, created_at, secteur")
       .eq("institution_id", instId)
       .eq("role", "collaborateur")
       .order("created_at", { ascending: false })
 
-    if (!ips) { setCollaborateurs([]); return }
+    if (!ips || ips.length === 0) { setCollaborateurs([]); return }
+
+    const profilIds = ips.map((ip) => ip.profil_id)
+    const { data: profils } = await supabase
+      .from("profils")
+      .select("id, prenom, nom")
+      .in("id", profilIds)
+    const profilMap = new Map(profils?.map((p) => [p.id, p]) ?? [])
 
     const collabs: Collaborateur[] = await Promise.all(
       ips.map(async (ip) => {
-        const profil = ip.profils as unknown as { prenom: string; nom: string } | null
+        const profil = profilMap.get(ip.profil_id)
 
         const { count: nbAtt } = await supabase
           .from("attestations")

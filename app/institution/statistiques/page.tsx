@@ -109,23 +109,29 @@ export default function StatistiquesPage() {
         // 5 dernières attestations
         const { data: atts } = await supabase
           .from("attestations")
-          .select("id, profil_id, created_at, formations(titre)")
+          .select("id, profil_id, formation_id, created_at")
           .in("profil_id", collabIds)
           .order("created_at", { ascending: false })
           .limit(5)
 
         if (atts && atts.length > 0) {
           const profilIds = [...new Set(atts.map((a) => a.profil_id))]
+          const formationIds = [...new Set(atts.map((a) => a.formation_id))]
           const { data: profils } = await supabase
             .from("profils")
             .select("id, prenom, nom")
             .in("id", profilIds)
+          const { data: formationsTitres } = await supabase
+            .from("formations")
+            .select("id, titre")
+            .in("id", formationIds)
           const profilMap = new Map(profils?.map((p) => [p.id, p]) ?? [])
+          const formationMap = new Map(formationsTitres?.map((f) => [f.id, f]) ?? [])
 
           setDernieresAttestations(
             atts.map((a) => {
               const p = profilMap.get(a.profil_id)
-              const f = a.formations as unknown as { titre: string } | null
+              const f = formationMap.get(a.formation_id)
               return {
                 id: a.id,
                 prenom: p?.prenom || "",
