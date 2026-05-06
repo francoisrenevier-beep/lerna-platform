@@ -34,16 +34,18 @@ export default function CollaborateursPage() {
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
   const [modal, setModal] = useState<ModalConfirmation | null>(null)
+  const [debugInfo, setDebugInfo] = useState<string>("")
   const router = useRouter()
 
   const loadCollaborateurs = async (instId: string) => {
-    const { data: ips } = await supabase
+    const { data: ips, error: ipsError } = await supabase
       .from("institution_profils")
       .select("profil_id, statut, created_at, secteur")
       .eq("institution_id", instId)
       .eq("role", "collaborateur")
       .order("created_at", { ascending: false })
 
+    setDebugInfo(`instId=${instId} | ips=${JSON.stringify(ips)} | err=${JSON.stringify(ipsError)}`)
     if (!ips || ips.length === 0) { setCollaborateurs([]); return }
 
     const profilIds = ips.map((ip) => ip.profil_id)
@@ -159,6 +161,11 @@ export default function CollaborateursPage() {
     <div className="min-h-screen bg-gray-50 flex">
       <InstitutionSidebar pageActive="collaborateurs" institution={institutionNom} />
       <main className="flex-1 p-8">
+        {debugInfo && (
+          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-xs font-mono break-all text-yellow-800">
+            {debugInfo}
+          </div>
+        )}
         <div className="flex items-start justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-[#1B2D5B]">Mes collaborateurs</h2>
