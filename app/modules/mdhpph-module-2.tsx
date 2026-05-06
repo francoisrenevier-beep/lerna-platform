@@ -23,110 +23,122 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
       <div className="max-w-3xl mx-auto px-8 py-12">
 
-        <SectionModule eyebrow="Introduction" titre="Du concept à l'outil opérationnel">
-          <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
-            <Liste items={[
-              "Distinguer les trois sous-composantes des facteurs personnels et leurs implications pratiques",
-              "Analyser l'environnement selon ses trois échelles (micro, méso, macro) et deux dimensions (physique/sociale)",
-              "Identifier les douze catégories d'habitudes de vie et comprendre le double critère réalisation/satisfaction",
-              "Distinguer facilitateurs et obstacles et comprendre leur dynamique"
-            ]} />
-          </ConceptBox>
-          <Texte>Comprendre les trois dimensions du MDH-PPH, c'est se doter d'une grille de lecture systématique pour décrypter n'importe quelle situation d'accompagnement. Chaque dimension est à la fois un objet d'évaluation et un terrain d'action.</Texte>
+        <SectionModule eyebrow="Fil rouge" titre="Lena — l'équipe commence à regarder différemment">
+          <HighlightBox label="Où en est Lena ?" couleur="bleu">
+            <Texte>Après la formation du module précédent, l'équipe de Lena décide d'appliquer le MDH-PPH. Première étape : regarder Lena autrement. Non plus à travers ses déficiences, mais à travers ses facteurs personnels dans leur globalité, l'environnement qui l'entoure, et ce qu'elle fait réellement au quotidien. Ce module vous donne les outils pour mener cette lecture.</Texte>
+          </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Leçon 2.1" titre="Les facteurs personnels en profondeur">
-          <Texte>Comprendre les facteurs personnels dans le cadre du MDH-PPH exige de dépasser la simple lecture du dossier médical. La version 2018 distingue trois sous-composantes aux implications très différentes pour la pratique.</Texte>
+        <SectionModule eyebrow="Introduction" titre="Des concepts à l'outil opérationnel">
+          <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
+            <Liste items={[
+              "Distinguer les trois sous-composantes des facteurs personnels et leurs implications pratiques différentes",
+              "Analyser l'environnement selon ses trois échelles (micro, méso, macro) et ses deux dimensions (physique / sociale)",
+              "Identifier les douze catégories d'habitudes de vie et comprendre le double critère réalisation/satisfaction",
+              "Distinguer facilitateurs et obstacles environnementaux et comprendre leur dynamique",
+            ]} />
+          </ConceptBox>
+          <Texte>Comprendre les trois dimensions du MDH-PPH, c'est se doter d'une grille de lecture systématique applicable à n'importe quelle situation d'accompagnement. Chaque dimension est à la fois un objet d'évaluation et un terrain d'action.</Texte>
+        </SectionModule>
+
+        <SectionModule eyebrow="Section 1" titre="Les facteurs personnels en profondeur">
+          <Texte>Les facteurs personnels ne se résument pas au dossier médical. C'est l'erreur la plus fréquente dans les institutions. La version 2018 du MDH-PPH distingue trois sous-composantes aux implications très différentes pour la pratique.</Texte>
 
           <SchemaEtapes
             titre="Les trois sous-composantes des facteurs personnels"
             etapes={[
-              { niveau: "Sous-composante 1", nom: "Facteurs identitaires", definition: "Âge, sexe, histoire de vie, croyances, valeurs, appartenance culturelle et communautaire. Déterminent ce qui compte pour la personne, ce qui donne sens à son accompagnement." },
-              { niveau: "Sous-composante 2", nom: "Systèmes organiques", definition: "Composantes corporelles (système nerveux, cardiovasculaire, moteur…) mesurées sur un spectre de l'intégrité à la déficience. Nécessaires, mais insuffisantes pour prédire la participation sociale." },
-              { niveau: "Sous-composante 3", nom: "Aptitudes", definition: "Possibilité pour une personne d'accomplir une activité physique ou mentale, de la pleine capacité à l'incapacité totale. Une aptitude réduite n'est pas synonyme de situation de handicap." }
+              { niveau: "Sous-composante 1", nom: "Facteurs identitaires", definition: "Âge, sexe, histoire de vie, croyances, valeurs, appartenance culturelle et communautaire. Ces éléments déterminent ce qui compte pour la personne, ce qui donne sens à son accompagnement. C'est souvent la dimension la plus négligée en institution." },
+              { niveau: "Sous-composante 2", nom: "Systèmes organiques", definition: "Composantes corporelles — système nerveux, cardiovasculaire, moteur, digestif — mesurées sur un spectre allant de l'intégrité à la déficience. Ces données sont nécessaires, mais insuffisantes pour prédire la participation sociale." },
+              { niveau: "Sous-composante 3", nom: "Aptitudes", definition: "La possibilité pour une personne d'accomplir une activité physique ou mentale : marcher, mémoriser, communiquer, s'orienter. Mesurées de la pleine capacité à l'incapacité totale. Une aptitude réduite n'est pas synonyme de situation de handicap." },
             ]}
-            note="Les facteurs identitaires sont souvent les plus négligés dans les institutions — et pourtant les plus déterminants"
+            note="Ignorer les facteurs identitaires, c'est risquer de construire des projets techniquement irréprochables mais déconnectés de ce qui importe pour la personne"
           />
 
           <HighlightBox label="Un exemple concret" couleur="jaune">
-            <Texte>Un résident qui présente des difficultés d'orientation spatiale peut être parfaitement autonome dans un quartier qu'il connaît depuis dix ans, et se retrouver en situation de handicap soudaine si son institution déménage dans un nouveau bâtiment. L'aptitude n'a pas changé — l'environnement, si.</Texte>
+            <Texte>Un résident qui présente des difficultés d'orientation spatiale peut être parfaitement autonome dans un quartier qu'il connaît depuis dix ans, et se retrouver en situation de handicap soudaine si son institution déménage dans un nouveau bâtiment. Son aptitude n'a pas changé d'un iota — mais l'interaction avec l'environnement a radicalement changé.</Texte>
           </HighlightBox>
 
-          <Texte>Les facteurs identitaires constituent souvent la dimension la plus négligée en institution. Ignorer ce qui compte pour la personne, c'est risquer de construire des projets d'accompagnement techniquement irréprochables mais totalement déconnectés de ce qui importe pour elle.</Texte>
+          <ConceptBox label="Lena — ses facteurs personnels" titre="Ce que l'équipe découvre en creusant">
+            <Texte><strong>Systèmes organiques :</strong> trisomie 21, légère hypersensibilité sensorielle (bruits forts, odeurs intenses).</Texte>
+            <Texte><strong>Aptitudes :</strong> aptitudes langagières réduites, bonnes capacités motrices, mémoire procédurale préservée (elle retrouve facilement des gestes répétés).</Texte>
+            <Texte><strong>Facteurs identitaires :</strong> Lena a grandi dans une famille où la cuisine était un rituel central. Elle aime créer, voir les résultats de son travail, être reconnue pour ses productions. Le jardinage lui procure un sentiment de soin et de patience. Le chant est lié à des souvenirs familiaux forts. Ces éléments n'apparaissent nulle part dans son projet personnalisé actuel.</Texte>
+          </ConceptBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Leçon 2.2" titre="L'architecture de l'environnement">
-          <Texte>L'environnement est le terrain d'action principal des équipes éducatives et sociales. Dans le cadre du MDH-PPH, il est structuré selon deux dimensions (physique et sociale) et trois échelles de proximité.</Texte>
+        <SectionModule eyebrow="Section 2" titre="L'architecture de l'environnement">
+          <Texte>L'environnement est le terrain d'action principal des équipes éducatives et sociales. Dans le cadre du MDH-PPH, il se structure selon deux dimensions et trois échelles de proximité. Cette architecture fournit une grille précieuse pour identifier où agir en priorité.</Texte>
 
           <SchemaEtapes
             titre="Les trois échelles de l'environnement"
             etapes={[
-              { niveau: "Niveau 1", nom: "Micro-environnement", definition: "Le contexte immédiat et personnel : logement, équipe éducative directe, aides techniques spécifiques, membres de la famille proche. Sphère la plus directement modifiable par les professionnels à court terme." },
-              { niveau: "Niveau 2", nom: "Méso-environnement", definition: "Le contexte communautaire : quartier, transports publics, clubs et associations, commerces locaux, structures de soins ou de loisirs. Niveau où se jouent la plupart des situations d'inclusion et d'exclusion sociale." },
-              { niveau: "Niveau 3", nom: "Macro-environnement", definition: "Les dimensions sociétales : politiques des assurances sociales, lois cantonales et fédérales, normes culturelles, systèmes économiques. En Suisse : AI, LAA, LAMal et dispositions cantonales en matière de handicap." }
+              { niveau: "Niveau 1 — le plus modifiable", nom: "Micro-environnement", definition: "Le contexte immédiat et personnel : logement, équipe éducative directe, aides techniques, membres de la famille proche. C'est la sphère la plus proche de la personne, celle où les professionnels ont le plus d'impact à court terme." },
+              { niveau: "Niveau 2 — inclus / excluant", nom: "Méso-environnement", definition: "Le contexte communautaire : quartier, transports, clubs et associations, commerces, structures de loisirs. C'est le niveau où se jouent la plupart des situations d'inclusion et d'exclusion sociale." },
+              { niveau: "Niveau 3 — cadre systémique", nom: "Macro-environnement", definition: "Les dimensions sociétales : politiques sociales, lois, normes culturelles, systèmes économiques. Difficile à modifier à l'échelle individuelle, mais il constitue le cadre dans lequel s'inscrit tout accompagnement." },
             ]}
-            note="Chaque niveau peut contenir des facteurs physiques (architecture, technologies, bruit) ou des facteurs sociaux (attitudes, règles, réseaux de soutien)"
+            note="Chaque niveau peut contenir des facteurs physiques (architecture, technologies, bruit) ou sociaux (attitudes, règles, réseaux de soutien)"
           />
 
-          <ConceptBox label="L'exemple de Paul" titre="Un obstacle méso-environnemental invisible">
-            <Texte>Paul se rend depuis des années à son club de sarbacane. Suite au déménagement du club et à un changement d'horaires de l'équipe, il ne peut plus y aller. Sa déficience neurologique n'a pas changé. C'est son environnement communautaire (méso) qui a produit une nouvelle situation de handicap — invisible si on ne regarde que ses facteurs personnels.</Texte>
+          <ConceptBox label="L'exemple de Paul" titre="Un obstacle méso-environnemental révélateur">
+            <Texte>Paul se rend depuis des années à son club de sarbacane. Suite au déménagement du club et à un changement d'horaires de l'équipe, il ne peut plus y aller. Sa déficience neurologique n'a pas bougé. C'est son environnement communautaire (méso) qui a produit une nouvelle situation de handicap. Sans la grille MDH-PPH, cet obstacle resterait invisible — on attribuerait l'agitation de Paul à son handicap.</Texte>
           </ConceptBox>
 
           <TableauComparaison
-            titre="Les deux dimensions à chaque niveau"
+            titre="Les deux dimensions à analyser à chaque niveau"
             colonnes={[
               { titre: "Dimension physique", contenu: [
-                "Architecture adaptée, aides techniques, accessibilité",
+                "Architecture, aides techniques, accessibilité de l'espace de vie",
                 "Accessibilité des transports, aménagement du quartier",
-                "Normes architecturales, politiques de construction",
+                "Normes de construction, politiques d'accessibilité",
               ]},
               { titre: "Dimension sociale", contenu: [
-                "Attitudes des pairs, attitudes des professionnels",
-                "Réseau de soutien communautaire, clubs inclusifs",
-                "Lois, assurances sociales, normes culturelles",
+                "Attitudes de l'équipe directe, règles institutionnelles internes",
+                "Ouverture des clubs et services, réseaux de soutien communautaires",
+                "Lois, normes culturelles, représentations du handicap dans la société",
               ]},
             ]}
           />
         </SectionModule>
 
-        <SectionModule eyebrow="Leçon 2.3" titre="Les habitudes de vie : indicateur central de participation">
-          <Texte>Les habitudes de vie constituent la finalité du modèle. Ce sont elles qui permettent de mesurer si une personne vit en situation de participation sociale ou en situation de handicap.</Texte>
+        <SectionModule eyebrow="Section 3" titre="Les habitudes de vie : indicateur central de participation">
+          <Texte>Les habitudes de vie constituent la finalité du modèle. Ce sont elles qui permettent de mesurer si une personne vit en situation de participation sociale ou en situation de handicap. La nomenclature 2018 identifie douze catégories précises, réparties en deux grands groupes.</Texte>
 
           <HighlightBox label="Les douze catégories d'habitudes de vie" couleur="bleu">
             <Liste couleur="bleu" items={[
               "6 activités courantes : nutrition, condition physique et psychique, soins personnels, habitation, déplacements, communication",
-              "6 rôles sociaux : responsabilités familiales, relations interpersonnelles, vie associative et communautaire, éducation, travail, loisirs"
+              "6 rôles sociaux : responsabilités familiales, relations interpersonnelles, vie associative et communautaire, éducation, travail, loisirs",
             ]} />
           </HighlightBox>
 
-          <Texte>Les rôles sociaux donnent du sens à la vie sociale de la personne et sont souvent les premiers à être sacrifiés dans une logique institutionnelle centrée sur les soins. Pourtant, c'est précisément dans ces rôles que réside la qualité de vie.</Texte>
+          <Texte>Les rôles sociaux donnent du sens à la vie sociale de la personne. Ils sont souvent les premiers à être sacrifiés dans une logique institutionnelle centrée sur les soins. Pourtant, c'est précisément dans ces rôles que réside la qualité de vie.</Texte>
 
           <PullQuote>
-            Une participation n'est réelle que si elle est jugée satisfaisante par la personne elle-même. L'outil MHAVIE mesure précisément ce double niveau : réalisation et satisfaction.
+            Une participation n'est réelle que si elle est jugée satisfaisante par la personne elle-même. Réalisation sans satisfaction n'est pas participation.
           </PullQuote>
 
-          <HighlightBox label="Le double critère essentiel" couleur="vert">
-            <Texte>Une personne qui réalise une activité de loisir avec une aide permanente et intrusive — sans avoir eu son mot à dire — est en situation de handicap quant à sa satisfaction, même si l'activité est « techniquement réalisée ». Réalisation ne suffit pas : il faut aussi la satisfaction.</Texte>
+          <HighlightBox label="Le double critère essentiel — MHAVIE" couleur="vert">
+            <Texte>L'outil MHAVIE (Mesure des Habitudes de Vie) évalue pour chaque catégorie à la fois <strong>le niveau de réalisation</strong> (de la pleine participation à la non-réalisation) et <strong>le niveau de satisfaction</strong> de la personne. Ces deux dimensions sont indissociables : une personne qui réalise une activité de loisir avec une aide permanente et intrusive — sans avoir eu son mot à dire — est en situation de handicap quant à sa satisfaction, même si l'activité est « techniquement réalisée ».</Texte>
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Leçon 2.4" titre="Facilitateurs et obstacles : la dynamique de l'interaction">
-          <Texte>C'est ici que se joue le cœur opérationnel du MDH-PPH pour les équipes de terrain.</Texte>
+        <SectionModule eyebrow="Section 4" titre="Facilitateurs et obstacles : la dynamique de l'interaction">
+          <Texte>C'est ici que se joue le cœur opérationnel du MDH-PPH pour les équipes de terrain. Un <strong>facilitateur</strong> est tout facteur environnemental qui favorise la réalisation des habitudes de vie. Un <strong>obstacle</strong> est tout facteur environnemental qui l'entrave.</Texte>
 
           <TableauComparaison
-            titre="Facilitateurs vs Obstacles"
+            titre="Facilitateurs vs Obstacles — exemples concrets"
             colonnes={[
               { titre: "Facilitateur", contenu: [
-                "Aide technique adaptée",
-                "Attitude bienveillante d'un pair",
-                "Horaire de transport flexible",
-                "Espace physique adapté",
+                "Aide technique adaptée aux besoins de la personne",
+                "Attitude bienveillante et inclusive d'un pair ou d'un professionnel",
+                "Horaire de transport flexible qui permet d'accéder à une activité valorisée",
+                "Espace physique adapté aux besoins sensoriels et moteurs",
+                "Règlement institutionnel souple permettant des choix individuels",
               ]},
               { titre: "Obstacle", contenu: [
-                "Escalier sans rampe",
-                "Préjugé d'un professionnel",
-                "Règlement institutionnel rigide",
-                "Information non accessible",
+                "Absence d'aide technique ou matériel inadapté",
+                "Préjugé ou attitude réductrice d'un membre de l'équipe",
+                "Absence de transport adapté ou changement d'horaire d'équipe",
+                "Local bruyant ou à odeurs intenses pour une personne hypersensible",
+                "Règlement institutionnel rigide imposant des activités uniformes",
               ]},
             ]}
           />
@@ -135,37 +147,107 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             Si l'on peut transformer un obstacle en facilitateur, on réduit la situation de handicap — sans nécessairement changer les déficiences ou les aptitudes de la personne.
           </PullQuote>
 
-          <HighlightBox label="Attention : les facilitateurs et obstacles sont dynamiques" couleur="jaune">
+          <HighlightBox label="Attention : les facilitateurs et obstacles ne sont pas fixes" couleur="jaune">
             <Liste items={[
               "Ce qui est un facilitateur pour une personne peut être un obstacle pour une autre",
               "Ce qui était un facilitateur hier peut devenir un obstacle demain si les conditions changent",
-              "Le professionnel doit développer un regard attentif aux variations de l'environnement"
+              "Un professionnel attentif développe un regard dynamique sur les variations de l'environnement",
+              "L'outil MQE (Mesure de la Qualité de l'Environnement) permet de quantifier précisément intensité et localisation des obstacles",
             ]} />
           </HighlightBox>
-
-          <ConceptBox label="L'outil MQE" titre="Mesure de la Qualité de l'Environnement">
-            <Texte>L'outil MQE permet de quantifier précisément les facilitateurs et obstacles dans les trois sphères (micro, méso, macro) et selon leur intensité (de mineur à majeur). Il constitue un outil d'évaluation structuré pour les équipes souhaitant objectiver leur analyse environnementale.</Texte>
-          </ConceptBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Quiz" titre="Testez votre compréhension">
-          <Quiz
-            questions={[{
-              question: "Les facteurs identitaires incluent :",
-              reponses: [
-                "Les systèmes nerveux et cardiovasculaire",
-                "Les capacités motrices et cognitives",
-                "L'âge, l'histoire de vie, les valeurs et l'appartenance culturelle",
-                "Les obstacles physiques de l'environnement",
-              ],
-              bonneReponse: 2,
-              explication: "Les facteurs identitaires regroupent les éléments qui définissent l'unicité de la personne — ce qu'elle est par son parcours, ses valeurs, sa culture. Ils sont souvent négligés dans l'évaluation institutionnelle mais sont décisifs pour construire un accompagnement pertinent.",
-            }]}
-            onValiderModule={onValiderModule}
-          />
+        <SectionModule eyebrow="Lena — retour au fil rouge" titre="Ce que l'analyse révèle">
+          <Texte>En appliquant la grille MDH-PPH à Lena, l'équipe identifie plusieurs éléments qu'elle n'avait jamais formalisés : une hypersensibilité aux bruits et odeurs intenses (facteur personnel organique), un atelier cuisine qu'elle adore mais dont l'horaire est en conflit avec un soin hebdomadaire (obstacle micro-environnemental), un groupe de chant communautaire dans le quartier qu'elle ne peut pas rejoindre faute d'accompagnant disponible (obstacle méso-environnemental social).</Texte>
+          <Texte>Ces éléments sont tous actionnables. Le prochain module montrera comment les analyser ensemble pour construire une image complète de la situation de Lena.</Texte>
+        </SectionModule>
+
+        <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
+          <Texte>Les trois dimensions du MDH-PPH — facteurs personnels, facteurs environnementaux, habitudes de vie — forment un système cohérent. Comprendre les facteurs identitaires de la personne, cartographier les obstacles et facilitateurs à chaque niveau, et évaluer les habitudes de vie selon leur réalisation ET leur satisfaction : c'est cette trilogie qui permet de construire des interventions véritablement centrées sur la vie de la personne.</Texte>
+          <HighlightBox label="À retenir pour la pratique" couleur="vert">
+            <Liste items={[
+              "Les facteurs identitaires (valeurs, histoire, culture) sont souvent les plus négligés — et les plus déterminants",
+              "L'environnement s'analyse à trois niveaux : micro (modifiable rapidement), méso, macro",
+              "Un obstacle peut être physique ou social — les deux dimensions doivent être explorées",
+              "Réalisation et satisfaction sont deux critères distincts et indissociables",
+              "Un facilitateur pour une personne peut être un obstacle pour une autre : le regard doit être individualisé",
+            ]} />
+          </HighlightBox>
         </SectionModule>
 
       </div>
+
+      <Quiz
+        questions={[
+          {
+            question: "Parmi les trois sous-composantes des facteurs personnels, laquelle est la plus fréquemment négligée dans les institutions ?",
+            reponses: [
+              "Les systèmes organiques",
+              "Les aptitudes",
+              "Les facteurs identitaires",
+              "Les facteurs environnementaux",
+            ],
+            bonneReponse: 2,
+            explication: "Les facteurs identitaires (histoire de vie, valeurs, appartenances culturelles) sont souvent absents des évaluations institutionnelles, pourtant ce sont eux qui déterminent ce qui compte pour la personne et ce qui donnera sens à l'accompagnement.",
+          },
+          {
+            question: "Un résident autonome dans son quartier habituel se retrouve en difficulté après le déménagement de l'institution dans un nouveau bâtiment. Selon le MDH-PPH, que s'est-il passé ?",
+            reponses: [
+              "Sa pathologie s'est aggravée suite au stress du déménagement",
+              "Son aptitude d'orientation spatiale a régressé",
+              "Un obstacle micro-environnemental physique a créé une nouvelle situation de handicap",
+              "Son environnement a changé, transformant d'anciens facilitateurs en obstacles",
+            ],
+            bonneReponse: 3,
+            explication: "L'aptitude du résident n'a pas changé — c'est son environnement qui a changé. Ce qui était facilitateur (un quartier connu) est devenu obstacle (un environnement inconnu). Le MDH-PPH permet de l'identifier et d'agir sur l'environnement plutôt que sur la personne.",
+          },
+          {
+            question: "Marie participe chaque semaine à son activité de loisir avec une aide permanente et intrusive. Elle n'a pas eu son mot à dire sur cette aide. Selon le MDH-PPH, Marie est-elle en situation de participation sociale ?",
+            reponses: [
+              "Oui, car elle réalise l'activité",
+              "Non, car même si l'activité est réalisée, sa satisfaction n'est pas assurée",
+              "Oui, dès lors que l'activité est adaptée à ses capacités",
+              "Non, car toute aide constitue un obstacle à l'autodétermination",
+            ],
+            bonneReponse: 1,
+            explication: "Le MDH-PPH exige deux critères : la réalisation ET la satisfaction. Une activité réalisée sans que la personne ait eu son mot à dire constitue une situation de handicap quant à la satisfaction. L'outil MHAVIE mesure précisément ces deux dimensions.",
+          },
+          {
+            question: "L'équipe observe que Paul s'agite depuis que son club de sarbacane a déménagé. Quel niveau environnemental est concerné ?",
+            reponses: [
+              "Micro-environnemental, car le problème vient de l'équipe directe",
+              "Méso-environnemental, car le club est une ressource communautaire",
+              "Macro-environnemental, car il s'agit d'une politique de financement",
+              "Aucun : l'agitation est un symptôme de la pathologie de Paul",
+            ],
+            bonneReponse: 1,
+            explication: "Le club de sarbacane est une ressource du contexte communautaire — c'est le méso-environnement. Son déménagement a créé un obstacle méso-environnemental social (accès à une habitude de vie valorisée). Ce n'est pas l'aggravation du handicap de Paul qui explique son agitation.",
+          },
+          {
+            question: "Un professionnel dit : « Sophie refuse toujours les activités que j'adapte pour elle. Pourtant je fais de mon mieux. » Que lui manque-t-il selon le MDH-PPH ?",
+            reponses: [
+              "Des compétences techniques en ergothérapie",
+              "La prise en compte du critère de satisfaction et des facteurs identitaires de Sophie",
+              "Une meilleure connaissance des systèmes organiques de Sophie",
+              "Un soutien de la direction institutionnelle",
+            ],
+            bonneReponse: 1,
+            explication: "Adapter une activité sans tenir compte de ce qui compte pour la personne (facteurs identitaires) et sans vérifier si elle en est satisfaite (double critère MHAVIE), c'est rester dans une logique médicale. Sophie refuse peut-être parce que ces activités ne correspondent pas à ses valeurs ou à son histoire de vie.",
+          },
+          {
+            question: "Pourquoi dit-on que les facilitateurs et les obstacles ne sont pas fixes ?",
+            reponses: [
+              "Parce qu'ils changent automatiquement tous les six mois",
+              "Parce qu'ils dépendent de l'humeur de la personne",
+              "Parce qu'un même facteur peut être facilitateur pour une personne et obstacle pour une autre, et peut évoluer dans le temps",
+              "Parce qu'ils sont subjectifs et non mesurables",
+            ],
+            bonneReponse: 2,
+            explication: "Un même facteur environnemental peut avoir des effets opposés selon les personnes et évoluer dans le temps. Un local lumineux est un facilitateur pour certains et un obstacle pour une personne sensible à la lumière. Un accompagnant bienveillant peut devenir un obstacle si son style devient intrusif.",
+          },
+        ]}
+        onValiderModule={onValiderModule}
+      />
     </div>
   )
 }
