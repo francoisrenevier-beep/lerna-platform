@@ -8,7 +8,7 @@ import { InstitutionSidebar } from "@/components/InstitutionSidebar"
 type Collaborateur = {
   profil_id: string
   statut: string
-  created_at: string
+  created_at: string | null
   prenom: string
   nom: string
   secteur: string | null
@@ -20,7 +20,8 @@ type ModalConfirmation = {
   nomComplet: string
 }
 
-function dateFormat(d: string) {
+function dateFormat(d: string | null) {
+  if (!d) return "—"
   return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
 }
 
@@ -34,17 +35,16 @@ export default function CollaborateursPage() {
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
   const [modal, setModal] = useState<ModalConfirmation | null>(null)
-  const [debugInfo, setDebugInfo] = useState<string>("")
   const router = useRouter()
 
   const loadCollaborateurs = async (instId: string) => {
     const { data: ips, error: ipsError } = await supabase
       .from("institution_profils")
-      .select("profil_id, statut, secteur")
+      .select("profil_id, statut, secteur, created_at")
       .eq("institution_id", instId)
       .eq("role", "collaborateur")
+      .order("created_at", { ascending: false, nullsFirst: false })
 
-    setDebugInfo(`instId=${instId} | ips=${JSON.stringify(ips)} | err=${JSON.stringify(ipsError)}`)
     if (!ips || ips.length === 0) { setCollaborateurs([]); return }
 
     const profilIds = ips.map((ip) => ip.profil_id)
@@ -66,7 +66,7 @@ export default function CollaborateursPage() {
         return {
           profil_id: ip.profil_id,
           statut: ip.statut,
-          created_at: (ip as any).created_at ?? "",
+          created_at: (ip as any).created_at ?? null,
           prenom: profil?.prenom || "",
           nom: profil?.nom || "",
           secteur: ip.secteur || null,
@@ -160,11 +160,6 @@ export default function CollaborateursPage() {
     <div className="min-h-screen bg-gray-50 flex">
       <InstitutionSidebar pageActive="collaborateurs" institution={institutionNom} />
       <main className="flex-1 p-8">
-        {debugInfo && (
-          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-xs font-mono break-all text-yellow-800">
-            {debugInfo}
-          </div>
-        )}
         <div className="flex items-start justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-[#1B2D5B]">Mes collaborateurs</h2>
