@@ -52,11 +52,11 @@ export default function AdminDashboardPage() {
 
       if (!profil?.est_super_admin) { router.push("/dashboard"); return }
 
-      // 1. Institutions actives
+      // 1. Institutions actives (actif + essai)
       const { count: nbInstitutions } = await supabase
         .from("institutions")
         .select("id", { count: "exact" })
-        .eq("statut", "actif")
+        .neq("statut", "inactif")
 
       // 2. Collaborateurs inscrits
       const { count: nbCollaborateurs } = await supabase
