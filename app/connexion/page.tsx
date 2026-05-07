@@ -32,6 +32,18 @@ export default function ConnexionPage() {
     } else {
       const userId = authData.user?.id
       if (userId) {
+        // Vérifie si super admin
+        const { data: profil } = await supabase
+          .from("profils")
+          .select("est_super_admin")
+          .eq("id", userId)
+          .single()
+
+        if (profil?.est_super_admin) {
+          router.push("/admin/dashboard")
+          return
+        }
+
         // Vérifie d'abord si l'utilisateur est inactif dans son institution
         const { data: ipInactif } = await supabase
           .from("institution_profils")
@@ -60,8 +72,6 @@ export default function ConnexionPage() {
         const role = ipActif?.role
         if (role === "responsable") {
           router.push("/institution/dashboard")
-        } else if (role === "admin") {
-          router.push("/admin/dashboard")
         } else {
           router.push("/dashboard")
         }

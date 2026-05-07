@@ -20,6 +20,7 @@ type Commentaire = {
   id: string
   prenom: string
   nom: string
+  institution_nom: string
   formation_titre: string
   commentaire: string
   created_at: string
@@ -50,6 +51,7 @@ export default function AdminEvaluationsPage() {
   const [stats, setStats] = useState<StatFormation[]>([])
   const [commentaires, setCommentaires] = useState<Commentaire[]>([])
   const [loading, setLoading] = useState(true)
+  const [filtreFormation, setFiltreFormation] = useState("")
   const router = useRouter()
 
   useEffect(() => {
@@ -58,21 +60,18 @@ export default function AdminEvaluationsPage() {
       const user = session?.user
       if (!user) { router.push("/connexion"); return }
 
-      const { data: ip } = await supabase
-        .from("institution_profils")
-        .select("role")
-        .eq("profil_id", user.id)
-        .eq("statut", "actif")
-        .limit(1)
+      const { data: profil } = await supabase
+        .from("profils")
+        .select("est_super_admin")
+        .eq("id", user.id)
         .single()
 
-      if (!ip || ip.role !== "admin") { router.push("/dashboard"); return }
+      if (!profil?.est_super_admin) { router.push("/dashboard"); return }
 
       const { data: formations } = await supabase
         .from("formations")
         .select("id, titre")
-        .eq("est_publie", true)
-        .order("ordre")
+        .order("titre")
 
       if (!formations) { setLoading(false); return }
 
@@ -83,7 +82,6 @@ export default function AdminEvaluationsPage() {
 
       if (!evaluations) { setLoading(false); return }
 
-      // Stats par formation
       const statsMap: StatFormation[] = formations.map((f) => {
         const evals = evaluations.filter((e) => e.formation_id === f.id)
         if (evals.length === 0) {
@@ -110,33 +108,39 @@ export default function AdminEvaluationsPage() {
 
       setStats(statsMap)
 
-      // Commentaires — récupère profils
+      // Commentaires avec institution
       const avecCommentaire = evaluations.filter((e) => e.commentaire)
       if (avecCommentaire.length > 0) {
         const profilIds = [...new Set(avecCommentaire.map((e) => e.profil_id))]
         const formationIds = [...new Set(avecCommentaire.map((e) => e.formation_id))]
 
-        const { data: profils } = await supabase
-          .from("profils")
-          .select("id, prenom, nom")
-          .in("id", profilIds)
+        const [{ data: profils }, { data: formationsTitres }, { data: institutionProfils }] = await Promise.all([
+          supabase.from("profils").select("id, prenom, nom").in("id", profilIds),
+          supabase.from("formations").select("id, titre").in("id", formationIds),
+          supabase.from("institution_profils").select("profil_id, institution_id").in("profil_id", profilIds),
+        ])
 
-        const { data: formationsTitres } = await supabase
-          .from("formations")
-          .select("id, titre")
-          .in("id", formationIds)
+        const institutionIds = [...new Set(institutionProfils?.map((ip) => ip.institution_id) ?? [])]
+        const { data: institutions } = institutionIds.length > 0
+          ? await supabase.from("institutions").select("id, nom").in("id", institutionIds)
+          : { data: [] }
 
         const profilMap = new Map(profils?.map((p) => [p.id, p]) ?? [])
         const formationMap = new Map(formationsTitres?.map((f) => [f.id, f]) ?? [])
+        const institutionMap = new Map(institutions?.map((i) => [i.id, i]) ?? [])
+        const profilInstitutionMap = new Map(institutionProfils?.map((ip) => [ip.profil_id, ip.institution_id]) ?? [])
 
         setCommentaires(
-          avecCommentaire.slice(0, 20).map((e) => {
+          avecCommentaire.slice(0, 30).map((e) => {
             const p = profilMap.get(e.profil_id)
             const f = formationMap.get(e.formation_id)
+            const instId = profilInstitutionMap.get(e.profil_id)
+            const inst = instId ? institutionMap.get(instId) : null
             return {
               id: e.id,
               prenom: p?.prenom || "",
               nom: p?.nom || "",
+              institution_nom: inst?.nom || "—",
               formation_titre: f?.titre || "—",
               commentaire: e.commentaire,
               created_at: e.created_at,
@@ -150,6 +154,17 @@ export default function AdminEvaluationsPage() {
     getData()
   }, [router])
 
+  const statsFiltrees = filtreFormation
+    ? stats.filter((s) => s.formation_id === filtreFormation)
+    : stats
+
+  const commentairesFiltres = filtreFormation
+    ? commentaires.filter((c) => {
+        const stat = stats.find((s) => s.formation_id === filtreFormation)
+        return stat ? c.formation_titre === stat.titre : true
+      })
+    : commentaires
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -162,18 +177,29 @@ export default function AdminEvaluationsPage() {
     <div className="min-h-screen bg-gray-50 flex">
       <AdminSidebar pageActive="evaluations" />
       <main className="flex-1 p-8 overflow-auto">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-[#1B2D5B]">Évaluations de satisfaction</h2>
-          <p className="text-gray-500 mt-1">Résultats des questionnaires post-formation.</p>
+        <div className="flex items-start justify-between mb-8">
+          <div>
+            <h2 className="text-2xl font-bold text-[#1B2D5B]">Évaluations de satisfaction</h2>
+            <p className="text-gray-500 mt-1">Résultats des questionnaires post-formation.</p>
+          </div>
+          <select
+            value={filtreFormation}
+            onChange={(e) => setFiltreFormation(e.target.value)}
+            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] bg-white"
+          >
+            <option value="">Toutes les formations</option>
+            {stats.map((s) => (
+              <option key={s.formation_id} value={s.formation_id}>{s.titre}</option>
+            ))}
+          </select>
         </div>
 
-        {stats.length === 0 ? (
+        {statsFiltrees.length === 0 ? (
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-10 text-center">
             <p className="text-gray-400 text-sm">Aucune évaluation reçue pour le moment.</p>
           </div>
         ) : (
           <>
-            {/* Tableau par formation */}
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden mb-8">
               <div className="px-6 py-4 border-b border-gray-100">
                 <h3 className="text-base font-semibold text-[#1B2D5B]">Résultats par formation</h3>
@@ -191,7 +217,7 @@ export default function AdminEvaluationsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {stats.map((s) => (
+                  {statsFiltrees.map((s) => (
                     <tr key={s.formation_id} className="border-b border-gray-50 last:border-0">
                       <td className="px-4 py-3 font-medium text-[#1B2D5B] max-w-[180px]">
                         <span className="block truncate">{s.titre}</span>
@@ -202,10 +228,7 @@ export default function AdminEvaluationsPage() {
                       <td className="px-4 py-3"><Etoiles note={s.moy_pertinence} /></td>
                       <td className="px-4 py-3"><Etoiles note={s.moy_recommandation} /></td>
                       <td className="px-4 py-3 text-center">
-                        <span className={
-                          "inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium " +
-                          (s.pct_nouveautes >= 70 ? "bg-[#3DBFA0]/10 text-[#3DBFA0]" : "bg-gray-100 text-gray-600")
-                        }>
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${s.pct_nouveautes >= 70 ? "bg-[#3DBFA0]/10 text-[#3DBFA0]" : "bg-gray-100 text-gray-600"}`}>
                           {s.pct_nouveautes} %
                         </span>
                       </td>
@@ -215,18 +238,18 @@ export default function AdminEvaluationsPage() {
               </table>
             </div>
 
-            {/* Commentaires libres */}
-            {commentaires.length > 0 && (
+            {commentairesFiltres.length > 0 && (
               <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-100">
                   <h3 className="text-base font-semibold text-[#1B2D5B]">Derniers commentaires</h3>
                 </div>
                 <div className="divide-y divide-gray-50">
-                  {commentaires.map((c) => (
+                  {commentairesFiltres.map((c) => (
                     <div key={c.id} className="px-6 py-4">
                       <div className="flex items-start justify-between gap-4 mb-2">
                         <div>
                           <span className="text-sm font-medium text-[#1B2D5B]">{c.prenom} {c.nom}</span>
+                          <span className="text-xs text-gray-400 ml-2">· {c.institution_nom}</span>
                           <span className="text-xs text-gray-400 ml-2">· {c.formation_titre}</span>
                         </div>
                         <span className="text-xs text-gray-400 whitespace-nowrap">{dateFormat(c.created_at)}</span>

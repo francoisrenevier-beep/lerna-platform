@@ -3,8 +3,10 @@
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
+type PageActive = "dashboard" | "institutions" | "formations" | "evaluations" | "demandes-demo" | "profil"
+
 type AdminSidebarProps = {
-  pageActive: "dashboard" | "evaluations"
+  pageActive: PageActive
 }
 
 export function AdminSidebar({ pageActive }: AdminSidebarProps) {
@@ -17,17 +19,24 @@ export function AdminSidebar({ pageActive }: AdminSidebarProps) {
 
   const liens = [
     { href: "/admin/dashboard", label: "Tableau de bord", id: "dashboard" },
+    { href: "/admin/institutions", label: "Institutions", id: "institutions" },
+    { href: "/admin/formations", label: "Formations", id: "formations" },
     { href: "/admin/evaluations", label: "Évaluations", id: "evaluations" },
+    { href: "/admin/demandes-demo", label: "Demandes de démo", id: "demandes-demo" },
+    { href: "/profil", label: "Mon profil", id: "profil" },
   ]
 
   return (
-    <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col flex-shrink-0">
+    <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col flex-shrink-0 min-h-screen">
       <div className="bg-white border-b border-white/20">
         <img src="/logo-lerna360-blanc.png" alt="LERNA360" className="w-full h-auto" />
       </div>
 
       <div className="px-4 py-3 border-b border-white/10">
-        <p className="text-xs text-white/50 uppercase tracking-wide">Administration</p>
+        <span className="inline-flex items-center gap-1.5 bg-[#3DBFA0]/20 border border-[#3DBFA0]/40 text-[#3DBFA0] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Super Admin
+        </span>
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
