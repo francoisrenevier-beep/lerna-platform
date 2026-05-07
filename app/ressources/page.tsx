@@ -13,14 +13,8 @@ type Formation = {
   domaine: string | null
   thematique: string | null
   public_cible: string | null
+  ordre: number
   nbRessources: number
-}
-
-function iconeType(type: string) {
-  if (type === "pdf")     return "📄"
-  if (type === "video")   return "🎬"
-  if (type === "article") return "📰"
-  return "🔗"
 }
 
 function Etiquette({ type, valeur }: { type: "domaine" | "thematique" | "public_cible"; valeur: string | null | undefined }) {
@@ -45,26 +39,22 @@ export default function RessourcesPage() {
         return
       }
 
-      const { data: ressourcesData } = await supabase
-        .from("ressources")
-        .select("formation_id")
-
-      if (!ressourcesData || ressourcesData.length === 0) {
-        setLoading(false)
-        return
-      }
+      const [{ data: formationsData }, { data: ressourcesData }] = await Promise.all([
+        supabase
+          .from("formations")
+          .select("id, titre, slug, domaine, thematique, public_cible, ordre")
+          .eq("est_publie", true)
+          .eq("est_a_venir", false)
+          .order("ordre"),
+        supabase
+          .from("ressources")
+          .select("formation_id"),
+      ])
 
       const countParFormation: Record<string, number> = {}
-      for (const r of ressourcesData) {
+      for (const r of ressourcesData ?? []) {
         countParFormation[r.formation_id] = (countParFormation[r.formation_id] ?? 0) + 1
       }
-      const formationIds = Object.keys(countParFormation)
-
-      const { data: formationsData } = await supabase
-        .from("formations")
-        .select("id, titre, slug, domaine, thematique, public_cible")
-        .in("id", formationIds)
-        .eq("est_publie", true)
 
       if (formationsData) {
         setFormations(
@@ -123,9 +113,13 @@ export default function RessourcesPage() {
                 </h3>
 
                 <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
-                  <span className="flex items-center gap-1.5 text-xs text-gray-400">
-                    {iconeType("lien")} {formation.nbRessources} ressource{formation.nbRessources > 1 ? "s" : ""}
-                  </span>
+                  {formation.nbRessources > 0 ? (
+                    <span className="flex items-center gap-1.5 text-xs text-gray-400">
+                      🔗 {formation.nbRessources} ressource{formation.nbRessources > 1 ? "s" : ""}
+                    </span>
+                  ) : (
+                    <span className="text-xs text-gray-300 italic">Aucune ressource pour l'instant</span>
+                  )}
                   <span className="text-xs font-medium text-[#3DBFA0]">Consulter →</span>
                 </div>
               </a>
