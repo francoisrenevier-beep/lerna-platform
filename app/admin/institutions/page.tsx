@@ -205,6 +205,12 @@ export default function AdminInstitutionsPage() {
                     <td className="px-4 py-3 text-center font-semibold text-[#3DBFA0]">{inst.nb_collaborateurs}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2 justify-end">
+                        <a
+                          href={`/admin/institutions/${inst.id}`}
+                          className="text-xs px-3 py-1.5 rounded-lg bg-[#1B2D5B]/10 text-[#1B2D5B] hover:bg-[#1B2D5B]/20 transition-colors font-medium"
+                        >
+                          Détail →
+                        </a>
                         <button
                           onClick={() => setModalModif({
                             institution: inst,
