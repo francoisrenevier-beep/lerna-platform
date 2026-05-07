@@ -11,7 +11,6 @@ type Institution = {
   code_acces: string
   statut: string
   licence_expiration: string | null
-  created_at: string | null
   nb_collaborateurs: number
 }
 
@@ -64,8 +63,8 @@ export default function AdminInstitutionsPage() {
   const chargerInstitutions = async () => {
     const { data: insts } = await supabase
       .from("institutions")
-      .select("id, nom, code_acces, statut, licence_expiration, created_at")
-      .order("created_at", { ascending: false })
+      .select("id, nom, code_acces, statut, licence_expiration")
+      .order("nom", { ascending: true })
 
     if (!insts) { setInstitutions([]); return }
 
@@ -188,7 +187,6 @@ export default function AdminInstitutionsPage() {
                 <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Statut</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Expiration</th>
                 <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Collaborateurs</th>
-                <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Créée le</th>
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
@@ -205,7 +203,6 @@ export default function AdminInstitutionsPage() {
                     </td>
                     <td className="px-4 py-3 text-gray-500">{dateFormat(inst.licence_expiration)}</td>
                     <td className="px-4 py-3 text-center font-semibold text-[#3DBFA0]">{inst.nb_collaborateurs}</td>
-                    <td className="px-4 py-3 text-gray-400 text-xs">{dateFormat(inst.created_at)}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2 justify-end">
                         <button
