@@ -58,15 +58,18 @@ export default function AdminInstitutionsPage() {
   const [modalModif, setModalModif] = useState<ModalModification | null>(null)
   const [modifLoading, setModifLoading] = useState(false)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
+  const [rlsError, setRlsError] = useState("")
   const router = useRouter()
 
   const chargerInstitutions = async () => {
-    const { data: insts } = await supabase
+    const { data: insts, error } = await supabase
       .from("institutions")
       .select("id, nom, code_acces, statut, licence_expiration")
       .order("nom", { ascending: true })
 
-    if (!insts) { setInstitutions([]); return }
+    if (error) { setRlsError(`Erreur RLS (${error.code}): ${error.message}`); setInstitutions([]); return }
+    setRlsError("")
+    if (!insts || insts.length === 0) { setInstitutions([]); return }
 
     const avecCollabs = await Promise.all(
       insts.map(async (inst) => {
@@ -245,7 +248,19 @@ export default function AdminInstitutionsPage() {
               })}
               {institutions.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-4 py-10 text-center text-gray-400">Aucune institution.</td>
+                  <td colSpan={7} className="px-4 py-10 text-center">
+                    {rlsError ? (
+                      <div className="text-sm">
+                        <p className="text-red-600 font-medium mb-1">Politique RLS manquante</p>
+                        <p className="text-red-400 text-xs font-mono">{rlsError}</p>
+                        <p className="text-gray-400 text-xs mt-2">Exécute dans le SQL Editor Supabase :<br/>
+                          <code className="bg-gray-100 px-1 rounded">CREATE POLICY "super_admin lit toutes les institutions" ON institutions FOR SELECT TO authenticated USING (is_super_admin());</code>
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="text-gray-400">Aucune institution.</p>
+                    )}
+                  </td>
                 </tr>
               )}
             </tbody>
