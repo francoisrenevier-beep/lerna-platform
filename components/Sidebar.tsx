@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
 type SidebarProps = {
-  pageActive: "dashboard" | "formations" | "catalogue" | "progression" | "attestations" | "profil"
+  pageActive: "dashboard" | "formations" | "catalogue" | "progression" | "attestations" | "profil" | "ressources"
   institution?: string
   prenom?: string
 }
@@ -22,6 +22,7 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
     { href: "/formations",   label: "Mes formations",  emoji: "🎯", id: "formations"   },
     { href: "/catalogue",    label: "Catalogue",       emoji: "📚", id: "catalogue"    },
     { href: "/progression",  label: "Ma progression",  emoji: "📈", id: "progression"  },
+    { href: "/ressources",   label: "Ressources",      emoji: "📖", id: "ressources"   },
     { href: "/attestations", label: "Attestations",    emoji: "🎓", id: "attestations" },
     { href: "/profil",       label: "Mon profil",      emoji: "👤", id: "profil"       },
   ]
