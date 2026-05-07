@@ -3,6 +3,7 @@ import React from "react"
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
+import { verifierEtAttribuerBadges } from "@/lib/badges"
 import { Module1PPH } from "@/app/modules/pph-module-1"
 import { Module2PPH } from "@/app/modules/pph-module-2"
 import { Module3PPH } from "@/app/modules/pph-module-3"
@@ -145,6 +146,9 @@ export default function ModulePage() {
       statut: "termine"
     }, { onConflict: "profil_id,module_id" })
     setStatut("termine")
+
+    // Attribution silencieuse des badges (non bloquant)
+    verifierEtAttribuerBadges(userId).catch(() => {})
 
     try {
       const pending = localStorage.getItem("lerna_quiz_pending")
