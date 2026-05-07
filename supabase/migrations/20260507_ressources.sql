@@ -62,7 +62,7 @@ ON CONFLICT DO NOTHING;
 INSERT INTO ressources (titre, description, type, url, formation_id, ordre)
 SELECT
   'Recommandations de bonnes pratiques professionnelles — HAS',
-  'Cadre de référence pour l'éthique professionnelle dans le secteur social et médico-social.',
+  'Cadre de référence pour l''éthique professionnelle dans le secteur social et médico-social.',
   'lien',
   'https://www.has-sante.fr/jcms/p_3221015/fr/recommendations-de-bonnes-pratiques',
   formation_id, 2
@@ -72,7 +72,7 @@ ON CONFLICT DO NOTHING;
 INSERT INTO ressources (titre, description, type, url, formation_id, ordre)
 SELECT
   'Guide pratique de la bientraitance',
-  'Repères concrets pour promouvoir la bientraitance au quotidien dans l'accompagnement.',
+  'Repères concrets pour promouvoir la bientraitance au quotidien dans l''accompagnement.',
   'pdf',
   '#',
   formation_id, 3
@@ -82,7 +82,7 @@ ON CONFLICT DO NOTHING;
 -- ── Handicap et vieillissement ────────────────────────────────────────────────
 INSERT INTO ressources (titre, description, type, url, formation_id, ordre)
 VALUES (
-  'Rapport mondial de l'OMS sur le vieillissement et la santé (2015)',
+  'Rapport mondial de l''OMS sur le vieillissement et la santé (2015)',
   'Analyse mondiale des enjeux de santé liés au vieillissement — chiffres, politiques et recommandations.',
   'lien',
   'https://www.who.int/publications/i/item/9789241565042',
@@ -100,8 +100,8 @@ VALUES (
 
 INSERT INTO ressources (titre, description, type, url, formation_id, ordre)
 VALUES (
-  'Grille d'évaluation AGGIR — présentation et mode d'emploi',
-  'Outil d'évaluation du niveau d'autonomie fonctionnelle, utilisé en institution.',
+  'Grille d''évaluation AGGIR — présentation et mode d''emploi',
+  'Outil d''évaluation du niveau d''autonomie fonctionnelle, utilisé en institution.',
   'pdf',
   '#',
   'dad21cb5-e946-4e13-a175-8fbf3120cbc9', 3
@@ -128,7 +128,7 @@ VALUES (
 
 INSERT INTO ressources (titre, description, type, url, formation_id, ordre)
 VALUES (
-  'Grille d'analyse MDH-PPH en situation d'accompagnement',
+  'Grille d''analyse MDH-PPH en situation d''accompagnement',
   'Outil pratique pour analyser une situation selon les trois dimensions du modèle : facteurs personnels, environnement et habitudes de vie.',
   'pdf',
   '#',
@@ -138,7 +138,7 @@ VALUES (
 INSERT INTO ressources (titre, description, type, url, formation_id, ordre)
 VALUES (
   'Fougeyrollas P. — La funambule, le fil et la toile (synthèse)',
-  'Présentation synthétique de l'ouvrage fondateur du MDH-PPH, accessible aux praticiens du secteur.',
+  'Présentation synthétique de l''ouvrage fondateur du MDH-PPH, accessible aux praticiens du secteur.',
   'article',
   '#',
   '7c9261ff-ab67-4fbb-9dd1-25d5abd0a616', 3
