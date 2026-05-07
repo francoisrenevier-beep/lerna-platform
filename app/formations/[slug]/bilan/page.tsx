@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
+import { QuestionnaireEvaluation } from "@/components/QuestionnaireEvaluation"
 
 type Formation = {
   id: string
@@ -65,6 +66,8 @@ export default function BilanPage() {
   const [downloadingAttestation, setDownloadingAttestation] = useState(false)
   const [downloadingMemo, setDownloadingMemo] = useState(false)
   const [openQuiz, setOpenQuiz] = useState<number | null>(null)
+  const [userId, setUserId] = useState<string | null>(null)
+  const [dejaEvalue, setDejaEvalue] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
@@ -72,6 +75,7 @@ export default function BilanPage() {
       const user = result.data.user
       if (!user) { router.push("/connexion"); return }
       setUserEmail(user.email ?? "")
+      setUserId(user.id)
 
       const slug = pathname.split("/")[2]
 
@@ -144,6 +148,15 @@ export default function BilanPage() {
         const raw = localStorage.getItem(key)
         if (raw) setQuizRecap(JSON.parse(raw))
       } catch {}
+
+      // Vérifie si l'utilisateur a déjà évalué cette formation
+      const { data: evalExistante } = await supabase
+        .from("evaluations_formations")
+        .select("id")
+        .eq("profil_id", user.id)
+        .eq("formation_id", f.id)
+        .maybeSingle()
+      setDejaEvalue(!!evalExistante)
 
       setLoading(false)
     }
@@ -382,6 +395,15 @@ export default function BilanPage() {
               })}
             </div>
           </div>
+        )}
+
+        {/* Questionnaire de satisfaction */}
+        {formation && userId && (
+          <QuestionnaireEvaluation
+            profilId={userId}
+            formationId={formation.id}
+            dejaEvalue={dejaEvalue}
+          />
         )}
 
         {/* Modules complétés */}

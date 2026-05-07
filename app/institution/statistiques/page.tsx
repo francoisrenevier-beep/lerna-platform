@@ -11,6 +11,8 @@ type LigneFormation = {
   nb_commences: number
   nb_termines: number
   taux: number
+  moy_recommandation: number
+  nb_evaluations: number
 }
 
 type DerniereAttestation = {
@@ -96,7 +98,19 @@ export default function StatistiquesPage() {
             const termines = nbTermines || 0
             const taux = collabIds.length > 0 ? Math.round((termines / collabIds.length) * 100) : 0
 
-            return { formation_id: f.id, titre: f.titre, nb_commences: commenced, nb_termines: termines, taux }
+            // Satisfaction : évaluations des collaborateurs pour cette formation
+            const { data: evals } = await supabase
+              .from("evaluations_formations")
+              .select("recommandation")
+              .eq("formation_id", f.id)
+              .in("profil_id", collabIds)
+
+            const nbEvals = evals?.length ?? 0
+            const moyReco = nbEvals > 0
+              ? evals!.reduce((acc, e) => acc + e.recommandation, 0) / nbEvals
+              : 0
+
+            return { formation_id: f.id, titre: f.titre, nb_commences: commenced, nb_termines: termines, taux, moy_recommandation: moyReco, nb_evaluations: nbEvals }
           })
         )
 
@@ -144,7 +158,7 @@ export default function StatistiquesPage() {
           )
         }
       } else {
-        setLignes(formations.map((f) => ({ formation_id: f.id, titre: f.titre, nb_commences: 0, nb_termines: 0, taux: 0 })))
+        setLignes(formations.map((f) => ({ formation_id: f.id, titre: f.titre, nb_commences: 0, nb_termines: 0, taux: 0, moy_recommandation: 0, nb_evaluations: 0 })))
       }
 
       setLoading(false)
@@ -213,6 +227,46 @@ export default function StatistiquesPage() {
             </tbody>
           </table>
         </div>
+
+        {/* Satisfaction des formations */}
+        {lignes.some((l) => l.nb_evaluations > 0) && (
+          <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden mb-8">
+            <div className="px-6 py-4 border-b border-gray-100">
+              <h3 className="text-base font-semibold text-[#1B2D5B]">Satisfaction des formations</h3>
+              <p className="text-xs text-gray-400 mt-0.5">Note de recommandation moyenne par formation</p>
+            </div>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-100 bg-gray-50">
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Formation</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Recommandation moyenne</th>
+                  <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Évaluations</th>
+                </tr>
+              </thead>
+              <tbody>
+                {lignes.filter((l) => l.nb_evaluations > 0).map((l) => (
+                  <tr key={l.formation_id} className="border-b border-gray-50 last:border-0">
+                    <td className="px-4 py-3 font-medium text-[#1B2D5B]">{l.titre}</td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1">
+                        {[1, 2, 3, 4, 5].map((i) => {
+                          const plein = i <= Math.round(l.moy_recommandation)
+                          return (
+                            <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={plein ? "#3DBFA0" : "none"} stroke={plein ? "#3DBFA0" : "#d1d5db"} strokeWidth="1.5">
+                              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                          )
+                        })}
+                        <span className="text-xs text-gray-500 ml-1">{l.moy_recommandation.toFixed(1)}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-center text-gray-700">{l.nb_evaluations}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         <div className="grid grid-cols-2 gap-6">
           {/* Graphique en barres */}
