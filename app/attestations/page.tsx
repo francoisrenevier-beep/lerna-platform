@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
-import { numeroAttestation } from "@/lib/attestation"
+import { numeroAttestation, dureeHeuresFromMinutes, downloadAttestation } from "@/lib/attestation"
 
 type AttestationRow = {
   id: string
@@ -20,6 +20,8 @@ type Formation = {
   titre: string
   duree_estimee_minutes: number
   slug: string
+  categorie: string | null
+  nb_modules_total: number | null
 }
 
 type Profil = {
@@ -36,13 +38,6 @@ function formatDate(dateStr: string) {
   })
 }
 
-function dureeHeures(minutes: number) {
-  const h = Math.floor(minutes / 60)
-  const m = minutes % 60
-  if (m === 0) return h + "h"
-  return h + "h" + m
-}
-
 export default function AttestationsPage() {
   const [attestations, setAttestations] = useState<AttestationRow[]>([])
   const [formations, setFormations] = useState<Record<string, Formation>>({})
@@ -51,6 +46,7 @@ export default function AttestationsPage() {
   const [queryError, setQueryError] = useState<string | null>(null)
   const [institution, setInstitution] = useState<string | undefined>(undefined)
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
+  const [downloadError, setDownloadError] = useState<string | null>(null)
   const [userEmail, setUserEmail] = useState<string>("")
   const router = useRouter()
 
@@ -82,7 +78,6 @@ export default function AttestationsPage() {
         setInstitution(inst.nom)
       }
 
-      // Requête sans jointure — created_at optionnel (peut ne pas exister)
       let attData: AttestationRow[] | null = null
       const { data: withDate, error: errWithDate } = await supabase
         .from("attestations")
@@ -91,21 +86,18 @@ export default function AttestationsPage() {
         .order("id", { ascending: false })
 
       if (errWithDate?.message?.includes("created_at")) {
-        // La colonne n'existe pas encore : requête sans elle
         const { data: withoutDate, error: errWithout } = await supabase
           .from("attestations")
           .select("id, profil_id, formation_id")
           .eq("profil_id", user.id)
           .order("id", { ascending: false })
         if (errWithout) {
-          console.error("Erreur attestations:", errWithout)
           setQueryError(errWithout.message)
           setLoading(false)
           return
         }
         attData = (withoutDate ?? []).map((a) => ({ ...a, created_at: "" }))
       } else if (errWithDate) {
-        console.error("Erreur attestations:", errWithDate)
         setQueryError(errWithDate.message)
         setLoading(false)
         return
@@ -120,11 +112,10 @@ export default function AttestationsPage() {
 
       setAttestations(attData)
 
-      // Charger les formations séparément
       const formationIds = [...new Set(attData.map((a) => a.formation_id))]
       const { data: formData, error: formError } = await supabase
         .from("formations")
-        .select("id, titre, duree_estimee_minutes, slug")
+        .select("id, titre, duree_estimee_minutes, slug, categorie, nb_modules_total")
         .in("id", formationIds)
 
       if (formError) {
@@ -142,46 +133,33 @@ export default function AttestationsPage() {
 
   const handleDownload = async (att: AttestationRow) => {
     setDownloadingId(att.id)
+    setDownloadError(null)
     try {
-      const filename = `attestation-lerna-${att.id.slice(0, 8)}.pdf`
-      const { downloadFromBase64, generateAttestation } = await import("@/lib/attestation")
       const f = formations[att.formation_id]
-
-      // Tenter de récupérer le PDF stocké en base64
-      const { data: pdfData } = await supabase
+      const { data: attExtra } = await supabase
         .from("attestations")
-        .select("pdf_base64, nb_modules")
+        .select("nb_modules")
         .eq("id", att.id)
         .single()
 
-      if (pdfData?.pdf_base64) {
-        downloadFromBase64(pdfData.pdf_base64, filename)
-      } else {
-        const { data: instData } = await supabase
-          .from("institution_profils")
-          .select("institutions(nom)")
-          .eq("profil_id", att.profil_id)
-          .eq("statut", "actif")
-          .maybeSingle()
-        const institutionNom = instData?.institutions
-          ? (instData.institutions as unknown as { nom: string }).nom
-          : undefined
-        const base64 = await generateAttestation({
-          prenom: profil?.prenom ?? userEmail.split("@")[0] ?? "",
-          nom: profil?.nom ?? "",
-          formationTitre: f?.titre ?? "Formation",
-          dureeMinutes: f?.duree_estimee_minutes ?? 0,
-          dateObtention: att.created_at,
-          attestationId: att.id,
-          nbModules: pdfData?.nb_modules ?? 0,
-          institution: institutionNom,
-        })
-        downloadFromBase64(base64, filename)
-      }
+      await downloadAttestation({
+        prenom: profil?.prenom ?? userEmail.split("@")[0] ?? "",
+        nom: profil?.nom ?? "",
+        formation_titre: f?.titre ?? "Formation",
+        formation_categorie: f?.categorie ?? "",
+        duree_heures: dureeHeuresFromMinutes(f?.duree_estimee_minutes ?? 0),
+        date_obtention: att.created_at,
+        modules_completes: attExtra?.nb_modules ?? 0,
+        modules_total: f?.nb_modules_total ?? 0,
+        institution_nom: institution ?? "",
+        numero_verification: numeroAttestation(att.id),
+        profil_id: att.profil_id,
+        formation_slug: f?.slug,
+        attestation_id: att.id,
+      })
     } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e)
       console.error("Erreur téléchargement PDF:", e)
-      alert("Erreur PDF : " + msg)
+      setDownloadError("Erreur lors de la génération — réessayez dans quelques instants")
     } finally {
       setDownloadingId(null)
     }
@@ -217,6 +195,15 @@ export default function AttestationsPage() {
           <div className="bg-red-50 border border-red-200 rounded-xl p-4 max-w-2xl mb-6">
             <p className="text-sm font-semibold text-red-700 mb-1">Erreur technique</p>
             <p className="text-xs text-red-600 font-mono">{queryError}</p>
+          </div>
+        )}
+
+        {downloadError && (
+          <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 max-w-2xl mb-6 flex items-start gap-3">
+            <svg className="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ea580c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p className="text-sm text-orange-700">{downloadError}</p>
           </div>
         )}
 
@@ -277,7 +264,7 @@ export default function AttestationsPage() {
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs text-gray-400">
-                              {f ? dureeHeures(f.duree_estimee_minutes) : "—"}
+                              {f ? dureeHeuresFromMinutes(f.duree_estimee_minutes) : "—"}
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs font-mono text-[#3DBFA0]">
@@ -304,7 +291,7 @@ export default function AttestationsPage() {
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs text-gray-400">
-                              {f ? dureeHeures(f.duree_estimee_minutes) : "—"}
+                              {f ? dureeHeuresFromMinutes(f.duree_estimee_minutes) : "—"}
                             </span>
                             <span className="text-gray-200 text-xs">·</span>
                             <span className="text-xs font-mono text-[#3DBFA0]">

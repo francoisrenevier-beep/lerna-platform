@@ -10,6 +10,8 @@ type Formation = {
   titre: string
   slug: string
   duree_estimee_minutes: number
+  categorie: string | null
+  nb_modules_total: number | null
 }
 
 type ModuleSimple = {
@@ -60,7 +62,8 @@ export default function BilanPage() {
   const [userEmail, setUserEmail] = useState("")
   const [attestationDate, setAttestationDate] = useState<string | null>(null)
   const [attestationId, setAttestationId] = useState<string | null>(null)
-  const [attestationPdfBase64, setAttestationPdfBase64] = useState<string | null>(null)
+  const [attestationNbModules, setAttestationNbModules] = useState<number>(0)
+  const [institutionNom, setInstitutionNom] = useState<string>("")
   const [quizRecap, setQuizRecap] = useState<QuizModule[]>([])
   const [loading, setLoading] = useState(true)
   const [downloadingAttestation, setDownloadingAttestation] = useState(false)
@@ -81,7 +84,7 @@ export default function BilanPage() {
 
       const { data: f } = await supabase
         .from("formations")
-        .select("id, titre, slug, duree_estimee_minutes")
+        .select("id, titre, slug, duree_estimee_minutes, categorie, nb_modules_total")
         .eq("slug", slug)
         .single()
       if (!f) { router.push("/formations"); return }
@@ -127,13 +130,22 @@ export default function BilanPage() {
       if (att) {
         setAttestationDate(att.created_at ?? null)
         setAttestationId(att.id)
-        // Récupérer pdf_base64 séparément (colonne optionnelle selon migration)
-        const { data: pdfData } = await supabase
+        const { data: attExtra } = await supabase
           .from("attestations")
-          .select("pdf_base64")
+          .select("nb_modules")
           .eq("id", att.id)
           .single()
-        if (pdfData?.pdf_base64) setAttestationPdfBase64(pdfData.pdf_base64)
+        if (attExtra?.nb_modules) setAttestationNbModules(attExtra.nb_modules)
+      }
+
+      const { data: instData } = await supabase
+        .from("institution_profils")
+        .select("institutions(nom)")
+        .eq("profil_id", user.id)
+        .eq("statut", "actif")
+        .maybeSingle()
+      if (instData?.institutions) {
+        setInstitutionNom((instData.institutions as unknown as { nom: string }).nom)
       }
 
       const { data: mods } = await supabase
@@ -167,38 +179,25 @@ export default function BilanPage() {
     if (!formation) return
     setDownloadingAttestation(true)
     try {
-      const filename = "attestation-lerna-" + (attestationId ?? formation.id).slice(0, 8) + ".pdf"
-      const { downloadFromBase64, generateAttestation } = await import("@/lib/attestation")
-
-      if (attestationPdfBase64) {
-        downloadFromBase64(attestationPdfBase64, filename)
-      } else {
-        // Fallback : générer à la volée
-        const { data: instData } = await supabase
-          .from("institution_profils")
-          .select("institutions(nom)")
-          .eq("profil_id", (await supabase.auth.getUser()).data.user!.id)
-          .eq("statut", "actif")
-          .maybeSingle()
-        const institution = instData?.institutions
-          ? (instData.institutions as unknown as { nom: string }).nom
-          : undefined
-        const base64 = await generateAttestation({
-          prenom: profil?.prenom ?? userEmail.split("@")[0] ?? "",
-          nom: profil?.nom ?? "",
-          formationTitre: formation.titre,
-          dureeMinutes: formation.duree_estimee_minutes,
-          dateObtention: attestationDate ?? new Date().toISOString(),
-          attestationId: attestationId ?? formation.id,
-          nbModules: modules.length,
-          institution,
-        })
-        downloadFromBase64(base64, filename)
-      }
+      const { downloadAttestation, numeroAttestation, dureeHeuresFromMinutes } = await import("@/lib/attestation")
+      await downloadAttestation({
+        prenom: profil?.prenom ?? userEmail.split("@")[0] ?? "",
+        nom: profil?.nom ?? "",
+        formation_titre: formation.titre,
+        formation_categorie: formation.categorie ?? "",
+        duree_heures: dureeHeuresFromMinutes(formation.duree_estimee_minutes),
+        date_obtention: attestationDate ?? new Date().toISOString(),
+        modules_completes: attestationNbModules || modules.length,
+        modules_total: formation.nb_modules_total ?? modules.length,
+        institution_nom: institutionNom,
+        numero_verification: numeroAttestation(attestationId ?? formation.id),
+        profil_id: userId ?? undefined,
+        formation_slug: formation.slug,
+        attestation_id: attestationId ?? undefined,
+      })
     } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e)
       console.error("Erreur attestation:", e)
-      alert("Erreur attestation : " + msg)
+      alert("Erreur lors de la génération — réessayez dans quelques instants")
     } finally {
       setDownloadingAttestation(false)
     }
