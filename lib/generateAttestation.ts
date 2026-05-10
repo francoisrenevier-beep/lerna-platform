@@ -70,7 +70,7 @@ export async function generateAttestationPDF(data: AttestationData): Promise<Blo
   doc.rect(0, 0, W, headerH, 'F')
 
   // Logo blanc (fetch pour transparence correcte)
-  const logo = await loadLogoViaFetch('/logo-lerna360-blanc.png')
+  const logo = await loadLogoViaFetch('/logo-learna-blanc.png')
   if (logo) {
     const logoW = 50
     const logoH = (logo.height / logo.width) * logoW

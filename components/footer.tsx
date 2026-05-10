@@ -13,9 +13,9 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-3 sm:items-start">
           {/* Logo + info légale */}
           <div>
-            <img src="/logo-lerna360-bleu.png" alt="LERNA360" className="h-20 w-auto" />
+            <img src="/logo-learna-bleu.png" alt="LEARNA" className="h-20 w-auto" />
             <p className="mt-3 text-sm text-white/60">
-              LERNA Sàrl — Suisse romande
+              Learna Sàrl — Suisse romande
               <br />
               contact@lerna.ch
             </p>
@@ -41,7 +41,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-white/20 pt-8 text-center text-sm text-white/40">
-          © {new Date().getFullYear()} LERNA Sàrl. Tous droits réservés.
+          © {new Date().getFullYear()} Learna Sàrl. Tous droits réservés.
         </div>
       </div>
     </footer>

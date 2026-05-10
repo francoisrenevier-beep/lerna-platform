@@ -29,7 +29,7 @@ export function AdminSidebar({ pageActive }: AdminSidebarProps) {
   return (
     <aside className="w-64 bg-[#1B2D5B] text-white flex flex-col flex-shrink-0 min-h-screen">
       <div className="bg-white border-b border-white/20">
-        <img src="/logo-lerna360-blanc.png" alt="LERNA360" className="w-full h-auto" />
+        <img src="/logo-learna-blanc.png" alt="LEARNA" className="w-full h-auto" />
       </div>
 
       <div className="px-4 py-3 border-b border-white/10">

@@ -6,8 +6,8 @@ import './globals.css'
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: 'LERNA - Ancrer les compétences sur le terrain',
-  description: 'LERNA propose aux institutions du travail social des parcours de formation en ligne, conçus pour les professionnels du handicap, de l\'éducation spécialisée et de l\'accompagnement social.',
+  title: 'Learna - Ancrer les compétences sur le terrain',
+  description: 'Learna propose aux institutions du travail social des parcours de formation en ligne, conçus pour les professionnels du handicap, de l\'éducation spécialisée et de l\'accompagnement social.',
   generator: 'v0.app',
 }
 

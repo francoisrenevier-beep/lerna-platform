@@ -160,7 +160,7 @@ const { error: liaisonError } = await supabase
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
       <div className="mb-8 text-center">
-        <img src="/logo-lerna360-blanc.png" alt="LERNA360" className="h-40 w-auto mx-auto" />
+        <img src="/logo-learna-compact.png" alt="LEARNA" className="h-28 w-auto mx-auto" />
       </div>
 
       <div className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-sm p-8">

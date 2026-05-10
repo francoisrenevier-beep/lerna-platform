@@ -85,7 +85,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
   doc.rect(-1, -1, barW + 1, H + 2, 'F')
 
   // ── Logo blanc en haut à gauche ────────────────────────────────
-  const logo = await loadLogoBase64('/logo-lerna360-blanc.png')
+  const logo = await loadLogoBase64('/logo-learna-blanc.png')
   if (logo) {
     const logoW = 42
     const logoH = (logo.height / logo.width) * logoW
@@ -108,7 +108,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
   doc.setFont('helvetica', 'normal')
   doc.setFontSize(7)
   doc.setTextColor(61, 191, 160)
-  doc.text('Lerna360 Sarl — Suisse romande', W / 2, headerH / 2 + 6, { align: 'center' })
+  doc.text('Learna Sàrl — Suisse romande', W / 2, headerH / 2 + 6, { align: 'center' })
 
   // ── Corps ──────────────────────────────────────────────────────
   let y = headerH + 18
@@ -211,7 +211,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
   doc.setTextColor(...navy)
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(9.5)
-  doc.text('Lerna360 Sarl  |  Suisse romande', xL, sigY + 10)
+  doc.text('Learna Sàrl  |  Suisse romande', xL, sigY + 10)
   doc.setTextColor(...gray)
   doc.setFont('helvetica', 'normal')
   doc.setFontSize(7.5)
