@@ -323,20 +323,26 @@ export async function POST(req: NextRequest) {
     let executablePath: string
     let launchArgs: string[]
 
+    const puppeteer = (await import('puppeteer-core')).default
+
     if (process.env.PUPPETEER_EXECUTABLE_PATH) {
       executablePath = process.env.PUPPETEER_EXECUTABLE_PATH
-      launchArgs = ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+      launchArgs = puppeteer.defaultArgs({
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+        headless: 'shell',
+      })
     } else {
-      const chromium = (await import('@sparticuz/chromium')).default
-      executablePath = await chromium.executablePath()
-      launchArgs = [...chromium.args, '--disable-dev-shm-usage']
+      const chromium = (await import('@sparticuz/chromium-min')).default
+      const chromiumUrl = process.env.CHROMIUM_BINARY_URL ??
+        'https://github.com/Sparticuz/chromium/releases/download/v148.0.0/chromium-v148.0.0-pack.x64.tar'
+      executablePath = await chromium.executablePath(chromiumUrl)
+      launchArgs = puppeteer.defaultArgs({ args: chromium.args, headless: 'shell' })
     }
 
-    const puppeteer = (await import('puppeteer-core')).default
     browser = await puppeteer.launch({
       executablePath,
       args: launchArgs,
-      headless: true,
+      headless: 'shell',
     })
 
     const page = await browser.newPage()
