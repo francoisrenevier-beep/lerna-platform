@@ -53,7 +53,7 @@ export async function downloadAttestation(data: AttestationData): Promise<void> 
   const blob = await generateAttestation(data)
 
   const slug = data.formation_slug ?? 'formation'
-  const filename = `attestation-lerna-${slug}.pdf`
+  const filename = `attestation-learna-${slug}.pdf`
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
