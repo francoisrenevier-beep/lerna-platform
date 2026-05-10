@@ -62,7 +62,7 @@ export function DemoForm() {
             Demander une démonstration
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Découvrez LERNA en 30 minutes avec l'un de nos responsables.
+            Découvrez Learna en 30 minutes avec l'un de nos responsables.
           </p>
         </div>
 

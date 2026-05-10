@@ -34,7 +34,7 @@ export function DefiSection() {
 
           {/* Colonne droite — solutions */}
           <div className="rounded-2xl bg-[#3DBFA0] p-8 text-white shadow-lg">
-            <h3 className="text-xl font-bold">LERNA répond à ces défis</h3>
+            <h3 className="text-xl font-bold">Learna répond à ces défis</h3>
             <ul className="mt-6 space-y-5">
               {solutions.map((s, i) => (
                 <li key={i} className="flex items-start gap-3">

@@ -3,7 +3,7 @@ import { Quote } from "lucide-react"
 const testimonials = [
   {
     quote:
-      "LERNA a transformé notre approche de la formation continue. Nos équipes peuvent se former à leur rythme, sans perturber l'accompagnement des résidents.",
+      "Learna a transformé notre approche de la formation continue. Nos équipes peuvent se former à leur rythme, sans perturber l'accompagnement des résidents.",
     author: "Marie Dupont",
     role: "Directrice",
     institution: "Fondation Arc-en-Ciel",
@@ -30,10 +30,10 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Ils font confiance à LERNA
+            Ils font confiance à Learna
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Des institutions suisses qui ont choisi LERNA pour la formation de
+            Des institutions suisses qui ont choisi Learna pour la formation de
             leurs équipes
           </p>
         </div>

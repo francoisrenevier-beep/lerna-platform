@@ -11,7 +11,7 @@ const cartes = [
     icon: Zap,
     titre: "Format adapté aux nouvelles générations",
     texte:
-      "Le e-learning est le format attendu par les nouveaux collaborateurs. LERNA s'y adapte pleinement.",
+      "Le e-learning est le format attendu par les nouveaux collaborateurs. Learna s'y adapte pleinement.",
   },
   {
     icon: TrendingUp,
@@ -33,7 +33,7 @@ export function PourquoiLerna() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">
-            Pourquoi LERNA&nbsp;?
+            Pourquoi Learna&nbsp;?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             Une plateforme conçue pour les réalités du secteur social

@@ -118,7 +118,7 @@ export default function DashboardPage() {
           <h2 className="text-2xl font-bold text-[#1B2D5B]">
             Bonjour{profil?.prenom ? ", " + profil.prenom : ""} 👋
           </h2>
-          <p className="text-gray-500 mt-1">Bienvenue sur votre espace de formation LERNA.</p>
+          <p className="text-gray-500 mt-1">Bienvenue sur votre espace de formation Learna.</p>
         </div>
 
         <div className="grid grid-cols-3 gap-4 mb-8">

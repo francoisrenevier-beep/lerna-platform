@@ -180,7 +180,7 @@ export default function AdminDashboardPage() {
       <main className="flex-1 p-8 overflow-auto">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#1B2D5B]">Tableau de bord</h2>
-          <p className="text-gray-500 mt-1">Vue globale de la plateforme LERNA360.</p>
+          <p className="text-gray-500 mt-1">Vue globale de la plateforme Learna.</p>
         </div>
 
         {/* 6 cartes statistiques */}

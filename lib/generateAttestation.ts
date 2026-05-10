@@ -9,7 +9,7 @@ export interface AttestationData {
 
 export function numeroAttestation(id: string): string {
   const clean = id.replace(/-/g, '').toUpperCase()
-  return `LERNA-${clean.slice(0, 4)}-${clean.slice(4, 8)}`
+  return `LEARNA-${clean.slice(0, 4)}-${clean.slice(4, 8)}`
 }
 
 function dureeHeures(minutes: number): string {
@@ -80,7 +80,7 @@ export async function generateAttestationPDF(data: AttestationData): Promise<Blo
     doc.setTextColor(...white)
     doc.setFont('helvetica', 'bold')
     doc.setFontSize(22)
-    doc.text('LERNA360', 18, headerH / 2 + 4)
+    doc.text('LEARNA', 18, headerH / 2 + 4)
   }
 
   // Label "ATTESTATION" côté droit de l'en-tête
@@ -197,7 +197,7 @@ export async function generateAttestationPDF(data: AttestationData): Promise<Blo
   doc.setTextColor(...navy)
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(10.5)
-  doc.text('LERNA Sarl  |  Suisse romande', W / 2, sigY + 14, { align: 'center' })
+  doc.text('Learna Sàrl  |  Suisse romande', W / 2, sigY + 14, { align: 'center' })
 
   doc.setTextColor(190, 196, 215)
   doc.setFont('courier', 'normal')

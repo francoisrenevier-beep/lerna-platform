@@ -296,7 +296,7 @@ export default function BilanPage() {
             <p className="font-semibold text-[#1B2D5B] text-sm mb-0.5">
               {downloadingAttestation ? "Génération..." : "Télécharger mon attestation"}
             </p>
-            <p className="text-xs text-gray-400">Certificat officiel LERNA360 en PDF</p>
+            <p className="text-xs text-gray-400">Certificat officiel Learna en PDF</p>
           </button>
 
           <button

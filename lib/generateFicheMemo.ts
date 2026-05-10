@@ -70,7 +70,7 @@ export async function generateFicheMemo(data: FicheMemoData): Promise<Blob> {
   doc.setTextColor(...navy)
   doc.setFont("helvetica", "bold")
   doc.setFontSize(16)
-  doc.text("LERNA360", 20, 24)
+  doc.text("LEARNA", 20, 24)
 
   doc.setTextColor(...grayText)
   doc.setFont("helvetica", "normal")
@@ -224,7 +224,7 @@ export async function generateFicheMemo(data: FicheMemoData): Promise<Blob> {
     doc.setTextColor(255, 255, 255)
     doc.setFont("helvetica", "normal")
     doc.setFontSize(7)
-    doc.text("LERNA360 — " + data.formationTitre, 20, 293)
+    doc.text("LEARNA — " + data.formationTitre, 20, 293)
     doc.text(i + " / " + pageCount, W - 20, 293, { align: "right" })
   }
 

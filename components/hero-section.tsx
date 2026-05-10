@@ -86,7 +86,7 @@ export function HeroSection() {
               La formation continue, ancrée dans la réalité du terrain.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              LERNA propose aux institutions du travail social une plateforme
+              Learna propose aux institutions du travail social une plateforme
               e-learning pensée pour le terrain. Des formations courtes,
               concrètes, suivies à son rythme — pour toute l&apos;équipe.
             </p>

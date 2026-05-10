@@ -11,7 +11,7 @@ export interface AttestationData {
 
 export function numeroAttestation(id: string): string {
   const clean = id.replace(/-/g, '').toUpperCase()
-  return `LERNA-${clean.slice(0, 4)}-${clean.slice(4, 8)}`
+  return `LEARNA-${clean.slice(0, 4)}-${clean.slice(4, 8)}`
 }
 
 function dureeHeures(minutes: number): string {
@@ -95,7 +95,7 @@ export async function generateAttestation(data: AttestationData): Promise<string
     doc.setTextColor(...white)
     doc.setFont('helvetica', 'bold')
     doc.setFontSize(18)
-    doc.text('LERNA360', xL, headerH / 2 + 4)
+    doc.text('LEARNA', xL, headerH / 2 + 4)
   }
 
   // ── Titre dans l'en-tête ───────────────────────────────────────
