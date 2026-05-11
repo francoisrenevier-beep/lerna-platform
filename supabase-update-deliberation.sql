@@ -9,7 +9,7 @@ SET
   titre                 = 'La Délibération Éthique dans l''Intervention Sociale',
   slug                  = 'deliberation-ethique-intervention-sociale',
   description_courte    = 'Comprendre, délibérer et décider avec justesse face aux dilemmes éthiques complexes du travail social',
-  domaine               = 'Transversal',
+  domaine               = ARRAY['Transversal'],
   thematique            = 'Éthique et posture',
   niveau                = 'intermediaire',
   duree_estimee_minutes = 240,
