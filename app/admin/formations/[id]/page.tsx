@@ -22,6 +22,7 @@ type Formation = {
   est_a_venir: boolean
   parcours_id: string | null
   parcours_ordre: number | null
+  image_url: string | null
 }
 
 type Module = {
@@ -68,6 +69,8 @@ export default function AdminFormationDetailPage() {
   const [formInfos, setFormInfos] = useState<Formation | null>(null)
   const [saveInfosLoading, setSaveInfosLoading] = useState(false)
   const [saveInfosOk, setSaveInfosOk] = useState(false)
+  const [imageUploading, setImageUploading] = useState(false)
+  const [imageUploadError, setImageUploadError] = useState<string | null>(null)
 
   // Module modal
   const [modalModule, setModalModule] = useState<ModuleForm | null>(null)
@@ -141,7 +144,7 @@ export default function AdminFormationDetailPage() {
 
       const { data: form } = await supabase
         .from("formations")
-        .select("id, titre, slug, description, description_courte, categorie, niveau, duree_estimee_minutes, domaine, thematique, public_cible, est_publie, est_privee, est_a_venir, parcours_id, parcours_ordre")
+        .select("id, titre, slug, description, description_courte, categorie, niveau, duree_estimee_minutes, domaine, thematique, public_cible, est_publie, est_privee, est_a_venir, parcours_id, parcours_ordre, image_url")
         .eq("id", formationId)
         .single()
 
@@ -237,6 +240,34 @@ export default function AdminFormationDetailPage() {
     ])
     await chargerModules()
     setReorderLoading(false)
+  }
+
+  const uploadImage = async (file: File) => {
+    setImageUploading(true)
+    setImageUploadError(null)
+    const ext = file.name.split(".").pop()
+    const path = `${formationId}/cover.${ext}`
+    const { error: uploadError } = await supabase.storage
+      .from("formation-images")
+      .upload(path, file, { upsert: true })
+    if (uploadError) {
+      setImageUploadError("Erreur lors de l'upload : " + uploadError.message)
+      setImageUploading(false)
+      return
+    }
+    const { data: urlData } = supabase.storage.from("formation-images").getPublicUrl(path)
+    const publicUrl = urlData.publicUrl
+    await supabase.from("formations").update({ image_url: publicUrl }).eq("id", formationId)
+    if (formInfos) setFormInfos({ ...formInfos, image_url: publicUrl })
+    setImageUploading(false)
+  }
+
+  const supprimerImage = async () => {
+    if (!formInfos?.image_url) return
+    const path = formInfos.image_url.split("/formation-images/")[1]
+    if (path) await supabase.storage.from("formation-images").remove([path])
+    await supabase.from("formations").update({ image_url: null }).eq("id", formationId)
+    if (formInfos) setFormInfos({ ...formInfos, image_url: null })
   }
 
   const nouveauModule = () => {
@@ -417,6 +448,47 @@ export default function AdminFormationDetailPage() {
           <div className="max-w-2xl bg-white rounded-xl border border-gray-100 shadow-sm p-6">
             <h3 className="text-base font-semibold text-[#1B2D5B] mb-5">Métadonnées de la formation</h3>
             <div className="space-y-4">
+              {/* Image de couverture */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-2">Image de couverture</label>
+                <div className="flex items-start gap-4">
+                  <div className="w-40 h-24 rounded-lg overflow-hidden border border-gray-200 bg-gray-50 flex-shrink-0">
+                    {formInfos.image_url ? (
+                      <img src={formInfos.image_url} alt="Couverture" className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs text-center px-2">
+                        Pas d'image
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="cursor-pointer inline-flex items-center gap-2 text-xs font-medium text-white bg-[#1B2D5B] px-3 py-2 rounded-lg hover:bg-[#152347] transition-colors">
+                      <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                      </svg>
+                      {imageUploading ? "Upload en cours..." : "Choisir une image"}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        disabled={imageUploading}
+                        onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadImage(f) }}
+                      />
+                    </label>
+                    {formInfos.image_url && (
+                      <button
+                        onClick={supprimerImage}
+                        className="text-xs font-medium text-red-500 hover:text-red-700 transition-colors text-left"
+                      >
+                        Supprimer l'image
+                      </button>
+                    )}
+                    <p className="text-xs text-gray-400">JPG, PNG, WebP · max 2 Mo recommandé</p>
+                    {imageUploadError && <p className="text-xs text-red-500">{imageUploadError}</p>}
+                  </div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
                   <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Titre</label>

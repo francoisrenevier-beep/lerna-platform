@@ -1,8 +1,8 @@
 const lignes = [
-  { taille: "Jusqu’à 50 ETP", tarif: "CHF 2’000.–", acces: "Illimité" },
-  { taille: "51 à 100 ETP", tarif: "CHF 4’000.–", acces: "Illimité" },
-  { taille: "101 à 200 ETP", tarif: "CHF 6’000.–", acces: "Illimité" },
-  { taille: "Dès 201 ETP", tarif: "CHF 8’000.–", acces: "Illimité" },
+  { taille: "Jusqu’à 50 ETP", tarif: "CHF 3’000.–", acces: "Illimité" },
+  { taille: "51 à 100 ETP", tarif: "CHF 5’000.–", acces: "Illimité" },
+  { taille: "101 à 200 ETP", tarif: "CHF 7’000.–", acces: "Illimité" },
+  { taille: "Dès 201 ETP", tarif: "CHF 9’000.–", acces: "Illimité" },
 ]
 
 export function TarifsSection() {

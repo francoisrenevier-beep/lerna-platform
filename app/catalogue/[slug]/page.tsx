@@ -19,6 +19,7 @@ type Formation = {
   domaine: string[] | string | null
   thematique: string | null
   public_cible: string | null
+  image_url: string | null
 }
 
 type Module = {
@@ -181,7 +182,7 @@ export default function CatalogueFormationDetailPage() {
       const [{ data: f }, { data: p }] = await Promise.all([
         supabase
           .from("formations")
-          .select("id, titre, slug, description, description_courte, niveau, duree_estimee_minutes, domaine, thematique, public_cible")
+          .select("id, titre, slug, description, description_courte, niveau, duree_estimee_minutes, domaine, thematique, public_cible, image_url")
           .eq("slug", slug)
           .single(),
         supabase.from("profils").select("id, prenom, nom").eq("id", user.id).single(),
@@ -293,7 +294,11 @@ export default function CatalogueFormationDetailPage() {
         {/* Hero pleine largeur avec overlay navy */}
         <div className="relative" style={{ minHeight: 280 }}>
           <div className="w-full" style={{ height: 280 }}>
-            <HeroIllustration domaine={firstDomaine} />
+            {formation.image_url ? (
+              <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
+            ) : (
+              <HeroIllustration domaine={firstDomaine} />
+            )}
           </div>
           {/* Overlay navy */}
           <div className="absolute inset-0 bg-[#1B2D5B]/75" />

@@ -22,6 +22,7 @@ type Formation = {
   public_cible: string | null
   ordre: number | null
   est_a_venir: boolean
+  image_url: string | null
 }
 
 type FormationState = "nouveau" | "en_cours" | "termine"
@@ -255,7 +256,11 @@ function FormationCard({
     <>
       {/* Image zone 40% = 152px */}
       <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 152 }}>
-        <DomainIllustration domaine={firstDomaine} />
+        {formation.image_url ? (
+          <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
+        ) : (
+          <DomainIllustration domaine={firstDomaine} />
+        )}
         {cfg && firstDomaine && (
           <span
             className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
@@ -622,7 +627,7 @@ export default function CataloguePage() {
           supabase
             .from("formations")
             .select(
-              "id, titre, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir"
+              "id, titre, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir, image_url"
             )
             .eq("est_privee", false)
             .or("est_publie.eq.true,est_a_venir.eq.true")
