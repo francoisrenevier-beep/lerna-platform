@@ -429,9 +429,9 @@ export default function DashboardPage() {
           .single(),
         supabase
           .from("formations")
-          .select("id, titre, slug, domaine, thematique, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url, nb_modules_total, est_publie, est_privee")
-          .eq("est_publie", true)
-          .eq("est_privee", false)
+          .select("id, titre, slug, domaine, thematique, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url, nb_modules_total")
+          .or("est_publie.eq.true,est_a_venir.eq.true")
+          .neq("est_privee", true)
           .order("ordre"),
         supabase
           .from("progression")
@@ -529,10 +529,19 @@ export default function DashboardPage() {
               .map(toVedette)
           : []
 
-      // Fallback : premières formations non commencées
+      // Fallback 1 : premières formations non commencées
       if (formationsVedette.length < 3) {
         const extra = formations
           .filter((f) => !formationIdsSet.has(f.id) && !formationsVedette.find((v) => v.id === f.id))
+          .slice(0, 3 - formationsVedette.length)
+          .map(toVedette)
+        formationsVedette = [...formationsVedette, ...extra]
+      }
+
+      // Fallback 2 : si l'utilisateur a tout commencé, montrer quand même 3 formations
+      if (formationsVedette.length < 3) {
+        const extra = formations
+          .filter((f) => !formationsVedette.find((v) => v.id === f.id))
           .slice(0, 3 - formationsVedette.length)
           .map(toVedette)
         formationsVedette = [...formationsVedette, ...extra]
