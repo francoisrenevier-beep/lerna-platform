@@ -109,11 +109,12 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
       style={{ backgroundColor: "var(--learna-navy)" }}
     >
       {/* Logo */}
-      <div className="px-5 py-5 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+      <div className="border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
         <img
-          src="/logo-learna-blanc.png"
+          src="/logo-learna-bleu.png"
           alt="LEARNA"
-          style={{ height: 40, width: "auto" }}
+          className="w-full block"
+          style={{ display: "block" }}
         />
       </div>
 
