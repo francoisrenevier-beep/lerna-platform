@@ -414,7 +414,8 @@ export default function DashboardPage() {
       const [
         { data: profilData },
         { data: ipData },
-        { data: allFormations },
+        { data: vedetteRaw },
+        { data: allFormationsForProgress },
         { data: progressionData },
         { count: countAttestations },
         { data: badgesData },
@@ -427,10 +428,15 @@ export default function DashboardPage() {
           .eq("statut", "actif")
           .limit(1)
           .single(),
+        // Requête directe pour les 3 formations en vedette — aucun filtre applicatif
         supabase
           .from("formations")
-          .select("id, titre, slug, domaine, thematique, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url, nb_modules_total")
-          .order("ordre"),
+          .select("id, titre, slug, domaine, thematique, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url")
+          .limit(3),
+        // Toutes les formations pour le calcul de progression
+        supabase
+          .from("formations")
+          .select("id, duree_estimee_minutes, domaine, nb_modules_total"),
         supabase
           .from("progression")
           .select("formation_id, module_id, statut, updated_at")
@@ -444,7 +450,7 @@ export default function DashboardPage() {
       ])
 
       const prog = progressionData ?? []
-      const formations = allFormations ?? []
+      const formations = allFormationsForProgress ?? []
       const formationIds = [...new Set(prog.map((p) => p.formation_id))]
 
       // Modules des formations commencées
@@ -468,21 +474,23 @@ export default function DashboardPage() {
         if (!f) continue
         const mods = modulesData.filter((m) => m.formation_id === fId)
         const nbTermines = mods.filter((m) => termineIds.has(m.id)).length
-        const nbModules = mods.length || ((f as Record<string, unknown>).nb_modules_total as number ?? 0)
+        const nbModules = mods.length || (f.nb_modules_total ?? 0)
         const isComplete = nbModules > 0 && nbTermines >= nbModules
 
         if (isComplete) {
           formationsCompletees++
           totalMinutesCompletees += (f.duree_estimee_minutes ?? 0)
         } else {
+          // On récupère titre/slug/image depuis vedetteRaw si disponible
+          const fv = (vedetteRaw ?? []).find((v) => v.id === fId)
           formationsEnCoursTout.push({
             id: fId,
-            titre: f.titre,
-            slug: f.slug,
+            titre: fv?.titre ?? fId,
+            slug: fv?.slug ?? fId,
             domaine: getFirstDomaine(f.domaine),
             nbModules,
             nbTermines,
-            image_url: (f as Record<string, unknown>).image_url as string | null ?? null,
+            image_url: fv?.image_url ?? null,
           })
         }
       }
@@ -498,52 +506,19 @@ export default function DashboardPage() {
         joursActifs,
       }
 
-      // Formations vedette : même domaine si possible, sinon premières publiées
-      const domainesEnCours = new Set<string>()
-      for (const fId of formationIds) {
-        const f = formations.find((f) => f.id === fId)
-        if (f) getDomaineArray(f.domaine).forEach((d) => domainesEnCours.add(d))
-      }
-      const formationIdsSet = new Set(formationIds)
-
-      const toVedette = (f: typeof formations[0]): FormationVedette => ({
+      // Formations vedette : directement depuis la requête dédiée
+      const formationsVedette: FormationVedette[] = (vedetteRaw ?? []).map((f) => ({
         id: f.id,
         titre: f.titre,
         slug: f.slug,
         domaine: getFirstDomaine(f.domaine),
-        thematique: (f as Record<string, unknown>).thematique as string | null ?? null,
+        thematique: f.thematique ?? null,
         duree_estimee_minutes: f.duree_estimee_minutes ?? 0,
-        description_courte: (f as Record<string, unknown>).description_courte as string | null ?? null,
-        niveau: (f as Record<string, unknown>).niveau as string | null ?? null,
-        est_a_venir: Boolean((f as Record<string, unknown>).est_a_venir),
-        image_url: (f as Record<string, unknown>).image_url as string | null ?? null,
-      })
-
-      let formationsVedette: FormationVedette[] =
-        domainesEnCours.size > 0
-          ? formations
-              .filter((f) => !formationIdsSet.has(f.id) && getDomaineArray(f.domaine).some((d) => domainesEnCours.has(d)))
-              .slice(0, 3)
-              .map(toVedette)
-          : []
-
-      // Fallback 1 : premières formations non commencées
-      if (formationsVedette.length < 3) {
-        const extra = formations
-          .filter((f) => !formationIdsSet.has(f.id) && !formationsVedette.find((v) => v.id === f.id))
-          .slice(0, 3 - formationsVedette.length)
-          .map(toVedette)
-        formationsVedette = [...formationsVedette, ...extra]
-      }
-
-      // Fallback 2 : si l'utilisateur a tout commencé, montrer quand même 3 formations
-      if (formationsVedette.length < 3) {
-        const extra = formations
-          .filter((f) => !formationsVedette.find((v) => v.id === f.id))
-          .slice(0, 3 - formationsVedette.length)
-          .map(toVedette)
-        formationsVedette = [...formationsVedette, ...extra]
-      }
+        description_courte: f.description_courte ?? null,
+        niveau: f.niveau ?? null,
+        est_a_venir: f.est_a_venir ?? false,
+        image_url: f.image_url ?? null,
+      }))
 
       setData({
         profil: profilData ?? null,
