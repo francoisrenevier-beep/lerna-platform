@@ -430,8 +430,6 @@ export default function DashboardPage() {
         supabase
           .from("formations")
           .select("id, titre, slug, domaine, thematique, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url, nb_modules_total")
-          .or("est_publie.eq.true,est_a_venir.eq.true")
-          .neq("est_privee", true)
           .order("ordre"),
         supabase
           .from("progression")
