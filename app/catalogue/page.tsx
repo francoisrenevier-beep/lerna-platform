@@ -214,8 +214,8 @@ function DomainIllustration({ domaine }: { domaine: string | null }) {
 
 function SkeletonCard() {
   return (
-    <div className="rounded-2xl overflow-hidden shadow-sm bg-white animate-pulse" style={{ height: 380 }}>
-      <div className="bg-gray-100" style={{ height: 152 }} />
+    <div className="rounded-2xl overflow-hidden shadow-sm bg-white animate-pulse" style={{ height: 400 }}>
+      <div className="bg-gray-100" style={{ height: 180 }} />
       <div className="p-5 space-y-3">
         <div className="h-3.5 bg-gray-100 rounded-full w-1/3" />
         <div className="h-5 bg-gray-100 rounded w-4/5" />
@@ -254,8 +254,8 @@ function FormationCard({
 
   const inner = (
     <>
-      {/* Image zone 40% = 152px */}
-      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 152 }}>
+      {/* Image zone */}
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 180 }}>
         {formation.image_url ? (
           <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
         ) : (
@@ -288,8 +288,8 @@ function FormationCard({
         )}
       </div>
 
-      {/* Content zone 60% = 228px */}
-      <div className="flex flex-col p-5" style={{ height: 228 }}>
+      {/* Content zone */}
+      <div className="flex flex-col p-5" style={{ height: 220 }}>
         <div className="flex-1 min-h-0">
           <h3 className="text-base font-bold text-[#1B2D5B] leading-snug mb-2 overflow-hidden" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
             {formation.titre}
@@ -341,7 +341,7 @@ function FormationCard({
     return (
       <div
         className={`rounded-2xl overflow-hidden shadow-sm flex flex-col ${cardBg} ${cardBorder}`}
-        style={{ height: 380 }}
+        style={{ height: 400 }}
       >
         {inner}
       </div>
@@ -352,7 +352,7 @@ function FormationCard({
     <a
       href={`/catalogue/${formation.slug}`}
       className={`rounded-2xl overflow-hidden shadow-sm flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${cardBg} ${cardBorder}`}
-      style={{ height: 380 }}
+      style={{ height: 400 }}
     >
       {inner}
     </a>
