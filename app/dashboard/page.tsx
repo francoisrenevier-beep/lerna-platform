@@ -27,6 +27,9 @@ type FormationRecommandee = {
   slug: string
   domaine: string | null
   duree_estimee_minutes: number
+  description_courte: string | null
+  niveau: string | null
+  est_a_venir: boolean
 }
 
 type BadgeRow = {
@@ -88,6 +91,22 @@ function getDomaineArray(domaine: string | string[] | null | undefined): string[
 function getFirstDomaine(domaine: string | string[] | null | undefined): string | null {
   return getDomaineArray(domaine)[0] ?? null
 }
+
+// ── Domaine config (couleurs + slugs) ─────────────────────────────────────────
+
+const DOMAINE_CONFIG: Record<string, { slug: string; badgeBg: string; badgeText: string }> = {
+  "Handicap":              { slug: "handicap",              badgeBg: "#EEF2FF", badgeText: "#3730A3" },
+  "Pédagogie Spécialisée": { slug: "pedagogie-specialisee", badgeBg: "#FFF7ED", badgeText: "#C2410C" },
+  "Protection des mineurs":{ slug: "protection-des-mineurs",badgeBg: "#FEF2F2", badgeText: "#B91C1C" },
+  "Transversal":           { slug: "transversal",           badgeBg: "#F1F5F9", badgeText: "#475569" },
+}
+
+const DOMAINES_ORDRE = [
+  "Handicap",
+  "Pédagogie Spécialisée",
+  "Protection des mineurs",
+  "Transversal",
+] as const
 
 // ── SVG illustrations compactes (50×50) ────────────────────────────────────────
 
@@ -242,6 +261,85 @@ function DomainIllustration({ domaine }: { domaine: string | null }) {
   }
 }
 
+// ── Formation Card (même style que le catalogue) ───────────────────────────────
+
+function FormationCardDash({ f }: { f: FormationRecommandee }) {
+  const cfg = f.domaine ? DOMAINE_CONFIG[f.domaine] : null
+
+  const inner = (
+    <>
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 220 }}>
+        <DomainIllustration domaine={f.domaine} />
+        {cfg && f.domaine && (
+          <span
+            className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
+            style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText }}
+          >
+            {f.domaine}
+          </span>
+        )}
+        {f.est_a_venir && (
+          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+            <span className="bg-[#1B2D5B] text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full">
+              À venir
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="flex flex-col p-5" style={{ height: 200 }}>
+        <div className="flex-1 min-h-0">
+          <h3
+            className="text-base font-bold text-[#1B2D5B] leading-snug mb-2 overflow-hidden"
+            style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" } as React.CSSProperties}
+          >
+            {f.titre}
+          </h3>
+          {f.description_courte && (
+            <p
+              className="text-sm text-gray-500 overflow-hidden"
+              style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" } as React.CSSProperties}
+            >
+              {f.description_courte}
+            </p>
+          )}
+        </div>
+        <div className="flex items-center justify-between mt-auto pt-2">
+          <div className="flex items-center gap-1.5 text-xs text-gray-400">
+            <span>{dureeFormat(f.duree_estimee_minutes)}</span>
+            {f.niveau && <span>· {f.niveau}</span>}
+          </div>
+          {!f.est_a_venir && (
+            <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#3DBFA0] text-white">
+              Commencer →
+            </span>
+          )}
+        </div>
+      </div>
+    </>
+  )
+
+  if (f.est_a_venir) {
+    return (
+      <div
+        className="rounded-2xl overflow-hidden shadow-sm flex flex-col bg-white border border-gray-100"
+        style={{ height: 420 }}
+      >
+        {inner}
+      </div>
+    )
+  }
+
+  return (
+    <a
+      href={"/catalogue/" + f.slug}
+      className="rounded-2xl overflow-hidden shadow-sm flex flex-col bg-white border border-gray-100 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+      style={{ height: 420 }}
+    >
+      {inner}
+    </a>
+  )
+}
+
 // ── Skeleton ───────────────────────────────────────────────────────────────────
 
 function Pulse({ className }: { className?: string }) {
@@ -310,7 +408,7 @@ export default function DashboardPage() {
           .single(),
         supabase
           .from("formations")
-          .select("id, titre, slug, domaine, duree_estimee_minutes, image_url, nb_modules_total, est_publie, est_privee")
+          .select("id, titre, slug, domaine, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url, nb_modules_total, est_publie, est_privee")
           .eq("est_publie", true)
           .eq("est_privee", false)
           .order("ordre"),
@@ -389,6 +487,17 @@ export default function DashboardPage() {
       }
 
       const formationIdsSet = new Set(formationIds)
+      const toRecoCard = (f: typeof formations[0]): FormationRecommandee => ({
+        id: f.id,
+        titre: f.titre,
+        slug: f.slug,
+        domaine: getFirstDomaine(f.domaine),
+        duree_estimee_minutes: f.duree_estimee_minutes,
+        description_courte: (f as Record<string, unknown>).description_courte as string | null ?? null,
+        niveau: (f as Record<string, unknown>).niveau as string | null ?? null,
+        est_a_venir: Boolean((f as Record<string, unknown>).est_a_venir),
+      })
+
       let recommandations: FormationRecommandee[] = formations
         .filter(
           (f) =>
@@ -396,26 +505,14 @@ export default function DashboardPage() {
             getDomaineArray(f.domaine).some((d) => domainesEnCours.has(d))
         )
         .slice(0, 3)
-        .map((f) => ({
-          id: f.id,
-          titre: f.titre,
-          slug: f.slug,
-          domaine: getFirstDomaine(f.domaine),
-          duree_estimee_minutes: f.duree_estimee_minutes,
-        }))
+        .map(toRecoCard)
 
       // Fallback : premières formations non commencées
       if (recommandations.length === 0) {
         recommandations = formations
           .filter((f) => !formationIdsSet.has(f.id))
           .slice(0, 3)
-          .map((f) => ({
-            id: f.id,
-            titre: f.titre,
-            slug: f.slug,
-            domaine: getFirstDomaine(f.domaine),
-            duree_estimee_minutes: f.duree_estimee_minutes,
-          }))
+          .map(toRecoCard)
       }
 
       setData({
@@ -595,7 +692,7 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* ── Formations recommandées ────────────────────────────────────── */}
+          {/* ── Formations recommandées — cards style catalogue ────────── */}
           {recommandations.length > 0 && (
             <section>
               <div className="mb-4">
@@ -606,30 +703,7 @@ export default function DashboardPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {recommandations.map((f) => (
-                  <div
-                    key={f.id}
-                    className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex flex-col"
-                  >
-                    <div className="h-36 overflow-hidden">
-                      <DomainIllustration domaine={f.domaine} />
-                    </div>
-                    <div className="p-4 flex flex-col flex-1">
-                      <h3 className="text-sm font-semibold text-[#1B2D5B] leading-snug flex-1">
-                        {f.titre}
-                      </h3>
-                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-50">
-                        <span className="text-xs text-gray-400">
-                          {dureeFormat(f.duree_estimee_minutes)}
-                        </span>
-                        <a
-                          href={"/catalogue/" + f.slug}
-                          className="text-xs font-semibold text-[#3DBFA0] bg-[#3DBFA0]/10 hover:bg-[#3DBFA0]/20 px-3 py-1.5 rounded-lg transition-colors"
-                        >
-                          Commencer →
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  <FormationCardDash key={f.id} f={f} />
                 ))}
               </div>
               <a href="/catalogue" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline">
@@ -637,6 +711,40 @@ export default function DashboardPage() {
               </a>
             </section>
           )}
+
+          {/* ── Explorer par domaine ───────────────────────────────────────── */}
+          <section>
+            <h2 className="text-base font-semibold text-[#1B2D5B] mb-4">Explorer par domaine</h2>
+            <div className="flex flex-wrap gap-3">
+              {DOMAINES_ORDRE.map((domaine) => {
+                const cfg = DOMAINE_CONFIG[domaine]
+                return (
+                  <a
+                    key={domaine}
+                    href={"/catalogue/domaine/" + cfg.slug}
+                    className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border font-medium text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                    style={{
+                      backgroundColor: cfg.badgeBg,
+                      color: cfg.badgeText,
+                      borderColor: cfg.badgeText + "22",
+                    }}
+                  >
+                    <span className="w-7 h-7 flex-shrink-0 rounded-md overflow-hidden inline-flex">
+                      <DomainIllustrationSm domaine={domaine} />
+                    </span>
+                    {domaine}
+                    <span className="text-xs opacity-50">→</span>
+                  </a>
+                )
+              })}
+              <a
+                href="/catalogue"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-500 font-medium text-sm hover:-translate-y-0.5 hover:shadow-md transition-all"
+              >
+                Tout le catalogue →
+              </a>
+            </div>
+          </section>
 
           {/* ── Mes badges récents ─────────────────────────────────────────── */}
           {(badges.length > 0 || nearUnlock) && (
