@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
 import { BADGE_DEFS, type BadgeStats } from "@/lib/badges"
+import { getCouleurEtiquette } from "@/lib/etiquettes"
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -21,15 +22,17 @@ type FormationEnCours = {
   image_url: string | null
 }
 
-type FormationRecommandee = {
+type FormationVedette = {
   id: string
   titre: string
   slug: string
   domaine: string | null
+  thematique: string | null
   duree_estimee_minutes: number
   description_courte: string | null
   niveau: string | null
   est_a_venir: boolean
+  image_url: string | null
 }
 
 type BadgeRow = {
@@ -46,14 +49,15 @@ type DashboardData = {
   totalMinutesCompletees: number
   nbAttestations: number
   nbBadges: number
-  recommandations: FormationRecommandee[]
+  formationsVedette: FormationVedette[]
   badges: BadgeRow[]
   badgeStats: BadgeStats
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
-function dureeFormat(minutes: number) {
+function dureeFormat(minutes: number | null) {
+  if (!minutes) return "–"
   if (minutes < 60) return minutes + " min"
   const h = Math.floor(minutes / 60)
   const m = minutes % 60
@@ -92,13 +96,13 @@ function getFirstDomaine(domaine: string | string[] | null | undefined): string 
   return getDomaineArray(domaine)[0] ?? null
 }
 
-// ── Domaine config (couleurs + slugs) ─────────────────────────────────────────
+// ── Domaine config ────────────────────────────────────────────────────────────
 
-const DOMAINE_CONFIG: Record<string, { slug: string; badgeBg: string; badgeText: string }> = {
-  "Handicap":              { slug: "handicap",              badgeBg: "#EEF2FF", badgeText: "#3730A3" },
-  "Pédagogie Spécialisée": { slug: "pedagogie-specialisee", badgeBg: "#FFF7ED", badgeText: "#C2410C" },
-  "Protection des mineurs":{ slug: "protection-des-mineurs",badgeBg: "#FEF2F2", badgeText: "#B91C1C" },
-  "Transversal":           { slug: "transversal",           badgeBg: "#F1F5F9", badgeText: "#475569" },
+const DOMAINE_CONFIG: Record<string, { slug: string; badgeBg: string; badgeText: string; gradFrom: string; gradTo: string }> = {
+  "Handicap":               { slug: "handicap",               badgeBg: "#EEF2FF", badgeText: "#3730A3", gradFrom: "#EEF2FF", gradTo: "#C7D2FE" },
+  "Pédagogie Spécialisée":  { slug: "pedagogie-specialisee",  badgeBg: "#FFF7ED", badgeText: "#C2410C", gradFrom: "#FFF7ED", gradTo: "#FED7AA" },
+  "Protection des mineurs": { slug: "protection-des-mineurs", badgeBg: "#FEF2F2", badgeText: "#B91C1C", gradFrom: "#FEF2F2", gradTo: "#FECACA" },
+  "Transversal":            { slug: "transversal",            badgeBg: "#F1F5F9", badgeText: "#475569", gradFrom: "#F1F5F9", gradTo: "#CBD5E1" },
 }
 
 const DOMAINES_ORDRE = [
@@ -108,7 +112,7 @@ const DOMAINES_ORDRE = [
   "Transversal",
 ] as const
 
-// ── SVG illustrations compactes (50×50) ────────────────────────────────────────
+// ── SVG illustrations compactes 50×50 (chips domaines + cartes en cours) ───────
 
 function IllustrationHandicapSm() {
   return (
@@ -119,7 +123,6 @@ function IllustrationHandicapSm() {
     </svg>
   )
 }
-
 function IllustrationPedagogieSm() {
   return (
     <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -132,7 +135,6 @@ function IllustrationPedagogieSm() {
     </svg>
   )
 }
-
 function IllustrationProtectionSm() {
   return (
     <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -142,7 +144,6 @@ function IllustrationProtectionSm() {
     </svg>
   )
 }
-
 function IllustrationTransversalSm() {
   return (
     <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -159,7 +160,6 @@ function IllustrationTransversalSm() {
     </svg>
   )
 }
-
 function DomainIllustrationSm({ domaine }: { domaine: string | null }) {
   switch (domaine) {
     case "Handicap": return <IllustrationHandicapSm />
@@ -169,162 +169,187 @@ function DomainIllustrationSm({ domaine }: { domaine: string | null }) {
   }
 }
 
-// ── SVG illustrations grandes (cartes recommandations) ─────────────────────────
+// ── SVG illustrations grandes (cartes formations) ─────────────────────────────
+// Chaque instance utilise un uid pour éviter les conflits d'IDs SVG dans le DOM
 
-function IllustrationHandicap() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+function IllustrationGrande({ domaine, uid }: { domaine: string | null; uid: string }) {
+  const cfg = domaine ? DOMAINE_CONFIG[domaine] : DOMAINE_CONFIG["Transversal"]
+  const gFrom = cfg?.gradFrom ?? "#F1F5F9"
+  const gTo   = cfg?.gradTo   ?? "#CBD5E1"
+  const gId   = "grad-" + uid
+
+  if (domaine === "Handicap") return (
+    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
       <defs>
-        <linearGradient id="dh" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#EEF2FF" />
-          <stop offset="100%" stopColor="#C7D2FE" />
+        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
         </linearGradient>
       </defs>
-      <rect width="200" height="120" fill="url(#dh)" />
-      <circle cx="100" cy="55" r="40" fill="#4338CA" fillOpacity="0.09" />
-      <circle cx="100" cy="38" r="10" fill="#4338CA" fillOpacity="0.58" />
-      <path d="M86 65 Q86 55 100 55 Q114 55 114 65 L114 76 Q114 79 111 79 L89 79 Q86 79 86 76Z" fill="#4338CA" fillOpacity="0.58" />
-      <circle cx="95" cy="92" r="11" fill="none" stroke="#4338CA" strokeWidth="2.5" strokeOpacity="0.4" />
-      <circle cx="95" cy="92" r="3.5" fill="#4338CA" fillOpacity="0.4" />
+      <rect width="300" height="160" fill={`url(#${gId})`} />
+      <circle cx="150" cy="72" r="55" fill="#4338CA" fillOpacity="0.07" />
+      <circle cx="150" cy="72" r="38" fill="#4338CA" fillOpacity="0.07" />
+      <circle cx="150" cy="50" r="14" fill="#4338CA" fillOpacity="0.52" />
+      <path d="M130 84 Q130 70 150 70 Q170 70 170 84 L170 100 Q170 104 167 104 L133 104 Q130 104 130 100Z" fill="#4338CA" fillOpacity="0.52" />
+      <circle cx="143" cy="126" r="15" fill="none" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.35" />
+      <circle cx="143" cy="126" r="5" fill="#4338CA" fillOpacity="0.35" />
+      <line x1="167" y1="90" x2="167" y2="112" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.3" strokeLinecap="round" />
+    </svg>
+  )
+
+  if (domaine === "Pédagogie Spécialisée") return (
+    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
+        </linearGradient>
+      </defs>
+      <rect width="300" height="160" fill={`url(#${gId})`} />
+      <rect x="102" y="28" width="76" height="100" rx="6" fill="#EA580C" fillOpacity="0.13" />
+      <rect x="107" y="28" width="68" height="100" rx="4" fill="#EA580C" fillOpacity="0.17" />
+      <rect x="102" y="28" width="10" height="100" rx="4" fill="#EA580C" fillOpacity="0.38" />
+      <rect x="119" y="52" width="44" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
+      <rect x="119" y="64" width="36" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
+      <rect x="119" y="76" width="44" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
+      <rect x="119" y="88" width="28" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
+      <polygon points="200,20 204,33 218,33 207,41 211,54 200,46 189,54 193,41 182,33 196,33" fill="#EA580C" fillOpacity="0.55" />
+    </svg>
+  )
+
+  if (domaine === "Protection des mineurs") return (
+    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
+        </linearGradient>
+      </defs>
+      <rect width="300" height="160" fill={`url(#${gId})`} />
+      <path d="M150 18 L192 34 L192 80 Q192 118 150 132 Q108 118 108 80 L108 34 Z" fill="#DC2626" fillOpacity="0.11" />
+      <path d="M150 26 L186 41 L186 80 Q186 115 150 127 Q114 115 114 80 L114 41 Z" fill="#DC2626" fillOpacity="0.15" />
+      <path d="M150 102 C150 102 120 84 120 66 C120 56 128 48 138 52 C143 54 150 60 150 60 C150 60 157 54 162 52 C172 48 180 56 180 66 C180 84 150 102 150 102Z" fill="#DC2626" fillOpacity="0.6" />
+    </svg>
+  )
+
+  // Transversal (default)
+  return (
+    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
+        </linearGradient>
+      </defs>
+      <rect width="300" height="160" fill={`url(#${gId})`} />
+      <line x1="150" y1="80" x2="82" y2="38"  stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
+      <line x1="150" y1="80" x2="218" y2="38" stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
+      <line x1="150" y1="80" x2="82" y2="122" stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
+      <line x1="150" y1="80" x2="218" y2="122"stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
+      <line x1="82"  y1="38" x2="218" y2="38"  stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.18" />
+      <line x1="82"  y1="122" x2="218" y2="122" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.18" />
+      <circle cx="150" cy="80"  r="14" fill="#64748B" fillOpacity="0.32" />
+      <circle cx="150" cy="80"  r="8"  fill="#64748B" fillOpacity="0.42" />
+      <circle cx="82"  cy="38"  r="10" fill="#64748B" fillOpacity="0.28" />
+      <circle cx="218" cy="38"  r="10" fill="#64748B" fillOpacity="0.28" />
+      <circle cx="82"  cy="122" r="10" fill="#64748B" fillOpacity="0.28" />
+      <circle cx="218" cy="122" r="10" fill="#64748B" fillOpacity="0.28" />
     </svg>
   )
 }
 
-function IllustrationPedagogie() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="dp" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FFF7ED" />
-          <stop offset="100%" stopColor="#FED7AA" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#dp)" />
-      <rect x="72" y="28" width="56" height="68" rx="4" fill="#EA580C" fillOpacity="0.15" />
-      <rect x="76" y="28" width="50" height="68" rx="3" fill="#EA580C" fillOpacity="0.18" />
-      <rect x="72" y="28" width="7" height="68" rx="3" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="44" width="32" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.38" />
-      <rect x="85" y="53" width="26" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.38" />
-      <rect x="85" y="62" width="32" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.38" />
-      <polygon points="136,22 139.5,32 150,32 141.5,38 144.5,48 136,42 127.5,48 130.5,38 122,32 132.5,32" fill="#EA580C" fillOpacity="0.58" />
-    </svg>
-  )
-}
+// ── Formation Card — style Coursera avec étiquettes ───────────────────────────
 
-function IllustrationProtection() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="dipr" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FEF2F2" />
-          <stop offset="100%" stopColor="#FECACA" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#dipr)" />
-      <path d="M100 18 L132 31 L132 63 Q132 87 100 98 Q68 87 68 63 L68 31 Z" fill="#DC2626" fillOpacity="0.12" />
-      <path d="M100 25 L128 37 L128 63 Q128 84 100 92 Q72 84 72 63 L72 37 Z" fill="#DC2626" fillOpacity="0.16" />
-      <path d="M100 75 C100 75 80 63 80 52 C80 45 86 39 93 42 C96.5 43.5 100 47 100 47 C100 47 103.5 43.5 107 42 C114 39 120 45 120 52 C120 63 100 75 100 75Z" fill="#DC2626" fillOpacity="0.62" />
-    </svg>
-  )
-}
-
-function IllustrationTransversal() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="dit" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F1F5F9" />
-          <stop offset="100%" stopColor="#CBD5E1" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#dit)" />
-      <line x1="100" y1="60" x2="58" y2="33" stroke="#64748B" strokeWidth="2" strokeOpacity="0.28" />
-      <line x1="100" y1="60" x2="142" y2="33" stroke="#64748B" strokeWidth="2" strokeOpacity="0.28" />
-      <line x1="100" y1="60" x2="58" y2="87" stroke="#64748B" strokeWidth="2" strokeOpacity="0.28" />
-      <line x1="100" y1="60" x2="142" y2="87" stroke="#64748B" strokeWidth="2" strokeOpacity="0.28" />
-      <circle cx="100" cy="60" r="11" fill="#64748B" fillOpacity="0.38" />
-      <circle cx="100" cy="60" r="6" fill="#64748B" fillOpacity="0.48" />
-      <circle cx="58" cy="33" r="8" fill="#64748B" fillOpacity="0.32" />
-      <circle cx="142" cy="33" r="8" fill="#64748B" fillOpacity="0.32" />
-      <circle cx="58" cy="87" r="8" fill="#64748B" fillOpacity="0.32" />
-      <circle cx="142" cy="87" r="8" fill="#64748B" fillOpacity="0.32" />
-    </svg>
-  )
-}
-
-function DomainIllustration({ domaine }: { domaine: string | null }) {
-  switch (domaine) {
-    case "Handicap": return <IllustrationHandicap />
-    case "Pédagogie Spécialisée": return <IllustrationPedagogie />
-    case "Protection des mineurs": return <IllustrationProtection />
-    default: return <IllustrationTransversal />
-  }
-}
-
-// ── Formation Card (même style que le catalogue) ───────────────────────────────
-
-function FormationCardDash({ f }: { f: FormationRecommandee }) {
+function FormationCardDash({ f, index }: { f: FormationVedette; index: number }) {
   const cfg = f.domaine ? DOMAINE_CONFIG[f.domaine] : null
+  const uid = `fc-${index}-${f.id.slice(0, 6)}`
 
-  const inner = (
-    <>
-      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 220 }}>
-        <DomainIllustration domaine={f.domaine} />
+  const content = (
+    <div className="flex flex-col h-full">
+      {/* Zone illustration */}
+      <div className="relative overflow-hidden flex-shrink-0" style={{ height: 168 }}>
+        {f.image_url ? (
+          <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
+        ) : (
+          <IllustrationGrande domaine={f.domaine} uid={uid} />
+        )}
+
+        {/* Overlay dégradé bas → transparent pour lisibilité */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+
+        {/* Badge domaine en bas à gauche */}
         {cfg && f.domaine && (
           <span
-            className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
-            style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText }}
+            className="absolute bottom-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm"
+            style={{ backgroundColor: cfg.badgeBg + "ee", color: cfg.badgeText }}
           >
             {f.domaine}
           </span>
         )}
+
+        {/* Badge "À venir" */}
         {f.est_a_venir && (
-          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/35 flex items-center justify-center">
             <span className="bg-[#1B2D5B] text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full">
               À venir
             </span>
           </div>
         )}
       </div>
-      <div className="flex flex-col p-5" style={{ height: 200 }}>
-        <div className="flex-1 min-h-0">
-          <h3
-            className="text-base font-bold text-[#1B2D5B] leading-snug mb-2 overflow-hidden"
-            style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" } as React.CSSProperties}
+
+      {/* Zone contenu */}
+      <div className="flex flex-col flex-1 p-5 gap-3">
+
+        {/* Thématique */}
+        {f.thematique && (
+          <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full ${getCouleurEtiquette("thematique", f.thematique)}`}>
+            {f.thematique}
+          </span>
+        )}
+
+        {/* Titre */}
+        <h3
+          className="text-base font-bold text-[#1B2D5B] leading-snug"
+          style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
+        >
+          {f.titre}
+        </h3>
+
+        {/* Description */}
+        {f.description_courte && (
+          <p
+            className="text-sm text-gray-500 leading-relaxed"
+            style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
           >
-            {f.titre}
-          </h3>
-          {f.description_courte && (
-            <p
-              className="text-sm text-gray-500 overflow-hidden"
-              style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" } as React.CSSProperties}
-            >
-              {f.description_courte}
-            </p>
+            {f.description_courte}
+          </p>
+        )}
+
+        {/* Méta : durée + niveau */}
+        <div className="flex items-center gap-2 text-xs text-gray-400 mt-auto">
+          <span className="inline-flex items-center gap-1">
+            <span>⏱</span> {dureeFormat(f.duree_estimee_minutes)}
+          </span>
+          {f.niveau && (
+            <>
+              <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
+              <span>{f.niveau}</span>
+            </>
           )}
         </div>
-        <div className="flex items-center justify-between mt-auto pt-2">
-          <div className="flex items-center gap-1.5 text-xs text-gray-400">
-            <span>{dureeFormat(f.duree_estimee_minutes)}</span>
-            {f.niveau && <span>· {f.niveau}</span>}
+
+        {/* CTA */}
+        {!f.est_a_venir && (
+          <div
+            className="mt-1 w-full text-center text-sm font-semibold text-white bg-[#3DBFA0] hover:bg-[#2ea88b] py-2.5 rounded-lg transition-colors"
+          >
+            Commencer →
           </div>
-          {!f.est_a_venir && (
-            <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#3DBFA0] text-white">
-              Commencer →
-            </span>
-          )}
-        </div>
+        )}
       </div>
-    </>
+    </div>
   )
 
   if (f.est_a_venir) {
     return (
-      <div
-        className="rounded-2xl overflow-hidden shadow-sm flex flex-col bg-white border border-gray-100"
-        style={{ height: 420 }}
-      >
-        {inner}
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+        {content}
       </div>
     )
   }
@@ -332,10 +357,9 @@ function FormationCardDash({ f }: { f: FormationRecommandee }) {
   return (
     <a
       href={"/catalogue/" + f.slug}
-      className="rounded-2xl overflow-hidden shadow-sm flex flex-col bg-white border border-gray-100 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
-      style={{ height: 420 }}
+      className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-xl group"
     >
-      {inner}
+      {content}
     </a>
   )
 }
@@ -362,11 +386,8 @@ function DashboardSkeleton() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[0, 1, 2, 3].map((i) => <Pulse key={i} className="h-28 rounded-xl" />)}
           </div>
-          <div className="space-y-2.5">
-            {[0, 1].map((i) => <Pulse key={i} className="h-20 rounded-xl" />)}
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[0, 1, 2].map((i) => <Pulse key={i} className="h-72 rounded-2xl" />)}
+            {[0, 1, 2].map((i) => <Pulse key={i} className="h-80 rounded-2xl" />)}
           </div>
         </div>
       </main>
@@ -408,7 +429,7 @@ export default function DashboardPage() {
           .single(),
         supabase
           .from("formations")
-          .select("id, titre, slug, domaine, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url, nb_modules_total, est_publie, est_privee")
+          .select("id, titre, slug, domaine, thematique, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url, nb_modules_total, est_publie, est_privee")
           .eq("est_publie", true)
           .eq("est_privee", false)
           .order("ordre"),
@@ -428,7 +449,7 @@ export default function DashboardPage() {
       const formations = allFormations ?? []
       const formationIds = [...new Set(prog.map((p) => p.formation_id))]
 
-      // Fetch modules for formations started
+      // Modules des formations commencées
       let modulesData: { id: string; formation_id: string }[] = []
       if (formationIds.length > 0) {
         const { data: mods } = await supabase
@@ -445,25 +466,25 @@ export default function DashboardPage() {
       let totalMinutesCompletees = 0
 
       for (const fId of formationIds) {
-        const formation = formations.find((f) => f.id === fId)
-        if (!formation) continue
+        const f = formations.find((f) => f.id === fId)
+        if (!f) continue
         const mods = modulesData.filter((m) => m.formation_id === fId)
         const nbTermines = mods.filter((m) => termineIds.has(m.id)).length
-        const nbModules = mods.length || (formation.nb_modules_total ?? 0)
+        const nbModules = mods.length || ((f as Record<string, unknown>).nb_modules_total as number ?? 0)
         const isComplete = nbModules > 0 && nbTermines >= nbModules
 
         if (isComplete) {
           formationsCompletees++
-          totalMinutesCompletees += formation.duree_estimee_minutes ?? 0
+          totalMinutesCompletees += (f.duree_estimee_minutes ?? 0)
         } else {
           formationsEnCoursTout.push({
             id: fId,
-            titre: formation.titre,
-            slug: formation.slug,
-            domaine: getFirstDomaine(formation.domaine),
+            titre: f.titre,
+            slug: f.slug,
+            domaine: getFirstDomaine(f.domaine),
             nbModules,
             nbTermines,
-            image_url: (formation as Record<string, unknown>).image_url as string | null ?? null,
+            image_url: (f as Record<string, unknown>).image_url as string | null ?? null,
           })
         }
       }
@@ -479,40 +500,42 @@ export default function DashboardPage() {
         joursActifs,
       }
 
-      // Recommandations par domaine
+      // Formations vedette : même domaine si possible, sinon premières publiées
       const domainesEnCours = new Set<string>()
       for (const fId of formationIds) {
         const f = formations.find((f) => f.id === fId)
         if (f) getDomaineArray(f.domaine).forEach((d) => domainesEnCours.add(d))
       }
-
       const formationIdsSet = new Set(formationIds)
-      const toRecoCard = (f: typeof formations[0]): FormationRecommandee => ({
+
+      const toVedette = (f: typeof formations[0]): FormationVedette => ({
         id: f.id,
         titre: f.titre,
         slug: f.slug,
         domaine: getFirstDomaine(f.domaine),
-        duree_estimee_minutes: f.duree_estimee_minutes,
+        thematique: (f as Record<string, unknown>).thematique as string | null ?? null,
+        duree_estimee_minutes: f.duree_estimee_minutes ?? 0,
         description_courte: (f as Record<string, unknown>).description_courte as string | null ?? null,
         niveau: (f as Record<string, unknown>).niveau as string | null ?? null,
         est_a_venir: Boolean((f as Record<string, unknown>).est_a_venir),
+        image_url: (f as Record<string, unknown>).image_url as string | null ?? null,
       })
 
-      let recommandations: FormationRecommandee[] = formations
-        .filter(
-          (f) =>
-            !formationIdsSet.has(f.id) &&
-            getDomaineArray(f.domaine).some((d) => domainesEnCours.has(d))
-        )
-        .slice(0, 3)
-        .map(toRecoCard)
+      let formationsVedette: FormationVedette[] =
+        domainesEnCours.size > 0
+          ? formations
+              .filter((f) => !formationIdsSet.has(f.id) && getDomaineArray(f.domaine).some((d) => domainesEnCours.has(d)))
+              .slice(0, 3)
+              .map(toVedette)
+          : []
 
       // Fallback : premières formations non commencées
-      if (recommandations.length === 0) {
-        recommandations = formations
-          .filter((f) => !formationIdsSet.has(f.id))
-          .slice(0, 3)
-          .map(toRecoCard)
+      if (formationsVedette.length < 3) {
+        const extra = formations
+          .filter((f) => !formationIdsSet.has(f.id) && !formationsVedette.find((v) => v.id === f.id))
+          .slice(0, 3 - formationsVedette.length)
+          .map(toVedette)
+        formationsVedette = [...formationsVedette, ...extra]
       }
 
       setData({
@@ -524,7 +547,7 @@ export default function DashboardPage() {
         totalMinutesCompletees,
         nbAttestations: countAttestations ?? 0,
         nbBadges: badgesData?.length ?? 0,
-        recommandations,
+        formationsVedette,
         badges: (badgesData ?? []).slice(0, 3),
         badgeStats,
       })
@@ -545,7 +568,7 @@ export default function DashboardPage() {
     totalMinutesCompletees,
     nbAttestations,
     nbBadges,
-    recommandations,
+    formationsVedette,
     badges,
     badgeStats,
   } = data
@@ -584,7 +607,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="px-8 py-7 space-y-8 max-w-6xl">
+        <div className="px-8 py-7 space-y-10 max-w-6xl">
 
           {/* ── Continuer l'apprentissage ──────────────────────────────────── */}
           {formationsEnCours.length > 0 && (
@@ -596,10 +619,7 @@ export default function DashboardPage() {
                 {formationsEnCours.map((f) => {
                   const pct = f.nbModules > 0 ? Math.round((f.nbTermines / f.nbModules) * 100) : 0
                   return (
-                    <div
-                      key={f.id}
-                      className="bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-3 flex items-center gap-4"
-                    >
+                    <div key={f.id} className="bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-3 flex items-center gap-4">
                       <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
                         {f.image_url ? (
                           <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
@@ -611,14 +631,9 @@ export default function DashboardPage() {
                         <p className="text-sm font-semibold text-[#1B2D5B] truncate">{f.titre}</p>
                         <div className="flex items-center gap-2 mt-1.5">
                           <div className="flex-1 bg-gray-100 rounded-full h-1.5">
-                            <div
-                              className="bg-[#3DBFA0] h-1.5 rounded-full transition-all"
-                              style={{ width: pct + "%" }}
-                            />
+                            <div className="bg-[#3DBFA0] h-1.5 rounded-full transition-all" style={{ width: pct + "%" }} />
                           </div>
-                          <span className="text-xs text-gray-400 flex-shrink-0">
-                            {f.nbTermines}/{f.nbModules} modules
-                          </span>
+                          <span className="text-xs text-gray-400 flex-shrink-0">{f.nbTermines}/{f.nbModules} modules</span>
                         </div>
                       </div>
                       <a
@@ -643,74 +658,58 @@ export default function DashboardPage() {
           <section>
             <h2 className="text-base font-semibold text-[#1B2D5B] mb-4">Ma progression</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <a
-                href="/formations"
-                className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all group"
-              >
-                <div className="text-2xl mb-2">🎓</div>
-                <div className="text-3xl font-bold text-[#3DBFA0]">{formationsCompletees}</div>
-                <div className="text-xs text-gray-500 mt-1.5 leading-snug">Formations complétées</div>
-                <div className="text-xs text-[#3DBFA0] mt-2 opacity-0 group-hover:opacity-100 transition-opacity font-medium">
-                  Voir →
-                </div>
-              </a>
-              <a
-                href="/progression"
-                className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all group"
-              >
-                <div className="text-2xl mb-2">⏱</div>
-                <div className="text-3xl font-bold text-[#1B2D5B]">
-                  {totalMinutesCompletees > 0 ? heuresFormat(totalMinutesCompletees) : "—"}
-                </div>
-                <div className="text-xs text-gray-500 mt-1.5 leading-snug">Heures de formation</div>
-                <div className="text-xs text-[#3DBFA0] mt-2 opacity-0 group-hover:opacity-100 transition-opacity font-medium">
-                  Voir →
-                </div>
-              </a>
-              <a
-                href="/attestations"
-                className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all group"
-              >
-                <div className="text-2xl mb-2">📜</div>
-                <div className="text-3xl font-bold text-green-600">{nbAttestations}</div>
-                <div className="text-xs text-gray-500 mt-1.5 leading-snug">Attestations obtenues</div>
-                <div className="text-xs text-[#3DBFA0] mt-2 opacity-0 group-hover:opacity-100 transition-opacity font-medium">
-                  Voir →
-                </div>
-              </a>
-              <a
-                href="/progression"
-                className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all group"
-              >
-                <div className="text-2xl mb-2">🏅</div>
-                <div className="text-3xl font-bold text-amber-500">{nbBadges}</div>
-                <div className="text-xs text-gray-500 mt-1.5 leading-snug">Badges débloqués</div>
-                <div className="text-xs text-[#3DBFA0] mt-2 opacity-0 group-hover:opacity-100 transition-opacity font-medium">
-                  Voir →
-                </div>
-              </a>
+              {[
+                { href: "/formations",  emoji: "🎓", value: formationsCompletees, label: "Formations complétées", color: "text-[#3DBFA0]" },
+                { href: "/progression", emoji: "⏱",  value: totalMinutesCompletees > 0 ? heuresFormat(totalMinutesCompletees) : "—", label: "Heures de formation", color: "text-[#1B2D5B]" },
+                { href: "/attestations",emoji: "📜", value: nbAttestations, label: "Attestations obtenues", color: "text-green-600" },
+                { href: "/progression", emoji: "🏅", value: nbBadges, label: "Badges débloqués", color: "text-amber-500" },
+              ].map((m) => (
+                <a key={m.label} href={m.href} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all group">
+                  <div className="text-2xl mb-2">{m.emoji}</div>
+                  <div className={`text-3xl font-bold ${m.color}`}>{m.value}</div>
+                  <div className="text-xs text-gray-500 mt-1.5 leading-snug">{m.label}</div>
+                  <div className="text-xs text-[#3DBFA0] mt-2 opacity-0 group-hover:opacity-100 transition-opacity font-medium">Voir →</div>
+                </a>
+              ))}
             </div>
           </section>
 
-          {/* ── Formations recommandées — cards style catalogue ────────── */}
-          {recommandations.length > 0 && (
-            <section>
-              <div className="mb-4">
-                <h2 className="text-base font-semibold text-[#1B2D5B]">Recommandées pour vous</h2>
+          {/* ── Formations vedette ─────────────────────────────────────────── */}
+          <section>
+            <div className="flex items-end justify-between mb-5">
+              <div>
+                <h2 className="text-lg font-bold text-[#1B2D5B]">
+                  {badgeStats.formationsCommencees > 0 ? "Recommandées pour vous" : "Formations à découvrir"}
+                </h2>
                 <p className="text-xs text-gray-400 mt-0.5">
-                  Selon vos formations en cours et votre domaine
+                  {badgeStats.formationsCommencees > 0
+                    ? "Selon vos formations en cours et votre domaine"
+                    : "Commencez votre parcours de formation"}
                 </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {recommandations.map((f) => (
-                  <FormationCardDash key={f.id} f={f} />
-                ))}
-              </div>
-              <a href="/catalogue" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline">
+              <a href="/catalogue" className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block">
                 Voir tout le catalogue →
               </a>
-            </section>
-          )}
+            </div>
+
+            {formationsVedette.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {formationsVedette.map((f, i) => (
+                  <FormationCardDash key={f.id} f={f} index={i} />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl border border-gray-100 p-10 text-center">
+                <p className="text-3xl mb-3">📚</p>
+                <p className="text-sm font-semibold text-[#1B2D5B] mb-1">Aucune formation disponible</p>
+                <p className="text-xs text-gray-400">Des formations seront ajoutées prochainement.</p>
+              </div>
+            )}
+
+            <a href="/catalogue" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline sm:hidden">
+              Voir tout le catalogue →
+            </a>
+          </section>
 
           {/* ── Explorer par domaine ───────────────────────────────────────── */}
           <section>
@@ -723,11 +722,7 @@ export default function DashboardPage() {
                     key={domaine}
                     href={"/catalogue/domaine/" + cfg.slug}
                     className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border font-medium text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                    style={{
-                      backgroundColor: cfg.badgeBg,
-                      color: cfg.badgeText,
-                      borderColor: cfg.badgeText + "22",
-                    }}
+                    style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeText + "22" }}
                   >
                     <span className="w-7 h-7 flex-shrink-0 rounded-md overflow-hidden inline-flex">
                       <DomainIllustrationSm domaine={domaine} />
@@ -751,61 +746,44 @@ export default function DashboardPage() {
             <section>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-[#1B2D5B]">Mes badges</h2>
-                <a href="/progression" className="text-xs text-[#3DBFA0] hover:underline">
-                  Voir tous mes badges →
-                </a>
+                <a href="/progression" className="text-xs text-[#3DBFA0] hover:underline">Voir tous →</a>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {badges.map((b) => {
                   const def = BADGE_DEFS.find((d) => d.id === b.badge_id)
                   if (!def) return null
                   return (
-                    <div
-                      key={b.badge_id}
-                      className="bg-white rounded-xl border border-[#3DBFA0]/20 shadow-sm p-4 flex items-start gap-3"
-                    >
+                    <div key={b.badge_id} className="bg-white rounded-xl border border-[#3DBFA0]/20 shadow-sm p-4 flex items-start gap-3">
                       <span className="text-2xl flex-shrink-0">{def.icone}</span>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-[#1B2D5B]">{def.titre}</p>
                         <p className="text-xs text-gray-400 mt-0.5">{def.description}</p>
-                        <p className="text-xs text-[#3DBFA0] font-medium mt-1.5">
-                          Obtenu le {formatDate(b.obtenu_le)}
-                        </p>
+                        <p className="text-xs text-[#3DBFA0] font-medium mt-1.5">Obtenu le {formatDate(b.obtenu_le)}</p>
                       </div>
                     </div>
                   )
                 })}
-                {nearUnlock &&
-                  (() => {
-                    const cur = nearUnlock.progressCurrent!(badgeStats)
-                    const tot = nearUnlock.progressTotal!
-                    const pct = Math.round((cur / tot) * 100)
-                    const manque = tot - cur
-                    return (
-                      <div className="bg-amber-50 rounded-xl border border-amber-200 shadow-sm p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xl grayscale">{nearUnlock.icone}</span>
-                          <p className="text-sm font-semibold text-amber-800">Presque là !</p>
-                        </div>
-                        <p className="text-xs text-amber-700 mb-3 leading-relaxed">
-                          Il vous manque{" "}
-                          <strong>
-                            {manque} formation{manque > 1 ? "s" : ""}
-                          </strong>{" "}
-                          pour obtenir <strong>{nearUnlock.titre}</strong>
-                        </p>
-                        <div className="w-full bg-amber-100 rounded-full h-1.5">
-                          <div
-                            className="bg-amber-400 h-1.5 rounded-full"
-                            style={{ width: pct + "%" }}
-                          />
-                        </div>
-                        <p className="text-xs text-amber-600 mt-1 text-right">
-                          {cur} / {tot}
-                        </p>
+                {nearUnlock && (() => {
+                  const cur = nearUnlock.progressCurrent!(badgeStats)
+                  const tot = nearUnlock.progressTotal!
+                  const pct = Math.round((cur / tot) * 100)
+                  const manque = tot - cur
+                  return (
+                    <div className="bg-amber-50 rounded-xl border border-amber-200 shadow-sm p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xl grayscale">{nearUnlock.icone}</span>
+                        <p className="text-sm font-semibold text-amber-800">Presque là !</p>
                       </div>
-                    )
-                  })()}
+                      <p className="text-xs text-amber-700 mb-3 leading-relaxed">
+                        Il vous manque <strong>{manque} formation{manque > 1 ? "s" : ""}</strong> pour obtenir <strong>{nearUnlock.titre}</strong>
+                      </p>
+                      <div className="w-full bg-amber-100 rounded-full h-1.5">
+                        <div className="bg-amber-400 h-1.5 rounded-full" style={{ width: pct + "%" }} />
+                      </div>
+                      <p className="text-xs text-amber-600 mt-1 text-right">{cur} / {tot}</p>
+                    </div>
+                  )
+                })()}
               </div>
             </section>
           )}
@@ -814,24 +792,13 @@ export default function DashboardPage() {
           <section className="pb-6">
             <div className="flex items-center gap-2 mb-4">
               <h2 className="text-base font-semibold text-[#1B2D5B]">Ressources</h2>
-              <span className="text-xs font-medium text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
-                Bientôt disponible
-              </span>
+              <span className="text-xs font-medium text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">Bientôt disponible</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                {
-                  titre: "Guides pratiques",
-                  desc: "Des guides et fiches mémo pour approfondir vos formations.",
-                },
-                {
-                  titre: "Articles de fond",
-                  desc: "Lectures complémentaires rédigées par des experts du secteur.",
-                },
-                {
-                  titre: "Ressources terrain",
-                  desc: "Outils pratiques directement applicables en situation professionnelle.",
-                },
+                { titre: "Guides pratiques",  desc: "Des guides et fiches mémo pour approfondir vos formations." },
+                { titre: "Articles de fond",  desc: "Lectures complémentaires rédigées par des experts du secteur." },
+                { titre: "Ressources terrain",desc: "Outils pratiques directement applicables en situation professionnelle." },
               ].map((r, i) => (
                 <div key={i} className="bg-gray-50 rounded-xl border border-gray-100 p-5">
                   <div className="text-2xl mb-3">📚</div>
