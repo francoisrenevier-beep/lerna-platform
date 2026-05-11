@@ -18,6 +18,7 @@ export function Module1Deliberation({ onValiderModule }: { onValiderModule?: () 
         sousTitre="Comprendre pourquoi les professionnels du travail social ont besoin de plus qu'un code de conduite pour traverser les situations complexes."
         duree="35 minutes"
         niveau="Intermédiaire"
+        videoYoutube="icKz8P2Hf2o"
       />
 
       <div className="max-w-3xl mx-auto px-8 py-12">
