@@ -208,38 +208,61 @@ export default function ModulePage() {
   const formSlug = formation ? formation.slug : ""
   const ModuleContent = MODULE_COMPONENTS[moduleId]
 
+  const progressPct = listeModules.length > 0 ? Math.round((moduleOrdre / listeModules.length) * 100) : 0
+
   return (
     <div className="min-h-screen bg-white">
-      <div className="sticky top-0 z-50 bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-4">
-          <a href={"/formations/" + formSlug} className="text-[#3DBFA0] hover:text-[#2ea88b] text-sm">
-            Retour
-          </a>
-          <div className="h-4 w-px bg-gray-200" />
-          <div>
-            <p className="text-xs text-gray-400">{formation?.titre}</p>
-            <p className="text-sm font-semibold text-[#1B2D5B]">Module {moduleOrdre} — {moduleTitre}</p>
+      {/* ── Sticky header ── */}
+      <div className="sticky top-0 z-50 bg-white shadow-sm">
+        <div className="px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <a href={"/formations/" + formSlug} className="text-[#3DBFA0] hover:text-[#2ea88b] text-sm font-medium transition-colors">
+              ← Retour
+            </a>
+            <div className="h-4 w-px bg-gray-200" />
+            <div>
+              <p className="text-xs text-gray-400">{formation?.titre}</p>
+              <p className="text-sm font-semibold text-[#1B2D5B]">Module {moduleOrdre} — {moduleTitre}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            {moduleDuree > 0 && (
+              <span className="text-xs text-gray-400">{moduleDuree} min</span>
+            )}
+            {statut !== "termine" ? (
+              <button
+                onClick={marquerTermine}
+                className="learna-btn bg-[#3DBFA0] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors"
+              >
+                Marquer comme terminé ✓
+              </button>
+            ) : (
+              <>
+                <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-3 py-1 rounded-full">
+                  ✓ Terminé
+                </span>
+                {modNext && (
+                  <a
+                    href={"/formations/" + formSlug + "/modules/" + modNext.id}
+                    className="bg-[#1B2D5B] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#152347] transition-colors"
+                  >
+                    Module suivant →
+                  </a>
+                )}
+              </>
+            )}
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-400">{moduleDuree} min</span>
-          {statut === "termine" && (
-            <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-3 py-1 rounded-full">
-              Terminé
-            </span>
-          )}
-          {statut === "termine" && modNext && (
-              <a
-              href={"/formations/" + formSlug + "/modules/" + modNext.id}
-              className="bg-[#1B2D5B] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#152347] transition-colors"
-            >
-              Module suivant →
-            </a>
-          )}
+        {/* Progress bar */}
+        <div className="h-[3px] bg-gray-100">
+          <div
+            className="h-full transition-all duration-500"
+            style={{ width: progressPct + "%", backgroundColor: "#3DBFA0" }}
+          />
         </div>
       </div>
 
-      <div className="pb-20">
+      <div className="pb-24">
         {ModuleContent ? (
           <ModuleContent onValiderModule={marquerTermine} />
         ) : (
@@ -249,21 +272,47 @@ export default function ModulePage() {
         )}
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-4 flex items-center justify-between">
+      {/* ── Bottom nav ── */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t px-6 py-3 flex items-center justify-between" style={{ borderColor: "var(--learna-border)" }}>
         <div>
-          {modPrev && (
-            <a href={"/formations/" + formSlug + "/modules/" + modPrev.id} className="text-sm text-gray-400 hover:text-[#1B2D5B]">
-              Module précédent
+          {modPrev ? (
+            <a
+              href={"/formations/" + formSlug + "/modules/" + modPrev.id}
+              className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-[#1B2D5B] transition-colors"
+            >
+              ← Module {moduleOrdre - 1}
+            </a>
+          ) : (
+            <a
+              href={"/formations/" + formSlug}
+              className="text-sm text-gray-400 hover:text-[#1B2D5B] transition-colors"
+            >
+              ← Formation
             </a>
           )}
         </div>
-        <p className="text-xs text-gray-300">{moduleOrdre} / {listeModules.length}</p>
+        <span className="text-xs font-medium px-3 py-1 rounded-full" style={{ backgroundColor: "#3DBFA0" + "1a", color: "#3DBFA0" }}>
+          {moduleOrdre} / {listeModules.length}
+        </span>
         <div>
-          {modNext && statut === "termine" && (
-            <a href={"/formations/" + formSlug + "/modules/" + modNext.id} className="text-sm text-[#3DBFA0] font-medium">
-              Module suivant →
+          {modNext ? (
+            <a
+              href={"/formations/" + formSlug + "/modules/" + modNext.id}
+              className={
+                "flex items-center gap-1.5 text-sm font-medium transition-colors " +
+                (statut === "termine" ? "text-[#3DBFA0] hover:text-[#2ea88b]" : "text-gray-300 pointer-events-none")
+              }
+            >
+              Module {moduleOrdre + 1} →
             </a>
-          )}
+          ) : statut === "termine" ? (
+            <a
+              href={"/formations/" + formSlug + "/bilan"}
+              className="text-sm font-medium text-[#3DBFA0] hover:text-[#2ea88b] transition-colors"
+            >
+              Voir le bilan →
+            </a>
+          ) : null}
         </div>
       </div>
     </div>

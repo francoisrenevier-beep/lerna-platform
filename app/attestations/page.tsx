@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { PageHeader } from "@/components/PageHeader"
 import { numeroAttestation, dureeHeuresFromMinutes, downloadAttestation } from "@/lib/attestation"
 
 type AttestationRow = {
@@ -174,22 +175,20 @@ export default function AttestationsPage() {
   }
 
   const nb = attestations.length
+  const sousTitre = queryError
+    ? "Erreur de chargement"
+    : nb === 0
+    ? "Aucune attestation pour le moment."
+    : `${nb} attestation${nb > 1 ? "s" : ""} obtenue${nb > 1 ? "s" : ""}`
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: "var(--learna-bg)" }}>
       <Sidebar pageActive="attestations" institution={institution} />
 
-      <main className="flex-1 p-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-[#1B2D5B]">Mes attestations</h2>
-          <p className="text-gray-500 mt-1">
-            {queryError
-              ? "Erreur de chargement"
-              : nb === 0
-              ? "Aucune attestation pour le moment."
-              : nb + " attestation" + (nb > 1 ? "s" : "") + " obtenue" + (nb > 1 ? "s" : "")}
-          </p>
-        </div>
+      <main className="flex-1 flex flex-col">
+        <PageHeader titre="Mes attestations" sousTitre={sousTitre} />
+
+        <div className="flex-1 p-8">
 
         {queryError && (
           <div className="bg-red-50 border border-red-200 rounded-xl p-4 max-w-2xl mb-6">
@@ -331,6 +330,7 @@ export default function AttestationsPage() {
             })}
           </div>
         )}
+        </div>
       </main>
     </div>
   )

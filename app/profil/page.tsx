@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { PageHeader } from "@/components/PageHeader"
 
 export default function ProfilPage() {
   const [userId, setUserId] = useState<string | null>(null)
@@ -135,16 +136,30 @@ export default function ProfilPage() {
     )
   }
 
+  const initiales = ((prenom?.[0] ?? "") + (nom?.[0] ?? "")).toUpperCase()
+
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: "var(--learna-bg)" }}>
       <Sidebar pageActive="profil" institution={institution} />
 
-      <main className="flex-1 p-8">
+      <main className="flex-1 flex flex-col">
+        <PageHeader
+          titre="Mon profil"
+          sousTitre="Gérez vos informations personnelles et votre mot de passe."
+          right={
+            initiales ? (
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+                style={{ backgroundColor: "#3DBFA0" }}
+              >
+                {initiales}
+              </div>
+            ) : undefined
+          }
+        />
+
+        <div className="flex-1 p-8">
         <div className="max-w-2xl">
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-[#1B2D5B]">Mon profil</h2>
-            <p className="text-gray-500 mt-1">Gérez vos informations personnelles et votre mot de passe.</p>
-          </div>
 
           {/* Informations personnelles */}
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-6">
@@ -289,6 +304,7 @@ export default function ProfilPage() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </main>
     </div>

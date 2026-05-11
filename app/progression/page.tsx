@@ -4,6 +4,8 @@ import { useEffect, useState, useCallback } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { PageHeader } from "@/components/PageHeader"
+import { MetricCard } from "@/components/MetricCard"
 import { getCouleurEtiquette } from "@/lib/etiquettes"
 import { BADGE_DEFS, verifierEtAttribuerBadges, type BadgeStats, type BadgeDef } from "@/lib/badges"
 
@@ -381,39 +383,47 @@ export default function ProgressionPage() {
   const badgesNonObtenus = BADGE_DEFS.filter((b) => !badgesObtenuIds.has(b.id))
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: "var(--learna-bg)" }}>
       {celebrationBadge && (
         <CelebrationBadge badge={celebrationBadge} onDismiss={dismissCelebration} />
       )}
 
       <Sidebar pageActive="progression" />
 
-      <main className="flex-1 p-8 space-y-8">
+      <main className="flex-1 flex flex-col">
+        <PageHeader
+          titre="Ma progression"
+          sousTitre="Votre parcours de formation en un coup d'œil."
+        />
 
-        {/* ── Mon parcours ── */}
+        <div className="flex-1 p-8 space-y-8">
+
+        {/* ── Métriques ── */}
         <section>
-          <h2 className="text-2xl font-bold text-[#1B2D5B] mb-1">Ma progression</h2>
-          <p className="text-gray-500 text-sm mb-6">Votre parcours de formation en un coup d'œil.</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <StatCard
-              icone="🎓"
+            <MetricCard
               valeur={String(pageStats.formationsCompletees)}
-              label="Formation(s) complétée(s)"
+              label="Formations complétées"
+              icone="🎓"
+              couleur="#3DBFA0"
             />
-            <StatCard
-              icone="⏱️"
+            <MetricCard
               valeur={formatHeures(pageStats.heures)}
-              label="de formation suivie"
+              label="Heures de formation"
+              icone="⏱️"
+              couleur="#1B2D5B"
             />
-            <StatCard
-              icone="📜"
+            <MetricCard
               valeur={String(pageStats.attestations)}
-              label="Attestation(s) obtenue(s)"
+              label="Attestations obtenues"
+              icone="📜"
+              couleur="#16a34a"
             />
-            <StatCard
-              icone="📅"
+            <MetricCard
               valeur={pageStats.derniereActivite ? formatDate(pageStats.derniereActivite) : "—"}
               label="Dernière activité"
+              icone="📅"
+              couleur="#f59e0b"
             />
           </div>
         </section>
@@ -537,6 +547,7 @@ export default function ProgressionPage() {
           </div>
         </section>
 
+        </div>
       </main>
     </div>
   )

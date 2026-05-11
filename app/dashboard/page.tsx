@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
 import { BADGE_DEFS, type BadgeStats } from "@/lib/badges"
 import { getCouleurEtiquette } from "@/lib/etiquettes"
+import { PageHeader } from "@/components/PageHeader"
+import { MetricCard } from "@/components/MetricCard"
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -570,24 +572,30 @@ export default function DashboardPage() {
       <main className="flex-1 min-w-0">
 
         {/* ── Header ────────────────────────────────────────────────────────── */}
-        <div className="bg-[#1B2D5B] px-8 py-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div>
-            <h1 className="text-2xl font-bold text-white leading-tight">
-              Bonjour{profil?.prenom ? ", " + profil.prenom : ""} 👋
-            </h1>
-            <p className="text-[#3DBFA0] text-sm mt-0.5 font-medium">
-              Bienvenue sur votre espace LEARNA
-            </p>
-          </div>
-          <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-white/45 text-sm capitalize">{getDateFr()}</span>
-            {institution?.nom && (
-              <span className="bg-[#3DBFA0]/20 text-[#3DBFA0] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#3DBFA0]/30 whitespace-nowrap">
-                {institution.nom}
+        <PageHeader
+          gradient
+          titre={`Bonjour${profil?.prenom ? ", " + profil.prenom : ""} 👋`}
+          sousTitre="Bienvenue sur votre espace LEARNA"
+          right={
+            <>
+              <span className="text-sm capitalize" style={{ color: "rgba(255,255,255,0.45)" }}>
+                {getDateFr()}
               </span>
-            )}
-          </div>
-        </div>
+              {institution?.nom && (
+                <span
+                  className="text-xs font-semibold px-3 py-1.5 rounded-full border whitespace-nowrap"
+                  style={{
+                    backgroundColor: "rgba(61,191,160,0.2)",
+                    color: "#3DBFA0",
+                    borderColor: "rgba(61,191,160,0.3)",
+                  }}
+                >
+                  {institution.nom}
+                </span>
+              )}
+            </>
+          }
+        />
 
         <div className="px-8 py-7 space-y-10 max-w-6xl">
 
@@ -638,21 +646,36 @@ export default function DashboardPage() {
 
           {/* ── Ma progression — 4 métriques ──────────────────────────────── */}
           <section>
-            <h2 className="text-base font-semibold text-[#1B2D5B] mb-4">Ma progression</h2>
+            <h2 className="text-base font-semibold mb-4" style={{ color: "var(--learna-navy)" }}>Ma progression</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { href: "/formations",  emoji: "🎓", value: formationsCompletees, label: "Formations complétées", color: "text-[#3DBFA0]" },
-                { href: "/progression", emoji: "⏱",  value: totalMinutesCompletees > 0 ? heuresFormat(totalMinutesCompletees) : "—", label: "Heures de formation", color: "text-[#1B2D5B]" },
-                { href: "/attestations",emoji: "📜", value: nbAttestations, label: "Attestations obtenues", color: "text-green-600" },
-                { href: "/progression", emoji: "🏅", value: nbBadges, label: "Badges débloqués", color: "text-amber-500" },
-              ].map((m) => (
-                <a key={m.label} href={m.href} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all group">
-                  <div className="text-2xl mb-2">{m.emoji}</div>
-                  <div className={`text-3xl font-bold ${m.color}`}>{m.value}</div>
-                  <div className="text-xs text-gray-500 mt-1.5 leading-snug">{m.label}</div>
-                  <div className="text-xs text-[#3DBFA0] mt-2 opacity-0 group-hover:opacity-100 transition-opacity font-medium">Voir →</div>
-                </a>
-              ))}
+              <MetricCard
+                valeur={formationsCompletees}
+                label="Formations complétées"
+                icone="🎓"
+                couleur="#3DBFA0"
+                href="/formations"
+              />
+              <MetricCard
+                valeur={totalMinutesCompletees > 0 ? heuresFormat(totalMinutesCompletees) : "—"}
+                label="Heures de formation"
+                icone="⏱"
+                couleur="#1B2D5B"
+                href="/progression"
+              />
+              <MetricCard
+                valeur={nbAttestations}
+                label="Attestations obtenues"
+                icone="📜"
+                couleur="#16a34a"
+                href="/attestations"
+              />
+              <MetricCard
+                valeur={nbBadges}
+                label="Badges débloqués"
+                icone="🏅"
+                couleur="#f59e0b"
+                href="/progression"
+              />
             </div>
           </section>
 

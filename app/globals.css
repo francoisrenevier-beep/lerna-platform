@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import '../styles/design-system.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -121,5 +122,37 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    background-color: var(--learna-bg);
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+  }
+}
+
+/* ── Micro-interactions ───────────────────────────────────────────────────── */
+
+a, button {
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.learna-card {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.learna-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--learna-shadow-md);
+}
+
+.learna-btn {
+  transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+}
+.learna-btn:active {
+  transform: scale(0.98);
 }
