@@ -17,7 +17,7 @@ insert into formations (
   est_a_venir
 ) values (
   'fab10000-0000-4000-8000-000000000000',
-  'Collaborer avec les familles : enjeux et pratiques',
+  'Familles et handicap adulte : enjeux et pratiques',
   'Cette formation e-learning de 5 modules explore en profondeur les dynamiques qui se jouent entre les familles, les personnes adultes en situation de handicap et les équipes professionnelles. Du traumatisme inaugural aux enjeux de l''après-nous, en passant par l''autodétermination, la minorisation et les outils concrets de collaboration, chaque module articule grille de lecture clinique et ancrage dans les pratiques du secteur adulte.',
   'Comprendre les dynamiques famille-institution dans le secteur adulte du handicap pour construire une collaboration digne et efficace.',
   'familles-secteur-adulte',
