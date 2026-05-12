@@ -26,6 +26,11 @@ import { Module2MDHPPH } from "@/app/modules/mdhpph-module-2"
 import { Module3MDHPPH } from "@/app/modules/mdhpph-module-3"
 import { Module4MDHPPH } from "@/app/modules/mdhpph-module-4"
 import { Module5MDHPPH } from "@/app/modules/mdhpph-module-5"
+import { Module1FamillesSecteurAdulte } from "@/app/modules/familles-module-1"
+import { Module2FamillesSecteurAdulte } from "@/app/modules/familles-module-2"
+import { Module3FamillesSecteurAdulte } from "@/app/modules/familles-module-3"
+import { Module4FamillesSecteurAdulte } from "@/app/modules/familles-module-4"
+import { Module5FamillesSecteurAdulte } from "@/app/modules/familles-module-5"
 
 type ModuleSimple = {
   id: string
@@ -63,6 +68,11 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "77b98c17-8566-407b-bd0a-196c8bc709b9": Module3MDHPPH,
   "7befd05f-64e8-4d62-93e1-9dbd26aeef52": Module4MDHPPH,
   "fe837bdc-855a-4a78-b2eb-8760881e3318": Module5MDHPPH,
+  "fab10001-0000-4000-8000-000000000001": Module1FamillesSecteurAdulte,
+  "fab10002-0000-4000-8000-000000000002": Module2FamillesSecteurAdulte,
+  "fab10003-0000-4000-8000-000000000003": Module3FamillesSecteurAdulte,
+  "fab10004-0000-4000-8000-000000000004": Module4FamillesSecteurAdulte,
+  "fab10005-0000-4000-8000-000000000005": Module5FamillesSecteurAdulte,
 }
 
 export default function ModulePage() {
