@@ -455,14 +455,16 @@ export default function DashboardPage() {
       const formations = allFormationsForProgress ?? []
       const formationIds = [...new Set(prog.map((p) => p.formation_id))]
 
-      // Modules des formations commencées
+      // Modules + détails des formations commencées
       let modulesData: { id: string; formation_id: string }[] = []
+      let formationsEnCoursMeta: { id: string; titre: string; slug: string; image_url: string | null }[] = []
       if (formationIds.length > 0) {
-        const { data: mods } = await supabase
-          .from("modules")
-          .select("id, formation_id")
-          .in("formation_id", formationIds)
+        const [{ data: mods }, { data: fMeta }] = await Promise.all([
+          supabase.from("modules").select("id, formation_id").in("formation_id", formationIds),
+          supabase.from("formations").select("id, titre, slug, image_url").in("id", formationIds),
+        ])
         modulesData = mods ?? []
+        formationsEnCoursMeta = fMeta ?? []
       }
 
       const termineIds = new Set(prog.filter((p) => p.statut === "termine").map((p) => p.module_id))
@@ -483,16 +485,15 @@ export default function DashboardPage() {
           formationsCompletees++
           totalMinutesCompletees += (f.duree_estimee_minutes ?? 0)
         } else {
-          // On récupère titre/slug/image depuis vedetteRaw si disponible
-          const fv = (vedetteRaw ?? []).find((v) => v.id === fId)
+          const fMeta = formationsEnCoursMeta.find((v) => v.id === fId)
           formationsEnCoursTout.push({
             id: fId,
-            titre: fv?.titre ?? fId,
-            slug: fv?.slug ?? fId,
+            titre: fMeta?.titre ?? fId,
+            slug: fMeta?.slug ?? fId,
             domaine: getFirstDomaine(f.domaine),
             nbModules,
             nbTermines,
-            image_url: fv?.image_url ?? null,
+            image_url: fMeta?.image_url ?? null,
           })
         }
       }
