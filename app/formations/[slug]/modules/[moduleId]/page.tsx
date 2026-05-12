@@ -245,14 +245,7 @@ export default function ModulePage() {
             {moduleDuree > 0 && (
               <span className="text-xs text-gray-400">{moduleDuree} min</span>
             )}
-            {statut !== "termine" ? (
-              <button
-                onClick={marquerTermine}
-                className="learna-btn bg-[#3DBFA0] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors"
-              >
-                Marquer comme terminé ✓
-              </button>
-            ) : (
+            {statut === "termine" ? (
               <>
                 <span className="text-xs font-medium text-[#3DBFA0] bg-[#3DBFA0]/10 px-3 py-1 rounded-full">
                   ✓ Terminé
@@ -266,6 +259,8 @@ export default function ModulePage() {
                   </a>
                 )}
               </>
+            ) : (
+              <span className="text-xs text-gray-400 italic">Réussissez le quiz pour valider</span>
             )}
           </div>
         </div>

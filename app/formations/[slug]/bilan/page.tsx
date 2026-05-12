@@ -11,7 +11,6 @@ type Formation = {
   slug: string
   duree_estimee_minutes: number
   categorie: string | null
-  nb_modules_total: number | null
 }
 
 type ModuleSimple = {
@@ -84,7 +83,7 @@ export default function BilanPage() {
 
       const { data: f } = await supabase
         .from("formations")
-        .select("id, titre, slug, duree_estimee_minutes, categorie, nb_modules_total")
+        .select("id, titre, slug, duree_estimee_minutes, categorie")
         .eq("slug", slug)
         .single()
       if (!f) { router.push("/formations"); return }
@@ -188,7 +187,7 @@ export default function BilanPage() {
         duree_heures: dureeHeuresFromMinutes(formation.duree_estimee_minutes),
         date_obtention: attestationDate ?? new Date().toISOString(),
         modules_completes: attestationNbModules || modules.length,
-        modules_total: formation.nb_modules_total ?? modules.length,
+        modules_total: modules.length,
         institution_nom: institutionNom,
         numero_verification: numeroAttestation(attestationId ?? formation.id),
         profil_id: userId ?? undefined,
