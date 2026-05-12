@@ -31,6 +31,9 @@ import { Module2FamillesSecteurAdulte } from "@/app/modules/familles-module-2"
 import { Module3FamillesSecteurAdulte } from "@/app/modules/familles-module-3"
 import { Module4FamillesSecteurAdulte } from "@/app/modules/familles-module-4"
 import { Module5FamillesSecteurAdulte } from "@/app/modules/familles-module-5"
+import { Module1Curatelle } from "@/app/modules/curatelle-module-1"
+import { Module2Curatelle } from "@/app/modules/curatelle-module-2"
+import { Module3Curatelle } from "@/app/modules/curatelle-module-3"
 
 type ModuleSimple = {
   id: string
@@ -73,6 +76,9 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "fab10003-0000-4000-8000-000000000003": Module3FamillesSecteurAdulte,
   "fab10004-0000-4000-8000-000000000004": Module4FamillesSecteurAdulte,
   "fab10005-0000-4000-8000-000000000005": Module5FamillesSecteurAdulte,
+  "c0ca0001-0000-4000-8000-000000000001": Module1Curatelle,
+  "c0ca0002-0000-4000-8000-000000000002": Module2Curatelle,
+  "c0ca0003-0000-4000-8000-000000000003": Module3Curatelle,
 }
 
 export default function ModulePage() {
