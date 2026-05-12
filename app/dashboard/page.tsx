@@ -438,7 +438,7 @@ export default function DashboardPage() {
         // Toutes les formations pour le calcul de progression
         supabase
           .from("formations")
-          .select("id, duree_estimee_minutes, domaine, nb_modules_total"),
+          .select("id, duree_estimee_minutes, domaine"),
         supabase
           .from("progression")
           .select("formation_id, module_id, statut, updated_at")
@@ -476,7 +476,7 @@ export default function DashboardPage() {
         if (!f) continue
         const mods = modulesData.filter((m) => m.formation_id === fId)
         const nbTermines = mods.filter((m) => termineIds.has(m.id)).length
-        const nbModules = mods.length || (f.nb_modules_total ?? 0)
+        const nbModules = mods.length
         const isComplete = nbModules > 0 && nbTermines >= nbModules
 
         if (isComplete) {

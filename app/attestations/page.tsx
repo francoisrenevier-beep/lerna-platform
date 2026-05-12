@@ -22,7 +22,6 @@ type Formation = {
   duree_estimee_minutes: number
   slug: string
   categorie: string | null
-  nb_modules_total: number | null
 }
 
 type Profil = {
@@ -116,7 +115,7 @@ export default function AttestationsPage() {
       const formationIds = [...new Set(attData.map((a) => a.formation_id))]
       const { data: formData, error: formError } = await supabase
         .from("formations")
-        .select("id, titre, duree_estimee_minutes, slug, categorie, nb_modules_total")
+        .select("id, titre, duree_estimee_minutes, slug, categorie")
         .in("id", formationIds)
 
       if (formError) {
@@ -151,7 +150,7 @@ export default function AttestationsPage() {
         duree_heures: dureeHeuresFromMinutes(f?.duree_estimee_minutes ?? 0),
         date_obtention: att.created_at,
         modules_completes: attExtra?.nb_modules ?? 0,
-        modules_total: f?.nb_modules_total ?? 0,
+        modules_total: attExtra?.nb_modules ?? 0,
         institution_nom: institution ?? "",
         numero_verification: numeroAttestation(att.id),
         profil_id: att.profil_id,
