@@ -13,7 +13,7 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={2}
-        categorie="Familles et handicap adulte"
+        categorie="Collaboration famille-institution"
         titre="Les dynamiques psychiques à l'œuvre"
         titrePart2="pacte dénégatif, minorisation et défenses institutionnelles"
         sousTitre="Derrière les difficultés relationnelles famille-institution se jouent des processus non conscients. Les comprendre permet de sortir des impasses sans culpabiliser ni les familles ni les équipes."

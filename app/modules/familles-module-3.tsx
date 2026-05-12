@@ -13,7 +13,7 @@ export function Module3FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={3}
-        categorie="Familles et handicap adulte"
+        categorie="Collaboration famille-institution"
         titre="L'autodétermination au cœur"
         titrePart2="de la relation famille-institution"
         sousTitre="Comprendre ce que l'autodétermination signifie vraiment dans le handicap adulte — et comment famille et institution, souvent sans le vouloir, peuvent en freiner l'exercice."

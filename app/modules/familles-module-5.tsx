@@ -13,7 +13,7 @@ export function Module5FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={5}
-        categorie="Familles et handicap adulte"
+        categorie="Collaboration famille-institution"
         titre="Construire une collaboration famille-institution"
         titrePart2="postures, outils et pratiques"
         sousTitre="La posture professionnelle juste, la réunion de projet repensée, la gestion des conflits, et des outils concrets pour une collaboration qui dure."

@@ -13,7 +13,7 @@ export function Module1FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={1}
-        categorie="Familles et handicap adulte"
+        categorie="Collaboration famille-institution"
         titre="La famille face au handicap adulte"
         titrePart2="trajectoires, blessures et ressources"
         sousTitre="Comprendre d'où vient la famille, ce qu'elle porte et ce qu'elle apporte — condition première d'une collaboration qui ait du sens."

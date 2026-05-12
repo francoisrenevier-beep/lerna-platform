@@ -13,7 +13,7 @@ export function Module4FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={4}
-        categorie="Familles et handicap adulte"
+        categorie="Collaboration famille-institution"
         titre="Les transitions critiques"
         titrePart2="vieillissement des parents et l'après-nous"
         sousTitre="L'épuisement aidant, le tabou de l'après-nous, les transitions résidentielles et le deuil parental — les moments charnières que l'institution doit anticiper."
