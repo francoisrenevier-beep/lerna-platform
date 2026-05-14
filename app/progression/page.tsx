@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { BottomNav } from "@/components/BottomNav"
 import { PageHeader } from "@/components/PageHeader"
 import { MetricCard } from "@/components/MetricCard"
 import { getCouleurEtiquette } from "@/lib/etiquettes"
@@ -383,14 +384,14 @@ export default function ProgressionPage() {
   const badgesNonObtenus = BADGE_DEFS.filter((b) => !badgesObtenuIds.has(b.id))
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: "var(--learna-bg)" }}>
+    <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "var(--learna-bg)" }}>
       {celebrationBadge && (
         <CelebrationBadge badge={celebrationBadge} onDismiss={dismissCelebration} />
       )}
 
       <Sidebar pageActive="progression" />
 
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col pb-20 md:pb-0">
         <PageHeader
           titre="Ma progression"
           sousTitre="Votre parcours de formation en un coup d'œil."
@@ -549,6 +550,7 @@ export default function ProgressionPage() {
 
         </div>
       </main>
+      <BottomNav pageActive="progression" />
     </div>
   )
 }

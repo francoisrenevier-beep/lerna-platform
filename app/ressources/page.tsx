@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { BottomNav } from "@/components/BottomNav"
 import { getCouleurEtiquette } from "@/lib/etiquettes"
 
 type Formation = {
@@ -79,9 +80,9 @@ export default function RessourcesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex overflow-x-hidden">
       <Sidebar pageActive="ressources" />
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 pb-24 md:pb-8">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#1B2D5B]">Ressources</h2>
           <p className="text-gray-500 mt-1">
@@ -127,6 +128,7 @@ export default function RessourcesPage() {
           </div>
         )}
       </main>
+      <BottomNav pageActive="ressources" />
     </div>
   )
 }

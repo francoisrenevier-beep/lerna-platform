@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { BottomNav } from "@/components/BottomNav"
 import { PageHeader } from "@/components/PageHeader"
 
 export default function ProfilPage() {
@@ -139,10 +140,10 @@ export default function ProfilPage() {
   const initiales = ((prenom?.[0] ?? "") + (nom?.[0] ?? "")).toUpperCase()
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: "var(--learna-bg)" }}>
+    <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "var(--learna-bg)" }}>
       <Sidebar pageActive="profil" institution={institution} />
 
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col pb-20 md:pb-0">
         <PageHeader
           titre="Mon profil"
           sousTitre="Gérez vos informations personnelles et votre mot de passe."
@@ -307,6 +308,7 @@ export default function ProfilPage() {
         </div>
         </div>
       </main>
+      <BottomNav pageActive="profil" institution={institution} />
     </div>
   )
 }

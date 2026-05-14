@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { BottomNav } from "@/components/BottomNav"
 import { PageHeader } from "@/components/PageHeader"
 import { numeroAttestation, dureeHeuresFromMinutes, downloadAttestation } from "@/lib/attestation"
 
@@ -181,10 +182,10 @@ export default function AttestationsPage() {
     : `${nb} attestation${nb > 1 ? "s" : ""} obtenue${nb > 1 ? "s" : ""}`
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: "var(--learna-bg)" }}>
+    <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "var(--learna-bg)" }}>
       <Sidebar pageActive="attestations" institution={institution} />
 
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col pb-20 md:pb-0">
         <PageHeader titre="Mes attestations" sousTitre={sousTitre} />
 
         <div className="flex-1 p-8">
@@ -331,6 +332,7 @@ export default function AttestationsPage() {
         )}
         </div>
       </main>
+      <BottomNav pageActive="attestations" institution={institution} />
     </div>
   )
 }
