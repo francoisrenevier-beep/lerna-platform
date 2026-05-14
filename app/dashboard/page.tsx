@@ -818,7 +818,7 @@ export default function DashboardPage() {
 
         </div>
       </main>
-      <BottomNav pageActive="dashboard" />
+      <BottomNav pageActive="dashboard" institution={institution?.nom} />
     </div>
   )
 }
