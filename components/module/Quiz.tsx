@@ -12,8 +12,29 @@ type QuizProps = {
   onValiderModule?: () => void
 }
 
+function shuffleArray<T>(arr: T[]): T[] {
+  const result = [...arr]
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
+
+function melanger(questions: Question[]): Question[] {
+  return shuffleArray(questions).map(q => {
+    const indices = shuffleArray(q.reponses.map((_, i) => i))
+    return {
+      ...q,
+      reponses: indices.map(i => q.reponses[i]),
+      bonneReponse: indices.indexOf(q.bonneReponse),
+    }
+  })
+}
+
 export function Quiz({ questions, onValiderModule }: QuizProps) {
   const [etape, setEtape] = useState<"quiz" | "resultat">("quiz")
+  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>(() => melanger(questions))
   const [reponsesChoisies, setReponsesChoisies] = useState<number[]>(Array(questions.length).fill(-1))
   const [questionActuelle, setQuestionActuelle] = useState(0)
   const [reponseValidee, setReponseValidee] = useState(false)
@@ -41,6 +62,7 @@ export function Quiz({ questions, onValiderModule }: QuizProps) {
   }
 
   const resetQuiz = () => {
+    setShuffledQuestions(melanger(questions))
     setEtape("quiz")
     setReponsesChoisies(Array(questions.length).fill(-1))
     setQuestionActuelle(0)
@@ -49,12 +71,12 @@ export function Quiz({ questions, onValiderModule }: QuizProps) {
   }
 
   const score = reponsesChoisies.filter(function(r, i) {
-    return r === questions[i].bonneReponse
+    return r === shuffledQuestions[i].bonneReponse
   }).length
 
   const reussi = score >= questions.length * 0.7
 
-  const q = questions[questionActuelle]
+  const q = shuffledQuestions[questionActuelle]
   const reponseChoisie = reponsesChoisies[questionActuelle]
   const estCorrect = reponseChoisie === q.bonneReponse
 
@@ -77,7 +99,7 @@ export function Quiz({ questions, onValiderModule }: QuizProps) {
         </div>
 
         <div className="space-y-4 mb-8">
-          {questions.map(function(question, i) {
+          {shuffledQuestions.map(function(question, i) {
             const correct = reponsesChoisies[i] === question.bonneReponse
             return (
               <div key={i} className={"rounded-lg p-4 " + (correct ? "bg-[#3DBFA0]/10 border border-[#3DBFA0]/30" : "bg-red-50 border border-red-200")}>
@@ -101,7 +123,7 @@ export function Quiz({ questions, onValiderModule }: QuizProps) {
             onClick={function() {
               try {
                 localStorage.setItem("lerna_quiz_pending", JSON.stringify({
-                  questions,
+                  questions: shuffledQuestions,
                   reponses: reponsesChoisies,
                   score,
                   total: questions.length,
