@@ -28,6 +28,7 @@ function iconeType(type: string) {
   if (type === "pdf")     return "📄"
   if (type === "video")   return "🎬"
   if (type === "article") return "📰"
+  if (type === "memo")    return "📋"
   return "🔗"
 }
 
@@ -35,6 +36,7 @@ function labelType(type: string) {
   if (type === "pdf")     return "PDF"
   if (type === "video")   return "Vidéo"
   if (type === "article") return "Article"
+  if (type === "memo")    return "Mémo"
   return "Lien"
 }
 
