@@ -15,8 +15,6 @@ node_modules
 .next/
 .DS_Store
 
-# next-pwa generated files
-/public/sw.js
-/public/sw.js.map
+# workbox generated files (si next-pwa utilisé)
 /public/workbox-*.js
 /public/workbox-*.js.map
