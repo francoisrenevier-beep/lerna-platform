@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { BottomNav } from "@/components/BottomNav"
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -369,8 +370,8 @@ function ParcoursCard({ group }: { group: ParcoursGroup }) {
   const firstAvailable = sorted.find((f) => !f.est_a_venir)
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border-l-4 border-[#1B2D5B] p-6 flex gap-5">
-      <div className="flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden self-center">
+    <div className="bg-white rounded-2xl shadow-sm border-l-4 border-[#1B2D5B] p-4 md:p-6 flex flex-col sm:flex-row gap-4 md:gap-5">
+      <div className="flex-shrink-0 w-16 h-16 sm:w-24 sm:h-24 rounded-xl overflow-hidden self-start sm:self-center">
         <DomainIllustration domaine={firstDomaine} />
       </div>
       <div className="flex-1 min-w-0">
@@ -553,11 +554,11 @@ function FilterDropdown({
 }) {
   const isActive = !!value
   return (
-    <div className="relative">
+    <div className="relative w-full md:w-auto">
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`appearance-none pl-3 pr-7 py-2 text-sm rounded-lg border cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] transition-colors ${
+        className={`appearance-none w-full pl-3 pr-7 py-2 text-sm rounded-lg border cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] transition-colors ${
           isActive
             ? "border-[#3DBFA0] bg-[#3DBFA0]/5 text-[#3DBFA0] font-medium"
             : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
@@ -738,13 +739,13 @@ export default function CataloguePage() {
   const totalCount = new Set(filtered.map((f) => f.id)).size
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex">
+    <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
       <Sidebar pageActive="catalogue" />
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 pb-20 md:pb-0">
         {/* ── Header navy ─────────────────────────────────────────────────────── */}
-        <div className="bg-[#1B2D5B] px-8 py-10">
-          <h1 className="text-3xl font-bold text-white mb-1">Catalogue des formations</h1>
-          <p className="text-[#3DBFA0] text-base font-medium mb-7">
+        <div className="bg-[#1B2D5B] px-4 md:px-8 py-6 md:py-10">
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">Catalogue des formations</h1>
+          <p className="text-[#3DBFA0] text-sm md:text-base font-medium mb-4 md:mb-7">
             Des formations ancrées dans la réalité du terrain
           </p>
           <div className="max-w-lg mx-auto relative">
@@ -769,8 +770,8 @@ export default function CataloguePage() {
         </div>
 
         {/* ── Sticky filter bar ────────────────────────────────────────────────── */}
-        <div className="sticky top-0 z-30 bg-white border-b border-gray-100 shadow-sm px-8 py-3">
-          <div className="flex items-center gap-3 flex-wrap">
+        <div className="sticky top-0 z-30 bg-white border-b border-gray-100 shadow-sm px-4 md:px-8 py-3">
+          <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:items-center md:gap-3">
             <FilterDropdown
               label="Domaine"
               options={[...DOMAINES]}
@@ -798,12 +799,12 @@ export default function CataloguePage() {
             {hasFilters && (
               <button
                 onClick={clearFilters}
-                className="text-sm text-gray-400 hover:text-gray-700 transition-colors underline underline-offset-2"
+                className="col-span-2 md:col-auto text-left text-sm text-gray-400 hover:text-gray-700 transition-colors underline underline-offset-2"
               >
                 Tout effacer
               </button>
             )}
-            <div className="flex items-center gap-2 flex-wrap ml-auto">
+            <div className="col-span-2 md:col-auto flex items-center gap-2 flex-wrap md:ml-auto">
               {filterDomaine && <FilterChip label={filterDomaine} onRemove={() => setFilterDomaine("")} />}
               {filterThematique && <FilterChip label={filterThematique} onRemove={() => setFilterThematique("")} />}
               {filterNiveau && <FilterChip label={filterNiveau} onRemove={() => setFilterNiveau("")} />}
@@ -813,9 +814,9 @@ export default function CataloguePage() {
         </div>
 
         {/* ── Main content ─────────────────────────────────────────────────────── */}
-        <main className="flex-1 px-8 py-10 space-y-14">
+        <main className="flex-1 px-4 md:px-8 py-6 md:py-10 space-y-10 md:space-y-14">
           {loading ? (
-            <div className="space-y-14">
+            <div className="space-y-10 md:space-y-14">
               <div>
                 <div className="h-7 bg-gray-100 rounded w-48 mb-6 animate-pulse" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -884,6 +885,7 @@ export default function CataloguePage() {
           )}
         </main>
       </div>
+      <BottomNav pageActive="catalogue" />
     </div>
   )
 }

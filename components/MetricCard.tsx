@@ -11,7 +11,7 @@ type MetricCardProps = {
 function CardInner({ valeur, label, icone, couleur }: Omit<MetricCardProps, "href">) {
   return (
     <div
-      className="learna-card flex flex-col gap-3 p-5 rounded-xl bg-white h-full"
+      className="learna-card flex flex-col gap-2 md:gap-3 p-3 md:p-5 rounded-xl bg-white h-full"
       style={{
         border: "0.5px solid var(--learna-border)",
         boxShadow: "var(--learna-shadow-sm)",
@@ -28,7 +28,7 @@ function CardInner({ valeur, label, icone, couleur }: Omit<MetricCardProps, "hre
 
       {/* Valeur */}
       <div
-        className="text-[28px] font-bold leading-none"
+        className="text-2xl md:text-[28px] font-bold leading-none"
         style={{ color: "var(--learna-navy)" }}
       >
         {valeur}

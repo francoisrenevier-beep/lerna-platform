@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
+import { BottomNav } from "@/components/BottomNav"
 import { BADGE_DEFS, type BadgeStats } from "@/lib/badges"
 import { getCouleurEtiquette } from "@/lib/etiquettes"
 import { PageHeader } from "@/components/PageHeader"
@@ -374,19 +375,19 @@ function Pulse({ className }: { className?: string }) {
 
 function DashboardSkeleton() {
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex">
-      <div className="w-64 bg-[#1B2D5B] flex-shrink-0" />
-      <main className="flex-1">
-        <div className="bg-[#1B2D5B] px-8 py-6 flex justify-between items-center">
+    <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
+      <div className="hidden md:block w-64 bg-[#1B2D5B] flex-shrink-0" />
+      <main className="flex-1 pb-20 md:pb-0">
+        <div className="bg-[#1B2D5B] px-4 md:px-8 py-6 flex justify-between items-center">
           <div className="space-y-2">
-            <Pulse className="h-8 w-64 bg-white/20" />
-            <Pulse className="h-4 w-44 bg-white/10" />
+            <Pulse className="h-8 w-48 md:w-64 bg-white/20" />
+            <Pulse className="h-4 w-32 md:w-44 bg-white/10" />
           </div>
-          <Pulse className="h-6 w-36 bg-white/10" />
+          <Pulse className="h-6 w-24 md:w-36 bg-white/10" />
         </div>
-        <div className="px-8 py-6 space-y-8 max-w-6xl">
+        <div className="px-4 md:px-8 py-6 space-y-8 max-w-6xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[0, 1, 2, 3].map((i) => <Pulse key={i} className="h-28 rounded-xl" />)}
+            {[0, 1, 2, 3].map((i) => <Pulse key={i} className="h-24 md:h-28 rounded-xl" />)}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[0, 1, 2].map((i) => <Pulse key={i} className="h-80 rounded-2xl" />)}
@@ -567,10 +568,10 @@ export default function DashboardPage() {
   })
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex">
+    <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
       <Sidebar pageActive="dashboard" institution={institution?.nom} />
 
-      <main className="flex-1 min-w-0">
+      <main className="flex-1 min-w-0 pb-20 md:pb-0">
 
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <PageHeader
@@ -598,7 +599,7 @@ export default function DashboardPage() {
           }
         />
 
-        <div className="px-8 py-7 space-y-10 max-w-6xl">
+        <div className="px-4 md:px-8 py-5 md:py-7 space-y-8 md:space-y-10 max-w-6xl">
 
           {/* ── Continuer l'apprentissage ──────────────────────────────────── */}
           {formationsEnCours.length > 0 && (
@@ -817,6 +818,7 @@ export default function DashboardPage() {
 
         </div>
       </main>
+      <BottomNav pageActive="dashboard" />
     </div>
   )
 }

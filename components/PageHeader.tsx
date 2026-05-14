@@ -11,7 +11,7 @@ export function PageHeader({ titre, sousTitre, gradient = false, right }: PageHe
   if (gradient) {
     return (
       <div
-        className="relative overflow-hidden px-8 py-7 flex flex-col md:flex-row md:items-center justify-between gap-3"
+        className="relative overflow-hidden px-4 md:px-8 py-5 md:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3"
         style={{ background: "linear-gradient(135deg, #1B2D5B 0%, #243d7a 100%)" }}
       >
         {/* Cercles décoratifs */}
@@ -67,7 +67,7 @@ export function PageHeader({ titre, sousTitre, gradient = false, right }: PageHe
 
   return (
     <div
-      className="px-8 py-6 flex flex-col md:flex-row md:items-center justify-between gap-3 border-b"
+      className="px-4 md:px-8 py-4 md:py-6 flex flex-col md:flex-row md:items-center justify-between gap-3 border-b"
       style={{
         backgroundColor: "var(--learna-white)",
         borderColor: "var(--learna-border)",

@@ -105,7 +105,7 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
 
   return (
     <aside
-      className="w-64 flex flex-col flex-shrink-0 min-h-screen"
+      className="hidden md:flex w-64 flex-col flex-shrink-0 min-h-screen"
       style={{ backgroundColor: "var(--learna-navy)" }}
     >
       {/* Logo */}
