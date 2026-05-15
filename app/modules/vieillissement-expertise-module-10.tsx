@@ -33,16 +33,16 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
               "Prendre soin de soi et de son équipe dans ces situations éprouvantes"
             ]} />
           </ConceptBox>
-          <Texte>Pendant longtemps, la question de la fin de vie était absente des préoccupations des institutions socio-éducatives. Les personnes en situation de handicap mouraient jeunes, souvent à l&apos;hôpital, et l&apos;institution n&apos;était pas perçue comme un lieu où l&apos;on accompagnait la mort. Cette réalité a profondément changé.</Texte>
-          <Texte>Aujourd&apos;hui, des personnes accompagnées depuis 30 ou 40 ans dans la même institution y vieillissent, y déclinent, et parfois y meurent. Les équipes se retrouvent face à des situations pour lesquelles elles n&apos;ont souvent pas été formées — et face à des questions que personne n&apos;avait pensé à poser avant que la réalité ne les impose.</Texte>
-          <Texte>Ce module ne forme pas aux soins palliatifs — c&apos;est un domaine spécialisé qui dépasse le champ du travail social. Il forme à la posture : comment rester un professionnel du travail social utile, présent et compétent face à la fin de vie, sans déborder sur des compétences qui ne sont pas les vôtres.</Texte>
+          <Texte>Pendant longtemps, la question de la fin de vie était absente des préoccupations des institutions socio-éducatives. Les personnes en situation de handicap mouraient jeunes, souvent à l&apos;hôpital, et l&apos;institution n&apos;était pas perçue comme un lieu où l&apos;on accompagnait la mort. Cette réalité a profondément changé. L&apos;allongement de l&apos;espérance de vie des personnes en situation de handicap — qui rejoint progressivement celle de la population générale pour certains profils — signifie que des personnes accompagnées depuis 30 ou 40 ans dans la même institution y vieillissent, y déclinent, et parfois y meurent.</Texte>
+          <Texte>Cette évolution pose aux institutions socio-éducatives une question pour laquelle elles n&apos;ont pas été conçues : sont-elles équipées — humainement, organisationnellement, culturellement — pour accompagner la fin de vie ? La réponse honnête est souvent : pas encore. Les équipes se retrouvent face à des situations pour lesquelles elles n&apos;ont souvent pas été formées, dans des locaux qui n&apos;ont pas été pensés pour cela, avec des protocoles inexistants ou inadaptés.</Texte>
+          <Texte>Ce module ne forme pas aux soins palliatifs — c&apos;est un domaine spécialisé qui dépasse le champ du travail social. Il forme à la posture : comment rester un professionnel du travail social utile, présent et compétent face à la fin de vie, sans déborder sur des compétences qui ne sont pas les vôtres. Et comment préparer ces situations avant qu&apos;elles ne surviennent — parce qu&apos;une fin de vie bien accompagnée se prépare toujours à l&apos;avance.</Texte>
           <PullQuote>
             La mort fait partie de la vie que vous accompagnez. L&apos;ignorer ne la fait pas disparaître — elle laisse seulement la personne et votre équipe traverser cette épreuve sans préparation.
           </PullQuote>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Le rôle du travail social face à la fin de vie">
-          <Texte>La première chose à clarifier est ce que le travail social apporte — et ce qu&apos;il n&apos;apporte pas — dans l&apos;accompagnement de la fin de vie. Cette clarté protège les professionnels du sentiment d&apos;échec ou d&apos;inadéquation, et permet de mobiliser les bons partenaires au bon moment.</Texte>
+          <Texte>La première chose à clarifier est ce que le travail social apporte — et ce qu&apos;il n&apos;apporte pas — dans l&apos;accompagnement de la fin de vie. Cette clarté protège les professionnels du sentiment d&apos;échec ou d&apos;inadéquation, et permet de mobiliser les bons partenaires au bon moment. Un professionnel qui croit devoir tout faire risque de s&apos;épuiser sur des tâches qui ne lui appartiennent pas, tout en négligeant celles qui lui appartiennent vraiment.</Texte>
 
           <TableauComparaison
             titre="Ce que le travail social apporte — et ce qu'il ne remplace pas"
@@ -74,16 +74,20 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
 
           <Texte>Ce tableau montre quelque chose d&apos;important : le travail social a un rôle central et irremplaçable dans l&apos;accompagnement de la fin de vie — mais ce rôle est relationnel, coordonnateur et humain, pas médical ou technique. Vous n&apos;avez pas à gérer la douleur. Vous avez à être là, à maintenir le lien, à assurer que la personne n&apos;est pas seule et ne perd pas ses repères dans les dernières semaines de sa vie.</Texte>
 
+          <Texte>Ce rôle de présence relationnelle est profondément sous-estimé dans notre culture institutionnelle, qui valorise l&apos;action et l&apos;intervention. Être présent, sans rien &quot;faire&quot; de technique, peut sembler insuffisant. C&apos;est pourtant souvent ce dont la personne a le plus besoin. Être reconnu, regardé, appelé par son prénom, entouré de visages familiers, dans un espace qu&apos;on connaît — ces éléments ont une valeur thérapeutique réelle en fin de vie. Et ils ne peuvent être fournis que par des professionnels qui accompagnent la personne depuis longtemps, dans son environnement habituel. C&apos;est exactement ce que le travail social institutionnel apporte, et que l&apos;hôpital ne peut pas remplacer.</Texte>
+
           <HighlightBox label="Le passage de la logique éducative à la logique de confort" couleur="jaune">
             <Texte>L&apos;une des transitions les plus difficiles pour les équipes socio-éducatives est le changement de paradigme qui accompagne la fin de vie. Pendant des années — parfois des décennies — vous avez travaillé à développer les capacités de la personne, à maintenir ses acquis, à proposer des stimulations. Progressivement, cet objectif devient moins pertinent. L&apos;enjeu n&apos;est plus de progresser — c&apos;est de maintenir la qualité de vie, le confort, la dignité.</Texte>
             <Texte>Ce changement de paradigme est difficile émotionnellement. Il peut être vécu comme un abandon — &quot;on renonce à la personne&quot;. Ce n&apos;est pas cela. C&apos;est reconnaître que les besoins de la personne ont changé, et que la réponse professionnelle doit changer avec eux. C&apos;est une forme d&apos;accompagnement qui demande autant de compétence et d&apos;humanité que tout ce qui a précédé — peut-être davantage.</Texte>
           </HighlightBox>
+
+          <Texte>Ce changement de paradigme implique en pratique de revoir certains réflexes professionnels bien établis. La stimulation cognitive, le maintien des compétences, la progression dans les activités — ces objectifs sont pertinents sur la majeure partie de la vie d&apos;une personne. En fin de vie, les proposer de manière insistante peut devenir une source d&apos;inconfort. La question à se poser n&apos;est plus &quot;comment faire progresser cette personne ?&quot; mais &quot;qu&apos;est-ce qui lui fait du bien aujourd&apos;hui ?&quot; Et &quot;qu&apos;est-ce qui l&apos;épuise ?&quot; Ce déplacement d&apos;attention, des capacités vers le confort, est au cœur de la posture palliative en travail social.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Recueillir les volontés : un acte de respect">
-          <Texte>Une personne en situation de handicap a le droit d&apos;exprimer ses volontés concernant sa fin de vie — ses peurs, ses souhaits, où elle voudrait mourir, avec qui, ce qui lui importe. Ce droit doit être exercé avec les adaptations appropriées : utilisation du FALC, supports visuels, entretiens en plusieurs temps, présence d&apos;une personne de confiance.</Texte>
+          <Texte>Une personne en situation de handicap a le droit d&apos;exprimer ses volontés concernant sa fin de vie — ses peurs, ses souhaits, où elle voudrait mourir, avec qui, ce qui lui importe. Ce droit est souvent non exercé — non parce que la personne n&apos;a pas de volontés, mais parce que personne ne lui a posé la question. La crainte de &quot;mettre des idées en tête&quot; ou de &quot;faire peur&quot; est compréhensible, mais elle repose sur une prémisse fausse : les personnes en situation de handicap pensent à la mort. Ce qui leur fait du mal, c&apos;est souvent que personne n&apos;ose en parler avec elles.</Texte>
 
-          <Texte>Ce travail de recueil des volontés ne se fait pas le jour où la personne entre dans sa phase terminale. Il se fait bien avant — idéalement dans le cadre d&apos;une révision du PPA qui intègre explicitement ces questions pour toutes les personnes de plus de 60 ans ou présentant des signes de déclin.</Texte>
+          <Texte>Ce travail de recueil des volontés ne se fait pas le jour où la personne entre dans sa phase terminale. Il se fait bien avant — idéalement dans le cadre d&apos;une révision du PPA qui intègre explicitement ces questions pour toutes les personnes de plus de 60 ans ou présentant des signes de déclin. Aborder ce sujet dans un moment calme, sans urgence médicale, permet à la personne de s&apos;exprimer sans pression, à son rythme, et à l&apos;équipe de documenter ces volontés avec soin. Quand la fin de vie arrive, il est souvent trop tard pour une conversation sereine.</Texte>
 
           <SchemaEtapes
             titre="Comment aborder les volontés de fin de vie avec la personne"
@@ -96,6 +100,8 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
             ]}
           />
 
+          <Texte>L&apos;adaptation du langage est une compétence technique à part entière. &quot;Qu&apos;est-ce que tu veux pour ta fin de vie ?&quot; est une question trop abstraite pour la plupart des personnes, avec ou sans handicap. En revanche, &quot;Si tu étais très malade et qu&apos;il fallait te soigner, tu préférerais rester ici ou aller à l&apos;hôpital ?&quot; ou &quot;Qui voudrais-tu que l&apos;équipe appelle en premier si tu te sentais très mal ?&quot; sont des questions concrètes, ancrées dans la réalité de la personne, qui permettent de recueillir des volontés réelles. La règle est simple : une question qui ne peut pas être répondue avec un geste, une image ou un mot de deux syllabes est probablement trop abstraite.</Texte>
+
           <HighlightBox label="Les questions concrètes à explorer" couleur="bleu">
             <Texte>Voici des questions concrètes adaptées à ce contexte, qui peuvent être posées avec les adaptations nécessaires :</Texte>
             <Liste items={[
@@ -107,6 +113,8 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
               "Qu'est-ce qui est important pour elle dans sa vie quotidienne actuelle et qu'on doit maintenir le plus longtemps possible ?"
             ]} />
           </HighlightBox>
+
+          <Texte>La question de l&apos;hospitalisation mérite une attention particulière. Pour beaucoup de personnes en situation de handicap ayant vécu la majeure partie de leur vie en institution, l&apos;hôpital est un environnement anxiogène — bruyant, impersonnel, avec des visages inconnus, des routines brisées, des règles incompréhensibles. Des études sur la fin de vie des personnes avec déficience intellectuelle montrent systématiquement que beaucoup d&apos;entre elles expriment le souhait de mourir dans leur lieu de vie habituel — et que ce souhait est systématiquement moins respecté que celui de la population générale, parce que les équipes ne l&apos;ont pas recueilli, ou parce que l&apos;institution n&apos;a pas les ressources pour l&apos;honorer. Recueillir et documenter ce souhait est la première étape pour qu&apos;il puisse être respecté.</Texte>
 
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
@@ -126,7 +134,9 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Soutenir les résidents témoins d'un décès">
-          <Texte>Quand un résident meurt dans une institution, les autres résidents — qui vivent avec lui depuis parfois des décennies — vivent une perte réelle. Cette perte est souvent insuffisamment reconnue. L&apos;équipe, absorbée par la gestion du décès, de la famille, des formalités, n&apos;a parfois pas les ressources pour accompagner les autres résidents dans ce deuil.</Texte>
+          <Texte>Quand un résident meurt dans une institution, les autres résidents — qui vivent avec lui depuis parfois des décennies — vivent une perte réelle. Cette perte est souvent insuffisamment reconnue. L&apos;équipe, absorbée par la gestion du décès, de la famille, des formalités, n&apos;a parfois pas les ressources pour accompagner les autres résidents dans ce deuil. Or ce deuil est réel, souvent profond, et peut se manifester de façon inattendue chez des personnes qui n&apos;ont pas toujours les mots pour exprimer leur peine.</Texte>
+
+          <Texte>La façon dont les personnes en situation de handicap intellectuel vivent le deuil présente des spécificités que les professionnels doivent connaître. Le deuil peut être retardé — la personne semble d&apos;abord indifférente, puis décompense plusieurs semaines après. Il peut se manifester par des troubles du comportement, des régressions, des modifications du sommeil ou de l&apos;appétit, des demandes répétées de nouvelles du défunt, ou une recherche de la personne disparue. Il peut aussi être exprimé très directement, avec une simplicité qui déstabilise les professionnels — &quot;il est mort et moi aussi je vais mourir un jour, c&apos;est ça ?&quot; Ces manifestations ne sont pas des signes de pathologie. Elles sont les formes que prend un deuil réel chez des personnes dont les capacités d&apos;élaboration symbolique sont limitées.</Texte>
 
           <Texte>Pourtant, la façon dont l&apos;institution gère un décès est une information pour tous les résidents sur la façon dont ils seront eux-mêmes accompagnés quand leur tour viendra. Un décès mal géré — nié, tu, expédié — communique un message implicite sur la valeur accordée à la vie et à la mort dans cette institution. Un décès accompagné avec soin communique le contraire.</Texte>
 
@@ -140,6 +150,10 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
               "Des réponses honnêtes à leurs questions sur leur propre mort, si elles surviennent — sans les éviter ni les dramatiser."
             ]} />
           </HighlightBox>
+
+          <Texte>Sur la question de la vérité : le mensonge — &quot;il est parti en voyage&quot; — ne protège pas le résident. Il retarde et complique son deuil. Quand la vérité émerge (et elle émerge toujours — un autre résident le dit, une famille le mentionne, la chambre est vidée), la confusion est doublée d&apos;une trahison de confiance. &quot;Pourquoi tu m&apos;as menti ?&quot; Cette question, posée par une personne en situation de handicap à son référent après la mort d&apos;un pair, est une des plus difficiles à entendre dans ce métier. La vérité, formulée avec douceur et des mots adaptés, permet un deuil réel et préserve la relation de confiance qui est le fondement de tout accompagnement.</Texte>
+
+          <Texte>Les rituels de mémoire ont une importance que l&apos;on sous-estime souvent. Pour des personnes dont la vie est structurée par des rituels et des routines, la disparition soudaine d&apos;un pair sans aucun marquage symbolique peut être déstabilisante. Un moment de parole collectif, une photo affichée dans le couloir, une sortie en mémoire de la personne, une chanson qu&apos;elle aimait jouée lors d&apos;un repas — ces gestes simples permettent à la communauté résidentielle de marquer la perte, d&apos;honorer la personne disparue, et de clore symboliquement quelque chose qui a commencé. Ils ne remplacent pas le deuil individuel, mais ils lui donnent un cadre collectif.</Texte>
 
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
@@ -159,12 +173,14 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="Prendre soin de soi et de son équipe">
-          <Texte>Accompagner la fin de vie d&apos;une personne que l&apos;on connaît depuis des années est une expérience humaine intense. Ce n&apos;est pas une expérience professionnelle ordinaire. La perte d&apos;un résident que l&apos;on accompagnait depuis longtemps génère un deuil réel chez les professionnels — qui n&apos;est pas toujours reconnu comme tel.</Texte>
+          <Texte>Accompagner la fin de vie d&apos;une personne que l&apos;on connaît depuis des années est une expérience humaine intense. Ce n&apos;est pas une expérience professionnelle ordinaire. La perte d&apos;un résident que l&apos;on accompagnait depuis longtemps génère un deuil réel chez les professionnels — qui n&apos;est pas toujours reconnu comme tel, ni par l&apos;institution, ni parfois par le professionnel lui-même.</Texte>
 
           <HighlightBox label="Le deuil professionnel — une réalité souvent niée" couleur="jaune">
             <Texte>Dans beaucoup d&apos;institutions, la mort d&apos;un résident est traitée comme un événement administratif : les formalités sont gérées, la chambre est nettoyée, un nouveau résident arrive. Les professionnels sont censés continuer à travailler comme si de rien n&apos;était. Cette attente implicite est un déni de la réalité émotionnelle du travail.</Texte>
             <Texte>Les professionnels qui ont accompagné une personne pendant 10, 15 ou 20 ans vivent une perte réelle à son décès. Nier cette perte — ou la minimiser — génère un cumul émotionnel qui s&apos;exprime tôt ou tard : épuisement, cynisme, désengagement, burn-out. Reconnaître ce deuil professionnel, lui donner un espace, est une nécessité institutionnelle — pas un luxe réservé aux professionnels fragiles.</Texte>
           </HighlightBox>
+
+          <Texte>Il faut distinguer deux types de difficultés émotionnelles que les professionnels rencontrent en accompagnant la fin de vie. La première est l&apos;empathie — la capacité à se mettre à la place de la personne et de ressentir quelque chose de ce qu&apos;elle vit. L&apos;empathie est une ressource professionnelle précieuse ; elle permet une présence authentique et une compréhension fine des besoins. La deuxième est la fusion émotionnelle — la difficulté à maintenir une frontière entre soi et la personne accompagnée, au point que sa souffrance devient la sienne. La fusion émotionnelle est un signal d&apos;alerte : elle signale un besoin de soutien, pas une force de caractère. Apprendre à nommer cette distinction est une compétence professionnelle.</Texte>
 
           <SchemaEtapes
             titre="Comment prendre soin de l'équipe après un décès"
@@ -178,6 +194,8 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
 
           <Texte>La direction de l&apos;institution a une responsabilité directe dans la création de ces espaces. Mais les professionnels de terrain ont aussi un rôle : nommer leurs besoins, demander ces espaces quand ils n&apos;existent pas, et reconnaître le deuil de leurs collègues. Une équipe qui traverse ensemble la mort d&apos;un résident sort souvent plus soudée — à condition que cette traversée soit accompagnée et non niée.</Texte>
 
+          <Texte>La question de la préparation mérite aussi d&apos;être abordée. Une fin de vie bien accompagnée ne commence pas au moment où la personne entre en phase terminale. Elle commence des mois ou des années avant, quand l&apos;équipe a eu le temps de parler de la mort, d&apos;établir des protocoles, de recueillir les volontés de la personne, et de réfléchir ensemble à la façon dont elle voudrait accompagner cet événement. Les équipes qui ont traversé ce travail préparatoire rapportent systématiquement moins d&apos;état de sidération, moins de conflits, et plus de sentiment d&apos;avoir bien fait leur travail — même dans des situations difficiles. La préparation n&apos;enlève pas la douleur. Elle lui donne un cadre.</Texte>
+
           <PullQuote>
             Prendre soin de vous après la mort d&apos;un résident n&apos;est pas de la faiblesse. C&apos;est la condition pour que vous soyez présent pour les prochains.
           </PullQuote>
@@ -188,11 +206,13 @@ export function Module10VieillissementExpertise({ onValiderModule }: { onValider
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le rôle du travail social face à la fin de vie est relationnel et coordonnateur — pas médical",
+              "La présence familière et la continuité des repères sont une valeur thérapeutique réelle — uniquement disponible en institution",
               "Le changement de paradigme (éducatif → confort) est difficile mais nécessaire — c'est une forme d'accompagnement, pas un abandon",
               "Recueillir les volontés se fait avant l'urgence, avec des questions concrètes et des supports adaptés",
-              "Les résidents témoins d'un décès ont besoin d'une vérité honnête, d'un espace d'expression et de rituels de mémoire",
+              "Les personnes en situation de handicap pensent à la mort — ce qui leur fait du mal, c'est que personne n'en parle avec elles",
+              "Le deuil des résidents peut être retardé, atypique, exprimé par des troubles comportementaux — le reconnaître et lui faire de la place",
               "Le deuil professionnel est réel — il mérite un espace institutionnel, pas un déni",
-              "Se préparer à la fin de vie est un acte de respect envers les personnes accompagnées — pas une anticipation morbide"
+              "Une fin de vie bien accompagnée se prépare toujours en amont — protocoles, volontés, formation de l'équipe"
             ]} />
           </HighlightBox>
         </SectionModule>
