@@ -34,6 +34,18 @@ import { Module5FamillesSecteurAdulte } from "@/app/modules/familles-module-5"
 import { Module1Curatelle } from "@/app/modules/curatelle-module-1"
 import { Module2Curatelle } from "@/app/modules/curatelle-module-2"
 import { Module3Curatelle } from "@/app/modules/curatelle-module-3"
+import { Module1VieillissementBases } from "@/app/modules/vieillissement-bases-module-1"
+import { Module2VieillissementBases } from "@/app/modules/vieillissement-bases-module-2"
+import { Module3VieillissementBases } from "@/app/modules/vieillissement-bases-module-3"
+import { Module4VieillissementBases } from "@/app/modules/vieillissement-bases-module-4"
+import { Module4VieillissementApprofondissement } from "@/app/modules/vieillissement-approfondissement-module-4"
+import { Module5VieillissementApprofondissement } from "@/app/modules/vieillissement-approfondissement-module-5"
+import { Module6VieillissementApprofondissement } from "@/app/modules/vieillissement-approfondissement-module-6"
+import { Module7VieillissementApprofondissement } from "@/app/modules/vieillissement-approfondissement-module-7"
+import { Module8VieillissementApprofondissement } from "@/app/modules/vieillissement-approfondissement-module-8"
+import { Module9VieillissementExpertise } from "@/app/modules/vieillissement-expertise-module-9"
+import { Module10VieillissementExpertise } from "@/app/modules/vieillissement-expertise-module-10"
+import { Module11VieillissementExpertise } from "@/app/modules/vieillissement-expertise-module-11"
 
 type ModuleSimple = {
   id: string
@@ -79,6 +91,18 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "c0ca0001-0000-4000-8000-000000000001": Module1Curatelle,
   "c0ca0002-0000-4000-8000-000000000002": Module2Curatelle,
   "c0ca0003-0000-4000-8000-000000000003": Module3Curatelle,
+  "bace0001-0001-4000-8000-000000000001": Module1VieillissementBases,
+  "bace0001-0002-4000-8000-000000000002": Module2VieillissementBases,
+  "bace0001-0003-4000-8000-000000000003": Module3VieillissementBases,
+  "bace0001-0004-4000-8000-000000000004": Module4VieillissementBases,
+  "a77f0001-0004-4000-8000-000000000004": Module4VieillissementApprofondissement,
+  "a77f0001-0005-4000-8000-000000000005": Module5VieillissementApprofondissement,
+  "a77f0001-0006-4000-8000-000000000006": Module6VieillissementApprofondissement,
+  "a77f0001-0007-4000-8000-000000000007": Module7VieillissementApprofondissement,
+  "a77f0001-0008-4000-8000-000000000008": Module8VieillissementApprofondissement,
+  "e9e00001-0009-4000-8000-000000000009": Module9VieillissementExpertise,
+  "e9e00001-0010-4000-8000-000000000010": Module10VieillissementExpertise,
+  "e9e00001-0011-4000-8000-000000000011": Module11VieillissementExpertise,
 }
 
 export default function ModulePage() {
