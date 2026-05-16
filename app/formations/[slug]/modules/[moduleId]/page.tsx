@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter, usePathname } from "next/navigation"
 import { verifierEtAttribuerBadges } from "@/lib/badges"
+import { ResourceCard, type Resource } from "@/components/ResourceCard"
 import { Module1PPH } from "@/app/modules/pph-module-1"
 import { Module2PPH } from "@/app/modules/pph-module-2"
 import { Module3PPH } from "@/app/modules/pph-module-3"
@@ -115,6 +116,7 @@ export default function ModulePage() {
   const [statut, setStatut] = useState("non_commence")
   const [loading, setLoading] = useState(true)
   const [userId, setUserId] = useState<string | null>(null)
+  const [moduleResources, setModuleResources] = useState<{ resource: Resource; context_note: string | null }[]>([])
 
   const router = useRouter()
   const pathname = usePathname()
@@ -172,6 +174,19 @@ export default function ModulePage() {
           statut: "en_cours"
         }, { onConflict: "profil_id,module_id" })
         setStatut("en_cours")
+      }
+
+      const { data: resData } = await supabase
+        .from("module_resources")
+        .select("context_note, resources(*)")
+        .eq("module_id", modId)
+        .order("display_order")
+      if (resData) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setModuleResources(resData.map((r: any) => ({
+          resource: r.resources,
+          context_note: r.context_note,
+        })).filter((r: { resource: Resource | null }) => r.resource != null))
       }
 
       setLoading(false)
@@ -303,6 +318,26 @@ export default function ModulePage() {
         ) : (
           <div className="max-w-3xl mx-auto px-8 py-12">
             <p className="text-gray-500 text-center">Contenu en cours de préparation...</p>
+          </div>
+        )}
+
+        {/* ── Ressources utiles pour ce module ────────────────────────────── */}
+        {moduleResources.length > 0 && (
+          <div className="max-w-3xl mx-auto px-6 md:px-8 py-8 border-t border-gray-100 mt-4">
+            <h3 className="text-base font-bold text-[#1B2D5B] mb-4 flex items-center gap-2">
+              <span className="w-1 h-5 bg-[#3DBFA0] rounded-full inline-block flex-shrink-0" />
+              Ressources utiles pour ce module
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {moduleResources.map(mr => (
+                <ResourceCard
+                  key={mr.resource.id}
+                  resource={mr.resource}
+                  contextNote={mr.context_note}
+                  compact
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
