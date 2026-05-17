@@ -3,7 +3,7 @@
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
-type PageActive = "dashboard" | "institutions" | "formations" | "ressources" | "evaluations" | "demandes-demo" | "profil"
+type PageActive = "dashboard" | "institutions" | "formations" | "parcours" | "ressources" | "evaluations" | "demandes-demo" | "profil"
 
 type AdminSidebarProps = {
   pageActive: PageActive
@@ -21,6 +21,7 @@ export function AdminSidebar({ pageActive }: AdminSidebarProps) {
     { href: "/admin/dashboard", label: "Tableau de bord", id: "dashboard" },
     { href: "/admin/institutions", label: "Institutions", id: "institutions" },
     { href: "/admin/formations", label: "Formations", id: "formations" },
+    { href: "/admin/parcours", label: "Parcours complets", id: "parcours" },
     { href: "/admin/ressources", label: "Ressources", id: "ressources" },
     { href: "/admin/evaluations", label: "Évaluations", id: "evaluations" },
     { href: "/admin/demandes-demo", label: "Demandes de démo", id: "demandes-demo" },

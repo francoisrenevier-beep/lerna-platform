@@ -26,8 +26,6 @@ type FormationState = "nouveau" | "en_cours" | "termine"
 
 const SLUG_TO_DOMAINE: Record<string, string> = {
   "handicap": "Handicap",
-  "pedagogie-specialisee": "Pédagogie Spécialisée",
-  "protection-des-mineurs": "Protection des mineurs",
   "transversal": "Transversal",
 }
 
@@ -38,20 +36,6 @@ const DOMAINE_CONFIG: Record<string, { badgeBg: string; badgeText: string; gradF
     gradFrom: "#4338CA",
     gradTo: "#3730A3",
     headerBg: "#3730A3",
-  },
-  "Pédagogie Spécialisée": {
-    badgeBg: "#FFF7ED",
-    badgeText: "#C2410C",
-    gradFrom: "#EA580C",
-    gradTo: "#C2410C",
-    headerBg: "#C2410C",
-  },
-  "Protection des mineurs": {
-    badgeBg: "#FEF2F2",
-    badgeText: "#B91C1C",
-    gradFrom: "#DC2626",
-    gradTo: "#B91C1C",
-    headerBg: "#B91C1C",
   },
   "Transversal": {
     badgeBg: "#F1F5F9",
@@ -71,7 +55,13 @@ const THEMATIQUES = [
   "Législation et droits",
 ]
 
-const NIVEAUX = ["Niveau 1", "Niveau 2", "Niveau 3"]
+const NIVEAUX = ["Base", "Intermédiaire", "Confirmé"]
+
+const NIVEAU_TO_DB: Record<string, string> = {
+  "Base": "base",
+  "Intermédiaire": "intermediaire",
+  "Confirmé": "confirme",
+}
 
 // ─── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -111,43 +101,6 @@ function IllustrationHandicap() {
   )
 }
 
-function IllustrationPedagogie() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="dip" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FFF7ED" />
-          <stop offset="100%" stopColor="#FED7AA" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#dip)" />
-      <rect x="72" y="28" width="56" height="68" rx="4" fill="#EA580C" fillOpacity="0.15" />
-      <rect x="76" y="28" width="50" height="68" rx="3" fill="#EA580C" fillOpacity="0.2" />
-      <rect x="72" y="28" width="7" height="68" rx="3" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="44" width="32" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="53" width="26" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="62" width="32" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.4" />
-      <polygon points="136,22 139.5,32 150,32 141.5,38 144.5,48 136,42 127.5,48 130.5,38 122,32 132.5,32" fill="#EA580C" fillOpacity="0.6" />
-    </svg>
-  )
-}
-
-function IllustrationProtection() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="dipr" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FEF2F2" />
-          <stop offset="100%" stopColor="#FECACA" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#dipr)" />
-      <path d="M100 18 L132 31 L132 63 Q132 87 100 98 Q68 87 68 63 L68 31 Z" fill="#DC2626" fillOpacity="0.13" />
-      <path d="M100 25 L128 37 L128 63 Q128 84 100 92 Q72 84 72 63 L72 37 Z" fill="#DC2626" fillOpacity="0.18" />
-      <path d="M100 75 C100 75 80 63 80 52 C80 45 86 39 93 42 C96.5 43.5 100 47 100 47 C100 47 103.5 43.5 107 42 C114 39 120 45 120 52 C120 63 100 75 100 75Z" fill="#DC2626" fillOpacity="0.65" />
-    </svg>
-  )
-}
 
 function IllustrationTransversal() {
   return (
@@ -173,12 +126,8 @@ function IllustrationTransversal() {
 }
 
 function DomainIllustration({ domaine }: { domaine: string }) {
-  switch (domaine) {
-    case "Handicap": return <IllustrationHandicap />
-    case "Pédagogie Spécialisée": return <IllustrationPedagogie />
-    case "Protection des mineurs": return <IllustrationProtection />
-    default: return <IllustrationTransversal />
-  }
+  if (domaine === "Handicap") return <IllustrationHandicap />
+  return <IllustrationTransversal />
 }
 
 // ─── Skeleton ────────────────────────────────────────────────────────────────────
@@ -446,7 +395,7 @@ export default function DomainePage() {
   const filtered = formations.filter((f) => {
     if (search && !f.titre.toLowerCase().includes(search.toLowerCase())) return false
     if (filterThematique && f.thematique !== filterThematique) return false
-    if (filterNiveau && f.niveau !== filterNiveau) return false
+    if (filterNiveau && f.niveau !== NIVEAU_TO_DB[filterNiveau]) return false
     if (filterDuree) {
       const mins = f.duree_estimee_minutes || 0
       if (filterDuree === "Moins de 1h" && mins >= 60) return false

@@ -7,6 +7,12 @@ import { Sidebar } from "@/components/Sidebar"
 import { BottomNav } from "@/components/BottomNav"
 import { getCouleurEtiquette } from "@/lib/etiquettes"
 
+function normaliseDomaine(domaine: string | string[] | null | undefined): string | null {
+  if (!domaine) return null
+  if (Array.isArray(domaine)) return domaine[0] ?? null
+  return domaine
+}
+
 type FormationAvecProgression = {
   id: string
   titre: string
@@ -133,8 +139,8 @@ export default function MesFormationsPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-2">
                       {formation.domaine && (
-                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${getCouleurEtiquette("domaine", formation.domaine)}`}>
-                          {formation.domaine}
+                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${getCouleurEtiquette("domaine", normaliseDomaine(formation.domaine))}`}>
+                          {normaliseDomaine(formation.domaine)}
                         </span>
                       )}
                       {formation.thematique && (

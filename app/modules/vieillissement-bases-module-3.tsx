@@ -167,6 +167,17 @@ export function Module3VieillissementBases({ onValiderModule }: { onValiderModul
             ]} />
           </HighlightBox>
 
+          <HighlightBox label="Autisme et communication vieillissante — vigilances spécifiques" couleur="jaune">
+            <Texte>Avec l&apos;âge, les personnes autistes peuvent présenter une sensibilité sensorielle modifiée — accrue pour certaines, diminuée pour d&apos;autres — ce qui change la façon dont elles reçoivent les communications et les gestes de soin. Quelques ajustements importants :</Texte>
+            <Liste items={[
+              "Annoncer systématiquement votre présence et chaque geste avant de le faire — les surprises sont souvent source d'anxiété intense",
+              "Maintenir un environnement sensoriel stable : limiter les bruits forts, les lumières vives, les parfums intenses lors des moments de soin ou d'échange",
+              "Préserver les outils de communication installés de longue date : si la personne utilise des pictogrammes, un agenda visuel ou des objets de référence depuis des années, ces supports sont encore plus précieux avec l'avancée en âge",
+              "Ne pas chercher à réduire d'emblée des comportements répétitifs qui s'intensifient — ils peuvent signaler un inconfort physique ou émotionnel"
+            ]} />
+            <Texte>Rappel fondamental : une intensification des comportements autistiques n&apos;est jamais automatiquement &quot;due à l&apos;autisme&quot;. C&apos;est souvent un signal — douleur, anxiété, perturbation de l&apos;environnement — qui mérite d&apos;être investigué avant toute autre réponse.</Texte>
+          </HighlightBox>
+
           <HighlightBox label="Communication pendant les soins personnels" couleur="bleu">
             <Texte>Les moments de soins (toilette, habillage) peuvent être source de grande vulnérabilité. Pratiques essentielles :</Texte>
             <Liste items={[

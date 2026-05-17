@@ -54,8 +54,6 @@ type Profil = {
 
 const DOMAINE_CONFIG: Record<string, { badgeBg: string; badgeText: string; overlayColor: string }> = {
   "Handicap": { badgeBg: "#EEF2FF", badgeText: "#3730A3", overlayColor: "#1B2D5B" },
-  "Pédagogie Spécialisée": { badgeBg: "#FFF7ED", badgeText: "#C2410C", overlayColor: "#1B2D5B" },
-  "Protection des mineurs": { badgeBg: "#FEF2F2", badgeText: "#B91C1C", overlayColor: "#1B2D5B" },
   "Transversal": { badgeBg: "#F1F5F9", badgeText: "#475569", overlayColor: "#1B2D5B" },
 }
 
@@ -95,39 +93,6 @@ function HeroIllustration({ domaine }: { domaine: string | null }) {
       <line x1="436" y1="178" x2="436" y2="210" stroke="#4338CA" strokeWidth="5" strokeOpacity="0.35" strokeLinecap="round" />
       <circle cx="650" cy="80" r="50" fill="#4338CA" fillOpacity="0.05" />
       <circle cx="150" cy="200" r="70" fill="#4338CA" fillOpacity="0.04" />
-    </svg>
-  )
-  if (domaine === "Pédagogie Spécialisée") return (
-    <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="hero-p" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FFF7ED" />
-          <stop offset="100%" stopColor="#FED7AA" />
-        </linearGradient>
-      </defs>
-      <rect width="800" height="280" fill="url(#hero-p)" />
-      <rect x="310" y="50" width="180" height="200" rx="8" fill="#EA580C" fillOpacity="0.12" />
-      <rect x="320" y="50" width="168" height="200" rx="6" fill="#EA580C" fillOpacity="0.16" />
-      <rect x="310" y="50" width="22" height="200" rx="6" fill="#EA580C" fillOpacity="0.35" />
-      <rect x="340" y="90" width="130" height="8" rx="4" fill="#EA580C" fillOpacity="0.35" />
-      <rect x="340" y="112" width="105" height="8" rx="4" fill="#EA580C" fillOpacity="0.35" />
-      <rect x="340" y="134" width="130" height="8" rx="4" fill="#EA580C" fillOpacity="0.35" />
-      <rect x="340" y="156" width="90" height="8" rx="4" fill="#EA580C" fillOpacity="0.35" />
-      <polygon points="530,32 540,62 572,62 547,80 557,110 530,92 503,110 513,80 488,62 520,62" fill="#EA580C" fillOpacity="0.55" />
-    </svg>
-  )
-  if (domaine === "Protection des mineurs") return (
-    <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="hero-pr" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FEF2F2" />
-          <stop offset="100%" stopColor="#FECACA" />
-        </linearGradient>
-      </defs>
-      <rect width="800" height="280" fill="url(#hero-pr)" />
-      <path d="M400 20 L480 55 L480 150 Q480 230 400 260 Q320 230 320 150 L320 55 Z" fill="#DC2626" fillOpacity="0.1" />
-      <path d="M400 38 L468 70 L468 150 Q468 222 400 248 Q332 222 332 150 L332 70 Z" fill="#DC2626" fillOpacity="0.14" />
-      <path d="M400 190 C400 190 355 163 355 138 C355 124 365 114 378 118 C385 120 400 130 400 130 C400 130 415 120 422 118 C435 114 445 124 445 138 C445 163 400 190 400 190Z" fill="#DC2626" fillOpacity="0.6" />
     </svg>
   )
   return (

@@ -18,3 +18,4 @@ node_modules
 # workbox generated files (si next-pwa utilisé)
 /public/workbox-*.js
 /public/workbox-*.js.map
+.vercel

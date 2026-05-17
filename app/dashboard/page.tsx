@@ -102,16 +102,12 @@ function getFirstDomaine(domaine: string | string[] | null | undefined): string 
 // ── Domaine config ────────────────────────────────────────────────────────────
 
 const DOMAINE_CONFIG: Record<string, { slug: string; badgeBg: string; badgeText: string; gradFrom: string; gradTo: string }> = {
-  "Handicap":               { slug: "handicap",               badgeBg: "#EEF2FF", badgeText: "#3730A3", gradFrom: "#EEF2FF", gradTo: "#C7D2FE" },
-  "Pédagogie Spécialisée":  { slug: "pedagogie-specialisee",  badgeBg: "#FFF7ED", badgeText: "#C2410C", gradFrom: "#FFF7ED", gradTo: "#FED7AA" },
-  "Protection des mineurs": { slug: "protection-des-mineurs", badgeBg: "#FEF2F2", badgeText: "#B91C1C", gradFrom: "#FEF2F2", gradTo: "#FECACA" },
-  "Transversal":            { slug: "transversal",            badgeBg: "#F1F5F9", badgeText: "#475569", gradFrom: "#F1F5F9", gradTo: "#CBD5E1" },
+  "Handicap":    { slug: "handicap",    badgeBg: "#EEF2FF", badgeText: "#3730A3", gradFrom: "#EEF2FF", gradTo: "#C7D2FE" },
+  "Transversal": { slug: "transversal", badgeBg: "#F1F5F9", badgeText: "#475569", gradFrom: "#F1F5F9", gradTo: "#CBD5E1" },
 }
 
 const DOMAINES_ORDRE = [
   "Handicap",
-  "Pédagogie Spécialisée",
-  "Protection des mineurs",
   "Transversal",
 ] as const
 
@@ -126,27 +122,7 @@ function IllustrationHandicapSm() {
     </svg>
   )
 }
-function IllustrationPedagogieSm() {
-  return (
-    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="50" height="50" fill="#FFF7ED" rx="8" />
-      <rect x="15" y="10" width="20" height="28" rx="2" fill="#EA580C" fillOpacity="0.18" />
-      <rect x="15" y="10" width="3" height="28" rx="1" fill="#EA580C" fillOpacity="0.42" />
-      <rect x="21" y="17" width="11" height="2" rx="1" fill="#EA580C" fillOpacity="0.5" />
-      <rect x="21" y="22" width="9" height="2" rx="1" fill="#EA580C" fillOpacity="0.5" />
-      <rect x="21" y="27" width="11" height="2" rx="1" fill="#EA580C" fillOpacity="0.5" />
-    </svg>
-  )
-}
-function IllustrationProtectionSm() {
-  return (
-    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="50" height="50" fill="#FEF2F2" rx="8" />
-      <path d="M25 5 L41 11 L41 26 Q41 39 25 45 Q9 39 9 26 L9 11 Z" fill="#DC2626" fillOpacity="0.13" />
-      <path d="M25 31 C25 31 15 24 15 18 C15 13 20 10 23 12 C24.2 12.7 25 14 25 14 C25 14 25.8 12.7 27 12 C30 10 35 13 35 18 C35 24 25 31 25 31Z" fill="#DC2626" fillOpacity="0.62" />
-    </svg>
-  )
-}
+
 function IllustrationTransversalSm() {
   return (
     <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -164,12 +140,8 @@ function IllustrationTransversalSm() {
   )
 }
 function DomainIllustrationSm({ domaine }: { domaine: string | null }) {
-  switch (domaine) {
-    case "Handicap": return <IllustrationHandicapSm />
-    case "Pédagogie Spécialisée": return <IllustrationPedagogieSm />
-    case "Protection des mineurs": return <IllustrationProtectionSm />
-    default: return <IllustrationTransversalSm />
-  }
+  if (domaine === "Handicap") return <IllustrationHandicapSm />
+  return <IllustrationTransversalSm />
 }
 
 // ── SVG illustrations grandes (cartes formations) ─────────────────────────────
@@ -196,39 +168,6 @@ function IllustrationGrande({ domaine, uid }: { domaine: string | null; uid: str
       <circle cx="143" cy="126" r="15" fill="none" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.35" />
       <circle cx="143" cy="126" r="5" fill="#4338CA" fillOpacity="0.35" />
       <line x1="167" y1="90" x2="167" y2="112" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.3" strokeLinecap="round" />
-    </svg>
-  )
-
-  if (domaine === "Pédagogie Spécialisée") return (
-    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
-        </linearGradient>
-      </defs>
-      <rect width="300" height="160" fill={`url(#${gId})`} />
-      <rect x="102" y="28" width="76" height="100" rx="6" fill="#EA580C" fillOpacity="0.13" />
-      <rect x="107" y="28" width="68" height="100" rx="4" fill="#EA580C" fillOpacity="0.17" />
-      <rect x="102" y="28" width="10" height="100" rx="4" fill="#EA580C" fillOpacity="0.38" />
-      <rect x="119" y="52" width="44" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
-      <rect x="119" y="64" width="36" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
-      <rect x="119" y="76" width="44" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
-      <rect x="119" y="88" width="28" height="4" rx="2" fill="#EA580C" fillOpacity="0.38" />
-      <polygon points="200,20 204,33 218,33 207,41 211,54 200,46 189,54 193,41 182,33 196,33" fill="#EA580C" fillOpacity="0.55" />
-    </svg>
-  )
-
-  if (domaine === "Protection des mineurs") return (
-    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
-        </linearGradient>
-      </defs>
-      <rect width="300" height="160" fill={`url(#${gId})`} />
-      <path d="M150 18 L192 34 L192 80 Q192 118 150 132 Q108 118 108 80 L108 34 Z" fill="#DC2626" fillOpacity="0.11" />
-      <path d="M150 26 L186 41 L186 80 Q186 115 150 127 Q114 115 114 80 L114 41 Z" fill="#DC2626" fillOpacity="0.15" />
-      <path d="M150 102 C150 102 120 84 120 66 C120 56 128 48 138 52 C143 54 150 60 150 60 C150 60 157 54 162 52 C172 48 180 56 180 66 C180 84 150 102 150 102Z" fill="#DC2626" fillOpacity="0.6" />
     </svg>
   )
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
@@ -23,6 +23,7 @@ type Formation = {
   public_cible: string | null
   ordre: number | null
   est_a_venir: boolean
+  est_nouveau: boolean
   image_url: string | null
 }
 
@@ -36,7 +37,7 @@ type ParcoursGroup = {
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
-const DOMAINES = ["Handicap", "Pédagogie Spécialisée", "Protection des mineurs", "Transversal"] as const
+const DOMAINES = ["Handicap", "Transversal"] as const
 
 const THEMATIQUES = [
   "Accompagnement",
@@ -47,7 +48,20 @@ const THEMATIQUES = [
   "Législation et droits",
 ]
 
-const NIVEAUX = ["Niveau 1", "Niveau 2", "Niveau 3"]
+const NIVEAUX = ["Base", "Intermédiaire", "Confirmé"]
+
+const NIVEAU_TO_DB: Record<string, string> = {
+  "Base": "base",
+  "Intermédiaire": "intermediaire",
+  "Confirmé": "confirme",
+}
+
+const NIVEAU_LABELS: Record<string, string> = {
+  "base": "Base",
+  "intermediaire": "Intermédiaire",
+  "confirme": "Confirmé",
+  "tous": "Tous niveaux",
+}
 
 interface DomaineConfig {
   slug: string
@@ -66,22 +80,6 @@ const DOMAINE_CONFIG: Record<string, DomaineConfig> = {
     gradFrom: "#EEF2FF",
     gradTo: "#C7D2FE",
     iconColor: "#4338CA",
-  },
-  "Pédagogie Spécialisée": {
-    slug: "pedagogie-specialisee",
-    badgeBg: "#FFF7ED",
-    badgeText: "#C2410C",
-    gradFrom: "#FFF7ED",
-    gradTo: "#FED7AA",
-    iconColor: "#EA580C",
-  },
-  "Protection des mineurs": {
-    slug: "protection-des-mineurs",
-    badgeBg: "#FEF2F2",
-    badgeText: "#B91C1C",
-    gradFrom: "#FEF2F2",
-    gradTo: "#FECACA",
-    iconColor: "#DC2626",
   },
   "Transversal": {
     slug: "transversal",
@@ -137,45 +135,6 @@ function IllustrationHandicap() {
   )
 }
 
-function IllustrationPedagogie() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="ip" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FFF7ED" />
-          <stop offset="100%" stopColor="#FED7AA" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#ip)" />
-      <rect x="72" y="28" width="56" height="68" rx="4" fill="#EA580C" fillOpacity="0.15" />
-      <rect x="76" y="28" width="50" height="68" rx="3" fill="#EA580C" fillOpacity="0.2" />
-      <rect x="72" y="28" width="7" height="68" rx="3" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="44" width="32" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="53" width="26" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="62" width="32" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.4" />
-      <rect x="85" y="71" width="20" height="3" rx="1.5" fill="#EA580C" fillOpacity="0.4" />
-      <polygon points="136,22 139.5,32 150,32 141.5,38 144.5,48 136,42 127.5,48 130.5,38 122,32 132.5,32" fill="#EA580C" fillOpacity="0.6" />
-    </svg>
-  )
-}
-
-function IllustrationProtection() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="ipr" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FEF2F2" />
-          <stop offset="100%" stopColor="#FECACA" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#ipr)" />
-      <path d="M100 18 L132 31 L132 63 Q132 87 100 98 Q68 87 68 63 L68 31 Z" fill="#DC2626" fillOpacity="0.13" />
-      <path d="M100 25 L128 37 L128 63 Q128 84 100 92 Q72 84 72 63 L72 37 Z" fill="#DC2626" fillOpacity="0.18" />
-      <path d="M100 75 C100 75 80 63 80 52 C80 45 86 39 93 42 C96.5 43.5 100 47 100 47 C100 47 103.5 43.5 107 42 C114 39 120 45 120 52 C120 63 100 75 100 75Z" fill="#DC2626" fillOpacity="0.65" />
-    </svg>
-  )
-}
-
 function IllustrationTransversal() {
   return (
     <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -202,13 +161,34 @@ function IllustrationTransversal() {
   )
 }
 
+function IllustrationParcours() {
+  return (
+    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="ipc" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#EEF9F6" />
+          <stop offset="100%" stopColor="#A7E8D8" />
+        </linearGradient>
+      </defs>
+      <rect width="200" height="120" fill="url(#ipc)" />
+      <circle cx="40" cy="60" r="12" fill="#3DBFA0" fillOpacity="0.5" />
+      <circle cx="40" cy="60" r="6" fill="#3DBFA0" fillOpacity="0.8" />
+      <line x1="52" y1="60" x2="78" y2="60" stroke="#3DBFA0" strokeWidth="2" strokeOpacity="0.5" strokeDasharray="4 3" />
+      <circle cx="90" cy="60" r="12" fill="#3DBFA0" fillOpacity="0.5" />
+      <circle cx="90" cy="60" r="6" fill="#3DBFA0" fillOpacity="0.8" />
+      <line x1="102" y1="60" x2="128" y2="60" stroke="#3DBFA0" strokeWidth="2" strokeOpacity="0.5" strokeDasharray="4 3" />
+      <circle cx="140" cy="60" r="12" fill="#3DBFA0" fillOpacity="0.5" />
+      <circle cx="140" cy="60" r="6" fill="#3DBFA0" fillOpacity="0.8" />
+      <line x1="152" y1="60" x2="168" y2="60" stroke="#3DBFA0" strokeWidth="2" strokeOpacity="0.5" strokeDasharray="4 3" />
+      <circle cx="178" cy="60" r="10" fill="#1B2D5B" fillOpacity="0.4" />
+      <path d="M174 60 L178 64 L184 56" stroke="#1B2D5B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.7" fill="none" />
+    </svg>
+  )
+}
+
 function DomainIllustration({ domaine }: { domaine: string | null }) {
-  switch (domaine) {
-    case "Handicap": return <IllustrationHandicap />
-    case "Pédagogie Spécialisée": return <IllustrationPedagogie />
-    case "Protection des mineurs": return <IllustrationProtection />
-    default: return <IllustrationTransversal />
-  }
+  if (domaine === "Handicap") return <IllustrationHandicap />
+  return <IllustrationTransversal />
 }
 
 // ─── Skeleton ───────────────────────────────────────────────────────────────────
@@ -270,7 +250,7 @@ function FormationCard({
             {firstDomaine}
           </span>
         )}
-        {state === "nouveau" && !isAVenir && (
+        {formation.est_nouveau && !isAVenir && (
           <span className="absolute top-3 right-3 text-xs font-bold bg-white text-[#3DBFA0] px-2.5 py-1 rounded-full shadow-sm">
             Nouveau
           </span>
@@ -318,7 +298,7 @@ function FormationCard({
         <div className="flex items-center justify-between mt-auto pt-2">
           <div className="flex items-center gap-1.5 text-xs text-gray-400">
             <span>{dureeFormat(formation.duree_estimee_minutes)}</span>
-            {formation.niveau && <span>· {formation.niveau}</span>}
+            {formation.niveau && <span>· {NIVEAU_LABELS[formation.niveau] || formation.niveau}</span>}
           </div>
           {!isAVenir && (
             <span
@@ -360,65 +340,6 @@ function FormationCard({
   )
 }
 
-// ─── Parcours Card ──────────────────────────────────────────────────────────────
-
-function ParcoursCard({ group }: { group: ParcoursGroup }) {
-  const totalMinutes = group.formations.reduce((s, f) => s + (f.duree_estimee_minutes || 0), 0)
-  const sorted = [...group.formations].sort((a, b) => (a.parcours_ordre || 0) - (b.parcours_ordre || 0))
-  const firstDomaine = getFirstDomaine(sorted[0]?.domaine)
-  const cfg = firstDomaine ? DOMAINE_CONFIG[firstDomaine] : null
-  const firstAvailable = sorted.find((f) => !f.est_a_venir)
-
-  return (
-    <div className="bg-white rounded-2xl shadow-sm border-l-4 border-[#1B2D5B] p-4 md:p-6 flex flex-col sm:flex-row gap-4 md:gap-5">
-      <div className="flex-shrink-0 w-16 h-16 sm:w-24 sm:h-24 rounded-xl overflow-hidden self-start sm:self-center">
-        <DomainIllustration domaine={firstDomaine} />
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 mb-3 flex-wrap">
-          <span className="inline-flex items-center text-xs font-bold text-white bg-[#3DBFA0] px-3 py-1 rounded-full">
-            PARCOURS
-          </span>
-          {cfg && firstDomaine && (
-            <span
-              className="text-xs font-semibold px-2.5 py-1 rounded-full"
-              style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText }}
-            >
-              {firstDomaine}
-            </span>
-          )}
-          <span className="ml-auto text-xs text-gray-400 flex-shrink-0">{dureeFormat(totalMinutes)} au total</span>
-        </div>
-        <h3 className="text-lg font-bold text-[#1B2D5B] mb-3">{group.nom}</h3>
-        <div className="space-y-1.5 mb-4">
-          {sorted.map((f, i) => (
-            <div key={f.id} className="flex items-center gap-2">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#1B2D5B]/10 text-[#1B2D5B] text-xs font-bold flex items-center justify-center">
-                {i + 1}
-              </span>
-              <span className="text-sm text-[#1B2D5B] truncate flex-1">{f.titre}</span>
-              {f.est_a_venir && (
-                <span className="text-xs text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-full flex-shrink-0">
-                  À venir
-                </span>
-              )}
-              <span className="text-xs text-gray-400 flex-shrink-0">{dureeFormat(f.duree_estimee_minutes)}</span>
-            </div>
-          ))}
-        </div>
-        {firstAvailable && (
-          <a
-            href={`/catalogue/${firstAvailable.slug}`}
-            className="inline-block text-sm font-semibold text-white bg-[#1B2D5B] px-4 py-2 rounded-lg hover:bg-[#1B2D5B]/90 transition-colors"
-          >
-            Découvrir →
-          </a>
-        )}
-      </div>
-    </div>
-  )
-}
-
 // ─── Domain Icon ────────────────────────────────────────────────────────────────
 
 function DomainIcon({ domaine, color }: { domaine: string; color: string }) {
@@ -429,19 +350,6 @@ function DomainIcon({ domaine, color }: { domaine: string; color: string }) {
       <path d="M10 9h4l1 7h-2l-1-4H10" />
       <path d="M8 21a4 4 0 0 1 4-4" />
       <circle cx="14" cy="20" r="2" />
-    </svg>
-  )
-  if (domaine === "Pédagogie Spécialisée") return (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" style={style} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-      <polygon points="12,7 13,10 16,10 13.5,12 14.5,15 12,13 9.5,15 10.5,12 8,10 11,10" strokeWidth="1.5" />
-    </svg>
-  )
-  if (domaine === "Protection des mineurs") return (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" style={style} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      <path d="M12 17c0 0-4-2.5-4-6 0-2 1.5-3.5 3.5-3C12.3 8.2 12 9 12 9s-.3-.8.5-1C14.5 7.5 16 9 16 11c0 3.5-4 6-4 6z" />
     </svg>
   )
   return (
@@ -477,7 +385,40 @@ function DomainSection({
   showAll: boolean
 }) {
   const cfg = DOMAINE_CONFIG[domaine]
-  const displayed = showAll ? formations : formations.slice(0, 3)
+  const [expanded, setExpanded] = useState(false)
+  const extraRef = useRef<HTMLDivElement>(null)
+
+  const isExpanded = showAll || expanded
+  const initial = formations.slice(0, 3)
+  const extra = formations.slice(3)
+  const hasMore = !isExpanded && extra.length > 0
+
+  const handleShowAll = () => {
+    setExpanded(true)
+    setTimeout(() => {
+      extraRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, 50)
+  }
+
+  const cardFor = (f: Formation) => {
+    const hasAttestation = attestationsSet.has(f.id)
+    const progressTermines = progressMap.get(f.id) || 0
+    const totalMods = moduleCounts.get(f.id) || 0
+    const state: FormationState = hasAttestation
+      ? "termine"
+      : progressTermines > 0
+      ? "en_cours"
+      : "nouveau"
+    return (
+      <FormationCard
+        key={f.id}
+        formation={f}
+        state={state}
+        nbTermines={progressTermines}
+        nbTotal={totalMods}
+      />
+    )
+  }
 
   return (
     <section>
@@ -493,46 +434,34 @@ function DomainSection({
             {formations.length} formation{formations.length !== 1 ? "s" : ""}
           </p>
         </div>
-        {!showAll && formations.length > 3 && cfg && (
-          <a
-            href={`/catalogue/domaine/${cfg.slug}`}
+        {hasMore && (
+          <button
+            onClick={handleShowAll}
             className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block"
           >
             Voir toutes →
-          </a>
+          </button>
         )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {displayed.map((f) => {
-          const hasAttestation = attestationsSet.has(f.id)
-          const progressTermines = progressMap.get(f.id) || 0
-          const totalMods = moduleCounts.get(f.id) || 0
-          const state: FormationState = hasAttestation
-            ? "termine"
-            : progressTermines > 0
-            ? "en_cours"
-            : "nouveau"
-          return (
-            <FormationCard
-              key={f.id}
-              formation={f}
-              state={state}
-              nbTermines={progressTermines}
-              nbTotal={totalMods}
-            />
-          )
-        })}
+        {initial.map(cardFor)}
       </div>
 
-      {!showAll && formations.length > 3 && cfg && (
+      {isExpanded && extra.length > 0 && (
+        <div ref={extraRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+          {extra.map(cardFor)}
+        </div>
+      )}
+
+      {hasMore && (
         <div className="mt-6 text-center">
-          <a
-            href={`/catalogue/domaine/${cfg.slug}`}
+          <button
+            onClick={handleShowAll}
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#1B2D5B] hover:text-[#3DBFA0] transition-colors border border-[#1B2D5B]/20 hover:border-[#3DBFA0] px-6 py-2.5 rounded-full"
           >
             Voir toutes les formations — {domaine} →
-          </a>
+          </button>
         </div>
       )}
     </section>
@@ -595,6 +524,95 @@ function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }
   )
 }
 
+// ─── Types Parcours Catalogue ────────────────────────────────────────────────────
+
+type ParcoursCatalogue = {
+  id: string
+  titre: string
+  slug: string
+  description_courte: string | null
+  image_url: string | null
+  nb_formations: number
+  duree_total: number
+  nb_completees: number
+}
+
+// ─── Parcours Catalogue Card ─────────────────────────────────────────────────────
+
+function ParcoursCatalogueCard({ p }: { p: ParcoursCatalogue }) {
+  const pct = p.nb_formations > 0 ? Math.round((p.nb_completees / p.nb_formations) * 100) : 0
+  return (
+    <a
+      href={`/parcours/${p.slug}`}
+      className="group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
+    >
+      <div className="h-44 flex-shrink-0 overflow-hidden relative">
+        {p.image_url ? (
+          <img src={p.image_url} alt={p.titre} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        ) : (
+          <IllustrationParcours />
+        )}
+        <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-[#1B2D5B] text-white px-2.5 py-1 rounded-full">
+          Parcours complet
+        </span>
+      </div>
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-base font-bold text-[#1B2D5B] leading-snug mb-2 group-hover:text-[#3DBFA0] transition-colors line-clamp-2">
+          {p.titre}
+        </h3>
+        {p.description_courte && (
+          <p className="text-sm text-gray-500 line-clamp-2 mb-3">{p.description_courte}</p>
+        )}
+        <div className="flex items-center gap-3 text-xs text-gray-400 mb-4">
+          <span>{p.nb_formations} formation{p.nb_formations !== 1 ? "s" : ""}</span>
+          <span>·</span>
+          <span>{dureeFormat(p.duree_total)}</span>
+        </div>
+        {p.nb_completees > 0 && (
+          <div className="mb-3">
+            <div className="flex justify-between text-xs mb-1">
+              <span className="text-gray-400">{p.nb_completees}/{p.nb_formations} terminées</span>
+              <span className="text-[#3DBFA0] font-medium">{pct}%</span>
+            </div>
+            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-[#3DBFA0] rounded-full" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        )}
+        <div className="mt-auto">
+          <span className={`inline-block text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
+            p.nb_completees === p.nb_formations && p.nb_formations > 0
+              ? "bg-gray-100 text-gray-500"
+              : p.nb_completees > 0
+              ? "bg-[#1B2D5B] text-white"
+              : "bg-[#3DBFA0] text-white"
+          }`}>
+            {p.nb_completees === p.nb_formations && p.nb_formations > 0
+              ? "✓ Terminé"
+              : p.nb_completees > 0
+              ? "Continuer →"
+              : "Découvrir →"}
+          </span>
+        </div>
+      </div>
+    </a>
+  )
+}
+
+// ─── Parcours Section Header ─────────────────────────────────────────────────────
+
+function ParcoursSectionIcon({ color }: { color: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className="w-5 h-5" style={{ color }} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="5" cy="12" r="2" />
+      <circle cx="12" cy="12" r="2" />
+      <circle cx="19" cy="12" r="2" />
+      <line x1="7" y1="12" x2="10" y2="12" />
+      <line x1="14" y1="12" x2="17" y2="12" />
+    </svg>
+  )
+}
+
 // ─── Main Page ───────────────────────────────────────────────────────────────────
 
 export default function CataloguePage() {
@@ -603,12 +621,16 @@ export default function CataloguePage() {
   const [attestationsSet, setAttestationsSet] = useState<Set<string>>(new Set())
   const [moduleCounts, setModuleCounts] = useState<Map<string, number>>(new Map())
   const [loading, setLoading] = useState(true)
+  const [userId, setUserId] = useState<string | null>(null)
+  const [parcoursListe, setParcoursListe] = useState<ParcoursCatalogue[]>([])
+  const [parcoursLoading, setParcoursLoading] = useState(false)
 
   const [search, setSearch] = useState("")
   const [filterDomaine, setFilterDomaine] = useState("")
   const [filterThematique, setFilterThematique] = useState("")
   const [filterNiveau, setFilterNiveau] = useState("")
   const [filterDuree, setFilterDuree] = useState("")
+  const [filterType, setFilterType] = useState("")
 
   const domaineRefs = useRef<Record<string, HTMLDivElement | null>>({})
   const router = useRouter()
@@ -622,13 +644,14 @@ export default function CataloguePage() {
         router.push("/connexion")
         return
       }
+      setUserId(user.id)
 
       const [{ data: forms }, { data: progs }, { data: attests }, { data: mods }] =
         await Promise.all([
           supabase
             .from("formations")
             .select(
-              "id, titre, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir, image_url"
+              "id, titre, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir, est_nouveau, image_url"
             )
             .eq("est_privee", false)
             .or("est_publie.eq.true,est_a_venir.eq.true")
@@ -666,9 +689,41 @@ export default function CataloguePage() {
       setModuleCounts(mc)
 
       setLoading(false)
+
+      // Charger les parcours en parallèle
+      chargerParcours(user.id)
     }
     getData()
   }, [router])
+
+  const chargerParcours = async (uid: string) => {
+    setParcoursLoading(true)
+    const { data: pList } = await supabase
+      .from("parcours")
+      .select("id, titre, slug, description_courte, image_url")
+      .eq("est_publie", true)
+      .order("created_at", { ascending: false })
+
+    if (!pList) { setParcoursLoading(false); return }
+
+    const { data: attests } = await supabase.from("attestations").select("formation_id").eq("profil_id", uid)
+    const attestSet = new Set(attests?.map((a: any) => a.formation_id) || [])
+
+    const enrichis = await Promise.all(pList.map(async (p) => {
+      const { data: pf } = await supabase
+        .from("parcours_formations")
+        .select("formation_id, formations(duree_estimee_minutes)")
+        .eq("parcours_id", p.id)
+
+      const nb_formations = pf?.length || 0
+      const duree_total = (pf || []).reduce((s: number, f: any) => s + (f.formations?.duree_estimee_minutes || 0), 0)
+      const nb_completees = (pf || []).filter((f: any) => attestSet.has(f.formation_id)).length
+      return { ...p, nb_formations, duree_total, nb_completees } as ParcoursCatalogue
+    }))
+
+    setParcoursListe(enrichis)
+    setParcoursLoading(false)
+  }
 
   // Scroll to domain section when filter changes
   useEffect(() => {
@@ -679,13 +734,14 @@ export default function CataloguePage() {
     }
   }, [filterDomaine])
 
-  const hasFilters = !!(filterDomaine || filterThematique || filterNiveau || filterDuree || search)
+  const hasFilters = !!(filterDomaine || filterThematique || filterNiveau || filterDuree || filterType || search)
 
   const clearFilters = () => {
     setFilterDomaine("")
     setFilterThematique("")
     setFilterNiveau("")
     setFilterDuree("")
+    setFilterType("")
     setSearch("")
   }
 
@@ -702,7 +758,7 @@ export default function CataloguePage() {
       if (!arr.includes(filterDomaine)) return false
     }
     if (filterThematique && f.thematique !== filterThematique) return false
-    if (filterNiveau && f.niveau !== filterNiveau) return false
+    if (filterNiveau && f.niveau !== NIVEAU_TO_DB[filterNiveau]) return false
     if (filterDuree) {
       const mins = f.duree_estimee_minutes || 0
       if (filterDuree === "Moins de 1h" && mins >= 60) return false
@@ -712,24 +768,6 @@ export default function CataloguePage() {
     return true
   })
 
-  // Build parcours groups
-  const parcoursMap = new Map<string, ParcoursGroup>()
-  for (const f of filtered) {
-    if (f.parcours_id) {
-      const existing = parcoursMap.get(f.parcours_id)
-      if (existing) {
-        existing.formations.push(f)
-      } else {
-        parcoursMap.set(f.parcours_id, {
-          id: f.parcours_id,
-          nom: f.parcours_nom || f.parcours_id,
-          formations: [f],
-        })
-      }
-    }
-  }
-  const parcoursGroups = Array.from(parcoursMap.values())
-
   // Formations by domain
   const formationsByDomaine = (domaine: string) =>
     filtered.filter((f) => getDomaineArray(f.domaine).includes(domaine))
@@ -737,6 +775,9 @@ export default function CataloguePage() {
   const domainesAffichees = DOMAINES.filter((d) => formationsByDomaine(d).length > 0)
 
   const totalCount = new Set(filtered.map((f) => f.id)).size
+
+  const showFormations = filterType === "" || filterType === "Formation"
+  const showParcours = filterType === "" || filterType === "Parcours complet"
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
@@ -766,12 +807,19 @@ export default function CataloguePage() {
           </div>
           <p className="text-white/60 text-sm text-center mt-3">
             {totalCount} formation{totalCount !== 1 ? "s" : ""} disponible{totalCount !== 1 ? "s" : ""}
+            {parcoursListe.length > 0 && ` · ${parcoursListe.length} parcours complet${parcoursListe.length !== 1 ? "s" : ""}`}
           </p>
         </div>
 
         {/* ── Sticky filter bar ────────────────────────────────────────────────── */}
         <div className="sticky top-0 z-30 bg-white border-b border-gray-100 shadow-sm px-4 md:px-8 py-3">
           <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:items-center md:gap-3">
+            <FilterDropdown
+              label="Type"
+              options={["Formation", "Parcours complet"]}
+              value={filterType}
+              onChange={setFilterType}
+            />
             <FilterDropdown
               label="Domaine"
               options={[...DOMAINES]}
@@ -805,6 +853,7 @@ export default function CataloguePage() {
               </button>
             )}
             <div className="col-span-2 md:col-auto flex items-center gap-2 flex-wrap md:ml-auto">
+              {filterType && <FilterChip label={filterType} onRemove={() => setFilterType("")} />}
               {filterDomaine && <FilterChip label={filterDomaine} onRemove={() => setFilterDomaine("")} />}
               {filterThematique && <FilterChip label={filterThematique} onRemove={() => setFilterThematique("")} />}
               {filterNiveau && <FilterChip label={filterNiveau} onRemove={() => setFilterNiveau("")} />}
@@ -815,74 +864,157 @@ export default function CataloguePage() {
 
         {/* ── Main content ─────────────────────────────────────────────────────── */}
         <main className="flex-1 px-4 md:px-8 py-6 md:py-10 space-y-10 md:space-y-14">
-          {loading ? (
-            <div className="space-y-10 md:space-y-14">
-              <div>
-                <div className="h-7 bg-gray-100 rounded w-48 mb-6 animate-pulse" />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+
+          {/* ── Formations par domaine ───────────────────────────────────────── */}
+          {showFormations && (
+            loading ? (
+              <>
+                <div>
+                  <div className="h-7 bg-gray-100 rounded w-48 mb-6 animate-pulse" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <div className="h-7 bg-gray-100 rounded w-48 mb-6 animate-pulse" />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+                <div>
+                  <div className="h-7 bg-gray-100 rounded w-48 mb-6 animate-pulse" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ) : (
-            <>
-              {/* Parcours section */}
-              {parcoursGroups.length > 0 && (
-                <section>
-                  <h2 className="text-xl font-bold text-[#1B2D5B] mb-5">Parcours de formation</h2>
-                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-                    {parcoursGroups.map((group) => (
-                      <ParcoursCard key={group.id} group={group} />
+              </>
+            ) : (
+              <>
+                {domainesAffichees.map((domaine) => {
+                  const domForms = formationsByDomaine(domaine)
+                  return (
+                    <div
+                      key={domaine}
+                      ref={(el: HTMLDivElement | null) => {
+                        domaineRefs.current[domaine] = el
+                      }}
+                    >
+                      <DomainSection
+                        domaine={domaine}
+                        formations={domForms}
+                        progressMap={progressMap}
+                        attestationsSet={attestationsSet}
+                        moduleCounts={moduleCounts}
+                        showAll={!!filterDomaine}
+                      />
+                    </div>
+                  )
+                })}
+
+                {filtered.length === 0 && (
+                  <div className="flex flex-col items-center justify-center py-24 text-center">
+                    <svg className="w-12 h-12 text-gray-200 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <p className="text-gray-400 text-lg font-medium">Aucune formation trouvée</p>
+                    <p className="text-gray-300 text-sm mt-1">Essayez d'autres filtres ou termes de recherche</p>
+                    <button
+                      onClick={clearFilters}
+                      className="mt-4 text-[#3DBFA0] hover:underline text-sm"
+                    >
+                      Effacer tous les filtres
+                    </button>
+                  </div>
+                )}
+              </>
+            )
+          )}
+
+          {/* ── Section Parcours complets ────────────────────────────────────── */}
+          {showParcours && (() => {
+            // Parcours depuis la table dédiée (priorité)
+            const hasTableParcours = !parcoursLoading && parcoursListe.length > 0
+
+            // Fallback : grouper les formations par parcours_nom quand la table est vide
+            const groupesFormations: ParcoursGroup[] = hasTableParcours ? [] : (() => {
+              const map: Record<string, ParcoursGroup> = {}
+              for (const f of formations) {
+                if (!f.parcours_id || !f.parcours_nom) continue
+                if (!map[f.parcours_id]) map[f.parcours_id] = { id: f.parcours_id, nom: f.parcours_nom, formations: [] }
+                map[f.parcours_id].formations.push(f)
+              }
+              return Object.values(map).map(g => ({
+                ...g,
+                formations: g.formations.sort((a, b) => (a.parcours_ordre || 0) - (b.parcours_ordre || 0)),
+              }))
+            })()
+
+            const totalParcours = hasTableParcours ? parcoursListe.length : groupesFormations.length
+
+            const cardForFormation = (f: Formation) => {
+              const hasAttestation = attestationsSet.has(f.id)
+              const progressTermines = progressMap.get(f.id) || 0
+              const totalMods = moduleCounts.get(f.id) || 0
+              const state: FormationState = hasAttestation ? "termine" : progressTermines > 0 ? "en_cours" : "nouveau"
+              return (
+                <FormationCard
+                  key={f.id}
+                  formation={f}
+                  state={state}
+                  nbTermines={progressTermines}
+                  nbTotal={totalMods}
+                />
+              )
+            }
+
+            return (
+              <section>
+                <div className="flex items-end justify-between mb-6">
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <div className="p-2 rounded-xl bg-[#EEF9F6]">
+                        <ParcoursSectionIcon color="#0f766e" />
+                      </div>
+                      <h2 className="text-xl font-bold text-[#1B2D5B]">Parcours complets</h2>
+                    </div>
+                    <p className="text-sm text-gray-500 ml-11">
+                      {parcoursLoading
+                        ? "Chargement…"
+                        : `${totalParcours} parcours disponible${totalParcours !== 1 ? "s" : ""}`}
+                    </p>
+                  </div>
+                </div>
+
+                {parcoursLoading ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {[1, 2, 3].map(i => <SkeletonCard key={i} />)}
+                  </div>
+                ) : hasTableParcours ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {parcoursListe.map(p => <ParcoursCatalogueCard key={p.id} p={p} />)}
+                  </div>
+                ) : groupesFormations.length > 0 ? (
+                  <div className="space-y-10">
+                    {groupesFormations.map(groupe => (
+                      <div key={groupe.id}>
+                        <div className="flex items-center gap-2 mb-4">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest bg-[#1B2D5B] text-white px-3 py-1.5 rounded-full">
+                            Parcours complet
+                          </span>
+                          <h3 className="text-lg font-bold text-[#1B2D5B]">{groupe.nom}</h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                          {groupe.formations.map(cardForFormation)}
+                        </div>
+                      </div>
                     ))}
                   </div>
-                </section>
-              )}
-
-              {/* Domain sections */}
-              {domainesAffichees.map((domaine) => {
-                const domForms = formationsByDomaine(domaine)
-                return (
-                  <div
-                    key={domaine}
-                    ref={(el: HTMLDivElement | null) => {
-                      domaineRefs.current[domaine] = el
-                    }}
-                  >
-                    <DomainSection
-                      domaine={domaine}
-                      formations={domForms}
-                      progressMap={progressMap}
-                      attestationsSet={attestationsSet}
-                      moduleCounts={moduleCounts}
-                      showAll={!!filterDomaine}
-                    />
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-16 text-center bg-white rounded-2xl border border-gray-100">
+                    <svg className="w-10 h-10 text-gray-200 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <p className="text-gray-400 font-medium">Aucun parcours disponible</p>
+                    <p className="text-gray-300 text-sm mt-1">Les parcours complets seront bientôt disponibles</p>
                   </div>
-                )
-              })}
-
-              {filtered.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-24 text-center">
-                  <svg className="w-12 h-12 text-gray-200 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                  <p className="text-gray-400 text-lg font-medium">Aucune formation trouvée</p>
-                  <p className="text-gray-300 text-sm mt-1">Essayez d'autres filtres ou termes de recherche</p>
-                  <button
-                    onClick={clearFilters}
-                    className="mt-4 text-[#3DBFA0] hover:underline text-sm"
-                  >
-                    Effacer tous les filtres
-                  </button>
-                </div>
-              )}
-            </>
-          )}
+                )}
+              </section>
+            )
+          })()}
         </main>
       </div>
       <BottomNav pageActive="catalogue" />

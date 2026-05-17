@@ -1,14 +1,8 @@
 type EtiquetteType = "domaine" | "thematique" | "public_cible"
 
 const couleursDomaine: Record<string, string> = {
-  "Handicap":                  "bg-[#EEF2FF] text-[#3730A3]",
-  "Pédagogie Spécialisée":     "bg-[#FFF7ED] text-[#C2410C]",
-  "Protection des mineurs":    "bg-[#FEF2F2] text-[#B91C1C]",
-  "Transversal":               "bg-[#F1F5F9] text-[#475569]",
-  // Anciens noms — rétrocompatibilité
-  "Éducation spécialisée":     "bg-[#FFF7ED] text-[#C2410C]",
-  "Protection de l'enfance":   "bg-[#FEF2F2] text-[#B91C1C]",
-  "Accompagnement social":     "bg-[#F0FDF4] text-[#15803D]",
+  "Handicap":    "bg-[#EEF2FF] text-[#3730A3]",
+  "Transversal": "bg-[#F1F5F9] text-[#475569]",
 }
 
 const couleursThematique: Record<string, string> = {

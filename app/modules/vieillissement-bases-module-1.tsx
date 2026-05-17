@@ -168,7 +168,9 @@ export function Module1VieillissementBases({ onValiderModule }: { onValiderModul
                   "Paralysie cérébrale",
                   "Lésions médullaires",
                   "Polyhandicap",
-                  "Traumatisme crânien"
+                  "Traumatisme crânien",
+                  "Trouble du spectre autistique",
+                  "Déficience intellectuelle (hors trisomie 21)"
                 ]
               },
               {
@@ -178,7 +180,9 @@ export function Module1VieillissementBases({ onValiderModule }: { onValiderModul
                   "Dégradation motrice dès 35-45 ans",
                   "Complications secondaires cumulées",
                   "Fragilité sanitaire croissante",
-                  "Pathologies neurodégénératives"
+                  "Pathologies neurodégénératives",
+                  "Perte du masquage, déclin cognitif, dépression",
+                  "Risque de démence augmenté, comorbidités psychiatriques"
                 ]
               },
               {
@@ -188,7 +192,9 @@ export function Module1VieillissementBases({ onValiderModule }: { onValiderModul
                   "Douleurs articulaires, fatigue accrue",
                   "Infections urinaires, apnées du sommeil",
                   "Troubles déglutition, crises épileptiques",
-                  "Déclin cognitif à ne pas attribuer aux séquelles"
+                  "Déclin cognitif à ne pas attribuer aux séquelles",
+                  "Comportements inhabituels, hypersensibilité accrue, épuisement visible",
+                  "Déficits sensoriels non détectés, douleur non verbalisée, épilepsie changeante"
                 ]
               }
             ]}
@@ -198,6 +204,20 @@ export function Module1VieillissementBases({ onValiderModule }: { onValiderModul
 
           <HighlightBox label="Focus trisomie 21 — une vigilance dès 40 ans" couleur="vert">
             <Texte>Presque toutes les personnes trisomiques développent après 40 ans des modifications anatomiques caractéristiques de la maladie d&apos;Alzheimer. La prévalence clinique dépasse 80% après 60 ans. Il est recommandé d&apos;établir un <strong>bilan cognitif de référence dès 40 ans</strong> avec un outil adapté (CAMCOG-DS en français) et de le renouveler régulièrement.</Texte>
+          </HighlightBox>
+
+          <HighlightBox label="Focus autisme — entre masquage et nouveaux signaux" couleur="bleu">
+            <Texte>Le vieillissement des personnes autistes est une réalité encore insuffisamment documentée, mais qui concerne une part significative des personnes accompagnées dans les ESE suisses. Trois dynamiques méritent une attention particulière.</Texte>
+            <Texte><strong>La perte du masquage :</strong> De nombreuses personnes autistes ont appris au fil des décennies à dissimuler certains de leurs comportements — répétitions, vocalises, comportements sensoriels — pour s&apos;adapter aux attentes de leur environnement social. Ce travail de compensation permanent est épuisant. Avec l&apos;âge, la fatigue et les éventuels troubles cognitifs, cette capacité peut s&apos;éroder progressivement. Des comportements que l&apos;équipe n&apos;avait jamais observés peuvent réapparaître ou s&apos;amplifier. Ce n&apos;est pas une aggravation du trouble en soi : c&apos;est l&apos;épuisement d&apos;une stratégie de compensation tenue pendant des décennies.</Texte>
+            <Texte><strong>La vulnérabilité aux disruptions :</strong> Le vieillissement multiplie les ruptures — hospitalisations, adaptation des activités, changements d&apos;équipe. Pour les personnes autistes, dont le besoin de prévisibilité et de stabilité routinière est souvent central, chaque perturbation peut avoir un impact émotionnel et comportemental disproportionné. Préparer ces transitions avec anticipation et supports visuels est particulièrement important dans ce profil.</Texte>
+            <Texte><strong>La douleur et la santé somatique :</strong> L&apos;évaluation de la douleur est particulièrement complexe dans l&apos;autisme. Certaines personnes sont hyposensibles — elles ne perçoivent pas clairement la douleur physique. D&apos;autres sont hypersensibles — tout contact peut devenir insupportable. Les troubles gastro-intestinaux et l&apos;épilepsie, fréquents dans cette population, peuvent se modifier avec l&apos;âge et nécessitent une surveillance régulière. <strong>Une modification des comportements habituels est souvent le seul signal disponible.</strong></Texte>
+          </HighlightBox>
+
+          <HighlightBox label="Focus déficience intellectuelle (hors trisomie 21) — des enjeux communs" couleur="vert">
+            <Texte>La déficience intellectuelle recouvre une réalité très hétérogène — de légère à profonde, d&apos;origines génétiques, chromosomiques ou non déterminées. Malgré cette diversité, plusieurs enjeux communs émergent avec l&apos;âge.</Texte>
+            <Texte><strong>Un risque de démence augmenté :</strong> Pour l&apos;ensemble des personnes avec DI (pas seulement la trisomie 21), le risque de développer une démence est significativement plus élevé que dans la population générale — estimé deux à quatre fois supérieur selon les études. La détection repose, comme toujours, sur la comparaison avec l&apos;état de base documenté de la personne, et non sur des tests standardisés inadaptés à son niveau de fonctionnement.</Texte>
+            <Texte><strong>Les déficits sensoriels sous-détectés :</strong> Les problèmes visuels et auditifs sont extrêmement fréquents chez les personnes avec DI et systématiquement sous-diagnostiqués. Un bilan visuel et un audiogramme réguliers à partir de 50 ans peuvent éviter des erreurs d&apos;interprétation majeures : une perte auditive non traitée peut facilement passer pour un déclin cognitif ou un repli volontaire.</Texte>
+            <Texte><strong>La douleur non verbalisée :</strong> Pour les personnes avec peu ou pas de langage, la douleur s&apos;exprime souvent par des changements comportementaux — agitation, repli, refus de soin, automutilation. L&apos;utilisation d&apos;échelles d&apos;évaluation comportementale de la douleur est indispensable, surtout avec l&apos;âge où les pathologies douloureuses (articulaires, dentaires, digestives) se multiplient et s&apos;accumulent.</Texte>
           </HighlightBox>
 
           <PullQuote>

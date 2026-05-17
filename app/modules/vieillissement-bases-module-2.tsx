@@ -209,6 +209,14 @@ export function Module2VieillissementBases({ onValiderModule }: { onValiderModul
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation 3</p>
               <p className="text-gray-700 text-sm leading-relaxed"><strong>Thomas, 61 ans, traumatisme crânien.</strong> Dort de plus en plus le jour, agité la nuit. L&apos;équipe pense que &quot;c&apos;est son caractère&quot;. Une évaluation révèle un syndrome d&apos;apnées du sommeil sévère, traitable.</p>
             </div>
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation 4</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>David, 53 ans, autisme sévère.</strong> Ses vocalises — habituellement discrètes et rythmées — sont devenues intenses et répétées depuis deux mois, particulièrement le soir. L&apos;équipe note dans les transmissions : &quot;aggravation des comportements autistiques, probablement liée au vieillissement&quot;. Personne ne cherche à évaluer la douleur. Un bilan dentaire réalisé lors d&apos;une visite médicale de routine révèle plusieurs caries profondes et un abcès non traité.</p>
+            </div>
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation 5</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Isabelle, 58 ans, déficience intellectuelle légère.</strong> Depuis quelques mois, elle répond à côté lors des activités de groupe, semble ne pas entendre certaines consignes, et s&apos;est progressivement mise à l&apos;écart des autres résidents. L&apos;équipe attribue ce changement à &quot;une évolution naturelle de sa déficience&quot;. Un audiogramme prescrit après signalement révèle une perte auditive bilatérale importante, facilement appareillable.</p>
+            </div>
           </div>
 
           <div className="space-y-3 my-6">
