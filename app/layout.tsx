@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
 import { ServiceWorkerRegister } from '@/components/service-worker-register'
+import { ContactModal } from '@/components/contact-modal'
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -71,6 +72,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
+        <ContactModal />
         <PWAInstallPrompt />
         <ServiceWorkerRegister />
         {process.env.NODE_ENV === 'production' && <Analytics />}
