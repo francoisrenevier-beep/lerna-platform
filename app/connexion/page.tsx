@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
 export default function ConnexionPage() {
-  const [tab, setTab] = useState<"login" | "register">("login")
+  const [tab, setTab] = useState<"login" | "register" | "forgot">("login")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [prenom, setPrenom] = useState("")
@@ -80,6 +80,27 @@ export default function ConnexionPage() {
       }
     }
     setLoading(false)
+  }
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setMessageType("error")
+      setMessage("Veuillez saisir votre adresse email.")
+      return
+    }
+    setLoading(true)
+    setMessage("")
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/auth/reset-password`,
+    })
+    setLoading(false)
+    if (error) {
+      setMessageType("error")
+      setMessage("Une erreur est survenue. Vérifiez l'adresse email et réessayez.")
+    } else {
+      setMessageType("success")
+      setMessage("Un email de réinitialisation a été envoyé. Vérifiez votre boîte de réception.")
+    }
   }
 
   const handleRegister = async () => {
@@ -177,6 +198,11 @@ const { error: liaisonError } = await supabase
           >
             Créer un compte
           </button>
+          {tab === "forgot" && (
+            <button className="pb-3 px-4 text-sm font-medium border-b-2 border-[#3DBFA0] text-[#1B2D5B]">
+              Mot de passe oublié
+            </button>
+          )}
         </div>
 
         {message && (
@@ -214,7 +240,10 @@ const { error: liaisonError } = await supabase
             >
               {loading ? "Connexion..." : "Se connecter"}
             </button>
-            <p className="text-center text-sm text-[#3DBFA0] cursor-pointer hover:underline">
+            <p
+              onClick={() => { setTab("forgot"); setMessage("") }}
+              className="text-center text-sm text-[#3DBFA0] cursor-pointer hover:underline"
+            >
               Mot de passe oublié ?
             </p>
           </div>
@@ -292,6 +321,38 @@ const { error: liaisonError } = await supabase
             >
               {loading ? "Création..." : "Créer mon compte"}
             </button>
+          </div>
+        )}
+
+        {tab === "forgot" && (
+          <div className="space-y-4">
+            <p className="text-sm text-gray-500">
+              Saisissez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+            </p>
+            <div>
+              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
+                placeholder="votre@email.ch"
+                onKeyDown={(e) => e.key === "Enter" && handleForgotPassword()}
+              />
+            </div>
+            <button
+              onClick={handleForgotPassword}
+              disabled={loading}
+              className="w-full bg-[#3DBFA0] text-white py-2.5 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
+            >
+              {loading ? "Envoi en cours..." : "Envoyer le lien"}
+            </button>
+            <p
+              onClick={() => { setTab("login"); setMessage("") }}
+              className="text-center text-sm text-gray-400 cursor-pointer hover:text-[#1B2D5B] transition-colors"
+            >
+              ← Retour à la connexion
+            </p>
           </div>
         )}
       </div>
