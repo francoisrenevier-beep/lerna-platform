@@ -47,7 +47,7 @@ export function DemoForm() {
 
     setLoading(false)
     if (err) {
-      setError("Une erreur est survenue. Merci de réessayer ou d'écrire à contact@lerna.ch.")
+      setError("Une erreur est survenue. Merci de réessayer ou d'écrire à contact@learna.ch.")
     } else {
       setSuccess(true)
       setForm(EMPTY)

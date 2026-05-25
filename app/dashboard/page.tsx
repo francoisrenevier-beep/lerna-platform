@@ -734,25 +734,38 @@ export default function DashboardPage() {
             </section>
           )}
 
-          {/* ── Ressources & À venir ──────────────────────────────────────── */}
+          {/* ── Bibliothèque de ressources ────────────────────────────────── */}
           <section className="pb-6">
-            <div className="flex items-center gap-2 mb-4">
-              <h2 className="text-base font-semibold text-[#1B2D5B]">Ressources</h2>
-              <span className="text-xs font-medium text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">Bientôt disponible</span>
+            <div className="flex items-end justify-between mb-4">
+              <div>
+                <h2 className="text-base font-semibold text-[#1B2D5B]">Bibliothèque de ressources</h2>
+                <p className="text-xs text-gray-400 mt-0.5">Outils pratiques, fiches et références liés à vos formations</p>
+              </div>
+              <a href="/ressources" className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block">
+                Voir tout →
+              </a>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { titre: "Guides pratiques",  desc: "Des guides et fiches mémo pour approfondir vos formations." },
-                { titre: "Articles de fond",  desc: "Lectures complémentaires rédigées par des experts du secteur." },
-                { titre: "Ressources terrain",desc: "Outils pratiques directement applicables en situation professionnelle." },
+                { icone: "⭐", titre: "Recommandées",   desc: "Sélectionnées pour vos formations en cours.",   href: "/ressources?section=recommandees" },
+                { icone: "🔧", titre: "Outils terrain", desc: "Check-lists et modèles applicables immédiatement.", href: "/ressources?section=outils" },
+                { icone: "🗒️", titre: "Fiches mémo",    desc: "Synthèses rapides pour retenir l'essentiel.",   href: "/ressources?section=memo" },
+                { icone: "🏛️", titre: "Officielles",    desc: "Textes légaux, articles et références théoriques.", href: "/ressources?section=officielles" },
               ].map((r, i) => (
-                <div key={i} className="bg-gray-50 rounded-xl border border-gray-100 p-5">
-                  <div className="text-2xl mb-3">📚</div>
-                  <h3 className="text-sm font-semibold text-gray-500 mb-1">{r.titre}</h3>
+                <a
+                  key={i}
+                  href={r.href}
+                  className="group bg-white rounded-xl border border-gray-100 shadow-sm p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+                >
+                  <div className="text-xl mb-2">{r.icone}</div>
+                  <h3 className="text-sm font-semibold text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors mb-1">{r.titre}</h3>
                   <p className="text-xs text-gray-400 leading-relaxed">{r.desc}</p>
-                </div>
+                </a>
               ))}
             </div>
+            <a href="/ressources" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline sm:hidden">
+              Voir toutes les ressources →
+            </a>
           </section>
 
         </div>

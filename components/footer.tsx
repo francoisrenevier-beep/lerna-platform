@@ -17,7 +17,7 @@ export function Footer() {
             <p className="mt-3 text-sm text-white/60">
               Learna Sàrl — Suisse romande
               <br />
-              contact@lerna.ch
+              contact@learna.ch
             </p>
           </div>
 

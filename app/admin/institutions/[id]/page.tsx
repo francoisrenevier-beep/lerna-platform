@@ -17,6 +17,7 @@ type Membre = {
   profil_id: string
   prenom: string
   nom: string
+  email: string | null
   role: string
   statut: string
   secteur: string | null
@@ -27,6 +28,7 @@ type ProfilDisponible = {
   id: string
   prenom: string
   nom: string
+  email: string | null
 }
 
 type Onglet = "infos" | "collaborateurs" | "responsables"
@@ -77,7 +79,7 @@ export default function AdminInstitutionDetailPage() {
     const profilIds = ips.map((ip) => ip.profil_id)
     const { data: profils } = await supabase
       .from("profils")
-      .select("id, prenom, nom")
+      .select("id, prenom, nom, email")
       .in("id", profilIds)
 
     const profilMap = new Map(profils?.map((p) => [p.id, p]) ?? [])
@@ -93,6 +95,7 @@ export default function AdminInstitutionDetailPage() {
           profil_id: ip.profil_id,
           prenom: p?.prenom || "",
           nom: p?.nom || "",
+          email: p?.email || null,
           role: ip.role,
           statut: ip.statut,
           secteur: ip.secteur || null,
@@ -177,8 +180,8 @@ export default function AdminInstitutionDetailPage() {
     const membresIds = membres.map((m) => m.profil_id)
     const { data } = await supabase
       .from("profils")
-      .select("id, prenom, nom")
-      .or(`prenom.ilike.%${search}%,nom.ilike.%${search}%`)
+      .select("id, prenom, nom, email")
+      .or(`prenom.ilike.%${search}%,nom.ilike.%${search}%,email.ilike.%${search}%`)
       .limit(10)
     const filtre = (data || []).filter((p) => !membresIds.includes(p.id))
     setProfilsDisponibles(filtre)
@@ -352,7 +355,7 @@ export default function AdminInstitutionDetailPage() {
               type="text"
               value={rechercheProfil}
               onChange={(e) => { setRechercheProfil(e.target.value); chargerProfilsDisponibles(e.target.value) }}
-              placeholder="Prénom ou nom..."
+              placeholder="Prénom, nom ou email..."
               className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] mb-3"
             />
             {profilsDisponibles.length > 0 && (
@@ -364,8 +367,11 @@ export default function AdminInstitutionDetailPage() {
                     disabled={ajoutLoading}
                     className="w-full text-left px-4 py-3 text-sm hover:bg-[#3DBFA0]/10 transition-colors border-b border-gray-50 last:border-0 flex items-center justify-between"
                   >
-                    <span className="font-medium text-[#1B2D5B]">{p.prenom} {p.nom}</span>
-                    <span className="text-xs text-[#3DBFA0] font-medium">Ajouter →</span>
+                    <div>
+                      <span className="font-medium text-[#1B2D5B]">{p.prenom} {p.nom}</span>
+                      {p.email && <span className="block text-xs text-gray-400">{p.email}</span>}
+                    </div>
+                    <span className="text-xs text-[#3DBFA0] font-medium shrink-0 ml-2">Ajouter →</span>
                   </button>
                 ))}
               </div>
@@ -407,6 +413,7 @@ function MembreTable({
         <thead>
           <tr className="border-b border-gray-100 bg-gray-50">
             <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Membre</th>
+            <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Email</th>
             <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Secteur</th>
             <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Formations</th>
             <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Statut</th>
@@ -417,6 +424,7 @@ function MembreTable({
           {membres.map((m) => (
             <tr key={m.profil_id} className={`border-b border-gray-50 last:border-0 ${m.statut === "inactif" ? "opacity-40" : ""}`}>
               <td className="px-4 py-3 font-medium text-[#1B2D5B]">{m.prenom} {m.nom}</td>
+              <td className="px-4 py-3 text-gray-400 text-xs">{m.email || "—"}</td>
               <td className="px-4 py-3 text-gray-400 text-xs">{m.secteur || "—"}</td>
               <td className="px-4 py-3 text-center font-semibold text-[#3DBFA0]">{m.nb_attestations}</td>
               <td className="px-4 py-3 text-center">

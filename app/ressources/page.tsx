@@ -8,6 +8,14 @@ import { BottomNav } from "@/components/BottomNav"
 import { ResourceCard, type Resource } from "@/components/ResourceCard"
 import { Search } from "lucide-react"
 
+// section= params → IDs dans le DOM
+const SECTION_IDS: Record<string, string> = {
+  recommandees: "section-recommandees",
+  outils:       "section-outils",
+  memo:         "section-memo",
+  officielles:  "section-officielles",
+}
+
 // ─── Types locaux ─────────────────────────────────────────────────────────────
 
 type ResourceWithMeta = Resource & {
@@ -47,15 +55,16 @@ const selectCls = "border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white 
 
 // ─── Section component ────────────────────────────────────────────────────────
 
-function Section({ title, resources, favoriteIds, onToggleFavorite }: {
+function Section({ title, resources, favoriteIds, onToggleFavorite, id }: {
   title: string
   resources: ResourceWithMeta[]
   favoriteIds: Set<string>
   onToggleFavorite: (id: string) => void
+  id?: string
 }) {
   if (resources.length === 0) return null
   return (
-    <section className="mb-10">
+    <section id={id} className="mb-10 scroll-mt-6">
       <h3 className="text-base font-bold text-[#1B2D5B] mb-4 flex items-center gap-2">
         <span className="w-1 h-5 bg-[#3DBFA0] rounded-full inline-block" />
         {title}
@@ -88,8 +97,22 @@ export default function RessourcesPage() {
   const [filtreDomain, setFiltreDomain] = useState("")
   const [filtreType, setFiltreType]     = useState("")
   const [filtreLevel, setFiltreLevel]   = useState("")
+  const [targetSection, setTargetSection] = useState<string | null>(null)
 
   const router = useRouter()
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const s = params.get("section")
+    if (s && SECTION_IDS[s]) setTargetSection(s)
+  }, [])
+
+  useEffect(() => {
+    if (loading || !targetSection) return
+    const id = SECTION_IDS[targetSection]
+    const el = document.getElementById(id)
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 150)
+  }, [loading, targetSection])
 
   useEffect(() => {
     const getData = async () => {
@@ -234,24 +257,28 @@ export default function RessourcesPage() {
         ) : (
           <>
             <Section
+              id="section-recommandees"
               title="Ressources recommandées"
               resources={recommended}
               favoriteIds={favoriteIds}
               onToggleFavorite={toggleFavorite}
             />
             <Section
+              id="section-outils"
               title="Outils terrain"
               resources={outilsTerrain}
               favoriteIds={favoriteIds}
               onToggleFavorite={toggleFavorite}
             />
             <Section
+              id="section-memo"
               title="Fiches mémo"
               resources={fichesMemo}
               favoriteIds={favoriteIds}
               onToggleFavorite={toggleFavorite}
             />
             <Section
+              id="section-officielles"
               title="Ressources officielles & pour aller plus loin"
               resources={officielles}
               favoriteIds={favoriteIds}
