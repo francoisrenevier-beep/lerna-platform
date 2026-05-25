@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import { AdminSidebar } from "@/components/AdminSidebar"
+import { Upload, X, FileText } from "lucide-react"
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -135,6 +136,10 @@ export default function AdminRessourcesPage() {
   const [saveError, setSaveError]       = useState("")
   const [confirmDelete, setConfirmDelete] = useState<Resource | null>(null)
   const [deleteLoading, setDeleteLoading] = useState<string | null>(null)
+  const [uploadingFile, setUploadingFile] = useState(false)
+  const [uploadedFileName, setUploadedFileName] = useState<string | null>(null)
+  const [uploadError, setUploadError]   = useState("")
+  const fileInputRef                    = useRef<HTMLInputElement>(null)
 
   const router = useRouter()
 
@@ -167,15 +172,48 @@ export default function AdminRessourcesPage() {
     init()
   }, [router])
 
+  const TYPES_AVEC_FICHIER = ["pdf", "checklist", "memo", "tool", "template", "official"]
+
+  const uploadFichier = async (file: File) => {
+    setUploadingFile(true)
+    setUploadError("")
+    const ext = file.name.split(".").pop() ?? "pdf"
+    const path = `${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`
+    const { error } = await supabase.storage.from("ressources").upload(path, file, {
+      contentType: file.type,
+      upsert: false,
+    })
+    if (error) {
+      setUploadError("Erreur lors de l'upload : " + error.message)
+      setUploadingFile(false)
+      return
+    }
+    const { data: { publicUrl } } = supabase.storage.from("ressources").getPublicUrl(path)
+    setForm(prev => ({ ...prev, file_url: publicUrl, is_downloadable: true }))
+    setUploadedFileName(file.name)
+    setUploadingFile(false)
+    void ext
+  }
+
+  const supprimerFichierUploade = () => {
+    setForm(prev => ({ ...prev, file_url: "" }))
+    setUploadedFileName(null)
+    if (fileInputRef.current) fileInputRef.current.value = ""
+  }
+
   const ouvrirAjout = () => {
     setEditResource(null)
     setForm(FORM_VIDE)
     setSaveError("")
+    setUploadedFileName(null)
+    setUploadError("")
     setShowModal(true)
   }
 
   const ouvrirEdition = (r: Resource) => {
     setEditResource(r)
+    setUploadedFileName(null)
+    setUploadError("")
     setForm({
       title: r.title,
       description: r.description ?? "",
@@ -513,9 +551,58 @@ export default function AdminRessourcesPage() {
                 <input type="url" value={form.source_url} onChange={e => setForm({...form, source_url: e.target.value})}
                   placeholder="https://..." className={inputCls} />
               </Field>
-              <Field label="URL fichier (file_url — Google Drive, Dropbox…)">
-                <input type="url" value={form.file_url} onChange={e => setForm({...form, file_url: e.target.value})}
-                  placeholder="https://drive.google.com/..." className={inputCls} />
+
+              {/* Fichier : upload Supabase Storage ou URL manuelle */}
+              <Field label={TYPES_AVEC_FICHIER.includes(form.type) ? "Fichier" : "URL fichier (file_url)"}>
+                {TYPES_AVEC_FICHIER.includes(form.type) && (
+                  <div className="mb-2">
+                    {uploadedFileName || (editResource && form.file_url && form.file_url.includes("supabase")) ? (
+                      <div className="flex items-center gap-2 p-2.5 bg-[#3DBFA0]/10 border border-[#3DBFA0]/30 rounded-lg">
+                        <FileText className="w-4 h-4 text-[#3DBFA0] flex-shrink-0" />
+                        <span className="text-xs font-medium text-[#1B8B72] flex-1 truncate">
+                          {uploadedFileName ?? form.file_url.split("/").pop()}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={supprimerFichierUploade}
+                          className="text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    ) : (
+                      <label className={`flex items-center gap-2 cursor-pointer border-2 border-dashed border-[#3DBFA0]/40 rounded-lg px-4 py-3 text-sm text-gray-500 hover:border-[#3DBFA0] hover:bg-[#3DBFA0]/5 transition-colors ${uploadingFile ? "opacity-60 pointer-events-none" : ""}`}>
+                        <Upload className="w-4 h-4 text-[#3DBFA0] flex-shrink-0" />
+                        <span>
+                          {uploadingFile ? "Upload en cours…" : "Cliquer pour uploader un fichier (PDF, DOCX…)"}
+                        </span>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                          className="hidden"
+                          onChange={e => {
+                            const file = e.target.files?.[0]
+                            if (file) uploadFichier(file)
+                          }}
+                        />
+                      </label>
+                    )}
+                    {uploadError && (
+                      <p className="text-xs text-red-600 mt-1">{uploadError}</p>
+                    )}
+                    <p className="text-[10px] text-gray-400 mt-1">
+                      ou renseigner une URL ci-dessous (Google Drive, Dropbox…)
+                    </p>
+                  </div>
+                )}
+                <input
+                  type="url"
+                  value={form.file_url}
+                  onChange={e => { setForm({...form, file_url: e.target.value}); setUploadedFileName(null) }}
+                  placeholder={TYPES_AVEC_FICHIER.includes(form.type) ? "https://drive.google.com/…" : "https://…"}
+                  className={inputCls}
+                />
               </Field>
 
               {/* Options booléennes */}

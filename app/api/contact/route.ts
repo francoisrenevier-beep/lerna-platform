@@ -24,6 +24,10 @@ export async function POST(req: NextRequest) {
 
   const sujetLabel = SUBJECT_LABELS[sujet] ?? sujet
 
+  const esc = (s: string) => s
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
@@ -41,15 +45,15 @@ export async function POST(req: NextRequest) {
             <table style="width:100%;border-collapse:collapse;">
               <tr>
                 <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px;">Sujet</td>
-                <td style="padding:8px 0;font-weight:600;color:#1B2D5B;">${sujetLabel}</td>
+                <td style="padding:8px 0;font-weight:600;color:#1B2D5B;">${esc(sujetLabel)}</td>
               </tr>
               <tr>
                 <td style="padding:8px 0;color:#6b7280;font-size:14px;">Nom</td>
-                <td style="padding:8px 0;color:#1B2D5B;">${nom}</td>
+                <td style="padding:8px 0;color:#1B2D5B;">${esc(nom)}</td>
               </tr>
               <tr>
                 <td style="padding:8px 0;color:#6b7280;font-size:14px;">Email</td>
-                <td style="padding:8px 0;"><a href="mailto:${email}" style="color:#3DBFA0;">${email}</a></td>
+                <td style="padding:8px 0;"><a href="mailto:${esc(email)}" style="color:#3DBFA0;">${esc(email)}</a></td>
               </tr>
             </table>
             <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;" />

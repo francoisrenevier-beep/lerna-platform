@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync } from 'fs'
 import { join } from 'path'
+import { createServerClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
 
 export const runtime = 'nodejs'
 export const maxDuration = 30
+
+function escHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
 
 interface AttestationPayload {
   prenom: string
@@ -29,7 +40,7 @@ function getLogoBase64(): string {
 }
 
 function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
-  const nomComplet = `${data.prenom} ${data.nom}`.trim() || 'Apprenant(e)'
+  const nomComplet = `${escHtml(data.prenom)} ${escHtml(data.nom)}`.trim() || 'Apprenant(e)'
   const dateFormatted = (() => {
     try {
       return new Date(data.date_obtention).toLocaleDateString('fr-FR', {
@@ -47,7 +58,7 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
     : `<span style="color:white;font-size:16pt;font-weight:bold;">LEARNA</span>`
 
   const institutionHtml = data.institution_nom
-    ? `<p class="institution-line">dans le cadre de la licence institutionnelle de <span class="institution-name">${data.institution_nom}</span></p>`
+    ? `<p class="institution-line">dans le cadre de la licence institutionnelle de <span class="institution-name">${escHtml(data.institution_nom)}</span></p>`
     : ''
 
   return `<!DOCTYPE html>
@@ -268,22 +279,22 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
     <p class="followed-text">a suivi et complété avec succès la formation</p>
 
     <div class="formation-box">
-      <div class="formation-title">${data.formation_titre}</div>
-      <div class="formation-categorie">${data.formation_categorie}</div>
+      <div class="formation-title">${escHtml(data.formation_titre)}</div>
+      <div class="formation-categorie">${escHtml(data.formation_categorie)}</div>
     </div>
 
     <div class="info-blocks">
       <div class="info-block">
         <div class="info-label">Durée</div>
-        <div class="info-value">${data.duree_heures}</div>
+        <div class="info-value">${escHtml(data.duree_heures)}</div>
       </div>
       <div class="info-block">
         <div class="info-label">Date d'obtention</div>
-        <div class="info-value small">${dateFormatted}</div>
+        <div class="info-value small">${escHtml(dateFormatted)}</div>
       </div>
       <div class="info-block">
         <div class="info-label">Modules complétés</div>
-        <div class="info-value">${data.modules_completes}/${data.modules_total}</div>
+        <div class="info-value">${Number(data.modules_completes)}/${Number(data.modules_total)}</div>
       </div>
     </div>
 
@@ -298,7 +309,7 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
       </div>
       <div class="verification-box">
         <div class="verif-label">N° de vérification</div>
-        <div class="verif-number">${data.numero_verification}</div>
+        <div class="verif-number">${escHtml(data.numero_verification)}</div>
       </div>
     </div>
   </div>
@@ -311,6 +322,17 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
 }
 
 export async function POST(req: NextRequest) {
+  const cookieStore = await cookies()
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    { cookies: { getAll: () => cookieStore.getAll(), setAll: () => {} } }
+  )
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+  }
+
   let data: AttestationPayload
   try {
     data = await req.json()

@@ -119,7 +119,11 @@ export function ResourceCard({
           is_downloadable, nb_formations } = resource
 
   const hasUrl = (is_downloadable && file_url) || source_url
-  const actionHref = (is_downloadable && file_url) ? file_url : (source_url ?? "")
+  const rawHref = (is_downloadable && file_url) ? file_url : (source_url ?? "")
+  const isSupabaseStorage = rawHref.includes('supabase') && rawHref.includes('/storage/')
+  const actionHref = isSupabaseStorage
+    ? `/api/ressource-download?url=${encodeURIComponent(rawHref)}`
+    : rawHref
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col gap-3 hover:shadow-md transition-shadow">

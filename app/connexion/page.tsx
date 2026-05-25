@@ -122,11 +122,9 @@ export default function ConnexionPage() {
     setLoading(true)
     setMessage("")
 
-    const { data: institution } = await supabase
-      .from("institutions")
-      .select("id, nom, statut")
-      .eq("code_acces", codeInstitution.toUpperCase())
-      .single()
+    const { data: institutionRows } = await supabase
+      .rpc("valider_code_institution", { code: codeInstitution })
+    const institution = institutionRows?.[0] ?? null
 
     if (!institution) {
       setMessageType("error")
