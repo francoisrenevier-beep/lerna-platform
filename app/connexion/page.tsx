@@ -153,23 +153,19 @@ export default function ConnexionPage() {
       return
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    const { error: inscriptionError } = await supabase.rpc("inscrire_utilisateur", {
+      p_prenom: prenom,
+      p_nom: nom,
+      p_email: email,
+      p_institution_id: institution.id,
+    })
 
-const { error: liaisonError } = await supabase
-  .from("institution_profils")
-  .insert({
-    profil_id: authData.user.id,
-    institution_id: institution.id,
-    role: "collaborateur",
-    statut: "actif"
-  })
-
-    if (liaisonError) {
-  setMessageType("error")
-  setMessage("Erreur rattachement : " + liaisonError.message + " - code: " + liaisonError.code)
-  setLoading(false)
-  return
-}
+    if (inscriptionError) {
+      setMessageType("error")
+      setMessage("Erreur rattachement : " + inscriptionError.message)
+      setLoading(false)
+      return
+    }
 
     setMessageType("success")
     setMessage("Compte créé avec succès. Vérifiez votre email pour confirmer votre inscription.")
