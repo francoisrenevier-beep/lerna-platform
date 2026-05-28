@@ -1,727 +1,473 @@
 "use client"
 
-import { Sidebar } from "@/components/Sidebar"
-import { BottomNav } from "@/components/BottomNav"
-import { BADGE_DEFS, type BadgeStats } from "@/lib/badges"
-import { getCouleurEtiquette } from "@/lib/etiquettes"
-import { PageHeader } from "@/components/PageHeader"
-import { MetricCard } from "@/components/MetricCard"
+import Link from "next/link"
+import { 
+  BookOpen, 
+  Trophy, 
+  Clock, 
+  ChevronRight, 
+  Play,
+  Award,
+  Zap,
+  Target,
+  Flame,
+  GraduationCap,
+  Calendar,
+  Bell,
+  Settings,
+  Search,
+  Home,
+  Library,
+  User,
+  BarChart3,
+  FileText
+} from "lucide-react"
 
-// ── Types ──────────────────────────────────────────────────────────────────────
+// ── Mock Data ─────────────────────────────────────────────────────────────────
 
-type FormationEnCours = {
-  id: string
-  titre: string
-  slug: string
-  domaine: string | null
-  nbModules: number
-  nbTermines: number
-  image_url: string | null
+const mockUser = {
+  prenom: "Marie",
+  nom: "Dupont",
+  role: "Infirmiere",
 }
 
-type FormationVedette = {
-  id: string
-  titre: string
-  slug: string
-  domaine: string | null
-  thematique: string | null
-  duree_estimee_minutes: number
-  description_courte: string | null
-  niveau: string | null
-  est_a_venir: boolean
-  image_url: string | null
+const mockInstitution = {
+  nom: "CHU de Lyon"
 }
 
-type BadgeRow = {
-  badge_id: string
-  obtenu_le: string
+const mockFormations = [
+  {
+    id: "1",
+    titre: "Gestion de la douleur",
+    description: "Techniques avancees de prise en charge",
+    progression: 75,
+    totalModules: 8,
+    modulesTermines: 6,
+    dureeEstimee: "4h30",
+    categorie: "Soins",
+    niveau: "Avance",
+  },
+  {
+    id: "2", 
+    titre: "Hygiene hospitaliere",
+    description: "Protocoles et bonnes pratiques",
+    progression: 30,
+    totalModules: 12,
+    modulesTermines: 4,
+    dureeEstimee: "6h00",
+    categorie: "Prevention",
+    niveau: "Intermediaire",
+  },
+  {
+    id: "3",
+    titre: "Communication patient",
+    description: "Relation soignant-soigne",
+    progression: 100,
+    totalModules: 6,
+    modulesTermines: 6,
+    dureeEstimee: "3h00",
+    categorie: "Soft Skills",
+    niveau: "Debutant",
+  }
+]
+
+const mockBadges = [
+  { id: "1", nom: "Premier pas", icone: "trophy", obtenuLe: "2024-01-15", description: "Premiere formation terminee" },
+  { id: "2", nom: "Assidu", icone: "flame", obtenuLe: "2024-02-01", description: "7 jours consecutifs" },
+  { id: "3", nom: "Expert", icone: "star", obtenuLe: "2024-02-20", description: "Score parfait" },
+]
+
+const mockStats = {
+  formationsTerminees: 12,
+  heuresFormation: 48,
+  scoresMoyens: 87,
+  streak: 14
 }
 
-// ── Mock Data ──────────────────────────────────────────────────────────────────
+// ── Page Component ────────────────────────────────────────────────────────────
 
-const MOCK_DATA = {
-  profil: { prenom: "Marie", nom: "Dupont" },
-  institution: { nom: "CHU de Lyon" },
-  formationsEnCours: [
-    {
-      id: "1",
-      titre: "Accompagnement des personnes en situation de handicap",
-      slug: "accompagnement-handicap",
-      domaine: "Handicap",
-      nbModules: 8,
-      nbTermines: 5,
-      image_url: null,
-    },
-    {
-      id: "2",
-      titre: "Communication adaptee et bienveillante",
-      slug: "communication-adaptee",
-      domaine: "Transversal",
-      nbModules: 6,
-      nbTermines: 2,
-      image_url: null,
-    },
-  ] as FormationEnCours[],
-  totalEnCours: 3,
-  formationsCompletees: 4,
-  totalMinutesCompletees: 720,
-  nbAttestations: 3,
-  nbBadges: 5,
-  formationsVedette: [
-    {
-      id: "v1",
-      titre: "Accueil et orientation des personnes handicapees",
-      slug: "accueil-orientation",
-      domaine: "Handicap",
-      thematique: "Accueil",
-      duree_estimee_minutes: 90,
-      description_courte: "Apprenez les bonnes pratiques pour accueillir et orienter les personnes en situation de handicap dans votre etablissement.",
-      niveau: "Debutant",
-      est_a_venir: false,
-      image_url: null,
-    },
-    {
-      id: "v2",
-      titre: "Sensibilisation au handicap invisible",
-      slug: "handicap-invisible",
-      domaine: "Handicap",
-      thematique: "Sensibilisation",
-      duree_estimee_minutes: 45,
-      description_courte: "Decouvrez les differentes formes de handicap invisible et comment adapter votre accompagnement.",
-      niveau: "Intermediaire",
-      est_a_venir: false,
-      image_url: null,
-    },
-    {
-      id: "v3",
-      titre: "Gestion du stress en milieu medical",
-      slug: "gestion-stress",
-      domaine: "Transversal",
-      thematique: "Bien-etre",
-      duree_estimee_minutes: 60,
-      description_courte: "Techniques et outils pour gerer le stress au quotidien dans votre environnement professionnel.",
-      niveau: "Tous niveaux",
-      est_a_venir: true,
-      image_url: null,
-    },
-  ] as FormationVedette[],
-  badges: [
-    { badge_id: "premier_pas", obtenu_le: "2024-01-15" },
-    { badge_id: "assidu", obtenu_le: "2024-02-20" },
-  ] as BadgeRow[],
-  badgeStats: {
-    formationsCommencees: 3,
-    formationsCompletees: 4,
-    joursActifs: 12,
-  } as BadgeStats,
-}
+export default function DashboardPreview() {
+  const getInitials = (prenom: string, nom: string) => {
+    return `${prenom.charAt(0)}${nom.charAt(0)}`.toUpperCase()
+  }
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
-
-function dureeFormat(minutes: number | null) {
-  if (!minutes) return "–"
-  if (minutes < 60) return minutes + " min"
-  const h = Math.floor(minutes / 60)
-  const m = minutes % 60
-  return m > 0 ? h + "h" + m : h + "h"
-}
-
-function heuresFormat(minutes: number) {
-  if (minutes === 0) return "0h"
-  const h = Math.floor(minutes / 60)
-  const m = minutes % 60
-  if (h === 0) return m + " min"
-  if (m === 0) return h + "h"
-  return h + "h" + m
-}
-
-function formatDate(d: string) {
-  return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })
-}
-
-function getDateFr() {
-  return new Date().toLocaleDateString("fr-FR", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  })
-}
-
-// ── Domaine config ────────────────────────────────────────────────────────────
-
-const DOMAINE_CONFIG: Record<string, { slug: string; badgeBg: string; badgeText: string; gradFrom: string; gradTo: string }> = {
-  "Handicap":    { slug: "handicap",    badgeBg: "#EEF2FF", badgeText: "#3730A3", gradFrom: "#EEF2FF", gradTo: "#C7D2FE" },
-  "Transversal": { slug: "transversal", badgeBg: "#F1F5F9", badgeText: "#475569", gradFrom: "#F1F5F9", gradTo: "#CBD5E1" },
-}
-
-const DOMAINES_ORDRE = [
-  "Handicap",
-  "Transversal",
-] as const
-
-// ── SVG illustrations compactes 50×50 (chips domaines + cartes en cours) ───────
-
-function IllustrationHandicapSm() {
-  return (
-    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="50" height="50" fill="#EEF2FF" rx="8" />
-      <circle cx="25" cy="18" r="6" fill="#4338CA" fillOpacity="0.55" />
-      <path d="M17 29 Q17 24 25 24 Q33 24 33 29 L33 35 Q33 37 31 37 L19 37 Q17 37 17 35Z" fill="#4338CA" fillOpacity="0.55" />
-    </svg>
-  )
-}
-
-function IllustrationTransversalSm() {
-  return (
-    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="50" height="50" fill="#F1F5F9" rx="8" />
-      <line x1="25" y1="25" x2="12" y2="14" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <line x1="25" y1="25" x2="38" y2="14" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <line x1="25" y1="25" x2="12" y2="36" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <line x1="25" y1="25" x2="38" y2="36" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <circle cx="25" cy="25" r="5" fill="#64748B" fillOpacity="0.5" />
-      <circle cx="12" cy="14" r="3.5" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="38" cy="14" r="3.5" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="12" cy="36" r="3.5" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="38" cy="36" r="3.5" fill="#64748B" fillOpacity="0.35" />
-    </svg>
-  )
-}
-function DomainIllustrationSm({ domaine }: { domaine: string | null }) {
-  if (domaine === "Handicap") return <IllustrationHandicapSm />
-  return <IllustrationTransversalSm />
-}
-
-// ── SVG illustrations grandes (cartes formations) ─────────────────────────────
-
-function IllustrationGrande({ domaine, uid }: { domaine: string | null; uid: string }) {
-  const cfg = domaine ? DOMAINE_CONFIG[domaine] : DOMAINE_CONFIG["Transversal"]
-  const gFrom = cfg?.gradFrom ?? "#F1F5F9"
-  const gTo   = cfg?.gradTo   ?? "#CBD5E1"
-  const gId   = "grad-" + uid
-
-  if (domaine === "Handicap") return (
-    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
-        </linearGradient>
-      </defs>
-      <rect width="300" height="160" fill={`url(#${gId})`} />
-      <circle cx="150" cy="72" r="55" fill="#4338CA" fillOpacity="0.07" />
-      <circle cx="150" cy="72" r="38" fill="#4338CA" fillOpacity="0.07" />
-      <circle cx="150" cy="50" r="14" fill="#4338CA" fillOpacity="0.52" />
-      <path d="M130 84 Q130 70 150 70 Q170 70 170 84 L170 100 Q170 104 167 104 L133 104 Q130 104 130 100Z" fill="#4338CA" fillOpacity="0.52" />
-      <circle cx="143" cy="126" r="15" fill="none" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.35" />
-      <circle cx="143" cy="126" r="5" fill="#4338CA" fillOpacity="0.35" />
-      <line x1="167" y1="90" x2="167" y2="112" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.3" strokeLinecap="round" />
-    </svg>
-  )
-
-  // Transversal (default)
-  return (
-    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
-        </linearGradient>
-      </defs>
-      <rect width="300" height="160" fill={`url(#${gId})`} />
-      <line x1="150" y1="80" x2="82" y2="38"  stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="150" y1="80" x2="218" y2="38" stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="150" y1="80" x2="82" y2="122" stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="150" y1="80" x2="218" y2="122"stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="82"  y1="38" x2="218" y2="38"  stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.18" />
-      <line x1="82"  y1="122" x2="218" y2="122" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.18" />
-      <circle cx="150" cy="80"  r="14" fill="#64748B" fillOpacity="0.32" />
-      <circle cx="150" cy="80"  r="8"  fill="#64748B" fillOpacity="0.42" />
-      <circle cx="82"  cy="38"  r="10" fill="#64748B" fillOpacity="0.28" />
-      <circle cx="218" cy="38"  r="10" fill="#64748B" fillOpacity="0.28" />
-      <circle cx="82"  cy="122" r="10" fill="#64748B" fillOpacity="0.28" />
-      <circle cx="218" cy="122" r="10" fill="#64748B" fillOpacity="0.28" />
-    </svg>
-  )
-}
-
-// ── Formation Card — style Coursera avec étiquettes ───────────────────────────
-
-function FormationCardDash({ f, index }: { f: FormationVedette; index: number }) {
-  const cfg = f.domaine ? DOMAINE_CONFIG[f.domaine] : null
-  const uid = `fc-${index}-${f.id.slice(0, 6)}`
-
-  const content = (
-    <div className="flex flex-col h-full">
-      {/* Zone illustration */}
-      <div className="relative overflow-hidden flex-shrink-0 rounded-t-2xl" style={{ height: 168 }}>
-        {f.image_url ? (
-          <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
-        ) : (
-          <IllustrationGrande domaine={f.domaine} uid={uid} />
-        )}
-
-        {/* Overlay dégradé bas → transparent pour lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-
-        {/* Badge domaine en bas à gauche */}
-        {cfg && f.domaine && (
-          <span
-            className="absolute bottom-3 left-3 text-[11px] font-semibold tracking-wide px-3 py-1 rounded-full shadow-sm backdrop-blur-md border border-white/20"
-            style={{ backgroundColor: cfg.badgeBg + "e8", color: cfg.badgeText }}
-          >
-            {f.domaine}
-          </span>
-        )}
-
-        {/* Badge "À venir" */}
-        {f.est_a_venir && (
-          <div className="absolute inset-0 bg-[#1B2D5B]/50 backdrop-blur-[2px] flex items-center justify-center">
-            <span className="bg-[#1B2D5B] text-white text-[10px] font-bold tracking-[0.15em] uppercase px-4 py-2 rounded-full border border-white/10 shadow-lg">
-              A venir
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Zone contenu */}
-      <div className="flex flex-col flex-1 p-5 gap-3 bg-gradient-to-b from-white to-slate-50/50">
-
-        {/* Thématique */}
-        {f.thematique && (
-          <span className={`self-start text-[11px] font-semibold tracking-wide px-3 py-1 rounded-full ${getCouleurEtiquette("thematique", f.thematique)}`}>
-            {f.thematique}
-          </span>
-        )}
-
-        {/* Titre */}
-        <h3
-          className="text-[15px] font-bold text-[#1B2D5B] leading-snug tracking-[-0.01em]"
-          style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
-        >
-          {f.titre}
-        </h3>
-
-        {/* Description */}
-        {f.description_courte && (
-          <p
-            className="text-[13px] text-slate-500 leading-relaxed"
-            style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
-          >
-            {f.description_courte}
-          </p>
-        )}
-
-        {/* Méta : durée + niveau */}
-        <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-auto font-medium">
-          <span className="inline-flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12,6 12,12 16,14" />
-            </svg>
-            {dureeFormat(f.duree_estimee_minutes)}
-          </span>
-          {f.niveau && (
-            <>
-              <span className="w-1 h-1 rounded-full bg-slate-300" />
-              <span>{f.niveau}</span>
-            </>
-          )}
-        </div>
-
-        {/* CTA */}
-        {!f.est_a_venir && (
-          <div
-            className="mt-2 w-full text-center text-[13px] font-semibold text-white bg-gradient-to-r from-[#3DBFA0] to-[#2ea88b] hover:from-[#2ea88b] hover:to-[#269d80] py-2.5 rounded-xl transition-all shadow-sm shadow-[#3DBFA0]/25"
-          >
-            Commencer
-            <svg className="inline-block w-4 h-4 ml-1.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-
-  if (f.est_a_venir) {
-    return (
-      <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm shadow-slate-200/50 overflow-hidden flex flex-col ring-1 ring-slate-100/50">
-        {content}
-      </div>
-    )
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour < 12) return "Bonjour"
+    if (hour < 18) return "Bon apres-midi"
+    return "Bonsoir"
   }
 
   return (
-    <div
-      className="bg-white rounded-2xl border border-slate-200/60 shadow-sm shadow-slate-200/50 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-300/40 hover:border-slate-200 group ring-1 ring-slate-100/50 cursor-pointer"
-    >
-      {content}
-    </div>
-  )
-}
-
-// ── Section header component ──────────────────────────────────────────────────
-
-function SectionHeader({ title, subtitle, linkText }: { title: string; subtitle?: string; linkText?: string }) {
-  return (
-    <div className="flex items-end justify-between mb-5">
-      <div>
-        <h2 className="text-lg font-bold text-[#1B2D5B] tracking-[-0.02em]">{title}</h2>
-        {subtitle && <p className="text-[13px] text-slate-400 mt-1 font-medium">{subtitle}</p>}
+    <div className="min-h-screen bg-[#09090b]">
+      {/* Preview Banner */}
+      <div className="bg-amber-500/10 border-b border-amber-500/20">
+        <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+          <span className="text-amber-300 text-sm font-medium">
+            Mode previsualisation — Donnees de demonstration
+          </span>
+        </div>
       </div>
-      {linkText && (
-        <span className="text-[13px] font-semibold text-[#3DBFA0] hidden sm:flex items-center gap-1 group cursor-pointer">
-          {linkText}
-          <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
-      )}
-    </div>
-  )
-}
 
-// ── Page principale (Preview avec données mockées) ─────────────────────────────
-
-export default function DashboardPreviewPage() {
-  const {
-    profil,
-    institution,
-    formationsEnCours,
-    totalEnCours,
-    formationsCompletees,
-    totalMinutesCompletees,
-    nbAttestations,
-    nbBadges,
-    formationsVedette,
-    badges,
-    badgeStats,
-  } = MOCK_DATA
-
-  const obtenuIds = new Set(badges.map((b) => b.badge_id))
-  const nearUnlock = BADGE_DEFS.find((b) => {
-    if (obtenuIds.has(b.id)) return false
-    if (!b.progressCurrent || !b.progressTotal) return false
-    const cur = b.progressCurrent(badgeStats)
-    return cur > 0 && cur < b.progressTotal
-  })
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-[#f8fafc] to-slate-100/80 flex overflow-x-hidden">
-      {/* Subtle texture overlay */}
-      <div 
-        className="fixed inset-0 pointer-events-none opacity-[0.015]" 
-        style={{ 
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }} 
-      />
-      
-      {/* Preview banner */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-amber-500 text-amber-950 text-center py-2 text-sm font-medium">
-        Mode previsualisation - Donnees de demonstration
-      </div>
-      
-      <Sidebar pageActive="dashboard" institution={institution?.nom} />
-
-      <main className="flex-1 min-w-0 pb-20 md:pb-0 relative pt-10">
-
-        {/* ── Header ────────────────────────────────────────────────────────── */}
-        <PageHeader
-          gradient
-          titre={`Bonjour${profil?.prenom ? ", " + profil.prenom : ""}`}
-          sousTitre="Bienvenue sur votre espace LEARNA"
-          right={
-            <>
-              <span className="text-[13px] capitalize font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>
-                {getDateFr()}
-              </span>
-              {institution?.nom && (
-                <span
-                  className="text-[11px] font-semibold px-3.5 py-1.5 rounded-full border whitespace-nowrap tracking-wide backdrop-blur-sm"
-                  style={{
-                    backgroundColor: "rgba(61,191,160,0.15)",
-                    color: "#5ee0c3",
-                    borderColor: "rgba(61,191,160,0.25)",
-                  }}
-                >
-                  {institution.nom}
-                </span>
-              )}
-            </>
-          }
-        />
-
-        <div className="px-4 md:px-8 py-6 md:py-8 space-y-10 md:space-y-12 max-w-6xl">
-
-          {/* ── Continuer l'apprentissage ──────────────────────────────────── */}
-          {formationsEnCours.length > 0 && (
-            <section>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#3DBFA0] to-[#2ea88b]" />
-                <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.12em]">
-                  Reprendre ou vous en etiez
-                </h2>
+      {/* Navigation */}
+      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#09090b]/90 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <GraduationCap className="w-5 h-5 text-white" />
               </div>
+              <span className="text-xl font-bold text-white tracking-tight">LEARNA</span>
+            </div>
+
+            {/* Search */}
+            <div className="hidden md:flex flex-1 max-w-lg mx-12">
+              <div className="relative w-full group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25 group-focus-within:text-white/40 transition-colors" />
+                <input 
+                  type="text"
+                  placeholder="Rechercher une formation..."
+                  className="w-full h-11 pl-11 pr-4 bg-white/[0.04] border border-white/[0.06] rounded-xl text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-emerald-500/40 focus:bg-white/[0.06] transition-all"
+                />
+                <kbd className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-white/20 bg-white/[0.06] px-2 py-1 rounded-md font-mono hidden lg:block">
+                  ⌘K
+                </kbd>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-1">
+              <button className="relative p-2.5 rounded-xl hover:bg-white/[0.04] transition-colors group">
+                <Bell className="w-5 h-5 text-white/40 group-hover:text-white/60 transition-colors" />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-emerald-400 rounded-full ring-2 ring-[#09090b]" />
+              </button>
+              <button className="p-2.5 rounded-xl hover:bg-white/[0.04] transition-colors group">
+                <Settings className="w-5 h-5 text-white/40 group-hover:text-white/60 transition-colors" />
+              </button>
+              <div className="ml-3 pl-4 border-l border-white/[0.06]">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-emerald-500/20 cursor-pointer hover:scale-105 transition-transform">
+                  {getInitials(mockUser.prenom, mockUser.nom)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-24 md:pb-12">
+        {/* Hero */}
+        <section className="mb-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-emerald-400 text-sm font-semibold tracking-wide">{mockInstitution.nom}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                <span className="text-white/30 text-sm">{mockUser.role}</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+                {getGreeting()}, {mockUser.prenom}
+              </h1>
+              <p className="text-white/40 mt-3 text-lg">
+                Continuez votre parcours de formation professionnelle
+              </p>
+            </div>
+            
+            {/* Streak badge */}
+            <div className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-500/15 to-amber-500/10 border border-orange-500/20">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/25">
+                <Flame className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-orange-300 text-xl font-bold">{mockStats.streak} jours</p>
+                <p className="text-orange-400/60 text-xs font-medium">Serie en cours</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: "Formations terminees", value: mockStats.formationsTerminees, icon: Trophy, gradient: "from-emerald-500 to-teal-500", bg: "emerald" },
+              { label: "Heures de formation", value: `${mockStats.heuresFormation}h`, icon: Clock, gradient: "from-blue-500 to-cyan-500", bg: "blue" },
+              { label: "Score moyen", value: `${mockStats.scoresMoyens}%`, icon: Target, gradient: "from-violet-500 to-purple-500", bg: "violet" },
+              { label: "Badges obtenus", value: mockBadges.length, icon: Award, gradient: "from-amber-500 to-orange-500", bg: "amber" },
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className="group relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-300 cursor-pointer overflow-hidden"
+              >
+                {/* Gradient glow on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
+                
+                <div className={`
+                  relative w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-lg
+                  ${stat.bg === 'emerald' ? 'bg-gradient-to-br from-emerald-500 to-teal-500 shadow-emerald-500/25' : ''}
+                  ${stat.bg === 'blue' ? 'bg-gradient-to-br from-blue-500 to-cyan-500 shadow-blue-500/25' : ''}
+                  ${stat.bg === 'violet' ? 'bg-gradient-to-br from-violet-500 to-purple-500 shadow-violet-500/25' : ''}
+                  ${stat.bg === 'amber' ? 'bg-gradient-to-br from-amber-500 to-orange-500 shadow-amber-500/25' : ''}
+                `}>
+                  <stat.icon className="w-5 h-5 text-white" />
+                </div>
+                <p className="relative text-3xl font-bold text-white mb-1">{stat.value}</p>
+                <p className="relative text-sm text-white/40 font-medium">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Main Grid */}
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Formations - 2 columns */}
+          <div className="lg:col-span-2 space-y-6">
+            
+            {/* En cours */}
+            <section>
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-7 rounded-full bg-gradient-to-b from-emerald-400 to-teal-500" />
+                  <h2 className="text-xl font-bold text-white">Continuer</h2>
+                  <span className="text-sm text-white/30 font-medium">
+                    {mockFormations.filter(f => f.progression < 100).length} en cours
+                  </span>
+                </div>
+                <Link 
+                  href="/formations" 
+                  className="text-sm text-white/30 hover:text-emerald-400 transition-colors flex items-center gap-1 font-medium"
+                >
+                  Tout voir
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+
               <div className="space-y-3">
-                {formationsEnCours.map((f) => {
-                  const pct = f.nbModules > 0 ? Math.round((f.nbTermines / f.nbModules) * 100) : 0
-                  return (
-                    <div 
-                      key={f.id} 
-                      className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 shadow-sm shadow-slate-200/50 px-4 py-4 flex items-center gap-4 hover:shadow-md hover:border-slate-200 transition-all duration-200 ring-1 ring-slate-100/50"
-                    >
-                      <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 shadow-sm ring-1 ring-slate-200/50">
-                        {f.image_url ? (
-                          <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
-                        ) : (
-                          <DomainIllustrationSm domaine={f.domaine} />
-                        )}
+                {mockFormations.filter(f => f.progression < 100).map((formation) => (
+                  <Link
+                    key={formation.id}
+                    href={`/formations/${formation.id}`}
+                    className="group block p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-500/30 hover:bg-white/[0.04] transition-all duration-300"
+                  >
+                    <div className="flex items-start gap-5">
+                      {/* Icon */}
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1e3a5f] to-[#1e3a5f]/60 border border-white/[0.08] flex items-center justify-center flex-shrink-0 group-hover:border-emerald-500/30 transition-colors">
+                        <BookOpen className="w-7 h-7 text-emerald-400" />
                       </div>
+
+                      {/* Content */}
                       <div className="flex-1 min-w-0">
-                        <p className="text-[14px] font-semibold text-[#1B2D5B] truncate tracking-[-0.01em]">{f.titre}</p>
-                        <div className="flex items-center gap-3 mt-2">
-                          <div className="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <div>
+                            <h3 className="font-bold text-white text-lg group-hover:text-emerald-400 transition-colors">
+                              {formation.titre}
+                            </h3>
+                            <p className="text-sm text-white/40 mt-1">{formation.description}</p>
+                          </div>
+                          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                            <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                              <Play className="w-5 h-5 text-white ml-0.5" />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Meta */}
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                          <span className="text-xs px-3 py-1.5 rounded-lg bg-white/[0.06] text-white/50 font-medium">
+                            {formation.categorie}
+                          </span>
+                          <span className="text-xs text-white/30 flex items-center gap-1.5 font-medium">
+                            <Clock className="w-3.5 h-3.5" />
+                            {formation.dureeEstimee}
+                          </span>
+                          <span className="text-xs text-white/30 font-medium">
+                            {formation.modulesTermines}/{formation.totalModules} modules
+                          </span>
+                        </div>
+
+                        {/* Progress */}
+                        <div className="flex items-center gap-4">
+                          <div className="flex-1 h-2 bg-white/[0.06] rounded-full overflow-hidden">
                             <div 
-                              className="bg-gradient-to-r from-[#3DBFA0] to-[#2ea88b] h-2 rounded-full transition-all duration-500 ease-out" 
-                              style={{ width: pct + "%" }} 
+                              className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-700 ease-out"
+                              style={{ width: `${formation.progression}%` }}
                             />
                           </div>
-                          <span className="text-[11px] text-slate-400 font-semibold flex-shrink-0 tabular-nums">
-                            {f.nbTermines}/{f.nbModules}
+                          <span className="text-sm font-bold text-emerald-400 tabular-nums">
+                            {formation.progression}%
                           </span>
                         </div>
                       </div>
-                      <span
-                        className="flex-shrink-0 text-[12px] font-semibold text-[#3DBFA0] bg-[#3DBFA0]/10 hover:bg-[#3DBFA0]/20 px-4 py-2 rounded-xl transition-all hover:shadow-sm flex items-center gap-1.5 cursor-pointer"
-                      >
-                        Continuer
-                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
                     </div>
-                  )
-                })}
-              </div>
-              {totalEnCours > 2 && (
-                <span className="inline-flex items-center gap-1 mt-3 text-[12px] font-semibold text-[#3DBFA0] cursor-pointer">
-                  Voir toutes mes formations
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              )}
-            </section>
-          )}
-
-          {/* ── Ma progression — 4 métriques ──────────────────────────────── */}
-          <section>
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#1B2D5B] to-[#3a5590]" />
-              <h2 className="text-base font-bold text-[#1B2D5B] tracking-[-0.02em]">Ma progression</h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-              <MetricCard
-                valeur={formationsCompletees}
-                label="Formations completees"
-                icone="graduation cap"
-                couleur="#3DBFA0"
-                href="/formations"
-              />
-              <MetricCard
-                valeur={totalMinutesCompletees > 0 ? heuresFormat(totalMinutesCompletees) : "—"}
-                label="Heures de formation"
-                icone="stopwatch"
-                couleur="#1B2D5B"
-                href="/progression"
-              />
-              <MetricCard
-                valeur={nbAttestations}
-                label="Attestations obtenues"
-                icone="scroll"
-                couleur="#16a34a"
-                href="/attestations"
-              />
-              <MetricCard
-                valeur={nbBadges}
-                label="Badges debloques"
-                icone="sports medal"
-                couleur="#f59e0b"
-                href="/progression"
-              />
-            </div>
-          </section>
-
-          {/* ── Formations vedette ─────────────────────────────────────────── */}
-          <section>
-            <SectionHeader
-              title={badgeStats.formationsCommencees > 0 ? "Recommandees pour vous" : "Formations a decouvrir"}
-              subtitle={badgeStats.formationsCommencees > 0 ? "Selon vos formations en cours et votre domaine" : "Commencez votre parcours de formation"}
-              linkText="Voir tout le catalogue"
-            />
-
-            {formationsVedette.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-                {formationsVedette.map((f, i) => (
-                  <FormationCardDash key={f.id} f={f} index={i} />
+                  </Link>
                 ))}
               </div>
-            ) : (
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 shadow-sm p-12 text-center ring-1 ring-slate-100/50">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 flex items-center justify-center">
-                  <span className="text-3xl">books</span>
-                </div>
-                <p className="text-[15px] font-semibold text-[#1B2D5B] mb-1.5">Aucune formation disponible</p>
-                <p className="text-[13px] text-slate-400">Des formations seront ajoutees prochainement.</p>
-              </div>
-            )}
+            </section>
 
-            <span className="inline-flex items-center gap-1 mt-4 text-[12px] font-semibold text-[#3DBFA0] cursor-pointer sm:hidden">
-              Voir tout le catalogue
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </section>
-
-          {/* ── Explorer par domaine ─────────────────────────────────────── */}
-          <section>
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#1B2D5B] to-[#3a5590]" />
-              <h2 className="text-base font-bold text-[#1B2D5B] tracking-[-0.02em]">Explorer par domaine</h2>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {DOMAINES_ORDRE.map((domaine) => {
-                const cfg = DOMAINE_CONFIG[domaine]
-                return (
-                  <div
-                    key={domaine}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl border font-semibold text-[13px] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-sm backdrop-blur-sm cursor-pointer"
-                    style={{ backgroundColor: cfg.badgeBg + "cc", color: cfg.badgeText, borderColor: cfg.badgeText + "18" }}
-                  >
-                    <span className="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden shadow-sm ring-1 ring-slate-200/30">
-                      <DomainIllustrationSm domaine={domaine} />
-                    </span>
-                    <span className="tracking-[-0.01em]">{domaine}</span>
-                    <svg className="w-4 h-4 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                )
-              })}
-              <div
-                className="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200/80 bg-white/60 text-slate-500 font-semibold text-[13px] hover:-translate-y-0.5 hover:shadow-lg hover:bg-white transition-all duration-200 shadow-sm backdrop-blur-sm cursor-pointer"
-              >
-                Tout le catalogue
-                <svg className="w-4 h-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </div>
-          </section>
-
-          {/* ── Mes badges récents ─────────────────────────────────────────── */}
-          {(badges.length > 0 || nearUnlock) && (
+            {/* Terminées */}
             <section>
-              <SectionHeader
-                title="Mes badges"
-                linkText="Voir tous"
-              />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-                {badges.map((b) => {
-                  const def = BADGE_DEFS.find((d) => d.id === b.badge_id)
-                  if (!def) return null
-                  return (
-                    <div 
-                      key={b.badge_id} 
-                      className="bg-white/80 backdrop-blur-sm rounded-2xl border border-[#3DBFA0]/20 shadow-sm p-5 flex items-start gap-4 ring-1 ring-[#3DBFA0]/10 hover:shadow-md hover:border-[#3DBFA0]/30 transition-all"
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3DBFA0]/10 to-[#3DBFA0]/5 flex items-center justify-center flex-shrink-0 shadow-sm">
-                        <span className="text-2xl">{def.icone}</span>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-1.5 h-7 rounded-full bg-gradient-to-b from-violet-400 to-purple-500" />
+                <h2 className="text-xl font-bold text-white">Terminees</h2>
+              </div>
+
+              <div className="space-y-3">
+                {mockFormations.filter(f => f.progression === 100).map((formation) => (
+                  <div
+                    key={formation.id}
+                    className="group p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.03] transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-5">
+                      <div className="w-14 h-14 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                        <Trophy className="w-6 h-6 text-emerald-400" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[14px] font-bold text-[#1B2D5B] tracking-[-0.01em]">{def.titre}</p>
-                        <p className="text-[12px] text-slate-400 mt-1 leading-relaxed">{def.description}</p>
-                        <p className="text-[11px] text-[#3DBFA0] font-semibold mt-2 flex items-center gap-1.5">
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                          Obtenu le {formatDate(b.obtenu_le)}
-                        </p>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-white/80 text-base">{formation.titre}</h3>
+                        <p className="text-sm text-white/30 mt-1">{formation.categorie} • {formation.dureeEstimee}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs px-4 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20">
+                          Complete
+                        </span>
+                        <button className="p-2 rounded-lg hover:bg-white/[0.06] transition-colors">
+                          <FileText className="w-5 h-5 text-white/30" />
+                        </button>
                       </div>
                     </div>
-                  )
-                })}
-                {nearUnlock && (() => {
-                  const cur = nearUnlock.progressCurrent!(badgeStats)
-                  const tot = nearUnlock.progressTotal!
-                  const pct = Math.round((cur / tot) * 100)
-                  const manque = tot - cur
-                  return (
-                    <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 rounded-2xl border border-amber-200/60 shadow-sm p-5 ring-1 ring-amber-200/30">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shadow-sm">
-                          <span className="text-xl grayscale opacity-70">{nearUnlock.icone}</span>
-                        </div>
-                        <p className="text-[14px] font-bold text-amber-800">Presque la !</p>
-                      </div>
-                      <p className="text-[12px] text-amber-700/80 mb-4 leading-relaxed">
-                        Il vous manque <strong className="text-amber-800">{manque} formation{manque > 1 ? "s" : ""}</strong> pour obtenir <strong className="text-amber-800">{nearUnlock.titre}</strong>
-                      </p>
-                      <div className="w-full bg-amber-100/80 rounded-full h-2.5 overflow-hidden">
-                        <div 
-                          className="bg-gradient-to-r from-amber-400 to-orange-400 h-2.5 rounded-full transition-all duration-500" 
-                          style={{ width: pct + "%" }} 
-                        />
-                      </div>
-                      <p className="text-[11px] text-amber-600 font-semibold mt-2 text-right tabular-nums">{cur} / {tot}</p>
-                    </div>
-                  )
-                })()}
+                  </div>
+                ))}
               </div>
             </section>
-          )}
+          </div>
 
-          {/* ── Bibliothèque de ressources ────────────────────────────────── */}
-          <section className="pb-8">
-            <SectionHeader
-              title="Bibliotheque de ressources"
-              subtitle="Outils pratiques, fiches et references lies a vos formations"
-              linkText="Voir tout"
-            />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-              {[
-                { icone: "star", titre: "Recommandees",   desc: "Selectionnees pour vos formations en cours.",   color: "#f59e0b" },
-                { icone: "wrench", titre: "Outils terrain", desc: "Check-lists et modeles applicables immediatement.", color: "#3DBFA0" },
-                { icone: "note", titre: "Fiches memo",    desc: "Syntheses rapides pour retenir l'essentiel.",   color: "#1B2D5B" },
-                { icone: "bank", titre: "Officielles",    desc: "Textes legaux, articles et references theoriques.", color: "#6366f1" },
-              ].map((r, i) => (
-                <div
-                  key={i}
-                  className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 shadow-sm p-5 hover:shadow-lg hover:-translate-y-1 hover:border-slate-200 transition-all duration-200 flex flex-col ring-1 ring-slate-100/50 cursor-pointer"
-                >
-                  <div 
-                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-3 shadow-sm transition-transform group-hover:scale-105"
-                    style={{ backgroundColor: r.color + "12" }}
+          {/* Sidebar */}
+          <div className="space-y-6">
+            
+            {/* Badges */}
+            <section className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+              <div className="flex items-center justify-between mb-5">
+                <h3 className="font-bold text-white text-lg flex items-center gap-2">
+                  <Award className="w-5 h-5 text-amber-400" />
+                  Badges recents
+                </h3>
+                <Link href="/badges" className="text-xs text-white/30 hover:text-white/60 transition-colors font-medium">
+                  Voir tous
+                </Link>
+              </div>
+
+              <div className="space-y-3">
+                {mockBadges.map((badge, index) => (
+                  <div
+                    key={badge.id}
+                    className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors cursor-pointer group"
                   >
-                    <span className="text-xl">{r.icone === "star" ? "⭐" : r.icone === "wrench" ? "🔧" : r.icone === "note" ? "🗒️" : "🏛️"}</span>
+                    <div className={`
+                      w-12 h-12 rounded-xl flex items-center justify-center shadow-lg
+                      ${index === 0 ? 'bg-gradient-to-br from-amber-500 to-orange-500 shadow-amber-500/25' : ''}
+                      ${index === 1 ? 'bg-gradient-to-br from-rose-500 to-pink-500 shadow-rose-500/25' : ''}
+                      ${index === 2 ? 'bg-gradient-to-br from-violet-500 to-purple-500 shadow-violet-500/25' : ''}
+                    `}>
+                      {index === 0 && <Trophy className="w-5 h-5 text-white" />}
+                      {index === 1 && <Flame className="w-5 h-5 text-white" />}
+                      {index === 2 && <Target className="w-5 h-5 text-white" />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors">{badge.nom}</p>
+                      <p className="text-xs text-white/30 mt-0.5">{badge.description}</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-white/20 group-hover:text-white/40 group-hover:translate-x-0.5 transition-all" />
                   </div>
-                  <h3 className="text-[13px] font-bold text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors mb-1.5 tracking-[-0.01em]">{r.titre}</h3>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">{r.desc}</p>
-                </div>
-              ))}
-            </div>
-            <span className="inline-flex items-center gap-1 mt-4 text-[12px] font-semibold text-[#3DBFA0] cursor-pointer sm:hidden">
-              Voir toutes les ressources
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </section>
+                ))}
+              </div>
+            </section>
 
+            {/* Quick Actions */}
+            <section className="p-6 rounded-2xl bg-gradient-to-br from-[#1e3a5f]/30 to-[#1e3a5f]/10 border border-[#1e3a5f]/30">
+              <h3 className="font-bold text-white text-lg mb-5 flex items-center gap-2">
+                <Zap className="w-5 h-5 text-emerald-400" />
+                Actions rapides
+              </h3>
+
+              <div className="space-y-2">
+                {[
+                  { icon: Library, label: "Explorer le catalogue", color: "emerald" },
+                  { icon: User, label: "Mon profil", color: "blue" },
+                  { icon: BarChart3, label: "Statistiques", color: "violet" },
+                ].map((action, index) => (
+                  <Link
+                    key={index}
+                    href="#"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] hover:border-emerald-500/20 transition-all group"
+                  >
+                    <div className={`
+                      w-10 h-10 rounded-lg flex items-center justify-center
+                      ${action.color === 'emerald' ? 'bg-emerald-500/15 text-emerald-400' : ''}
+                      ${action.color === 'blue' ? 'bg-blue-500/15 text-blue-400' : ''}
+                      ${action.color === 'violet' ? 'bg-violet-500/15 text-violet-400' : ''}
+                    `}>
+                      <action.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-sm text-white/70 group-hover:text-white font-medium flex-1">{action.label}</span>
+                    <ChevronRight className="w-4 h-4 text-white/20 group-hover:text-white/50 group-hover:translate-x-0.5 transition-all" />
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            {/* Upcoming */}
+            <section className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+              <h3 className="font-bold text-white text-lg mb-5 flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-blue-400" />
+                A venir
+              </h3>
+
+              <div className="space-y-3">
+                <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+                  <div className="flex items-center gap-2 text-xs text-blue-300 mb-2 font-medium">
+                    <Clock className="w-3.5 h-3.5" />
+                    Demain, 14h00
+                  </div>
+                  <p className="text-sm font-semibold text-white">Webinaire: Nouveautes protocoles</p>
+                  <p className="text-xs text-white/40 mt-1">45 min • En direct</p>
+                </div>
+                
+                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                  <div className="flex items-center gap-2 text-xs text-white/40 mb-2 font-medium">
+                    <Clock className="w-3.5 h-3.5" />
+                    Vendredi, 10h00
+                  </div>
+                  <p className="text-sm font-semibold text-white/80">Echeance: Certification annuelle</p>
+                  <p className="text-xs text-white/30 mt-1">2 modules restants</p>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </main>
-      <BottomNav pageActive="dashboard" institution={institution?.nom} />
+
+      {/* Mobile Bottom Nav */}
+      <nav className="fixed bottom-0 left-0 right-0 md:hidden bg-[#09090b]/95 backdrop-blur-xl border-t border-white/[0.06] z-50">
+        <div className="flex items-center justify-around h-18 px-2 py-2">
+          {[
+            { icon: Home, label: "Accueil", active: true },
+            { icon: BookOpen, label: "Formations", active: false },
+            { icon: Library, label: "Catalogue", active: false },
+            { icon: Trophy, label: "Badges", active: false },
+            { icon: User, label: "Profil", active: false },
+          ].map((item, index) => (
+            <button
+              key={index}
+              className={`flex flex-col items-center justify-center gap-1 px-4 py-2 rounded-xl transition-all ${
+                item.active 
+                  ? 'text-emerald-400 bg-emerald-500/10' 
+                  : 'text-white/40 hover:text-white/60 hover:bg-white/[0.04]'
+              }`}
+            >
+              <item.icon className="w-5 h-5" />
+              <span className="text-[10px] font-semibold">{item.label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
     </div>
   )
 }
