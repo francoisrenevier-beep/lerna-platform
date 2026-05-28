@@ -205,7 +205,7 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
   const content = (
     <div className="flex flex-col h-full">
       {/* Zone illustration */}
-      <div className="relative overflow-hidden flex-shrink-0" style={{ height: 168 }}>
+      <div className="relative overflow-hidden flex-shrink-0 rounded-t-2xl" style={{ height: 168 }}>
         {f.image_url ? (
           <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
         ) : (
@@ -213,13 +213,13 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
         )}
 
         {/* Overlay dégradé bas → transparent pour lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
 
         {/* Badge domaine en bas à gauche */}
         {cfg && f.domaine && (
           <span
-            className="absolute bottom-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm"
-            style={{ backgroundColor: cfg.badgeBg + "ee", color: cfg.badgeText }}
+            className="absolute bottom-3 left-3 text-[11px] font-semibold tracking-wide px-3 py-1 rounded-full shadow-sm backdrop-blur-md border border-white/20"
+            style={{ backgroundColor: cfg.badgeBg + "e8", color: cfg.badgeText }}
           >
             {f.domaine}
           </span>
@@ -227,8 +227,8 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
 
         {/* Badge "À venir" */}
         {f.est_a_venir && (
-          <div className="absolute inset-0 bg-black/35 flex items-center justify-center">
-            <span className="bg-[#1B2D5B] text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full">
+          <div className="absolute inset-0 bg-[#1B2D5B]/50 backdrop-blur-[2px] flex items-center justify-center">
+            <span className="bg-[#1B2D5B] text-white text-[10px] font-bold tracking-[0.15em] uppercase px-4 py-2 rounded-full border border-white/10 shadow-lg">
               À venir
             </span>
           </div>
@@ -236,18 +236,18 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
       </div>
 
       {/* Zone contenu */}
-      <div className="flex flex-col flex-1 p-5 gap-3">
+      <div className="flex flex-col flex-1 p-5 gap-3 bg-gradient-to-b from-white to-slate-50/50">
 
         {/* Thématique */}
         {f.thematique && (
-          <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full ${getCouleurEtiquette("thematique", f.thematique)}`}>
+          <span className={`self-start text-[11px] font-semibold tracking-wide px-3 py-1 rounded-full ${getCouleurEtiquette("thematique", f.thematique)}`}>
             {f.thematique}
           </span>
         )}
 
         {/* Titre */}
         <h3
-          className="text-base font-bold text-[#1B2D5B] leading-snug"
+          className="text-[15px] font-bold text-[#1B2D5B] leading-snug tracking-[-0.01em]"
           style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
         >
           {f.titre}
@@ -256,7 +256,7 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
         {/* Description */}
         {f.description_courte && (
           <p
-            className="text-sm text-gray-500 leading-relaxed"
+            className="text-[13px] text-slate-500 leading-relaxed"
             style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
           >
             {f.description_courte}
@@ -264,13 +264,17 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
         )}
 
         {/* Méta : durée + niveau */}
-        <div className="flex items-center gap-2 text-xs text-gray-400 mt-auto">
-          <span className="inline-flex items-center gap-1">
-            <span>⏱</span> {dureeFormat(f.duree_estimee_minutes)}
+        <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-auto font-medium">
+          <span className="inline-flex items-center gap-1.5">
+            <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12,6 12,12 16,14" />
+            </svg>
+            {dureeFormat(f.duree_estimee_minutes)}
           </span>
           {f.niveau && (
             <>
-              <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
+              <span className="w-1 h-1 rounded-full bg-slate-300" />
               <span>{f.niveau}</span>
             </>
           )}
@@ -279,9 +283,12 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
         {/* CTA */}
         {!f.est_a_venir && (
           <div
-            className="mt-1 w-full text-center text-sm font-semibold text-white bg-[#3DBFA0] hover:bg-[#2ea88b] py-2.5 rounded-lg transition-colors"
+            className="mt-2 w-full text-center text-[13px] font-semibold text-white bg-gradient-to-r from-[#3DBFA0] to-[#2ea88b] hover:from-[#2ea88b] hover:to-[#269d80] py-2.5 rounded-xl transition-all shadow-sm shadow-[#3DBFA0]/25"
           >
-            Commencer →
+            Commencer
+            <svg className="inline-block w-4 h-4 ml-1.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </div>
         )}
       </div>
@@ -290,7 +297,7 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
 
   if (f.est_a_venir) {
     return (
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+      <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm shadow-slate-200/50 overflow-hidden flex flex-col ring-1 ring-slate-100/50">
         {content}
       </div>
     )
@@ -299,7 +306,7 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
   return (
     <a
       href={"/catalogue/" + f.slug}
-      className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-xl group"
+      className="bg-white rounded-2xl border border-slate-200/60 shadow-sm shadow-slate-200/50 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-300/40 hover:border-slate-200 group ring-1 ring-slate-100/50"
     >
       {content}
     </a>
@@ -309,30 +316,51 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
 // ── Skeleton ───────────────────────────────────────────────────────────────────
 
 function Pulse({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-gray-200 rounded ${className ?? ""}`} />
+  return <div className={`animate-pulse bg-slate-200/80 rounded ${className ?? ""}`} />
 }
 
 function DashboardSkeleton() {
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100/50 to-slate-50 flex overflow-x-hidden">
       <div className="hidden md:block w-64 bg-[#1B2D5B] flex-shrink-0" />
       <main className="flex-1 pb-20 md:pb-0">
-        <div className="bg-[#1B2D5B] px-4 md:px-8 py-6 flex justify-between items-center">
-          <div className="space-y-2">
-            <Pulse className="h-8 w-48 md:w-64 bg-white/20" />
-            <Pulse className="h-4 w-32 md:w-44 bg-white/10" />
+        <div className="bg-gradient-to-br from-[#1B2D5B] via-[#243a6b] to-[#1B2D5B] px-4 md:px-8 py-8 flex justify-between items-center">
+          <div className="space-y-3">
+            <Pulse className="h-8 w-48 md:w-64 bg-white/15 rounded-lg" />
+            <Pulse className="h-4 w-32 md:w-44 bg-white/10 rounded-md" />
           </div>
-          <Pulse className="h-6 w-24 md:w-36 bg-white/10" />
+          <Pulse className="h-6 w-24 md:w-36 bg-white/10 rounded-full" />
         </div>
-        <div className="px-4 md:px-8 py-6 space-y-8 max-w-6xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[0, 1, 2, 3].map((i) => <Pulse key={i} className="h-24 md:h-28 rounded-xl" />)}
+        <div className="px-4 md:px-8 py-8 space-y-10 max-w-6xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {[0, 1, 2, 3].map((i) => <Pulse key={i} className="h-28 md:h-32 rounded-2xl" />)}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[0, 1, 2].map((i) => <Pulse key={i} className="h-80 rounded-2xl" />)}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[0, 1, 2].map((i) => <Pulse key={i} className="h-[360px] rounded-2xl" />)}
           </div>
         </div>
       </main>
+    </div>
+  )
+}
+
+// ── Section header component ──────────────────────────────────────────────────
+
+function SectionHeader({ title, subtitle, href, linkText }: { title: string; subtitle?: string; href?: string; linkText?: string }) {
+  return (
+    <div className="flex items-end justify-between mb-5">
+      <div>
+        <h2 className="text-lg font-bold text-[#1B2D5B] tracking-[-0.02em]">{title}</h2>
+        {subtitle && <p className="text-[13px] text-slate-400 mt-1 font-medium">{subtitle}</p>}
+      </div>
+      {href && linkText && (
+        <a href={href} className="text-[13px] font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:flex items-center gap-1 group">
+          {linkText}
+          <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      )}
     </div>
   )
 }
@@ -507,10 +535,18 @@ export default function DashboardPage() {
   })
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-[#f8fafc] to-slate-100/80 flex overflow-x-hidden">
+      {/* Subtle texture overlay */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-[0.015]" 
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }} 
+      />
+      
       <Sidebar pageActive="dashboard" institution={institution?.nom} />
 
-      <main className="flex-1 min-w-0 pb-20 md:pb-0">
+      <main className="flex-1 min-w-0 pb-20 md:pb-0 relative">
 
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <PageHeader
@@ -519,16 +555,16 @@ export default function DashboardPage() {
           sousTitre="Bienvenue sur votre espace LEARNA"
           right={
             <>
-              <span className="text-sm capitalize" style={{ color: "rgba(255,255,255,0.45)" }}>
+              <span className="text-[13px] capitalize font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>
                 {getDateFr()}
               </span>
               {institution?.nom && (
                 <span
-                  className="text-xs font-semibold px-3 py-1.5 rounded-full border whitespace-nowrap"
+                  className="text-[11px] font-semibold px-3.5 py-1.5 rounded-full border whitespace-nowrap tracking-wide backdrop-blur-sm"
                   style={{
-                    backgroundColor: "rgba(61,191,160,0.2)",
-                    color: "#3DBFA0",
-                    borderColor: "rgba(61,191,160,0.3)",
+                    backgroundColor: "rgba(61,191,160,0.15)",
+                    color: "#5ee0c3",
+                    borderColor: "rgba(61,191,160,0.25)",
                   }}
                 >
                   {institution.nom}
@@ -538,20 +574,26 @@ export default function DashboardPage() {
           }
         />
 
-        <div className="px-4 md:px-8 py-5 md:py-7 space-y-8 md:space-y-10 max-w-6xl">
+        <div className="px-4 md:px-8 py-6 md:py-8 space-y-10 md:space-y-12 max-w-6xl">
 
           {/* ── Continuer l'apprentissage ──────────────────────────────────── */}
           {formationsEnCours.length > 0 && (
             <section>
-              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
-                Reprendre où vous en étiez
-              </h2>
-              <div className="space-y-2.5">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#3DBFA0] to-[#2ea88b]" />
+                <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.12em]">
+                  Reprendre où vous en étiez
+                </h2>
+              </div>
+              <div className="space-y-3">
                 {formationsEnCours.map((f) => {
                   const pct = f.nbModules > 0 ? Math.round((f.nbTermines / f.nbModules) * 100) : 0
                   return (
-                    <div key={f.id} className="bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-3 flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                    <div 
+                      key={f.id} 
+                      className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 shadow-sm shadow-slate-200/50 px-4 py-4 flex items-center gap-4 hover:shadow-md hover:border-slate-200 transition-all duration-200 ring-1 ring-slate-100/50"
+                    >
+                      <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 shadow-sm ring-1 ring-slate-200/50">
                         {f.image_url ? (
                           <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
                         ) : (
@@ -559,27 +601,38 @@ export default function DashboardPage() {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-[#1B2D5B] truncate">{f.titre}</p>
-                        <div className="flex items-center gap-2 mt-1.5">
-                          <div className="flex-1 bg-gray-100 rounded-full h-1.5">
-                            <div className="bg-[#3DBFA0] h-1.5 rounded-full transition-all" style={{ width: pct + "%" }} />
+                        <p className="text-[14px] font-semibold text-[#1B2D5B] truncate tracking-[-0.01em]">{f.titre}</p>
+                        <div className="flex items-center gap-3 mt-2">
+                          <div className="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                            <div 
+                              className="bg-gradient-to-r from-[#3DBFA0] to-[#2ea88b] h-2 rounded-full transition-all duration-500 ease-out" 
+                              style={{ width: pct + "%" }} 
+                            />
                           </div>
-                          <span className="text-xs text-gray-400 flex-shrink-0">{f.nbTermines}/{f.nbModules} modules</span>
+                          <span className="text-[11px] text-slate-400 font-semibold flex-shrink-0 tabular-nums">
+                            {f.nbTermines}/{f.nbModules}
+                          </span>
                         </div>
                       </div>
                       <a
                         href={"/formations/" + f.slug}
-                        className="flex-shrink-0 text-xs font-semibold text-[#3DBFA0] bg-[#3DBFA0]/10 hover:bg-[#3DBFA0]/20 px-3 py-1.5 rounded-lg transition-colors"
+                        className="flex-shrink-0 text-[12px] font-semibold text-[#3DBFA0] bg-[#3DBFA0]/10 hover:bg-[#3DBFA0]/20 px-4 py-2 rounded-xl transition-all hover:shadow-sm flex items-center gap-1.5"
                       >
-                        Continuer →
+                        Continuer
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
                       </a>
                     </div>
                   )
                 })}
               </div>
               {totalEnCours > 2 && (
-                <a href="/formations" className="inline-block mt-2.5 text-xs text-[#3DBFA0] hover:underline">
-                  Voir toutes mes formations →
+                <a href="/formations" className="inline-flex items-center gap-1 mt-3 text-[12px] font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors">
+                  Voir toutes mes formations
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
                 </a>
               )}
             </section>
@@ -587,8 +640,11 @@ export default function DashboardPage() {
 
           {/* ── Ma progression — 4 métriques ──────────────────────────────── */}
           <section>
-            <h2 className="text-base font-semibold mb-4" style={{ color: "var(--learna-navy)" }}>Ma progression</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#1B2D5B] to-[#3a5590]" />
+              <h2 className="text-base font-bold text-[#1B2D5B] tracking-[-0.02em]">Ma progression</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
               <MetricCard
                 valeur={formationsCompletees}
                 label="Formations complétées"
@@ -622,44 +678,43 @@ export default function DashboardPage() {
 
           {/* ── Formations vedette ─────────────────────────────────────────── */}
           <section>
-            <div className="flex items-end justify-between mb-5">
-              <div>
-                <h2 className="text-lg font-bold text-[#1B2D5B]">
-                  {badgeStats.formationsCommencees > 0 ? "Recommandées pour vous" : "Formations à découvrir"}
-                </h2>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  {badgeStats.formationsCommencees > 0
-                    ? "Selon vos formations en cours et votre domaine"
-                    : "Commencez votre parcours de formation"}
-                </p>
-              </div>
-              <a href="/catalogue" className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block">
-                Voir tout le catalogue →
-              </a>
-            </div>
+            <SectionHeader
+              title={badgeStats.formationsCommencees > 0 ? "Recommandées pour vous" : "Formations à découvrir"}
+              subtitle={badgeStats.formationsCommencees > 0 ? "Selon vos formations en cours et votre domaine" : "Commencez votre parcours de formation"}
+              href="/catalogue"
+              linkText="Voir tout le catalogue"
+            />
 
             {formationsVedette.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
                 {formationsVedette.map((f, i) => (
                   <FormationCardDash key={f.id} f={f} index={i} />
                 ))}
               </div>
             ) : (
-              <div className="bg-white rounded-2xl border border-gray-100 p-10 text-center">
-                <p className="text-3xl mb-3">📚</p>
-                <p className="text-sm font-semibold text-[#1B2D5B] mb-1">Aucune formation disponible</p>
-                <p className="text-xs text-gray-400">Des formations seront ajoutées prochainement.</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 shadow-sm p-12 text-center ring-1 ring-slate-100/50">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 flex items-center justify-center">
+                  <span className="text-3xl">📚</span>
+                </div>
+                <p className="text-[15px] font-semibold text-[#1B2D5B] mb-1.5">Aucune formation disponible</p>
+                <p className="text-[13px] text-slate-400">Des formations seront ajoutées prochainement.</p>
               </div>
             )}
 
-            <a href="/catalogue" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline sm:hidden">
-              Voir tout le catalogue →
+            <a href="/catalogue" className="inline-flex items-center gap-1 mt-4 text-[12px] font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors sm:hidden">
+              Voir tout le catalogue
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
           </section>
 
           {/* ── Explorer par domaine ───────────────────────────────────────── */}
           <section>
-            <h2 className="text-base font-semibold text-[#1B2D5B] mb-4">Explorer par domaine</h2>
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#1B2D5B] to-[#3a5590]" />
+              <h2 className="text-base font-bold text-[#1B2D5B] tracking-[-0.02em]">Explorer par domaine</h2>
+            </div>
             <div className="flex flex-wrap gap-3">
               {DOMAINES_ORDRE.map((domaine) => {
                 const cfg = DOMAINE_CONFIG[domaine]
@@ -667,22 +722,27 @@ export default function DashboardPage() {
                   <a
                     key={domaine}
                     href={"/catalogue/domaine/" + cfg.slug}
-                    className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border font-medium text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                    style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeText + "22" }}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl border font-semibold text-[13px] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-sm backdrop-blur-sm"
+                    style={{ backgroundColor: cfg.badgeBg + "cc", color: cfg.badgeText, borderColor: cfg.badgeText + "18" }}
                   >
-                    <span className="w-7 h-7 flex-shrink-0 rounded-md overflow-hidden inline-flex">
+                    <span className="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden shadow-sm ring-1 ring-slate-200/30">
                       <DomainIllustrationSm domaine={domaine} />
                     </span>
-                    {domaine}
-                    <span className="text-xs opacity-50">→</span>
+                    <span className="tracking-[-0.01em]">{domaine}</span>
+                    <svg className="w-4 h-4 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </a>
                 )
               })}
               <a
                 href="/catalogue"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-500 font-medium text-sm hover:-translate-y-0.5 hover:shadow-md transition-all"
+                className="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200/80 bg-white/60 text-slate-500 font-semibold text-[13px] hover:-translate-y-0.5 hover:shadow-lg hover:bg-white transition-all duration-200 shadow-sm backdrop-blur-sm"
               >
-                Tout le catalogue →
+                Tout le catalogue
+                <svg className="w-4 h-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
             </div>
           </section>
@@ -690,21 +750,32 @@ export default function DashboardPage() {
           {/* ── Mes badges récents ─────────────────────────────────────────── */}
           {(badges.length > 0 || nearUnlock) && (
             <section>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-base font-semibold text-[#1B2D5B]">Mes badges</h2>
-                <a href="/progression" className="text-xs text-[#3DBFA0] hover:underline">Voir tous →</a>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <SectionHeader
+                title="Mes badges"
+                href="/progression"
+                linkText="Voir tous"
+              />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
                 {badges.map((b) => {
                   const def = BADGE_DEFS.find((d) => d.id === b.badge_id)
                   if (!def) return null
                   return (
-                    <div key={b.badge_id} className="bg-white rounded-xl border border-[#3DBFA0]/20 shadow-sm p-4 flex items-start gap-3">
-                      <span className="text-2xl flex-shrink-0">{def.icone}</span>
+                    <div 
+                      key={b.badge_id} 
+                      className="bg-white/80 backdrop-blur-sm rounded-2xl border border-[#3DBFA0]/20 shadow-sm p-5 flex items-start gap-4 ring-1 ring-[#3DBFA0]/10 hover:shadow-md hover:border-[#3DBFA0]/30 transition-all"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3DBFA0]/10 to-[#3DBFA0]/5 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <span className="text-2xl">{def.icone}</span>
+                      </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-[#1B2D5B]">{def.titre}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">{def.description}</p>
-                        <p className="text-xs text-[#3DBFA0] font-medium mt-1.5">Obtenu le {formatDate(b.obtenu_le)}</p>
+                        <p className="text-[14px] font-bold text-[#1B2D5B] tracking-[-0.01em]">{def.titre}</p>
+                        <p className="text-[12px] text-slate-400 mt-1 leading-relaxed">{def.description}</p>
+                        <p className="text-[11px] text-[#3DBFA0] font-semibold mt-2 flex items-center gap-1.5">
+                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          Obtenu le {formatDate(b.obtenu_le)}
+                        </p>
                       </div>
                     </div>
                   )
@@ -715,18 +786,23 @@ export default function DashboardPage() {
                   const pct = Math.round((cur / tot) * 100)
                   const manque = tot - cur
                   return (
-                    <div className="bg-amber-50 rounded-xl border border-amber-200 shadow-sm p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xl grayscale">{nearUnlock.icone}</span>
-                        <p className="text-sm font-semibold text-amber-800">Presque là !</p>
+                    <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 rounded-2xl border border-amber-200/60 shadow-sm p-5 ring-1 ring-amber-200/30">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shadow-sm">
+                          <span className="text-xl grayscale opacity-70">{nearUnlock.icone}</span>
+                        </div>
+                        <p className="text-[14px] font-bold text-amber-800">Presque là !</p>
                       </div>
-                      <p className="text-xs text-amber-700 mb-3 leading-relaxed">
-                        Il vous manque <strong>{manque} formation{manque > 1 ? "s" : ""}</strong> pour obtenir <strong>{nearUnlock.titre}</strong>
+                      <p className="text-[12px] text-amber-700/80 mb-4 leading-relaxed">
+                        Il vous manque <strong className="text-amber-800">{manque} formation{manque > 1 ? "s" : ""}</strong> pour obtenir <strong className="text-amber-800">{nearUnlock.titre}</strong>
                       </p>
-                      <div className="w-full bg-amber-100 rounded-full h-1.5">
-                        <div className="bg-amber-400 h-1.5 rounded-full" style={{ width: pct + "%" }} />
+                      <div className="w-full bg-amber-100/80 rounded-full h-2.5 overflow-hidden">
+                        <div 
+                          className="bg-gradient-to-r from-amber-400 to-orange-400 h-2.5 rounded-full transition-all duration-500" 
+                          style={{ width: pct + "%" }} 
+                        />
                       </div>
-                      <p className="text-xs text-amber-600 mt-1 text-right">{cur} / {tot}</p>
+                      <p className="text-[11px] text-amber-600 font-semibold mt-2 text-right tabular-nums">{cur} / {tot}</p>
                     </div>
                   )
                 })()}
@@ -735,36 +811,41 @@ export default function DashboardPage() {
           )}
 
           {/* ── Bibliothèque de ressources ────────────────────────────────── */}
-          <section className="pb-6">
-            <div className="flex items-end justify-between mb-4">
-              <div>
-                <h2 className="text-base font-semibold text-[#1B2D5B]">Bibliothèque de ressources</h2>
-                <p className="text-xs text-gray-400 mt-0.5">Outils pratiques, fiches et références liés à vos formations</p>
-              </div>
-              <a href="/ressources" className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block">
-                Voir tout →
-              </a>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <section className="pb-8">
+            <SectionHeader
+              title="Bibliothèque de ressources"
+              subtitle="Outils pratiques, fiches et références liés à vos formations"
+              href="/ressources"
+              linkText="Voir tout"
+            />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
               {[
-                { icone: "⭐", titre: "Recommandées",   desc: "Sélectionnées pour vos formations en cours.",   href: "/ressources?section=recommandees" },
-                { icone: "🔧", titre: "Outils terrain", desc: "Check-lists et modèles applicables immédiatement.", href: "/ressources?section=outils" },
-                { icone: "🗒️", titre: "Fiches mémo",    desc: "Synthèses rapides pour retenir l'essentiel.",   href: "/ressources?section=memo" },
-                { icone: "🏛️", titre: "Officielles",    desc: "Textes légaux, articles et références théoriques.", href: "/ressources?section=officielles" },
+                { icone: "⭐", titre: "Recommandées",   desc: "Sélectionnées pour vos formations en cours.",   href: "/ressources?section=recommandees", color: "#f59e0b" },
+                { icone: "🔧", titre: "Outils terrain", desc: "Check-lists et modèles applicables immédiatement.", href: "/ressources?section=outils", color: "#3DBFA0" },
+                { icone: "🗒️", titre: "Fiches mémo",    desc: "Synthèses rapides pour retenir l'essentiel.",   href: "/ressources?section=memo", color: "#1B2D5B" },
+                { icone: "🏛️", titre: "Officielles",    desc: "Textes légaux, articles et références théoriques.", href: "/ressources?section=officielles", color: "#6366f1" },
               ].map((r, i) => (
                 <a
                   key={i}
                   href={r.href}
-                  className="group bg-white rounded-xl border border-gray-100 shadow-sm p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+                  className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 shadow-sm p-5 hover:shadow-lg hover:-translate-y-1 hover:border-slate-200 transition-all duration-200 flex flex-col ring-1 ring-slate-100/50"
                 >
-                  <div className="text-xl mb-2">{r.icone}</div>
-                  <h3 className="text-sm font-semibold text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors mb-1">{r.titre}</h3>
-                  <p className="text-xs text-gray-400 leading-relaxed">{r.desc}</p>
+                  <div 
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-3 shadow-sm transition-transform group-hover:scale-105"
+                    style={{ backgroundColor: r.color + "12" }}
+                  >
+                    <span className="text-xl">{r.icone}</span>
+                  </div>
+                  <h3 className="text-[13px] font-bold text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors mb-1.5 tracking-[-0.01em]">{r.titre}</h3>
+                  <p className="text-[11px] text-slate-400 leading-relaxed">{r.desc}</p>
                 </a>
               ))}
             </div>
-            <a href="/ressources" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline sm:hidden">
-              Voir toutes les ressources →
+            <a href="/ressources" className="inline-flex items-center gap-1 mt-4 text-[12px] font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors sm:hidden">
+              Voir toutes les ressources
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
           </section>
 
