@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react"
 import { supabase } from "@/lib/supabase"
-import { getCouleurEtiquette } from "@/lib/etiquettes"
-import { ArrowRight, Clock, Signal } from "lucide-react"
+import { getDomaineMeta, getNiveauMeta } from "@/lib/formationMeta"
+import { ArrowRight, Clock } from "lucide-react"
 
 type Formation = {
   id: string
   titre: string
   slug: string
+  description_courte: string | null
   domaine: string | string[] | null
   niveau: string | null
   duree_estimee_minutes: number | null
@@ -16,12 +17,7 @@ type Formation = {
   est_nouveau: boolean
 }
 
-const NIVEAU_LABELS: Record<string, string> = {
-  base: "Base",
-  intermediaire: "Intermédiaire",
-  confirme: "Confirmé",
-  tous: "Tous niveaux",
-}
+type StatutProgression = "en_cours" | "termine" | null
 
 function dureeFormat(minutes: number | null) {
   if (!minutes) return "–"
@@ -31,14 +27,14 @@ function dureeFormat(minutes: number | null) {
   return m > 0 ? h + "h" + m : h + "h"
 }
 
-function normaliseDomaine(domaine: string | string[] | null): string | null {
+function normaliserDomaine(domaine: string | string[] | null): string | null {
   if (!domaine) return null
   if (Array.isArray(domaine)) return domaine[0] ?? null
   return domaine
 }
 
 function IllustrationDefault({ domaine }: { domaine: string | null }) {
-  if (domaine === "Handicap") {
+  if (domaine === "handicap") {
     return (
       <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
         <defs>
@@ -77,61 +73,96 @@ function IllustrationDefault({ domaine }: { domaine: string | null }) {
   )
 }
 
-const DOMAINE_BADGE: Record<string, { bg: string; text: string }> = {
-  Handicap: { bg: "#EEF2FF", text: "#3730A3" },
-  Transversal: { bg: "#F1F5F9", text: "#475569" },
-}
-
-function FormationCard({ formation }: { formation: Formation }) {
-  const domaine = normaliseDomaine(formation.domaine)
-  const badge = domaine ? DOMAINE_BADGE[domaine] : null
+export function FormationCard({
+  formation,
+  showNiveauBadge = true,
+  statut = null,
+}: {
+  formation: Formation
+  showNiveauBadge?: boolean
+  statut?: StatutProgression
+}) {
+  const domaineRaw = normaliserDomaine(formation.domaine)
+  const domaineMeta = getDomaineMeta(domaineRaw)
+  const niveauMeta = getNiveauMeta(formation.niveau)
+  const hasDomaine = domaineRaw && domaineMeta.value
 
   return (
     <a
       href="/connexion"
-      className="group flex flex-col rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
-      style={{ height: 380 }}
+      className="group flex flex-col rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg h-full"
     >
       {/* Zone image */}
       <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 200 }}>
         {formation.image_url ? (
           <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
         ) : (
-          <IllustrationDefault domaine={domaine} />
+          <IllustrationDefault domaine={domaineRaw} />
         )}
-        {badge && domaine && (
-          <span
-            className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
-            style={{ backgroundColor: badge.bg, color: badge.text }}
-          >
-            {domaine}
+
+        {/* Badge domaine haut-gauche */}
+        {hasDomaine && (
+          <span className={`absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm ${domaineMeta.bgClass} ${domaineMeta.textClass}`}>
+            {domaineMeta.label}
           </span>
         )}
-        {formation.est_nouveau && (
+
+        {/* Badge statut haut-droite */}
+        {statut === "termine" ? (
+          <span className="absolute top-3 right-3 text-xs font-bold bg-white text-[#3DBFA0] px-2.5 py-1 rounded-full shadow-sm">
+            ✓ Terminé
+          </span>
+        ) : statut === "en_cours" ? (
+          <span className="absolute top-3 right-3 text-xs font-bold bg-white text-[#1B2D5B] px-2.5 py-1 rounded-full shadow-sm">
+            En cours
+          </span>
+        ) : formation.est_nouveau ? (
           <span className="absolute top-3 right-3 text-xs font-bold bg-white text-[#3DBFA0] px-2.5 py-1 rounded-full shadow-sm">
             Nouveau
+          </span>
+        ) : null}
+
+        {/* Badge niveau bas-gauche */}
+        {showNiveauBadge && formation.niveau && (
+          <span
+            className="absolute bottom-3 left-3 text-xs font-semibold px-2 py-0.5 rounded-full text-white shadow-sm"
+            style={{ backgroundColor: niveauMeta.couleur }}
+          >
+            {niveauMeta.label}
           </span>
         )}
       </div>
 
+      {/* Bande de niveau 4px */}
+      <div style={{ height: 4, backgroundColor: niveauMeta.couleur, flexShrink: 0 }} />
+
       {/* Zone contenu */}
       <div className="flex flex-col p-5 flex-1">
-        <h3 className="text-base font-bold text-[#1B2D5B] leading-snug mb-2 group-hover:text-[#3DBFA0] transition-colors overflow-hidden" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
+        <h3
+          className="text-base font-bold text-[#1B2D5B] leading-snug mb-2 group-hover:text-[#3DBFA0] transition-colors"
+          style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+        >
           {formation.titre}
         </h3>
-        <div className="mt-auto flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-gray-400">
-            <Clock className="h-3.5 w-3.5" />
-            <span>{dureeFormat(formation.duree_estimee_minutes)}</span>
-            {formation.niveau && (
-              <>
-                <span>·</span>
-                <Signal className="h-3.5 w-3.5" />
-                <span>{NIVEAU_LABELS[formation.niveau] || formation.niveau}</span>
-              </>
-            )}
+        {formation.description_courte && (
+          <p
+            className="text-xs text-gray-400 mb-3"
+            style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+          >
+            {formation.description_courte}
+          </p>
+        )}
+        <div className="mt-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 text-xs text-gray-400 min-w-0">
+            <Clock className="h-3.5 w-3.5 flex-shrink-0" />
+            <span className="truncate">
+              {dureeFormat(formation.duree_estimee_minutes)}
+              {formation.niveau && niveauMeta.label !== "—" && (
+                <> · {niveauMeta.label}</>
+              )}
+            </span>
           </div>
-          <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#3DBFA0] text-white">
+          <span className="flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#3DBFA0] text-white">
             Commencer →
           </span>
         </div>
@@ -151,7 +182,7 @@ export function FormationsPreview() {
   useEffect(() => {
     supabase
       .from("formations")
-      .select("id, titre, slug, domaine, niveau, duree_estimee_minutes, image_url, est_nouveau")
+      .select("id, titre, slug, description_courte, domaine, niveau, duree_estimee_minutes, image_url, est_nouveau")
       .eq("est_publie", true)
       .eq("est_privee", false)
       .order("ordre")
@@ -205,7 +236,7 @@ export function FormationsPreview() {
             Les formations seront bientôt disponibles.
           </p>
         ) : (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
             {visible.map((f, i) => (
               <div key={f.id} ref={i === INITIAL_COUNT ? extraRef : undefined}>
                 <FormationCard formation={f} />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import { AdminSidebar } from "@/components/AdminSidebar"
+import { NIVEAUX, DOMAINES, getNiveauMeta, getDomaineMeta } from "@/lib/formationMeta"
 
 // ─── Types ──────────────────────────────────────────────────────────────────────
 
@@ -39,7 +40,7 @@ type FormCreation = {
 }
 
 type FormMetadata = {
-  domaine: string[]
+  domaine: string
   thematique: string
   niveau: string
   public_cible: string
@@ -58,20 +59,12 @@ type ParcoursExistant = {
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
-const DOMAINES_OPTIONS = ["Handicap", "Transversal"]
 const THEMATIQUES_OPTIONS = ["Accompagnement", "Management", "Communication", "Éthique et posture", "Outils et méthodes", "Législation et droits"]
 
-const NIVEAUX = [
-  { value: "base", label: "Base", color: "bg-blue-100 text-blue-700 border-blue-300" },
-  { value: "intermediaire", label: "Intermédiaire", color: "bg-amber-100 text-amber-700 border-amber-300" },
-  { value: "confirme", label: "Confirmé", color: "bg-purple-100 text-purple-700 border-purple-300" },
-  { value: "tous", label: "Tous niveaux", color: "bg-gray-100 text-gray-500 border-gray-300" },
-]
-
 const NIVEAUX_PARCOURS = [
-  { value: "1", niveau: "base", label: "Base" },
+  { value: "1", niveau: "base",          label: "Base" },
   { value: "2", niveau: "intermediaire", label: "Intermédiaire" },
-  { value: "3", niveau: "confirme", label: "Confirmé" },
+  { value: "3", niveau: "avance",        label: "Avancé" },
 ]
 
 // ─── Helpers ────────────────────────────────────────────────────────────────────
@@ -93,15 +86,12 @@ function getDomaineArray(domaine: string | string[] | null | undefined): string[
 
 function getDomaineLabel(domaine: string | string[] | null): string {
   const arr = getDomaineArray(domaine)
-  return arr.length > 0 ? arr.join(", ") : "—"
-}
-
-function getNiveauInfo(niveau: string | null) {
-  return NIVEAUX.find(n => n.value === niveau) ?? null
+  if (arr.length === 0) return "—"
+  return arr.map((v) => getDomaineMeta(v).label).join(", ")
 }
 
 function niveauToOrdre(niveau: string): number {
-  const map: Record<string, number> = { base: 1, intermediaire: 2, confirme: 3 }
+  const map: Record<string, number> = { base: 1, intermediaire: 2, avance: 3 }
   return map[niveau] ?? 1
 }
 
@@ -112,7 +102,7 @@ const FORM_VIDE: FormCreation = {
 }
 
 const METADATA_VIDE: FormMetadata = {
-  domaine: [], thematique: "", niveau: "base", public_cible: "",
+  domaine: "", thematique: "", niveau: "base", public_cible: "",
   parcours_id: "", parcours_ordre: "1", parcours_nom: "",
   est_nouveau: false, parcours_actif: false, parcours_nouveau: false,
 }
@@ -255,7 +245,7 @@ export default function AdminFormationsPage() {
 
     const hasParcours = !!data?.parcours_id
     setFormMetadata({
-      domaine: getDomaineArray(data?.domaine),
+      domaine: getDomaineArray(data?.domaine)[0] ?? "",
       thematique: data?.thematique || "",
       niveau: data?.niveau || "base",
       public_cible: data?.public_cible || "",
@@ -279,13 +269,13 @@ export default function AdminFormationsPage() {
     const parcours_id = formMetadata.parcours_actif ? (formMetadata.parcours_id || null) : null
     const parcours_nom = formMetadata.parcours_actif ? (formMetadata.parcours_nom || null) : null
     const parcours_ordre = formMetadata.parcours_actif
-      ? (["base", "intermediaire", "confirme"].includes(formMetadata.niveau)
+      ? (["base", "intermediaire", "avance"].includes(formMetadata.niveau)
         ? niveauToOrdre(formMetadata.niveau)
         : parseInt(formMetadata.parcours_ordre) || 1)
       : null
 
     const { error } = await supabase.from("formations").update({
-      domaine: formMetadata.domaine.length > 0 ? formMetadata.domaine : null,
+      domaine: formMetadata.domaine ? [formMetadata.domaine] : null,
       thematique: formMetadata.thematique || null,
       niveau: formMetadata.niveau || null,
       public_cible: formMetadata.public_cible || null,
@@ -302,16 +292,6 @@ export default function AdminFormationsPage() {
     } else {
       setMetadataSaveOk(true)
     }
-  }
-
-  const toggleDomaineMetadata = (dom: string) => {
-    setFormMetadata((prev) => ({
-      ...prev,
-      domaine: prev.domaine.includes(dom)
-        ? prev.domaine.filter((d) => d !== dom)
-        : [...prev.domaine, dom],
-    }))
-    setMetadataSaveOk(false)
   }
 
   const handleSelectParcours = (value: string) => {
@@ -378,7 +358,7 @@ export default function AdminFormationsPage() {
             </thead>
             <tbody>
               {formationsFiltrees.map((f) => {
-                const niveauInfo = getNiveauInfo(f.niveau)
+                const niveauMeta = getNiveauMeta(f.niveau)
                 return (
                   <tr key={f.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50">
                     <td className="px-4 py-3 max-w-[260px]">
@@ -390,9 +370,12 @@ export default function AdminFormationsPage() {
                       </div>
                       <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
                         <p className="text-xs text-gray-400 font-mono">/{f.slug}</p>
-                        {niveauInfo && (
-                          <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full flex-shrink-0 ${niveauInfo.color.replace("border-", "").split(" ").slice(0, 2).join(" ")}`}>
-                            {niveauInfo.label}
+                        {f.niveau && (
+                          <span
+                            className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full flex-shrink-0 text-white"
+                            style={{ backgroundColor: niveauMeta.couleur }}
+                          >
+                            {niveauMeta.label}
                           </span>
                         )}
                       </div>
@@ -489,23 +472,16 @@ export default function AdminFormationsPage() {
 
               {/* Niveau */}
               <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase mb-2">Niveau</label>
-                <div className="grid grid-cols-2 gap-2">
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5">Niveau</label>
+                <select
+                  value={formMetadata.niveau}
+                  onChange={(e) => { setFormMetadata(prev => ({ ...prev, niveau: e.target.value })); setMetadataSaveOk(false) }}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
+                >
                   {NIVEAUX.map((n) => (
-                    <button
-                      key={n.value}
-                      type="button"
-                      onClick={() => { setFormMetadata(prev => ({ ...prev, niveau: n.value })); setMetadataSaveOk(false) }}
-                      className={`px-3 py-2.5 rounded-lg text-sm font-medium border-2 transition-all text-left ${
-                        formMetadata.niveau === n.value
-                          ? n.color
-                          : "border-gray-100 text-gray-500 hover:border-gray-200 bg-white"
-                      }`}
-                    >
-                      {n.label}
-                    </button>
+                    <option key={n.value} value={n.value}>{n.label}</option>
                   ))}
-                </div>
+                </select>
               </div>
 
               {/* Parcours */}
@@ -584,30 +560,19 @@ export default function AdminFormationsPage() {
                 )}
               </div>
 
-              {/* Domaine multi-select */}
+              {/* Domaine */}
               <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase mb-2">Domaine(s)</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {DOMAINES_OPTIONS.map((dom) => (
-                    <label key={dom} className="flex items-center gap-2.5 cursor-pointer group">
-                      <div
-                        className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors flex-shrink-0 ${
-                          formMetadata.domaine.includes(dom)
-                            ? "bg-[#3DBFA0] border-[#3DBFA0]"
-                            : "border-gray-300 group-hover:border-[#3DBFA0]"
-                        }`}
-                        onClick={() => toggleDomaineMetadata(dom)}
-                      >
-                        {formMetadata.domaine.includes(dom) && (
-                          <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 10 10" fill="currentColor">
-                            <path d="M8.5 2.5L4 7 1.5 4.5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        )}
-                      </div>
-                      <span className="text-sm text-gray-700" onClick={() => toggleDomaineMetadata(dom)}>{dom}</span>
-                    </label>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5">Domaine</label>
+                <select
+                  value={formMetadata.domaine}
+                  onChange={(e) => { setFormMetadata(prev => ({ ...prev, domaine: e.target.value })); setMetadataSaveOk(false) }}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
+                >
+                  <option value="">— Aucun —</option>
+                  {DOMAINES.map((d) => (
+                    <option key={d.value} value={d.value}>{d.label}</option>
                   ))}
-                </div>
+                </select>
               </div>
 
               {/* Thématique */}

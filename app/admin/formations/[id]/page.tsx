@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter, useParams } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import { AdminSidebar } from "@/components/AdminSidebar"
+import { NIVEAUX, DOMAINES } from "@/lib/formationMeta"
 
 type Formation = {
   id: string
@@ -14,7 +15,7 @@ type Formation = {
   categorie: string | null
   niveau: string | null
   duree_estimee_minutes: number | null
-  domaine: string | null
+  domaine: string[] | null
   thematique: string | null
   public_cible: string | null
   est_publie: boolean
@@ -50,12 +51,6 @@ type Apprenant = {
 
 type Onglet = "modules" | "apprenants" | "infos"
 
-const NIVEAUX = [
-  { value: "base", label: "Base" },
-  { value: "intermediaire", label: "Intermédiaire" },
-  { value: "confirme", label: "Confirmé" },
-  { value: "tous", label: "Tous niveaux" },
-]
 
 function formatDuree(minutes: number | null): string {
   if (!minutes || minutes <= 0) return "—"
@@ -568,6 +563,19 @@ export default function AdminFormationDetailPage() {
                       className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]" />
                   </div>
                   <div>
+                    <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Domaine</label>
+                    <select
+                      value={formInfos.domaine?.[0] ?? ""}
+                      onChange={(e) => setFormInfos({ ...formInfos, domaine: e.target.value ? [e.target.value] : null })}
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
+                    >
+                      <option value="">— Aucun —</option>
+                      {DOMAINES.map((d) => (
+                        <option key={d.value} value={d.value}>{d.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
                     <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Thématique</label>
                     <input type="text" value={formInfos.thematique || ""}
                       onChange={(e) => setFormInfos({ ...formInfos, thematique: e.target.value })}
@@ -600,23 +608,17 @@ export default function AdminFormationDetailPage() {
               <h3 className="text-sm font-semibold text-[#1B2D5B] mb-4">Niveau & Durée</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-2">Niveau</label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5">Niveau</label>
+                  <select
+                    value={formInfos.niveau ?? ""}
+                    onChange={(e) => setFormInfos({ ...formInfos, niveau: e.target.value || null })}
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
+                  >
+                    <option value="">— Non défini —</option>
                     {NIVEAUX.map((n) => (
-                      <button
-                        key={n.value}
-                        type="button"
-                        onClick={() => setFormInfos({ ...formInfos, niveau: n.value })}
-                        className={`px-3 py-2.5 rounded-lg text-sm font-medium border-2 transition-all text-left ${
-                          formInfos.niveau === n.value
-                            ? "border-[#1B2D5B] bg-[#1B2D5B] text-white"
-                            : "border-gray-100 text-gray-500 hover:border-gray-200 bg-white"
-                        }`}
-                      >
-                        {n.label}
-                      </button>
+                      <option key={n.value} value={n.value}>{n.label}</option>
                     ))}
-                  </div>
+                  </select>
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Durée estimée (minutes)</label>
