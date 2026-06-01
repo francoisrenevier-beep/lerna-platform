@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
 import { BottomNav } from "@/components/BottomNav"
+import { getDomaineMeta } from "@/lib/formationMeta"
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -37,7 +38,7 @@ type ParcoursGroup = {
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
-const DOMAINES = ["Handicap", "Transversal"] as const
+const DOMAINES = ["handicap", "transversal", "pedagogie-specialisee", "protection-mineurs"] as const
 
 const THEMATIQUES = [
   "Accompagnement",
@@ -48,18 +49,18 @@ const THEMATIQUES = [
   "Législation et droits",
 ]
 
-const NIVEAUX = ["Base", "Intermédiaire", "Confirmé"]
+const NIVEAUX = ["Base", "Intermédiaire", "Avancé"]
 
 const NIVEAU_TO_DB: Record<string, string> = {
   "Base": "base",
   "Intermédiaire": "intermediaire",
-  "Confirmé": "confirme",
+  "Avancé": "avance",
 }
 
 const NIVEAU_LABELS: Record<string, string> = {
   "base": "Base",
   "intermediaire": "Intermédiaire",
-  "confirme": "Confirmé",
+  "avance": "Avancé",
   "tous": "Tous niveaux",
 }
 
@@ -73,7 +74,7 @@ interface DomaineConfig {
 }
 
 const DOMAINE_CONFIG: Record<string, DomaineConfig> = {
-  "Handicap": {
+  "handicap": {
     slug: "handicap",
     badgeBg: "#EEF2FF",
     badgeText: "#3730A3",
@@ -81,13 +82,29 @@ const DOMAINE_CONFIG: Record<string, DomaineConfig> = {
     gradTo: "#C7D2FE",
     iconColor: "#4338CA",
   },
-  "Transversal": {
+  "transversal": {
     slug: "transversal",
     badgeBg: "#F1F5F9",
     badgeText: "#475569",
     gradFrom: "#F1F5F9",
     gradTo: "#CBD5E1",
     iconColor: "#64748B",
+  },
+  "pedagogie-specialisee": {
+    slug: "pedagogie-specialisee",
+    badgeBg: "#F0FDFA",
+    badgeText: "#0F766E",
+    gradFrom: "#F0FDFA",
+    gradTo: "#99F6E4",
+    iconColor: "#0D9488",
+  },
+  "protection-mineurs": {
+    slug: "protection-mineurs",
+    badgeBg: "#FFF7ED",
+    badgeText: "#C2410C",
+    gradFrom: "#FFF7ED",
+    gradTo: "#FED7AA",
+    iconColor: "#EA580C",
   },
 }
 
@@ -187,7 +204,7 @@ function IllustrationParcours() {
 }
 
 function DomainIllustration({ domaine }: { domaine: string | null }) {
-  if (domaine === "Handicap") return <IllustrationHandicap />
+  if (domaine === "handicap") return <IllustrationHandicap />
   return <IllustrationTransversal />
 }
 
@@ -247,7 +264,7 @@ function FormationCard({
             className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
             style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText }}
           >
-            {firstDomaine}
+            {getDomaineMeta(firstDomaine).label}
           </span>
         )}
         {formation.est_nouveau && !isAVenir && (
@@ -344,7 +361,7 @@ function FormationCard({
 
 function DomainIcon({ domaine, color }: { domaine: string; color: string }) {
   const style = { color }
-  if (domaine === "Handicap") return (
+  if (domaine === "handicap") return (
     <svg viewBox="0 0 24 24" className="w-5 h-5" style={style} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="5" r="2.5" />
       <path d="M10 9h4l1 7h-2l-1-4H10" />
@@ -428,7 +445,7 @@ function DomainSection({
             <div className="p-2 rounded-xl" style={{ backgroundColor: cfg?.badgeBg }}>
               <DomainIcon domaine={domaine} color={cfg?.badgeText || "#475569"} />
             </div>
-            <h2 className="text-xl font-bold text-[#1B2D5B]">{domaine}</h2>
+            <h2 className="text-xl font-bold text-[#1B2D5B]">{getDomaineMeta(domaine).label}</h2>
           </div>
           <p className="text-sm text-gray-500 ml-11">
             {formations.length} formation{formations.length !== 1 ? "s" : ""}
@@ -460,7 +477,7 @@ function DomainSection({
             onClick={handleShowAll}
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#1B2D5B] hover:text-[#3DBFA0] transition-colors border border-[#1B2D5B]/20 hover:border-[#3DBFA0] px-6 py-2.5 rounded-full"
           >
-            Voir toutes les formations — {domaine} →
+            Voir toutes les formations — {getDomaineMeta(domaine).label} →
           </button>
         </div>
       )}
@@ -820,12 +837,25 @@ export default function CataloguePage() {
               value={filterType}
               onChange={setFilterType}
             />
-            <FilterDropdown
-              label="Domaine"
-              options={[...DOMAINES]}
-              value={filterDomaine}
-              onChange={setFilterDomaine}
-            />
+            <div className="relative w-full md:w-auto">
+              <select
+                value={filterDomaine}
+                onChange={(e) => setFilterDomaine(e.target.value)}
+                className={`appearance-none w-full pl-3 pr-7 py-2 text-sm rounded-lg border cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] transition-colors ${
+                  filterDomaine
+                    ? "border-[#3DBFA0] bg-[#3DBFA0]/5 text-[#3DBFA0] font-medium"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                }`}
+              >
+                <option value="">Domaine</option>
+                {DOMAINES.map((slug) => (
+                  <option key={slug} value={slug}>{getDomaineMeta(slug).label}</option>
+                ))}
+              </select>
+              <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+              </svg>
+            </div>
             <FilterDropdown
               label="Thématique"
               options={THEMATIQUES}
@@ -854,7 +884,7 @@ export default function CataloguePage() {
             )}
             <div className="col-span-2 md:col-auto flex items-center gap-2 flex-wrap md:ml-auto">
               {filterType && <FilterChip label={filterType} onRemove={() => setFilterType("")} />}
-              {filterDomaine && <FilterChip label={filterDomaine} onRemove={() => setFilterDomaine("")} />}
+              {filterDomaine && <FilterChip label={getDomaineMeta(filterDomaine).label} onRemove={() => setFilterDomaine("")} />}
               {filterThematique && <FilterChip label={filterThematique} onRemove={() => setFilterThematique("")} />}
               {filterNiveau && <FilterChip label={filterNiveau} onRemove={() => setFilterNiveau("")} />}
               {filterDuree && <FilterChip label={filterDuree} onRemove={() => setFilterDuree("")} />}
