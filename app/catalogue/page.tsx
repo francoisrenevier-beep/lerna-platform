@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
 import { BottomNav } from "@/components/BottomNav"
-import { getDomaineMeta } from "@/lib/formationMeta"
+import { getDomaineMeta, getNiveauMeta } from "@/lib/formationMeta"
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -285,6 +285,9 @@ function FormationCard({
           </div>
         )}
       </div>
+
+      {/* Bande de niveau */}
+      <div style={{ height: 4, backgroundColor: getNiveauMeta(formation.niveau).couleur, flexShrink: 0 }} />
 
       {/* Content zone */}
       <div className="flex flex-col p-5" style={{ height: 200 }}>
