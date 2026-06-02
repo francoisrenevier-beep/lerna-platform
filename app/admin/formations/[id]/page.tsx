@@ -80,6 +80,7 @@ export default function AdminFormationDetailPage() {
   const [saveInfosError, setSaveInfosError] = useState<string | null>(null)
   const [imageUploading, setImageUploading] = useState(false)
   const [imageUploadError, setImageUploadError] = useState<string | null>(null)
+  const [imageInputKey, setImageInputKey] = useState(0)
 
   const [modalModule, setModalModule] = useState<ModuleForm | null>(null)
   const [moduleLoading, setModuleLoading] = useState(false)
@@ -273,27 +274,42 @@ export default function AdminFormationDetailPage() {
   const uploadImage = async (file: File) => {
     setImageUploading(true)
     setImageUploadError(null)
-    const ext = file.name.split(".").pop()
-    const path = `${formationId}/cover.${ext}`
-    const { error: uploadError } = await supabase.storage
-      .from("formation-images")
-      .upload(path, file, { upsert: true })
-    if (uploadError) {
-      setImageUploadError("Erreur lors de l'upload : " + uploadError.message)
+    try {
+      const ext = file.name.includes(".") ? file.name.split(".").pop() : "jpg"
+      const path = `${formationId}/cover.${ext}`
+      const { error: uploadError } = await supabase.storage
+        .from("formation-images")
+        .upload(path, file, { upsert: true, contentType: file.type || "image/jpeg" })
+      if (uploadError) {
+        setImageUploadError("Erreur upload : " + uploadError.message)
+        return
+      }
+      const { data: urlData } = supabase.storage.from("formation-images").getPublicUrl(path)
+      const { error: updateError } = await supabase.from("formations")
+        .update({ image_url: urlData.publicUrl })
+        .eq("id", formationId)
+      if (updateError) {
+        setImageUploadError("Erreur sauvegarde : " + updateError.message)
+        return
+      }
+      if (formInfos) setFormInfos({ ...formInfos, image_url: urlData.publicUrl })
+    } catch (err: unknown) {
+      setImageUploadError("Erreur inattendue : " + (err instanceof Error ? err.message : String(err)))
+    } finally {
       setImageUploading(false)
-      return
+      setImageInputKey((k) => k + 1)
     }
-    const { data: urlData } = supabase.storage.from("formation-images").getPublicUrl(path)
-    const publicUrl = urlData.publicUrl
-    await supabase.from("formations").update({ image_url: publicUrl }).eq("id", formationId)
-    if (formInfos) setFormInfos({ ...formInfos, image_url: publicUrl })
-    setImageUploading(false)
   }
 
   const supprimerImage = async () => {
     if (!formInfos?.image_url) return
-    const path = formInfos.image_url.split("/formation-images/")[1]
-    if (path) await supabase.storage.from("formation-images").remove([path])
+    try {
+      const rawPath = formInfos.image_url.split("/formation-images/")[1]
+      const path = rawPath?.split("?")[0]
+      if (path) await supabase.storage.from("formation-images").remove([path])
+    } catch {
+      // ignore delete errors (file might already be gone)
+    }
     await supabase.from("formations").update({ image_url: null }).eq("id", formationId)
     if (formInfos) setFormInfos({ ...formInfos, image_url: null })
   }
@@ -517,7 +533,7 @@ export default function AdminFormationDetailPage() {
                       <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                     </svg>
                     {imageUploading ? "Upload en cours..." : "Choisir une image"}
-                    <input type="file" accept="image/*" className="hidden" disabled={imageUploading}
+                    <input key={imageInputKey} type="file" accept="image/*" className="hidden" disabled={imageUploading}
                       onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadImage(f) }} />
                   </label>
                   {formInfos.image_url && (
