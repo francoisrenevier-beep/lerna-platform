@@ -16,6 +16,7 @@ type Formation = {
   domaine: string | string[] | null
   niveau: string | null
   duree_estimee_minutes: number | null
+  image_url: string | null
   est_nouveau: boolean
 }
 
@@ -117,9 +118,13 @@ export function FormationCard({
       href="/connexion"
       className="group flex flex-col rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg h-full"
     >
-      {/* Zone vignette */}
-      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 152 }}>
-        <VignetteTypo formation={formation} domaineRaw={domaineRaw} />
+      {/* Zone image / vignette */}
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 160 }}>
+        {formation.image_url ? (
+          <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
+        ) : (
+          <VignetteTypo formation={formation} domaineRaw={domaineRaw} />
+        )}
 
         {/* Badge domaine haut-gauche */}
         {hasDomaine && (
@@ -207,7 +212,7 @@ export function FormationsPreview() {
   useEffect(() => {
     supabase
       .from("formations")
-      .select("id, titre, titre_court, slug, description_courte, domaine, niveau, duree_estimee_minutes, est_nouveau")
+      .select("id, titre, titre_court, slug, description_courte, domaine, niveau, duree_estimee_minutes, image_url, est_nouveau")
       .eq("est_publie", true)
       .eq("est_privee", false)
       .order("ordre")

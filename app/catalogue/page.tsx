@@ -23,6 +23,7 @@ type Formation = {
   parcours_nom: string | null
   domaine: string[] | string | null
   titre_court?: string | null
+  image_url: string | null
   thematique: string | null
   public_cible: string | null
   ordre: number | null
@@ -163,7 +164,11 @@ function FormationCard({
     <>
       {/* Zone vignette */}
       <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 160 }}>
-        <VignetteTypo formation={formation} domaineRaw={firstDomaine} />
+        {formation.image_url ? (
+          <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
+        ) : (
+          <VignetteTypo formation={formation} domaineRaw={firstDomaine} />
+        )}
 
         {/* Badge domaine haut-gauche */}
         {domaineBadge && domaineBadge.value && (
@@ -596,7 +601,7 @@ export default function CataloguePage() {
           supabase
             .from("formations")
             .select(
-              "id, titre, titre_court, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir, est_nouveau"
+              "id, titre, titre_court, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir, est_nouveau, image_url"
             )
             .eq("est_privee", false)
             .or("est_publie.eq.true,est_a_venir.eq.true")
