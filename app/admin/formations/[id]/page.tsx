@@ -275,15 +275,25 @@ export default function AdminFormationDetailPage() {
     setImageUploading(true)
     setImageUploadError(null)
     try {
+      // Supprimer l'ancienne image pour éviter les fichiers orphelins
+      if (formInfos?.image_url) {
+        const oldRaw = formInfos.image_url.split("/formation-images/")[1]
+        const oldPath = oldRaw?.split("?")[0]
+        if (oldPath) await supabase.storage.from("formation-images").remove([oldPath])
+      }
+
+      // Nom unique à chaque upload → pas de cache CDN
       const ext = file.name.includes(".") ? file.name.split(".").pop() : "jpg"
-      const path = `${formationId}/cover.${ext}`
+      const path = `${formationId}/cover-${Date.now()}.${ext}`
+
       const { error: uploadError } = await supabase.storage
         .from("formation-images")
-        .upload(path, file, { upsert: true, contentType: file.type || "image/jpeg" })
+        .upload(path, file, { contentType: file.type || "image/jpeg" })
       if (uploadError) {
         setImageUploadError("Erreur upload : " + uploadError.message)
         return
       }
+
       const { data: urlData } = supabase.storage.from("formation-images").getPublicUrl(path)
       const { error: updateError } = await supabase.from("formations")
         .update({ image_url: urlData.publicUrl })
@@ -292,6 +302,7 @@ export default function AdminFormationDetailPage() {
         setImageUploadError("Erreur sauvegarde : " + updateError.message)
         return
       }
+
       if (formInfos) setFormInfos({ ...formInfos, image_url: urlData.publicUrl })
     } catch (err: unknown) {
       setImageUploadError("Erreur inattendue : " + (err instanceof Error ? err.message : String(err)))
