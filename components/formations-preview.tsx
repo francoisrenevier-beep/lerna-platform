@@ -2,22 +2,26 @@
 
 import { useEffect, useRef, useState } from "react"
 import { supabase } from "@/lib/supabase"
-import { getDomaineMeta, getNiveauMeta } from "@/lib/formationMeta"
-import { ArrowRight, Clock } from "lucide-react"
+import { getDomaineMeta, getNiveauMeta, titreVignette } from "@/lib/formationMeta"
+import { ArrowRight, Clock, Signal } from "lucide-react"
+
+// ─── Types ───────────────────────────────────────────────────────────────────
 
 type Formation = {
   id: string
   titre: string
+  titre_court?: string | null
   slug: string
   description_courte: string | null
   domaine: string | string[] | null
   niveau: string | null
   duree_estimee_minutes: number | null
-  image_url: string | null
   est_nouveau: boolean
 }
 
 type StatutProgression = "en_cours" | "termine" | null
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function dureeFormat(minutes: number | null) {
   if (!minutes) return "–"
@@ -33,45 +37,66 @@ function normaliserDomaine(domaine: string | string[] | null): string | null {
   return domaine
 }
 
-function IllustrationDefault({ domaine }: { domaine: string | null }) {
-  if (domaine === "handicap") {
-    return (
-      <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-        <defs>
-          <linearGradient id="prev-ih" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#EEF2FF" />
-            <stop offset="100%" stopColor="#C7D2FE" />
-          </linearGradient>
-        </defs>
-        <rect width="200" height="120" fill="url(#prev-ih)" />
-        <circle cx="100" cy="55" r="40" fill="#4338CA" fillOpacity="0.1" />
-        <circle cx="100" cy="55" r="28" fill="#4338CA" fillOpacity="0.13" />
-        <circle cx="100" cy="38" r="10" fill="#4338CA" fillOpacity="0.6" />
-        <path d="M86 65 Q86 55 100 55 Q114 55 114 65 L114 76 Q114 79 111 79 L89 79 Q86 79 86 76Z" fill="#4338CA" fillOpacity="0.6" />
-      </svg>
-    )
-  }
+// ─── Vignette typographique ───────────────────────────────────────────────────
+
+export function VignetteTypo({
+  formation,
+  domaineRaw,
+}: {
+  formation: { titre: string; titre_court?: string | null }
+  domaineRaw: string | null
+}) {
+  const meta = getDomaineMeta(domaineRaw)
+  const Icon = meta.icon
+  const court = titreVignette(formation)
+
   return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="prev-it" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F1F5F9" />
-          <stop offset="100%" stopColor="#CBD5E1" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#prev-it)" />
-      <circle cx="100" cy="60" r="11" fill="#64748B" fillOpacity="0.4" />
-      <circle cx="58" cy="33" r="8" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="142" cy="33" r="8" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="58" cy="87" r="8" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="142" cy="87" r="8" fill="#64748B" fillOpacity="0.35" />
-      <line x1="100" y1="60" x2="58" y2="33" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-      <line x1="100" y1="60" x2="142" y2="33" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-      <line x1="100" y1="60" x2="58" y2="87" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-      <line x1="100" y1="60" x2="142" y2="87" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-    </svg>
+    <div
+      className="absolute inset-0 overflow-hidden"
+      style={{ backgroundColor: meta.tintBg }}
+    >
+      {/* Cercles décoratifs bas-droite */}
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{ width: 130, height: 130, bottom: -35, right: -35, backgroundColor: meta.iconBg, opacity: 0.4 }}
+      />
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{ width: 195, height: 195, bottom: -68, right: -68, backgroundColor: meta.iconBg, opacity: 0.18 }}
+      />
+
+      {/* Pastille icône bas-droite */}
+      <div
+        className="absolute rounded-2xl p-2.5 shadow-sm"
+        style={{ bottom: 12, right: 12, backgroundColor: meta.iconBg }}
+      >
+        <Icon className="w-5 h-5" style={{ color: meta.iconColor }} />
+      </div>
+
+      {/* Titre court — centré verticalement, gauche */}
+      <div
+        className="absolute flex items-center"
+        style={{ top: 0, bottom: 0, left: 14, right: "38%" }}
+      >
+        <p
+          className="font-medium leading-snug"
+          style={{
+            color: "#1B2D5B",
+            fontSize: 17,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          } as React.CSSProperties}
+        >
+          {court}
+        </p>
+      </div>
+    </div>
   )
 }
+
+// ─── Carte de formation ───────────────────────────────────────────────────────
 
 export function FormationCard({
   formation,
@@ -92,17 +117,16 @@ export function FormationCard({
       href="/connexion"
       className="group flex flex-col rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg h-full"
     >
-      {/* Zone image */}
-      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 200 }}>
-        {formation.image_url ? (
-          <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
-        ) : (
-          <IllustrationDefault domaine={domaineRaw} />
-        )}
+      {/* Zone vignette */}
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 152 }}>
+        <VignetteTypo formation={formation} domaineRaw={domaineRaw} />
 
         {/* Badge domaine haut-gauche */}
         {hasDomaine && (
-          <span className={`absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm ${domaineMeta.bgClass} ${domaineMeta.textClass}`}>
+          <span
+            className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
+            style={{ backgroundColor: domaineMeta.badgeBg, color: domaineMeta.badgeText }}
+          >
             {domaineMeta.label}
           </span>
         )}
@@ -125,9 +149,10 @@ export function FormationCard({
         {/* Badge niveau bas-gauche */}
         {showNiveauBadge && formation.niveau && (
           <span
-            className="absolute bottom-3 left-3 text-xs font-semibold px-2 py-0.5 rounded-full text-white shadow-sm"
-            style={{ backgroundColor: niveauMeta.couleur }}
+            className="absolute bottom-3 left-3 flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full shadow-sm"
+            style={{ backgroundColor: "rgba(255,255,255,0.85)", color: niveauMeta.couleur }}
           >
+            <Signal className="w-3 h-3" />
             {niveauMeta.label}
           </span>
         )}
@@ -136,7 +161,7 @@ export function FormationCard({
       {/* Bande de niveau 4px */}
       <div style={{ height: 4, backgroundColor: niveauMeta.couleur, flexShrink: 0 }} />
 
-      {/* Zone contenu */}
+      {/* Bloc texte */}
       <div className="flex flex-col p-5 flex-1">
         <h3
           className="text-base font-bold text-[#1B2D5B] leading-snug mb-2 group-hover:text-[#3DBFA0] transition-colors"
@@ -157,9 +182,7 @@ export function FormationCard({
             <Clock className="h-3.5 w-3.5 flex-shrink-0" />
             <span className="truncate">
               {dureeFormat(formation.duree_estimee_minutes)}
-              {formation.niveau && niveauMeta.label !== "—" && (
-                <> · {niveauMeta.label}</>
-              )}
+              {formation.niveau && niveauMeta.label !== "—" && <> · {niveauMeta.label}</>}
             </span>
           </div>
           <span className="flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#3DBFA0] text-white">
@@ -170,6 +193,8 @@ export function FormationCard({
     </a>
   )
 }
+
+// ─── Section publique "Nos formations" ───────────────────────────────────────
 
 const INITIAL_COUNT = 3
 
@@ -182,7 +207,7 @@ export function FormationsPreview() {
   useEffect(() => {
     supabase
       .from("formations")
-      .select("id, titre, slug, description_courte, domaine, niveau, duree_estimee_minutes, image_url, est_nouveau")
+      .select("id, titre, titre_court, slug, description_courte, domaine, niveau, duree_estimee_minutes, est_nouveau")
       .eq("est_publie", true)
       .eq("est_privee", false)
       .order("ordre")
@@ -194,9 +219,7 @@ export function FormationsPreview() {
 
   const handleShowAll = () => {
     setShowAll(true)
-    setTimeout(() => {
-      extraRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-    }, 50)
+    setTimeout(() => extraRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50)
   }
 
   const visible = showAll ? formations : formations.slice(0, INITIAL_COUNT)
@@ -207,12 +230,8 @@ export function FormationsPreview() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">
-              Nos formations
-            </h2>
-            <p className="mt-2 text-lg text-muted-foreground">
-              Ancrées dans les réalités du travail social en Suisse romande
-            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">Nos formations</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Ancrées dans les réalités du travail social en Suisse romande</p>
           </div>
           {hasMore && (
             <button
@@ -232,9 +251,7 @@ export function FormationsPreview() {
             ))}
           </div>
         ) : formations.length === 0 ? (
-          <p className="mt-12 text-center text-muted-foreground">
-            Les formations seront bientôt disponibles.
-          </p>
+          <p className="mt-12 text-center text-muted-foreground">Les formations seront bientôt disponibles.</p>
         ) : (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
             {visible.map((f, i) => (

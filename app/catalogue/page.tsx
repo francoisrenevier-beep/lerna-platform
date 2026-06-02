@@ -5,7 +5,9 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
 import { BottomNav } from "@/components/BottomNav"
-import { getDomaineMeta, getNiveauMeta } from "@/lib/formationMeta"
+import { getDomaineMeta, getNiveauMeta, titreVignette } from "@/lib/formationMeta"
+import { VignetteTypo } from "@/components/formations-preview"
+import { Signal } from "lucide-react"
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -20,12 +22,12 @@ type Formation = {
   parcours_ordre: number | null
   parcours_nom: string | null
   domaine: string[] | string | null
+  titre_court?: string | null
   thematique: string | null
   public_cible: string | null
   ordre: number | null
   est_a_venir: boolean
   est_nouveau: boolean
-  image_url: string | null
 }
 
 type FormationState = "nouveau" | "en_cours" | "termine"
@@ -64,49 +66,6 @@ const NIVEAU_LABELS: Record<string, string> = {
   "tous": "Tous niveaux",
 }
 
-interface DomaineConfig {
-  slug: string
-  badgeBg: string
-  badgeText: string
-  gradFrom: string
-  gradTo: string
-  iconColor: string
-}
-
-const DOMAINE_CONFIG: Record<string, DomaineConfig> = {
-  "handicap": {
-    slug: "handicap",
-    badgeBg: "#EEF2FF",
-    badgeText: "#3730A3",
-    gradFrom: "#EEF2FF",
-    gradTo: "#C7D2FE",
-    iconColor: "#4338CA",
-  },
-  "transversal": {
-    slug: "transversal",
-    badgeBg: "#F1F5F9",
-    badgeText: "#475569",
-    gradFrom: "#F1F5F9",
-    gradTo: "#CBD5E1",
-    iconColor: "#64748B",
-  },
-  "pedagogie-specialisee": {
-    slug: "pedagogie-specialisee",
-    badgeBg: "#F0FDFA",
-    badgeText: "#0F766E",
-    gradFrom: "#F0FDFA",
-    gradTo: "#99F6E4",
-    iconColor: "#0D9488",
-  },
-  "protection-mineurs": {
-    slug: "protection-mineurs",
-    badgeBg: "#FFF7ED",
-    badgeText: "#C2410C",
-    gradFrom: "#FFF7ED",
-    gradTo: "#FED7AA",
-    iconColor: "#EA580C",
-  },
-}
 
 // ─── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -130,53 +89,6 @@ function getFirstDomaine(domaine: string | string[] | null | undefined): string 
 }
 
 // ─── SVG Illustrations ──────────────────────────────────────────────────────────
-
-function IllustrationHandicap() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="ih" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#EEF2FF" />
-          <stop offset="100%" stopColor="#C7D2FE" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#ih)" />
-      <circle cx="100" cy="55" r="40" fill="#4338CA" fillOpacity="0.1" />
-      <circle cx="100" cy="55" r="28" fill="#4338CA" fillOpacity="0.13" />
-      <circle cx="100" cy="38" r="10" fill="#4338CA" fillOpacity="0.6" />
-      <path d="M86 65 Q86 55 100 55 Q114 55 114 65 L114 76 Q114 79 111 79 L89 79 Q86 79 86 76Z" fill="#4338CA" fillOpacity="0.6" />
-      <circle cx="95" cy="92" r="11" fill="none" stroke="#4338CA" strokeWidth="2.5" strokeOpacity="0.5" />
-      <circle cx="95" cy="92" r="3.5" fill="#4338CA" fillOpacity="0.5" />
-      <line x1="114" y1="68" x2="114" y2="84" stroke="#4338CA" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function IllustrationTransversal() {
-  return (
-    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="it" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F1F5F9" />
-          <stop offset="100%" stopColor="#CBD5E1" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="120" fill="url(#it)" />
-      <line x1="100" y1="60" x2="58" y2="33" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-      <line x1="100" y1="60" x2="142" y2="33" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-      <line x1="100" y1="60" x2="58" y2="87" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-      <line x1="100" y1="60" x2="142" y2="87" stroke="#64748B" strokeWidth="2" strokeOpacity="0.3" />
-      <line x1="58" y1="33" x2="142" y2="33" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.2" />
-      <line x1="58" y1="87" x2="142" y2="87" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.2" />
-      <circle cx="100" cy="60" r="11" fill="#64748B" fillOpacity="0.4" />
-      <circle cx="100" cy="60" r="6" fill="#64748B" fillOpacity="0.5" />
-      <circle cx="58" cy="33" r="8" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="142" cy="33" r="8" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="58" cy="87" r="8" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="142" cy="87" r="8" fill="#64748B" fillOpacity="0.35" />
-    </svg>
-  )
-}
 
 function IllustrationParcours() {
   return (
@@ -203,17 +115,12 @@ function IllustrationParcours() {
   )
 }
 
-function DomainIllustration({ domaine }: { domaine: string | null }) {
-  if (domaine === "handicap") return <IllustrationHandicap />
-  return <IllustrationTransversal />
-}
-
 // ─── Skeleton ───────────────────────────────────────────────────────────────────
 
 function SkeletonCard() {
   return (
-    <div className="rounded-2xl overflow-hidden shadow-sm bg-white animate-pulse" style={{ height: 420 }}>
-      <div className="bg-gray-100" style={{ height: 220 }} />
+    <div className="rounded-2xl overflow-hidden shadow-sm bg-white animate-pulse" style={{ height: 364 }}>
+      <div className="bg-gray-100" style={{ height: 160 }} />
       <div className="p-5 space-y-3">
         <div className="h-3.5 bg-gray-100 rounded-full w-1/3" />
         <div className="h-5 bg-gray-100 rounded w-4/5" />
@@ -239,7 +146,6 @@ function FormationCard({
   nbTotal: number
 }) {
   const firstDomaine = getFirstDomaine(formation.domaine)
-  const cfg = firstDomaine ? DOMAINE_CONFIG[firstDomaine] : null
   const isAVenir = formation.est_a_venir
 
   const cardBg = state === "termine" ? "bg-green-50/50" : "bg-white"
@@ -250,33 +156,52 @@ function FormationCard({
       ? "border border-green-200"
       : "border border-gray-100"
 
+  const niveauMeta = getNiveauMeta(formation.niveau)
+  const domaineBadge = firstDomaine ? getDomaineMeta(firstDomaine) : null
+
   const inner = (
     <>
-      {/* Image zone */}
-      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 220 }}>
-        {formation.image_url ? (
-          <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
-        ) : (
-          <DomainIllustration domaine={firstDomaine} />
-        )}
-        {cfg && firstDomaine && (
+      {/* Zone vignette */}
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 160 }}>
+        <VignetteTypo formation={formation} domaineRaw={firstDomaine} />
+
+        {/* Badge domaine haut-gauche */}
+        {domaineBadge && domaineBadge.value && (
           <span
             className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
-            style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText }}
+            style={{ backgroundColor: domaineBadge.badgeBg, color: domaineBadge.badgeText }}
           >
-            {getDomaineMeta(firstDomaine).label}
+            {domaineBadge.label}
           </span>
         )}
-        {formation.est_nouveau && !isAVenir && (
-          <span className="absolute top-3 right-3 text-xs font-bold bg-white text-[#3DBFA0] px-2.5 py-1 rounded-full shadow-sm">
-            Nouveau
-          </span>
-        )}
-        {state === "termine" && (
+
+        {/* Badge statut haut-droite */}
+        {state === "termine" ? (
           <span className="absolute top-3 right-3 text-xs font-bold bg-green-500 text-white px-2.5 py-1 rounded-full shadow-sm">
             ✓ Terminé
           </span>
+        ) : state === "en_cours" ? (
+          <span className="absolute top-3 right-3 text-xs font-bold bg-white text-[#1B2D5B] px-2.5 py-1 rounded-full shadow-sm">
+            En cours
+          </span>
+        ) : formation.est_nouveau && !isAVenir ? (
+          <span className="absolute top-3 right-3 text-xs font-bold bg-white text-[#3DBFA0] px-2.5 py-1 rounded-full shadow-sm">
+            Nouveau
+          </span>
+        ) : null}
+
+        {/* Badge niveau bas-gauche */}
+        {formation.niveau && (
+          <span
+            className="absolute bottom-3 left-3 flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full shadow-sm"
+            style={{ backgroundColor: "rgba(255,255,255,0.85)", color: niveauMeta.couleur }}
+          >
+            <Signal className="w-3 h-3" />
+            {niveauMeta.label}
+          </span>
         )}
+
+        {/* Overlay "À venir" */}
         {isAVenir && (
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
             <span className="bg-[#1B2D5B] text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full">
@@ -287,7 +212,7 @@ function FormationCard({
       </div>
 
       {/* Bande de niveau */}
-      <div style={{ height: 4, backgroundColor: getNiveauMeta(formation.niveau).couleur, flexShrink: 0 }} />
+      <div style={{ height: 4, backgroundColor: niveauMeta.couleur, flexShrink: 0 }} />
 
       {/* Content zone */}
       <div className="flex flex-col p-5" style={{ height: 200 }}>
@@ -342,7 +267,7 @@ function FormationCard({
     return (
       <div
         className={`rounded-2xl overflow-hidden shadow-sm flex flex-col ${cardBg} ${cardBorder}`}
-        style={{ height: 420 }}
+        style={{ height: 364 }}
       >
         {inner}
       </div>
@@ -353,7 +278,7 @@ function FormationCard({
     <a
       href={`/catalogue/${formation.slug}`}
       className={`rounded-2xl overflow-hidden shadow-sm flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${cardBg} ${cardBorder}`}
-      style={{ height: 420 }}
+      style={{ height: 364 }}
     >
       {inner}
     </a>
@@ -404,7 +329,7 @@ function DomainSection({
   moduleCounts: Map<string, number>
   showAll: boolean
 }) {
-  const cfg = DOMAINE_CONFIG[domaine]
+  const cfg = getDomaineMeta(domaine)
   const [expanded, setExpanded] = useState(false)
   const extraRef = useRef<HTMLDivElement>(null)
 
@@ -445,8 +370,8 @@ function DomainSection({
       <div className="flex items-end justify-between mb-6">
         <div>
           <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-xl" style={{ backgroundColor: cfg?.badgeBg }}>
-              <DomainIcon domaine={domaine} color={cfg?.badgeText || "#475569"} />
+            <div className="p-2 rounded-xl" style={{ backgroundColor: cfg.badgeBg }}>
+              <DomainIcon domaine={domaine} color={cfg.iconColor} />
             </div>
             <h2 className="text-xl font-bold text-[#1B2D5B]">{getDomaineMeta(domaine).label}</h2>
           </div>
@@ -671,7 +596,7 @@ export default function CataloguePage() {
           supabase
             .from("formations")
             .select(
-              "id, titre, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir, est_nouveau, image_url"
+              "id, titre, titre_court, slug, description_courte, niveau, duree_estimee_minutes, parcours_id, parcours_ordre, parcours_nom, domaine, thematique, public_cible, ordre, est_a_venir, est_nouveau"
             )
             .eq("est_privee", false)
             .or("est_publie.eq.true,est_a_venir.eq.true")
