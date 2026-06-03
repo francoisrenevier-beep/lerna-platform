@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import { AdminSidebar } from "@/components/AdminSidebar"
 import { Upload, X, FileText } from "lucide-react"
+import { DOMAINES as DOMAINES_META } from "@/lib/formationMeta"
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -29,13 +30,7 @@ const CATEGORIES = [
   { value: "reference_theorique",  label: "Référence théorique" },
 ]
 
-const DOMAINS = [
-  { value: "handicap",              label: "Handicap" },
-  { value: "transversal",           label: "Transversal" },
-  { value: "management",            label: "Management" },
-  { value: "pedagogie_specialisee", label: "Pédagogie spécialisée" },
-  { value: "protection_mineurs",    label: "Protection des mineurs" },
-]
+const DOMAINS = DOMAINES_META.map((d) => ({ value: d.value, label: d.label }))
 
 const LEVELS = [
   { value: "base",          label: "Base" },

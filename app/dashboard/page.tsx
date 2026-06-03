@@ -9,6 +9,7 @@ import { BADGE_DEFS, type BadgeStats } from "@/lib/badges"
 import { getCouleurEtiquette } from "@/lib/etiquettes"
 import { PageHeader } from "@/components/PageHeader"
 import { MetricCard } from "@/components/MetricCard"
+import { DOMAINES as DOMAINES_META, getDomaineMeta } from "@/lib/formationMeta"
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -99,108 +100,34 @@ function getFirstDomaine(domaine: string | string[] | null | undefined): string 
   return getDomaineArray(domaine)[0] ?? null
 }
 
-// ── Domaine config ────────────────────────────────────────────────────────────
+// ── Domaine helpers (dérivés de formationMeta — source unique) ────────────────
 
-const DOMAINE_CONFIG: Record<string, { slug: string; badgeBg: string; badgeText: string; gradFrom: string; gradTo: string }> = {
-  "Handicap":    { slug: "handicap",    badgeBg: "#EEF2FF", badgeText: "#3730A3", gradFrom: "#EEF2FF", gradTo: "#C7D2FE" },
-  "Transversal": { slug: "transversal", badgeBg: "#F1F5F9", badgeText: "#475569", gradFrom: "#F1F5F9", gradTo: "#CBD5E1" },
-}
-
-const DOMAINES_ORDRE = [
-  "Handicap",
-  "Transversal",
-] as const
-
-// ── SVG illustrations compactes 50×50 (chips domaines + cartes en cours) ───────
-
-function IllustrationHandicapSm() {
-  return (
-    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="50" height="50" fill="#EEF2FF" rx="8" />
-      <circle cx="25" cy="18" r="6" fill="#4338CA" fillOpacity="0.55" />
-      <path d="M17 29 Q17 24 25 24 Q33 24 33 29 L33 35 Q33 37 31 37 L19 37 Q17 37 17 35Z" fill="#4338CA" fillOpacity="0.55" />
-    </svg>
-  )
-}
-
-function IllustrationTransversalSm() {
-  return (
-    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="50" height="50" fill="#F1F5F9" rx="8" />
-      <line x1="25" y1="25" x2="12" y2="14" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <line x1="25" y1="25" x2="38" y2="14" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <line x1="25" y1="25" x2="12" y2="36" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <line x1="25" y1="25" x2="38" y2="36" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.4" />
-      <circle cx="25" cy="25" r="5" fill="#64748B" fillOpacity="0.5" />
-      <circle cx="12" cy="14" r="3.5" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="38" cy="14" r="3.5" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="12" cy="36" r="3.5" fill="#64748B" fillOpacity="0.35" />
-      <circle cx="38" cy="36" r="3.5" fill="#64748B" fillOpacity="0.35" />
-    </svg>
-  )
-}
 function DomainIllustrationSm({ domaine }: { domaine: string | null }) {
-  if (domaine === "Handicap") return <IllustrationHandicapSm />
-  return <IllustrationTransversalSm />
+  const meta = getDomaineMeta(domaine)
+  const Icon = meta.icon
+  return (
+    <div className="w-full h-full flex items-center justify-center rounded-lg" style={{ backgroundColor: meta.tintBg }}>
+      <Icon style={{ color: meta.iconColor, width: 22, height: 22 }} />
+    </div>
+  )
 }
 
-// ── SVG illustrations grandes (cartes formations) ─────────────────────────────
-// Chaque instance utilise un uid pour éviter les conflits d'IDs SVG dans le DOM
+// ── Illustration grande (thumbnail formation sans image) ──────────────────────
 
-function IllustrationGrande({ domaine, uid }: { domaine: string | null; uid: string }) {
-  const cfg = domaine ? DOMAINE_CONFIG[domaine] : DOMAINE_CONFIG["Transversal"]
-  const gFrom = cfg?.gradFrom ?? "#F1F5F9"
-  const gTo   = cfg?.gradTo   ?? "#CBD5E1"
-  const gId   = "grad-" + uid
-
-  if (domaine === "Handicap") return (
-    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
-        </linearGradient>
-      </defs>
-      <rect width="300" height="160" fill={`url(#${gId})`} />
-      <circle cx="150" cy="72" r="55" fill="#4338CA" fillOpacity="0.07" />
-      <circle cx="150" cy="72" r="38" fill="#4338CA" fillOpacity="0.07" />
-      <circle cx="150" cy="50" r="14" fill="#4338CA" fillOpacity="0.52" />
-      <path d="M130 84 Q130 70 150 70 Q170 70 170 84 L170 100 Q170 104 167 104 L133 104 Q130 104 130 100Z" fill="#4338CA" fillOpacity="0.52" />
-      <circle cx="143" cy="126" r="15" fill="none" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.35" />
-      <circle cx="143" cy="126" r="5" fill="#4338CA" fillOpacity="0.35" />
-      <line x1="167" y1="90" x2="167" y2="112" stroke="#4338CA" strokeWidth="3" strokeOpacity="0.3" strokeLinecap="round" />
-    </svg>
-  )
-
-  // Transversal (default)
+function IllustrationGrande({ domaine }: { domaine: string | null }) {
+  const meta = getDomaineMeta(domaine)
+  const Icon = meta.icon
   return (
-    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id={gId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={gFrom} /><stop offset="100%" stopColor={gTo} />
-        </linearGradient>
-      </defs>
-      <rect width="300" height="160" fill={`url(#${gId})`} />
-      <line x1="150" y1="80" x2="82" y2="38"  stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="150" y1="80" x2="218" y2="38" stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="150" y1="80" x2="82" y2="122" stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="150" y1="80" x2="218" y2="122"stroke="#64748B" strokeWidth="2.5" strokeOpacity="0.25" />
-      <line x1="82"  y1="38" x2="218" y2="38"  stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.18" />
-      <line x1="82"  y1="122" x2="218" y2="122" stroke="#64748B" strokeWidth="1.5" strokeOpacity="0.18" />
-      <circle cx="150" cy="80"  r="14" fill="#64748B" fillOpacity="0.32" />
-      <circle cx="150" cy="80"  r="8"  fill="#64748B" fillOpacity="0.42" />
-      <circle cx="82"  cy="38"  r="10" fill="#64748B" fillOpacity="0.28" />
-      <circle cx="218" cy="38"  r="10" fill="#64748B" fillOpacity="0.28" />
-      <circle cx="82"  cy="122" r="10" fill="#64748B" fillOpacity="0.28" />
-      <circle cx="218" cy="122" r="10" fill="#64748B" fillOpacity="0.28" />
-    </svg>
+    <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: meta.tintBg }}>
+      <Icon style={{ color: meta.iconColor, width: 48, height: 48, opacity: 0.5 }} />
+    </div>
   )
 }
 
 // ── Formation Card — style Coursera avec étiquettes ───────────────────────────
 
 function FormationCardDash({ f, index }: { f: FormationVedette; index: number }) {
-  const cfg = f.domaine ? DOMAINE_CONFIG[f.domaine] : null
-  const uid = `fc-${index}-${f.id.slice(0, 6)}`
+  const domaineMeta = getDomaineMeta(f.domaine)
 
   const content = (
     <div className="flex flex-col h-full">
@@ -209,19 +136,19 @@ function FormationCardDash({ f, index }: { f: FormationVedette; index: number })
         {f.image_url ? (
           <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
         ) : (
-          <IllustrationGrande domaine={f.domaine} uid={uid} />
+          <IllustrationGrande domaine={f.domaine} />
         )}
 
         {/* Overlay dégradé bas → transparent pour lisibilité */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 
         {/* Badge domaine en bas à gauche */}
-        {cfg && f.domaine && (
+        {f.domaine && domaineMeta.value && (
           <span
             className="absolute bottom-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm"
-            style={{ backgroundColor: cfg.badgeBg + "ee", color: cfg.badgeText }}
+            style={{ backgroundColor: domaineMeta.badgeBg + "ee", color: domaineMeta.badgeText }}
           >
-            {f.domaine}
+            {domaineMeta.label}
           </span>
         )}
 
@@ -661,23 +588,20 @@ export default function DashboardPage() {
           <section>
             <h2 className="text-base font-semibold text-[#1B2D5B] mb-4">Explorer par domaine</h2>
             <div className="flex flex-wrap gap-3">
-              {DOMAINES_ORDRE.map((domaine) => {
-                const cfg = DOMAINE_CONFIG[domaine]
-                return (
-                  <a
-                    key={domaine}
-                    href={"/catalogue/domaine/" + cfg.slug}
-                    className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border font-medium text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                    style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeText + "22" }}
-                  >
-                    <span className="w-7 h-7 flex-shrink-0 rounded-md overflow-hidden inline-flex">
-                      <DomainIllustrationSm domaine={domaine} />
-                    </span>
-                    {domaine}
-                    <span className="text-xs opacity-50">→</span>
-                  </a>
-                )
-              })}
+              {DOMAINES_META.map((d) => (
+                <a
+                  key={d.value}
+                  href={"/catalogue/domaine/" + d.value}
+                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border font-medium text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                  style={{ backgroundColor: d.badgeBg, color: d.badgeText, borderColor: d.badgeText + "22" }}
+                >
+                  <span className="w-7 h-7 flex-shrink-0 rounded-md overflow-hidden inline-flex">
+                    <DomainIllustrationSm domaine={d.value} />
+                  </span>
+                  {d.label}
+                  <span className="text-xs opacity-50">→</span>
+                </a>
+              ))}
               <a
                 href="/catalogue"
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-500 font-medium text-sm hover:-translate-y-0.5 hover:shadow-md transition-all"

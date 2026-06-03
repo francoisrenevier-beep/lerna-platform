@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/Sidebar"
 import { BottomNav } from "@/components/BottomNav"
-import { getDomaineMeta, getNiveauMeta, titreVignette } from "@/lib/formationMeta"
+import { DOMAINES as DOMAINES_META, getDomaineMeta, getNiveauMeta, titreVignette } from "@/lib/formationMeta"
 import { VignetteTypo } from "@/components/formations-preview"
 import { Signal } from "lucide-react"
 
@@ -41,7 +41,7 @@ type ParcoursGroup = {
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
-const DOMAINES = ["handicap", "vieillissement-grand-age", "transversal", "pedagogie-specialisee", "protection-mineurs"] as const
+const DOMAINES = DOMAINES_META.map((d) => d.value)
 
 const THEMATIQUES = [
   "Accompagnement",
@@ -293,33 +293,8 @@ function FormationCard({
 // ─── Domain Icon ────────────────────────────────────────────────────────────────
 
 function DomainIcon({ domaine, color }: { domaine: string; color: string }) {
-  const style = { color }
-  if (domaine === "handicap") return (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" style={style} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="5" r="2.5" />
-      <path d="M10 9h4l1 7h-2l-1-4H10" />
-      <path d="M8 21a4 4 0 0 1 4-4" />
-      <circle cx="14" cy="20" r="2" />
-    </svg>
-  )
-  if (domaine === "vieillissement-grand-age") return (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" style={style} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-    </svg>
-  )
-  return (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" style={style} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="2" />
-      <circle cx="6" cy="6" r="2" />
-      <circle cx="18" cy="6" r="2" />
-      <circle cx="6" cy="18" r="2" />
-      <circle cx="18" cy="18" r="2" />
-      <line x1="12" y1="10" x2="7" y2="7" />
-      <line x1="12" y1="10" x2="17" y2="7" />
-      <line x1="12" y1="14" x2="7" y2="17" />
-      <line x1="12" y1="14" x2="17" y2="17" />
-    </svg>
-  )
+  const Icon = getDomaineMeta(domaine).icon
+  return <Icon className="w-5 h-5" style={{ color }} />
 }
 
 // ─── Domain Section ──────────────────────────────────────────────────────────────
