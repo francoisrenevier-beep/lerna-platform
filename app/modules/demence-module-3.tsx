@@ -25,39 +25,86 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
           <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
             <Liste items={[
               "Identifier les signes observables courants d'une démence",
-              "Comprendre qu'un comportement difficile est presque toujours l'expression d'un besoin",
-              "Adopter les attitudes justes dans les situations courantes du quotidien",
-              "Gérer des situations concrètes comme la répétition ou le refus",
+              "Expliquer pourquoi un comportement difficile est presque toujours l'expression d'un besoin",
+              "Appliquer les attitudes justes dans les situations courantes du quotidien",
+              "Analyser des situations concrètes : répétitions, refus, agitation, déambulation",
+              "Distinguer ce que vous pouvez gérer dans votre rôle de ce qui nécessite une transmission",
             ]} />
           </ConceptBox>
+          <Texte>Ce module est le plus directement ancré dans la pratique quotidienne. Il s&apos;appuie sur un principe central : <strong>les comportements que nous percevons comme «difficiles» sont presque toujours des tentatives de communication</strong>. Quand les mots ne sont plus disponibles, ou ne suffisent plus, le corps, les émotions et les comportements prennent le relais.</Texte>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 1" titre="Les signes observables courants (rappel OMS)">
-          <Texte>Ces signes <strong>ne se transmettent pas comme un diagnostic</strong> mais comme des <strong>observations</strong> utiles à l&apos;équipe et aux professionnels compétents.</Texte>
+        <SectionModule eyebrow="Section 1" titre="Les signes observables courants">
+          <Texte>Ces signes <strong>ne se transmettent pas comme un diagnostic</strong> mais comme des <strong>observations factuelles</strong> utiles à l&apos;équipe et aux professionnels de santé compétents. Les observer et les noter précisément est déjà une contribution précieuse.</Texte>
 
-          <HighlightBox label="Premiers signes fréquents" couleur="bleu">
-            <Liste items={[
-              "Oublis d'événements récents, objets égarés de façon répétée",
-              "Se perdre, même dans un lieu familier ; perte de la notion du temps",
-              "Difficulté à suivre une conversation ou à trouver ses mots",
-              "Difficulté à réaliser des tâches familières (préparation d'un repas, gestion d'un médicament)",
-              "Changements d'humeur ou de comportement : anxiété, repli, irritabilité",
-            ]} />
+          <HighlightBox label="Signes fréquemment observés — liste OMS" couleur="bleu">
+            <div className="space-y-3 mt-2">
+              <div className="flex gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B2D5B] text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">1</span>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">Oublis d&apos;événements récents, objets égarés</p>
+                  <p className="text-sm text-gray-600">La personne oublie des faits récents entiers (une visite de famille, un repas), pas seulement des détails. Elle égare des objets et ne peut plus reconstituer où elle les a posés.</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B2D5B] text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">2</span>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">Désorientation dans le temps et l&apos;espace</p>
+                  <p className="text-sm text-gray-600">Se perdre dans un lieu familier, ne plus savoir quel jour ou quelle saison on est. Une personne peut chercher à «rentrer chez elle» alors qu&apos;elle est dans son lieu de vie depuis des années — car elle se trouve mentalement dans un autre temps.</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B2D5B] text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">3</span>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">Difficultés de langage et de communication</p>
+                  <p className="text-sm text-gray-600">Perdre le fil d&apos;une conversation, chercher ses mots sur des termes simples et courants, mal comprendre ce qu&apos;on lui dit, répéter les mêmes questions ou les mêmes histoires.</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B2D5B] text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">4</span>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">Difficultés avec les tâches familières</p>
+                  <p className="text-sm text-gray-600">Ne plus pouvoir réaliser des activités qu&apos;elle faisait aisément avant : préparer un repas simple, utiliser le téléphone, gérer ses médicaments, s&apos;habiller dans le bon ordre.</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B2D5B] text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">5</span>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">Changements d&apos;humeur ou de comportement</p>
+                  <p className="text-sm text-gray-600">Anxiété inhabituelle, repli social, irritabilité ou tristesse. Des comportements nouveaux qui tranchent avec ce que l&apos;on connaissait de la personne : désinhibition, suspicion, agitation en fin de journée.</p>
+                </div>
+              </div>
+            </div>
+          </HighlightBox>
+
+          <HighlightBox label="Le «sundowning» — l'agitation en fin de journée" couleur="jaune">
+            <Texte>De nombreuses personnes atteintes de démence présentent une aggravation de la confusion, de l&apos;agitation ou de l&apos;anxiété en fin d&apos;après-midi et en soirée — un phénomène appelé «sundowning» (du coucher de soleil). La fatigue cognitive accumulée dans la journée, la diminution de la lumière naturelle, et la perturbation des repères temporels contribuent à ce phénomène. Le savoir aide à mieux l&apos;anticiper : un environnement plus calme, une activité douce, une présence rassurante à ces moments-là peuvent faire une vraie différence.</Texte>
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 2" titre="Le comportement comme communication">
-          <Texte>Un comportement qui semble «difficile» — agitation, déambulation, refus, répétitions — est presque toujours une <strong>tentative d&apos;exprimer un besoin</strong> non satisfait.</Texte>
+        <SectionModule eyebrow="Section 2" titre="Le comportement comme communication — le principe fondateur">
+          <Texte>Voici le principe le plus important de ce module : <strong>un comportement qui semble «difficile» est presque toujours une tentative d&apos;exprimer un besoin non satisfait.</strong></Texte>
+          <Texte>La personne atteinte de démence n&apos;a pas les outils habituels pour communiquer sa détresse, sa douleur ou son malaise. Quand le langage devient insuffisant, le corps et les comportements prennent le relais. L&apos;agitation, le refus, les cris, la déambulation — tout cela «dit» quelque chose.</Texte>
 
-          <HighlightBox label="Les besoins derrière les comportements" couleur="jaune">
-            <Liste items={[
-              "Douleur physique non verbalisée",
-              "Peur, insécurité, sentiment d'être seul·e",
-              "Faim, soif, fatigue",
-              "Besoin d'aller aux toilettes",
-              "Environnement trop bruyant, trop stimulant ou trop peu stimulant",
-              "Sentiment de ne pas être écouté·e ou compris·e",
-            ]} />
+          <HighlightBox label="Les besoins derrière les comportements les plus fréquents" couleur="bleu">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <p className="text-xs font-bold text-gray-500 uppercase mb-1">Agitation / cris</p>
+                <Liste items={["Douleur physique non verbalisée", "Peur, insécurité", "Besoin d'aller aux toilettes", "Environnement trop stimulant"]} />
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <p className="text-xs font-bold text-gray-500 uppercase mb-1">Refus de soin</p>
+                <Liste items={["Peur de ne pas comprendre ce qui va se passer", "Douleur anticipée ou vécue", "Atteinte à la pudeur ou à la dignité", "Fatigue ou manque de confiance"]} />
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <p className="text-xs font-bold text-gray-500 uppercase mb-1">Déambulation</p>
+                <Liste items={["Besoin d'activité physique", "Chercher quelqu'un ou quelque chose", "Revenir à un lieu chargé de sens", "Anxiété sans objet précis"]} />
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <p className="text-xs font-bold text-gray-500 uppercase mb-1">Répétitions</p>
+                <Liste items={["Inquiétude ou anxiété persistante", "Besoin de réassurance", "Absence de repère temporel", "Chercher un ancrage dans l'environnement"]} />
+              </div>
+            </div>
           </HighlightBox>
 
           <PullQuote>
@@ -66,117 +113,167 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Attitudes justes : les repères de base">
+          <Texte>Ces repères s&apos;appliquent à toutes les situations de contact avec une personne atteinte de démence, quel que soit votre rôle dans l&apos;institution.</Texte>
+
           <div className="space-y-3 my-4">
-            <div className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
-              <span className="text-[#15803D] font-bold text-lg flex-shrink-0">1</span>
-              <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Se présenter calmement</p>
-                <p className="text-sm text-gray-600">Se mettre à hauteur de la personne, capter le regard avant de parler. Ne pas arriver par derrière.</p>
+            {[
+              {
+                n: "1",
+                titre: "Approche calme et visible",
+                texte: "Se présenter à la vue de la personne (pas par derrière), se mettre à sa hauteur, la regarder dans les yeux avant de parler. Un contact visuel bienveillant dit déjà «tu es en sécurité» avant même les mots.",
+              },
+              {
+                n: "2",
+                titre: "Phrases courtes, une information à la fois",
+                texte: "Éviter les phrases longues ou les questions multiples. «Il est midi. On va manger.» plutôt que «Tu te rappelles qu'il est midi et qu'on devait aller au réfectoire parce que le repas est servi maintenant ?» Laisser le temps de répondre — la personne peut avoir besoin de plusieurs secondes.",
+              },
+              {
+                n: "3",
+                titre: "Ne pas corriger, ne pas argumenter",
+                texte: "Si la personne croit que sa mère est en vie, qu'elle est encore au travail, ou qu'elle est dans sa maison d'enfance — ne pas la corriger frontalement. Cela ne «remet pas les choses en ordre» : ça provoque seulement de la détresse et de la confusion supplémentaire. Entrer dans son monde, accueillir l'émotion, rassurer.",
+              },
+              {
+                n: "4",
+                titre: "Préserver les routines et les repères",
+                texte: "Un environnement stable et prévisible est sécurisant pour une personne dont le cerveau ne peut plus créer de nouveaux repères efficacement. Les rituels du quotidien — même simples — aident à structurer la journée et à réduire l'anxiété.",
+              },
+              {
+                n: "5",
+                titre: "Valoriser ce qui reste",
+                texte: "S'appuyer sur ce que la personne peut encore faire, ses goûts persistants, son histoire de vie. Une personne qui ne peut plus lire peut encore apprécier la musique qu'elle a aimée toute sa vie. Une personne qui ne reconnaît plus les visages peut encore apprécier le toucher d'une main.",
+              },
+              {
+                n: "6",
+                titre: "Soigner le non-verbal — il prime sur les mots",
+                texte: "Le ton de voix, le rythme, le sourire, la posture, le geste doux — tout cela est perçu et ressenti bien au-delà des mots, souvent jusqu'aux stades très avancés. Un professionnel pressé et tendu transmet sa tension. Un professionnel calme et chaleureux transmet sa sécurité.",
+              },
+            ].map(({ n, titre, texte }) => (
+              <div key={n} className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
+                <span className="text-[#15803D] font-bold text-lg flex-shrink-0 mt-0.5">{n}</span>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800 mb-1">{titre}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">{texte}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
-              <span className="text-[#15803D] font-bold text-lg flex-shrink-0">2</span>
-              <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Phrases courtes et simples</p>
-                <p className="text-sm text-gray-600">Une information à la fois. Laisser le temps de répondre — ne pas répéter immédiatement si la personne ne répond pas.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
-              <span className="text-[#15803D] font-bold text-lg flex-shrink-0">3</span>
-              <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Ne pas corriger ni argumenter</p>
-                <p className="text-sm text-gray-600">Entrer dans le monde de la personne plutôt que de la confronter à la réalité. La corriger provoque souvent anxiété ou colère sans apporter de bénéfice.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
-              <span className="text-[#15803D] font-bold text-lg flex-shrink-0">4</span>
-              <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Préserver les routines</p>
-                <p className="text-sm text-gray-600">Un environnement stable et prévisible est sécurisant. Les repères rassurent là où les capacités cognitives faiblissent.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
-              <span className="text-[#15803D] font-bold text-lg flex-shrink-0">5</span>
-              <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Valoriser ce qui reste</p>
-                <p className="text-sm text-gray-600">Capacités préservées, goûts, histoire de vie — s&apos;appuyer sur ce que la personne peut encore faire plutôt que sur ses limitations.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
-              <span className="text-[#15803D] font-bold text-lg flex-shrink-0">6</span>
-              <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Soigner le non-verbal</p>
-                <p className="text-sm text-gray-600">Ton de voix, sourire, gestes apaisants — ils comptent souvent plus que les mots. La personne perçoit l&apos;attitude même quand les mots ne passent plus.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </SectionModule>
 
         <SectionModule eyebrow="Situation concrète 1" titre="La répétition">
-          <div className="space-y-4 my-6">
+          <div className="space-y-4 my-4">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation</p>
-              <p className="text-gray-700 text-sm leading-relaxed"><strong>Madame R. demande dix fois en une heure à quelle heure sa fille vient la voir.</strong></p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Madame R., 79 ans, Alzheimer modéré.</strong> Elle demande dix fois en une heure à quelle heure sa fille vient la voir. À chaque fois, l&apos;équipe lui répond — et quelques minutes plus tard, Madame R. pose à nouveau la question, comme si elle ne l&apos;avait jamais posée.</p>
             </div>
-
             <div className="border-l-4 border-red-300 bg-red-50 rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-red-600 mb-1">❌ À éviter</p>
-              <p className="text-sm text-gray-700 italic">«Vous me l&apos;avez déjà demandé, je viens de vous répondre.»</p>
+              <p className="text-sm text-gray-700 italic">«Je viens de vous répondre ! Sa fille vient à 15h, comme je vous l&apos;ai dit quatre fois déjà.»</p>
+              <p className="text-sm text-gray-500 mt-1">→ Cette réponse est compréhensible humainement mais contre-productive : elle provoque de la honte et de la détresse chez Madame R., sans apporter de réassurance durable.</p>
             </div>
-
             <div className="border-l-4 border-[#3DBFA0] bg-[#F0FDF4] rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-1">✓ Attitude juste</p>
               <Liste items={[
-                "Répondre calmement à chaque fois, d'un ton constant — la personne n'a pas accès au souvenir de la question précédente",
-                "Détourner doucement vers une activité rassurante",
-                "Vérifier si l'anxiété sous-jacente (peur d'être seule, inquiétude) peut être apaisée",
+                "Répondre calmement à chaque fois, d'un ton constant — Madame R. n'a pas accès au souvenir de sa question précédente",
+                "Explorer ce qui se cache derrière : «Vous avez hâte de la voir ? Elle vous manque ?» — souvent, la répétition exprime une inquiétude ou un besoin de connexion",
+                "Proposer un repère concret : un post-it visible indiquant l'heure de la visite, un objet qui rappelle la fille",
+                "Détourner doucement vers une activité valorisante en attendant",
               ]} />
             </div>
-
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Comprendre</p>
-              <p className="text-sm text-gray-700">La répétition exprime souvent une <strong>inquiétude</strong>, pas un simple oubli. Madame R. n&apos;oublie pas qu&apos;elle a posé la question — c&apos;est la réassurance qu&apos;elle cherche.</p>
+              <p className="text-sm text-gray-700">Madame R. ne «fait pas exprès» de répéter. Sa mémoire de travail ne peut plus enregistrer la réponse. Mais son anxiété de fond — «est-ce que ma fille viendra ?» — persiste. C&apos;est cette anxiété qu&apos;il faut adresser, pas seulement l&apos;information manquante.</p>
             </div>
           </div>
         </SectionModule>
 
         <SectionModule eyebrow="Situation concrète 2" titre="Le refus">
-          <div className="space-y-4 my-6">
+          <div className="space-y-4 my-4">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation</p>
-              <p className="text-gray-700 text-sm leading-relaxed"><strong>Monsieur T. refuse catégoriquement de se lever pour le repas et hausse le ton.</strong></p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Monsieur T., 82 ans, démence vasculaire.</strong> Il refuse catégoriquement de se lever pour le repas et hausse le ton quand on insiste. Il dit «laissez-moi tranquille» et tourne la tête.</p>
             </div>
-
             <div className="border-l-4 border-red-300 bg-red-50 rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-red-600 mb-1">❌ À éviter</p>
-              <p className="text-sm text-gray-700 italic">Insister, tirer sur le bras, raisonner longuement.</p>
+              <p className="text-sm text-gray-700 italic">Insister, argumenter («mais il faut manger pour votre santé !»), prendre physiquement le bras.</p>
+              <p className="text-sm text-gray-500 mt-1">→ La contrainte aggraverait la résistance et risquerait de déclencher une réaction de défense vive. Elle est aussi potentiellement non éthique.</p>
             </div>
-
             <div className="border-l-4 border-[#3DBFA0] bg-[#F0FDF4] rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-1">✓ Attitude juste</p>
               <Liste items={[
-                "Reculer, baisser la tension — ne pas maintenir la pression",
-                "Revenir un peu plus tard quand la situation est apaisée",
-                "Chercher la cause : douleur ? peur ? pas faim ? trop de bruit ? médicament ?",
-                "Proposer un choix simple : «Vous préférez manger ici ou là-bas ?»",
-                "Transmettre l'observation à l'équipe si le refus se répète",
+                "Reculer, baisser la tension — dire «D'accord, je reviens dans un moment» et respecter ce temps",
+                "Chercher la cause : douleur ? fatigue particulière ? mauvaise nuit ? contrariété antérieure ? médicament ?",
+                "Revenir quelques minutes plus tard avec une approche différente : ton plus léger, proposition d'un choix simple",
+                "Si possible, proposer le repas autrement — dans sa chambre, avec un aliment préféré en premier",
+                "Transmettre l'observation à l'équipe si le refus se répète sur plusieurs repas",
               ]} />
             </div>
-
             <HighlightBox label="Repère LEARNA" couleur="jaune">
               <Texte>Face à un refus de soin répété, à une douleur suspectée ou à un changement brusque de comportement, on <strong>transmet</strong> aux professionnels compétents — on ne décide pas seul·e.</Texte>
             </HighlightBox>
           </div>
         </SectionModule>
 
+        <SectionModule eyebrow="Situation concrète 3" titre="L'agitation et les pleurs">
+          <div className="space-y-4 my-4">
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Madame S., 76 ans, démence à corps de Lewy.</strong> Elle pleure depuis une heure, ne répond pas aux questions, semble chercher quelqu&apos;un. Elle dit qu&apos;elle a peur. L&apos;équipe ne comprend pas ce qui a déclenché cet état — le matin s&apos;était passé normalement.</p>
+            </div>
+            <div className="border-l-4 border-[#3DBFA0] bg-[#F0FDF4] rounded-r-xl p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-1">✓ Attitude juste</p>
+              <Liste items={[
+                "S'asseoir à côté d'elle, à sa hauteur, sans urgence — la seule présence calme est déjà thérapeutique",
+                "Accueillir l'émotion sans chercher à l'expliquer immédiatement : «Je suis là. Vous n'êtes pas seule.»",
+                "Ne pas chercher à «raisonner» la peur — la peur est réelle même si son objet n'est pas identifiable",
+                "Chercher des repères rassurants : un objet familier, une musique connue, le nom d'une personne chère",
+                "Si l'agitation persiste ou s'intensifie, signaler à l'infirmier·ère référent·e — une douleur physique peut se manifester ainsi",
+              ]} />
+            </div>
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">À savoir</p>
+              <p className="text-sm text-gray-700">Dans la démence à corps de Lewy, les fluctuations de l&apos;état peuvent être très rapides. Un état d&apos;agitation intense peut succéder à une période de calme, sans raison apparente. Le comprendre évite de chercher systématiquement une «cause externe» et aide à mieux ajuster la réponse.</p>
+            </div>
+          </div>
+        </SectionModule>
+
+        <SectionModule eyebrow="Situation concrète 4" titre="La déambulation — «je veux rentrer chez moi»">
+          <div className="space-y-4 my-4">
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Monsieur F., 81 ans, Alzheimer modéré à sévère.</strong> Il vit dans l&apos;institution depuis deux ans. Chaque après-midi, il se lève, prend son manteau et répète : «Je dois rentrer, ma femme m&apos;attend.» Sa femme est décédée il y a six ans.</p>
+            </div>
+            <div className="border-l-4 border-red-300 bg-red-50 rounded-r-xl p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-red-600 mb-1">❌ À éviter</p>
+              <p className="text-sm text-gray-700 italic">«Monsieur F., votre femme est décédée, vous ne pouvez pas rentrer ici.»</p>
+              <p className="text-sm text-gray-500 mt-1">→ Annoncer un deuil à une personne atteinte de démence qui ne s&apos;en souvient plus revient à le lui annoncer pour la première fois, à chaque fois. C&apos;est cruel et inutile.</p>
+            </div>
+            <div className="border-l-4 border-[#3DBFA0] bg-[#F0FDF4] rounded-r-xl p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-1">✓ Attitude juste</p>
+              <Liste items={[
+                "Entrer dans son monde : «Vous pensez à elle ? Elle vous manque ?»",
+                "Détourner doucement vers l'émotion plutôt que vers les faits : l'accompagner dans son sentiment de manque",
+                "Proposer une activité de transition : «Avant de partir, vous voulez bien venir prendre quelque chose à boire avec moi ?»",
+                "Utiliser des éléments de sa vie : une photo, un objet personnel, une musique qu'il aimait — pour le ramener dans le présent par les émotions positives",
+              ]} />
+            </div>
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Comprendre</p>
+              <p className="text-sm text-gray-700">Monsieur F. ne «veut pas rentrer chez lui» au sens littéral — il exprime un besoin de retourner vers quelque chose de connu et de sécurisant. «Chez moi» représente souvent la sécurité, l&apos;amour, la familiarité. L&apos;accompagnement juste cherche à répondre à ce besoin sous-jacent, pas à corriger le désir exprimé.</p>
+            </div>
+          </div>
+        </SectionModule>
+
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
-              "Un comportement «difficile» est presque toujours une tentative d'exprimer un besoin non satisfait",
+              "Un comportement «difficile» est presque toujours une tentative d'exprimer un besoin",
               "La bonne question : «qu'est-ce que la personne cherche à me dire ?»",
+              "Approche calme, phrases courtes, non-verbal soigné — les bases de toute interaction",
               "Ne pas corriger ni argumenter : entrer dans le monde de la personne",
-              "La répétition exprime souvent une inquiétude — répondre calmement à chaque fois",
-              "Face à un refus répété ou un changement brusque : transmettre à l'équipe soignante",
+              "La répétition exprime souvent une inquiétude — y répondre calmement à chaque fois",
+              "Face à un refus, reculer et revenir — jamais forcer",
+              "«Je veux rentrer chez moi» est un besoin de sécurité, pas une demande littérale",
+              "Tout changement persistant ou brusque se transmet à l'équipe soignante",
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -186,48 +283,48 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
       <Quiz
         questions={[
           {
-            question: "Un comportement «difficile» chez une personne atteinte de démence est le plus souvent :",
+            question: "Monsieur T. refuse de se lever pour le repas. La première chose à faire est :",
             reponses: [
-              "De la méchanceté volontaire envers les soignants",
-              "Une façon d'exprimer un besoin non satisfait",
-              "Un signe que la maladie progresse vite",
-              "Sans aucune cause identifiable",
-            ],
-            bonneReponse: 1,
-            explication: "Presque tous les comportements difficiles (agitation, refus, répétitions, déambulation) sont des tentatives d'exprimer un besoin : douleur, peur, faim, besoin d'aller aux toilettes, environnement inadapté. La bonne question est «qu'est-ce que la personne cherche à me dire ?»",
-          },
-          {
-            question: "Face à une personne désorientée qui croit que sa mère vient la chercher, il vaut mieux :",
-            reponses: [
-              "La corriger fermement en lui disant que sa mère est décédée",
-              "Entrer dans son monde, rassurer, ne pas confronter à la réalité",
-              "Ignorer ce qu'elle dit et changer de sujet brutalement",
+              "Insister fermement pour qu'il comprenne l'importance de s'alimenter",
+              "Reculer, laisser passer un moment, puis revenir avec une approche différente",
               "Appeler immédiatement le médecin",
+              "Le signaler comme «patient non coopératif» dans le dossier",
             ],
             bonneReponse: 1,
-            explication: "Corriger une personne atteinte de démence sur la réalité provoque souvent de la détresse et de la colère sans aucun bénéfice, puisqu'elle ne peut pas enregistrer la correction. Entrer dans son monde — accueillir son émotion, rassurer — est l'attitude qui apaise.",
+            explication: "Face à un refus, insister aggrave presque toujours la résistance. La bonne attitude est de reculer, de baisser la tension, de chercher la cause possible (douleur, peur, fatigue), puis de revenir quelques minutes plus tard avec une approche différente — un ton plus léger, un choix simple proposé. Si le refus se répète, on transmet à l'équipe soignante.",
           },
           {
-            question: "Quand Madame R. demande pour la dixième fois à quelle heure sa fille vient, c'est parce que :",
+            question: "Madame R. demande pour la dixième fois à quelle heure sa fille vient. C'est parce que :",
             reponses: [
-              "Elle cherche à agacer le personnel",
-              "Elle fait semblant d'oublier pour attirer l'attention",
-              "Elle n'a pas accès au souvenir des questions précédentes et exprime souvent une inquiétude",
-              "Elle n'a pas entendu les réponses précédentes",
-            ],
-            bonneReponse: 2,
-            explication: "La répétition n'est pas de la manipulation — la personne n'a tout simplement pas accès au souvenir des questions précédentes. De plus, la répétition exprime souvent une anxiété ou un besoin de réassurance sous-jacent. Répondre calmement à chaque fois est la bonne attitude.",
-          },
-          {
-            question: "Le langage non-verbal (ton de voix, regard, sourire) a peu d'importance avec les personnes atteintes de démence.",
-            reponses: [
-              "Vrai — ces personnes ne perçoivent plus les nuances",
-              "Faux — le non-verbal compte souvent plus que les mots et reste perçu longtemps",
-              "Vrai — seul le contenu verbal des messages compte",
-              "Faux — mais uniquement dans les premiers stades",
+              "Elle cherche à agacer le personnel intentionnellement",
+              "Sa mémoire ne peut pas enregistrer la réponse, et elle exprime souvent une anxiété sous-jacente",
+              "Elle n'a pas entendu les réponses précédentes — il faut parler plus fort",
+              "C'est un signe qu'elle a besoin d'être changée d'étage",
             ],
             bonneReponse: 1,
-            explication: "Faux. Le non-verbal (ton de voix, regard, posture, sourire) est souvent le dernier canal de communication qui reste accessible. Même quand les mots ne passent plus, la personne continue à percevoir l'attitude émotionnelle de l'accompagnant.",
+            explication: "La répétition n'est pas de la manipulation. La personne n'a simplement pas accès au souvenir de ses questions précédentes. De plus, la répétition exprime souvent une anxiété ou un besoin de réassurance — c'est cette anxiété qu'il faut adresser, pas seulement l'information manquante.",
+          },
+          {
+            question: "Monsieur F. dit «je dois rentrer, ma femme m'attend» alors que sa femme est décédée. La réponse juste est :",
+            reponses: [
+              "Lui rappeler fermement que sa femme est décédée pour ancrer la réalité",
+              "Entrer dans son émotion, accueillir le manque, détourner vers quelque chose de rassurant",
+              "L'ignorer et changer de sujet brusquement",
+              "L'accompagner jusqu'à la sortie pour lui montrer qu'il n'y a nulle part où aller",
+            ],
+            bonneReponse: 1,
+            explication: "Annoncer un deuil à une personne atteinte de démence qui ne s'en souvient plus revient à le lui annoncer pour la première fois. C'est inutile et cruel. La bonne attitude est d'entrer dans l'émotion («vous pensez à elle ?»), de détourner vers l'affection et la sécurité, et de proposer une transition douce.",
+          },
+          {
+            question: "Le «sundowning» désigne :",
+            reponses: [
+              "La tendance des personnes atteintes de démence à mieux dormir après le coucher du soleil",
+              "L'aggravation de la confusion et de l'agitation en fin d'après-midi et en soirée",
+              "Un stade avancé de la maladie d'Alzheimer",
+              "La désorientation spatiale caractéristique de la démence vasculaire",
+            ],
+            bonneReponse: 1,
+            explication: "Le «sundowning» est un phénomène fréquent dans les démences : la confusion, l'agitation et l'anxiété s'aggravent typiquement en fin d'après-midi et en soirée. La fatigue cognitive accumulée dans la journée et la diminution de la lumière naturelle y contribuent. L'anticiper permet d'adapter l'environnement et la présence à ces moments.",
           },
         ]}
         onValiderModule={onValiderModule}
