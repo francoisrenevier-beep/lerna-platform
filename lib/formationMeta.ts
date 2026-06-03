@@ -1,7 +1,7 @@
 "use client"
 
 import type { LucideIcon } from "lucide-react"
-import { Accessibility, BookOpen, ShieldCheck, Share2 } from "lucide-react"
+import { Accessibility, BookOpen, ShieldCheck, Share2, Heart } from "lucide-react"
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -83,6 +83,18 @@ export const DOMAINES: readonly DomaineMeta[] = [
     badgeText: "#475569",
     bgClass: "bg-slate-100",
     textClass: "text-slate-600",
+  },
+  {
+    value: "vieillissement-grand-age",
+    label: "Vieillissement et grand âge",
+    icon: Heart,
+    tintBg: "#F5F3FF",
+    iconBg: "#DDD6FE",
+    iconColor: "#5B21B6",
+    badgeBg: "#F5F3FF",
+    badgeText: "#5B21B6",
+    bgClass: "bg-violet-50",
+    textClass: "text-violet-700",
   },
 ]
 

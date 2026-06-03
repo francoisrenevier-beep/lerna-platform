@@ -47,6 +47,16 @@ import { Module8VieillissementApprofondissement } from "@/app/modules/vieillisse
 import { Module9VieillissementExpertise } from "@/app/modules/vieillissement-expertise-module-9"
 import { Module10VieillissementExpertise } from "@/app/modules/vieillissement-expertise-module-10"
 import { Module11VieillissementExpertise } from "@/app/modules/vieillissement-expertise-module-11"
+import { Module1TransitionAgeAdulte } from "@/app/modules/transition-module-1"
+import { Module2TransitionAgeAdulte } from "@/app/modules/transition-module-2"
+import { Module3TransitionAgeAdulte } from "@/app/modules/transition-module-3"
+import { Module4TransitionAgeAdulte } from "@/app/modules/transition-module-4"
+import { Module5TransitionAgeAdulte } from "@/app/modules/transition-module-5"
+import { Module6TransitionAgeAdulte } from "@/app/modules/transition-module-6"
+import { Module1Demence } from "@/app/modules/demence-module-1"
+import { Module2Demence } from "@/app/modules/demence-module-2"
+import { Module3Demence } from "@/app/modules/demence-module-3"
+import { Module4Demence } from "@/app/modules/demence-module-4"
 
 type ModuleSimple = {
   id: string
@@ -104,6 +114,16 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "e9e00001-0009-4000-8000-000000000009": Module9VieillissementExpertise,
   "e9e00001-0010-4000-8000-000000000010": Module10VieillissementExpertise,
   "e9e00001-0011-4000-8000-000000000011": Module11VieillissementExpertise,
+  "74a00001-0000-4000-8000-000000000001": Module1TransitionAgeAdulte,
+  "74a00002-0000-4000-8000-000000000002": Module2TransitionAgeAdulte,
+  "74a00003-0000-4000-8000-000000000003": Module3TransitionAgeAdulte,
+  "74a00004-0000-4000-8000-000000000004": Module4TransitionAgeAdulte,
+  "74a00005-0000-4000-8000-000000000005": Module5TransitionAgeAdulte,
+  "74a00006-0000-4000-8000-000000000006": Module6TransitionAgeAdulte,
+  "d3ce0001-0001-4000-8000-000000000001": Module1Demence,
+  "d3ce0001-0002-4000-8000-000000000002": Module2Demence,
+  "d3ce0001-0003-4000-8000-000000000003": Module3Demence,
+  "d3ce0001-0004-4000-8000-000000000004": Module4Demence,
 }
 
 export default function ModulePage() {

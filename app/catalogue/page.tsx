@@ -41,7 +41,7 @@ type ParcoursGroup = {
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
-const DOMAINES = ["handicap", "transversal", "pedagogie-specialisee", "protection-mineurs"] as const
+const DOMAINES = ["handicap", "vieillissement-grand-age", "transversal", "pedagogie-specialisee", "protection-mineurs"] as const
 
 const THEMATIQUES = [
   "Accompagnement",
@@ -300,6 +300,11 @@ function DomainIcon({ domaine, color }: { domaine: string; color: string }) {
       <path d="M10 9h4l1 7h-2l-1-4H10" />
       <path d="M8 21a4 4 0 0 1 4-4" />
       <circle cx="14" cy="20" r="2" />
+    </svg>
+  )
+  if (domaine === "vieillissement-grand-age") return (
+    <svg viewBox="0 0 24 24" className="w-5 h-5" style={style} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
     </svg>
   )
   return (
