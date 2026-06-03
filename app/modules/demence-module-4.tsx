@@ -12,171 +12,185 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
       <HeroModule
         numero={4}
         categorie="Démence : sensibilisation générale"
-        titre="Communiquer et transmettre :"
-        titrePart2="le maillon qui change tout"
-        sousTitre="La personne atteinte de démence ne peut pas toujours dire ce qu'elle ressent. Chaque observation transmise — par n'importe qui — peut changer le cours de ce qu'elle vit."
+        titre="Communiquer entre professionnel·le·s :"
+        titrePart2="ce que l'on voit, tel qu'on le voit"
+        sousTitre="Chacun·e perçoit une partie de la réalité d'une personne. Partager ce que l'on observe — de façon factuelle, sans interprétation — est ce qui permet à l'équipe d'agir de façon cohérente et adaptée."
         duree="25 minutes"
         niveau="Sensibilisation"
       />
 
       <div className="max-w-3xl mx-auto px-8 py-12">
 
-        <SectionModule eyebrow="Introduction" titre="Pourquoi ce module existe">
+        <SectionModule eyebrow="Introduction" titre="De quoi parle ce module">
           <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
             <Liste items={[
-              "Comprendre pourquoi la transmission d'information est un acte de soin à part entière",
-              "Distinguer une observation factuelle d'une interprétation ou d'un jugement",
-              "Reconnaître la valeur de vos observations, quel que soit votre rôle ou votre secteur",
-              "Identifier à qui et comment transmettre ce que vous observez",
+              "Comprendre pourquoi la communication entre professionnel·le·s est centrale dans l'accompagnement de la démence",
+              "Distinguer une observation objective d'une interprétation ou d'un jugement",
+              "Formuler une transmission utile pour l'équipe",
+              "Reconnaître la valeur de ce que vous observez, quel que soit votre secteur d'activité",
             ]} />
           </ConceptBox>
-          <Texte>Ce module ne vous dira pas comment faire votre métier. Il pose une question simple : quand vous remarquez quelque chose qui semble inhabituel chez une personne atteinte de démence — est-ce que vous le dites ? Et si oui, comment ?</Texte>
-          <Texte>Ces deux questions sont au cœur de ce que ce module veut explorer.</Texte>
+          <Texte>Dans l&apos;accompagnement des personnes atteintes de démence, plusieurs professionnel·le·s interviennent — parfois de secteurs très différents. Chacun·e voit la personne dans un contexte particulier, à un moment particulier. Seule, chaque observation est partielle. Ensemble, elles permettent de construire une image plus complète et de mieux soutenir la personne dans son quotidien.</Texte>
+          <Texte>Ce module ne porte pas sur les décisions à prendre ni sur les rôles de chacun·e. Il porte sur <strong>la qualité de ce qui est partagé</strong> entre collègues et équipes.</Texte>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 1" titre="La personne atteinte de démence a besoin que vous parliez pour elle">
-          <Texte>Une personne atteinte de démence perd progressivement la capacité d&apos;articuler ce qu&apos;elle ressent, ce qu&apos;elle perçoit, ce qui lui fait mal ou ce qui la perturbe. Elle peut ne plus trouver les mots pour dire qu&apos;elle a mal. Elle peut ne pas savoir qu&apos;elle doit signaler quelque chose. Elle peut avoir signalé une chose à une personne — et ne pas se souvenir de l&apos;avoir dit.</Texte>
+        <SectionModule eyebrow="Section 1" titre="Chaque professionnel·le a une vue partielle — et c'est normal">
+          <Texte>Une personne atteinte de démence n&apos;est jamais observée de la même façon par tout le monde. Elle se comporte différemment selon les moments de la journée, selon les personnes présentes, selon les activités. Ce n&apos;est pas une incohérence — c&apos;est la réalité de la démence.</Texte>
 
-          <HighlightBox label="Un déficit de voix" couleur="bleu">
-            <Texte>Là où une personne sans démence peut dire «j&apos;ai mal au dos depuis hier» ou «je n&apos;ai pas dormi depuis trois nuits», une personne atteinte de démence peut exprimer ces mêmes réalités par des comportements : agitation, refus, repli, cris. Ou ne pas les exprimer du tout.</Texte>
-            <Texte>Ce sont les personnes qui l&apos;entourent qui deviennent ses yeux et sa voix. Pas parce qu&apos;elles le décident, mais parce que c&apos;est structurellement ce qui se passe. <strong>Chaque personne en contact avec elle est un capteur d&apos;information que personne d&apos;autre n&apos;a.</strong></Texte>
+          <HighlightBox label="Des regards différents sur la même personne" couleur="bleu">
+            <Texte>L&apos;infirmier·ère de nuit sait comment Monsieur D. dort et s&apos;il se lève. L&apos;animatrice sait comment il réagit dans un groupe. La personne qui prépare les repas sait ce qu&apos;il mange vraiment. Le membre du pool qui l&apos;a accompagné le week-end a vu comment il était dimanche matin.</Texte>
+            <Texte>Aucun de ces regards n&apos;est plus légitime que les autres. Tous ensemble, ils permettent de comprendre comment Monsieur D. va — vraiment — et d&apos;ajuster l&apos;accompagnement en conséquence.</Texte>
           </HighlightBox>
 
-          <Texte>Cela vaut quel que soit votre secteur d&apos;activité, quel que soit votre poste, quel que soit le temps que vous passez auprès d&apos;elle. L&apos;agent d&apos;entretien qui passe dix minutes dans la chambre le matin voit quelque chose que l&apos;infirmière de nuit ne verra pas. Le cuisinier qui observe une résidente repousser systématiquement son assiette a une information que personne d&apos;autre ne compile.</Texte>
+          <Texte>Ce qui relie ces regards partiels, c&apos;est la communication entre professionnel·le·s. Quand elle fonctionne bien — quand ce qui est observé est partagé, de façon précise et sans filtre interprétatif — l&apos;équipe dispose d&apos;une base solide pour accompagner. Quand elle est défaillante, chacun·e travaille dans son coin avec une image fragmentée.</Texte>
 
           <PullQuote>
-            Ce n&apos;est pas votre formation qui détermine la valeur de ce que vous observez. C&apos;est la précision avec laquelle vous le transmettez.
+            Ce n&apos;est pas ce que vous savez faire qui détermine la valeur de ce que vous observez. C&apos;est la précision avec laquelle vous le partagez avec l&apos;équipe.
           </PullQuote>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 2" titre="Ce qui rend une transmission utile — ou inutile">
-          <Texte>Il ne suffit pas de dire quelque chose. Ce que vous dites, et comment vous le dites, détermine si votre observation sera exploitable par les professionnels qui en ont besoin.</Texte>
-          <Texte>La différence fondamentale est entre <strong>ce que vous observez</strong> et <strong>ce que vous en concluez</strong>. Le premier est une donnée. Le second est une interprétation — et elle peut être fausse, biaisée, ou tout simplement hors de votre portée.</Texte>
+        <SectionModule eyebrow="Section 2" titre="La différence entre observer et interpréter">
+          <Texte>C&apos;est le point central de ce module. Une observation factuelle et une interprétation ne sont pas la même chose — et les confondre dans une transmission a des conséquences réelles sur l&apos;équipe qui la reçoit.</Texte>
+
+          <Texte>Une observation décrit ce qui est visible, audible, mesurable. Une interprétation explique pourquoi — et cette explication peut être fausse, partielle, ou teintée d&apos;un a priori.</Texte>
 
           <div className="space-y-4 my-6">
             <div className="rounded-xl overflow-hidden border border-gray-200">
               <div className="px-5 py-3 bg-gray-50 border-b border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 1</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 1 — Comportement alimentaire</p>
               </div>
               <div className="grid grid-cols-2 divide-x divide-gray-200">
                 <div className="p-4">
                   <p className="text-xs font-semibold text-red-600 mb-2">❌ Interprétation</p>
-                  <p className="text-sm text-gray-700 italic">«Madame R. déprime depuis lundi.»</p>
+                  <p className="text-sm text-gray-700 italic">«Elle ne mange plus — elle déprime.»</p>
+                  <p className="text-xs text-gray-400 mt-2">La cause est supposée, pas observée.</p>
                 </div>
                 <div className="p-4">
-                  <p className="text-xs font-semibold text-[#15803D] mb-2">✓ Observation factuelle</p>
-                  <p className="text-sm text-gray-700 italic">«Depuis lundi, Madame R. répond peu quand on lui parle et n&apos;a pas regardé la télévision, alors qu&apos;elle le fait habituellement tous les après-midis.»</p>
+                  <p className="text-xs font-semibold text-[#15803D] mb-2">✓ Observation objective</p>
+                  <p className="text-sm text-gray-700 italic">«Depuis lundi, elle laisse plus de la moitié de son assiette à chaque repas. Elle ne l&apos;a pas signalé elle-même.»</p>
+                  <p className="text-xs text-gray-400 mt-2">Faits précis, datés, observables.</p>
                 </div>
               </div>
             </div>
 
             <div className="rounded-xl overflow-hidden border border-gray-200">
               <div className="px-5 py-3 bg-gray-50 border-b border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 2</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 2 — Comportement physique</p>
               </div>
               <div className="grid grid-cols-2 divide-x divide-gray-200">
                 <div className="p-4">
                   <p className="text-xs font-semibold text-red-600 mb-2">❌ Jugement</p>
-                  <p className="text-sm text-gray-700 italic">«Monsieur T. fait sa difficile avec la nourriture.»</p>
+                  <p className="text-sm text-gray-700 italic">«Monsieur T. fait sa difficile avec les soins du matin.»</p>
+                  <p className="text-xs text-gray-400 mt-2">Cela dit quelque chose sur le comportement mais pas sur ce qui se passe.</p>
                 </div>
                 <div className="p-4">
-                  <p className="text-xs font-semibold text-[#15803D] mb-2">✓ Observation factuelle</p>
-                  <p className="text-sm text-gray-700 italic">«Monsieur T. a laissé plus de la moitié de son assiette trois fois cette semaine — lundi, mercredi et aujourd&apos;hui.»</p>
+                  <p className="text-xs font-semibold text-[#15803D] mb-2">✓ Observation objective</p>
+                  <p className="text-sm text-gray-700 italic">«Depuis mercredi, il grimace et détourne le bras quand on l&apos;aide à se lever. Ce n&apos;est pas habituel.»</p>
+                  <p className="text-xs text-gray-400 mt-2">Le changement est décrit ; la cause reste ouverte à évaluation.</p>
                 </div>
               </div>
             </div>
 
             <div className="rounded-xl overflow-hidden border border-gray-200">
               <div className="px-5 py-3 bg-gray-50 border-b border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 3</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 3 — Humeur et comportement</p>
               </div>
               <div className="grid grid-cols-2 divide-x divide-gray-200">
                 <div className="p-4">
                   <p className="text-xs font-semibold text-red-600 mb-2">❌ Vague</p>
-                  <p className="text-sm text-gray-700 italic">«Il n&apos;est pas bien en ce moment.»</p>
+                  <p className="text-sm text-gray-700 italic">«Elle n&apos;est pas bien en ce moment.»</p>
+                  <p className="text-xs text-gray-400 mt-2">Impossible d&apos;agir sur cette base.</p>
                 </div>
                 <div className="p-4">
-                  <p className="text-xs font-semibold text-[#15803D] mb-2">✓ Observation factuelle</p>
-                  <p className="text-sm text-gray-700 italic">«Depuis ce matin, il tient sa main droite contre lui et grimace quand on l&apos;aide à se lever — ce n&apos;est pas son comportement habituel.»</p>
+                  <p className="text-xs font-semibold text-[#15803D] mb-2">✓ Observation objective</p>
+                  <p className="text-sm text-gray-700 italic">«Depuis lundi, elle répond peu quand on lui parle et n&apos;a pas participé à l&apos;activité du mardi, alors qu&apos;elle le fait habituellement.»</p>
+                  <p className="text-xs text-gray-400 mt-2">Comparaison avec l&apos;état habituel, éléments concrets.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <HighlightBox label="Pourquoi cette distinction est cruciale" couleur="jaune">
-            <Texte>Les professionnels de santé qui reçoivent votre transmission ne peuvent travailler qu&apos;avec ce que vous leur donnez. Une interprétation («elle déprime») peut fermer une piste diagnostique importante — et en ouvrir de mauvaises. Une observation factuelle («elle ne mange plus, elle ne parle plus depuis lundi») laisse le champ ouvert à une évaluation juste.</Texte>
-            <Texte>Ce n&apos;est pas une question de hiérarchie ou de qui a le droit d&apos;interpréter. C&apos;est une question d&apos;efficacité : <strong>les faits aident. Les conclusions prématurées peuvent nuire.</strong></Texte>
+          <HighlightBox label="Pourquoi cette distinction est importante" couleur="jaune">
+            <Texte>Une interprétation transmise comme un fait peut orienter l&apos;évaluation d&apos;un·e collègue dans une direction qui n&apos;est peut-être pas la bonne. Si vous dites «elle déprime», les personnes qui reçoivent cette information commencent peut-être à chercher une cause psychologique — alors que la vraie raison est une douleur physique non identifiée.</Texte>
+            <Texte>Les observations factuelles laissent le champ ouvert. Elles donnent à l&apos;équipe les éléments bruts à partir desquels construire une évaluation juste — sans a priori, sans filtres.</Texte>
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 3" titre="Quand transmettre — et à qui">
-          <Texte>La règle est simple, et elle s&apos;applique quel que soit votre poste : <strong>si quelque chose vous semble inhabituel par rapport à ce que vous connaissez de la personne, vous le transmettez.</strong> Pas demain. Pas lors de la prochaine réunion. Aux personnes concernées, dans les meilleurs délais.</Texte>
+        <SectionModule eyebrow="Section 3" titre="Transmettre : à qui, quand, comment">
+          <Texte>La transmission utile est celle qui arrive à la bonne personne, au bon moment, sous une forme utilisable. Voici trois questions simples pour guider la décision.</Texte>
 
-          <Texte>«Les personnes concernées», dans votre contexte, ce sont les professionnels habilités à évaluer et agir — équipe soignante, infirmier·ère, médecin, responsable, selon les structures de votre institution. Vous ne choisissez pas d&apos;agir à leur place. Vous leur donnez l&apos;information pour qu&apos;ils puissent le faire.</Texte>
+          <div className="space-y-3 my-4">
+            <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-5">
+              <p className="text-sm font-bold text-[#5B21B6] mb-2">À qui ?</p>
+              <p className="text-sm text-gray-700 leading-relaxed">Aux professionnel·le·s concerné·e·s dans votre contexte — équipe soignante, référent·e, responsable, selon les structures de votre institution. Pas besoin de savoir exactement à qui : si vous ne savez pas, adressez-vous à votre supérieur·e direct·e ou à l&apos;infirmier·ère disponible.</p>
+            </div>
+            <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-5">
+              <p className="text-sm font-bold text-[#5B21B6] mb-2">Quand ?</p>
+              <p className="text-sm text-gray-700 leading-relaxed">Dès que vous observez quelque chose d&apos;inhabituel. Pas en attendant la prochaine réunion d&apos;équipe, pas «si ça continue». Dans la démence, les changements peuvent évoluer vite. Un changement brusque mérite une transmission rapide. Un changement plus progressif peut aller dans le cahier de transmissions, mais sans attendre plusieurs jours.</p>
+            </div>
+            <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-5">
+              <p className="text-sm font-bold text-[#5B21B6] mb-2">Comment ?</p>
+              <p className="text-sm text-gray-700 leading-relaxed">En décrivant ce que vous avez observé, quand, et en quoi c&apos;est différent de l&apos;habituel. Sans diagnostic, sans conclusion. La structure est simple : <em>«J&apos;ai remarqué que [fait observé], depuis [quand], et c&apos;est inhabituel parce que [comparaison avec l&apos;état de base].»</em></p>
+            </div>
+          </div>
 
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-2">Situation</p>
-              <p className="text-gray-700 text-sm font-semibold mb-2">Vous êtes en train de faire le ménage dans la chambre de Monsieur L.</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Monsieur L. vous dit depuis deux jours qu&apos;il a «quelque chose qui tire» dans le bas du dos quand il se lève. Il ne se plaint pas à l&apos;équipe soignante. Ce matin, il vous le dit encore.</p>
-            </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Question</p>
-              <p className="text-gray-700 text-sm leading-relaxed italic">Que faites-vous ? Et comment formulez-vous votre transmission ?</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-2">Mise en pratique</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Monsieur L. vous dit depuis deux jours qu&apos;il a «quelque chose qui tire» dans le bas du dos quand il se lève. Vous n&apos;êtes pas soignant·e.</p>
             </div>
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Réponse guidée</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Vous transmettez à l&apos;infirmier·ère ou au responsable disponible, maintenant. Formulation : <em>«Monsieur L. me dit depuis deux jours qu&apos;il a une douleur dans le dos quand il se lève — il me l&apos;a dit encore ce matin. Je ne sais pas s&apos;il l&apos;a dit à l&apos;équipe soignante.»</em></p>
-              <p className="text-gray-700 text-sm leading-relaxed mt-2">Vous ne diagnostiquez pas. Vous ne décidez pas si c&apos;est grave. Vous transmettez ce que vous avez entendu, de façon factuelle. C&apos;est suffisant — et c&apos;est précieux.</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Formulation adaptée</p>
+              <p className="text-gray-700 text-sm italic leading-relaxed">«Monsieur L. m&apos;a dit hier et aujourd&apos;hui qu&apos;il a une douleur dans le bas du dos quand il se lève. Il ne l&apos;a pas signalé lui-même à l&apos;équipe soignante à ma connaissance.»</p>
+              <p className="text-gray-700 text-sm leading-relaxed mt-2">Ni diagnostic, ni conclusion, ni jugement. Des faits, datés, transmis aux personnes concernées. C&apos;est suffisant — et c&apos;est précieux pour l&apos;équipe.</p>
             </div>
           </div>
 
-          <HighlightBox label="Le principe : dans le doute, on transmet" couleur="bleu">
-            <Texte>La crainte de «déranger pour rien» est compréhensible. Mais dans le contexte de la démence, où la personne ne peut pas toujours porter elle-même sa propre information, une transmission inutile coûte peu. Un signal ignoré peut coûter cher.</Texte>
-            <Texte>Ce n&apos;est pas à vous de trancher si c&apos;est important. C&apos;est votre rôle de le signaler. C&apos;est le rôle de quelqu&apos;un d&apos;autre de l&apos;évaluer.</Texte>
+          <HighlightBox label="Dans le doute, on transmet" couleur="bleu">
+            <Texte>La crainte de «signaler pour rien» est normale. Mais dans l&apos;accompagnement de la démence, une transmission inutile ne coûte pas grand-chose. Un changement qui passe sous le radar peut coûter beaucoup à la personne. Ce n&apos;est pas à vous de trancher si c&apos;est important. C&apos;est à vous de partager ce que vous avez observé.</Texte>
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 4" titre="Ce que la communication change — concrètement">
-          <Texte>La qualité de la communication autour d&apos;une personne atteinte de démence détermine directement la qualité de sa prise en charge. Ce n&apos;est pas une métaphore — c&apos;est mécanique.</Texte>
+        <SectionModule eyebrow="Section 4" titre="Ce que la communication entre équipes change — concrètement">
+          <Texte>La qualité de la communication professionnelle a un impact direct sur la qualité de l&apos;accompagnement. Ce ne sont pas des généralités — voici trois exemples concrets de ce qui se passe quand les observations circulent bien dans une équipe.</Texte>
 
           <div className="space-y-3 my-4">
             <div className="flex gap-4 items-start border border-gray-200 rounded-xl p-4">
-              <span className="text-2xl flex-shrink-0">🔗</span>
+              <span className="text-xl flex-shrink-0 mt-0.5">→</span>
               <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Une douleur transmise = une douleur traitée</p>
-                <p className="text-sm text-gray-600 leading-relaxed">Si personne ne dit que Monsieur L. se plaint depuis deux jours, la douleur n&apos;est pas traitée. S&apos;il porte une douleur non soignée, il devient peut-être agité — et cette agitation sera lue comme «un symptôme de sa démence» plutôt que comme le signal d&apos;un problème physique résolvable.</p>
+                <p className="text-sm font-semibold text-gray-800 mb-1">Un comportement est mieux compris</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Monsieur T. est agité chaque après-midi depuis mercredi. L&apos;équipe cherche pourquoi. La personne qui l&apos;a accompagné mercredi matin signale qu&apos;il a glissé dans la douche et s&apos;est rattrapé au mur. Sans cette information, l&apos;agitation est attribuée à «sa démence». Avec elle, l&apos;équipe suspecte une douleur physique et demande une évaluation.</p>
               </div>
             </div>
             <div className="flex gap-4 items-start border border-gray-200 rounded-xl p-4">
-              <span className="text-2xl flex-shrink-0">🔗</span>
+              <span className="text-xl flex-shrink-0 mt-0.5">→</span>
               <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Un changement noté = une évolution suivie</p>
-                <p className="text-sm text-gray-600 leading-relaxed">La démence évolue. Les changements rapides ou inhabituels peuvent signaler une complication médicale (infection, AVC, chute). Une observation transmise à temps peut permettre une intervention précoce — avec des conséquences très différentes pour la personne.</p>
+                <p className="text-sm font-semibold text-gray-800 mb-1">Un changement est détecté à temps</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Madame R. a toujours participé à l&apos;atelier du mardi. Depuis deux semaines, elle refuse. L&apos;animatrice le signale à l&apos;équipe soignante. Une évaluation révèle un début d&apos;infection urinaire — fréquente dans la démence, et qui peut se manifester d&apos;abord par un changement comportemental. Le traitement est mis en place rapidement.</p>
               </div>
             </div>
             <div className="flex gap-4 items-start border border-gray-200 rounded-xl p-4">
-              <span className="text-2xl flex-shrink-0">🔗</span>
+              <span className="text-xl flex-shrink-0 mt-0.5">→</span>
               <div>
-                <p className="text-sm font-semibold text-gray-800 mb-1">Une information partagée = une équipe cohérente</p>
-                <p className="text-sm text-gray-600 leading-relaxed">Une personne atteinte de démence peut agir différemment selon les personnes et les moments. Si chaque professionnel garde ses observations pour lui, l&apos;équipe navigue à vue. Quand les observations circulent, l&apos;équipe peut construire une image cohérente et adapter l&apos;accompagnement.</p>
+                <p className="text-sm font-semibold text-gray-800 mb-1">L&apos;équipe agit de façon cohérente</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Plusieurs professionnel·le·s remarquent que Monsieur D. est plus calme quand on lui parle avec une voix douce et lente. Cette observation, une fois partagée et intégrée dans les transmissions, devient une pratique commune. Chacun·e adopte cette approche — et les situations d&apos;agitation se raréfient.</p>
               </div>
             </div>
           </div>
 
           <PullQuote>
-            Vous n&apos;avez pas besoin de savoir ce que signifie ce que vous observez. Vous avez besoin de le dire.
+            Une équipe bien informée n&apos;est pas une équipe qui sait tout. C&apos;est une équipe où ce que chacun·e observe est partagé sans filtre, et peut être utile à quelqu&apos;un d&apos;autre.
           </PullQuote>
         </SectionModule>
 
         <SectionModule eyebrow="Synthèse de la formation" titre="Les 5 idées essentielles à emporter">
           <HighlightBox label="Ce que cette formation a posé" couleur="vert">
             <Liste items={[
-              "La démence touche ~161'100 personnes en Suisse — en forte hausse. Ce n'est ni de la folie, ni une fatalité du vieillissement.",
-              "La conscience et les émotions restent. Derrière chaque comportement difficile, il y a une personne qui cherche à se faire comprendre.",
-              "Une posture calme, des mots simples, le respect des routines et le non-verbal soigné font une différence réelle au quotidien.",
-              "Tout comportement inhabituel est d'abord une tentative de communication — cherchez le besoin avant d'agir.",
-              "Ce que vous observez a de la valeur. Transmettez-le, de façon factuelle, aux personnes concernées. Peu importe votre rôle.",
+              "La démence touche ~161'100 personnes en Suisse — en forte hausse. Ce n'est ni de la folie, ni une étape normale du vieillissement.",
+              "La conscience et les émotions restent. Derrière chaque comportement difficile, il y a un besoin à identifier.",
+              "Une posture calme, des mots simples, les routines préservées et le non-verbal soigné font une différence réelle au quotidien.",
+              "Tout comportement inhabituel est une tentative de communication — cherchez le besoin avant d'agir sur le comportement.",
+              "Partager ce que vous observez — de façon factuelle, sans interprétation — permet à l'équipe d'agir de façon cohérente et adaptée.",
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -186,48 +200,48 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
       <Quiz
         questions={[
           {
-            question: "Pourquoi la transmission d'information autour d'une personne atteinte de démence est-elle particulièrement importante ?",
+            question: "Plusieurs professionnel·le·s observent une personne atteinte de démence dans des contextes différents. Pourquoi cette multiplicité de regards est-elle utile ?",
             reponses: [
-              "Parce que les professionnels de santé ont besoin de documentation pour les dossiers administratifs",
-              "Parce que la personne ne peut pas toujours exprimer ce qu'elle ressent — les observations des uns compensent ce que les autres ne voient pas",
-              "Parce que c'est une obligation légale dans les établissements médico-sociaux",
-              "Parce que cela permet à l'équipe de décider collectivement de la marche à suivre",
+              "Pour s'assurer que les informations importantes sont confirmées par plusieurs sources avant d'agir",
+              "Parce que la personne se comporte différemment selon les contextes — chaque regard partiel contribue à une image plus complète",
+              "Pour que l'équipe soignante puisse déléguer l'observation aux autres professionnel·le·s",
+              "Parce que la démence affecte la personne de façon homogène dans tous les contextes",
             ],
             bonneReponse: 1,
-            explication: "La démence altère progressivement la capacité à verbaliser ses besoins, sa douleur, ses perceptions. La personne devient dépendante des observations des personnes qui l'entourent pour que ses besoins soient identifiés et pris en charge. Chaque professionnel — quel que soit son rôle — voit des choses que les autres ne verront pas. C'est cela qui donne de la valeur à chaque observation transmise.",
+            explication: "La démence peut se manifester différemment selon les moments, les personnes présentes et les activités. L'animatrice voit quelque chose que l'infirmière de nuit ne verra pas, et réciproquement. Ce n'est pas une redondance — c'est une complémentarité. La communication entre professionnel·le·s permet de relier ces vues partielles pour construire une image cohérente de comment la personne va réellement.",
           },
           {
-            question: "Une collègue vous dit : «Madame R. ne mange plus vraiment, je pense qu'elle est déprimée.» Quelle partie de cette phrase est une observation factuelle ?",
+            question: "Une collègue transmet : «Madame K. est anxieuse depuis hier.» Quelle limite présente cette formulation ?",
             reponses: [
-              "Les deux parties — observer et interpréter font partie du même acte professionnel",
-              "Uniquement «elle est déprimée» — c'est l'information exploitable pour les soignants",
-              "Uniquement «elle ne mange plus vraiment» — c'est un fait observable ; «elle est déprimée» est une interprétation",
-              "Aucune des deux — sans données précises sur les quantités, rien n'est exploitable",
+              "Elle est trop courte — une transmission utile doit toujours comporter au moins cinq éléments",
+              "«Anxieuse» est une interprétation qui peut orienter à tort l'évaluation — ce qui a été observé concrètement n'est pas décrit",
+              "Elle ne précise pas le secteur d'activité de la collègue qui transmet",
+              "Elle n'indique pas si Madame K. a été informée de la transmission",
+            ],
+            bonneReponse: 1,
+            explication: "«Anxieuse» est une interprétation d'un état intérieur — pas une description d'un comportement observable. L'équipe qui reçoit cette information ne sait pas ce qui a réellement été observé : la personne ne mangeait plus ? elle marchait dans les couloirs ? elle pleurait ? elle répétait la même phrase ? Ces éléments sont ceux qui permettent une évaluation juste — pas une étiquette affective.",
+          },
+          {
+            question: "Vous travaillez dans la cuisine d'un EMS. Vous remarquez que Madame L. laisse systématiquement son assiette à moitié pleine depuis lundi, alors qu'elle mangeait bien avant. Que faites-vous ?",
+            reponses: [
+              "Vous le signalez à l'équipe soignante en décrivant ce que vous avez observé, depuis quand, et en quoi c'est différent de l'habituel",
+              "Vous adaptez les portions pour qu'elle n'ait pas l'air de ne pas manger",
+              "Vous attendez que ça dure une semaine pour être sûr·e que c'est un vrai changement",
+              "Vous en parlez à la famille lors de la prochaine visite pour avoir leur avis",
+            ],
+            bonneReponse: 0,
+            explication: "L'observation d'un changement dans les habitudes alimentaires — même faite par quelqu'un qui n'est pas soignant·e — est une information précieuse pour l'équipe. La transmettre de façon factuelle (depuis quand, à quels repas, en quoi c'est différent de l'habituel) permet aux personnes concernées de l'évaluer. Attendre, adapter les portions ou contourner ne remplace pas la transmission.",
+          },
+          {
+            question: "Quelle formulation est la plus utile pour une équipe soignante qui reçoit une transmission ?",
+            reponses: [
+              "«Monsieur P. n'est vraiment pas bien depuis quelques jours — vous devriez aller le voir.»",
+              "«Je pense que Monsieur P. a besoin d'un ajustement de son traitement — il est très agité.»",
+              "«Depuis mardi, Monsieur P. est agité entre 15h et 17h — il marche dans les couloirs et répète «je veux partir». Ce comportement est nouveau pour lui.»",
+              "«Monsieur P. fait une crise en ce moment, c'est urgent.»",
             ],
             bonneReponse: 2,
-            explication: "«Elle ne mange plus vraiment» décrit un comportement observable — même si l'expression pourrait être plus précise (depuis quand ? à quels repas ?). «Elle est déprimée» est une interprétation : elle suppose une cause qui reste à évaluer par les professionnels de santé. Transmettre les deux comme équivalents peut orienter l'évaluation à tort. La valeur professionnelle de la transmission repose sur les faits, pas sur leur explication.",
-          },
-          {
-            question: "Vous n'êtes pas soignant·e. Vous remarquez que Monsieur P. semble tenir son bras différemment ce matin et grimace légèrement quand il se déplace. Quelle est la bonne attitude ?",
-            reponses: [
-              "Ne pas intervenir — ce type d'observation relève uniquement du personnel soignant qualifié",
-              "Observer encore quelques jours pour être sûr·e avant d'en parler",
-              "Demander à Monsieur P. si ça va, et si la réponse est oui, ne rien signaler",
-              "Transmettre aux personnes concernées ce que vous avez observé, de façon factuelle, maintenant",
-            ],
-            bonneReponse: 3,
-            explication: "Votre formation n'est pas ce qui détermine la valeur de votre observation — c'est sa précision. Un changement dans la posture ou les mouvements d'une personne atteinte de démence peut signaler une douleur qu'elle ne peut pas exprimer autrement. Attendre «pour être sûr» ou considérer que ce n'est pas votre rôle, c'est laisser passer une information qui pourrait changer quelque chose. La transmission factuelle aux personnes concernées est toujours la bonne réponse.",
-          },
-          {
-            question: "Quelle formulation est la plus utile pour une équipe soignante ?",
-            reponses: [
-              "«Madame L. semble aller moins bien depuis quelques jours — je voulais vous le signaler.»",
-              "«Madame L. est très agitée — je pense qu'elle a besoin d'un ajustement de traitement.»",
-              "«Depuis mardi matin, Madame L. est agitée entre 15h et 17h — elle marche dans les couloirs et répète «je veux partir». Ce n'est pas son comportement habituel.»",
-              "«Madame L. fait une crise — venez vite.»",
-            ],
-            bonneReponse: 2,
-            explication: "La troisième formulation donne une information immédiatement exploitable : le comportement précis (agitation, déambulation, paroles répétées), le moment (depuis mardi, entre 15h et 17h), et le contexte (inhabituel). La première est trop vague. La deuxième contient une hypothèse diagnostique hors de portée. La quatrième est une alerte mais sans information utilisable pour évaluer la situation.",
+            explication: "La troisième formulation est immédiatement exploitable : elle décrit un comportement précis (agitation, déambulation, paroles répétées), un moment (depuis mardi, entre 15h et 17h), et une comparaison avec l'état habituel (comportement nouveau). Les autres options contiennent des jugements («n'est pas bien»), des conclusions diagnostiques («ajustement de traitement») ou des évaluations de gravité («c'est urgent») qui ne sont pas de la compétence de la personne qui transmet.",
           },
         ]}
         onValiderModule={onValiderModule}
