@@ -126,10 +126,10 @@ export function FormationCard({
           <VignetteTypo formation={formation} domaineRaw={domaineRaw} />
         )}
 
-        {/* Badge domaine haut-gauche */}
+        {/* Badge domaine bas-droite */}
         {hasDomaine && (
           <span
-            className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
+            className="absolute bottom-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
             style={{ backgroundColor: domaineMeta.badgeBg, color: domaineMeta.badgeText }}
           >
             {domaineMeta.label}
