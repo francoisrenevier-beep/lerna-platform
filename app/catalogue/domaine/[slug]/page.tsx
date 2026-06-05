@@ -180,7 +180,7 @@ function FormationCard({
         <DomainIllustration domaine={domaine} />
         {cfg && (
           <span
-            className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
+            className="absolute bottom-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm"
             style={{ backgroundColor: cfg.badgeBg, color: cfg.badgeText }}
           >
             {domaine}
