@@ -140,35 +140,15 @@ export default function ConnexionPage() {
       return
     }
 
-    const { data: authData, error: authError } = await supabase.auth.signUp({
+    const { error: authError } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { prenom, nom } }
+      options: { data: { prenom, nom, institution_id: institution.id } }
     })
 
-    if (authError || !authData.user) {
+    if (authError) {
       setMessageType("error")
-      setMessage("Erreur lors de la création du compte : " + authError?.message)
-      setLoading(false)
-      return
-    }
-
-    const inscriptionRes = await fetch("/api/inscrire", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId: authData.user.id,
-        prenom,
-        nom,
-        email,
-        institution_id: institution.id,
-      }),
-    })
-
-    if (!inscriptionRes.ok) {
-      const { error } = await inscriptionRes.json()
-      setMessageType("error")
-      setMessage("Erreur rattachement : " + error)
+      setMessage("Erreur lors de la création du compte : " + authError.message)
       setLoading(false)
       return
     }
