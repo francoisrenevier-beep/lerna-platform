@@ -153,22 +153,16 @@ export default function ConnexionPage() {
       return
     }
 
-    const inscriptionRes = await fetch("/api/inscrire", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId: authData.user.id,
-        prenom,
-        nom,
-        email,
-        institution_id: institution.id,
-      }),
+    const { error: inscriptionError } = await supabase.rpc("inscrire_utilisateur", {
+      p_prenom: prenom,
+      p_nom: nom,
+      p_email: email,
+      p_institution_id: institution.id,
     })
 
-    if (!inscriptionRes.ok) {
-      const { error } = await inscriptionRes.json()
+    if (inscriptionError) {
       setMessageType("error")
-      setMessage("Erreur rattachement : " + error)
+      setMessage("Erreur rattachement : " + inscriptionError.message)
       setLoading(false)
       return
     }
