@@ -29,6 +29,21 @@ export function InstitutionSidebar({ pageActive, institution }: InstitutionSideb
         <img src="/logo-learna-blanc.png" alt="LEARNA" className="w-full h-auto" />
       </div>
 
+      {/* Sélecteur de vue */}
+      <div className="px-4 pt-3 pb-1">
+        <div className="flex rounded-lg bg-white/10 p-0.5 gap-0.5">
+          <span className="flex-1 text-center text-xs font-semibold py-1.5 px-2 rounded-md bg-[#3DBFA0] text-white select-none">
+            Vue RH
+          </span>
+          <a
+            href="/dashboard"
+            className="flex-1 text-center text-xs font-medium py-1.5 px-2 rounded-md text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+          >
+            Mon espace
+          </a>
+        </div>
+      </div>
+
       <nav className="flex-1 p-4 space-y-1">
         {liens.map(function(lien) {
           const estActif = lien.id === pageActive

@@ -7,6 +7,7 @@ type SidebarProps = {
   pageActive: "dashboard" | "formations" | "catalogue" | "progression" | "attestations" | "profil" | "ressources"
   institution?: string
   prenom?: string
+  estResponsable?: boolean
 }
 
 // ── Icônes SVG inline ──────────────────────────────────────────────────────────
@@ -85,7 +86,7 @@ function IconLogout() {
   )
 }
 
-export function Sidebar({ pageActive, institution }: SidebarProps) {
+export function Sidebar({ pageActive, institution, estResponsable }: SidebarProps) {
   const router = useRouter()
 
   const handleLogout = async () => {
@@ -117,6 +118,35 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
           style={{ display: "block" }}
         />
       </div>
+
+      {/* Sélecteur de vue (responsables uniquement) */}
+      {estResponsable && (
+        <div className="px-3 pt-3 pb-1">
+          <div className="flex rounded-lg p-0.5 gap-0.5" style={{ backgroundColor: "rgba(255,255,255,0.1)" }}>
+            <span
+              className="flex-1 text-center text-xs font-semibold py-1.5 px-2 rounded-md select-none"
+              style={{ backgroundColor: "rgba(255,255,255,0.15)", color: "#ffffff" }}
+            >
+              Mon espace
+            </span>
+            <a
+              href="/institution/dashboard"
+              className="flex-1 text-center text-xs font-medium py-1.5 px-2 rounded-md transition-colors"
+              style={{ color: "rgba(255,255,255,0.55)" }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(255,255,255,0.1)"
+                ;(e.currentTarget as HTMLElement).style.color = "#ffffff"
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"
+                ;(e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)"
+              }}
+            >
+              Vue RH
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
