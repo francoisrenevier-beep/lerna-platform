@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { supabase } from "@/lib/supabase"
 
 type FormData = {
   prenom: string
@@ -36,21 +35,23 @@ export function DemoForm() {
     setLoading(true)
     setError(null)
 
-    const { error: err } = await supabase.from("demandes_demo").insert({
-      prenom: form.prenom,
-      nom: form.nom,
-      institution: form.institution,
-      email: form.email,
-      telephone: form.telephone || null,
-      message: form.message || null,
-    })
-
-    setLoading(false)
-    if (err) {
-      setError("Une erreur est survenue. Merci de réessayer ou d'écrire à contact@learna.ch.")
-    } else {
+    try {
+      const res = await fetch("/api/demo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error ?? "Erreur inconnue")
       setSuccess(true)
       setForm(EMPTY)
+    } catch (e) {
+      setError(
+        (e instanceof Error ? e.message : null) ??
+          "Une erreur est survenue. Merci de réessayer ou d'écrire à contact@learna.ch."
+      )
+    } finally {
+      setLoading(false)
     }
   }
 
