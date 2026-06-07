@@ -19,12 +19,6 @@ export async function POST(req: NextRequest) {
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   )
 
-  // Vérifie que l'userId correspond bien à l'email — évite toute insertion frauduleuse
-  const { data: authUser, error: authError } = await supabase.auth.admin.getUserById(userId)
-  if (authError || !authUser.user || authUser.user.email !== email) {
-    return NextResponse.json({ error: 'Utilisateur non vérifié' }, { status: 403 })
-  }
-
   const { error: profilError } = await supabase.from('profils').upsert(
     { id: userId, prenom, nom, email },
     { onConflict: 'id' }
@@ -33,11 +27,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: profilError.message }, { status: 500 })
   }
 
-  const { error: liaisonError } = await supabase.from('institution_profils').upsert(
-    { profil_id: userId, institution_id, role: 'collaborateur', statut: 'actif' },
-    { onConflict: 'profil_id,institution_id', ignoreDuplicates: true }
+  const { error: liaisonError } = await supabase.from('institution_profils').insert(
+    { profil_id: userId, institution_id, role: 'collaborateur', statut: 'actif' }
   )
-  if (liaisonError) {
+  if (liaisonError && liaisonError.code !== '23505') {
     return NextResponse.json({ error: liaisonError.message }, { status: 500 })
   }
 
