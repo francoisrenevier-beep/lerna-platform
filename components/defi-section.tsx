@@ -1,14 +1,14 @@
 import { XCircle, CheckCircle } from "lucide-react"
 
 const problemes = [
-  "Turnover élevé — les collaborateurs quittent avant d'avoir mis en pratique leur formation",
+  "Les formations présentielles ne touchent qu'une partie des équipes — une majorité de collaborateurs reste à l'écart",
   "Libérer un professionnel pour une journée de formation, c'est le remplacer et désorganiser l'équipe",
   "Les nouveaux collaborateurs mettent du temps à s'intégrer à la culture et aux pratiques de l'institution",
 ]
 
 const solutions = [
-  "Des formations courtes suivies à son rythme, sans quitter son poste",
-  "Un socle commun de réflexion pour toute l'équipe, y compris les nouveaux",
+  "Une offre qui complète les formations présentielles et s'adresse à l'ensemble des secteurs de l'institution",
+  "Un socle commun de réflexion pour l'ensemble des collaborateurs",
   "Une intégration rapide et autonome des nouveaux collaborateurs",
 ]
 

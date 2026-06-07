@@ -86,9 +86,10 @@ export function HeroSection() {
               La formation continue, ancrée dans la réalité du terrain.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Learna propose aux institutions du travail social une plateforme
-              e-learning pensée pour le terrain. Des formations courtes,
-              concrètes, suivies à son rythme — pour toute l&apos;équipe.
+              Learna propose aux institutions sociales et médico-sociales une
+              plateforme e-learning pensée pour le terrain, par le terrain. Des
+              formations courtes, concrètes, suivies à son rythme — avec des
+              outils directement applicables dans votre pratique.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button

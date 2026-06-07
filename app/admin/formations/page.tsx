@@ -48,6 +48,7 @@ type FormMetadata = {
   parcours_ordre: string
   parcours_nom: string
   est_nouveau: boolean
+  afficher_accueil: boolean
   parcours_actif: boolean
   parcours_nouveau: boolean
 }
@@ -104,7 +105,7 @@ const FORM_VIDE: FormCreation = {
 const METADATA_VIDE: FormMetadata = {
   domaine: "", thematique: "", niveau: "base", public_cible: "",
   parcours_id: "", parcours_ordre: "1", parcours_nom: "",
-  est_nouveau: false, parcours_actif: false, parcours_nouveau: false,
+  est_nouveau: false, afficher_accueil: false, parcours_actif: false, parcours_nouveau: false,
 }
 
 // ─── Main Page ───────────────────────────────────────────────────────────────────
@@ -239,7 +240,7 @@ export default function AdminFormationsPage() {
   const ouvrirMetadata = async (formation: Formation) => {
     const { data } = await supabase
       .from("formations")
-      .select("domaine, thematique, niveau, public_cible, parcours_id, parcours_ordre, parcours_nom, est_nouveau")
+      .select("domaine, thematique, niveau, public_cible, parcours_id, parcours_ordre, parcours_nom, est_nouveau, afficher_accueil")
       .eq("id", formation.id)
       .single()
 
@@ -253,6 +254,7 @@ export default function AdminFormationsPage() {
       parcours_ordre: data?.parcours_ordre?.toString() || "1",
       parcours_nom: data?.parcours_nom || "",
       est_nouveau: data?.est_nouveau || false,
+      afficher_accueil: data?.afficher_accueil || false,
       parcours_actif: hasParcours,
       parcours_nouveau: false,
     })
@@ -283,6 +285,7 @@ export default function AdminFormationsPage() {
       parcours_ordre,
       parcours_nom,
       est_nouveau: formMetadata.est_nouveau,
+      afficher_accueil: formMetadata.afficher_accueil,
     }).eq("id", metadataModal.id)
 
     await chargerFormations()
@@ -455,6 +458,20 @@ export default function AdminFormationsPage() {
             <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 mb-5 font-medium truncate">{metadataModal.titre}</p>
 
             <div className="space-y-5">
+
+              {/* Afficher sur l'accueil */}
+              <label
+                className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${formMetadata.afficher_accueil ? "border-[#1B2D5B] bg-[#1B2D5B]/5" : "border-gray-200 hover:border-gray-300"}`}
+                onClick={() => { setFormMetadata(prev => ({ ...prev, afficher_accueil: !prev.afficher_accueil })); setMetadataSaveOk(false) }}
+              >
+                <div className={`w-11 h-6 rounded-full relative transition-colors flex-shrink-0 ${formMetadata.afficher_accueil ? "bg-[#1B2D5B]" : "bg-gray-200"}`}>
+                  <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-all ${formMetadata.afficher_accueil ? "left-6" : "left-1"}`} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">Afficher sur la page d&apos;accueil</p>
+                  <p className="text-xs text-gray-400">Inclus dans les 3 formations mises en avant sur l&apos;accueil publique</p>
+                </div>
+              </label>
 
               {/* Badge Nouveau */}
               <label

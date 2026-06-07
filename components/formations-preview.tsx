@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { getDomaineMeta, getNiveauMeta, titreVignette } from "@/lib/formationMeta"
 import { ArrowRight, Clock, Signal } from "lucide-react"
@@ -201,34 +201,30 @@ export function FormationCard({
 
 // ─── Section publique "Nos formations" ───────────────────────────────────────
 
-const INITIAL_COUNT = 3
-
 export function FormationsPreview() {
   const [formations, setFormations] = useState<Formation[]>([])
   const [loading, setLoading] = useState(true)
-  const [showAll, setShowAll] = useState(false)
-  const extraRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    supabase
-      .from("formations")
-      .select("id, titre, titre_court, slug, description_courte, domaine, niveau, duree_estimee_minutes, image_url, est_nouveau")
-      .eq("est_publie", true)
-      .eq("est_privee", false)
-      .order("ordre")
-      .then(({ data }) => {
-        if (data) setFormations(data)
-        setLoading(false)
-      })
+    const charger = async () => {
+      const base = supabase
+        .from("formations")
+        .select("id, titre, titre_court, slug, description_courte, domaine, niveau, duree_estimee_minutes, image_url, est_nouveau")
+        .eq("est_publie", true)
+        .eq("est_privee", false)
+
+      // Priorité aux formations marquées "afficher_accueil", sinon les 3 premières par ordre
+      const { data: selectionnes } = await base.eq("afficher_accueil", true).order("ordre").limit(3)
+      if (selectionnes && selectionnes.length > 0) {
+        setFormations(selectionnes)
+      } else {
+        const { data: fallback } = await base.order("ordre").limit(3)
+        if (fallback) setFormations(fallback)
+      }
+      setLoading(false)
+    }
+    charger()
   }, [])
-
-  const handleShowAll = () => {
-    setShowAll(true)
-    setTimeout(() => extraRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50)
-  }
-
-  const visible = showAll ? formations : formations.slice(0, INITIAL_COUNT)
-  const hasMore = !showAll && formations.length > INITIAL_COUNT
 
   return (
     <section id="formations" className="bg-[#F8FAFC] py-16 sm:py-24">
@@ -238,20 +234,18 @@ export function FormationsPreview() {
             <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">Nos formations</h2>
             <p className="mt-2 text-lg text-muted-foreground">Ancrées dans les réalités du travail social en Suisse romande</p>
           </div>
-          {hasMore && (
-            <button
-              onClick={handleShowAll}
-              className="flex items-center gap-2 rounded-lg border border-[#3DBFA0] px-4 py-2 text-sm font-medium text-[#3DBFA0] transition-colors hover:bg-[#3DBFA0]/10"
-            >
-              Voir toutes les formations
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          )}
+          <a
+            href="/formations"
+            className="flex items-center gap-2 rounded-lg border border-[#3DBFA0] px-4 py-2 text-sm font-medium text-[#3DBFA0] transition-colors hover:bg-[#3DBFA0]/10"
+          >
+            Voir toutes les formations
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
 
         {loading ? (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: INITIAL_COUNT }).map((_, i) => (
+            {Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="h-40 animate-pulse rounded-xl bg-gray-200" />
             ))}
           </div>
@@ -259,8 +253,8 @@ export function FormationsPreview() {
           <p className="mt-12 text-center text-muted-foreground">Les formations seront bientôt disponibles.</p>
         ) : (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
-            {visible.map((f, i) => (
-              <div key={f.id} ref={i === INITIAL_COUNT ? extraRef : undefined}>
+            {formations.map((f) => (
+              <div key={f.id}>
                 <FormationCard formation={f} />
               </div>
             ))}
