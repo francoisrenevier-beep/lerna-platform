@@ -41,9 +41,36 @@ export function TarifsSection() {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-white/60">
-          Accès illimité pour tous vos collaborateurs — Aucun frais de mise en œuvre — Nouvelles formations incluses
-        </p>
+        <div className="mt-8 space-y-4 text-center">
+          <p className="text-sm text-white/60">
+            Accès illimité pour tous vos collaborateurs — Nouvelles formations incluses
+          </p>
+
+          <div className="mx-auto max-w-sm rounded-xl border border-white/10 bg-white/5 px-6 py-5 text-left">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
+              <span className="text-sm text-white/40 line-through">
+                Frais de mise en service : 1&apos;490 CHF
+              </span>
+              <span className="text-sm font-bold text-[#3DBFA0]">
+                Offerts dans le cadre de l&apos;offre pilote
+              </span>
+            </div>
+            <ul className="mt-3 space-y-1.5 text-xs text-white/60">
+              {[
+                "Paramétrage de l'institution",
+                "Création du code d'accès institutionnel",
+                "Import des collaborateurs",
+                "Configuration des espaces manager",
+                "Accompagnement au lancement",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <span className="h-1 w-1 flex-shrink-0 rounded-full bg-[#3DBFA0]/60" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )
