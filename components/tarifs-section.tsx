@@ -41,20 +41,30 @@ export function TarifsSection() {
           ))}
         </div>
 
-        <div className="mt-10 flex items-center justify-center gap-4 rounded-2xl border border-[#3DBFA0]/30 bg-[#3DBFA0]/10 px-8 py-6">
+        <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10">
+          {/* Montant barré */}
           <div className="text-center">
-            <p className="text-xs font-medium uppercase tracking-widest text-[#3DBFA0]/70">
-              Offre pilote
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/40">
+              Frais de mise en œuvre
             </p>
-            <p className="mt-1 text-base text-white/40 line-through">
-              Frais de mise en œuvre : 1&apos;490.–
+            <p className="mt-2 text-5xl font-bold tracking-tight text-white/25 line-through decoration-[#3DBFA0] decoration-[3px]">
+              1&apos;490.–
             </p>
           </div>
-          <div className="h-8 w-px bg-[#3DBFA0]/30" />
-          <span className="text-2xl font-bold text-[#3DBFA0]">Offert</span>
+
+          {/* Bulle promotionnelle */}
+          <div className="relative rounded-2xl bg-[#3DBFA0] px-7 py-5 text-center shadow-2xl shadow-[#3DBFA0]/30">
+            <div className="absolute -left-3 top-1/2 hidden h-0 w-0 -translate-y-1/2 border-y-[10px] border-r-[14px] border-y-transparent border-r-[#3DBFA0] sm:block" />
+            <p className="text-[11px] font-bold uppercase tracking-widest text-[#1B2D5B]/60">
+              Offre promotionnelle
+            </p>
+            <p className="mt-0.5 text-base font-bold text-[#1B2D5B]">
+              Frais de mise en œuvre offerts
+            </p>
+          </div>
         </div>
 
-        <p className="mt-6 text-center text-sm text-white/50">
+        <p className="mt-8 text-center text-sm text-white/50">
           Accès illimité pour tous vos collaborateurs — Nouvelles formations incluses
         </p>
       </div>
