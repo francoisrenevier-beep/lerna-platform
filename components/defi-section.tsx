@@ -2,14 +2,14 @@ import { XCircle, CheckCircle } from "lucide-react"
 
 const problemes = [
   "Les formations présentielles ne touchent qu'une partie des équipes — une majorité de collaborateurs reste à l'écart",
-  "Libérer un professionnel pour une journée de formation, c'est le remplacer et désorganiser l'équipe",
-  "Les nouveaux collaborateurs mettent du temps à s'intégrer à la culture et aux pratiques de l'institution",
+  "Libérer un collaborateur pour une journée de formation n'est pas toujours possible — remplacements complexes, désorganisation de l'équipe",
+  "Équipes de nuit, remplaçants fixes et collaborateurs en périphérie de l'accompagnement (administratif, intendance, technique) sont rarement inclus dans les plans de formation continue",
 ]
 
 const solutions = [
   "Une offre qui complète les formations présentielles et s'adresse à l'ensemble des secteurs de l'institution",
-  "Un socle commun de réflexion pour l'ensemble des collaborateurs",
-  "Une intégration rapide et autonome des nouveaux collaborateurs",
+  "Un socle commun de réflexion pour l'ensemble des collaborateurs, avec des outils directement mobilisables sur le terrain",
+  "Sensibiliser l'ensemble des collaborateurs — y compris ceux en périphérie de l'accompagnement — à des thématiques en lien avec les personnes accompagnées",
 ]
 
 export function DefiSection() {

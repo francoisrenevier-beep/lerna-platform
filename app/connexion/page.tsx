@@ -270,7 +270,7 @@ export default function ConnexionPage() {
                 value={codeInstitution}
                 onChange={(e) => setCodeInstitution(e.target.value)}
                 className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] uppercase"
-                placeholder="Ex: AVOP2024"
+                placeholder="Ex: Learna2024"
               />
               <p className="text-xs text-gray-400 mt-1">Code fourni par votre institution</p>
             </div>
