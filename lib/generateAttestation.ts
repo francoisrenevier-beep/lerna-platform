@@ -197,7 +197,7 @@ export async function generateAttestationPDF(data: AttestationData): Promise<Blo
   doc.setTextColor(...navy)
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(10.5)
-  doc.text('Learna Sàrl  |  Suisse romande', W / 2, sigY + 14, { align: 'center' })
+  doc.text('Learna  |  Suisse romande', W / 2, sigY + 14, { align: 'center' })
 
   doc.setTextColor(190, 196, 215)
   doc.setFont('courier', 'normal')
