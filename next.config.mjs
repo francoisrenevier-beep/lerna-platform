@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      { source: "/licences", destination: "/tarifs", permanent: true },
+    ]
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

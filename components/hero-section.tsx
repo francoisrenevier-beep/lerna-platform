@@ -51,19 +51,19 @@ function DashboardIllustration() {
           </div>
         </div>
 
-        {/* Stats cards */}
+        {/* Stats cards — valeurs à confirmer selon catalogue actuel */}
         <div className="mt-6 grid grid-cols-3 gap-3">
           <div className="rounded-lg bg-accent/10 p-3">
-            <div className="text-lg font-bold text-accent">12</div>
-            <div className="h-2 w-12 rounded bg-accent/30" />
+            <div className="text-lg font-bold text-accent">5</div>
+            <div className="text-[10px] leading-tight text-accent/70 mt-0.5">formations</div>
           </div>
           <div className="rounded-lg bg-primary/10 p-3">
-            <div className="text-lg font-bold text-primary">85%</div>
-            <div className="h-2 w-10 rounded bg-primary/30" />
+            <div className="text-lg font-bold text-primary">4</div>
+            <div className="text-[10px] leading-tight text-primary/60 mt-0.5">domaines</div>
           </div>
           <div className="rounded-lg bg-accent/10 p-3">
-            <div className="text-lg font-bold text-accent">3</div>
-            <div className="h-2 w-14 rounded bg-accent/30" />
+            <div className="text-lg font-bold text-accent">∞</div>
+            <div className="text-[10px] leading-tight text-accent/70 mt-0.5">accès illimité</div>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ export function HeroSection() {
           {/* Text content */}
           <div className="max-w-xl">
             <h1 className="text-pretty text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              La formation continue, ancrée dans la réalité du terrain.
+              Former les équipes, élargir les regards
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
               Learna propose aux institutions sociales et médico-sociales une

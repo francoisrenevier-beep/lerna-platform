@@ -1,8 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+
+const navLinks = [
+  { label: "Accueil", href: "/" },
+  { label: "Formations & Ressources", href: "/formations-ressources" },
+  { label: "La solution", href: "/la-solution" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Tarifs", href: "/tarifs" },
+]
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -11,50 +20,41 @@ export function Navigation() {
     <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-36 items-center justify-between">
-          {/* Logo */}
+          {/* Logo → Accueil */}
           <div className="flex-shrink-0">
-            <a href="/">
+            <Link href="/">
               <img src="/logo-learna-blanc.png" alt="LEARNA" className="h-32 w-auto" />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:gap-8">
-            <a
-              href="#formations"
-              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
-            >
-              Formations
-            </a>
-            <a
-              href="#institutions"
-              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
-            >
-              Institutions
-            </a>
-            <a
-              href="#tarifs"
-              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
-            >
-              Tarifs
-            </a>
-            <a
+          <div className="hidden lg:flex lg:items-center lg:gap-5">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground whitespace-nowrap"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
               href="/connexion"
-              className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
+              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
             >
               Connexion
-            </a>
+            </Link>
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
-              Demander un accès
+          <div className="hidden lg:block">
+            <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+              <Link href="/contact">Demander un accès</Link>
             </Button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden">
+          <div className="flex lg:hidden">
             <button
               type="button"
               className="text-foreground"
@@ -73,34 +73,29 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="border-t border-border md:hidden">
+        <div className="border-t border-border lg:hidden">
           <div className="space-y-1 px-4 pb-4 pt-2">
-            <a
-              href="#formations"
-              className="block py-2 text-sm font-medium text-foreground/80"
-            >
-              Formations
-            </a>
-            <a
-              href="#institutions"
-              className="block py-2 text-sm font-medium text-foreground/80"
-            >
-              Institutions
-            </a>
-            <a
-              href="#tarifs"
-              className="block py-2 text-sm font-medium text-foreground/80"
-            >
-              Tarifs
-            </a>
-            <a
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block py-2 text-sm font-medium text-foreground/80"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
               href="/connexion"
               className="block py-2 text-sm font-medium text-foreground/80"
+              onClick={() => setMobileMenuOpen(false)}
             >
               Connexion
-            </a>
-            <Button className="mt-4 w-full bg-accent text-accent-foreground hover:bg-accent/90">
-              Demander un accès
+            </Link>
+            <Button asChild className="mt-4 w-full bg-accent text-accent-foreground hover:bg-accent/90">
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                Demander un accès
+              </Link>
             </Button>
           </div>
         </div>

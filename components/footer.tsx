@@ -1,9 +1,13 @@
+import Link from "next/link"
+
 const links = [
-  { label: "Formations", href: "#formations" },
-  { label: "Institutions", href: "#institutions" },
-  { label: "Tarifs", href: "#tarifs" },
-  { label: "Contact", href: "#contact" },
-  { label: "Mentions légales", href: "#mentions" },
+  { label: "Accueil", href: "/" },
+  { label: "Formations & Ressources", href: "/formations-ressources" },
+  { label: "La solution", href: "/la-solution" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Tarifs", href: "/tarifs" },
+  { label: "Contact", href: "/contact" },
+  { label: "Mentions légales", href: "/mentions-legales" },
 ]
 
 export function Footer() {
@@ -22,15 +26,15 @@ export function Footer() {
           </div>
 
           {/* Liens */}
-          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2 sm:pt-1">
-            {links.map((link, index) => (
-              <a
-                key={index}
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 sm:pt-1">
+            {links.map((link) => (
+              <Link
+                key={link.href}
                 href={link.href}
                 className="text-sm text-white/70 transition-colors hover:text-white"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 

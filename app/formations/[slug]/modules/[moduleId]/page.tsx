@@ -11,6 +11,7 @@ import { Module3PPH } from "@/app/modules/pph-module-3"
 import { Module4PPH } from "@/app/modules/pph-module-4"
 import { Module5PPH } from "@/app/modules/pph-module-5"
 import { Module1Deliberation } from "@/app/modules/deliberation-module-1"
+import { Module1DeliberationV2 } from "@/app/modules/deliberation-module-1-v2"
 import { Module2Deliberation } from "@/app/modules/deliberation-module-2"
 import { Module3Deliberation } from "@/app/modules/deliberation-module-3"
 import { Module4Deliberation } from "@/app/modules/deliberation-module-4"
@@ -78,6 +79,7 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "d9e48c2e-b354-48e6-9cfe-a699ea31cba2": Module4PPH,
   "e5c5678a-957c-49a0-9d30-dbf63cea7565": Module5PPH,
   "de1b0001-0000-4000-8000-000000000001": Module1Deliberation,
+  "de1b2001-0000-4000-8000-000000000001": Module1DeliberationV2,
   "de1b0002-0000-4000-8000-000000000002": Module2Deliberation,
   "de1b0003-0000-4000-8000-000000000003": Module3Deliberation,
   "de1b0004-0000-4000-8000-000000000004": Module4Deliberation,

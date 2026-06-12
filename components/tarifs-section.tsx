@@ -11,7 +11,7 @@ export function TarifsSection() {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Une licence pour toute votre équipe
+            Une licence pour tous vos collaborateurs
           </h2>
           <p className="mt-4 text-lg text-white/70">
             Tarif annuel TTC — accès illimité pour tous vos collaborateurs

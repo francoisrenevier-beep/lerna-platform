@@ -213,12 +213,12 @@ export function FormationsPreview() {
         .eq("est_publie", true)
         .eq("est_privee", false)
 
-      // Priorité aux formations marquées "afficher_accueil", sinon les 3 premières par ordre
-      const { data: selectionnes } = await base.eq("afficher_accueil", true).order("ordre").limit(3)
+      // Priorité aux formations marquées "afficher_accueil", sinon les 5 premières par ordre
+      const { data: selectionnes } = await base.eq("afficher_accueil", true).order("ordre").limit(4)
       if (selectionnes && selectionnes.length > 0) {
         setFormations(selectionnes)
       } else {
-        const { data: fallback } = await base.order("ordre").limit(3)
+        const { data: fallback } = await base.order("ordre").limit(4)
         if (fallback) setFormations(fallback)
       }
       setLoading(false)
@@ -235,7 +235,7 @@ export function FormationsPreview() {
             <p className="mt-2 text-lg text-muted-foreground">Ancrées dans les réalités du travail social en Suisse romande</p>
           </div>
           <a
-            href="/formations"
+            href="/formations-ressources"
             className="flex items-center gap-2 rounded-lg border border-[#3DBFA0] px-4 py-2 text-sm font-medium text-[#3DBFA0] transition-colors hover:bg-[#3DBFA0]/10"
           >
             Voir toutes les formations
@@ -245,7 +245,7 @@ export function FormationsPreview() {
 
         {loading ? (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, i) => (
+            {Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="h-40 animate-pulse rounded-xl bg-gray-200" />
             ))}
           </div>

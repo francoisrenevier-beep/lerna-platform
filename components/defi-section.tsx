@@ -20,7 +20,7 @@ export function DefiSection() {
           {/* Colonne gauche — problèmes */}
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">
-              Former ses équipes : un enjeu majeur, des contraintes bien réelles
+              Et tout ce que la formation laisse d'habitude de côté
             </h2>
             <ul className="mt-8 space-y-5">
               {problemes.map((p, i) => (

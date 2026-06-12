@@ -1,40 +1,43 @@
 import { Quote } from "lucide-react"
 
+// ─── Témoignages réels ────────────────────────────────────────────────────────
+// Ajouter ici d'autres témoignages au fil des retours :
+// { quote: "…", author: "Prénom N.", role: "Rôle", institution: "Institution" }
+
 const testimonials = [
   {
     quote:
-      "Learna a transformé notre approche de la formation continue. Nos équipes peuvent se former à leur rythme, sans perturber l'accompagnement des résidents.",
-    author: "Marie Dupont",
-    role: "Directrice",
-    institution: "Fondation Arc-en-Ciel",
+      "Je travaille depuis quinze ans et j'ai quand même appris des choses. Le découpage en niveaux m'a permis d'aller à mon rythme sans me sentir perdue.",
+    author: "Nathalie C.",
+    role: "Éducatrice",
+    institution: "",
   },
   {
     quote:
-      "Les contenus sont parfaitement adaptés aux réalités du terrain suisse. Une ressource précieuse pour nos éducateurs spécialisés.",
-    author: "Jean-Pierre Muller",
-    role: "Responsable RH",
-    institution: "Institution Les Oliviers",
+      "J'ai suivi une formation en trois fois, sans perdre le fil. Le découpage en sections aide à reprendre là où on s'est arrêté.",
+    author: "Patrick",
+    role: "Assistant socio-éducatif",
+    institution: "",
   },
   {
     quote:
-      "La flexibilité de la plateforme et la qualité des formations nous ont convaincus. Un investissement qui profite à toute notre équipe.",
-    author: "Sophie Reymond",
-    role: "Coordinatrice pédagogique",
-    institution: "Centre Espoir",
+      "Pouvoir avancer quand je veux, sans date imposée, ça correspond à mon emploi du temps en horaires décalés.",
+    author: "Samira",
+    role: "Veilleuse",
+    institution: "",
   },
 ]
 
 export function Testimonials() {
   return (
-    <section className="bg-secondary py-16 sm:py-24">
+    <section className="bg-[#F8FAFC] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Ils font confiance à Learna
+          <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">
+            Ce qu'en disent les collaborateurs
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Des institutions suisses qui ont choisi Learna pour la formation de
-            leurs équipes
+            Des professionnels du travail social qui ont suivi une formation LEARNA
           </p>
         </div>
 
@@ -44,27 +47,22 @@ export function Testimonials() {
               key={index}
               className="rounded-2xl border border-border bg-card p-8"
             >
-              {/* Quote icon */}
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20">
-                <Quote className="h-5 w-5 text-accent" />
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#3DBFA0]/20">
+                <Quote className="h-5 w-5 text-[#3DBFA0]" />
               </div>
 
-              {/* Quote text */}
               <p className="text-balance leading-relaxed text-foreground">
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
 
-              {/* Author */}
               <div className="mt-6 border-t border-border pt-6">
-                <div className="font-semibold text-foreground">
-                  {testimonial.author}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {testimonial.role}
-                </div>
-                <div className="mt-1 text-sm font-medium text-accent">
-                  {testimonial.institution}
-                </div>
+                <div className="font-semibold text-[#1B2D5B]">{testimonial.author}</div>
+                <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                {testimonial.institution && (
+                  <div className="mt-1 text-sm font-medium text-[#3DBFA0]">
+                    {testimonial.institution}
+                  </div>
+                )}
               </div>
             </div>
           ))}
