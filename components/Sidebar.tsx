@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
@@ -7,7 +8,6 @@ type SidebarProps = {
   pageActive: "dashboard" | "formations" | "catalogue" | "progression" | "attestations" | "profil" | "ressources"
   institution?: string
   prenom?: string
-  estResponsable?: boolean
 }
 
 // ── Icônes SVG inline ──────────────────────────────────────────────────────────
@@ -86,8 +86,25 @@ function IconLogout() {
   )
 }
 
-export function Sidebar({ pageActive, institution, estResponsable }: SidebarProps) {
+export function Sidebar({ pageActive, institution }: SidebarProps) {
   const router = useRouter()
+  const [estResponsable, setEstResponsable] = useState(false)
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (!data.user) return
+      supabase
+        .from("institution_profils")
+        .select("role")
+        .eq("profil_id", data.user.id)
+        .eq("statut", "actif")
+        .limit(1)
+        .single()
+        .then(({ data: ip }) => {
+          if (ip?.role === "responsable") setEstResponsable(true)
+        })
+    })
+  }, [])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()

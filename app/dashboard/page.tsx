@@ -47,7 +47,6 @@ type BadgeRow = {
 type DashboardData = {
   profil: Profil | null
   institution: Institution | null
-  estResponsable: boolean
   formationsEnCours: FormationEnCours[]
   totalEnCours: number
   formationsCompletees: number
@@ -293,7 +292,7 @@ export default function DashboardPage() {
         supabase.from("profils").select("prenom, nom").eq("id", user.id).single(),
         supabase
           .from("institution_profils")
-          .select("institutions(nom), role")
+          .select("institutions(nom)")
           .eq("profil_id", user.id)
           .eq("statut", "actif")
           .limit(1)
@@ -394,7 +393,6 @@ export default function DashboardPage() {
       setData({
         profil: profilData ?? null,
         institution: (ipData?.institutions as unknown as Institution) ?? null,
-        estResponsable: ipData?.role === "responsable",
         formationsEnCours: formationsEnCoursTout.slice(0, 2),
         totalEnCours: formationsEnCoursTout.length,
         formationsCompletees,
@@ -416,7 +414,6 @@ export default function DashboardPage() {
   const {
     profil,
     institution,
-    estResponsable,
     formationsEnCours,
     totalEnCours,
     formationsCompletees,
@@ -438,7 +435,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
-      <Sidebar pageActive="dashboard" institution={institution?.nom} estResponsable={estResponsable} />
+      <Sidebar pageActive="dashboard" institution={institution?.nom} />
 
       <main className="flex-1 min-w-0 pb-20 md:pb-0">
 
