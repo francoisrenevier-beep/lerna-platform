@@ -7,6 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { TableauComparaison } from "@/components/module/TableauComparaison"
 import { Quiz } from "@/components/module/Quiz"
+import { AccrocheScenario } from "@/components/module/AccrocheScenario"
 
 export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
@@ -45,6 +46,10 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             Le plan d'accompagnement MDH-PPH n'est pas écrit pour les professionnels. Il est écrit avec la personne, pour la personne.
           </PullQuote>
         </SectionModule>
+
+        <AccrocheScenario type="question">
+          <p>Un projet personnalisé co-construit réellement avec la personne accompagnée — est-ce possible dans votre pratique quotidienne ? Quels obstacles institutionnels, de temps ou de méthode rendent cela difficile ? Et si le MDH-PPH vous donnait un cadre précis pour y parvenir concrètement, pas seulement en intention ?</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Leçon 4.1" titre="De l'évaluation au projet personnalisé">
           <Texte>La construction du plan d'accompagnement suit trois étapes articulées. Chacune découle directement des concepts que nous avons explorés dans les modules précédents.</Texte>
@@ -131,6 +136,10 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
           <Texte>Il ne s'agit pas de nier que la famille de Lena la connaît bien, ni que l'institution a des contraintes réelles. Il s'agit de garantir que la voix de Lena elle-même — pas seulement ce que les autres pensent pour elle — est au centre du projet.</Texte>
         </SectionModule>
+
+        <AccrocheScenario type="reflexion">
+          <p>Parmi les personnes que vous accompagnez, laquelle serait la plus difficile à « faire parler d'elle-même » — à exprimer ce qu'elle veut vraiment pour sa vie ? Quel obstacle à l'autodétermination est à l'œuvre dans sa situation ? Est-il micro (votre équipe décide à sa place), méso (le règlement l'interdit) ou macro (la norme culturelle la réduit au silence) ?</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Leçon 4.3" titre="Les outils MHAVIE et MQE en pratique">
           <Texte>Le MDH-PPH est soutenu par deux outils standardisés complémentaires qui permettent d'objectiver l'évaluation et de mesurer les progrès dans le temps. Ces outils transforment une impression clinique en données comparables.</Texte>
@@ -287,6 +296,17 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 ],
                 bonneReponse: 2,
                 explication: "Agir sur les facteurs environnementaux signifie modifier l'environnement physique, humain, attitudinal ou institutionnel pour lever les obstacles. L'installation d'un plan de travail adapté est une modification de l'environnement physique micro. Les autres options relèvent d'interventions sur les facteurs personnels (aptitudes) de la personne."
+              },
+              {
+                question: "Un plan co-construit avec Lena indiquait qu'elle cuisinerait le mercredi avec Mia et Theo. Six mois plus tard, Theo a quitté l'institution et Lena semble moins enthousiaste. Que prescrit le MDH-PPH ?",
+                reponses: [
+                  "Conserver le plan tel quel car les objectifs de participation n'ont pas changé",
+                  "Réduire l'activité cuisine pour éviter la déception de Lena",
+                  "Réévaluer la situation avec le MHAVIE pour objectiver l'évolution et ajuster le plan au nouveau contexte",
+                  "Remplacer Theo par un autre participant choisi par l'équipe pour reconstituer le groupe"
+                ],
+                bonneReponse: 2,
+                explication: "Le flux temporel du MDH-PPH invite à des réévaluations régulières, surtout après des transitions. Le départ de Theo a modifié l'environnement social micro de Lena. Le MHAVIE permettra de mesurer l'impact sur sa satisfaction et d'ajuster le plan : peut-être maintenir la cuisine mais adapter le groupe, ou explorer d'autres habitudes de vie prioritaires pour Lena elle-même."
               }
             ]}
             onValiderModule={onValiderModule}

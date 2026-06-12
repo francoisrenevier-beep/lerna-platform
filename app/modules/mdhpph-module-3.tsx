@@ -6,6 +6,7 @@ import { HighlightBox } from "@/components/module/HighlightBox"
 import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { Quiz } from "@/components/module/Quiz"
+import { AccrocheScenario } from "@/components/module/AccrocheScenario"
 
 export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
@@ -23,9 +24,9 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
       <div className="max-w-3xl mx-auto px-8 py-12">
 
         <SectionModule eyebrow="Fil rouge" titre="Lena — la crise de l'atelier cuisine">
-          <HighlightBox label="Ce qui s'est passé" couleur="jaune">
-            <Texte>Suite à des travaux dans le foyer, l'atelier cuisine de Lena a été déplacé dans un local provisoire : lumineux mais bruyant, avec des ventilations intenses qui dégagent des odeurs fortes. Lena, qui n'a jamais manqué une séance depuis trois ans, refuse désormais d'y aller. Elle manifeste des comportements d'agitation et d'évitement en début de semaine — exactement les jours où l'atelier est programmé. L'équipe est désemparée. Ce module vous montre comment analyser cette situation.</Texte>
-          </HighlightBox>
+          <AccrocheScenario type="scenario">
+            <p>Suite à des travaux dans le foyer, l'atelier cuisine de Lena a été déplacé dans un local provisoire : lumineux mais bruyant, avec des ventilations intenses qui dégagent des odeurs fortes. Lena, qui n'a jamais manqué une séance depuis trois ans, refuse désormais d'y aller. Elle manifeste des comportements d'agitation et d'évitement en début de semaine — exactement les jours où l'atelier est programmé. L'équipe est désemparée. Qu'est-ce que le MDH-PPH permet de voir ici que le regard clinique habituel manque ?</p>
+          </AccrocheScenario>
         </SectionModule>
 
         <SectionModule eyebrow="Introduction" titre="Voir avant d'intervenir">
@@ -88,6 +89,10 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             </div>
           </div>
         </SectionModule>
+
+        <AccrocheScenario type="reflexion">
+          <p>Pensez à une personne que vous accompagnez et qui présente des comportements difficiles à comprendre. Avez-vous cartographié systématiquement les facteurs environnementaux physiques et sociaux de son contexte de vie — à chacun des trois niveaux ? Qu'est-ce que vous ne savez peut-être pas encore sur ce qui l'entrave quotidiennement ?</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Section 3" titre="Vieillissement, transitions et situations de handicap émergentes">
           <Texte>Une des forces du MDH-PPH 2018 est de s'appliquer tout au long du parcours de vie, y compris dans la période du vieillissement. Pour les institutions accueillant des adultes en situation de handicap, cette dimension est de plus en plus centrale : les personnes accompagnées vieillissent, et le vieillissement modifie profondément l'équation personne-environnement.</Texte>
@@ -218,6 +223,17 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             ],
             bonneReponse: 1,
             explication: "Le flux temporel est au cœur du MDH-PPH 2018 : les situations évoluent en permanence. Le vieillissement, un déménagement, un changement d'équipe ou de proche aidant peuvent transformer d'anciens facilitateurs en obstacles. Anticiper ces transitions plutôt que les subir est l'un des apports majeurs du modèle.",
+          },
+          {
+            question: "Selon le MDH-PPH, pourquoi une personne de 50 ans accompagnée depuis longtemps peut-elle se retrouver en situation de handicap croissante sans que son handicap d'origine se soit aggravé ?",
+            reponses: [
+              "Parce que les traitements médicaux deviennent moins efficaces avec l'âge",
+              "Parce que le vieillissement modifie les facteurs personnels (systèmes organiques), et si l'environnement n'est pas adapté en conséquence, une nouvelle situation de handicap émerge",
+              "Parce que les institutions deviennent moins attentives aux personnes après 40 ans",
+              "Parce que les habitudes de vie deviennent moins importantes pour les personnes âgées",
+            ],
+            bonneReponse: 1,
+            explication: "Le flux temporel du MDH-PPH 2018 intègre le vieillissement comme une évolution des facteurs personnels (capacités organiques). Si l'environnement n'est pas adapté en conséquence — mêmes horaires, mêmes trajets, mêmes formats d'activité —, la situation de handicap s'aggrave progressivement. L'enjeu est d'anticiper ces évolutions par des réévaluations proactives, pas de les traiter comme des fatalités.",
           },
         ]}
         onValiderModule={onValiderModule}

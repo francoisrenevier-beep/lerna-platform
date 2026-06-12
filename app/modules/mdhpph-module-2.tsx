@@ -7,6 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { TableauComparaison } from "@/components/module/TableauComparaison"
 import { Quiz } from "@/components/module/Quiz"
+import { AccrocheScenario } from "@/components/module/AccrocheScenario"
 
 export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
@@ -28,6 +29,10 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             <Texte>Après la formation du module précédent, l'équipe de Lena décide d'appliquer le MDH-PPH. Première étape : regarder Lena autrement. Non plus à travers ses déficiences, mais à travers ses facteurs personnels dans leur globalité, l'environnement qui l'entoure, et ce qu'elle fait réellement au quotidien. Ce module vous donne les outils pour mener cette lecture.</Texte>
           </HighlightBox>
         </SectionModule>
+
+        <AccrocheScenario type="question">
+          <p>Vous avez en face de vous le dossier d'une personne accompagnée. On y liste ses diagnostics, ses déficiences, ses traitements. Mais combien de pages décrivent ce qu'elle aime faire, ce qui l'émeut, ce qui lui donne de l'énergie ? Combien de lignes portent sur les obstacles concrets qui l'empêchent de mener la vie qu'elle souhaite ? Ce module vous donne les instruments pour aller au-delà du dossier médical.</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Introduction" titre="Des concepts à l'outil opérationnel">
           <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
@@ -119,6 +124,10 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             <Texte>L'outil MHAVIE (Mesure des Habitudes de Vie) évalue pour chaque catégorie à la fois <strong>le niveau de réalisation</strong> (de la pleine participation à la non-réalisation) et <strong>le niveau de satisfaction</strong> de la personne. Ces deux dimensions sont indissociables : une personne qui réalise une activité de loisir avec une aide permanente et intrusive — sans avoir eu son mot à dire — est en situation de handicap quant à sa satisfaction, même si l'activité est « techniquement réalisée ».</Texte>
           </HighlightBox>
         </SectionModule>
+
+        <AccrocheScenario type="reflexion">
+          <p>Parmi les douze habitudes de vie, quelle est celle qui compte le plus pour les personnes que vous accompagnez — et pour laquelle vous observez la plus grande insatisfaction ? Est-ce une activité courante ou un rôle social ? Et quel obstacle environnemental, micro ou méso, est à l'origine de cette insatisfaction ? C'est là votre prochain levier d'action concret.</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Section 4" titre="Facilitateurs et obstacles : la dynamique de l'interaction">
           <Texte>C'est ici que se joue le cœur opérationnel du MDH-PPH pour les équipes de terrain. Un <strong>facilitateur</strong> est tout facteur environnemental qui favorise la réalisation des habitudes de vie. Un <strong>obstacle</strong> est tout facteur environnemental qui l'entrave.</Texte>
@@ -244,6 +253,17 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             ],
             bonneReponse: 2,
             explication: "Un même facteur environnemental peut avoir des effets opposés selon les personnes et évoluer dans le temps. Un local lumineux est un facilitateur pour certains et un obstacle pour une personne sensible à la lumière. Un accompagnant bienveillant peut devenir un obstacle si son style devient intrusif.",
+          },
+          {
+            question: "En quoi la MQE (Mesure de la Qualité de l'Environnement) complète-t-elle le MHAVIE dans la démarche MDH-PPH ?",
+            reponses: [
+              "La MQE remplace le MHAVIE pour les personnes qui ne peuvent pas s'exprimer verbalement",
+              "Le MHAVIE mesure le résultat (habitudes de vie), la MQE analyse les facteurs environnementaux qui l'expliquent",
+              "La MQE évalue les aptitudes de la personne, le MHAVIE évalue son environnement",
+              "Les deux outils mesurent la même chose mais à des niveaux d'intensité différents",
+            ],
+            bonneReponse: 1,
+            explication: "MHAVIE et MQE sont complémentaires : le MHAVIE photographie le résultat de l'interaction (est-ce que la personne réalise ses habitudes de vie de façon satisfaisante ?), tandis que la MQE analyse les facteurs environnementaux qui expliquent ce résultat (quels obstacles et facilitateurs sont à l'œuvre, à quelle intensité ?). Ensemble, ils permettent une analyse complète et une mesure objective de l'évolution.",
           },
         ]}
         onValiderModule={onValiderModule}

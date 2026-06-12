@@ -7,6 +7,8 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { TableauComparaison } from "@/components/module/TableauComparaison"
 import { Quiz } from "@/components/module/Quiz"
+import { AccrocheScenario } from "@/components/module/AccrocheScenario"
+import { SchemaMDHPPH } from "@/components/module/SchemaMDHPPH"
 
 export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
@@ -22,6 +24,10 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
       />
 
       <div className="max-w-3xl mx-auto px-8 py-12">
+
+        <AccrocheScenario type="scenario">
+          <p>Imaginez la réunion de synthèse de Lena. Autour de la table : un éducateur, une ergothérapeute, une infirmière. Pendant quarante minutes, on discute de ses déficiences, de ses traitements, de ses incidents comportementaux de la semaine. Personne ne mentionne qu'elle est passionnée de cuisine. Personne ne sait qu'elle chante dans sa chambre chaque soir. Le projet personnalisé que l'équipe valide ce jour-là liste ses soins, ses activités thérapeutiques, ses rendez-vous médicaux — mais nulle part ses passions. Ce projet parle-t-il de la vie de Lena, ou seulement de son handicap ?</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Fil rouge" titre="Lena, 42 ans — le début de l'histoire">
           <HighlightBox label="Notre fil rouge narratif" couleur="bleu">
@@ -65,7 +71,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             titre="Deux lectures d'une même situation"
             colonnes={[
               { titre: "Lecture médicale", contenu: [
-                "Lena agite parce qu'elle a une trisomie 21",
+                "Lena s'agite parce qu'elle a une trisomie 21",
                 "Marc ne peut pas aller à l'atelier à cause de sa déficience cognitive",
                 "Sophie résiste aux soins en raison de sa pathologie psychiatrique",
                 "Paul s'énerve : comportement lié à son handicap neurologique",
@@ -81,7 +87,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Le MDH-PPH 2018 : une révolution conceptuelle">
-          <Texte>Le Modèle de Développement Humain – Processus de Production du Handicap (MDH-PPH), élaboré par Patrick Fougeyrollas et l'équipe du RIPPH, a connu plusieurs versions depuis les années 1990. La version bonifiée de 2018 constitue une avancée majeure par rapport aux précédentes.</Texte>
+          <Texte>Le Modèle de Développement Humain – Processus de Production du Handicap (MDH-PPH), élaboré par Patrick Fougeyrollas et l'équipe du RIPPH (Réseau International sur le Processus de Production du Handicap), a connu plusieurs versions depuis les années 1990. La version bonifiée de 2018 constitue une avancée majeure par rapport aux précédentes.</Texte>
 
           <PullQuote source="Patrick Fougeyrollas, RIPPH 2018">
             Le handicap n'est plus une identité, c'est un résultat. C'est le produit d'une interaction dynamique entre les caractéristiques d'une personne et les conditions de son environnement.
@@ -124,12 +130,18 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             note="Le flux temporel traverse l'ensemble : cette interaction est dynamique et évolutive — jamais figée"
           />
 
+          <SchemaMDHPPH />
+
           <Texte>Les habitudes de vie sont à la fois le résultat à mesurer et la finalité à viser. Une habitude de vie réalisée de façon pleine et satisfaisante = participation sociale. Une habitude de vie entravée ou insatisfaisante = situation de handicap.</Texte>
 
           <HighlightBox label="Le flux temporel" couleur="vert">
             <Texte>Une évaluation à un moment donné sert de photographie de référence pour mesurer l'évolution six mois ou deux ans plus tard, après intervention. L'accompagnement n'est jamais terminé : il doit être régulièrement réévalué. Ce principe est fondamental — et il implique des réévaluations planifiées, pas seulement réactives.</Texte>
           </HighlightBox>
         </SectionModule>
+
+        <AccrocheScenario type="reflexion">
+          <p>Pensez à une personne que vous accompagnez en ce moment. Si vous deviez nommer ce qui l'anime profondément — ce pour quoi elle se lève le matin, ce qui lui donne le sourire — est-ce que ces éléments sont présents dans son projet personnalisé ? Si ce n'est pas le cas, quel regard le modèle médical a-t-il imposé, et que changerait de commencer par là ?</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Lena — retour au fil rouge" titre="Ce que le MDH-PPH change pour Lena">
           <Texte>Avec le MDH-PPH, la question posée à l'équipe n'est plus « Quels soins Lena nécessite-t-elle ? » mais « Dans quelle mesure l'environnement empêche-t-il Lena de cuisiner, de jardiner, de chanter — de faire ce qui donne sens à sa vie ? »</Texte>
@@ -218,6 +230,17 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             ],
             bonneReponse: 2,
             explication: "Le flux temporel rappelle qu'aucune situation n'est figée. Une évaluation à un instant T sert de référence pour mesurer l'évolution après intervention — à 6 mois, à un an. Cela implique des réévaluations planifiées, proactives, pas seulement réactives lors de crises.",
+          },
+          {
+            question: "Lorsque l'environnement de Lena est radicalement amélioré (facilitateurs maximaux), que se passe-t-il avec ses déficiences organiques liées à la trisomie 21 ?",
+            reponses: [
+              "Les déficiences organiques diminuent grâce à la stimulation positive de l'environnement",
+              "Les déficiences organiques restent inchangées, mais leur impact sur la participation sociale est réduit",
+              "Les déficiences n'ont plus aucune importance : seul l'environnement compte",
+              "L'environnement ne peut compenser que les incapacités physiques, pas les déficiences cognitives",
+            ],
+            bonneReponse: 1,
+            explication: "Le MDH-PPH est précis sur ce point : les déficiences organiques sont des réalités biologiques qui ne disparaissent pas. Ce qui change avec un environnement adapté, c'est leur impact sur la réalisation des habitudes de vie — et donc sur la participation sociale. C'est précisément cette distinction entre ce qui est 'dans la personne' et ce qui peut être transformé 'autour d'elle' qui fonde la puissance opérationnelle du modèle.",
           },
         ]}
         onValiderModule={onValiderModule}

@@ -7,6 +7,7 @@ import { SchemaEtapes } from "@/components/module/SchemaEtapes"
 import { Texte, Liste } from "@/components/module/Texte"
 import { TableauComparaison } from "@/components/module/TableauComparaison"
 import { Quiz } from "@/components/module/Quiz"
+import { AccrocheScenario } from "@/components/module/AccrocheScenario"
 
 export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => void } = {}) {
   return (
@@ -27,6 +28,10 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge — Lena, 42 ans — Un an plus tard</p>
           <p className="text-gray-700 text-sm leading-relaxed">Le plan co-construit avec Lena a fonctionné. Elle cuisine à nouveau, elle a retrouvé ses amies, elle chante dans la chorale. Mais en analysant sa situation collectivement, l'équipe a commencé à remarquer quelque chose d'inquiétant : <strong>plusieurs autres résidents rencontraient les mêmes obstacles</strong>. Les horaires rigides, les activités non choisies, les changements d'équipe non anticipés — ce n'était pas le problème de Lena. C'était le problème de l'institution. Le MDH-PPH venait de passer du projet individuel à la question organisationnelle.</p>
         </div>
+
+        <AccrocheScenario type="question">
+          <p>Et si le MDH-PPH n'était pas seulement un outil d'évaluation individuelle, mais un miroir institutionnel ? Quand vous observez les obstacles récurrents que vous identifiez semaine après semaine pour différentes personnes, quels patterns émergent ? Qu'est-ce que ces patterns révèlent sur votre institution — sur ses règles, ses horaires, ses rituels implicites ?</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Introduction" titre="Le MDH-PPH comme outil organisationnel">
           <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
@@ -139,6 +144,10 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             Une institution inclusive ne s'affiche pas dans les valeurs du projet d'établissement. Elle se lit dans la façon dont les équipes parlent des personnes qu'elles accompagnent quand personne ne regarde.
           </PullQuote>
         </SectionModule>
+
+        <AccrocheScenario type="reflexion">
+          <p>Pensez à un moment récent dans votre institution où vous avez entendu quelqu'un parler d'un résident d'une façon qui vous a mis mal à l'aise — pas forcément malveillante, juste réductrice. Ce type de moment est un révélateur de culture institutionnelle réelle. Qu'est-ce qu'il vous a appris sur ce qu'il reste à construire collectivement ?</p>
+        </AccrocheScenario>
 
         <SectionModule eyebrow="Leçon 5.3" titre="La coordination interprofessionnelle au service de la participation">
           <Texte>La mise en œuvre du MDH-PPH dans les pratiques institutionnelles suppose une coordination interprofessionnelle efficace. Les situations complexes — polyhandicap, double diagnostic, vieillissement — nécessitent la mobilisation de compétences multiples, qui ne peuvent s'articuler que si elles partagent un cadre commun d'analyse.</Texte>
@@ -285,6 +294,17 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 ],
                 bonneReponse: 1,
                 explication: "Ce module opère le passage de l'utilisation individuelle du MDH-PPH (analyser la situation de Lena, construire son plan) à l'utilisation collective et organisationnelle : quand plusieurs analyses convergent vers les mêmes obstacles, l'enjeu n'est plus de modifier le projet de vie d'une personne, mais de transformer l'organisation qui produit ces obstacles. C'est le niveau institutionnel du MDH-PPH."
+              },
+              {
+                question: "Pourquoi la mesure de la conformité aux procédures administratives ne suffit-elle pas à évaluer la qualité d'une institution inclusive ?",
+                reponses: [
+                  "Parce que les procédures sont trop complexes pour être évaluées objectivement",
+                  "Parce que la conformité procédurale ne dit rien de la participation sociale effective des personnes accompagnées",
+                  "Parce que les résidents ne savent pas évaluer la qualité de leur accompagnement",
+                  "Parce que seuls les indicateurs financiers reflètent réellement la qualité institutionnelle"
+                ],
+                bonneReponse: 1,
+                explication: "Une institution peut respecter toutes les procédures administratives et documenter parfaitement ses interventions, tout en produisant des situations de handicap pour ses résidents. Le MDH-PPH propose une mesure centrée sur les résultats de participation — combien de personnes réalisent leurs habitudes de vie de façon satisfaisante ? — et non sur la conformité des processus. C'est un changement fondamental d'indicateur de qualité."
               }
             ]}
             onValiderModule={onValiderModule}
