@@ -52,11 +52,11 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <SchemaEtapes
             titre="Les trois sous-composantes des facteurs personnels"
             etapes={[
-              { niveau: "Sous-composante 1", nom: "Facteurs identitaires", definition: "Âge, sexe, histoire de vie, croyances, valeurs, appartenance culturelle et communautaire. Ces éléments déterminent ce qui compte pour la personne, ce qui donne sens à son accompagnement. C'est souvent la dimension la plus négligée en institution." },
-              { niveau: "Sous-composante 2", nom: "Systèmes organiques", definition: "Composantes corporelles — système nerveux, cardiovasculaire, moteur, digestif — mesurées sur un spectre allant de l'intégrité à la déficience. Ces données sont nécessaires, mais insuffisantes pour prédire la participation sociale." },
-              { niveau: "Sous-composante 3", nom: "Aptitudes", definition: "La possibilité pour une personne d'accomplir une activité physique ou mentale : marcher, mémoriser, communiquer, s'orienter. Mesurées de la pleine capacité à l'incapacité totale. Une aptitude réduite n'est pas synonyme de situation de handicap." },
+              { niveau: "Sous-composante 1", nom: "Facteurs identitaires", definition: "Caractéristiques sociodémographiques, économiques et culturelles propres à un individu et à son histoire de vie (âge, sexe, genre, orientation sexuelle, appartenance culturelle, statut économique, histoire de vie). Distinction clé du MDH-PPH 2018 : ces facteurs sont évalués sur un continuum allant de FACILITATEUR à OBSTACLE — un niveau d'éducation élevé peut faciliter la participation, un isolement social peut l'entraver." },
+              { niveau: "Sous-composante 2", nom: "Systèmes organiques", definition: "Ensemble de composantes corporelles visant une fonction commune — système nerveux, cardiovasculaire, moteur, digestif, oculaire, auditif — mesurés sur un spectre allant de l'INTÉGRITÉ à la DÉFICIENCE. Ces données sont nécessaires, mais insuffisantes à elles seules pour prédire la participation sociale." },
+              { niveau: "Sous-composante 3", nom: "Aptitudes", definition: "La possibilité pour une personne d'accomplir une activité physique ou mentale : marcher, mémoriser, communiquer, s'orienter. Mesurées de la CAPACITÉ SANS LIMITE à l'INCAPACITÉ COMPLÈTE. Une aptitude réduite n'est pas synonyme de situation de handicap — tout dépend de l'interaction avec l'environnement." },
             ]}
-            note="Ignorer les facteurs identitaires, c'est risquer de construire des projets techniquement irréprochables mais déconnectés de ce qui importe pour la personne"
+            note="Contrairement aux systèmes organiques et aptitudes, les facteurs identitaires peuvent être à la fois facilitateurs ET obstacles — leur impact sur la participation dépend du contexte"
           />
 
           <HighlightBox label="Un exemple concret" couleur="jaune">
@@ -64,9 +64,9 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           </HighlightBox>
 
           <ConceptBox label="Lena — ses facteurs personnels" titre="Ce que l'équipe découvre en creusant">
-            <Texte><strong>Systèmes organiques :</strong> trisomie 21, légère hypersensibilité sensorielle (bruits forts, odeurs intenses).</Texte>
-            <Texte><strong>Aptitudes :</strong> aptitudes langagières réduites, bonnes capacités motrices, mémoire procédurale préservée (elle retrouve facilement des gestes répétés).</Texte>
-            <Texte><strong>Facteurs identitaires :</strong> Lena a grandi dans une famille où la cuisine était un rituel central. Elle aime créer, voir les résultats de son travail, être reconnue pour ses productions. Le jardinage lui procure un sentiment de soin et de patience. Le chant est lié à des souvenirs familiaux forts. Ces éléments n'apparaissent nulle part dans son projet personnalisé actuel.</Texte>
+            <Texte><strong>Systèmes organiques :</strong> trisomie 21 (continuum intégrité → déficience), légère hypersensibilité sensorielle aux bruits forts et odeurs intenses.</Texte>
+            <Texte><strong>Aptitudes :</strong> aptitudes langagières réduites, bonnes capacités motrices, mémoire procédurale préservée (elle retrouve facilement les gestes répétés).</Texte>
+            <Texte><strong>Facteurs identitaires :</strong> Lena a grandi dans une famille où la cuisine était un rituel central. Elle aime créer, voir les résultats de son travail, être reconnue pour ses productions. Le jardinage lui procure un sentiment de soin. Le chant est lié à des souvenirs familiaux forts. <em>Dimension clé :</em> ses liens familiaux et son statut de membre actif de l'atelier sont des facteurs identitaires <strong>facilitateurs</strong> — ils soutiennent sa participation. Son isolement potentiel hors de l'atelier devient un facteur identitaire <strong>obstacle</strong>.</Texte>
           </ConceptBox>
         </SectionModule>
 
@@ -107,10 +107,10 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         <SectionModule eyebrow="Section 3" titre="Les habitudes de vie : indicateur central de participation">
           <Texte>Les habitudes de vie constituent la finalité du modèle. Ce sont elles qui permettent de mesurer si une personne vit en situation de participation sociale ou en situation de handicap. La nomenclature 2018 identifie douze catégories précises, réparties en deux grands groupes.</Texte>
 
-          <HighlightBox label="Les douze catégories d'habitudes de vie" couleur="bleu">
+          <HighlightBox label="Les douze catégories d'habitudes de vie (nomenclature officielle MDH-PPH 2018)" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "6 activités courantes : nutrition, condition physique et psychique, soins personnels, habitation, déplacements, communication",
-              "6 rôles sociaux : responsabilités familiales, relations interpersonnelles, vie associative et communautaire, éducation, travail, loisirs",
+              "6 activités courantes : Communication · Déplacements · Nutrition · Condition physique et bien-être psychologique · Soins personnels et de santé · Habitation",
+              "6 rôles sociaux : Responsabilités · Relations interpersonnelles · Vie associative et spirituelle · Éducation · Travail · Loisirs",
             ]} />
           </HighlightBox>
 
@@ -175,11 +175,11 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <Texte>Les trois dimensions du MDH-PPH — facteurs personnels, facteurs environnementaux, habitudes de vie — forment un système cohérent. Comprendre les facteurs identitaires de la personne, cartographier les obstacles et facilitateurs à chaque niveau, et évaluer les habitudes de vie selon leur réalisation ET leur satisfaction : c'est cette trilogie qui permet de construire des interventions véritablement centrées sur la vie de la personne.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
-              "Les facteurs identitaires (valeurs, histoire, culture) sont souvent les plus négligés — et les plus déterminants",
+              "Les facteurs identitaires ont un continuum facilitateur → obstacle : ils ne sont pas neutres",
+              "Les systèmes organiques vont de l'intégrité à la déficience ; les aptitudes de la capacité sans limite à l'incapacité complète",
               "L'environnement s'analyse à trois niveaux : micro (modifiable rapidement), méso, macro",
-              "Un obstacle peut être physique ou social — les deux dimensions doivent être explorées",
-              "Réalisation et satisfaction sont deux critères distincts et indissociables",
-              "Un facilitateur pour une personne peut être un obstacle pour une autre : le regard doit être individualisé",
+              "Les 12 habitudes de vie : 6 activités courantes + 6 rôles sociaux (dont vie associative ET spirituelle)",
+              "Réalisation et satisfaction sont deux critères distincts et indissociables dans le MHAVIE",
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -189,15 +189,15 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
       <Quiz
         questions={[
           {
-            question: "Parmi les trois sous-composantes des facteurs personnels, laquelle est la plus fréquemment négligée dans les institutions ?",
+            question: "Dans le MDH-PPH 2018, sur quel continuum sont évalués les facteurs identitaires ?",
             reponses: [
-              "Les systèmes organiques",
-              "Les aptitudes",
-              "Les facteurs identitaires",
-              "Les facteurs environnementaux",
+              "Intégrité → Déficience (comme les systèmes organiques)",
+              "Capacité → Incapacité (comme les aptitudes)",
+              "Facilitateur → Obstacle",
+              "Ils ne sont pas évalués sur un continuum, seulement décrits",
             ],
             bonneReponse: 2,
-            explication: "Les facteurs identitaires (histoire de vie, valeurs, appartenances culturelles) sont souvent absents des évaluations institutionnelles, pourtant ce sont eux qui déterminent ce qui compte pour la personne et ce qui donnera sens à l'accompagnement.",
+            explication: "Contrairement aux systèmes organiques (intégrité → déficience) et aux aptitudes (capacité → incapacité), les facteurs identitaires sont évalués sur un continuum facilitateur → obstacle. Par exemple, un réseau social fort est un facteur identitaire facilitateur ; un isolement ou un faible niveau d'éducation peut devenir un obstacle. Cette distinction est une innovation de la nomenclature MDH-PPH 2018.",
           },
           {
             question: "Un résident autonome dans son quartier habituel se retrouve en difficulté après le déménagement de l'institution dans un nouveau bâtiment. Selon le MDH-PPH, que s'est-il passé ?",
