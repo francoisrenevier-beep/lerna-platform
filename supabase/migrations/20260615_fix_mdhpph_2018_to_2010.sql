@@ -13,10 +13,9 @@ UPDATE modules
 SET description = 'Pourquoi le modèle médical ne suffit plus, la révolution MDH-PPH 2010 et l''équation fondamentale Facteurs Personnels × Facteurs Environnementaux = Habitudes de Vie.'
 WHERE id = '49289005-4480-4137-88fa-673bc0d2d287';
 
--- Ressource : titre et description
-UPDATE ressources
+-- Ressource : titre et description (table resources v2)
+UPDATE resources
 SET
-  titre = 'Présentation officielle du MDH-PPH 2010 — RIPPH',
+  title = 'Présentation officielle du MDH-PPH 2010 — RIPPH',
   description = 'Documentation officielle du Modèle de Développement Humain — Processus de Production du Handicap (MDH-PPH 2). Fougeyrollas et al., RIPPH, Québec, 2010.'
-WHERE formation_id = '7c9261ff-ab67-4fbb-9dd1-25d5abd0a616'
-  AND titre = 'Présentation officielle du MDH-PPH 2018 — RIPPH';
+WHERE id = '50d065bd-93bb-41a8-9a21-59b8bf2a8ff1';
