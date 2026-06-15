@@ -18,7 +18,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         categorie="MDH-PPH 2010"
         titre="Le changement de paradigme"
         titrePart2="du modèle médical au modèle interactionnel"
-        sousTitre="Comprendre pourquoi le regard que nous portons sur le handicap définit le cœur même de nos pratiques — et comment le MDH-PPH 2010 transforme radicalement cette question."
+        sousTitre="Vous l'appliquez déjà intuitivement — le MDH-PPH 2010 vous donne le langage commun et le cadre structuré pour le faire encore mieux, en équipe."
         duree="40 minutes"
         niveau="Intermédiaire"
       />
@@ -26,13 +26,13 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
       <div className="max-w-3xl mx-auto px-8 py-12">
 
         <AccrocheScenario type="scenario">
-          <p>Imaginez la réunion de synthèse de Lena. Autour de la table : un éducateur, une ergothérapeute, une infirmière. Pendant quarante minutes, on discute de ses déficiences, de ses traitements, de ses incidents comportementaux de la semaine. Personne ne mentionne qu'elle est passionnée de cuisine. Personne ne sait qu'elle chante dans sa chambre chaque soir. Le projet personnalisé que l'équipe valide ce jour-là liste ses soins, ses activités thérapeutiques, ses rendez-vous médicaux — mais nulle part ses passions. Ce projet parle-t-il de la vie de Lena, ou seulement de son handicap ?</p>
+          <p>Imaginez la réunion de synthèse de Lena. Autour de la table : un éducateur, une ergothérapeute, une infirmière. Chacun connaît Lena — sa fierté quand ses plats sont réussis, son sourire à l'atelier jardinage, ses éclats de voix quand elle chante. Des observations précieuses, des intuitions professionnelles solides. Mais comment les rassembler en un plan d'action cohérent et partagé ? Comment identifier ensemble ce qui aide Lena et ce qu'on pourrait faire de plus ? Le MDH-PPH est précisément ce cadre commun : il donne un nom à ce que vous observez déjà, et une méthode pour passer de l'intuition à l'action collective.</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Fil rouge" titre="Lena, 42 ans — le début de l'histoire">
           <HighlightBox label="Notre fil rouge narratif" couleur="bleu">
-            <Texte>Tout au long de cette formation, nous allons suivre <strong>Lena</strong>, 42 ans, qui réside depuis 8 ans dans un foyer de vie. Elle présente une trisomie 21, des aptitudes langagières réduites. Elle est passionnée de cuisine, de jardinage et de chant choral. Son projet personnalisé actuel liste ses soins, ses activités thérapeutiques et ses rendez-vous médicaux. Il ne mentionne nulle part ses passions.</Texte>
-            <Texte>Au fil des cinq modules, nous verrons comment le MDH-PPH transforme le regard porté sur Lena — et, par ricochet, sur chacune des personnes que vous accompagnez.</Texte>
+            <Texte>Tout au long de cette formation, nous allons suivre <strong>Lena</strong>, 42 ans, qui réside depuis 8 ans dans un foyer de vie. Elle présente une trisomie 21. Elle est passionnée de cuisine, de jardinage et de chant choral. Son équipe lui est très attachée et la connaît bien.</Texte>
+            <Texte>Au fil des cinq modules, nous verrons comment le MDH-PPH donne à son équipe les outils pour formaliser ce qu'elle observe déjà — et agir encore plus efficacement pour que Lena vive la vie qu'elle souhaite.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -49,45 +49,45 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <Texte>Pendant des décennies, le modèle dominant était médical. Ce modèle a rendu d'immenses services — mais il a aussi produit des angles morts majeurs dans les pratiques institutionnelles.</Texte>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 1" titre="Le modèle médical et ses effets sur les pratiques">
-          <Texte>Dans le modèle médical, la déficience est perçue comme une caractéristique intrinsèque de la personne. C'est elle qui est « anormale », c'est à elle de s'adapter, c'est sa pathologie qui explique ses difficultés. L'objectif clinique est alors de « réparer » l'individu, de compenser ses manques, de restaurer une norme biologique ou fonctionnelle.</Texte>
+        <SectionModule eyebrow="Section 1" titre="Deux regards sur le handicap — deux leviers d'action">
+          <Texte>Pour comprendre ce que le MDH-PPH apporte, il est utile de le situer par rapport à l'approche médicale classique qui a longtemps structuré les pratiques — et qui reste présente dans certains outils et référentiels. Il ne s'agit pas d'opposer bonne et mauvaise pratique : chaque professionnel agit avec les meilleurs outils dont il dispose. La question est : quels leviers d'action chaque approche rend-elle visibles ?</Texte>
 
-          <HighlightBox label="Les quatre effets pervers du modèle médical" couleur="jaune">
-            <Liste items={[
-              "L'évaluation se concentre sur les déficiences plutôt que sur les ressources",
-              "Les projets d'accompagnement se centrent sur les soins et la rééducation, au détriment de la vie sociale",
-              "Les personnes sont stigmatisées en étant réduites à leur diagnostic",
-              "L'environnement est déresponsabilisé : si c'est la personne le « problème », l'institution n'a pas à changer",
+          <HighlightBox label="Ce que le MDH-PPH rend possible" couleur="bleu">
+            <Liste couleur="bleu" items={[
+              "L'évaluation intègre les ressources et aspirations de la personne — pas seulement ses difficultés",
+              "Les objectifs visent la participation sociale : ce que la personne veut faire de sa vie",
+              "La personne est vue dans sa globalité — son histoire, ses valeurs, ses liens — pas seulement son diagnostic",
+              "L'environnement devient un levier d'action concret : identifier ce qui aide et ce qui freine",
             ]} />
           </HighlightBox>
 
-          <Texte>Ces effets ne sont pas le fruit de mauvaises intentions. La plupart des professionnels qui adoptent un raisonnement médical le font sincèrement, dans l'intention d'aider. Mais l'intention ne suffit pas : c'est la logique du cadre qui oriente les actes.</Texte>
+          <Texte>Intuitivement, la plupart des bons professionnels raisonnent déjà ainsi. Ils savent que Marc s'agite parce que son activité favorite a été supprimée, que Sophie résiste parce qu'elle n'a pas eu son mot à dire. Le MDH-PPH formalise ces intuitions en une méthode rigoureuse et partageable avec toute l'équipe.</Texte>
 
-          <ConceptBox label="Lena dans le modèle médical" titre="Ce que son dossier dit d'elle">
-            <Texte>Dans le cadre actuel, Lena est décrite par ses déficiences : trisomie 21, aptitudes langagières réduites, difficultés de mémorisation. Son projet personnalisé vise à maintenir ses capacités motrices, assurer ses soins d'hygiène et réduire ses comportements d'agitation. Ses passions pour la cuisine et le jardinage sont notées dans la rubrique « loisirs » — sans objectif, sans levier, sans intention professionnelle.</Texte>
+          <ConceptBox label="Lena — deux lectures, deux leviers" titre="La même situation, vue différemment">
+            <Texte>Avec une lecture centrée sur les déficiences, le plan de Lena vise à maintenir ses capacités et réduire ses comportements d'agitation. Avec le MDH-PPH, l'équipe se demande : quels sont les obstacles qui empêchent Lena de cuisiner, de jardiner, de chanter — et comment les lever ? La différence n'est pas dans l'intention, elle est dans la question que l'on se pose.</Texte>
           </ConceptBox>
 
           <TableauComparaison
-            titre="Deux lectures d'une même situation"
+            titre="Deux questions pour une même situation"
             colonnes={[
-              { titre: "Lecture médicale", contenu: [
-                "Lena s'agite parce qu'elle a une trisomie 21",
-                "Marc ne peut pas aller à l'atelier à cause de sa déficience cognitive",
-                "Sophie résiste aux soins en raison de sa pathologie psychiatrique",
-                "Paul s'énerve : comportement lié à son handicap neurologique",
+              { titre: "Question centrée déficience", contenu: [
+                "Lena s'agite — comment réduire ce comportement ?",
+                "Marc ne va plus à l'atelier — quelle est l'origine dans sa pathologie ?",
+                "Sophie résiste aux soins — comment améliorer sa compliance ?",
+                "Paul s'énerve — quel ajustement médical envisager ?",
               ]},
-              { titre: "Lecture MDH-PPH", contenu: [
+              { titre: "Question MDH-PPH", contenu: [
                 "Qu'est-ce qui, dans l'environnement, empêche Lena de faire ce qui compte pour elle ?",
                 "Quels obstacles environnementaux limitent l'accès de Marc à l'atelier ?",
-                "Le cadre de soin crée-t-il des obstacles à l'autodétermination de Sophie ?",
+                "Qu'est-ce qui, dans le cadre de soin, pourrait mieux soutenir l'autodétermination de Sophie ?",
                 "La situation de Paul a-t-elle changé — et son environnement s'est-il adapté ?",
               ]},
             ]}
           />
         </SectionModule>
 
-        <SectionModule eyebrow="Section 2" titre="Le MDH-PPH 2010 : une révolution conceptuelle">
-          <Texte>Le Modèle de Développement Humain – Processus de Production du Handicap (MDH-PPH), élaboré par Patrick Fougeyrollas et l'équipe du RIPPH (Réseau International sur le Processus de Production du Handicap), a connu plusieurs versions depuis les années 1990. Le MDH-PPH 2 (2010) constitue une avancée majeure par rapport au PPH (1998).</Texte>
+        <SectionModule eyebrow="Section 2" titre="Le MDH-PPH 2010 : un cadre commun pour vos équipes">
+          <Texte>Le Modèle de Développement Humain – Processus de Production du Handicap (MDH-PPH), élaboré par Patrick Fougeyrollas et l'équipe du RIPPH (Réseau International sur le Processus de Production du Handicap), est le cadre de référence international pour comprendre et agir sur les situations de handicap. Sa version 2010 (MDH-PPH 2) donne à vos équipes une nomenclature précise et des outils concrets.</Texte>
 
           <PullQuote source="Patrick Fougeyrollas, RIPPH 2010">
             Le handicap n'est plus une identité, c'est un résultat. C'est le produit d'une interaction dynamique entre les caractéristiques d'une personne et les conditions de son environnement.
@@ -152,13 +152,13 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <p>Pensez à une personne que vous accompagnez en ce moment. Si vous deviez nommer ce qui l'anime profondément — ce pour quoi elle se lève le matin, ce qui lui donne le sourire — est-ce que ces éléments sont présents dans son projet personnalisé ? Si ce n'est pas le cas, quel regard le modèle médical a-t-il imposé, et que changerait de commencer par là ?</p>
         </AccrocheScenario>
 
-        <SectionModule eyebrow="Lena — retour au fil rouge" titre="Ce que le MDH-PPH change pour Lena">
-          <Texte>Avec le MDH-PPH, la question posée à l'équipe n'est plus « Quels soins Lena nécessite-t-elle ? » mais « Dans quelle mesure l'environnement empêche-t-il Lena de cuisiner, de jardiner, de chanter — de faire ce qui donne sens à sa vie ? »</Texte>
-          <Texte>Cette question ouvre immédiatement un espace d'action différent. Non plus sur Lena, mais autour d'elle. Non plus compenser ses manques, mais transformer les obstacles en facilitateurs. Nous verrons dans les modules suivants comment cette analyse se déploie concrètement.</Texte>
+        <SectionModule eyebrow="Lena — retour au fil rouge" titre="Ce que le MDH-PPH apporte à l'équipe de Lena">
+          <Texte>Avec le MDH-PPH, l'équipe de Lena dispose d'un cadre commun pour aller plus loin. La question n'est pas seulement « Quels soins Lena nécessite-t-elle ? » mais aussi « Dans quelle mesure peut-on transformer ce qui l'entoure pour qu'elle cuisine, jardine et chante encore mieux ? »</Texte>
+          <Texte>Ce n'est pas un changement d'intention — l'équipe a toujours voulu le meilleur pour Lena. C'est un élargissement du terrain d'action : en plus d'agir sur Lena, on agit autour d'elle. Nous verrons dans les modules suivants comment cette démarche se déploie concrètement.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>Le modèle médical, bien qu'animé de bonnes intentions, produit des angles morts dans les pratiques : il attribue les difficultés à la personne, déresponsabilise l'environnement, réduit les individus à leurs déficiences. Le MDH-PPH 2010 propose un changement radical : le handicap n'est pas dans la personne, il est produit par l'interaction entre ses caractéristiques et son environnement.</Texte>
+          <Texte>Le MDH-PPH 2010 ne remet pas en question l'engagement des professionnels — il l'enrichit d'un cadre structuré. Le handicap n'est pas seulement dans la personne : c'est le résultat de l'interaction entre ses caractéristiques et son environnement. Cette lecture ouvre des leviers d'action concrets pour toute l'équipe.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le handicap est un résultat interactionnel, pas une identité",
@@ -219,15 +219,15 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             explication: "Le MDH-PPH 2010 introduit quatre innovations par rapport au PPH (1998) : une nouvelle nomenclature pour les facteurs identitaires, les causes comme domaine conceptuel, les facteurs de risque et de protection comme 4ème domaine à part entière, et un renforcement de la temporalité (flux temporel). Ces apports rappellent que les situations de handicap sont dynamiques et évolutives — jamais figées.",
           },
           {
-            question: "Pourquoi le projet personnalisé de Lena, centré sur ses soins et ses rendez-vous médicaux, illustre-t-il une logique médicale ?",
+            question: "Pourquoi le MDH-PPH invite-t-il à aller au-delà du projet centré uniquement sur les soins ?",
             reponses: [
-              "Parce qu'il ne mentionne aucun objectif de réadaptation",
-              "Parce qu'il se concentre sur les déficiences et les soins sans considérer ses habitudes de vie valorisées",
-              "Parce qu'il n'a pas été rédigé par un médecin",
-              "Parce qu'il ne fixe pas d'objectifs mesurables",
+              "Parce que les soins ne sont pas utiles pour les personnes en situation de handicap",
+              "Parce que les habitudes de vie valorisées par la personne — ce qu'elle aime faire — sont un levier d'action essentiel pour la participation sociale",
+              "Parce que les médecins ne doivent pas intervenir dans les projets personnalisés",
+              "Parce que les objectifs mesurables ne s'appliquent qu'aux rôles sociaux",
             ],
             bonneReponse: 1,
-            explication: "Un projet personnalisé d'inspiration médicale identifie les déficiences, y répond par des soins et de la rééducation, et laisse de côté ce qui constitue la vie de la personne. Lena est passionnée de cuisine, de jardinage et de chant — mais aucun de ces éléments n'est un levier d'action dans son projet actuel.",
+            explication: "Le MDH-PPH complète la dimension soin en ajoutant les habitudes de vie valorisées par la personne. Lena est passionnée de cuisine, de jardinage et de chant — ces éléments sont des leviers d'action puissants pour sa participation sociale. Le MDH-PPH permet de les intégrer formellement dans le projet personnalisé.",
           },
           {
             question: "Qu'implique le 'flux temporel' dans le MDH-PPH pour les équipes professionnelles ?",

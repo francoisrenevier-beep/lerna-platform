@@ -30,7 +30,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </div>
 
         <AccrocheScenario type="question">
-          <p>Et si le MDH-PPH n'était pas seulement un outil d'évaluation individuelle, mais un miroir institutionnel ? Quand vous observez les obstacles récurrents que vous identifiez semaine après semaine pour différentes personnes, quels patterns émergent ? Qu'est-ce que ces patterns révèlent sur votre institution — sur ses règles, ses horaires, ses rituels implicites ?</p>
+          <p>Et si le MDH-PPH n'était pas seulement un outil d'évaluation individuelle, mais un outil de pilotage collectif ? Quand plusieurs analyses convergent vers les mêmes leviers d'action, c'est une opportunité précieuse : modifier un élément de l'organisation pour améliorer la qualité de vie de plusieurs personnes à la fois. C'est l'étape où le MDH-PPH passe du projet individuel à la politique institutionnelle.</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Introduction" titre="Le MDH-PPH comme outil organisationnel">
@@ -46,7 +46,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <Texte>Le MDH-PPH n'est pas seulement un outil d'analyse individuelle. Il a une portée organisationnelle et stratégique. Lorsqu'une équipe commence à analyser systématiquement les situations à travers son prisme, elle commence à révéler des patterns d'obstacles environnementaux récurrents — des obstacles que l'institution elle-même produit, souvent sans le savoir.</Texte>
 
           <PullQuote>
-            Quand plusieurs personnes rencontrent le même obstacle, le problème n'est pas dans les personnes. Il est dans l'organisation.
+            Quand plusieurs personnes rencontrent le même obstacle, c'est un signal précieux : une opportunité d'amélioration collective qui bénéficiera à tous.
           </PullQuote>
         </SectionModule>
 
@@ -64,12 +64,12 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             </div>
           </div>
 
-          <HighlightBox label="Des exemples d'obstacles institutionnels récurrents" couleur="jaune">
-            <Liste items={[
-              "Des horaires de repas rigides qui génèrent un obstacle pour les résidents dont les habitudes alimentaires ou rythmes biologiques sont différents",
-              "Des activités de groupe non différenciées qui génèrent un obstacle pour ceux qui n'y trouvent pas de satisfaction",
-              "Des roulements d'équipe non stabilisés en fin de semaine qui créent un obstacle social récurrent pour des personnes sensibles à la continuité relationnelle",
-              "L'absence de formations à la communication alternative qui génère un obstacle systématique pour les personnes ayant des troubles du langage"
+          <HighlightBox label="Des exemples de leviers d'amélioration collective" couleur="bleu">
+            <Liste couleur="bleu" items={[
+              "Adapter les horaires de repas pour mieux respecter les rythmes individuels des personnes accompagnées",
+              "Diversifier les activités pour que chacun trouve une forme de participation qui lui convient vraiment",
+              "Stabiliser les équipes en fin de semaine pour offrir une continuité relationnelle aux personnes qui y sont sensibles",
+              "Former les équipes à la communication alternative pour mieux inclure les personnes ayant des troubles du langage"
             ]} />
           </HighlightBox>
 
@@ -103,13 +103,13 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         <SectionModule eyebrow="Leçon 5.2" titre="Construire une culture institutionnelle inclusive">
           <Texte>Adopter le MDH-PPH dans une institution ne se fait pas par décret. Cela exige un travail de fond sur la culture professionnelle. La culture institutionnelle se lit dans les pratiques informelles : ce qu'on dit autour de la table de soins, la façon dont on parle des résidents en leur absence, les décisions prises sans les concerner directement.</Texte>
 
-          <HighlightBox label="Ce qui trahit la culture institutionnelle" couleur="jaune">
+          <HighlightBox label="Ce qui révèle une culture institutionnelle inclusive" couleur="vert">
             <Liste items={[
-              "Comment on parle des résidents dans les espaces professionnels en leur absence",
-              "Les décisions prises sans les concerner directement, même bienveillantes",
-              "La tolérance implicite vis-à-vis de certains commentaires réducteurs ou condescendants",
-              "Le décalage entre les valeurs affichées dans le projet institutionnel et les allocations réelles de ressources",
-              "Les réunions d'équipe où les personnes accompagnées ne sont jamais acteurs, seulement sujets"
+              "On parle des personnes accompagnées avec respect et en termes de capacités, même dans les espaces informels",
+              "Les décisions qui les concernent intègrent leur point de vue, même quand c'est un effort d'organisation",
+              "Le langage utilisé en équipe reflète une vision globale de la personne — pas seulement son diagnostic",
+              "Les valeurs affichées dans le projet institutionnel se retrouvent dans les choix concrets du quotidien",
+              "Les personnes accompagnées sont invitées à être actrices — pas seulement sujets — des réunions qui les concernent"
             ]} />
           </HighlightBox>
 
@@ -141,12 +141,12 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           />
 
           <PullQuote>
-            Une institution inclusive ne s'affiche pas dans les valeurs du projet d'établissement. Elle se lit dans la façon dont les équipes parlent des personnes qu'elles accompagnent quand personne ne regarde.
+            Une institution inclusive se construit jour après jour, dans les petits gestes professionnels autant que dans les grandes décisions institutionnelles.
           </PullQuote>
         </SectionModule>
 
         <AccrocheScenario type="reflexion">
-          <p>Pensez à un moment récent dans votre institution où vous avez entendu quelqu'un parler d'un résident d'une façon qui vous a mis mal à l'aise — pas forcément malveillante, juste réductrice. Ce type de moment est un révélateur de culture institutionnelle réelle. Qu'est-ce qu'il vous a appris sur ce qu'il reste à construire collectivement ?</p>
+          <p>Pensez à un moment récent dans votre institution où vous avez vu un collègue faire quelque chose de remarquable pour une personne accompagnée — un geste d'écoute, une adaptation spontanée, une attention au détail. Ce type de moment révèle ce que vos équipes savent déjà faire. Comment le MDH-PPH pourrait-il vous aider à le faire encore plus souvent, de façon plus systématique et partagée ?</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Leçon 5.3" titre="La coordination interprofessionnelle au service de la participation">
@@ -241,15 +241,15 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 explication: "L'analyse MDH-PPH a identifié deux obstacles environnementaux : un obstacle social méso (roulement d'équipe instable) et un obstacle d'autodétermination (activités imposées sans consultation). La priorité est d'agir sur ces obstacles environnementaux — pas de traiter un symptôme médical inexistant ou de supprimer une opportunité de participation."
               },
               {
-                question: "Qu'est-ce qui distingue une culture institutionnelle inclusive d'une culture institutionnelle qui l'affiche seulement ?",
+                question: "Comment le MDH-PPH contribue-t-il à renforcer la culture inclusive d'une institution ?",
                 reponses: [
-                  "La présence d'un projet d'établissement bien rédigé avec des valeurs d'inclusion clairement formulées",
-                  "La façon dont les équipes parlent des personnes accompagnées dans les espaces informels",
-                  "Le nombre de formations suivies par les professionnels sur le handicap",
-                  "La certification qualité de l'établissement par un organisme externe"
+                  "En remplaçant le projet d'établissement par un nouveau document standardisé",
+                  "En donnant à toutes les équipes un langage commun et des outils partagés pour parler des personnes en termes de participation et de ressources",
+                  "En imposant un format unique de réunion pour toutes les institutions",
+                  "En confiant l'évaluation à des experts externes plutôt qu'aux équipes de terrain"
                 ],
                 bonneReponse: 1,
-                explication: "La culture institutionnelle réelle se révèle dans les pratiques informelles : comment on parle des résidents dans les couloirs, les décisions prises sans les concerner, la tolérance aux commentaires réducteurs. Un projet d'établissement ou une certification n'attestent pas de la culture réelle — ils en attestent seulement la déclaration d'intention."
+                explication: "Le MDH-PPH contribue à la culture inclusive en outillant les équipes : un vocabulaire commun (facteurs personnels, obstacles, habitudes de vie), des outils structurés (MHAVIE, MQE), et une logique centrée sur la participation. Quand toute l'équipe parle le même langage et utilise les mêmes cadres d'analyse, la cohérence culturelle se construit naturellement."
               },
               {
                 question: "Qu'est-ce qu'une réunion de synthèse transformée par le MDH-PPH permet de faire différemment ?",

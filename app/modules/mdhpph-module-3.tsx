@@ -65,7 +65,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <Texte>Le MDH-PPH est particulièrement puissant dans l'analyse des situations dites « complexes » : comportements défis, troubles du comportement associés à une pathologie psychiatrique, crises d'agitation ou d'automutilation. Ces situations sont souvent abordées sous l'angle médical, avec une réponse pharmacologique ou contentive comme première réponse.</Texte>
 
           <PullQuote>
-            Lorsqu'un résident s'agite ou manifeste des comportements perturbateurs, la première question n'est pas « Quelle est sa pathologie ? » mais « Que produit son environnement actuel ? »
+            Lorsqu'un résident s'agite, un professionnel attentif se demande : « Que s'est-il passé dans son environnement ? Qu'est-ce qui, autour de lui, a changé ? » — C'est exactement la logique du MDH-PPH.
           </PullQuote>
 
           <Texte>Les comportements défis sont souvent des indicateurs d'une situation de handicap non résolue : une habitude de vie importante pour la personne est entravée par un obstacle environnemental qu'elle ne peut pas nommer verbalement ou résoudre par elle-même. Le comportement devient le seul langage disponible pour exprimer cette inadéquation.</Texte>
@@ -74,8 +74,8 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             <Texte>L'agitation de Lena en début de semaine n'est pas une aggravation de sa trisomie. C'est une réponse comportementale à une situation de handicap environnementale : l'incapacité d'accéder à une habitude de vie valorisée (la cuisine) à cause d'un obstacle physique micro (le local inadapté). Une fois l'obstacle identifié, la solution devient claire — et ne passe pas par un ajustement médicamenteux.</Texte>
           </ConceptBox>
 
-          <HighlightBox label="Ce raisonnement s'applique largement" couleur="jaune">
-            <Texte>Une personne hospitalisée en milieu psychiatrique qui résiste aux soins n'est peut-être pas « non-compliant » : le cadre de soin lui-même produit peut-être des obstacles à son autodétermination qui génèrent une résistance légitime. L'équipe doit apprendre à lire ces signaux comme des indicateurs d'inadéquation environnementale — pas uniquement comme des symptômes à réduire.</Texte>
+          <HighlightBox label="Ce raisonnement s'applique largement" couleur="bleu">
+            <Texte>Un professionnel expérimenté sait souvent, d'instinct, que la résistance d'une personne aux soins n'est pas uniquement une question de pathologie — c'est peut-être un signal que quelque chose dans le cadre de soin n'est pas adapté à ses besoins. Le MDH-PPH donne le vocabulaire précis pour nommer ce signal et agir dessus de façon structurée.</Texte>
           </HighlightBox>
 
           <div className="grid grid-cols-2 gap-4 my-8">
