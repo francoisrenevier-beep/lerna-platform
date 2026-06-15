@@ -14,7 +14,7 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={2}
-        categorie="MDH-PPH 2018"
+        categorie="MDH-PPH 2010"
         titre="Les trois dimensions"
         titrePart2="du modèle MDH-PPH"
         sousTitre="Explorer en profondeur les facteurs personnels, l'architecture de l'environnement et les habitudes de vie pour maîtriser les leviers opérationnels du modèle."
@@ -47,12 +47,12 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Les facteurs personnels en profondeur">
-          <Texte>Les facteurs personnels ne se résument pas au dossier médical. C'est l'erreur la plus fréquente dans les institutions. La version 2018 du MDH-PPH distingue trois sous-composantes aux implications très différentes pour la pratique.</Texte>
+          <Texte>Les facteurs personnels ne se résument pas au dossier médical. C'est l'erreur la plus fréquente dans les institutions. Le MDH-PPH 2010 distingue trois sous-composantes aux implications très différentes pour la pratique.</Texte>
 
           <SchemaEtapes
             titre="Les trois sous-composantes des facteurs personnels"
             etapes={[
-              { niveau: "Sous-composante 1", nom: "Facteurs identitaires", definition: "Caractéristiques sociodémographiques, économiques et culturelles propres à un individu et à son histoire de vie (âge, sexe, genre, orientation sexuelle, appartenance culturelle, statut économique, histoire de vie). Distinction clé du MDH-PPH 2018 : ces facteurs sont évalués sur un continuum allant de FACILITATEUR à OBSTACLE — un niveau d'éducation élevé peut faciliter la participation, un isolement social peut l'entraver." },
+              { niveau: "Sous-composante 1", nom: "Facteurs identitaires", definition: "Caractéristiques sociodémographiques, économiques et culturelles propres à un individu et à son histoire de vie (âge, sexe, genre, orientation sexuelle, appartenance culturelle, statut économique, histoire de vie). Distinction clé du MDH-PPH 2010 : ces facteurs sont évalués sur un continuum allant de FACILITATEUR à OBSTACLE — un niveau d'éducation élevé peut faciliter la participation, un isolement social peut l'entraver." },
               { niveau: "Sous-composante 2", nom: "Systèmes organiques", definition: "Ensemble de composantes corporelles visant une fonction commune — système nerveux, cardiovasculaire, moteur, digestif, oculaire, auditif — mesurés sur un spectre allant de l'INTÉGRITÉ à la DÉFICIENCE. Ces données sont nécessaires, mais insuffisantes à elles seules pour prédire la participation sociale." },
               { niveau: "Sous-composante 3", nom: "Aptitudes", definition: "La possibilité pour une personne d'accomplir une activité physique ou mentale : marcher, mémoriser, communiquer, s'orienter. Mesurées de la CAPACITÉ SANS LIMITE à l'INCAPACITÉ COMPLÈTE. Une aptitude réduite n'est pas synonyme de situation de handicap — tout dépend de l'interaction avec l'environnement." },
             ]}
@@ -105,9 +105,9 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Les habitudes de vie : indicateur central de participation">
-          <Texte>Les habitudes de vie constituent la finalité du modèle. Ce sont elles qui permettent de mesurer si une personne vit en situation de participation sociale ou en situation de handicap. La nomenclature 2018 identifie douze catégories précises, réparties en deux grands groupes.</Texte>
+          <Texte>Les habitudes de vie constituent la finalité du modèle. Ce sont elles qui permettent de mesurer si une personne vit en situation de participation sociale ou en situation de handicap. Le MDH-PPH 2010 identifie douze catégories précises, réparties en deux grands groupes.</Texte>
 
-          <HighlightBox label="Les douze catégories d'habitudes de vie (nomenclature officielle MDH-PPH 2018)" couleur="bleu">
+          <HighlightBox label="Les douze catégories d'habitudes de vie (nomenclature officielle MDH-PPH 2010)" couleur="bleu">
             <Liste couleur="bleu" items={[
               "6 activités courantes : Communication · Déplacements · Nutrition · Condition physique et bien-être psychologique · Soins personnels et de santé · Habitation",
               "6 rôles sociaux : Responsabilités · Relations interpersonnelles · Vie associative et spirituelle · Éducation · Travail · Loisirs",
@@ -189,7 +189,7 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
       <Quiz
         questions={[
           {
-            question: "Dans le MDH-PPH 2018, sur quel continuum sont évalués les facteurs identitaires ?",
+            question: "Dans le MDH-PPH, sur quel continuum sont évalués les facteurs identitaires ?",
             reponses: [
               "Intégrité → Déficience (comme les systèmes organiques)",
               "Capacité → Incapacité (comme les aptitudes)",
@@ -197,7 +197,7 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "Ils ne sont pas évalués sur un continuum, seulement décrits",
             ],
             bonneReponse: 2,
-            explication: "Contrairement aux systèmes organiques (intégrité → déficience) et aux aptitudes (capacité → incapacité), les facteurs identitaires sont évalués sur un continuum facilitateur → obstacle. Par exemple, un réseau social fort est un facteur identitaire facilitateur ; un isolement ou un faible niveau d'éducation peut devenir un obstacle. Cette distinction est une innovation de la nomenclature MDH-PPH 2018.",
+            explication: "Contrairement aux systèmes organiques (intégrité → déficience) et aux aptitudes (capacité → incapacité), les facteurs identitaires sont évalués sur un continuum facilitateur → obstacle. Par exemple, un réseau social fort est un facteur identitaire facilitateur ; un isolement ou un faible niveau d'éducation peut devenir un obstacle. Cette distinction est une innovation du MDH-PPH 2010.",
           },
           {
             question: "Un résident autonome dans son quartier habituel se retrouve en difficulté après le déménagement de l'institution dans un nouveau bâtiment. Selon le MDH-PPH, que s'est-il passé ?",

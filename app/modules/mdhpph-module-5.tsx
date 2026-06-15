@@ -14,7 +14,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={5}
-        categorie="MDH-PPH 2018"
+        categorie="MDH-PPH 2010"
         titre="Transformer les pratiques"
         titrePart2="institutionnelles"
         sousTitre="Du projet individuel à la transformation organisationnelle : comment le MDH-PPH, appliqué collectivement, révèle les patterns d'obstacles que l'institution elle-même produit."

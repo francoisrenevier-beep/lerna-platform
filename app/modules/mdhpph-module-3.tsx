@@ -13,7 +13,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={3}
-        categorie="MDH-PPH 2018"
+        categorie="MDH-PPH 2010"
         titre="Analyser une situation complexe"
         titrePart2="avec le MDH-PPH"
         sousTitre="De la lecture systémique des situations difficiles à l'analyse interprofessionnelle : apprendre à voir avant d'intervenir."
@@ -95,7 +95,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </AccrocheScenario>
 
         <SectionModule eyebrow="Section 3" titre="Vieillissement, transitions et situations de handicap émergentes">
-          <Texte>Une des forces du MDH-PPH 2018 est de s'appliquer tout au long du parcours de vie, y compris dans la période du vieillissement. Pour les institutions accueillant des adultes en situation de handicap, cette dimension est de plus en plus centrale : les personnes accompagnées vieillissent, et le vieillissement modifie profondément l'équation personne-environnement.</Texte>
+          <Texte>Une des forces du MDH-PPH 2010 est de s'appliquer tout au long du parcours de vie, y compris dans la période du vieillissement. Pour les institutions accueillant des adultes en situation de handicap, cette dimension est de plus en plus centrale : les personnes accompagnées vieillissent, et le vieillissement modifie profondément l'équation personne-environnement.</Texte>
 
           <Texte>Une personne qui était en situation de participation sociale à 30 ans peut se retrouver progressivement en situation de handicap à 50 ans — non pas parce que son handicap d'origine s'est aggravé, mais parce que ses capacités organiques ont diminué avec l'âge et que son environnement n'a pas été adapté en conséquence.</Texte>
 
@@ -222,7 +222,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "Parce que les personnes en situation de handicap ne signalent jamais elles-mêmes leurs difficultés",
             ],
             bonneReponse: 1,
-            explication: "Le flux temporel est au cœur du MDH-PPH 2018 : les situations évoluent en permanence. Le vieillissement, un déménagement, un changement d'équipe ou de proche aidant peuvent transformer d'anciens facilitateurs en obstacles. Anticiper ces transitions plutôt que les subir est l'un des apports majeurs du modèle.",
+            explication: "Le flux temporel est au cœur du MDH-PPH 2010 : les situations évoluent en permanence. Le vieillissement, un déménagement, un changement d'équipe ou de proche aidant peuvent transformer d'anciens facilitateurs en obstacles. Anticiper ces transitions plutôt que les subir est l'un des apports majeurs du modèle.",
           },
           {
             question: "Selon le MDH-PPH, pourquoi une personne de 50 ans accompagnée depuis longtemps peut-elle se retrouver en situation de handicap croissante sans que son handicap d'origine se soit aggravé ?",
@@ -233,7 +233,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "Parce que les habitudes de vie deviennent moins importantes pour les personnes âgées",
             ],
             bonneReponse: 1,
-            explication: "Le flux temporel du MDH-PPH 2018 intègre le vieillissement comme une évolution des facteurs personnels (capacités organiques). Si l'environnement n'est pas adapté en conséquence — mêmes horaires, mêmes trajets, mêmes formats d'activité —, la situation de handicap s'aggrave progressivement. L'enjeu est d'anticiper ces évolutions par des réévaluations proactives, pas de les traiter comme des fatalités.",
+            explication: "Le flux temporel du MDH-PPH intègre le vieillissement comme une évolution des facteurs personnels (capacités organiques). Si l'environnement n'est pas adapté en conséquence — mêmes horaires, mêmes trajets, mêmes formats d'activité —, la situation de handicap s'aggrave progressivement. L'enjeu est d'anticiper ces évolutions par des réévaluations proactives, pas de les traiter comme des fatalités.",
           },
         ]}
         onValiderModule={onValiderModule}

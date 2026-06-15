@@ -14,7 +14,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={4}
-        categorie="MDH-PPH 2018"
+        categorie="MDH-PPH 2010"
         titre="Construire un plan d'accompagnement"
         titrePart2="centré participation"
         sousTitre="De l'évaluation MDH-PPH au projet personnalisé : formuler des objectifs en termes de vie, co-construire avec la personne et mesurer les progrès dans le temps."
@@ -188,7 +188,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Leçon 4.4" titre="Le flux temporel : évaluer, ajuster, mesurer">
-          <Texte>Le flux temporel est une innovation conceptuelle clé de la version 2018 du MDH-PPH. Il signifie que toute situation de handicap est dynamique et évolutive. Une évaluation à un instant T n'est jamais définitive : elle sert de photographie de référence pour mesurer l'évolution après intervention.</Texte>
+          <Texte>Le flux temporel est une innovation conceptuelle clé du MDH-PPH 2010. Il signifie que toute situation de handicap est dynamique et évolutive. Une évaluation à un instant T n'est jamais définitive : elle sert de photographie de référence pour mesurer l'évolution après intervention.</Texte>
 
           <HighlightBox label="Ce que le flux temporel change dans la pratique" couleur="jaune">
             <Texte>Sans flux temporel, le projet personnalisé est un document figé qu'on révise une fois par an parce que c'est obligatoire. Avec le flux temporel, c'est un outil vivant qu'on utilise pour piloter l'accompagnement : on évalue, on intervient, on réévalue, on ajuste.</Texte>
@@ -276,7 +276,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 explication: "Le MHAVIE est un outil de mesure standardisé qui permet de comparer deux photographies d'une même situation à des temps différents. Il ne classe pas les personnes et ne remplace pas l'observation — il l'objective et la rend comparable, pour valider ou ajuster la stratégie d'intervention."
               },
               {
-                question: "Qu'est-ce que le 'flux temporel' apporte à la compréhension du handicap dans le MDH-PPH 2018 ?",
+                question: "Qu'est-ce que le 'flux temporel' apporte à la compréhension du handicap dans le MDH-PPH 2010 ?",
                 reponses: [
                   "Il signifie que le handicap s'aggrave toujours avec le temps et demande plus de soins",
                   "Il rappelle que toute situation de handicap est dynamique : les obstacles et facilitateurs évoluent",

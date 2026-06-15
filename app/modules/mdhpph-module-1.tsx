@@ -15,10 +15,10 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={1}
-        categorie="MDH-PPH 2018"
+        categorie="MDH-PPH 2010"
         titre="Le changement de paradigme"
         titrePart2="du modèle médical au modèle interactionnel"
-        sousTitre="Comprendre pourquoi le regard que nous portons sur le handicap définit le cœur même de nos pratiques — et comment le MDH-PPH 2018 transforme radicalement cette question."
+        sousTitre="Comprendre pourquoi le regard que nous portons sur le handicap définit le cœur même de nos pratiques — et comment le MDH-PPH 2010 transforme radicalement cette question."
         duree="40 minutes"
         niveau="Intermédiaire"
       />
@@ -40,7 +40,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
             <Liste items={[
               "Expliquer les effets concrets du modèle médical sur les pratiques d'accompagnement",
-              "Décrire le changement de paradigme introduit par le MDH-PPH 2018",
+              "Décrire le changement de paradigme introduit par le MDH-PPH 2010",
               "Comprendre l'équation fondamentale : Facteurs Personnels × Facteurs Environnementaux = Habitudes de Vie",
               "Identifier la place du flux temporel dans la lecture d'une situation",
             ]} />
@@ -86,10 +86,10 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           />
         </SectionModule>
 
-        <SectionModule eyebrow="Section 2" titre="Le MDH-PPH 2018 : une révolution conceptuelle">
-          <Texte>Le Modèle de Développement Humain – Processus de Production du Handicap (MDH-PPH), élaboré par Patrick Fougeyrollas et l'équipe du RIPPH (Réseau International sur le Processus de Production du Handicap), a connu plusieurs versions depuis les années 1990. La version bonifiée de 2018 constitue une avancée majeure par rapport aux précédentes.</Texte>
+        <SectionModule eyebrow="Section 2" titre="Le MDH-PPH 2010 : une révolution conceptuelle">
+          <Texte>Le Modèle de Développement Humain – Processus de Production du Handicap (MDH-PPH), élaboré par Patrick Fougeyrollas et l'équipe du RIPPH (Réseau International sur le Processus de Production du Handicap), a connu plusieurs versions depuis les années 1990. Le MDH-PPH 2 (2010) constitue une avancée majeure par rapport au PPH (1998).</Texte>
 
-          <PullQuote source="Patrick Fougeyrollas, RIPPH 2018">
+          <PullQuote source="Patrick Fougeyrollas, RIPPH 2010">
             Le handicap n'est plus une identité, c'est un résultat. C'est le produit d'une interaction dynamique entre les caractéristiques d'une personne et les conditions de son environnement.
           </PullQuote>
 
@@ -99,9 +99,9 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             <Texte>Stephen Hawking : déficiences organiques majeures, incapacités motrices sévères — et pourtant une participation sociale optimale de physicien reconnu mondialement, grâce à des facilitateurs technologiques de pointe. À l'inverse, un astronaute aux capacités physiques parfaites se retrouve en situation de handicap total dans l'espace sans son équipement. Ce n'est pas la biologie qui produit le handicap — c'est l'interaction entre la personne et son milieu.</Texte>
           </HighlightBox>
 
-          <Texte>La version 2018 introduit quatre innovations majeures par rapport à la version 1998 : une nouvelle nomenclature pour les facteurs identitaires, les <strong>causes</strong> comme domaine conceptuel explicite, les <strong>facteurs de risque et de protection</strong> comme 4ème domaine du modèle, et un renforcement de la <strong>temporalité</strong> (flux temporel) — qui rappelle qu'aucune situation n'est figée dans le temps.</Texte>
+          <Texte>Le MDH-PPH 2010 introduit quatre innovations majeures par rapport au PPH (1998) : une nouvelle nomenclature pour les facteurs identitaires, les <strong>causes</strong> comme domaine conceptuel explicite, les <strong>facteurs de risque et de protection</strong> comme 4ème domaine du modèle, et un renforcement de la <strong>temporalité</strong> (flux temporel) — qui rappelle qu'aucune situation n'est figée dans le temps.</Texte>
 
-          <HighlightBox label="Les 4 domaines conceptuels du MDH-PPH 2018" couleur="bleu">
+          <HighlightBox label="Les 4 domaines conceptuels du MDH-PPH 2010" couleur="bleu">
             <Liste couleur="bleu" items={[
               "Facteurs personnels : identitaires (facilitateur ↔ obstacle), systèmes organiques (intégrité ↔ déficience), aptitudes (capacité ↔ incapacité)",
               "Facteurs environnementaux : micro, méso, macro — sur une échelle de facilitateur majeur à obstacle majeur",
@@ -113,7 +113,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <div className="grid grid-cols-2 gap-4 my-8">
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
               <p className="text-4xl font-bold text-[#3DBFA0] mb-2">4</p>
-              <p className="text-sm text-white/70 leading-snug">domaines conceptuels dans le MDH-PPH 2018 : facteurs personnels, environnementaux, habitudes de vie, et facteurs de risque/protection</p>
+              <p className="text-sm text-white/70 leading-snug">domaines conceptuels dans le MDH-PPH 2010 : facteurs personnels, environnementaux, habitudes de vie, et facteurs de risque/protection</p>
             </div>
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
               <p className="text-4xl font-bold text-[#3DBFA0] mb-2">12</p>
@@ -158,7 +158,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>Le modèle médical, bien qu'animé de bonnes intentions, produit des angles morts dans les pratiques : il attribue les difficultés à la personne, déresponsabilise l'environnement, réduit les individus à leurs déficiences. Le MDH-PPH 2018 propose un changement radical : le handicap n'est pas dans la personne, il est produit par l'interaction entre ses caractéristiques et son environnement.</Texte>
+          <Texte>Le modèle médical, bien qu'animé de bonnes intentions, produit des angles morts dans les pratiques : il attribue les difficultés à la personne, déresponsabilise l'environnement, réduit les individus à leurs déficiences. Le MDH-PPH 2010 propose un changement radical : le handicap n'est pas dans la personne, il est produit par l'interaction entre ses caractéristiques et son environnement.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le handicap est un résultat interactionnel, pas une identité",
@@ -197,7 +197,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             explication: "Le signe × (multiplication) signifie que les deux dimensions se conditionnent mutuellement. Transformer l'environnement peut produire une participation sociale même sans modifier les déficiences ou aptitudes de la personne. C'est le levier fondamental du MDH-PPH.",
           },
           {
-            question: "Selon le MDH-PPH 2018, une personne est en situation de handicap quand :",
+            question: "Selon le MDH-PPH, une personne est en situation de handicap quand :",
             reponses: [
               "Elle présente des déficiences organiques diagnostiquées",
               "Elle ne peut pas accomplir certaines activités de façon autonome",
@@ -208,7 +208,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             explication: "La situation de handicap n'est pas un état de la personne — c'est un résultat produit par l'interaction entre ses facteurs personnels et les obstacles de son environnement. Une même personne peut être en situation de participation dans un contexte adapté et en situation de handicap dans un contexte inadapté.",
           },
           {
-            question: "Quelle innovation majeure la version 2018 du MDH-PPH apporte-t-elle par rapport aux versions précédentes ?",
+            question: "Quelle innovation majeure le MDH-PPH 2010 apporte-t-il par rapport au PPH (1998) ?",
             reponses: [
               "La distinction entre facteurs personnels et facteurs environnementaux",
               "La notion de participation sociale comme indicateur",
@@ -216,7 +216,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "La liste des douze catégories d'habitudes de vie",
             ],
             bonneReponse: 2,
-            explication: "La version 2018 du MDH-PPH introduit quatre innovations : une nouvelle nomenclature pour les facteurs identitaires, les causes comme domaine conceptuel, les facteurs de risque et de protection comme 4ème domaine à part entière, et un renforcement de la temporalité (flux temporel). Ces apports rappellent que les situations de handicap sont dynamiques et évolutives — jamais figées.",
+            explication: "Le MDH-PPH 2010 introduit quatre innovations par rapport au PPH (1998) : une nouvelle nomenclature pour les facteurs identitaires, les causes comme domaine conceptuel, les facteurs de risque et de protection comme 4ème domaine à part entière, et un renforcement de la temporalité (flux temporel). Ces apports rappellent que les situations de handicap sont dynamiques et évolutives — jamais figées.",
           },
           {
             question: "Pourquoi le projet personnalisé de Lena, centré sur ses soins et ses rendez-vous médicaux, illustre-t-il une logique médicale ?",
