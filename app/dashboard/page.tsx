@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
+import {
+  GraduationCap, LayoutGrid, TrendingUp, Library, Award, User,
+  Clock, Users, Heart, Star, ArrowRight,
+} from "lucide-react"
 import { Sidebar } from "@/components/Sidebar"
 import { BottomNav } from "@/components/BottomNav"
-import { BADGE_DEFS, type BadgeStats } from "@/lib/badges"
-import { getCouleurEtiquette } from "@/lib/etiquettes"
 import { PageHeader } from "@/components/PageHeader"
-import { MetricCard } from "@/components/MetricCard"
-import { DOMAINES as DOMAINES_META, getDomaineMeta } from "@/lib/formationMeta"
+import { getDomaineMeta } from "@/lib/formationMeta"
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -23,25 +24,6 @@ type FormationEnCours = {
   domaine: string | null
   nbModules: number
   nbTermines: number
-  image_url: string | null
-}
-
-type FormationVedette = {
-  id: string
-  titre: string
-  slug: string
-  domaine: string | null
-  thematique: string | null
-  duree_estimee_minutes: number
-  description_courte: string | null
-  niveau: string | null
-  est_a_venir: boolean
-  image_url: string | null
-}
-
-type BadgeRow = {
-  badge_id: string
-  obtenu_le: string
 }
 
 type DashboardData = {
@@ -53,20 +35,32 @@ type DashboardData = {
   totalMinutesCompletees: number
   nbAttestations: number
   nbBadges: number
-  formationsVedette: FormationVedette[]
-  badges: BadgeRow[]
-  badgeStats: BadgeStats
 }
+
+// ── Populaires dans l'institution — données de démonstration ─────────────────
+// TODO: brancher sur des agrégats Supabase réels dès qu'ils existent :
+// - participantsCount : nb d'inscrits par formation dans l'institution (ex. distinct profil_id sur `progression`)
+// - likeRate / rating : agrégats de `evaluations_formations.recommandation` pour l'institution
+// Ces deux agrégats nécessitent une vue/fonction côté serveur car les RLS actuelles
+// de `progression` et `evaluations_formations` limitent la lecture à son propre profil
+// (ou aux rôles admin/responsable), donc pas de calcul possible ici côté client.
+
+type FormationPopulaireDemo = {
+  titre: string
+  participantsCount: number
+  likeRate: number
+  rating: number
+}
+
+const DEMO_FORMATIONS_POPULAIRES: FormationPopulaireDemo[] = [
+  { titre: "Prévenir et gérer les comportements-défis", participantsCount: 47, likeRate: 96, rating: 4.8 },
+  { titre: "Protection des mineurs : cadre légal et signalement", participantsCount: 41, likeRate: 93, rating: 4.7 },
+  { titre: "Communication non-violente en situation d'urgence", participantsCount: 38, likeRate: 89, rating: 4.5 },
+  { titre: "Posture professionnelle et éthique du soin", participantsCount: 33, likeRate: 91, rating: 4.6 },
+  { titre: "Accompagner le vieillissement en situation de handicap", participantsCount: 29, likeRate: 85, rating: 4.4 },
+]
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
-
-function dureeFormat(minutes: number | null) {
-  if (!minutes) return "–"
-  if (minutes < 60) return minutes + " min"
-  const h = Math.floor(minutes / 60)
-  const m = minutes % 60
-  return m > 0 ? h + "h" + m : h + "h"
-}
 
 function heuresFormat(minutes: number) {
   if (minutes === 0) return "0h"
@@ -75,10 +69,6 @@ function heuresFormat(minutes: number) {
   if (h === 0) return m + " min"
   if (m === 0) return h + "h"
   return h + "h" + m
-}
-
-function formatDate(d: string) {
-  return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })
 }
 
 function getDateFr() {
@@ -100,136 +90,82 @@ function getFirstDomaine(domaine: string | string[] | null | undefined): string 
   return getDomaineArray(domaine)[0] ?? null
 }
 
-// ── Domaine helpers (dérivés de formationMeta — source unique) ────────────────
+// ── Cartes d'accès rapide ──────────────────────────────────────────────────────
 
-function DomainIllustrationSm({ domaine }: { domaine: string | null }) {
-  const meta = getDomaineMeta(domaine)
-  const Icon = meta.icon
-  return (
-    <div className="w-full h-full flex items-center justify-center rounded-lg" style={{ backgroundColor: meta.tintBg }}>
-      <Icon style={{ color: meta.iconColor, width: 22, height: 22 }} />
-    </div>
-  )
+type QuickAccess = {
+  href: string
+  titre: string
+  description: string
+  Icon: typeof GraduationCap
+  accent: string
+  badge?: number
 }
 
-// ── Illustration grande (thumbnail formation sans image) ──────────────────────
-
-function IllustrationGrande({ domaine }: { domaine: string | null }) {
-  const meta = getDomaineMeta(domaine)
-  const Icon = meta.icon
-  return (
-    <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: meta.tintBg }}>
-      <Icon style={{ color: meta.iconColor, width: 48, height: 48, opacity: 0.5 }} />
-    </div>
-  )
-}
-
-// ── Formation Card — style Coursera avec étiquettes ───────────────────────────
-
-function FormationCardDash({ f, index }: { f: FormationVedette; index: number }) {
-  const domaineMeta = getDomaineMeta(f.domaine)
-
-  const content = (
-    <div className="flex flex-col h-full">
-      {/* Zone illustration */}
-      <div className="relative overflow-hidden flex-shrink-0" style={{ height: 168 }}>
-        {f.image_url ? (
-          <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
-        ) : (
-          <IllustrationGrande domaine={f.domaine} />
-        )}
-
-        {/* Overlay dégradé bas → transparent pour lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-
-        {/* Badge domaine en bas à gauche */}
-        {f.domaine && domaineMeta.value && (
-          <span
-            className="absolute bottom-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm"
-            style={{ backgroundColor: domaineMeta.badgeBg + "ee", color: domaineMeta.badgeText }}
-          >
-            {domaineMeta.label}
-          </span>
-        )}
-
-        {/* Badge "À venir" */}
-        {f.est_a_venir && (
-          <div className="absolute inset-0 bg-black/35 flex items-center justify-center">
-            <span className="bg-[#1B2D5B] text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full">
-              À venir
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Zone contenu */}
-      <div className="flex flex-col flex-1 p-5 gap-3">
-
-        {/* Thématique */}
-        {f.thematique && (
-          <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full ${getCouleurEtiquette("thematique", f.thematique)}`}>
-            {f.thematique}
-          </span>
-        )}
-
-        {/* Titre */}
-        <h3
-          className="text-base font-bold text-[#1B2D5B] leading-snug"
-          style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
-        >
-          {f.titre}
-        </h3>
-
-        {/* Description */}
-        {f.description_courte && (
-          <p
-            className="text-sm text-gray-500 leading-relaxed"
-            style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}
-          >
-            {f.description_courte}
-          </p>
-        )}
-
-        {/* Méta : durée + niveau */}
-        <div className="flex items-center gap-2 text-xs text-gray-400 mt-auto">
-          <span className="inline-flex items-center gap-1">
-            <span>⏱</span> {dureeFormat(f.duree_estimee_minutes)}
-          </span>
-          {f.niveau && (
-            <>
-              <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
-              <span>{f.niveau}</span>
-            </>
-          )}
-        </div>
-
-        {/* CTA */}
-        {!f.est_a_venir && (
-          <div
-            className="mt-1 w-full text-center text-sm font-semibold text-white bg-[#3DBFA0] hover:bg-[#2ea88b] py-2.5 rounded-lg transition-colors"
-          >
-            Commencer →
-          </div>
-        )}
-      </div>
-    </div>
-  )
-
-  if (f.est_a_venir) {
-    return (
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-        {content}
-      </div>
-    )
-  }
-
+function QuickAccessCard({ c }: { c: QuickAccess }) {
   return (
     <a
-      href={"/catalogue/" + f.slug}
-      className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-xl group"
+      href={c.href}
+      className="group relative flex flex-col gap-3 bg-white rounded-2xl border border-gray-100 p-5 pl-6 overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
     >
-      {content}
+      <span className="absolute left-0 top-0 bottom-0 w-1" style={{ backgroundColor: c.accent }} />
+
+      <div className="flex items-start justify-between">
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: c.accent + "1A", color: c.accent }}
+        >
+          <c.Icon className="w-5 h-5" />
+        </div>
+        {c.badge !== undefined && c.badge > 0 && (
+          <span
+            className="text-xs font-bold px-2 py-1 rounded-full"
+            style={{ backgroundColor: c.accent + "1A", color: c.accent }}
+          >
+            {c.badge}
+          </span>
+        )}
+      </div>
+
+      <div>
+        <h3 className="text-sm font-bold text-[#1B2D5B]">{c.titre}</h3>
+        <p className="text-xs text-gray-400 mt-1 leading-relaxed">{c.description}</p>
+      </div>
+
+      <ArrowRight
+        className="w-4 h-4 absolute bottom-5 right-5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
+        style={{ color: c.accent }}
+      />
     </a>
+  )
+}
+
+// ── Populaires dans l'institution — rang + étoiles ─────────────────────────────
+
+function RangBadge({ rang, accent }: { rang: number; accent: string }) {
+  const colore = rang <= 2
+  return (
+    <span
+      className="w-6 h-6 flex-shrink-0 rounded-full flex items-center justify-center text-xs font-bold"
+      style={colore ? { backgroundColor: accent + "1A", color: accent } : { backgroundColor: "#F1F5F9", color: "#94A3B8" }}
+    >
+      {rang}
+    </span>
+  )
+}
+
+function StarsDisplay({ rating }: { rating: number }) {
+  const pleines = Math.round(rating)
+  return (
+    <span className="inline-flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <Star
+          key={i}
+          className="w-3 h-3"
+          fill={i <= pleines ? "#f59e0b" : "none"}
+          style={{ color: i <= pleines ? "#f59e0b" : "#D1D5DB" }}
+        />
+      ))}
+    </span>
   )
 }
 
@@ -246,17 +182,21 @@ function DashboardSkeleton() {
       <main className="flex-1 pb-20 md:pb-0">
         <div className="bg-[#1B2D5B] px-4 md:px-8 py-6 flex justify-between items-center">
           <div className="space-y-2">
+            <Pulse className="h-3 w-32 bg-white/10" />
             <Pulse className="h-8 w-48 md:w-64 bg-white/20" />
-            <Pulse className="h-4 w-32 md:w-44 bg-white/10" />
           </div>
           <Pulse className="h-6 w-24 md:w-36 bg-white/10" />
         </div>
         <div className="px-4 md:px-8 py-6 space-y-8 max-w-6xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[0, 1, 2, 3].map((i) => <Pulse key={i} className="h-24 md:h-28 rounded-xl" />)}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[0, 1, 2, 3, 4, 5].map((i) => <Pulse key={i} className="h-32 rounded-2xl" />)}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[0, 1, 2].map((i) => <Pulse key={i} className="h-80 rounded-2xl" />)}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-3">
+              <Pulse className="h-24 rounded-xl" />
+              <Pulse className="h-24 rounded-xl" />
+            </div>
+            <Pulse className="h-56 rounded-2xl" />
           </div>
         </div>
       </main>
@@ -283,11 +223,10 @@ export default function DashboardPage() {
       const [
         { data: profilData },
         { data: ipData },
-        { data: vedetteRaw },
         { data: allFormationsForProgress },
         { data: progressionData },
         { count: countAttestations },
-        { data: badgesData },
+        { count: countBadges },
       ] = await Promise.all([
         supabase.from("profils").select("prenom, nom").eq("id", user.id).single(),
         supabase
@@ -297,11 +236,6 @@ export default function DashboardPage() {
           .eq("statut", "actif")
           .limit(1)
           .single(),
-        // Requête directe pour les 3 formations en vedette — aucun filtre applicatif
-        supabase
-          .from("formations")
-          .select("id, titre, slug, domaine, thematique, duree_estimee_minutes, description_courte, niveau, est_a_venir, image_url")
-          .limit(3),
         // Toutes les formations pour le calcul de progression
         supabase
           .from("formations")
@@ -311,24 +245,20 @@ export default function DashboardPage() {
           .select("formation_id, module_id, statut, updated_at")
           .eq("profil_id", user.id),
         supabase.from("attestations").select("id", { count: "exact" }).eq("profil_id", user.id),
-        supabase
-          .from("badges")
-          .select("badge_id, obtenu_le")
-          .eq("profil_id", user.id)
-          .order("obtenu_le", { ascending: false }),
+        supabase.from("badges").select("badge_id", { count: "exact", head: true }).eq("profil_id", user.id),
       ])
 
       const prog = progressionData ?? []
       const formations = allFormationsForProgress ?? []
       const formationIds = [...new Set(prog.map((p) => p.formation_id))]
 
-      // Modules + détails des formations commencées
+      // Détails des formations commencées
       let modulesData: { id: string; formation_id: string }[] = []
-      let formationsEnCoursMeta: { id: string; titre: string; slug: string; image_url: string | null }[] = []
+      let formationsEnCoursMeta: { id: string; titre: string; slug: string }[] = []
       if (formationIds.length > 0) {
         const [{ data: mods }, { data: fMeta }] = await Promise.all([
           supabase.from("modules").select("id, formation_id").in("formation_id", formationIds),
-          supabase.from("formations").select("id, titre, slug, image_url").in("id", formationIds),
+          supabase.from("formations").select("id, titre, slug").in("id", formationIds),
         ])
         modulesData = mods ?? []
         formationsEnCoursMeta = fMeta ?? []
@@ -360,48 +290,19 @@ export default function DashboardPage() {
             domaine: getFirstDomaine(f.domaine),
             nbModules,
             nbTermines,
-            image_url: fMeta?.image_url ?? null,
           })
         }
       }
 
-      // Badge stats
-      const termineDates = prog
-        .filter((p) => p.statut === "termine" && p.updated_at)
-        .map((p) => new Date(p.updated_at).toISOString().slice(0, 10))
-      const joursActifs = new Set(termineDates).size
-      const badgeStats: BadgeStats = {
-        formationsCommencees: formationIds.length,
-        formationsCompletees,
-        joursActifs,
-      }
-
-      // Formations vedette : directement depuis la requête dédiée
-      const formationsVedette: FormationVedette[] = (vedetteRaw ?? []).map((f) => ({
-        id: f.id,
-        titre: f.titre,
-        slug: f.slug,
-        domaine: getFirstDomaine(f.domaine),
-        thematique: f.thematique ?? null,
-        duree_estimee_minutes: f.duree_estimee_minutes ?? 0,
-        description_courte: f.description_courte ?? null,
-        niveau: f.niveau ?? null,
-        est_a_venir: f.est_a_venir ?? false,
-        image_url: f.image_url ?? null,
-      }))
-
       setData({
         profil: profilData ?? null,
         institution: (ipData?.institutions as unknown as Institution) ?? null,
-        formationsEnCours: formationsEnCoursTout.slice(0, 2),
+        formationsEnCours: formationsEnCoursTout.slice(0, 3),
         totalEnCours: formationsEnCoursTout.length,
         formationsCompletees,
         totalMinutesCompletees,
         nbAttestations: countAttestations ?? 0,
-        nbBadges: badgesData?.length ?? 0,
-        formationsVedette,
-        badges: (badgesData ?? []).slice(0, 3),
-        badgeStats,
+        nbBadges: countBadges ?? 0,
       })
       setLoading(false)
     }
@@ -420,18 +321,61 @@ export default function DashboardPage() {
     totalMinutesCompletees,
     nbAttestations,
     nbBadges,
-    formationsVedette,
-    badges,
-    badgeStats,
   } = data
 
-  const obtenuIds = new Set(badges.map((b) => b.badge_id))
-  const nearUnlock = BADGE_DEFS.find((b) => {
-    if (obtenuIds.has(b.id)) return false
-    if (!b.progressCurrent || !b.progressTotal) return false
-    const cur = b.progressCurrent(badgeStats)
-    return cur > 0 && cur < b.progressTotal
-  })
+  const quickAccess: QuickAccess[] = [
+    {
+      href: "/formations",
+      titre: "Mes formations",
+      description: "Vos parcours en cours et à venir.",
+      Icon: GraduationCap,
+      accent: "#1D4ED8",
+      badge: totalEnCours,
+    },
+    {
+      href: "/catalogue",
+      titre: "Catalogue",
+      description: "Toutes les formations disponibles.",
+      Icon: LayoutGrid,
+      accent: "#7E22CE",
+    },
+    {
+      href: "/progression",
+      titre: "Ma progression",
+      description: "Votre avancement et vos badges.",
+      Icon: TrendingUp,
+      accent: "#3DBFA0",
+    },
+    {
+      href: "/ressources",
+      titre: "Ressources",
+      description: "Outils, fiches et références pratiques.",
+      Icon: Library,
+      accent: "#B45309",
+    },
+    {
+      href: "/attestations",
+      titre: "Attestations",
+      description: "Vos justificatifs de formation.",
+      Icon: Award,
+      accent: "#D85A30",
+      badge: nbAttestations,
+    },
+    {
+      href: "/profil",
+      titre: "Mon profil",
+      description: "Vos informations personnelles.",
+      Icon: User,
+      accent: "#BE123C",
+    },
+  ]
+
+  const plusSuivies = [...DEMO_FORMATIONS_POPULAIRES]
+    .sort((a, b) => b.participantsCount - a.participantsCount)
+    .slice(0, 4)
+  const plusAimees = [...DEMO_FORMATIONS_POPULAIRES]
+    .sort((a, b) => b.likeRate - a.likeRate)
+    .slice(0, 4)
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
@@ -442,13 +386,10 @@ export default function DashboardPage() {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <PageHeader
           gradient
+          surtitre="Espace de formation"
           titre={`Bonjour${profil?.prenom ? ", " + profil.prenom : ""} 👋`}
-          sousTitre="Bienvenue sur votre espace LEARNA"
           right={
             <>
-              <span className="text-sm capitalize" style={{ color: "rgba(255,255,255,0.45)" }}>
-                {getDateFr()}
-              </span>
               {institution?.nom && (
                 <span
                   className="text-xs font-semibold px-3 py-1.5 rounded-full border whitespace-nowrap"
@@ -461,234 +402,162 @@ export default function DashboardPage() {
                   {institution.nom}
                 </span>
               )}
+              <span className="text-sm capitalize" style={{ color: "rgba(255,255,255,0.45)" }}>
+                {getDateFr()}
+              </span>
             </>
           }
         />
 
         <div className="px-4 md:px-8 py-5 md:py-7 space-y-8 md:space-y-10 max-w-6xl">
 
-          {/* ── Continuer l'apprentissage ──────────────────────────────────── */}
-          {formationsEnCours.length > 0 && (
-            <section>
+          {/* ── Où souhaitez-vous aller ? ─────────────────────────────────── */}
+          <section>
+            <h2 className="text-lg font-bold text-[#1B2D5B] mb-4">Où souhaitez-vous aller ?</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {quickAccess.map((c) => (
+                <QuickAccessCard key={c.href} c={c} />
+              ))}
+            </div>
+          </section>
+
+          {/* ── Reprendre + En un coup d'œil ──────────────────────────────── */}
+          <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
               <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
                 Reprendre où vous en étiez
               </h2>
-              <div className="space-y-2.5">
-                {formationsEnCours.map((f) => {
-                  const pct = f.nbModules > 0 ? Math.round((f.nbTermines / f.nbModules) * 100) : 0
-                  return (
-                    <div key={f.id} className="bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-3 flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-                        {f.image_url ? (
-                          <img src={f.image_url} alt={f.titre} className="w-full h-full object-cover" />
-                        ) : (
-                          <DomainIllustrationSm domaine={f.domaine} />
+              {formationsEnCours.length > 0 ? (
+                <div className="space-y-3">
+                  {formationsEnCours.map((f) => {
+                    const pct = f.nbModules > 0 ? Math.round((f.nbTermines / f.nbModules) * 100) : 0
+                    const domaineMeta = getDomaineMeta(f.domaine)
+                    return (
+                      <div key={f.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+                        {f.domaine && domaineMeta.value && (
+                          <span
+                            className="inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full mb-2"
+                            style={{ backgroundColor: domaineMeta.badgeBg, color: domaineMeta.badgeText }}
+                          >
+                            {domaineMeta.label}
+                          </span>
                         )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-[#1B2D5B] truncate">{f.titre}</p>
-                        <div className="flex items-center gap-2 mt-1.5">
-                          <div className="flex-1 bg-gray-100 rounded-full h-1.5">
-                            <div className="bg-[#3DBFA0] h-1.5 rounded-full transition-all" style={{ width: pct + "%" }} />
-                          </div>
-                          <span className="text-xs text-gray-400 flex-shrink-0">{f.nbTermines}/{f.nbModules} modules</span>
+                        <h3 className="text-sm font-bold text-[#1B2D5B] mb-3">{f.titre}</h3>
+                        <div className="w-full bg-gray-100 rounded-full h-2 mb-2 overflow-hidden">
+                          <div
+                            className="h-2 rounded-full transition-all"
+                            style={{ width: pct + "%", background: "linear-gradient(90deg, #3DBFA0, #1B8B72)" }}
+                          />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-gray-400">{f.nbTermines}/{f.nbModules} modules</span>
+                          <a
+                            href={"/formations/" + f.slug}
+                            className="text-xs font-semibold text-[#3DBFA0] hover:underline"
+                          >
+                            Continuer →
+                          </a>
                         </div>
                       </div>
-                      <a
-                        href={"/formations/" + f.slug}
-                        className="flex-shrink-0 text-xs font-semibold text-[#3DBFA0] bg-[#3DBFA0]/10 hover:bg-[#3DBFA0]/20 px-3 py-1.5 rounded-lg transition-colors"
-                      >
-                        Continuer →
-                      </a>
-                    </div>
-                  )
-                })}
-              </div>
-              {totalEnCours > 2 && (
+                    )
+                  })}
+                </div>
+              ) : (
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 text-center">
+                  <p className="text-sm font-semibold text-[#1B2D5B] mb-1">Aucune formation en cours</p>
+                  <p className="text-xs text-gray-400 mb-3">Découvrez le catalogue pour démarrer une formation.</p>
+                  <a href="/catalogue" className="text-xs font-semibold text-[#3DBFA0] hover:underline">
+                    Voir le catalogue →
+                  </a>
+                </div>
+              )}
+              {totalEnCours > formationsEnCours.length && (
                 <a href="/formations" className="inline-block mt-2.5 text-xs text-[#3DBFA0] hover:underline">
                   Voir toutes mes formations →
                 </a>
               )}
-            </section>
-          )}
+            </div>
 
-          {/* ── Ma progression — 4 métriques ──────────────────────────────── */}
-          <section>
-            <h2 className="text-base font-semibold mb-4" style={{ color: "var(--learna-navy)" }}>Ma progression</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <MetricCard
-                valeur={formationsCompletees}
-                label="Formations complétées"
-                icone="🎓"
-                couleur="#3DBFA0"
-                href="/formations"
-              />
-              <MetricCard
-                valeur={totalMinutesCompletees > 0 ? heuresFormat(totalMinutesCompletees) : "—"}
-                label="Heures de formation"
-                icone="⏱"
-                couleur="#1B2D5B"
-                href="/progression"
-              />
-              <MetricCard
-                valeur={nbAttestations}
-                label="Attestations obtenues"
-                icone="📜"
-                couleur="#16a34a"
-                href="/attestations"
-              />
-              <MetricCard
-                valeur={nbBadges}
-                label="Badges débloqués"
-                icone="🏅"
-                couleur="#f59e0b"
-                href="/progression"
-              />
+            <div>
+              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
+                En un coup d'œil
+              </h2>
+              <div className="rounded-2xl p-5 flex flex-col gap-4" style={{ backgroundColor: "var(--learna-navy)" }}>
+                {[
+                  { icon: GraduationCap, valeur: formationsCompletees, label: "Formations complétées" },
+                  { icon: Clock, valeur: totalMinutesCompletees > 0 ? heuresFormat(totalMinutesCompletees) : "—", label: "Heures de formation" },
+                  { icon: Award, valeur: nbBadges, label: "Badges débloqués" },
+                ].map((s, i) => (
+                  <div key={i} className={`flex items-center gap-3 ${i > 0 ? "pt-4 border-t" : ""}`} style={i > 0 ? { borderColor: "rgba(255,255,255,0.1)" } : undefined}>
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: "rgba(61,191,160,0.15)", color: "#3DBFA0" }}
+                    >
+                      <s.icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xl font-bold text-white leading-none">{s.valeur}</div>
+                      <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{s.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
-          {/* ── Formations vedette ─────────────────────────────────────────── */}
-          <section>
+          {/* ── Populaires dans votre institution ─────────────────────────── */}
+          <section className="pb-6">
             <div className="flex items-end justify-between mb-5">
               <div>
-                <h2 className="text-lg font-bold text-[#1B2D5B]">
-                  {badgeStats.formationsCommencees > 0 ? "Recommandées pour vous" : "Formations à découvrir"}
-                </h2>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  {badgeStats.formationsCommencees > 0
-                    ? "Selon vos formations en cours et votre domaine"
-                    : "Commencez votre parcours de formation"}
-                </p>
+                <h2 className="text-lg font-bold text-[#1B2D5B]">Populaires dans votre institution</h2>
+                <p className="text-xs text-gray-400 mt-0.5">Ce que vos collègues suivent et recommandent</p>
               </div>
               <a href="/catalogue" className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block">
                 Voir tout le catalogue →
               </a>
             </div>
 
-            {formationsVedette.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {formationsVedette.map((f, i) => (
-                  <FormationCardDash key={f.id} f={f} index={i} />
-                ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <Users className="w-4 h-4 text-[#3DBFA0]" />
+                  <h3 className="text-sm font-bold text-[#1B2D5B]">Les plus suivies</h3>
+                </div>
+                <div className="space-y-3">
+                  {plusSuivies.map((f, i) => (
+                    <div key={f.titre} className="flex items-center gap-3">
+                      <RangBadge rang={i + 1} accent="#3DBFA0" />
+                      <span className="flex-1 min-w-0 text-sm font-medium text-[#1B2D5B] truncate">{f.titre}</span>
+                      <span className="flex-shrink-0 text-xs text-gray-400 inline-flex items-center gap-1">
+                        <Users className="w-3 h-3" /> {f.participantsCount}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ) : (
-              <div className="bg-white rounded-2xl border border-gray-100 p-10 text-center">
-                <p className="text-3xl mb-3">📚</p>
-                <p className="text-sm font-semibold text-[#1B2D5B] mb-1">Aucune formation disponible</p>
-                <p className="text-xs text-gray-400">Des formations seront ajoutées prochainement.</p>
+
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <Heart className="w-4 h-4 text-[#BE123C]" />
+                  <h3 className="text-sm font-bold text-[#1B2D5B]">Les plus aimées</h3>
+                </div>
+                <div className="space-y-3">
+                  {plusAimees.map((f, i) => (
+                    <div key={f.titre} className="flex items-center gap-3">
+                      <RangBadge rang={i + 1} accent="#BE123C" />
+                      <span className="flex-1 min-w-0 text-sm font-medium text-[#1B2D5B] truncate">{f.titre}</span>
+                      <div className="flex-shrink-0 flex items-center gap-2">
+                        <StarsDisplay rating={f.rating} />
+                        <span className="text-xs font-semibold text-gray-400">{f.likeRate}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            )}
+            </div>
 
             <a href="/catalogue" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline sm:hidden">
               Voir tout le catalogue →
-            </a>
-          </section>
-
-          {/* ── Explorer par domaine ───────────────────────────────────────── */}
-          <section>
-            <h2 className="text-base font-semibold text-[#1B2D5B] mb-4">Explorer par domaine</h2>
-            <div className="flex flex-wrap gap-3">
-              {DOMAINES_META.map((d) => (
-                <a
-                  key={d.value}
-                  href={"/catalogue/domaine/" + d.value}
-                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border font-medium text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                  style={{ backgroundColor: d.badgeBg, color: d.badgeText, borderColor: d.badgeText + "22" }}
-                >
-                  <span className="w-7 h-7 flex-shrink-0 rounded-md overflow-hidden inline-flex">
-                    <DomainIllustrationSm domaine={d.value} />
-                  </span>
-                  {d.label}
-                  <span className="text-xs opacity-50">→</span>
-                </a>
-              ))}
-              <a
-                href="/catalogue"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-500 font-medium text-sm hover:-translate-y-0.5 hover:shadow-md transition-all"
-              >
-                Tout le catalogue →
-              </a>
-            </div>
-          </section>
-
-          {/* ── Mes badges récents ─────────────────────────────────────────── */}
-          {(badges.length > 0 || nearUnlock) && (
-            <section>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-base font-semibold text-[#1B2D5B]">Mes badges</h2>
-                <a href="/progression" className="text-xs text-[#3DBFA0] hover:underline">Voir tous →</a>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {badges.map((b) => {
-                  const def = BADGE_DEFS.find((d) => d.id === b.badge_id)
-                  if (!def) return null
-                  return (
-                    <div key={b.badge_id} className="bg-white rounded-xl border border-[#3DBFA0]/20 shadow-sm p-4 flex items-start gap-3">
-                      <span className="text-2xl flex-shrink-0">{def.icone}</span>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-[#1B2D5B]">{def.titre}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">{def.description}</p>
-                        <p className="text-xs text-[#3DBFA0] font-medium mt-1.5">Obtenu le {formatDate(b.obtenu_le)}</p>
-                      </div>
-                    </div>
-                  )
-                })}
-                {nearUnlock && (() => {
-                  const cur = nearUnlock.progressCurrent!(badgeStats)
-                  const tot = nearUnlock.progressTotal!
-                  const pct = Math.round((cur / tot) * 100)
-                  const manque = tot - cur
-                  return (
-                    <div className="bg-amber-50 rounded-xl border border-amber-200 shadow-sm p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xl grayscale">{nearUnlock.icone}</span>
-                        <p className="text-sm font-semibold text-amber-800">Presque là !</p>
-                      </div>
-                      <p className="text-xs text-amber-700 mb-3 leading-relaxed">
-                        Il vous manque <strong>{manque} formation{manque > 1 ? "s" : ""}</strong> pour obtenir <strong>{nearUnlock.titre}</strong>
-                      </p>
-                      <div className="w-full bg-amber-100 rounded-full h-1.5">
-                        <div className="bg-amber-400 h-1.5 rounded-full" style={{ width: pct + "%" }} />
-                      </div>
-                      <p className="text-xs text-amber-600 mt-1 text-right">{cur} / {tot}</p>
-                    </div>
-                  )
-                })()}
-              </div>
-            </section>
-          )}
-
-          {/* ── Bibliothèque de ressources ────────────────────────────────── */}
-          <section className="pb-6">
-            <div className="flex items-end justify-between mb-4">
-              <div>
-                <h2 className="text-base font-semibold text-[#1B2D5B]">Bibliothèque de ressources</h2>
-                <p className="text-xs text-gray-400 mt-0.5">Outils pratiques, fiches et références liés à vos formations</p>
-              </div>
-              <a href="/ressources" className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block">
-                Voir tout →
-              </a>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { icone: "⭐", titre: "Recommandées",   desc: "Sélectionnées pour vos formations en cours.",   href: "/ressources?section=recommandees" },
-                { icone: "🔧", titre: "Outils terrain", desc: "Check-lists et modèles applicables immédiatement.", href: "/ressources?section=outils" },
-                { icone: "🗒️", titre: "Fiches mémo",    desc: "Synthèses rapides pour retenir l'essentiel.",   href: "/ressources?section=memo" },
-                { icone: "🏛️", titre: "Officielles",    desc: "Textes légaux, articles et références théoriques.", href: "/ressources?section=officielles" },
-              ].map((r, i) => (
-                <a
-                  key={i}
-                  href={r.href}
-                  className="group bg-white rounded-xl border border-gray-100 shadow-sm p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
-                >
-                  <div className="text-xl mb-2">{r.icone}</div>
-                  <h3 className="text-sm font-semibold text-[#1B2D5B] group-hover:text-[#3DBFA0] transition-colors mb-1">{r.titre}</h3>
-                  <p className="text-xs text-gray-400 leading-relaxed">{r.desc}</p>
-                </a>
-              ))}
-            </div>
-            <a href="/ressources" className="inline-block mt-3 text-xs text-[#3DBFA0] hover:underline sm:hidden">
-              Voir toutes les ressources →
             </a>
           </section>
 
