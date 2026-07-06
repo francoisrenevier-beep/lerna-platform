@@ -86,9 +86,41 @@ function IconLogout() {
   )
 }
 
+function IconChevronLeft() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  )
+}
+
+function IconChevronRight() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  )
+}
+
+const STORAGE_KEY = "lerna_sidebar_collapsed"
+
 export function Sidebar({ pageActive, institution }: SidebarProps) {
   const router = useRouter()
   const [estResponsable, setEstResponsable] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (saved === "true") setCollapsed(true)
+    setMounted(true)
+  }, [])
+
+  const toggleCollapsed = () => {
+    const next = !collapsed
+    setCollapsed(next)
+    localStorage.setItem(STORAGE_KEY, String(next))
+  }
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -113,32 +145,59 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
 
   const liens = [
     { href: "/dashboard",    label: "Accueil",        Icon: IconHome,         id: "dashboard"    },
-    { href: "/formations",   label: "Mes formations",  Icon: IconFormations,   id: "formations"   },
     { href: "/catalogue",    label: "Catalogue",       Icon: IconCatalogue,    id: "catalogue"    },
-    { href: "/progression",  label: "Ma progression",  Icon: IconProgression,  id: "progression"  },
+    { href: "/formations",   label: "Mes formations",  Icon: IconFormations,   id: "formations"   },
     { href: "/ressources",   label: "Ressources",      Icon: IconRessources,   id: "ressources"   },
     { href: "/attestations", label: "Attestations",    Icon: IconAttestations, id: "attestations" },
+    { href: "/progression",  label: "Ma progression",  Icon: IconProgression,  id: "progression"  },
     { href: "/profil",       label: "Mon profil",      Icon: IconProfil,       id: "profil"       },
   ]
 
+  // Avoid layout shift on first render by using a neutral initial width
+  const sidebarWidth = !mounted ? 256 : collapsed ? 64 : 256
+
   return (
+    <div
+      className="hidden md:block flex-shrink-0"
+      style={{ width: sidebarWidth, transition: "width 0.25s ease" }}
+    >
     <aside
-      className="hidden md:flex w-64 flex-col flex-shrink-0 min-h-screen"
-      style={{ backgroundColor: "var(--learna-navy)" }}
+      className="fixed top-0 left-0 flex flex-col overflow-y-auto overflow-x-hidden"
+      style={{
+        backgroundColor: "var(--learna-navy)",
+        width: sidebarWidth,
+        height: "100vh",
+        transition: "width 0.25s ease",
+        zIndex: 40,
+      }}
     >
       {/* Logo */}
-      <div className="border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-        <img
-          src="/logo-learna-bleu.png"
-          alt="LEARNA"
-          className="w-full block"
-          style={{ display: "block" }}
-        />
+      <div
+        className="border-b flex-shrink-0"
+        style={{ borderColor: "rgba(255,255,255,0.08)", overflow: "hidden" }}
+      >
+        {collapsed ? (
+          <div className="flex items-center justify-center py-4">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
+              style={{ backgroundColor: "#3DBFA0", color: "#ffffff" }}
+            >
+              L
+            </div>
+          </div>
+        ) : (
+          <img
+            src="/logo-learna-bleu.png"
+            alt="LEARNA"
+            className="w-full block"
+            style={{ display: "block" }}
+          />
+        )}
       </div>
 
       {/* Sélecteur de vue (responsables uniquement) */}
-      {estResponsable && (
-        <div className="px-3 pt-3 pb-1">
+      {estResponsable && !collapsed && (
+        <div className="px-3 pt-3 pb-1 flex-shrink-0">
           <div className="flex rounded-lg p-0.5 gap-0.5" style={{ backgroundColor: "rgba(255,255,255,0.1)" }}>
             <span
               className="flex-1 text-center text-xs font-semibold py-1.5 px-2 rounded-md select-none"
@@ -166,26 +225,29 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
       )}
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5">
+      <nav className="flex-1 px-2 py-4 space-y-0.5">
         {liens.map(({ href, label, Icon, id }) => {
           const isActive = id === pageActive
           return (
             <a
               key={id}
               href={href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-100"
+              title={collapsed ? label : undefined}
+              className="flex items-center gap-3 rounded-lg text-sm font-medium transition-all duration-100"
               style={
                 isActive
                   ? {
                       backgroundColor: "rgba(61,191,160,0.15)",
                       color: "#ffffff",
                       borderLeft: "3px solid #3DBFA0",
-                      paddingLeft: "calc(0.75rem - 3px)",
+                      padding: collapsed ? "0.625rem 0" : "0.625rem calc(0.75rem - 3px)",
+                      justifyContent: collapsed ? "center" : undefined,
                     }
                   : {
                       color: "rgba(255,255,255,0.62)",
                       borderLeft: "3px solid transparent",
-                      paddingLeft: "calc(0.75rem - 3px)",
+                      padding: collapsed ? "0.625rem 0" : "0.625rem calc(0.75rem - 3px)",
+                      justifyContent: collapsed ? "center" : undefined,
                     }
               }
               onMouseEnter={(e) => {
@@ -202,15 +264,15 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
               }}
             >
               <span className="flex-shrink-0 opacity-90"><Icon /></span>
-              <span>{label}</span>
+              {!collapsed && <span>{label}</span>}
             </a>
           )
         })}
       </nav>
 
       {/* Institution + déconnexion */}
-      <div className="px-3 pb-4 space-y-2 border-t pt-3" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-        {institution && (
+      <div className="px-2 pb-3 space-y-1 border-t pt-3 flex-shrink-0" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        {institution && !collapsed && (
           <div
             className="px-3 py-2.5 rounded-lg"
             style={{
@@ -226,8 +288,13 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
         )}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all duration-100"
-          style={{ color: "rgba(255,255,255,0.45)" }}
+          title={collapsed ? "Se déconnecter" : undefined}
+          className="w-full flex items-center gap-2.5 rounded-lg text-sm transition-all duration-100"
+          style={{
+            color: "rgba(255,255,255,0.45)",
+            padding: collapsed ? "0.625rem 0" : "0.625rem 0.75rem",
+            justifyContent: collapsed ? "center" : undefined,
+          }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(255,255,255,0.08)"
             ;(e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)"
@@ -238,9 +305,33 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
           }}
         >
           <IconLogout />
-          <span>Se déconnecter</span>
+          {!collapsed && <span>Se déconnecter</span>}
+        </button>
+
+        {/* Bouton masquer/afficher */}
+        <button
+          onClick={toggleCollapsed}
+          title={collapsed ? "Afficher le menu" : "Masquer le menu"}
+          className="w-full flex items-center gap-2 rounded-lg text-xs transition-all duration-100"
+          style={{
+            color: "rgba(255,255,255,0.3)",
+            padding: collapsed ? "0.5rem 0" : "0.5rem 0.75rem",
+            justifyContent: collapsed ? "center" : undefined,
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(255,255,255,0.06)"
+            ;(e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)"
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"
+            ;(e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.3)"
+          }}
+        >
+          {collapsed ? <IconChevronRight /> : <IconChevronLeft />}
+          {!collapsed && <span>Masquer</span>}
         </button>
       </div>
     </aside>
+    </div>
   )
 }

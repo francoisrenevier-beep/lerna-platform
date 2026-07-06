@@ -338,14 +338,6 @@ export default function DashboardPage() {
 
   const quickAccess: QuickAccess[] = [
     {
-      href: "/formations",
-      titre: "Mes formations",
-      description: "Vos parcours en cours et à venir.",
-      Icon: GraduationCap,
-      accent: "#1D4ED8",
-      badge: totalEnCours,
-    },
-    {
       href: "/catalogue",
       titre: "Catalogue",
       description: "Toutes les formations disponibles.",
@@ -353,11 +345,12 @@ export default function DashboardPage() {
       accent: "#7E22CE",
     },
     {
-      href: "/progression",
-      titre: "Ma progression",
-      description: "Votre avancement et vos badges.",
-      Icon: TrendingUp,
-      accent: "#3DBFA0",
+      href: "/formations",
+      titre: "Mes formations",
+      description: "Vos parcours en cours et à venir.",
+      Icon: GraduationCap,
+      accent: "#1D4ED8",
+      badge: totalEnCours,
     },
     {
       href: "/ressources",
@@ -373,6 +366,13 @@ export default function DashboardPage() {
       Icon: Award,
       accent: "#D85A30",
       badge: nbAttestations,
+    },
+    {
+      href: "/progression",
+      titre: "Ma progression",
+      description: "Votre avancement et vos badges.",
+      Icon: TrendingUp,
+      accent: "#3DBFA0",
     },
     {
       href: "/profil",

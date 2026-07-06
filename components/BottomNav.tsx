@@ -112,8 +112,8 @@ function IconClose() {
 
 const BOTTOM_ITEMS = [
   { href: "/dashboard",   label: "Accueil",    Icon: IconHome,        id: "dashboard"   },
-  { href: "/formations",  label: "Formations", Icon: IconFormations,  id: "formations"  },
   { href: "/catalogue",   label: "Catalogue",  Icon: IconCatalogue,   id: "catalogue"   },
+  { href: "/formations",  label: "Formations", Icon: IconFormations,  id: "formations"  },
   { href: "/progression", label: "Progression",Icon: IconProgression, id: "progression" },
 ] as const
 
@@ -121,11 +121,11 @@ const BOTTOM_ITEMS = [
 
 const DRAWER_ITEMS = [
   { href: "/dashboard",    label: "Accueil",         Icon: IconHome,         id: "dashboard"    },
-  { href: "/formations",   label: "Mes formations",   Icon: IconFormations,   id: "formations"   },
   { href: "/catalogue",    label: "Catalogue",        Icon: IconCatalogue,    id: "catalogue"    },
-  { href: "/progression",  label: "Ma progression",   Icon: IconProgression,  id: "progression"  },
+  { href: "/formations",   label: "Mes formations",   Icon: IconFormations,   id: "formations"   },
   { href: "/ressources",   label: "Ressources",       Icon: IconRessources,   id: "ressources"   },
   { href: "/attestations", label: "Attestations",     Icon: IconAttestations, id: "attestations" },
+  { href: "/progression",  label: "Ma progression",   Icon: IconProgression,  id: "progression"  },
   { href: "/profil",       label: "Mon profil",       Icon: IconProfil,       id: "profil"       },
 ] as const
 
