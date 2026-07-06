@@ -26,6 +26,27 @@ type FormationEnCours = {
   nbTermines: number
 }
 
+type FormationPopulaire = {
+  id: string
+  titre: string
+  slug: string
+  participantsCount: number
+  noteMoyenne: number | null
+  nbEvaluations: number
+}
+
+// Ligne brute renvoyée par la fonction SQL `get_formations_populaires`
+// (agrégats anonymes, toutes institutions confondues — voir migration
+// 20260706_fn_formations_populaires.sql).
+type FormationPopulaireRow = {
+  formation_id: string
+  titre: string
+  slug: string
+  participants_count: number
+  note_moyenne: number | null
+  nb_evaluations: number
+}
+
 type DashboardData = {
   profil: Profil | null
   institution: Institution | null
@@ -35,30 +56,8 @@ type DashboardData = {
   totalMinutesCompletees: number
   nbAttestations: number
   nbBadges: number
+  formationsPopulaires: FormationPopulaire[]
 }
-
-// ── Populaires dans l'institution — données de démonstration ─────────────────
-// TODO: brancher sur des agrégats Supabase réels dès qu'ils existent :
-// - participantsCount : nb d'inscrits par formation dans l'institution (ex. distinct profil_id sur `progression`)
-// - likeRate / rating : agrégats de `evaluations_formations.recommandation` pour l'institution
-// Ces deux agrégats nécessitent une vue/fonction côté serveur car les RLS actuelles
-// de `progression` et `evaluations_formations` limitent la lecture à son propre profil
-// (ou aux rôles admin/responsable), donc pas de calcul possible ici côté client.
-
-type FormationPopulaireDemo = {
-  titre: string
-  participantsCount: number
-  likeRate: number
-  rating: number
-}
-
-const DEMO_FORMATIONS_POPULAIRES: FormationPopulaireDemo[] = [
-  { titre: "Prévenir et gérer les comportements-défis", participantsCount: 47, likeRate: 96, rating: 4.8 },
-  { titre: "Protection des mineurs : cadre légal et signalement", participantsCount: 41, likeRate: 93, rating: 4.7 },
-  { titre: "Communication non-violente en situation d'urgence", participantsCount: 38, likeRate: 89, rating: 4.5 },
-  { titre: "Posture professionnelle et éthique du soin", participantsCount: 33, likeRate: 91, rating: 4.6 },
-  { titre: "Accompagner le vieillissement en situation de handicap", participantsCount: 29, likeRate: 85, rating: 4.4 },
-]
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -227,6 +226,7 @@ export default function DashboardPage() {
         { data: progressionData },
         { count: countAttestations },
         { count: countBadges },
+        { data: populairesData },
       ] = await Promise.all([
         supabase.from("profils").select("prenom, nom").eq("id", user.id).single(),
         supabase
@@ -246,6 +246,8 @@ export default function DashboardPage() {
           .eq("profil_id", user.id),
         supabase.from("attestations").select("id", { count: "exact" }).eq("profil_id", user.id),
         supabase.from("badges").select("badge_id", { count: "exact", head: true }).eq("profil_id", user.id),
+        // Agrégats anonymes toutes institutions confondues (fonction SECURITY DEFINER)
+        supabase.rpc("get_formations_populaires"),
       ])
 
       const prog = progressionData ?? []
@@ -294,6 +296,15 @@ export default function DashboardPage() {
         }
       }
 
+      const formationsPopulaires: FormationPopulaire[] = ((populairesData as FormationPopulaireRow[]) ?? []).map((r) => ({
+        id: r.formation_id,
+        titre: r.titre,
+        slug: r.slug,
+        participantsCount: r.participants_count ?? 0,
+        noteMoyenne: r.note_moyenne,
+        nbEvaluations: r.nb_evaluations ?? 0,
+      }))
+
       setData({
         profil: profilData ?? null,
         institution: (ipData?.institutions as unknown as Institution) ?? null,
@@ -303,6 +314,7 @@ export default function DashboardPage() {
         totalMinutesCompletees,
         nbAttestations: countAttestations ?? 0,
         nbBadges: countBadges ?? 0,
+        formationsPopulaires,
       })
       setLoading(false)
     }
@@ -321,6 +333,7 @@ export default function DashboardPage() {
     totalMinutesCompletees,
     nbAttestations,
     nbBadges,
+    formationsPopulaires,
   } = data
 
   const quickAccess: QuickAccess[] = [
@@ -370,11 +383,13 @@ export default function DashboardPage() {
     },
   ]
 
-  const plusSuivies = [...DEMO_FORMATIONS_POPULAIRES]
+  const plusSuivies = formationsPopulaires
+    .filter((f) => f.participantsCount > 0)
     .sort((a, b) => b.participantsCount - a.participantsCount)
     .slice(0, 4)
-  const plusAimees = [...DEMO_FORMATIONS_POPULAIRES]
-    .sort((a, b) => b.likeRate - a.likeRate)
+  const plusAimees = formationsPopulaires
+    .filter((f) => f.nbEvaluations > 0 && f.noteMoyenne !== null)
+    .sort((a, b) => (b.noteMoyenne ?? 0) - (a.noteMoyenne ?? 0))
     .slice(0, 4)
 
   return (
@@ -505,12 +520,12 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* ── Populaires dans votre institution ─────────────────────────── */}
+          {/* ── Formations populaires (toutes institutions) ───────────────── */}
           <section className="pb-6">
             <div className="flex items-end justify-between mb-5">
               <div>
-                <h2 className="text-lg font-bold text-[#1B2D5B]">Populaires dans votre institution</h2>
-                <p className="text-xs text-gray-400 mt-0.5">Ce que vos collègues suivent et recommandent</p>
+                <h2 className="text-lg font-bold text-[#1B2D5B]">Formations populaires</h2>
+                <p className="text-xs text-gray-400 mt-0.5">Les plus suivies et les mieux notées, tous établissements LEARNA confondus</p>
               </div>
               <a href="/catalogue" className="text-sm font-semibold text-[#3DBFA0] hover:text-[#2ea88b] transition-colors hidden sm:block">
                 Voir tout le catalogue →
@@ -523,17 +538,23 @@ export default function DashboardPage() {
                   <Users className="w-4 h-4 text-[#3DBFA0]" />
                   <h3 className="text-sm font-bold text-[#1B2D5B]">Les plus suivies</h3>
                 </div>
-                <div className="space-y-3">
-                  {plusSuivies.map((f, i) => (
-                    <div key={f.titre} className="flex items-center gap-3">
-                      <RangBadge rang={i + 1} accent="#3DBFA0" />
-                      <span className="flex-1 min-w-0 text-sm font-medium text-[#1B2D5B] truncate">{f.titre}</span>
-                      <span className="flex-shrink-0 text-xs text-gray-400 inline-flex items-center gap-1">
-                        <Users className="w-3 h-3" /> {f.participantsCount}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                {plusSuivies.length > 0 ? (
+                  <div className="space-y-3">
+                    {plusSuivies.map((f, i) => (
+                      <div key={f.id} className="flex items-center gap-3">
+                        <RangBadge rang={i + 1} accent="#3DBFA0" />
+                        <a href={"/catalogue/" + f.slug} className="flex-1 min-w-0 text-sm font-medium text-[#1B2D5B] truncate hover:underline">
+                          {f.titre}
+                        </a>
+                        <span className="flex-shrink-0 text-xs text-gray-400 inline-flex items-center gap-1">
+                          <Users className="w-3 h-3" /> {f.participantsCount}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-gray-400">Pas encore assez de données pour ce classement.</p>
+                )}
               </div>
 
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
@@ -541,18 +562,24 @@ export default function DashboardPage() {
                   <Heart className="w-4 h-4 text-[#BE123C]" />
                   <h3 className="text-sm font-bold text-[#1B2D5B]">Les plus aimées</h3>
                 </div>
-                <div className="space-y-3">
-                  {plusAimees.map((f, i) => (
-                    <div key={f.titre} className="flex items-center gap-3">
-                      <RangBadge rang={i + 1} accent="#BE123C" />
-                      <span className="flex-1 min-w-0 text-sm font-medium text-[#1B2D5B] truncate">{f.titre}</span>
-                      <div className="flex-shrink-0 flex items-center gap-2">
-                        <StarsDisplay rating={f.rating} />
-                        <span className="text-xs font-semibold text-gray-400">{f.likeRate}%</span>
+                {plusAimees.length > 0 ? (
+                  <div className="space-y-3">
+                    {plusAimees.map((f, i) => (
+                      <div key={f.id} className="flex items-center gap-3">
+                        <RangBadge rang={i + 1} accent="#BE123C" />
+                        <a href={"/catalogue/" + f.slug} className="flex-1 min-w-0 text-sm font-medium text-[#1B2D5B] truncate hover:underline">
+                          {f.titre}
+                        </a>
+                        <div className="flex-shrink-0 flex items-center gap-2">
+                          <StarsDisplay rating={f.noteMoyenne ?? 0} />
+                          <span className="text-xs font-semibold text-gray-400">{f.noteMoyenne?.toFixed(1)}/5</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-gray-400">Pas encore assez de données pour ce classement.</p>
+                )}
               </div>
             </div>
 
