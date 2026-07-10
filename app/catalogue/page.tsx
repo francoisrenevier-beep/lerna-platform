@@ -120,8 +120,8 @@ function IllustrationParcours() {
 
 function SkeletonCard() {
   return (
-    <div className="rounded-2xl overflow-hidden shadow-sm bg-white animate-pulse" style={{ height: 364 }}>
-      <div className="bg-gray-100" style={{ height: 160 }} />
+    <div className="rounded-2xl overflow-hidden shadow-sm bg-white animate-pulse" style={{ height: 388 }}>
+      <div className="bg-gray-100" style={{ height: 184 }} />
       <div className="p-5 space-y-3">
         <div className="h-3.5 bg-gray-100 rounded-full w-1/3" />
         <div className="h-5 bg-gray-100 rounded w-4/5" />
@@ -163,7 +163,7 @@ function FormationCard({
   const inner = (
     <>
       {/* Zone vignette */}
-      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 160 }}>
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 184 }}>
         {formation.image_url ? (
           <img src={formation.image_url} alt={formation.titre} className="w-full h-full object-cover" />
         ) : (
@@ -272,7 +272,7 @@ function FormationCard({
     return (
       <div
         className={`rounded-2xl overflow-hidden shadow-sm flex flex-col ${cardBg} ${cardBorder}`}
-        style={{ height: 364 }}
+        style={{ height: 388 }}
       >
         {inner}
       </div>
@@ -283,7 +283,7 @@ function FormationCard({
     <a
       href={`/catalogue/${formation.slug}`}
       className={`rounded-2xl overflow-hidden shadow-sm flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${cardBg} ${cardBorder}`}
-      style={{ height: 364 }}
+      style={{ height: 388 }}
     >
       {inner}
     </a>

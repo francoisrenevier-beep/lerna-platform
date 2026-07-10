@@ -58,6 +58,26 @@ import { Module1Demence } from "@/app/modules/demence-module-1"
 import { Module2Demence } from "@/app/modules/demence-module-2"
 import { Module3Demence } from "@/app/modules/demence-module-3"
 import { Module4Demence } from "@/app/modules/demence-module-4"
+import { Module1ProtectionDonnees } from "@/app/modules/protection-donnees-module-1"
+import { Module2ProtectionDonnees } from "@/app/modules/protection-donnees-module-2"
+import { Module3ProtectionDonnees } from "@/app/modules/protection-donnees-module-3"
+import { Module1GestionProjetBase } from "@/app/modules/gestion-projet-base-module-1"
+import { Module2GestionProjetBase } from "@/app/modules/gestion-projet-base-module-2"
+import { Module3GestionProjetBase } from "@/app/modules/gestion-projet-base-module-3"
+import { Module4GestionProjetBase } from "@/app/modules/gestion-projet-base-module-4"
+import { Module5GestionProjetBase } from "@/app/modules/gestion-projet-base-module-5"
+import { Module1GestionProjetIntermediaire } from "@/app/modules/gestion-projet-intermediaire-module-1"
+import { Module2GestionProjetIntermediaire } from "@/app/modules/gestion-projet-intermediaire-module-2"
+import { Module3GestionProjetIntermediaire } from "@/app/modules/gestion-projet-intermediaire-module-3"
+import { Module4GestionProjetIntermediaire } from "@/app/modules/gestion-projet-intermediaire-module-4"
+import { Module5GestionProjetIntermediaire } from "@/app/modules/gestion-projet-intermediaire-module-5"
+import { Module6GestionProjetIntermediaire } from "@/app/modules/gestion-projet-intermediaire-module-6"
+import { Module1GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-1"
+import { Module2GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-2"
+import { Module3GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-3"
+import { Module4GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-4"
+import { Module5GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-5"
+import { Module6GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-6"
 
 type ModuleSimple = {
   id: string
@@ -126,6 +146,26 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "d3ce0001-0002-4000-8000-000000000002": Module2Demence,
   "d3ce0001-0003-4000-8000-000000000003": Module3Demence,
   "d3ce0001-0004-4000-8000-000000000004": Module4Demence,
+  "da7a0001-0001-4000-8000-000000000001": Module1ProtectionDonnees,
+  "da7a0001-0002-4000-8000-000000000002": Module2ProtectionDonnees,
+  "da7a0001-0003-4000-8000-000000000003": Module3ProtectionDonnees,
+  "9e7b0001-0001-4000-8000-000000000001": Module1GestionProjetBase,
+  "9e7b0001-0002-4000-8000-000000000002": Module2GestionProjetBase,
+  "9e7b0001-0003-4000-8000-000000000003": Module3GestionProjetBase,
+  "9e7b0001-0004-4000-8000-000000000004": Module4GestionProjetBase,
+  "9e7b0001-0005-4000-8000-000000000005": Module5GestionProjetBase,
+  "9e7b0002-0001-4000-8000-000000000001": Module1GestionProjetIntermediaire,
+  "9e7b0002-0002-4000-8000-000000000002": Module2GestionProjetIntermediaire,
+  "9e7b0002-0003-4000-8000-000000000003": Module3GestionProjetIntermediaire,
+  "9e7b0002-0004-4000-8000-000000000004": Module4GestionProjetIntermediaire,
+  "9e7b0002-0005-4000-8000-000000000005": Module5GestionProjetIntermediaire,
+  "9e7b0002-0006-4000-8000-000000000006": Module6GestionProjetIntermediaire,
+  "9e7b0003-0001-4000-8000-000000000001": Module1GestionProjetAvance,
+  "9e7b0003-0002-4000-8000-000000000002": Module2GestionProjetAvance,
+  "9e7b0003-0003-4000-8000-000000000003": Module3GestionProjetAvance,
+  "9e7b0003-0004-4000-8000-000000000004": Module4GestionProjetAvance,
+  "9e7b0003-0005-4000-8000-000000000005": Module5GestionProjetAvance,
+  "9e7b0003-0006-4000-8000-000000000006": Module6GestionProjetAvance,
 }
 
 export default function ModulePage() {
