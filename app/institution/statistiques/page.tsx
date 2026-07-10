@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { InstitutionSidebar } from "@/components/InstitutionSidebar"
+import { PageHeader } from "@/components/PageHeader"
+import { Download } from "lucide-react"
 
 type LigneFormation = {
   formation_id: string
@@ -25,6 +27,10 @@ type DerniereAttestation = {
 
 function dateFormat(d: string) {
   return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
+}
+
+function csvEscape(v: string) {
+  return /[";\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v
 }
 
 export default function StatistiquesPage() {
@@ -168,24 +174,72 @@ export default function StatistiquesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-[#1B2D5B] text-sm">Chargement...</p>
+      <div className="min-h-screen bg-[#F8FAFC] flex">
+        <div className="hidden md:block w-64 bg-[#1B2D5B] flex-shrink-0" />
+        <main className="flex-1">
+          <div className="bg-[#1B2D5B] px-4 md:px-8 py-6">
+            <div className="h-8 w-56 bg-white/20 rounded animate-pulse" />
+          </div>
+          <div className="px-4 md:px-8 py-6 space-y-6 max-w-6xl">
+            <div className="h-64 bg-gray-200 rounded-2xl animate-pulse" />
+            <div className="grid grid-cols-2 gap-6">
+              <div className="h-56 bg-gray-200 rounded-2xl animate-pulse" />
+              <div className="h-56 bg-gray-200 rounded-2xl animate-pulse" />
+            </div>
+          </div>
+        </main>
       </div>
     )
   }
 
   const maxCommences = Math.max(...lignes.map((l) => l.nb_commences), 1)
 
+  const exporterCSV = () => {
+    const rows = [
+      ["Formation", "Commencé", "Terminé", "Taux de complétion (%)", "Recommandation moyenne", "Évaluations"].join(";"),
+      ...lignes.map((l) =>
+        [
+          csvEscape(l.titre),
+          String(l.nb_commences),
+          String(l.nb_termines),
+          String(l.taux),
+          l.nb_evaluations > 0 ? l.moy_recommandation.toFixed(1) : "",
+          String(l.nb_evaluations),
+        ].join(";")
+      ),
+    ]
+    const blob = new Blob(["﻿" + rows.join("\n")], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `statistiques-formations-${new Date().toISOString().slice(0, 10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-[#F8FAFC] flex">
       <InstitutionSidebar pageActive="statistiques" institution={institutionNom} />
-      <main className="flex-1 p-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-[#1B2D5B]">Statistiques</h2>
-          <p className="text-gray-500 mt-1">Progression et attestations de l'équipe.</p>
-        </div>
+      <main className="flex-1 min-w-0">
+        <PageHeader
+          gradient
+          surtitre="Espace RH"
+          titre="Statistiques"
+          sousTitre="Progression et attestations de l'équipe"
+          right={
+            <button
+              onClick={exporterCSV}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-white/20 bg-white/10 text-white hover:bg-white/20 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Exporter CSV
+            </button>
+          }
+        />
+
+        <div className="px-4 md:px-8 py-6 max-w-6xl">
         {/* Tableau récapitulatif par formation */}
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden mb-8">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-8">
           <div className="px-6 py-4 border-b border-gray-100">
             <h3 className="text-base font-semibold text-[#1B2D5B]">Progression par formation</h3>
           </div>
@@ -230,7 +284,7 @@ export default function StatistiquesPage() {
 
         {/* Satisfaction des formations */}
         {lignes.some((l) => l.nb_evaluations > 0) && (
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden mb-8">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-8">
             <div className="px-6 py-4 border-b border-gray-100">
               <h3 className="text-base font-semibold text-[#1B2D5B]">Satisfaction des formations</h3>
               <p className="text-xs text-gray-400 mt-0.5">Note de recommandation moyenne par formation</p>
@@ -268,9 +322,9 @@ export default function StatistiquesPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Graphique en barres */}
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <h3 className="text-base font-semibold text-[#1B2D5B] mb-5">Formations les plus suivies</h3>
             {lignes.filter((l) => l.nb_commences > 0).length === 0 ? (
               <p className="text-sm text-gray-400 text-center py-8">Aucune formation commencée.</p>
@@ -298,7 +352,7 @@ export default function StatistiquesPage() {
           </div>
 
           {/* 5 dernières attestations */}
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <h3 className="text-base font-semibold text-[#1B2D5B] mb-5">5 dernières attestations</h3>
             {dernieresAttestations.length === 0 ? (
               <p className="text-sm text-gray-400 text-center py-8">Aucune attestation obtenue.</p>
@@ -321,6 +375,7 @@ export default function StatistiquesPage() {
               </div>
             )}
           </div>
+        </div>
         </div>
       </main>
     </div>

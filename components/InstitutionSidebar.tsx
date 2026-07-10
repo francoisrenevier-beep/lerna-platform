@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
+import { LayoutDashboard, Users, BarChart3, UserCircle, LogOut } from "lucide-react"
 
 type InstitutionSidebarProps = {
   pageActive: "dashboard" | "collaborateurs" | "statistiques" | "profil"
@@ -50,10 +51,10 @@ export function InstitutionSidebar({ pageActive, institution }: InstitutionSideb
   }
 
   const liens = [
-    { href: "/institution/dashboard",      label: "Tableau de bord",    id: "dashboard"      },
-    { href: "/institution/collaborateurs", label: "Mes collaborateurs", id: "collaborateurs" },
-    { href: "/institution/statistiques",   label: "Statistiques",       id: "statistiques"   },
-    { href: "/profil",                     label: "Mon profil",          id: "profil"         },
+    { href: "/institution/dashboard",      label: "Tableau de bord",    id: "dashboard",      Icon: LayoutDashboard },
+    { href: "/institution/collaborateurs", label: "Mes collaborateurs", id: "collaborateurs", Icon: Users           },
+    { href: "/institution/statistiques",   label: "Statistiques",       id: "statistiques",   Icon: BarChart3       },
+    { href: "/profil",                     label: "Mon profil",          id: "profil",         Icon: UserCircle      },
   ]
 
   const sidebarWidth = !mounted ? 256 : collapsed ? 64 : 256
@@ -116,7 +117,7 @@ export function InstitutionSidebar({ pageActive, institution }: InstitutionSideb
               href={lien.href}
               title={collapsed ? lien.label : undefined}
               className={
-                "flex items-center rounded-lg text-sm transition-colors " +
+                "flex items-center gap-2.5 rounded-lg text-sm transition-colors " +
                 (estActif
                   ? "bg-[#3DBFA0]/20 text-white font-medium border border-[#3DBFA0]/30"
                   : "text-white/70 hover:bg-white/10 hover:text-white")
@@ -126,11 +127,8 @@ export function InstitutionSidebar({ pageActive, institution }: InstitutionSideb
                 justifyContent: collapsed ? "center" : undefined,
               }}
             >
-              {collapsed ? (
-                <span className="text-base font-bold">{lien.label[0]}</span>
-              ) : (
-                lien.label
-              )}
+              <lien.Icon className="w-[18px] h-[18px] flex-shrink-0" strokeWidth={1.8} />
+              {!collapsed && lien.label}
             </a>
           )
         })}
@@ -146,13 +144,14 @@ export function InstitutionSidebar({ pageActive, institution }: InstitutionSideb
         <button
           onClick={handleLogout}
           title={collapsed ? "Se déconnecter" : undefined}
-          className="w-full text-left rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors"
+          className="w-full flex items-center gap-2.5 rounded-lg hover:bg-white/10 text-white/70 hover:text-white text-sm transition-colors"
           style={{
             padding: collapsed ? "0.625rem 0" : "0.625rem 0.75rem",
-            textAlign: collapsed ? "center" : undefined,
+            justifyContent: collapsed ? "center" : undefined,
           }}
         >
-          {collapsed ? "→" : "→ Se déconnecter"}
+          <LogOut className="w-[18px] h-[18px] flex-shrink-0" strokeWidth={1.8} />
+          {!collapsed && "Se déconnecter"}
         </button>
 
         {/* Bouton masquer/afficher */}

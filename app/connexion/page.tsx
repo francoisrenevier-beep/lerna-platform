@@ -3,6 +3,119 @@
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
+import {
+  Mail, Lock, User, KeyRound, Eye, EyeOff,
+  AlertCircle, CheckCircle2, ArrowLeft, ArrowRight, Loader2,
+} from "lucide-react"
+
+// ── Champs réutilisables ───────────────────────────────────────────────────────
+
+type FieldProps = {
+  id: string
+  label: string
+  icon: React.ReactNode
+  hint?: string
+} & React.InputHTMLAttributes<HTMLInputElement>
+
+function Field({ id, label, icon, hint, className, ...props }: FieldProps) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-[#1B2D5B] mb-1.5">
+        {label}
+      </label>
+      <div className="relative">
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+          {icon}
+        </span>
+        <input
+          id={id}
+          className={`w-full border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm bg-white transition-shadow focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] focus:border-transparent ${className ?? ""}`}
+          {...props}
+        />
+      </div>
+      {hint && <p className="text-xs text-gray-400 mt-1">{hint}</p>}
+    </div>
+  )
+}
+
+type PasswordFieldProps = {
+  id: string
+  label: string
+  value: string
+  onChange: (v: string) => void
+  autoComplete?: string
+  autoFocus?: boolean
+}
+
+function PasswordField({ id, label, value, onChange, autoComplete, autoFocus }: PasswordFieldProps) {
+  const [visible, setVisible] = useState(false)
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-[#1B2D5B] mb-1.5">
+        {label}
+      </label>
+      <div className="relative">
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+          <Lock className="w-4 h-4" />
+        </span>
+        <input
+          id={id}
+          type={visible ? "text" : "password"}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          autoComplete={autoComplete}
+          autoFocus={autoFocus}
+          placeholder="••••••••"
+          className="w-full border border-gray-200 rounded-xl pl-10 pr-11 py-2.5 text-sm bg-white transition-shadow focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] focus:border-transparent"
+        />
+        <button
+          type="button"
+          tabIndex={-1}
+          onClick={() => setVisible(!visible)}
+          aria-label={visible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#1B2D5B] transition-colors"
+        >
+          {visible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+type SubmitButtonProps = {
+  loading: boolean
+  labelLoading: string
+  children: React.ReactNode
+  variant?: "navy" | "teal"
+}
+
+function SubmitButton({ loading, labelLoading, children, variant = "navy" }: SubmitButtonProps) {
+  const colors =
+    variant === "navy"
+      ? "bg-[#1B2D5B] hover:bg-[#152347]"
+      : "bg-[#3DBFA0] hover:bg-[#2ea88b]"
+  return (
+    <button
+      type="submit"
+      disabled={loading}
+      className={`group w-full ${colors} text-white py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-sm hover:shadow-md`}
+    >
+      {loading ? (
+        <>
+          <Loader2 className="w-4 h-4 animate-spin" />
+          {labelLoading}
+        </>
+      ) : (
+        <>
+          {children}
+          <ArrowRight className="w-4 h-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+        </>
+      )}
+    </button>
+  )
+}
+
+// ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function ConnexionPage() {
   const [tab, setTab] = useState<"login" | "register" | "forgot">("login")
@@ -16,6 +129,11 @@ export default function ConnexionPage() {
   const [message, setMessage] = useState("")
   const [messageType, setMessageType] = useState<"success" | "error">("error")
   const router = useRouter()
+
+  const changerTab = (t: "login" | "register" | "forgot") => {
+    setTab(t)
+    setMessage("")
+  }
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -159,186 +277,217 @@ export default function ConnexionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
-      <div className="mb-8 text-center">
-        <img src="/logo-learna-compact.png" alt="LEARNA" className="h-28 w-auto mx-auto" />
+    <div className="relative min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center px-4 py-10 overflow-hidden">
+      {/* Décor d'arrière-plan */}
+      <div
+        className="absolute pointer-events-none rounded-full"
+        style={{ top: -140, right: -100, width: 420, height: 420, background: "rgba(61,191,160,0.08)", filter: "blur(10px)" }}
+      />
+      <div
+        className="absolute pointer-events-none rounded-full"
+        style={{ bottom: -160, left: -120, width: 460, height: 460, background: "rgba(27,45,91,0.06)", filter: "blur(10px)" }}
+      />
+
+      <div className="relative z-10 mb-6 text-center">
+        <a href="/">
+          <img src="/logo-learna-compact.png" alt="LEARNA" className="h-24 w-auto mx-auto" />
+        </a>
       </div>
 
-      <div className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-sm p-8">
-        <div className="flex mb-6 border-b border-gray-200">
-          <button
-            onClick={() => { setTab("login"); setMessage("") }}
-            className={`pb-3 px-4 text-sm font-medium transition-colors ${tab === "login" ? "border-b-2 border-[#3DBFA0] text-[#1B2D5B]" : "text-gray-400"}`}
-          >
-            Se connecter
-          </button>
-          <button
-            onClick={() => { setTab("register"); setMessage("") }}
-            className={`pb-3 px-4 text-sm font-medium transition-colors ${tab === "register" ? "border-b-2 border-[#3DBFA0] text-[#1B2D5B]" : "text-gray-400"}`}
-          >
-            Créer un compte
-          </button>
-          {tab === "forgot" && (
-            <button className="pb-3 px-4 text-sm font-medium border-b-2 border-[#3DBFA0] text-[#1B2D5B]">
-              Mot de passe oublié
+      <div
+        className="relative z-10 w-full max-w-md bg-white border border-gray-100 rounded-2xl p-8"
+        style={{ boxShadow: "0 10px 40px rgba(27,45,91,0.08), 0 2px 8px rgba(27,45,91,0.04)" }}
+      >
+        {/* Onglets segmentés */}
+        {tab !== "forgot" ? (
+          <div className="flex bg-gray-100 rounded-xl p-1 mb-6 gap-1" role="tablist">
+            <button
+              role="tab"
+              aria-selected={tab === "login"}
+              onClick={() => changerTab("login")}
+              className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+                tab === "login" ? "bg-white text-[#1B2D5B] shadow-sm" : "text-gray-400 hover:text-gray-600"
+              }`}
+            >
+              Se connecter
             </button>
-          )}
-        </div>
+            <button
+              role="tab"
+              aria-selected={tab === "register"}
+              onClick={() => changerTab("register")}
+              className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+                tab === "register" ? "bg-white text-[#1B2D5B] shadow-sm" : "text-gray-400 hover:text-gray-600"
+              }`}
+            >
+              Créer un compte
+            </button>
+          </div>
+        ) : (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-[#1B2D5B]">Mot de passe oublié</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Saisissez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+            </p>
+          </div>
+        )}
 
         {message && (
-          <div className={`mb-4 p-3 rounded-lg text-sm ${messageType === "error" ? "bg-red-50 border border-red-200 text-red-700" : "bg-[#f0faf8] border border-[#3DBFA0] text-[#1B2D5B]"}`}>
-            {message}
+          <div
+            className={`mb-4 p-3 rounded-xl text-sm flex items-start gap-2.5 ${
+              messageType === "error"
+                ? "bg-red-50 border border-red-200 text-red-700"
+                : "bg-[#f0faf8] border border-[#3DBFA0]/40 text-[#1B2D5B]"
+            }`}
+            role="alert"
+          >
+            {messageType === "error" ? (
+              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+            ) : (
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#3DBFA0]" />
+            )}
+            <span>{message}</span>
           </div>
         )}
 
         {tab === "login" && (
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                placeholder="votre@email.ch"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Mot de passe</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                placeholder="••••••••"
-              />
-            </div>
+          <form
+            className="space-y-4"
+            onSubmit={(e) => { e.preventDefault(); handleLogin() }}
+          >
+            <Field
+              id="login-email"
+              label="Email"
+              icon={<Mail className="w-4 h-4" />}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="votre@email.ch"
+              autoComplete="email"
+              autoFocus
+            />
+            <PasswordField
+              id="login-password"
+              label="Mot de passe"
+              value={password}
+              onChange={setPassword}
+              autoComplete="current-password"
+            />
+            <SubmitButton loading={loading} labelLoading="Connexion...">
+              Se connecter
+            </SubmitButton>
             <button
-              onClick={handleLogin}
-              disabled={loading}
-              className="w-full bg-[#1B2D5B] text-white py-2.5 rounded-lg text-sm font-medium hover:bg-[#152347] transition-colors disabled:opacity-50"
-            >
-              {loading ? "Connexion..." : "Se connecter"}
-            </button>
-            <p
-              onClick={() => { setTab("forgot"); setMessage("") }}
-              className="text-center text-sm text-[#3DBFA0] cursor-pointer hover:underline"
+              type="button"
+              onClick={() => changerTab("forgot")}
+              className="block w-full text-center text-sm text-[#3DBFA0] hover:underline"
             >
               Mot de passe oublié ?
-            </p>
-          </div>
+            </button>
+          </form>
         )}
 
         {tab === "register" && (
-          <div className="space-y-4">
+          <form
+            className="space-y-4"
+            onSubmit={(e) => { e.preventDefault(); handleRegister() }}
+          >
             <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Prénom</label>
-                <input
-                  type="text"
-                  value={prenom}
-                  onChange={(e) => setPrenom(e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                  placeholder="Marie"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Nom</label>
-                <input
-                  type="text"
-                  value={nom}
-                  onChange={(e) => setNom(e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                  placeholder="Dupont"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                placeholder="votre@email.ch"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Code institution</label>
-              <input
+              <Field
+                id="register-prenom"
+                label="Prénom"
+                icon={<User className="w-4 h-4" />}
                 type="text"
-                value={codeInstitution}
-                onChange={(e) => setCodeInstitution(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] uppercase"
-                placeholder="Ex: Learna2024"
+                value={prenom}
+                onChange={(e) => setPrenom(e.target.value)}
+                placeholder="Marie"
+                autoComplete="given-name"
+                autoFocus
               />
-              <p className="text-xs text-gray-400 mt-1">Code fourni par votre institution</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Mot de passe</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                placeholder="••••••••"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Confirmer le mot de passe</label>
-              <input
-                type="password"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                placeholder="••••••••"
+              <Field
+                id="register-nom"
+                label="Nom"
+                icon={<User className="w-4 h-4" />}
+                type="text"
+                value={nom}
+                onChange={(e) => setNom(e.target.value)}
+                placeholder="Dupont"
+                autoComplete="family-name"
               />
             </div>
-            <button
-              onClick={handleRegister}
-              disabled={loading}
-              className="w-full bg-[#3DBFA0] text-white py-2.5 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
-            >
-              {loading ? "Création..." : "Créer mon compte"}
-            </button>
-          </div>
+            <Field
+              id="register-email"
+              label="Email"
+              icon={<Mail className="w-4 h-4" />}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="votre@email.ch"
+              autoComplete="email"
+            />
+            <Field
+              id="register-code"
+              label="Code institution"
+              icon={<KeyRound className="w-4 h-4" />}
+              type="text"
+              value={codeInstitution}
+              onChange={(e) => setCodeInstitution(e.target.value)}
+              placeholder="Ex: Learna2024"
+              className="uppercase"
+              hint="Code fourni par votre institution"
+              autoComplete="off"
+            />
+            <PasswordField
+              id="register-password"
+              label="Mot de passe"
+              value={password}
+              onChange={setPassword}
+              autoComplete="new-password"
+            />
+            <PasswordField
+              id="register-password-confirm"
+              label="Confirmer le mot de passe"
+              value={passwordConfirm}
+              onChange={setPasswordConfirm}
+              autoComplete="new-password"
+            />
+            <SubmitButton loading={loading} labelLoading="Création..." variant="teal">
+              Créer mon compte
+            </SubmitButton>
+          </form>
         )}
 
         {tab === "forgot" && (
-          <div className="space-y-4">
-            <p className="text-sm text-gray-500">
-              Saisissez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
-            </p>
-            <div>
-              <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                placeholder="votre@email.ch"
-                onKeyDown={(e) => e.key === "Enter" && handleForgotPassword()}
-              />
-            </div>
+          <form
+            className="space-y-4"
+            onSubmit={(e) => { e.preventDefault(); handleForgotPassword() }}
+          >
+            <Field
+              id="forgot-email"
+              label="Email"
+              icon={<Mail className="w-4 h-4" />}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="votre@email.ch"
+              autoComplete="email"
+              autoFocus
+            />
+            <SubmitButton loading={loading} labelLoading="Envoi en cours..." variant="teal">
+              Envoyer le lien
+            </SubmitButton>
             <button
-              onClick={handleForgotPassword}
-              disabled={loading}
-              className="w-full bg-[#3DBFA0] text-white py-2.5 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
+              type="button"
+              onClick={() => changerTab("login")}
+              className="w-full flex items-center justify-center gap-1.5 text-sm text-gray-400 hover:text-[#1B2D5B] transition-colors"
             >
-              {loading ? "Envoi en cours..." : "Envoyer le lien"}
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Retour à la connexion
             </button>
-            <p
-              onClick={() => { setTab("login"); setMessage("") }}
-              className="text-center text-sm text-gray-400 cursor-pointer hover:text-[#1B2D5B] transition-colors"
-            >
-              ← Retour à la connexion
-            </p>
-          </div>
+          </form>
         )}
       </div>
 
-      <a href="/" className="mt-6 text-sm text-gray-400 hover:text-[#1B2D5B] transition-colors">
-        Retour à l accueil
+      <a href="/" className="relative z-10 mt-6 text-sm text-gray-400 hover:text-[#1B2D5B] transition-colors">
+        ← Retour à l'accueil
       </a>
     </div>
   )

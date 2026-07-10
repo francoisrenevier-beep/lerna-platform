@@ -3,8 +3,52 @@
 import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
+import { Lock, Eye, EyeOff, AlertCircle, Loader2 } from "lucide-react"
 
 type PageState = "loading" | "form" | "expired" | "success"
+
+type PasswordFieldProps = {
+  id: string
+  label: string
+  value: string
+  onChange: (v: string) => void
+  autoFocus?: boolean
+}
+
+function PasswordField({ id, label, value, onChange, autoFocus }: PasswordFieldProps) {
+  const [visible, setVisible] = useState(false)
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-[#1B2D5B] mb-1.5">
+        {label}
+      </label>
+      <div className="relative">
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+          <Lock className="w-4 h-4" />
+        </span>
+        <input
+          id={id}
+          type={visible ? "text" : "password"}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          autoComplete="new-password"
+          autoFocus={autoFocus}
+          placeholder="••••••••"
+          className="w-full border border-gray-200 rounded-xl pl-10 pr-11 py-2.5 text-sm bg-white transition-shadow focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] focus:border-transparent"
+        />
+        <button
+          type="button"
+          tabIndex={-1}
+          onClick={() => setVisible(!visible)}
+          aria-label={visible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#1B2D5B] transition-colors"
+        >
+          {visible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function ResetPasswordPage() {
   const [pageState, setPageState] = useState<PageState>("loading")
@@ -74,12 +118,27 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
-      <div className="mb-8 text-center">
-        <img src="/logo-learna-compact.png" alt="LEARNA" className="h-28 w-auto mx-auto" />
+    <div className="relative min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center px-4 py-10 overflow-hidden">
+      {/* Décor d'arrière-plan */}
+      <div
+        className="absolute pointer-events-none rounded-full"
+        style={{ top: -140, right: -100, width: 420, height: 420, background: "rgba(61,191,160,0.08)", filter: "blur(10px)" }}
+      />
+      <div
+        className="absolute pointer-events-none rounded-full"
+        style={{ bottom: -160, left: -120, width: 460, height: 460, background: "rgba(27,45,91,0.06)", filter: "blur(10px)" }}
+      />
+
+      <div className="relative z-10 mb-6 text-center">
+        <a href="/">
+          <img src="/logo-learna-compact.png" alt="LEARNA" className="h-24 w-auto mx-auto" />
+        </a>
       </div>
 
-      <div className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-sm p-8">
+      <div
+        className="relative z-10 w-full max-w-md bg-white border border-gray-100 rounded-2xl p-8"
+        style={{ boxShadow: "0 10px 40px rgba(27,45,91,0.08), 0 2px 8px rgba(27,45,91,0.04)" }}
+      >
 
         {/* Loading */}
         {pageState === "loading" && (
@@ -117,45 +176,38 @@ export default function ResetPasswordPage() {
             <p className="text-sm text-gray-500 mb-6">Choisissez un mot de passe sécurisé d'au moins 8 caractères.</p>
 
             {error && (
-              <div className="mb-4 p-3 rounded-lg text-sm bg-red-50 border border-red-200 text-red-700">
-                {error}
+              <div className="mb-4 p-3 rounded-xl text-sm bg-red-50 border border-red-200 text-red-700 flex items-start gap-2.5" role="alert">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <span>{error}</span>
               </div>
             )}
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-[#1B2D5B] mb-1">
-                  Nouveau mot de passe
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                  placeholder="••••••••"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-[#1B2D5B] mb-1">
-                  Confirmer le mot de passe
-                </label>
-                <input
-                  type="password"
-                  value={passwordConfirm}
-                  onChange={(e) => setPasswordConfirm(e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-                  placeholder="••••••••"
-                  onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-                />
-              </div>
+            <form
+              className="space-y-4"
+              onSubmit={(e) => { e.preventDefault(); handleSubmit() }}
+            >
+              <PasswordField
+                id="new-password"
+                label="Nouveau mot de passe"
+                value={password}
+                onChange={setPassword}
+                autoFocus
+              />
+              <PasswordField
+                id="new-password-confirm"
+                label="Confirmer le mot de passe"
+                value={passwordConfirm}
+                onChange={setPasswordConfirm}
+              />
               <button
-                onClick={handleSubmit}
+                type="submit"
                 disabled={submitting}
-                className="w-full bg-[#3DBFA0] text-white py-2.5 rounded-lg text-sm font-medium hover:bg-[#2ea88b] transition-colors disabled:opacity-50"
+                className="w-full bg-[#3DBFA0] text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-[#2ea88b] transition-all disabled:opacity-60 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
               >
+                {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
                 {submitting ? "Enregistrement…" : "Enregistrer le mot de passe"}
               </button>
-            </div>
+            </form>
           </div>
         )}
 
@@ -176,8 +228,8 @@ export default function ResetPasswordPage() {
       </div>
 
       {pageState !== "success" && (
-        <a href="/connexion" className="mt-6 text-sm text-gray-400 hover:text-[#1B2D5B] transition-colors">
-          Retour à la connexion
+        <a href="/connexion" className="relative z-10 mt-6 text-sm text-gray-400 hover:text-[#1B2D5B] transition-colors">
+          ← Retour à la connexion
         </a>
       )}
     </div>

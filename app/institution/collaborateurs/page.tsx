@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { InstitutionSidebar } from "@/components/InstitutionSidebar"
+import { PageHeader } from "@/components/PageHeader"
+import { Search, Copy, Check, Download } from "lucide-react"
 
 type Collaborateur = {
   profil_id: string
@@ -20,9 +22,15 @@ type ModalConfirmation = {
   nomComplet: string
 }
 
+type FiltreStatut = "tous" | "actif" | "inactif"
+
 function dateFormat(d: string | null) {
   if (!d) return "—"
   return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
+}
+
+function csvEscape(v: string) {
+  return /[";\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v
 }
 
 export default function CollaborateursPage() {
@@ -31,6 +39,7 @@ export default function CollaborateursPage() {
   const [codeAcces, setCodeAcces] = useState("")
   const [collaborateurs, setCollaborateurs] = useState<Collaborateur[]>([])
   const [recherche, setRecherche] = useState("")
+  const [filtreStatut, setFiltreStatut] = useState<FiltreStatut>("tous")
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
@@ -142,113 +151,199 @@ export default function CollaborateursPage() {
     setTimeout(() => setCopied(false), 2000)
   }
 
+  const exporterCSV = () => {
+    const lignes = [
+      ["Prénom", "Nom", "Secteur", "Inscription", "Formations complétées", "Statut"].join(";"),
+      ...collaborateursFiltres.map((c) =>
+        [
+          csvEscape(c.prenom),
+          csvEscape(c.nom),
+          csvEscape(c.secteur || ""),
+          dateFormat(c.created_at),
+          String(c.nb_formations_completes),
+          c.statut === "actif" ? "Actif" : "Inactif",
+        ].join(";")
+      ),
+    ]
+    const blob = new Blob(["﻿" + lignes.join("\n")], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `collaborateurs-${new Date().toISOString().slice(0, 10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const collaborateursFiltres = collaborateurs.filter((c) => {
+    if (filtreStatut !== "tous" && c.statut !== filtreStatut) return false
     if (!recherche) return true
     const nom = `${c.prenom} ${c.nom}`.toLowerCase()
     return nom.includes(recherche.toLowerCase())
   })
 
+  const nbActifs = collaborateurs.filter((c) => c.statut === "actif").length
+  const nbInactifs = collaborateurs.length - nbActifs
+
+  const filtres: { id: FiltreStatut; label: string; count: number }[] = [
+    { id: "tous", label: "Tous", count: collaborateurs.length },
+    { id: "actif", label: "Actifs", count: nbActifs },
+    { id: "inactif", label: "Inactifs", count: nbInactifs },
+  ]
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-[#1B2D5B] text-sm">Chargement...</p>
+      <div className="min-h-screen bg-[#F8FAFC] flex">
+        <div className="hidden md:block w-64 bg-[#1B2D5B] flex-shrink-0" />
+        <main className="flex-1">
+          <div className="bg-[#1B2D5B] px-4 md:px-8 py-6">
+            <div className="h-8 w-64 bg-white/20 rounded animate-pulse" />
+          </div>
+          <div className="px-4 md:px-8 py-6 space-y-4 max-w-6xl">
+            <div className="h-10 w-full max-w-sm bg-gray-200 rounded animate-pulse" />
+            <div className="h-72 bg-gray-200 rounded-2xl animate-pulse" />
+          </div>
+        </main>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-[#F8FAFC] flex">
       <InstitutionSidebar pageActive="collaborateurs" institution={institutionNom} />
-      <main className="flex-1 p-8">
-        <div className="flex items-start justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-[#1B2D5B]">Mes collaborateurs</h2>
-            <p className="text-gray-500 mt-1">{collaborateurs.length} collaborateur{collaborateurs.length !== 1 ? "s" : ""} dans votre institution.</p>
-          </div>
-          <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm">
-            <div>
-              <p className="text-xs text-gray-400">Code institutionnel</p>
-              <p className="text-sm font-mono font-bold text-[#1B2D5B]">{codeAcces}</p>
+      <main className="flex-1 min-w-0">
+        <PageHeader
+          gradient
+          surtitre="Espace RH"
+          titre="Mes collaborateurs"
+          sousTitre={`${collaborateurs.length} collaborateur${collaborateurs.length !== 1 ? "s" : ""} dans votre institution`}
+          right={
+            <div className="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-4 py-2.5">
+              <div>
+                <p className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>Code institution</p>
+                <p className="text-sm font-mono font-bold text-white">{codeAcces}</p>
+              </div>
+              <button
+                onClick={copierCode}
+                className="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-[#3DBFA0] text-white hover:bg-[#2ea88b] transition-colors"
+              >
+                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                {copied ? "Copié" : "Copier"}
+              </button>
             </div>
+          }
+        />
+
+        <div className="px-4 md:px-8 py-6 max-w-6xl">
+          {/* Barre d'outils : recherche, filtres, export */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="relative flex-1 min-w-[220px] max-w-sm">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+              <input
+                type="text"
+                value={recherche}
+                onChange={(e) => setRecherche(e.target.value)}
+                placeholder="Rechercher par nom..."
+                className="w-full border border-gray-200 rounded-xl pl-10 pr-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] focus:border-transparent"
+              />
+            </div>
+
+            <div className="flex bg-white border border-gray-200 rounded-xl p-1 gap-1">
+              {filtres.map((f) => (
+                <button
+                  key={f.id}
+                  onClick={() => setFiltreStatut(f.id)}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
+                    filtreStatut === f.id
+                      ? "bg-[#1B2D5B] text-white"
+                      : "text-gray-500 hover:bg-gray-50"
+                  }`}
+                >
+                  {f.label} <span className={filtreStatut === f.id ? "opacity-70" : "text-gray-400"}>({f.count})</span>
+                </button>
+              ))}
+            </div>
+
             <button
-              onClick={copierCode}
-              className="ml-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-[#3DBFA0] text-white hover:bg-[#2ea88b] transition-colors"
+              onClick={exporterCSV}
+              disabled={collaborateursFiltres.length === 0}
+              className="ml-auto inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-[#1B2D5B] hover:border-[#3DBFA0] hover:text-[#3DBFA0] transition-colors disabled:opacity-40"
             >
-              {copied ? "Copié ✓" : "Copier"}
+              <Download className="w-4 h-4" />
+              Exporter CSV
             </button>
           </div>
-        </div>
 
-        {/* Recherche */}
-        <div className="mb-4">
-          <input
-            type="text"
-            value={recherche}
-            onChange={(e) => setRecherche(e.target.value)}
-            placeholder="Rechercher par nom..."
-            className="w-full max-w-sm border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
-          />
-        </div>
-
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-100 bg-gray-50">
-                <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Collaborateur</th>
-                <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Secteur / Groupe</th>
-                <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Inscription</th>
-                <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Formations</th>
-                <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Statut</th>
-                <th className="px-4 py-3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {collaborateursFiltres.map((c) => (
-                <tr
-                  key={c.profil_id}
-                  className={`border-b border-gray-50 last:border-0 transition-opacity ${c.statut === "inactif" ? "opacity-40" : ""}`}
-                >
-                  <td className="px-4 py-3">
-                    <p className="font-medium text-[#1B2D5B]">{c.prenom} {c.nom}</p>
-                  </td>
-                  <td className="px-4 py-3 text-gray-500 text-sm">{c.secteur || <span className="text-gray-300 italic">—</span>}</td>
-                  <td className="px-4 py-3 text-gray-500">{dateFormat(c.created_at)}</td>
-                  <td className="px-4 py-3 text-center font-medium text-[#3DBFA0]">{c.nb_formations_completes}</td>
-                  <td className="px-4 py-3 text-center">
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${c.statut === "actif" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"}`}>
-                      {c.statut === "actif" ? "Actif" : "Inactif"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    {c.statut === "actif" ? (
-                      <button
-                        onClick={() => setModal({ profilId: c.profil_id, nomComplet: `${c.prenom} ${c.nom}` })}
-                        disabled={actionLoading === c.profil_id}
-                        className="text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 bg-red-50 text-red-600 hover:bg-red-100"
-                      >
-                        Supprimer l'accès
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => reactiver(c.profil_id)}
-                        disabled={actionLoading === c.profil_id}
-                        className="text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 bg-green-50 text-green-600 hover:bg-green-100"
-                      >
-                        {actionLoading === c.profil_id ? "..." : "Réactiver"}
-                      </button>
-                    )}
-                  </td>
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-100 bg-gray-50">
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Collaborateur</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Secteur / Groupe</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Inscription</th>
+                  <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Formations</th>
+                  <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Statut</th>
+                  <th className="px-4 py-3"></th>
                 </tr>
-              ))}
-              {collaborateursFiltres.length === 0 && (
-                <tr>
-                  <td colSpan={6} className="px-4 py-8 text-center text-gray-400 text-sm">
-                    {recherche ? "Aucun collaborateur ne correspond à cette recherche." : "Aucun collaborateur inscrit pour le moment."}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {collaborateursFiltres.map((c) => (
+                  <tr
+                    key={c.profil_id}
+                    className={`border-b border-gray-50 last:border-0 transition-colors hover:bg-gray-50/50 ${c.statut === "inactif" ? "opacity-40" : ""}`}
+                  >
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-[#3DBFA0]/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-[#3DBFA0] text-xs font-bold">
+                            {c.prenom.charAt(0)}{c.nom.charAt(0)}
+                          </span>
+                        </div>
+                        <p className="font-medium text-[#1B2D5B]">{c.prenom} {c.nom}</p>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-gray-500 text-sm">{c.secteur || <span className="text-gray-300 italic">—</span>}</td>
+                    <td className="px-4 py-3 text-gray-500">{dateFormat(c.created_at)}</td>
+                    <td className="px-4 py-3 text-center font-medium text-[#3DBFA0]">{c.nb_formations_completes}</td>
+                    <td className="px-4 py-3 text-center">
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${c.statut === "actif" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"}`}>
+                        {c.statut === "actif" ? "Actif" : "Inactif"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      {c.statut === "actif" ? (
+                        <button
+                          onClick={() => setModal({ profilId: c.profil_id, nomComplet: `${c.prenom} ${c.nom}` })}
+                          disabled={actionLoading === c.profil_id}
+                          className="text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 bg-red-50 text-red-600 hover:bg-red-100"
+                        >
+                          Supprimer l'accès
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => reactiver(c.profil_id)}
+                          disabled={actionLoading === c.profil_id}
+                          className="text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 bg-green-50 text-green-600 hover:bg-green-100"
+                        >
+                          {actionLoading === c.profil_id ? "..." : "Réactiver"}
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+                {collaborateursFiltres.length === 0 && (
+                  <tr>
+                    <td colSpan={6} className="px-4 py-8 text-center text-gray-400 text-sm">
+                      {recherche || filtreStatut !== "tous"
+                        ? "Aucun collaborateur ne correspond à ces critères."
+                        : "Aucun collaborateur inscrit pour le moment."}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            </div>
+          </div>
         </div>
       </main>
 
