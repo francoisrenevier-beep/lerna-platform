@@ -78,6 +78,10 @@ import { Module3GestionProjetAvance } from "@/app/modules/gestion-projet-avance-
 import { Module4GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-4"
 import { Module5GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-5"
 import { Module6GestionProjetAvance } from "@/app/modules/gestion-projet-avance-module-6"
+import { Module1Violence } from "@/app/modules/violence-module-1"
+import { Module2Violence } from "@/app/modules/violence-module-2"
+import { Module3Violence } from "@/app/modules/violence-module-3"
+import { Module4Violence } from "@/app/modules/violence-module-4"
 
 type ModuleSimple = {
   id: string
@@ -166,6 +170,10 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "9e7b0003-0004-4000-8000-000000000004": Module4GestionProjetAvance,
   "9e7b0003-0005-4000-8000-000000000005": Module5GestionProjetAvance,
   "9e7b0003-0006-4000-8000-000000000006": Module6GestionProjetAvance,
+  "de5c0001-0001-4000-8000-000000000001": Module1Violence,
+  "de5c0001-0002-4000-8000-000000000002": Module2Violence,
+  "de5c0001-0003-4000-8000-000000000003": Module3Violence,
+  "de5c0001-0004-4000-8000-000000000004": Module4Violence,
 }
 
 export default function ModulePage() {
