@@ -21,9 +21,9 @@ export const sFilRouge = {
   titre: "Rejouer la scène",
   highlight_label: "La situation, au ralenti",
   texte1:
-    "Revenons au bureau, vendredi 17h15. M. Keller vient d'apprendre le refus. Il se lève, hausse le ton : « Vous décidez de ma vie sans moi ! » Sarah, surprise, répond : « Monsieur Keller, calmez-vous, c'est le règlement, la décision a été prise en équipe. » Il fait un pas vers elle : « Le règlement ! Toujours le règlement ! » Elle recule contre le bureau : « Si vous continuez sur ce ton, l'entretien est terminé. » Le classeur vole.",
+    "Revenons au bureau, vendredi 17h15. Noah vient d'apprendre l'annulation de son retour en famille. Il se lève, hausse le ton : « Vous décidez de ma vie sans moi ! » Léa, surprise, répond : « Noah, calme-toi, c'est la décision du réseau. » Il fait un pas vers elle : « Le réseau ! Toujours le réseau ! » Elle recule contre le bureau : « Si tu continues sur ce ton, on arrête là. » La chaise vole.",
   texte2:
-    "Chaque réplique de Sarah est compréhensible — et chacune, on va le voir, a probablement alimenté l'escalade. Ce module ne juge pas Sarah : il donne à toute l'institution ce qu'elle n'avait pas ce jour-là — une grammaire commune de la désescalade.",
+    "Chaque réplique de Léa est compréhensible — et chacune, on va le voir, a probablement alimenté l'escalade. Ce module ne juge pas Léa : il donne à toute l'institution ce qu'elle n'avait pas ce jour-là — une grammaire commune de la désescalade.",
 }
 
 export const sIntroduction = {
@@ -93,19 +93,19 @@ export const sReperes = {
   eyebrow: "Section 2",
   titre: "Les dix repères de la désescalade verbale",
   texte_intro:
-    "Le consensus international « Project BETA » (Richmond et al., 2012) a formalisé dix domaines de la désescalade verbale. Ils sont présentés ici adaptés au champ social — et chacun est illustré par ce qui s'est passé, ou aurait pu se passer, dans le bureau de Sarah.",
+    "Le consensus international « Project BETA » (Richmond et al., 2012) a formalisé dix domaines de la désescalade verbale. Ils sont présentés ici adaptés au champ social — et chacun est illustré par ce qui s'est passé, ou aurait pu se passer, dans le bureau de Léa.",
   concept_label: "Outil central",
   concept_titre: "Les dix repères (d'après Richmond et al., 2012)",
   concept_items: [
-    "**1. Respecter l'espace personnel** : garder une distance d'au moins deux longueurs de bras, laisser à la personne — et à soi — un accès dégagé vers la sortie. Sarah, adossée au bureau, porte fermée : personne n'avait d'issue.",
+    "**1. Respecter l'espace personnel** : garder une distance d'au moins deux longueurs de bras, laisser à la personne — et à soi — un accès dégagé vers la sortie. Léa, adossée au bureau, porte fermée : personne n'avait d'issue.",
     "**2. Ne pas provoquer** : mains visibles et détendues, posture de trois-quarts plutôt que face à face, ton bas et lent, pas de doigt pointé, pas de bras croisés. Le corps parle avant les mots.",
     "**3. Établir un contact verbal unique** : une seule personne parle avec la personne en tension. Si d'autres arrivent, elles sécurisent l'espace sans intervenir dans l'échange à plusieurs voix.",
     "**4. Être concis et répéter simplement** : sous tension, la capacité de traitement de l'information s'effondre. Phrases courtes, un message à la fois, répété calmement si nécessaire. Les longues explications sont inaudibles.",
-    "**5. Identifier les besoins et les émotions** : derrière « vous décidez de ma vie sans moi ! », il y a un besoin de prise sur sa propre existence. L'entendre ne coûte rien et change tout : « Vous avez le sentiment qu'on décide sans vous. »",
+    "**5. Identifier les besoins et les émotions** : derrière « vous décidez de ma vie sans moi ! », il y a un besoin de prise sur sa propre existence. L'entendre ne coûte rien et change tout : « Tu as le sentiment qu'on décide sans toi. »",
     "**6. Écouter vraiment** : laisser finir les phrases, reformuler, tolérer les silences. L'écoute active est l'ingrédient le plus cité des études sur la désescalade (Price & Baker, 2012).",
-    "**7. Trouver un point d'accord — ou acter le désaccord avec respect** : « Vous avez raison sur un point : cette décision a été prise sans vous, et je comprends que ce soit difficile à recevoir. » Donner raison sur ce qui est vrai n'est pas céder sur la décision.",
-    "**8. Poser des limites claires et calmes** : nommer la limite sans menace ni ultimatum, en la reliant à la sécurité et non au pouvoir : « Je veux continuer cette discussion. Je ne peux pas le faire si les objets volent. » Comparer avec la version de Sarah : « Si vous continuez sur ce ton, l'entretien est terminé » — une menace qui acculait.",
-    "**9. Offrir des choix réalistes** : le choix rend une prise à la personne — exactement ce dont la frustration l'a privée. « On peut continuer maintenant, ou je reviens vers vous demain matin avec le responsable. Qu'est-ce que vous préférez ? » Ne jamais proposer un choix qu'on ne peut pas tenir.",
+    "**7. Trouver un point d'accord — ou acter le désaccord avec respect** : « Tu as raison sur un point : cette décision a été prise sans toi, et je comprends que ce soit difficile à recevoir. » Donner raison sur ce qui est vrai n'est pas céder sur la décision.",
+    "**8. Poser des limites claires et calmes** : nommer la limite sans menace ni ultimatum, en la reliant à la sécurité et non au pouvoir : « Je veux continuer cette discussion. Je ne peux pas le faire si les objets volent. » Comparer avec la version de Léa : « Si tu continues sur ce ton, on arrête là » — une menace qui acculait.",
+    "**9. Offrir des choix réalistes** : le choix rend une prise à la personne — exactement ce dont la frustration l'a privée. « On peut en reparler ce soir après le repas, ou demain matin avec le responsable. Qu'est-ce que tu préfères ? » Ne jamais proposer un choix qu'on ne peut pas tenir.",
     "**10. Débriefer — la personne et l'équipe** : après tout épisode de tension, une reprise a lieu : avec la personne (à froid), et en équipe. Ce dixième repère fait le pont avec la postvention (module 4).",
   ],
   tableau_titre: "Ce qui enflamme / ce qui apaise — synthèse pratique",
@@ -114,7 +114,7 @@ export const sReperes = {
     "« Calmez-vous » (injonction paradoxale : personne ne s'est jamais calmé sur ordre)",
     "Justifier la décision par le règlement pendant que l'émotion monte",
     "Hausser le ton pour « reprendre la main »",
-    "Menacer d'une conséquence (« sinon l'entretien est terminé »)",
+    "Menacer d'une conséquence (« sinon on arrête là »)",
     "Bloquer physiquement ou psychologiquement l'issue",
     "Prendre les insultes personnellement et y répondre",
   ],
@@ -182,7 +182,7 @@ export const quiz = [
   },
   {
     question:
-      "« Si vous continuez sur ce ton, l'entretien est terminé. » Cette phrase pose problème en phase d'escalade parce que :",
+      "« Si tu continues sur ce ton, on arrête là. » Cette phrase pose problème en phase d'escalade parce que :",
     reponses: [
       "Elle est trop polie pour être efficace",
       "C'est un ultimatum qui accule la personne, alors qu'une limite efficace se pose sans menace et reliée à la sécurité",
@@ -195,7 +195,7 @@ export const quiz = [
   },
   {
     question:
-      "Offrir un choix réaliste (« on continue maintenant, ou je reviens demain avec le responsable ») est efficace parce que :",
+      "Offrir un choix réaliste (« on peut en reparler ce soir après le repas, ou demain matin avec le responsable ») est efficace parce que :",
     reponses: [
       "Cela permet de gagner du temps avant l'arrivée des collègues",
       "Cela redonne à la personne une prise sur la situation — exactement ce dont la frustration l'a privée",
@@ -208,11 +208,11 @@ export const quiz = [
   },
   {
     question:
-      "M. Keller entre en phase de crise : il jette le classeur. À ce moment précis, la priorité de Sarah est de :",
+      "Noah entre en phase de crise : il jette la chaise. À ce moment précis, la priorité de Léa est de :",
     reponses: [
       "Poursuivre la désescalade verbale en nommant les émotions",
       "Se mettre en sécurité, protéger les éventuels tiers et alerter selon la procédure",
-      "Ramasser le classeur pour montrer que la situation reste sous contrôle",
+      "Ramasser la chaise pour montrer que la situation reste sous contrôle",
       "Rappeler fermement la limite qui vient d'être franchie",
     ],
     bonneReponse: 1,

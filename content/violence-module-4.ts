@@ -18,10 +18,10 @@ export const hero = {
 
 export const sFilRouge = {
   eyebrow: "Fil rouge",
-  titre: "Sarah, une heure après",
+  titre: "Léa, une heure après",
   highlight_label: "La situation, dernière reprise",
   texte1:
-    "Le classeur est retombé, M. Keller a quitté le bâtiment. Sarah range machinalement le bureau. Une collègue passe la tête : « Ça va ? » — « Oui, oui, ça va. Ça fait partie du métier, hein. » Elle rentre chez elle. Le week-end, elle dort mal, rejoue la scène en boucle, hésite à en parler lundi : « De quoi j'aurais l'air ? Il ne m'a même pas touchée. »",
+    "La chaise est retombée, Noah est parti s'enfermer dans sa chambre. Léa range machinalement le bureau. Une collègue passe la tête : « Ça va ? » — « Oui, oui, ça va. Ça fait partie du métier, hein. » Elle rentre chez elle. Le week-end, elle dort mal, rejoue la scène en boucle, hésite à en parler lundi : « De quoi j'aurais l'air ? Il ne m'a même pas touchée. »",
   texte2:
     "Ce module s'occupe de ce moment-là — celui où tout se joue en silence. La postvention, c'est l'ensemble des mesures d'aide et d'apprentissage qui suivent un incident : pour la personne touchée, pour l'équipe, pour la relation avec l'usager·ère, et pour l'institution.",
 }
@@ -145,7 +145,7 @@ export const sConclusion = {
   eyebrow: "Conclusion",
   titre: "Ce que cette formation a posé",
   texte1:
-    "Quatre modules, une situation — Sarah et M. Keller — et une conviction : la violence émanant des personnes accompagnées se comprend (elle est un processus, pas un éclair), se prévient (par l'organisation plus que par l'héroïsme individuel), se gère (par des attitudes qui s'apprennent et se partagent) et se répare (par un soutien réel, sans banalisation ni mise en cause).",
+    "Quatre modules, une situation — Léa et Noah — et une conviction : la violence émanant des personnes accompagnées se comprend (elle est un processus, pas un éclair), se prévient (par l'organisation plus que par l'héroïsme individuel), se gère (par des attitudes qui s'apprennent et se partagent) et se répare (par un soutien réel, sans banalisation ni mise en cause).",
   texte2:
     "Aucun de ces quatre verbes n'appartient à un rôle en particulier. La réceptionniste qui repère une montée de tension, le veilleur qui trace un signalement dans les transmissions, l'éducatrice qui désescalade, le cadre qui prend des nouvelles trois jours après, l'équipe qui analyse l'incident sans chercher de coupable : c'est la même culture institutionnelle, portée par tous. C'est exactement cela, une base commune.",
   retenir_label: "Ce que vous pouvez faire dès aujourd'hui",

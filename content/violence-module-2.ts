@@ -21,9 +21,9 @@ export const sFilRouge = {
   titre: "Lundi matin : que fait-on de l'incident ?",
   highlight_label: "La situation, suite",
   texte1:
-    "Lundi matin, l'incident de vendredi est dans toutes les conversations. Trois réactions circulent dans l'équipe. La première : « M. Keller a dépassé les bornes, il faut une sanction. » La deuxième : « Sarah n'aurait pas dû lui annoncer ça un vendredi soir, toute seule. » La troisième, murmurée à la pause : « De toute façon, ça fait partie du métier. »",
+    "Lundi matin, l'incident de vendredi est dans toutes les conversations. Trois réactions circulent dans l'équipe. La première : « Noah a dépassé les bornes, il faut une sanction. » La deuxième : « Léa n'aurait pas dû lui annoncer ça un vendredi soir, toute seule. » La troisième, murmurée à la pause : « De toute façon, ça fait partie du métier. »",
   texte2:
-    "Ces trois réactions ont un point commun : elles referment l'incident au lieu de l'ouvrir. La première le referme sur M. Keller, la deuxième sur Sarah, la troisième sur rien du tout. Ce module propose une quatrième voie : **faire de l'incident une source d'apprentissage pour toute l'institution.**",
+    "Ces trois réactions ont un point commun : elles referment l'incident au lieu de l'ouvrir. La première le referme sur Noah, la deuxième sur Léa, la troisième sur rien du tout. Ce module propose une quatrième voie : **faire de l'incident une source d'apprentissage pour toute l'institution.**",
 }
 
 export const sIntroduction = {
@@ -55,14 +55,14 @@ export const sApprenante = {
   tableau_col1_titre: "Apprentissage en simple boucle",
   tableau_col1_items: [
     "On corrige l'action sans questionner ses règles",
-    "« La prochaine fois, Sarah annoncera les refus avec un collègue »",
+    "« La prochaine fois, Léa annoncera ce type de décision avec un·e collègue »",
     "Utile, mais fragile : le problème de fond reste intact",
     "Question posée : « Comment mieux faire la même chose ? »",
   ],
   tableau_col2_titre: "Apprentissage en double boucle",
   tableau_col2_items: [
     "On questionne les règles et les présupposés eux-mêmes",
-    "« Pourquoi les décisions de refus sont-elles annoncées le vendredi soir ? Pourquoi la personne concernée n'est-elle pas associée plus tôt à la décision ? »",
+    "« Pourquoi ce type de décision est-il annoncé le vendredi soir ? Pourquoi la personne concernée n'est-elle pas associée plus tôt à la décision ? »",
     "Plus exigeant, mais transformateur : il modifie les conditions qui produisent les incidents",
     "Question posée : « Faisons-nous la bonne chose ? »",
   ],
@@ -82,13 +82,13 @@ export const sArbre = {
       niveau: "Étape 1",
       nom: "Recueillir les faits",
       definition:
-        "Le plus tôt possible après l'incident. Uniquement des faits : « la porte était fermée », pas « Sarah s'est enfermée imprudemment ». Un fait se constate ; un jugement se discute.",
+        "Le plus tôt possible après l'incident. Uniquement des faits : « la porte était fermée », pas « Léa s'est enfermée imprudemment ». Un fait se constate ; un jugement se discute.",
     },
     {
       niveau: "Étape 2",
       nom: "Construire l'arbre",
       definition:
-        "Partir du fait final (le classeur jeté) et remonter en posant pour chaque fait : « Qu'a-t-il fallu pour que cela se produise ? Ce fait était-il nécessaire ? suffisant ? »",
+        "Partir du fait final (la chaise jetée) et remonter en posant pour chaque fait : « Qu'a-t-il fallu pour que cela se produise ? Ce fait était-il nécessaire ? suffisant ? »",
     },
     {
       niveau: "Étape 3",
@@ -104,18 +104,18 @@ export const sArbre = {
     },
   ],
   texte_milieu:
-    "Appliquons la logique à notre situation. Le fait final : M. Keller jette un classeur. En remontant, l'analyse fait apparaître plusieurs branches — toutes factuelles, aucune culpabilisante :",
+    "Appliquons la logique à notre situation. Le fait final : Noah jette une chaise. En remontant, l'analyse fait apparaître plusieurs branches — toutes factuelles, aucune culpabilisante :",
   concept_label: "Exemple travaillé",
   concept_titre: "L'arbre des causes de l'incident de vendredi (extrait)",
   concept_items: [
-    "**Branche « décision »** : la demande de congé a été discutée en colloque sans M. Keller — il découvre la décision et ses motifs en même temps — il n'a eu aucune prise sur le processus",
-    "**Branche « moment »** : l'annonce a lieu vendredi à 17h15 — aucun temps de reprise possible avant le week-end — la frustration n'a nulle part où aller",
-    "**Branche « configuration »** : bureau exigu, porte fermée, Sarah seule — pas de possibilité de recul, pas de collègue en soutien, sentiment d'enfermement pour les deux",
-    "**Branche « histoire »** : deux demandes de M. Keller déjà refusées ce mois-ci — accumulation de frustration non repérée car non tracée",
+    "**Branche « décision »** : le retour en famille a été annulé en synthèse de réseau (équipe et référente de l'autorité de protection) sans Noah — il découvre la décision et ses motifs en même temps — il n'a eu aucune prise sur le processus",
+    "**Branche « moment »** : l'annonce a lieu vendredi à 17h15, à la veille d'un week-end symboliquement chargé (le retour en famille) — aucun temps de reprise possible — la frustration n'a nulle part où aller",
+    "**Branche « configuration »** : bureau exigu, porte fermée, Léa seule — pas de possibilité de recul, pas de collègue en soutien, sentiment d'enfermement pour les deux",
+    "**Branche « histoire »** : deux appels téléphoniques à sa mère déjà écourtés ce mois-ci — accumulation de frustration non repérée car non tracée",
   ],
   highlight_label: "Ce que l'arbre change",
   highlight_texte:
-    "Aucune de ces branches ne dit « Sarah a mal fait » ni « M. Keller est violent ». Chacune ouvre une mesure concrète : associer la personne aux décisions qui la concernent (« faire avec plutôt que pour »), planifier les annonces difficiles en début de semaine et en début de journée, définir une configuration type pour les entretiens sensibles (deuxième professionnel·le à proximité, position près de la porte pour chacun), tracer les frustrations récentes dans les transmissions. **La multicausalité n'est pas une façon de diluer les responsabilités : c'est une façon de multiplier les leviers.**",
+    "Aucune de ces branches ne dit « Léa a mal fait » ni « Noah est violent ». Chacune ouvre une mesure concrète : associer la personne aux décisions qui la concernent (« faire avec plutôt que pour »), planifier les annonces difficiles en début de semaine et en début de journée, définir une configuration type pour les entretiens sensibles (deuxième professionnel·le à proximité, position près de la porte pour chacun), tracer les frustrations récentes dans les transmissions. **La multicausalité n'est pas une façon de diluer les responsabilités : c'est une façon de multiplier les leviers.**",
 }
 
 export const sSituations = {
@@ -178,11 +178,11 @@ export const quiz = [
   },
   {
     question:
-      "« Sarah s'est imprudemment enfermée seule avec M. Keller. » Dans une analyse par arbre des causes, cette formulation pose problème parce que :",
+      "« Léa s'est imprudemment enfermée seule avec Noah. » Dans une analyse par arbre des causes, cette formulation pose problème parce que :",
     reponses: [
       "Elle est trop courte pour être utile",
       "C'est un jugement, pas un fait — la formulation factuelle serait : « l'entretien s'est déroulé porte fermée, sans autre professionnel·le à proximité »",
-      "Elle ne mentionne pas la réaction de M. Keller",
+      "Elle ne mentionne pas la réaction de Noah",
       "Elle devrait préciser l'heure exacte",
     ],
     bonneReponse: 1,

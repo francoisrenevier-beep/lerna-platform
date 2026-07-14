@@ -21,9 +21,9 @@ export const sFilRouge = {
   titre: "Un vendredi en fin de journée",
   highlight_label: "La situation qui nous accompagnera",
   texte1:
-    "**Sarah**, éducatrice sociale, doit annoncer à **M. Keller** que sa demande de congé prolongé du week-end est refusée. Il est 17h15, un vendredi. Le bureau est exigu, la porte est fermée, l'équipe du soir n'est pas encore arrivée. M. Keller écoute d'abord en silence, puis élève la voix, insulte Sarah, et jette un classeur à travers la pièce avant de quitter le bureau en claquant la porte.",
+    "**Léa**, éducatrice sociale, doit annoncer à **Noah**, 15 ans, placé depuis six mois, que son retour en famille du week-end est annulé. Il est 17h15, un vendredi. Le bureau est exigu, la porte est fermée, l'équipe du soir n'est pas encore arrivée. Noah écoute d'abord en silence, puis élève la voix, insulte Léa, et jette une chaise contre le mur avant de quitter le bureau en claquant la porte.",
   texte2:
-    "Personne n'est blessé. Mais Sarah tremble encore une heure après. Et une question flotte dans l'institution, formulée à demi-mot : « Est-ce qu'elle s'y est mal prise ? » Cette formation propose de remplacer cette question — culpabilisante et stérile — par de meilleures questions.",
+    "Personne n'est blessé. Mais Léa tremble encore une heure après. Et une question flotte dans l'institution, formulée à demi-mot : « Est-ce qu'elle s'y est mal prise ? » Cette formation propose de remplacer cette question — culpabilisante et stérile — par de meilleures questions.",
 }
 
 export const sIntroduction = {
@@ -163,7 +163,7 @@ export const sEcologique = {
   ],
   highlight_label: "Un déplacement de regard, pas une culpabilisation",
   highlight_texte:
-    "Dire que l'interaction joue un rôle ne signifie pas que Sarah « s'y est mal prise ». Cela signifie que l'incident du vendredi soir n'appartient pas qu'à M. Keller : il appartient aussi au moment choisi (17h15, veille de week-end), au lieu (bureau exigu, porte fermée), au contexte (équipe du soir absente), à la manière dont la décision a été construite et annoncée. **Et tout cela, contrairement à l'histoire de vie de M. Keller, l'institution peut le travailler.** C'est exactement l'objet du module 2.",
+    "Dire que l'interaction joue un rôle ne signifie pas que Léa « s'y est mal prise ». Cela signifie que l'incident du vendredi soir n'appartient pas qu'à Noah : il appartient aussi au moment choisi (17h15, veille d'un week-end symboliquement chargé), au lieu (bureau exigu, porte fermée), au contexte (équipe du soir absente), à la manière dont la décision a été construite et annoncée. **Et tout cela, contrairement à l'histoire de vie et à la situation familiale de Noah, l'institution peut le travailler.** C'est exactement l'objet du module 2.",
 }
 
 export const sConclusion = {
@@ -233,15 +233,15 @@ export const quiz = [
   },
   {
     question:
-      "Dans la situation de Sarah et M. Keller, quels éléments relèvent du niveau « institutionnel » du modèle écologique ?",
+      "Dans la situation de Léa et Noah, quels éléments relèvent du niveau « institutionnel » du modèle écologique ?",
     reponses: [
-      "L'histoire de vie de M. Keller et ses difficultés d'expression",
+      "L'histoire de vie de Noah et ses difficultés d'expression",
       "Le moment de l'annonce (vendredi 17h15), le bureau exigu, l'absence de l'équipe du soir",
-      "La précarité et la stigmatisation vécues par M. Keller dans la société",
-      "Le ton employé par Sarah pendant l'entretien",
+      "Le placement et la situation familiale de Noah",
+      "Le ton employé par Léa pendant l'entretien",
     ],
     bonneReponse: 1,
     explication:
-      "Le moment choisi, la configuration des lieux et la présence ou l'absence de collègues relèvent de l'organisation institutionnelle — le niveau sur lequel l'institution a le plus de prise directe. L'histoire de vie relève du niveau individuel, la stigmatisation du niveau sociétal, le ton de l'interaction relationnelle.",
+      "Le moment choisi, la configuration des lieux et la présence ou l'absence de collègues relèvent de l'organisation institutionnelle — le niveau sur lequel l'institution a le plus de prise directe. L'histoire de vie relève du niveau individuel, le placement et la situation familiale du niveau sociétal, le ton de l'interaction relationnelle.",
   },
 ]
