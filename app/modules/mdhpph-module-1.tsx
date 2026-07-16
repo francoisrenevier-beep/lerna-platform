@@ -46,7 +46,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             ]} />
           </ConceptBox>
           <Texte>La manière dont nous conceptualisons le handicap ne relève pas de la philosophie abstraite. Elle détermine ce que nous regardons lors d'une évaluation, comment nous formulons les objectifs, à qui nous attribuons la responsabilité des difficultés rencontrées.</Texte>
-          <Texte>Pendant des décennies, le modèle dominant était médical. Ce modèle a rendu d'immenses services — mais il a aussi produit des angles morts majeurs dans les pratiques institutionnelles.</Texte>
+          <Texte>Pendant des décennies, le modèle dominant était médical. Ce modèle a rendu d'immenses services — et il reste indispensable. Mais utilisé seul, il ne montre qu'une partie des leviers d'action disponibles. Le MDH-PPH ne le remplace pas : il le complète en rendant visibles les leviers environnementaux.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Deux regards sur le handicap — deux leviers d'action">
@@ -87,10 +87,10 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Le MDH-PPH 2010 : un cadre commun pour vos équipes">
-          <Texte>Le Modèle de Développement Humain – Processus de Production du Handicap (MDH-PPH), élaboré par Patrick Fougeyrollas et l'équipe du RIPPH (Réseau International sur le Processus de Production du Handicap), est le cadre de référence international pour comprendre et agir sur les situations de handicap. Sa version 2010 (MDH-PPH 2) donne à vos équipes une nomenclature précise et des outils concrets.</Texte>
+          <Texte>Le Modèle de Développement Humain — Processus de Production du Handicap (MDH-PPH) a été élaboré par l'anthropologue québécois Patrick Fougeyrollas et ses collaborateurs, et il est porté par le RIPPH (Réseau International sur le Processus de Production du Handicap). Première version en 1998, version bonifiée en 2010 (le MDH-PPH 2, publié dans <em>La funambule, le fil et la toile</em>, Fougeyrollas, 2010). C'est un cadre de référence largement utilisé dans l'espace francophone — notamment au Québec et en Suisse romande — et il partage sa vision interactionnelle avec la CIF de l'OMS, tout en s'en distinguant par une séparation plus stricte entre ce qui relève de la personne, de l'environnement et des situations de vie.</Texte>
 
-          <PullQuote source="Patrick Fougeyrollas, RIPPH 2010">
-            Le handicap n'est plus une identité, c'est un résultat. C'est le produit d'une interaction dynamique entre les caractéristiques d'une personne et les conditions de son environnement.
+          <PullQuote>
+            Le handicap n'est pas une identité, c'est un résultat : le produit d'une interaction dynamique entre les caractéristiques d'une personne et les conditions de son environnement.
           </PullQuote>
 
           <Texte>Cette formulation change tout. Une même personne peut être en situation de participation sociale dans un contexte adapté, et en situation de handicap dans un contexte inadapté — sans que ses déficiences aient changé d'un iota.</Texte>
@@ -99,21 +99,21 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             <Texte>Stephen Hawking : déficiences organiques majeures, incapacités motrices sévères — et pourtant une participation sociale optimale de physicien reconnu mondialement, grâce à des facilitateurs technologiques de pointe. À l'inverse, un astronaute aux capacités physiques parfaites se retrouve en situation de handicap total dans l'espace sans son équipement. Ce n'est pas la biologie qui produit le handicap — c'est l'interaction entre la personne et son milieu.</Texte>
           </HighlightBox>
 
-          <Texte>Le MDH-PPH 2010 introduit quatre innovations majeures par rapport au PPH (1998) : une nouvelle nomenclature pour les facteurs identitaires, les <strong>causes</strong> comme domaine conceptuel explicite, les <strong>facteurs de risque et de protection</strong> comme 4ème domaine du modèle, et un renforcement de la <strong>temporalité</strong> (flux temporel) — qui rappelle qu'aucune situation n'est figée dans le temps.</Texte>
+          <Texte>Le MDH-PPH 2 (2010) apporte quatre bonifications majeures par rapport au PPH (1998) : les <strong>facteurs de risque et de protection</strong> sont désormais intégrés à l'intérieur des trois domaines conceptuels (et non plus placés en amont du modèle comme simples causes) ; les <strong>facteurs environnementaux</strong> sont structurés en trois niveaux — MICRO (personnel), MÉSO (communautaire) et MACRO (sociétal) ; la place des <strong>facteurs identitaires</strong> est considérablement renforcée au sein des facteurs personnels ; et le <strong>flux temporel</strong> est mis en évidence au cœur de l'interaction — rappelant qu'aucune situation n'est figée dans le temps.</Texte>
 
-          <HighlightBox label="Les 4 domaines conceptuels du MDH-PPH 2010" couleur="bleu">
+          <HighlightBox label="Les 3 domaines conceptuels du MDH-PPH 2010 — et leur qualificateur transversal" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "Facteurs personnels : identitaires (facilitateur ↔ obstacle), systèmes organiques (intégrité ↔ déficience), aptitudes (capacité ↔ incapacité)",
-              "Facteurs environnementaux : micro, méso, macro — sur une échelle de facilitateur majeur à obstacle majeur",
-              "Habitudes de vie : 6 activités courantes + 6 rôles sociaux — résultat de l'interaction",
-              "Facteurs de risque et de protection : causes potentielles d'atteinte à la santé (risque) ou éléments qui en préservent (protection)",
+              "Facteurs personnels : identitaires (facilitateur → obstacle), systèmes organiques (intégrité → déficience), aptitudes (capacité → incapacité)",
+              "Facteurs environnementaux : micro (personnel), méso (communautaire), macro (sociétal) — chacun sur une échelle de facilitateur à obstacle",
+              "Habitudes de vie : 6 activités courantes + 6 rôles sociaux — résultat de l'interaction, de la pleine participation sociale à la situation de handicap",
+              "Transversal aux trois domaines : chaque dimension peut agir comme facteur de protection ou facteur de risque (la mention « FP-FR » du schéma officiel) — ce n'est pas un domaine séparé, c'est une lecture qui traverse tout le modèle",
             ]} />
           </HighlightBox>
 
           <div className="grid grid-cols-2 gap-4 my-8">
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-[#3DBFA0] mb-2">4</p>
-              <p className="text-sm text-white/70 leading-snug">domaines conceptuels dans le MDH-PPH 2010 : facteurs personnels, environnementaux, habitudes de vie, et facteurs de risque/protection</p>
+              <p className="text-4xl font-bold text-[#3DBFA0] mb-2">3</p>
+              <p className="text-sm text-white/70 leading-snug">domaines conceptuels dans le MDH-PPH 2010 : facteurs personnels, facteurs environnementaux et habitudes de vie — traversés par les facteurs de risque et de protection</p>
             </div>
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
               <p className="text-4xl font-bold text-[#3DBFA0] mb-2">12</p>
@@ -127,6 +127,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
           <ConceptBox label="L'équation centrale" titre="Facteurs Personnels × Facteurs Environnementaux = Habitudes de Vie">
             <Texte>Le signe de multiplication — et non d'addition — signifie que les deux dimensions interagissent et se conditionnent mutuellement. Modifier l'une transforme le résultat. Si l'environnement est nul, même les meilleures aptitudes personnelles ne produiront pas de participation sociale.</Texte>
+            <Texte><em>Précision :</em> cette « équation » est une formulation pédagogique, très utile pour retenir la logique du modèle. Le schéma officiel du MDH-PPH 2 parle, lui, d'une <strong>interaction</strong> entre les trois domaines, traversée par le flux temporel.</Texte>
           </ConceptBox>
 
           <SchemaEtapes
@@ -149,7 +150,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <AccrocheScenario type="reflexion">
-          <p>Pensez à une personne que vous accompagnez en ce moment. Si vous deviez nommer ce qui l'anime profondément — ce pour quoi elle se lève le matin, ce qui lui donne le sourire — est-ce que ces éléments sont présents dans son projet personnalisé ? Si ce n'est pas le cas, quel regard le modèle médical a-t-il imposé, et que changerait de commencer par là ?</p>
+          <p>Pensez à une personne que vous accompagnez en ce moment. Si vous deviez nommer ce qui l'anime profondément — ce pour quoi elle se lève le matin, ce qui lui donne le sourire — est-ce que ces éléments sont présents dans son projet personnalisé ? S'ils ne le sont pas encore, ce n'est la faute de personne — c'est souvent simplement que les outils disponibles ne prévoyaient pas de place pour eux. Qu'est-ce que cela changerait de commencer par là ?</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Lena — retour au fil rouge" titre="Ce que le MDH-PPH apporte à l'équipe de Lena">
@@ -168,6 +169,14 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "La question n'est plus « Qu'est-ce que la personne ne peut pas faire ? » mais « Qu'est-ce qui l'empêche de le faire ? »",
             ]} />
           </HighlightBox>
+
+          <HighlightBox label="Références de la formation" couleur="bleu">
+            <Liste couleur="bleu" items={[
+              "Fougeyrollas, P., Cloutier, R., Bergeron, H., Côté, J. et St-Michel, G. (1998). Classification québécoise : Processus de production du handicap. Québec : RIPPH/SCCIDIH.",
+              "Fougeyrollas, P. (2010). La funambule, le fil et la toile. Transformations réciproques du sens du handicap. Québec : Presses de l'Université Laval.",
+              "RIPPH — Réseau International sur le Processus de Production du Handicap : ripph.qc.ca (concepts-clés, schéma MDH-PPH 2, outils MHAVIE et MQE).",
+            ]} />
+          </HighlightBox>
         </SectionModule>
 
       </div>
@@ -183,7 +192,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "L'équipe éducative qui n'a pas su s'adapter",
             ],
             bonneReponse: 1,
-            explication: "Dans le modèle médical, la déficience est une caractéristique intrinsèque de la personne : c'est elle qui est 'anormale', c'est à elle de s'adapter. Ce modèle déresponsabilise l'environnement, ce que le MDH-PPH remet radicalement en question.",
+            explication: "Dans le modèle médical, la difficulté est comprise comme une caractéristique intrinsèque de la personne : c'est donc à elle de s'adapter, avec l'aide des soins et de la réadaptation. Le MDH-PPH élargit ce regard en réintégrant l'environnement dans l'analyse : la difficulté résulte de l'interaction entre la personne et son milieu — ce qui ouvre un second terrain d'action, complémentaire au premier.",
           },
           {
             question: "Qu'est-ce que l'équation MDH-PPH 'Facteurs Personnels × Facteurs Environnementaux = Habitudes de Vie' signifie concrètement ?",
@@ -194,7 +203,7 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "L'équation s'applique uniquement aux personnes avec des déficiences physiques",
             ],
             bonneReponse: 1,
-            explication: "Le signe × (multiplication) signifie que les deux dimensions se conditionnent mutuellement. Transformer l'environnement peut produire une participation sociale même sans modifier les déficiences ou aptitudes de la personne. C'est le levier fondamental du MDH-PPH.",
+            explication: "Le signe × (multiplication) signifie que les deux dimensions se conditionnent mutuellement. Transformer l'environnement peut produire une participation sociale même sans modifier les déficiences ou aptitudes de la personne. C'est le levier fondamental du MDH-PPH. (Rappel : cette équation est une formulation pédagogique de l'interaction décrite dans le schéma officiel.)",
           },
           {
             question: "Selon le MDH-PPH, une personne est en situation de handicap quand :",
@@ -208,15 +217,15 @@ export function Module1MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             explication: "La situation de handicap n'est pas un état de la personne — c'est un résultat produit par l'interaction entre ses facteurs personnels et les obstacles de son environnement. Une même personne peut être en situation de participation dans un contexte adapté et en situation de handicap dans un contexte inadapté.",
           },
           {
-            question: "Quelle innovation majeure le MDH-PPH 2010 apporte-t-il par rapport au PPH (1998) ?",
+            question: "Quelles bonifications majeures le MDH-PPH 2 (2010) apporte-t-il par rapport au PPH (1998) ?",
             reponses: [
               "La distinction entre facteurs personnels et facteurs environnementaux",
-              "La notion de participation sociale comme indicateur",
-              "L'intégration du flux temporel et des facteurs de risque/protection dans toutes les dimensions",
+              "La création d'un quatrième domaine conceptuel indépendant pour les facteurs de risque",
+              "L'intégration des facteurs de risque et de protection dans les trois domaines, la structuration de l'environnement en trois niveaux (micro, méso, macro) et la place accrue des facteurs identitaires",
               "La liste des douze catégories d'habitudes de vie",
             ],
             bonneReponse: 2,
-            explication: "Le MDH-PPH 2010 introduit quatre innovations par rapport au PPH (1998) : une nouvelle nomenclature pour les facteurs identitaires, les causes comme domaine conceptuel, les facteurs de risque et de protection comme 4ème domaine à part entière, et un renforcement de la temporalité (flux temporel). Ces apports rappellent que les situations de handicap sont dynamiques et évolutives — jamais figées.",
+            explication: "Dans le MDH-PPH 2 (2010), les facteurs de risque — complétés par les facteurs de protection — ne sont plus placés en amont du modèle : ils sont intégrés à l'intérieur des trois domaines conceptuels (chaque dimension du schéma porte la mention FP-FR). Les facteurs environnementaux sont précisés en trois niveaux (MICRO personnel, MÉSO communautaire, MACRO sociétal), la place des facteurs identitaires est renforcée, et le flux temporel est mis en évidence. Les domaines conceptuels restent au nombre de trois : facteurs personnels, facteurs environnementaux, habitudes de vie. La distinction personne/environnement et les douze catégories existaient déjà en 1998.",
           },
           {
             question: "Pourquoi le MDH-PPH invite-t-il à aller au-delà du projet centré uniquement sur les soins ?",

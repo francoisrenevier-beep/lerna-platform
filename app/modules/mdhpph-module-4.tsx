@@ -73,14 +73,14 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 definition: "Le MDH-PPH propose trois leviers complémentaires : agir sur les facteurs personnels (réadaptation, apprentissage), agir sur les facteurs environnementaux (aides techniques, aménagements, modification des règles et attitudes), ou redéfinir les objectifs de vie lorsque certains obstacles ne peuvent pas être levés."
               }
             ]}
-            note="Les recherches montrent que l'action sur l'environnement est souvent plus efficiente et plus durable que la rééducation des aptitudes"
+            note="L'action sur l'environnement est souvent un levier rapide et durable — complémentaire, et non opposé, au travail sur les aptitudes de la personne"
           />
 
           <TableauComparaison
             titre="Reformuler les objectifs en termes de vie"
             colonnes={[
               {
-                titre: "Formulation médicale (à éviter)",
+                titre: "Formulation centrée sur les fonctions",
                 contenu: [
                   "Améliorer la coordination oculo-motrice de Lena",
                   "Réduire les comportements d'agitation de Marco",
@@ -89,7 +89,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 ]
               },
               {
-                titre: "Formulation MDH-PPH (recommandée)",
+                titre: "Formulation centrée sur la participation (MDH-PPH)",
                 contenu: [
                   "Lena reprend son atelier cuisine hebdomadaire avec des pairs, de façon satisfaisante",
                   "Marco peut accéder à son club de loisirs deux fois par semaine",
@@ -110,7 +110,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             L'autodétermination signifie que la personne accompagnée est l'auteure principale de son projet de vie — pas le professionnel, pas l'institution, pas la famille.
           </PullQuote>
 
-          <Texte>Dans la pratique institutionnelle, l'autodétermination se heurte souvent à des résistances réelles. Des familles aux attentes protectrices mais réductrices. Des règlements qui uniformisent les rythmes de vie. Des équipes qui projettent leurs propres valeurs sur les choix des résidents. Le MDH-PPH aide à identifier ces obstacles pour y répondre de façon structurée.</Texte>
+          <Texte>Dans la pratique, l'autodétermination rencontre des freins bien réels — et presque toujours animés de bonnes intentions. Des familles dont la volonté légitime de protéger peut, sans le vouloir, restreindre les choix. Des organisations dont les contraintes réelles (sécurité, effectifs, horaires) tendent à uniformiser les rythmes de vie. Des professionnels qui, en toute bonne foi, peuvent projeter leurs propres préférences sur celles de la personne. Ces dynamiques sont humaines et compréhensibles. Le MDH-PPH permet de les nommer sans les juger — comme des facteurs environnementaux analysables — et d'y répondre de façon structurée.</Texte>
 
           <ConceptBox label="Lena parle pour elle-même" titre="La co-construction en pratique">
             <Texte>Avant la révision de son projet personnalisé, l'équipe de Lena conduit trois entretiens avec elle, en s'appuyant sur un support visuel adapté. Lena exprime clairement ce qu'elle veut : cuisiner avec Mia et Theo le mercredi, chanter dans la chorale le vendredi, et avoir sa propre chambre rangée "à sa façon, pas à la façon de Maëlle". Ces préférences — et non les déficits — deviennent le point de départ du plan.</Texte>
@@ -128,9 +128,9 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
           <ConceptBox label="Les obstacles à l'autodétermination" titre="Les identifier pour les lever">
             <Liste items={[
-              "Obstacles micro-environnementaux : équipes qui décident à la place de la personne, horaires imposés sans consultation, activités non choisies",
-              "Obstacles méso-environnementaux : familles surprotectrices, règlement intérieur rigide, manque d'espaces de parole pour la personne",
-              "Obstacles macro-environnementaux : politiques de financement qui limitent les choix individuels, normes culturelles qui infantilisent les adultes en situation de handicap"
+              "Obstacles micro-environnementaux : décisions prises pour la personne sans recueil de son avis, horaires fixés sans consultation, activités attribuées plutôt que choisies",
+              "Obstacles méso-environnementaux : attentes familiales très protectrices, règlement intérieur laissant peu de marge aux choix individuels, absence d'espaces de parole dédiés à la personne",
+              "Obstacles macro-environnementaux : cadres de financement qui limitent les choix individuels, représentations culturelles qui peinent à reconnaître les adultes en situation de handicap comme décideurs de leur propre vie"
             ]} />
           </ConceptBox>
 
@@ -172,8 +172,9 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             note="Comparer les scores MHAVIE entre deux temps d'évaluation permet de valider l'efficacité des interventions de façon objective"
           />
 
-          <HighlightBox label="Utilisation du score MHAVIE pour Lena" couleur="vert">
-            <Texte>Avant la révision du projet de Lena, l'équipe administre le MHAVIE. Lena obtient un score de réalisation faible sur les activités de loisirs (3/9) et les relations interpersonnelles (4/9), avec une satisfaction exprimée très basse. Six mois après les interventions, les scores progressent à 7/9 et 7/9. C'est la preuve objective que le plan fonctionne — et une base pour décider si on continue, ajuste ou réoriente.</Texte>
+          <HighlightBox label="Utilisation de la MHAVIE pour Lena" couleur="vert">
+            <Texte>Avant la révision du projet de Lena, l'équipe administre la MHAVIE. Le constat est net : sur les catégories « loisirs » et « relations interpersonnelles », le niveau de réalisation est faible (forte difficulté, aide humaine importante requise) et la satisfaction exprimée par Lena — recueillie séparément sur l'échelle en cinq points — est très basse. Six mois après les interventions, la même mesure montre une nette progression de la réalisation et de la satisfaction sur ces deux catégories. C'est un indicateur objectif que le plan fonctionne — et une base pour décider si on continue, ajuste ou réoriente.</Texte>
+            <Texte><em>Bon à savoir :</em> dans la MHAVIE, le score de réalisation combine le niveau de difficulté et le type d'aide requise (humaine, technique, aménagement). La satisfaction est documentée à part, sur une échelle de Likert en cinq points : elle qualifie la participation, elle n'entre pas dans le calcul du score de réalisation.</Texte>
           </HighlightBox>
 
           <HighlightBox label="Ce que mesure réellement le score MHAVIE" couleur="bleu">
@@ -206,7 +207,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
           <div className="bg-gray-50 border-l-4 border-[#3DBFA0] rounded-r-xl px-6 py-5 my-8">
             <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge — Lena, 6 mois plus tard</p>
-            <p className="text-gray-700 text-sm leading-relaxed">Six mois après la mise en œuvre du plan co-construit, l'équipe réévalue la situation de Lena avec le MHAVIE. Les scores ont progressé significativement sur les loisirs et les relations interpersonnelles. Lena cuisine à nouveau le mercredi, elle a retrouvé ses amies, et elle est moins agitée le soir. Un nouvel obstacle est apparu : la cuisinière référente de l'atelier a changé, et Lena a du mal avec cette nouvelle personne. Le flux temporel ne signifie pas qu'on repart de zéro — il signifie qu'on reste attentif à ce qui évolue et qu'on ajuste sans attendre.</p>
+            <p className="text-gray-700 text-sm leading-relaxed">Six mois après la mise en œuvre du plan co-construit, l'équipe réévalue la situation de Lena avec la MHAVIE. Les scores ont progressé significativement sur les loisirs et les relations interpersonnelles. Lena cuisine à nouveau le mercredi, elle a retrouvé ses amies, et elle est moins agitée le soir. Un nouvel obstacle est apparu : la cuisinière référente de l'atelier a changé, et Lena a du mal avec cette nouvelle personne. Le flux temporel ne signifie pas qu'on repart de zéro — il signifie qu'on reste attentif à ce qui évolue et qu'on ajuste sans attendre.</p>
           </div>
 
           <PullQuote>
@@ -248,7 +249,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "En commençant par les déficits les plus importants identifiés par l'équipe médicale",
                   "En croisant l'importance accordée par la personne à chaque habitude et son niveau d'insatisfaction actuel",
                   "En traitant d'abord les situations qui mobilisent le moins de ressources institutionnelles",
-                  "En suivant l'ordre des 12 catégories d'habitudes de vie dans le MHAVIE"
+                  "En suivant l'ordre des 12 catégories d'habitudes de vie dans la MHAVIE"
                 ],
                 bonneReponse: 1,
                 explication: "La priorité absolue est déterminée par le croisement de deux dimensions : l'importance que la personne accorde elle-même à l'habitude de vie (pas celle que les professionnels lui attribuent), et le niveau d'insatisfaction ressenti. Ce qui compte pour la personne ET qui va mal = action prioritaire."
@@ -262,7 +263,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Lena a des difficultés cognitives qui rendent la décision difficile"
                 ],
                 bonneReponse: 2,
-                explication: "Le niveau méso-environnemental correspond aux environnements proches mais dépassant la relation directe (famille, règlement de l'institution, communauté de quartier). Le micro désigne les interactions directes avec les personnes (équipe). Le macro désigne les systèmes sociaux larges (lois, politiques, normes culturelles)."
+                explication: "Le niveau méso (communautaire) correspond à ce qui dépasse l'entourage immédiat de la personne : l'organisation d'ensemble de l'institution (règlement, horaires, services), le quartier, les ressources communautaires. Le micro (personnel) désigne l'environnement immédiat : équipe directe, proches, lieu de vie. Le macro (sociétal) désigne les systèmes larges : lois, politiques, normes culturelles. Les difficultés cognitives de Lena, elles, sont un facteur personnel — pas un facteur environnemental."
               },
               {
                 question: "À quoi sert principalement le score MHAVIE dans le suivi d'un projet personnalisé ?",
@@ -273,7 +274,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "À remplacer l'observation clinique quotidienne de l'équipe éducative"
                 ],
                 bonneReponse: 2,
-                explication: "Le MHAVIE est un outil de mesure standardisé qui permet de comparer deux photographies d'une même situation à des temps différents. Il ne classe pas les personnes et ne remplace pas l'observation — il l'objective et la rend comparable, pour valider ou ajuster la stratégie d'intervention."
+                explication: "La MHAVIE est un outil de mesure standardisé qui permet de comparer deux photographies d'une même situation à des temps différents. Elle ne classe pas les personnes et ne remplace pas l'observation — elle l'objective et la rend comparable, pour valider ou ajuster la stratégie d'intervention."
               },
               {
                 question: "Qu'est-ce que le 'flux temporel' apporte à la compréhension du handicap dans le MDH-PPH 2010 ?",
@@ -302,11 +303,11 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 reponses: [
                   "Conserver le plan tel quel car les objectifs de participation n'ont pas changé",
                   "Réduire l'activité cuisine pour éviter la déception de Lena",
-                  "Réévaluer la situation avec le MHAVIE pour objectiver l'évolution et ajuster le plan au nouveau contexte",
+                  "Réévaluer la situation avec la MHAVIE pour objectiver l'évolution et ajuster le plan au nouveau contexte",
                   "Remplacer Theo par un autre participant choisi par l'équipe pour reconstituer le groupe"
                 ],
                 bonneReponse: 2,
-                explication: "Le flux temporel du MDH-PPH invite à des réévaluations régulières, surtout après des transitions. Le départ de Theo a modifié l'environnement social micro de Lena. Le MHAVIE permettra de mesurer l'impact sur sa satisfaction et d'ajuster le plan : peut-être maintenir la cuisine mais adapter le groupe, ou explorer d'autres habitudes de vie prioritaires pour Lena elle-même."
+                explication: "Le flux temporel du MDH-PPH invite à des réévaluations régulières, surtout après des transitions. Le départ de Theo a modifié l'environnement social micro de Lena. La MHAVIE permettra de mesurer l'impact sur sa satisfaction et d'ajuster le plan : peut-être maintenir la cuisine mais adapter le groupe, ou explorer d'autres habitudes de vie prioritaires pour Lena elle-même."
               }
             ]}
             onValiderModule={onValiderModule}

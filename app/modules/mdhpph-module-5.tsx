@@ -17,7 +17,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         categorie="MDH-PPH 2010"
         titre="Transformer les pratiques"
         titrePart2="institutionnelles"
-        sousTitre="Du projet individuel à la transformation organisationnelle : comment le MDH-PPH, appliqué collectivement, révèle les patterns d'obstacles que l'institution elle-même produit."
+        sousTitre="Du projet individuel à la transformation organisationnelle : comment le MDH-PPH, appliqué collectivement, révèle des leviers d'amélioration qui bénéficient à toutes les personnes accompagnées."
         duree="40 minutes"
         niveau="Intermédiaire"
       />
@@ -26,7 +26,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
         <div className="bg-gray-50 border-l-4 border-[#1B2D5B] rounded-r-xl px-6 py-5 mb-10">
           <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge — Lena, 42 ans — Un an plus tard</p>
-          <p className="text-gray-700 text-sm leading-relaxed">Le plan co-construit avec Lena a fonctionné. Elle cuisine à nouveau, elle a retrouvé ses amies, elle chante dans la chorale. Mais en analysant sa situation collectivement, l'équipe a commencé à remarquer quelque chose d'inquiétant : <strong>plusieurs autres résidents rencontraient les mêmes obstacles</strong>. Les horaires rigides, les activités non choisies, les changements d'équipe non anticipés — ce n'était pas le problème de Lena. C'était le problème de l'institution. Le MDH-PPH venait de passer du projet individuel à la question organisationnelle.</p>
+          <p className="text-gray-700 text-sm leading-relaxed">Le plan co-construit avec Lena a fonctionné. Elle cuisine à nouveau, elle a retrouvé ses amies, elle chante dans la chorale. Mais en analysant sa situation collectivement, l'équipe a remarqué quelque chose d'important : <strong>plusieurs autres résidents rencontraient les mêmes obstacles</strong>. Les horaires peu flexibles, les activités attribuées plutôt que choisies, les changements d'équipe non anticipés — ce n'était pas propre à la situation de Lena. C'étaient des enjeux d'organisation. Et c'est une bonne nouvelle : ce qui relève de l'organisation peut être amélioré par l'organisation, au bénéfice de tous. Le MDH-PPH venait de passer du projet individuel à la question organisationnelle.</p>
         </div>
 
         <AccrocheScenario type="question">
@@ -36,14 +36,14 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         <SectionModule eyebrow="Introduction" titre="Le MDH-PPH comme outil organisationnel">
           <ConceptBox label="Objectifs" titre="À l'issue de ce module, vous serez en mesure de :">
             <Liste items={[
-              "Identifier les patterns d'obstacles environnementaux récurrents que l'institution elle-même produit",
+              "Identifier les patterns d'obstacles environnementaux récurrents qui relèvent de l'organisation collective",
               "Comprendre les leviers pour construire une culture institutionnelle inclusive",
               "Organiser la coordination interprofessionnelle autour du cadre MDH-PPH",
               "Définir le rôle de la direction dans le portage du changement institutionnel",
               "Articuler le MDH-PPH avec les partenaires extérieurs à l'institution"
             ]} />
           </ConceptBox>
-          <Texte>Le MDH-PPH n'est pas seulement un outil d'analyse individuelle. Il a une portée organisationnelle et stratégique. Lorsqu'une équipe commence à analyser systématiquement les situations à travers son prisme, elle commence à révéler des patterns d'obstacles environnementaux récurrents — des obstacles que l'institution elle-même produit, souvent sans le savoir.</Texte>
+          <Texte>Le MDH-PPH n'est pas seulement un outil d'analyse individuelle. Il a une portée organisationnelle et stratégique. Lorsqu'une équipe analyse systématiquement les situations à travers son prisme, elle commence à révéler des patterns d'obstacles environnementaux récurrents — des obstacles qui relèvent du fonctionnement collectif et qu'aucun professionnel, pris isolément dans le quotidien, ne peut voir ni résoudre seul. Les repérer n'est pas une mise en cause : c'est l'ouverture d'un nouveau terrain d'action, plus large et plus durable.</Texte>
 
           <PullQuote>
             Quand plusieurs personnes rencontrent le même obstacle, c'est un signal précieux : une opportunité d'amélioration collective qui bénéficiera à tous.
@@ -79,10 +79,10 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               {
                 titre: "Observation individuelle MDH-PPH",
                 contenu: [
-                  "Plusieurs résidents refusent les activités du vendredi car l'équipe change (obstacle social méso)",
-                  "Les habitudes alimentaires culturelles ou personnelles ne sont pas respectées (obstacle physique micro)",
-                  "Les personnes ne peuvent pas choisir leurs activités de loisirs (obstacle d'autodétermination méso)",
-                  "Les changements non annoncés dans l'organisation génèrent de l'anxiété chez plusieurs résidents (obstacle psychologique micro)"
+                  "Plusieurs résidents refusent les activités du vendredi car l'équipe directe change (obstacle social micro)",
+                  "Les habitudes alimentaires culturelles ou personnelles ne sont pas prises en compte dans l'organisation des repas (obstacle méso)",
+                  "Les personnes ne peuvent pas choisir leurs activités de loisirs (obstacle social méso — organisation laissant peu de place aux choix)",
+                  "Les changements non annoncés dans l'organisation génèrent de l'anxiété chez plusieurs résidents (obstacle social micro)"
                 ]
               },
               {
@@ -134,7 +134,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               {
                 niveau: "Levier 4",
                 nom: "Portage par la direction",
-                definition: "La direction doit incarner les valeurs d'inclusion dans ses processus de décision, ses allocations de ressources et ses politiques de personnel. La cohérence entre discours et pratique institutionnelle est la condition de la crédibilité du changement. Une direction qui parle d'autodétermination mais n'accorde aucune flexibilité aux équipes envoie un message contradictoire."
+                definition: "La direction doit incarner les valeurs d'inclusion dans ses processus de décision, ses allocations de ressources et ses politiques de personnel. La cohérence entre le discours et les marges de manœuvre concrètement accordées aux équipes est ce qui rend le changement crédible et durable."
               }
             ]}
             note="Le changement de paradigme prend du temps — et il demande de la persévérance institutionnelle, pas seulement des bonnes intentions"
@@ -167,7 +167,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "La personne est objet de la réunion, pas acteur",
                   "Les objectifs sont formulés par discipline",
                   "La coordination reste informelle et partielle",
-                  "Les décisions reflètent la hiérarchie professionnelle"
+                  "Les décisions s'appuient surtout sur les points de vue professionnels"
                 ]
               },
               {
@@ -238,7 +238,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Supprimer les activités du vendredi qui ne conviennent manifestement pas à cette population"
                 ],
                 bonneReponse: 1,
-                explication: "L'analyse MDH-PPH a identifié deux obstacles environnementaux : un obstacle social méso (roulement d'équipe instable) et un obstacle d'autodétermination (activités imposées sans consultation). La priorité est d'agir sur ces obstacles environnementaux — pas de traiter un symptôme médical inexistant ou de supprimer une opportunité de participation."
+                explication: "L'analyse MDH-PPH a identifié deux obstacles environnementaux : un obstacle social micro (le roulement de l'équipe directe) et un obstacle social méso (une organisation des activités laissant peu de place aux choix). La priorité est d'agir sur ces obstacles environnementaux — pas de traiter un symptôme médical inexistant, ni de supprimer une opportunité de participation."
               },
               {
                 question: "Comment le MDH-PPH contribue-t-il à renforcer la culture inclusive d'une institution ?",
@@ -304,7 +304,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Parce que seuls les indicateurs financiers reflètent réellement la qualité institutionnelle"
                 ],
                 bonneReponse: 1,
-                explication: "Une institution peut respecter toutes les procédures administratives et documenter parfaitement ses interventions, tout en produisant des situations de handicap pour ses résidents. Le MDH-PPH propose une mesure centrée sur les résultats de participation — combien de personnes réalisent leurs habitudes de vie de façon satisfaisante ? — et non sur la conformité des processus. C'est un changement fondamental d'indicateur de qualité."
+                explication: "Une institution peut respecter toutes les procédures administratives et documenter parfaitement ses interventions, sans que cela garantisse pour autant la participation sociale effective des personnes accompagnées. Le MDH-PPH propose de compléter les indicateurs de conformité par une mesure centrée sur les résultats de participation — combien de personnes réalisent leurs habitudes de vie de façon satisfaisante ? C'est un enrichissement fondamental des indicateurs de qualité."
               }
             ]}
             onValiderModule={onValiderModule}

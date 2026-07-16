@@ -47,7 +47,7 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Les facteurs personnels en profondeur">
-          <Texte>Les facteurs personnels ne se résument pas au dossier médical. C'est l'erreur la plus fréquente dans les institutions. Le MDH-PPH 2010 distingue trois sous-composantes aux implications très différentes pour la pratique.</Texte>
+          <Texte>Les facteurs personnels ne se résument pas au dossier médical. Le réflexe de partir des données médicales est compréhensible — ce sont souvent les informations les mieux documentées et les plus accessibles. Mais elles ne racontent qu'une partie de la personne. Le MDH-PPH 2010 distingue trois sous-composantes aux implications très différentes pour la pratique.</Texte>
 
           <SchemaEtapes
             titre="Les trois sous-composantes des facteurs personnels"
@@ -76,9 +76,9 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <SchemaEtapes
             titre="Les trois échelles de l'environnement"
             etapes={[
-              { niveau: "Niveau 1 — le plus modifiable", nom: "Micro-environnement", definition: "Le contexte immédiat et personnel : logement, équipe éducative directe, aides techniques, membres de la famille proche. C'est la sphère la plus proche de la personne, celle où les professionnels ont le plus d'impact à court terme." },
-              { niveau: "Niveau 2 — inclus / excluant", nom: "Méso-environnement", definition: "Le contexte communautaire : quartier, transports, clubs et associations, commerces, structures de loisirs. C'est le niveau où se jouent la plupart des situations d'inclusion et d'exclusion sociale." },
-              { niveau: "Niveau 3 — cadre systémique", nom: "Macro-environnement", definition: "Les dimensions sociétales : politiques sociales, lois, normes culturelles, systèmes économiques. Difficile à modifier à l'échelle individuelle, mais il constitue le cadre dans lequel s'inscrit tout accompagnement." },
+              { niveau: "Niveau 1 — le plus modifiable", nom: "MICRO — environnement personnel", definition: "Le contexte immédiat et personnel : logement ou unité de vie, équipe éducative directe, aides techniques, membres de la famille proche. C'est la sphère la plus proche de la personne, celle où les professionnels ont le plus d'impact à court terme." },
+              { niveau: "Niveau 2 — inclus / excluant", nom: "MÉSO — environnement communautaire", definition: "Le contexte communautaire et organisationnel : l'institution dans son fonctionnement d'ensemble (règlements, horaires, organisation des services), le quartier, les transports, les clubs et associations, les commerces, les structures de loisirs. C'est le niveau où se jouent la plupart des situations d'inclusion et d'exclusion sociale." },
+              { niveau: "Niveau 3 — cadre systémique", nom: "MACRO — environnement sociétal", definition: "Les dimensions sociétales : politiques sociales, lois, normes culturelles, systèmes économiques. Difficile à modifier à l'échelle individuelle, mais il constitue le cadre dans lequel s'inscrit tout accompagnement." },
             ]}
             note="Chaque niveau peut contenir des facteurs physiques (architecture, technologies, bruit) ou sociaux (attitudes, règles, réseaux de soutien)"
           />
@@ -91,14 +91,14 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             titre="Les deux dimensions à analyser à chaque niveau"
             colonnes={[
               { titre: "Dimension physique", contenu: [
-                "Architecture, aides techniques, accessibilité de l'espace de vie",
-                "Accessibilité des transports, aménagement du quartier",
-                "Normes de construction, politiques d'accessibilité",
+                "Micro : architecture du lieu de vie, aides techniques, ambiance sensorielle (bruit, lumière, odeurs)",
+                "Méso : accessibilité des transports, aménagement du quartier et des locaux collectifs",
+                "Macro : normes de construction, politiques d'accessibilité",
               ]},
               { titre: "Dimension sociale", contenu: [
-                "Attitudes de l'équipe directe, règles institutionnelles internes",
-                "Ouverture des clubs et services, réseaux de soutien communautaires",
-                "Lois, normes culturelles, représentations du handicap dans la société",
+                "Micro : attitudes et disponibilité de l'entourage immédiat (équipe directe, proches)",
+                "Méso : règlements et organisation de l'institution, ouverture des clubs et services, réseaux de soutien communautaires",
+                "Macro : lois, normes culturelles, représentations du handicap dans la société",
               ]},
             ]}
           />
@@ -114,7 +114,7 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             ]} />
           </HighlightBox>
 
-          <Texte>Les rôles sociaux donnent du sens à la vie sociale de la personne. Ils sont souvent les premiers à être sacrifiés dans une logique institutionnelle centrée sur les soins. Pourtant, c'est précisément dans ces rôles que réside la qualité de vie.</Texte>
+          <Texte>Les rôles sociaux donnent du sens à la vie sociale de la personne. Dans le quotidien d'un accompagnement, l'attention se porte naturellement d'abord sur les activités courantes — soins, repas, déplacements — parce qu'elles sont urgentes et visibles. Les rôles sociaux, eux, demandent une vigilance volontaire : ils ne s'imposent pas d'eux-mêmes à l'agenda. Pourtant, c'est précisément dans ces rôles que réside une grande part de la qualité de vie.</Texte>
 
           <PullQuote>
             Une participation n'est réelle que si elle est jugée satisfaisante par la personne elle-même. Réalisation sans satisfaction n'est pas participation.
@@ -140,14 +140,14 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 "Attitude bienveillante et inclusive d'un pair ou d'un professionnel",
                 "Horaire de transport flexible qui permet d'accéder à une activité valorisée",
                 "Espace physique adapté aux besoins sensoriels et moteurs",
-                "Règlement institutionnel souple permettant des choix individuels",
+                "Organisation institutionnelle souple laissant de la place aux choix individuels",
               ]},
               { titre: "Obstacle", contenu: [
                 "Absence d'aide technique ou matériel inadapté",
-                "Préjugé ou attitude réductrice d'un membre de l'équipe",
-                "Absence de transport adapté ou changement d'horaire d'équipe",
+                "Représentations réductrices du handicap dans l'entourage ou la société (méconnaissance, surprotection)",
+                "Absence de transport adapté ou changement d'horaire non anticipé",
                 "Local bruyant ou à odeurs intenses pour une personne hypersensible",
-                "Règlement institutionnel rigide imposant des activités uniformes",
+                "Programmation uniforme des activités laissant peu de place aux choix individuels",
               ]},
             ]}
           />
@@ -179,7 +179,7 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "Les systèmes organiques vont de l'intégrité à la déficience ; les aptitudes de la capacité sans limite à l'incapacité complète",
               "L'environnement s'analyse à trois niveaux : micro (modifiable rapidement), méso, macro",
               "Les 12 habitudes de vie : 6 activités courantes + 6 rôles sociaux (dont vie associative ET spirituelle)",
-              "Réalisation et satisfaction sont deux critères distincts et indissociables dans le MHAVIE",
+              "Réalisation et satisfaction sont deux critères distincts et indissociables dans la MHAVIE",
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -204,11 +204,11 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             reponses: [
               "Sa pathologie s'est aggravée suite au stress du déménagement",
               "Son aptitude d'orientation spatiale a régressé",
-              "Un obstacle micro-environnemental physique a créé une nouvelle situation de handicap",
+              "Le nouveau bâtiment est un facteur personnel défavorable qu'il faut compenser par la rééducation",
               "Son environnement a changé, transformant d'anciens facilitateurs en obstacles",
             ],
             bonneReponse: 3,
-            explication: "L'aptitude du résident n'a pas changé — c'est son environnement qui a changé. Ce qui était facilitateur (un quartier connu) est devenu obstacle (un environnement inconnu). Le MDH-PPH permet de l'identifier et d'agir sur l'environnement plutôt que sur la personne.",
+            explication: "L'aptitude du résident n'a pas changé — c'est son environnement qui a changé. Ce qui était facilitateur (un quartier connu) est devenu obstacle (un environnement inconnu). Attention à la troisième option : un bâtiment n'est jamais un facteur personnel — le MDH-PPH repose sur l'exclusion mutuelle des concepts : ce qui appartient à l'environnement ne se classe pas dans la personne. C'est précisément cette rigueur qui permet d'identifier le bon levier d'action.",
           },
           {
             question: "Marie participe chaque semaine à son activité de loisir avec une aide permanente et intrusive. Elle n'a pas eu son mot à dire sur cette aide. Selon le MDH-PPH, Marie est-elle en situation de participation sociale ?",
@@ -255,15 +255,15 @@ export function Module2MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             explication: "Un même facteur environnemental peut avoir des effets opposés selon les personnes et évoluer dans le temps. Un local lumineux est un facilitateur pour certains et un obstacle pour une personne sensible à la lumière. Un accompagnant bienveillant peut devenir un obstacle si son style devient intrusif.",
           },
           {
-            question: "En quoi la MQE (Mesure de la Qualité de l'Environnement) complète-t-elle le MHAVIE dans la démarche MDH-PPH ?",
+            question: "En quoi la MQE (Mesure de la Qualité de l'Environnement) complète-t-elle la MHAVIE dans la démarche MDH-PPH ?",
             reponses: [
-              "La MQE remplace le MHAVIE pour les personnes qui ne peuvent pas s'exprimer verbalement",
-              "Le MHAVIE mesure le résultat (habitudes de vie), la MQE analyse les facteurs environnementaux qui l'expliquent",
-              "La MQE évalue les aptitudes de la personne, le MHAVIE évalue son environnement",
+              "La MQE remplace la MHAVIE pour les personnes qui ne peuvent pas s'exprimer verbalement",
+              "La MHAVIE mesure le résultat (habitudes de vie), la MQE analyse les facteurs environnementaux qui l'expliquent",
+              "La MQE évalue les aptitudes de la personne, la MHAVIE évalue son environnement",
               "Les deux outils mesurent la même chose mais à des niveaux d'intensité différents",
             ],
             bonneReponse: 1,
-            explication: "MHAVIE et MQE sont complémentaires : le MHAVIE photographie le résultat de l'interaction (est-ce que la personne réalise ses habitudes de vie de façon satisfaisante ?), tandis que la MQE analyse les facteurs environnementaux qui expliquent ce résultat (quels obstacles et facilitateurs sont à l'œuvre, à quelle intensité ?). Ensemble, ils permettent une analyse complète et une mesure objective de l'évolution.",
+            explication: "MHAVIE et MQE sont complémentaires : la MHAVIE photographie le résultat de l'interaction (est-ce que la personne réalise ses habitudes de vie de façon satisfaisante ?), tandis que la MQE analyse les facteurs environnementaux qui expliquent ce résultat (quels obstacles et facilitateurs sont à l'œuvre, à quelle intensité ?). Ensemble, elles permettent une analyse complète et une mesure objective de l'évolution.",
           },
         ]}
         onValiderModule={onValiderModule}

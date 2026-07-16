@@ -62,7 +62,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Situations complexes : comportements défis et santé mentale">
-          <Texte>Le MDH-PPH est particulièrement puissant dans l'analyse des situations dites « complexes » : comportements défis, troubles du comportement associés à une pathologie psychiatrique, crises d'agitation ou d'automutilation. Ces situations sont souvent abordées sous l'angle médical, avec une réponse pharmacologique ou contentive comme première réponse.</Texte>
+          <Texte>Le MDH-PPH est particulièrement puissant dans l'analyse des situations dites « complexes » : comportements défis, troubles du comportement associés à une pathologie psychiatrique, crises d'agitation ou d'automutilation. Ces situations sont naturellement abordées d'abord sous l'angle clinique — un réflexe légitime, et parfois indispensable : écarter une cause somatique (une douleur, un problème de santé non exprimé) est toujours une première vérification nécessaire. Le MDH-PPH n'écarte pas cette lecture : il lui ajoute une seconde grille, complémentaire, qui interroge systématiquement l'environnement.</Texte>
 
           <PullQuote>
             Lorsqu'un résident s'agite, un professionnel attentif se demande : « Que s'est-il passé dans son environnement ? Qu'est-ce qui, autour de lui, a changé ? » — C'est exactement la logique du MDH-PPH.
@@ -71,7 +71,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <Texte>Les comportements défis sont souvent des indicateurs d'une situation de handicap non résolue : une habitude de vie importante pour la personne est entravée par un obstacle environnemental qu'elle ne peut pas nommer verbalement ou résoudre par elle-même. Le comportement devient le seul langage disponible pour exprimer cette inadéquation.</Texte>
 
           <ConceptBox label="Lena — relire l'agitation" titre="Ce que le comportement dit réellement">
-            <Texte>L'agitation de Lena en début de semaine n'est pas une aggravation de sa trisomie. C'est une réponse comportementale à une situation de handicap environnementale : l'incapacité d'accéder à une habitude de vie valorisée (la cuisine) à cause d'un obstacle physique micro (le local inadapté). Une fois l'obstacle identifié, la solution devient claire — et ne passe pas par un ajustement médicamenteux.</Texte>
+            <Texte>L'agitation de Lena en début de semaine n'est pas une aggravation de sa trisomie. C'est une réponse comportementale à une situation de handicap environnementale : l'incapacité d'accéder à une habitude de vie valorisée (la cuisine) à cause d'un obstacle physique micro (le local inadapté). Une fois l'obstacle identifié — et une cause somatique écartée avec les collègues du soin — la solution devient claire : elle se situe d'abord dans l'environnement.</Texte>
           </ConceptBox>
 
           <HighlightBox label="Ce raisonnement s'applique largement" couleur="bleu">
@@ -80,12 +80,12 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
           <div className="grid grid-cols-2 gap-4 my-8">
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
-              <p className="text-3xl font-bold text-[#3DBFA0] mb-2">1ère question</p>
-              <p className="text-sm text-white/70 leading-snug">à poser face à un comportement défi : « Que produit l'environnement actuel de cette personne ? »</p>
+              <p className="text-3xl font-bold text-[#3DBFA0] mb-2">2 questions</p>
+              <p className="text-sm text-white/70 leading-snug">face à un comportement défi : « Une cause somatique est-elle écartée ? » puis « Qu'est-ce qui a changé dans l'environnement de cette personne ? »</p>
             </div>
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
-              <p className="text-3xl font-bold text-[#3DBFA0] mb-2">Non</p>
-              <p className="text-sm text-white/70 leading-snug">ce n'est pas la pathologie qui explique le comportement — c'est l'interaction personne-environnement</p>
+              <p className="text-3xl font-bold text-[#3DBFA0] mb-2">Complément</p>
+              <p className="text-sm text-white/70 leading-snug">la lecture environnementale ne remplace pas l'évaluation clinique — elle la complète, en interrogeant l'interaction personne-environnement</p>
             </div>
           </div>
         </SectionModule>
@@ -114,15 +114,15 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           </PullQuote>
 
           <HighlightBox label="Anticiper plutôt que subir" couleur="vert">
-            <Texte>Le MDH-PPH invite les équipes à planifier des réévaluations régulières — au minimum annuelles — de la situation de chaque personne accompagnée. Ces réévaluations doivent être proactives, pas seulement déclenchées par des crises. Chaque transition (déménagement, changement d'équipe, retraite d'un proche aidant) reconfigure les interactions personne-environnement et mérite une analyse dédiée.</Texte>
+            <Texte>Le MDH-PPH invite les équipes à planifier des réévaluations régulières de la situation de chaque personne accompagnée — en pratique, un rythme annuel est couramment recommandé, avec un rythme plus rapproché pour les situations qui évoluent vite. Ces réévaluations doivent être proactives, pas seulement déclenchées par des crises. Chaque transition (déménagement, changement d'équipe, retraite d'un proche aidant) reconfigure les interactions personne-environnement et mérite une analyse dédiée.</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="L'analyse interprofessionnelle : un langage commun">
-          <Texte>L'une des contributions majeures du MDH-PPH dans les institutions est de fournir un langage commun à des équipes interdisciplinaires. Éducateurs, infirmiers, ergothérapeutes, psychologues, responsables de secteur : chaque professionnel arrive avec sa propre grille de lecture. Sans cadre commun, les réunions de synthèse deviennent des dialogues de sourds où chacun défend sa lecture disciplinaire.</Texte>
+          <Texte>L'une des contributions majeures du MDH-PPH dans les institutions est de fournir un langage commun à des équipes interdisciplinaires. Éducateurs, infirmiers, ergothérapeutes, psychologues, responsables de secteur : chaque professionnel arrive avec sa propre grille de lecture — et chacune de ces lectures est juste dans son domaine. Sans cadre commun, elles peinent toutefois à s'articuler entre elles : on juxtapose des observations pertinentes sans réussir à en faire une analyse partagée.</Texte>
 
           <ConceptBox label="Le MDH-PPH comme traducteur" titre="Reformuler pour agir ensemble">
-            <Texte>Quand un éducateur dit « Marco est agité depuis le changement d'équipe » et qu'un infirmier dit « Marco montre des signes d'anxiété », le MDH-PPH permet de reformuler : <em>« Un obstacle environnemental social (méso-micro) — le changement d'équipe — a généré une situation de handicap pour Marco dans ses habitudes de vie relationnelles. »</em></Texte>
+            <Texte>Quand un éducateur dit « Marco est agité depuis le changement d'équipe » et qu'un infirmier dit « Marco montre des signes d'anxiété », le MDH-PPH permet de reformuler : <em>« Un obstacle environnemental social de niveau micro — le changement de l'équipe directe — a généré une situation de handicap pour Marco dans ses habitudes de vie relationnelles. »</em></Texte>
             <Texte>Ce reformatage déplace le débat de la pathologie vers l'interaction — et ouvre immédiatement l'espace de discussion vers des solutions concrètes plutôt que vers des explications diagnostiques.</Texte>
           </ConceptBox>
 
@@ -142,11 +142,11 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>L'analyse MDH-PPH est une démarche de lecture systémique en trois étapes — facteurs personnels, facteurs environnementaux, habitudes de vie — qui permet d'identifier les vrais leviers d'action. Les comportements défis ne sont pas des symptômes à réduire mais des signaux d'une interaction inadéquate à corriger. Le vieillissement appelle des réévaluations proactives. Et le MDH-PPH offre à l'équipe interdisciplinaire un langage commun pour agir ensemble.</Texte>
+          <Texte>L'analyse MDH-PPH est une démarche de lecture systémique en trois étapes — facteurs personnels, facteurs environnementaux, habitudes de vie — qui permet d'identifier les vrais leviers d'action. Les comportements défis sont souvent aussi des signaux d'une interaction inadéquate — une lecture qui complète l'évaluation clinique sans s'y substituer. Le vieillissement appelle des réévaluations proactives. Et le MDH-PPH offre à l'équipe interdisciplinaire un langage commun pour agir ensemble.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
-              "Avant d'intervenir : décrire l'interaction personne-environnement, pas poser un diagnostic",
-              "Les comportements défis sont des indicateurs d'une situation de handicap non résolue",
+              "Avant d'intervenir : décrire l'interaction personne-environnement avant de conclure — et écarter une cause somatique avec les collègues du soin",
+              "Les comportements défis sont souvent des indicateurs d'une situation de handicap non résolue",
               "Réévaluer régulièrement et de façon proactive — ne pas attendre la crise",
               "Le MDH-PPH offre un langage commun à l'équipe interdisciplinaire",
               "Reformuler en termes d'interaction ouvre l'espace vers des solutions concrètes",
