@@ -82,6 +82,7 @@ import { Module1Violence } from "@/app/modules/violence-module-1"
 import { Module2Violence } from "@/app/modules/violence-module-2"
 import { Module3Violence } from "@/app/modules/violence-module-3"
 import { Module4Violence } from "@/app/modules/violence-module-4"
+import { Module1Sommeil } from "@/app/modules/sommeil-module-1"
 
 type ModuleSimple = {
   id: string
@@ -174,6 +175,7 @@ const MODULE_COMPONENTS: Record<string, React.ComponentType<{ onValiderModule?: 
   "de5c0001-0002-4000-8000-000000000002": Module2Violence,
   "de5c0001-0003-4000-8000-000000000003": Module3Violence,
   "de5c0001-0004-4000-8000-000000000004": Module4Violence,
+  "d0d00001-0001-4000-8000-000000000001": Module1Sommeil,
 }
 
 export default function ModulePage() {
