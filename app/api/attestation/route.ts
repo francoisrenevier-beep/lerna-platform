@@ -31,12 +31,21 @@ interface AttestationPayload {
 
 function getLogoBase64(): string {
   try {
-    const logoPath = join(process.cwd(), 'public', 'logo-learna-blanc.png')
+    const logoPath = join(process.cwd(), 'public', 'logo-learna-couleur.png')
     const buffer = readFileSync(logoPath)
     return `data:image/png;base64,${buffer.toString('base64')}`
   } catch {
     return ''
   }
+}
+
+function formatDuree(duree: string): string {
+  const match = duree.match(/^(\d+)h$/)
+  if (match) {
+    const h = Number(match[1])
+    return `${h} heure${h > 1 ? 's' : ''}`
+  }
+  return duree
 }
 
 function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
@@ -54,268 +63,175 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
   })()
 
   const logoHtml = logoDataUrl
-    ? `<img src="${logoDataUrl}" alt="Learna" style="height:22mm;width:auto;" />`
-    : `<span style="color:white;font-size:16pt;font-weight:bold;">LEARNA</span>`
+    ? `<img src="${logoDataUrl}" alt="Learna" style="width: 190px; display: block;">`
+    : `<span style="font-size: 24px; font-weight: 800; color: #0d1f4b;">LEARNA</span>`
 
   const institutionHtml = data.institution_nom
-    ? `<p class="institution-line">dans le cadre de la licence institutionnelle de <span class="institution-name">${escHtml(data.institution_nom)}</span></p>`
+    ? `<div><div class="info-label">Institution</div><div class="info-value">${escHtml(data.institution_nom)}</div></div>`
     : ''
 
   return `<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  @page { size: A4 landscape; margin: 0; }
+  @page { size: A4 portrait; margin: 0; }
   body {
-    width: 297mm;
-    height: 210mm;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 794px;
+    height: 1123px;
+    font-family: 'Manrope', sans-serif;
     background: white;
     overflow: hidden;
+  }
+  .page {
     display: flex;
     flex-direction: column;
+    height: 1123px;
+    padding: 72px 80px 0;
   }
-  .header {
-    background: #1B2D5B;
-    height: 38mm;
-    min-height: 38mm;
-    display: flex;
-    align-items: center;
-    padding: 0 12mm;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .header-titles {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    white-space: nowrap;
-  }
-  .header-title {
-    color: white;
-    font-size: 10pt;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .header-subtitle {
-    color: #3DBFA0;
-    font-size: 8pt;
-    margin-top: 3px;
-  }
-  .accent-line {
-    height: 2.5mm;
-    background: #3DBFA0;
-    flex-shrink: 0;
-  }
-  .content {
-    flex: 1;
-    padding: 5mm 20mm 3mm;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-  }
-  .intro-text {
-    color: #6b7280;
-    font-style: italic;
-    font-size: 10pt;
-    margin-bottom: 3.5mm;
-  }
-  .name {
-    color: #1B2D5B;
-    font-size: 26pt;
-    font-weight: bold;
-    text-align: center;
-  }
-  .name-separator {
-    width: 110mm;
-    height: 0.3mm;
-    background: #d1d5db;
-    margin: 2.5mm auto 3.5mm;
-  }
-  .followed-text {
-    color: #6b7280;
-    font-style: italic;
-    font-size: 10pt;
-    margin-bottom: 4mm;
-  }
-  .formation-box {
-    background: #E8F7F4;
-    border: 1.5px solid #3DBFA0;
-    border-radius: 6px;
-    padding: 4mm 10mm;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 4mm;
-  }
-  .formation-title {
-    color: #1B2D5B;
-    font-size: 13pt;
-    font-weight: bold;
-    margin-bottom: 1.5mm;
-  }
-  .formation-categorie {
-    color: #3DBFA0;
-    font-size: 9pt;
-  }
-  .info-blocks {
-    display: flex;
-    gap: 4mm;
-    width: 100%;
-    margin-bottom: 4mm;
-  }
-  .info-block {
-    flex: 1;
-    background: #F8FAFC;
-    border-radius: 5px;
-    padding: 3mm 4mm;
-    text-align: center;
-  }
-  .info-label {
-    color: #9ca3af;
-    font-size: 6.5pt;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 2mm;
-  }
-  .info-value {
-    color: #1B2D5B;
-    font-size: 18pt;
-    font-weight: bold;
-  }
-  .info-value.small {
-    font-size: 10pt;
-  }
-  .institution-line {
-    color: #6b7280;
-    font-size: 9pt;
-    margin-bottom: 3.5mm;
-    text-align: center;
-  }
-  .institution-name {
-    color: #1B2D5B;
-    font-weight: bold;
-  }
-  .separator {
-    width: 100%;
-    height: 0.3mm;
-    background: #e5e7eb;
-    margin-bottom: 3.5mm;
-    flex-shrink: 0;
-  }
-  .footer-section {
+  .top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: auto;
+    align-items: flex-start;
   }
-  .footer-left .org-name {
-    color: #1B2D5B;
-    font-size: 9pt;
-    font-weight: bold;
-  }
-  .footer-left .org-type {
-    color: #9ca3af;
-    font-size: 8pt;
-    margin-top: 1mm;
-  }
-  .verification-box {
-    background: #E8F7F4;
-    border: 1.5px solid #3DBFA0;
-    border-radius: 5px;
-    padding: 3mm 6mm;
-    text-align: center;
-  }
-  .verif-label {
-    color: #9ca3af;
-    font-size: 6.5pt;
-    letter-spacing: 0.5px;
+  .code-block {
+    text-align: right;
+    font-size: 11px;
+    color: #8a93a8;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    margin-bottom: 1.5mm;
   }
-  .verif-number {
-    color: #1B2D5B;
-    font-size: 10pt;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
+  .code-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0d1f4b;
+    letter-spacing: 0.1em;
   }
-  .bottom-band {
-    background: #1B2D5B;
-    height: 9mm;
+  .title-block { margin-top: 96px; }
+  .accent-bar { width: 56px; height: 4px; background: #1cae87; }
+  h1 {
+    font-size: 44px;
+    font-weight: 800;
+    color: #0d1f4b;
+    margin: 28px 0 0;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #8a93a8;
+    margin: 14px 0 0;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .body-block {
+    margin-top: 72px;
+    font-size: 16px;
+    color: #47506a;
+    line-height: 1.75;
+  }
+  .name {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0d1f4b;
+    margin: 16px 0;
+    border-bottom: 1px solid #dfe3ec;
+    padding-bottom: 18px;
+  }
+  .formation-titre {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1cae87;
+    margin: 14px 0 0;
+  }
+  .info-row {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    gap: 56px;
+    margin-top: 64px;
   }
-  .bottom-band span {
-    color: rgba(255,255,255,0.7);
-    font-size: 7.5pt;
-    letter-spacing: 0.3px;
+  .info-label {
+    font-size: 11px;
+    color: #8a93a8;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .info-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0d1f4b;
+    margin-top: 6px;
+  }
+  .spacer { flex: 1; }
+  .signature-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-bottom: 24px;
+  }
+  .signature {
+    text-align: center;
+    width: 240px;
+  }
+  .signature-space { height: 72px; }
+  .signature-name {
+    border-top: 1px solid #0d1f4b;
+    margin-top: 8px;
+    padding-top: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0d1f4b;
+  }
+  .signature-role { font-size: 11px; color: #8a93a8; }
+  .footer {
+    border-top: 1px solid #eef0f5;
+    margin: 0 -80px;
+    padding: 16px 80px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5px;
+    color: #a7aec0;
   }
 </style>
 </head>
 <body>
-  <div class="header">
-    ${logoHtml}
-    <div class="header-titles">
-      <div class="header-title">Attestation de suivi de formation</div>
-      <div class="header-subtitle">Learna Sàrl — Suisse romande</div>
+  <div class="page">
+    <div class="top">
+      ${logoHtml}
+      <div class="code-block">Code Learna<br><span class="code-value">${escHtml(data.numero_verification)}</span></div>
     </div>
-  </div>
-
-  <div class="accent-line"></div>
-
-  <div class="content">
-    <p class="intro-text">Nous attestons par la présente que</p>
-
-    <div class="name">${nomComplet}</div>
-    <div class="name-separator"></div>
-
-    <p class="followed-text">a suivi et complété avec succès la formation</p>
-
-    <div class="formation-box">
-      <div class="formation-title">${escHtml(data.formation_titre)}</div>
-      <div class="formation-categorie">${escHtml(data.formation_categorie)}</div>
+    <div class="title-block">
+      <div class="accent-bar"></div>
+      <h1>Attestation de suivi</h1>
+      <p class="subtitle">Formation en ligne — Plateforme Learna</p>
     </div>
-
-    <div class="info-blocks">
-      <div class="info-block">
-        <div class="info-label">Durée</div>
-        <div class="info-value">${escHtml(data.duree_heures)}</div>
-      </div>
-      <div class="info-block">
-        <div class="info-label">Date d'obtention</div>
-        <div class="info-value small">${escHtml(dateFormatted)}</div>
-      </div>
-      <div class="info-block">
-        <div class="info-label">Modules complétés</div>
-        <div class="info-value">${Number(data.modules_completes)}/${Number(data.modules_total)}</div>
+    <div class="body-block">
+      <p>Learna atteste que</p>
+      <p class="name">${nomComplet}</p>
+      <p>a suivi l'intégralité de la formation</p>
+      <p class="formation-titre">${escHtml(data.formation_titre)}</p>
+    </div>
+    <div class="info-row">
+      <div><div class="info-label">Durée</div><div class="info-value">${escHtml(formatDuree(data.duree_heures))}</div></div>
+      <div><div class="info-label">Date d'attestation</div><div class="info-value">${escHtml(dateFormatted)}</div></div>
+      ${institutionHtml}
+    </div>
+    <div class="spacer"></div>
+    <div class="signature-row">
+      <div class="signature">
+        <div class="signature-space"></div>
+        <div class="signature-name">Learna</div>
+        <div class="signature-role">Organisme de formation</div>
       </div>
     </div>
-
-    ${institutionHtml}
-
-    <div class="separator"></div>
-
-    <div class="footer-section">
-      <div class="footer-left">
-        <div class="org-name">Learna Sàrl | Suisse romande</div>
-        <div class="org-type">Organisme de formation continue</div>
-      </div>
-      <div class="verification-box">
-        <div class="verif-label">N° de vérification</div>
-        <div class="verif-number">${escHtml(data.numero_verification)}</div>
-      </div>
+    <div class="footer">
+      <span>Attestation générée par la plateforme Learna — learna.ch</span>
+      <span>Document non contractuel · Vérifiable avec le code Learna</span>
     </div>
-  </div>
-
-  <div class="bottom-band">
-    <span>Formation développée par des professionnels du travail social en Suisse romande</span>
   </div>
 </body>
 </html>`
@@ -374,7 +290,7 @@ export async function POST(req: NextRequest) {
     await page.setContent(html, { waitUntil: 'networkidle0', timeout: 20000 })
     const pdf = await page.pdf({
       format: 'A4',
-      landscape: true,
+      landscape: false,
       printBackground: true,
     })
 
