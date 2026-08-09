@@ -28,7 +28,7 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             <Liste items={[
               "Identifier les acteurs clés du réseau autour d'une personne vieillissante en institution",
               "Savoir quand et comment solliciter le médecin référent",
-              "Comprendre le rôle des partenaires externes (Spitex, gériatrie, Pro Infirmis, Pro Senectute)",
+              "Comprendre le rôle des partenaires externes (gériatrie, ergothérapie et physiothérapie, Pro Infirmis, Pro Senectute)",
               "Formuler une observation transmissible et utile",
               "Comprendre que travailler en réseau protège la personne accompagnée — et le professionnel"
             ]} />
@@ -124,12 +124,12 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             colonnes={[
               {
                 titre: "Acteur",
-                contenu: ["Spitex / NOMAD / APAC", "Gériatrie hospitalière", "Équipes mobiles gériatriques", "Psychiatrie de l'âge avancé", "Pro Infirmis", "Pro Senectute"]
+                contenu: ["Ergothérapie / physiothérapie", "Gériatrie hospitalière", "Équipes mobiles gériatriques", "Psychiatrie de l'âge avancé", "Pro Infirmis", "Pro Senectute"]
               },
               {
                 titre: "Mission",
                 contenu: [
-                  "Soins infirmiers et aide — peut intervenir en institution",
+                  "Mobilité, transferts, prévention des chutes, adaptation des gestes et du matériel",
                   "Évaluation spécialisée : démence, fragilité, chutes, dénutrition",
                   "Se déplacent en institution pour des évaluations",
                   "Troubles psychiques se complexifiant avec l'âge",
@@ -140,7 +140,7 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
               {
                 titre: "Quand faire appel",
                 contenu: [
-                  "Besoins médicaux dépassant les compétences éducatives",
+                  "Perte de mobilité, chutes, difficultés croissantes dans les gestes du quotidien",
                   "Diagnostic gériatrique complexe nécessitant un bilan spécialisé",
                   "Personne supportant mal les déplacements ou hospitalisations",
                   "Démence + troubles psychiques, dépression sévère",
@@ -151,23 +151,24 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             ]}
           />
 
-          <HighlightBox label="La Spitex en institution — un partenaire souvent sous-utilisé" couleur="jaune">
-            <Texte>La Spitex peut intervenir en institution pour compléter l&apos;offre de soins : injections, soins de plaies, surveillance médicale, bilans infirmiers. Ces interventions permettent souvent de <strong>maintenir une personne dans son institution d&apos;origine plus longtemps</strong>, en évitant un transfert vers un EMS parfois prématuré. Si votre institution n&apos;a pas encore de convention avec la Spitex locale, c&apos;est une question à soulever auprès de votre hiérarchie.</Texte>
+          <HighlightBox label="L&apos;ergothérapie et la physiothérapie — des ressources souvent sous-utilisées" couleur="jaune">
+            <Texte>L&apos;ergothérapie et la physiothérapie sont prescrites par un médecin et prises en charge par l&apos;assurance-maladie de base. Elles peuvent intervenir sur le lieu de vie de la personne : travail de la mobilité et des transferts, prévention des chutes, adaptation des gestes du quotidien (repas, toilette, habillage), évaluation des aides techniques et de l&apos;aménagement des espaces.</Texte>
+            <Texte>Ces interventions permettent souvent de <strong>maintenir une personne dans son institution d&apos;origine plus longtemps</strong>, en évitant un transfert vers un EMS parfois prématuré. Elles restent pourtant peu demandées en institution socio-éducative : lorsqu&apos;une perte de mobilité s&apos;installe, proposer que le médecin référent évalue l&apos;indication d&apos;un bilan est un réflexe professionnel utile.</Texte>
           </HighlightBox>
 
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-2">Situation</p>
-              <p className="text-gray-700 text-sm font-semibold mb-2">Daniel, 68 ans — des soins que l&apos;équipe ne peut pas assurer</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Daniel a une lésion médullaire. Depuis quelques mois, il présente des plaies de pression qui nécessitent des soins infirmiers réguliers. L&apos;équipe éducative n&apos;a pas les compétences pour réaliser ces soins. La direction hésite à impliquer des partenaires externes, craignant de trop &quot;médicaliser&quot; l&apos;accompagnement.</p>
+              <p className="text-gray-700 text-sm font-semibold mb-2">Daniel, 68 ans — des besoins que l&apos;équipe ne peut pas couvrir seule</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Daniel a une lésion médullaire. Depuis quelques mois, ses transferts du lit au fauteuil sont beaucoup plus difficiles : il se fatigue vite, deux professionnels sont désormais nécessaires, et il a glissé deux fois lors du transfert. L&apos;équipe éducative improvise des solutions au jour le jour, sans compétence technique en la matière. La direction hésite à faire appel à des intervenants externes, craignant de trop &quot;médicaliser&quot; l&apos;accompagnement.</p>
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Question de réflexion</p>
-              <p className="text-gray-700 text-sm leading-relaxed italic">Quel argument pourriez-vous apporter pour qu&apos;un partenariat avec la Spitex soit envisagé, tout en respectant la vocation éducative de l&apos;institution ?</p>
+              <p className="text-gray-700 text-sm leading-relaxed italic">Quel argument pourriez-vous apporter pour qu&apos;un bilan externe soit demandé, tout en respectant la vocation éducative de l&apos;institution ?</p>
             </div>
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Réponse guidée</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Faire intervenir la Spitex pour les soins infirmiers spécifiques ne transforme pas l&apos;institution en EMS — cela lui permet de maintenir sa mission éducative en s&apos;appuyant sur des compétences complémentaires. C&apos;est précisément cette complémentarité qui permet à Daniel de rester dans son environnement familier, auprès des personnes qu&apos;il connaît depuis des années. Rester dans son institution est la meilleure chose pour Daniel — à condition que ses besoins soient correctement couverts.</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Solliciter le médecin référent pour qu&apos;il évalue l&apos;indication d&apos;un bilan d&apos;ergothérapie ou de physiothérapie ne transforme pas l&apos;institution en EMS — cela lui permet de maintenir sa mission éducative en s&apos;appuyant sur des compétences complémentaires. Une évaluation des transferts, du positionnement et des aides techniques sécurise à la fois Daniel et les professionnels qui l&apos;accompagnent. C&apos;est précisément cette complémentarité qui permet à Daniel de rester dans son environnement familier, auprès des personnes qu&apos;il connaît depuis des années. Rester dans son institution est la meilleure chose pour Daniel — à condition que ses besoins soient correctement couverts.</p>
             </div>
           </div>
         </SectionModule>
@@ -257,15 +258,15 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             explication: "Une bonne transmission médicale décrit les faits (quoi), la durée (depuis quand), la fréquence, et l'écart avec le comportement habituel. Elle ne contient pas d'interprétation diagnostique ni de prescription. C'est le rôle du médecin d'interpréter — pas le vôtre."
           },
           {
-            question: "Quel est le rôle de la Spitex en contexte institutionnel ?",
+            question: "Une personne accompagnée perd progressivement en mobilité et ses transferts deviennent difficiles. Comment mobiliser l'ergothérapie ou la physiothérapie ?",
             reponses: [
-              "Remplacer l'équipe éducative lors des congés et absences",
-              "Assurer les soins infirmiers spécialisés que l'équipe éducative ne peut pas réaliser",
-              "Évaluer si une personne doit être transférée en EMS",
-              "Intervenir uniquement à domicile, jamais en institution"
+              "L'équipe éducative peut les solliciter directement, sans autre démarche",
+              "En passant par le médecin, qui évalue l'indication et établit la prescription",
+              "Ces prestations ne sont accessibles qu'après un séjour hospitalier",
+              "Elles ne peuvent intervenir qu'en cabinet, jamais sur le lieu de vie"
             ],
             bonneReponse: 1,
-            explication: "La Spitex peut intervenir en institution pour compléter l'offre de soins : injections, soins de plaies, bilans infirmiers. Ces interventions permettent souvent de maintenir une personne dans son institution d'origine plus longtemps, en évitant un transfert prématuré vers un EMS."
+            explication: "L'ergothérapie et la physiothérapie sont prescrites par un médecin et prises en charge par l'assurance-maladie de base. Le rôle de l'équipe est de documenter les difficultés observées (transferts, chutes, gestes du quotidien) et de les transmettre au médecin référent, qui évalue l'indication. Ces interventions peuvent avoir lieu sur le lieu de vie de la personne et permettent souvent de la maintenir plus longtemps dans son institution d'origine."
           },
           {
             question: "Pourquoi un document de transmission est-il important lors d'une hospitalisation d'urgence ?",
