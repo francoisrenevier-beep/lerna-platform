@@ -164,7 +164,7 @@ export function Module11VieillissementExpertise({ onValiderModule }: { onValider
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Articuler le PPA avec les partenaires">
-          <Texte>Le PPA d&apos;une personne vieillissante ne peut pas être construit en vase clos. Il doit être articulé avec les évaluations médicales, les interventions de la Spitex, les bilans gériatriques, et les réflexions de la famille. Cette articulation est souvent le maillon le plus fragile — non par manque de volonté, mais par manque de pratiques formalisées et de temps dédié à ce travail de coordination.</Texte>
+          <Texte>Le PPA d&apos;une personne vieillissante ne peut pas être construit en vase clos. Il doit être articulé avec les évaluations médicales, les interventions thérapeutiques (ergothérapie, physiothérapie), les bilans gériatriques, et les réflexions de la famille. Cette articulation est souvent le maillon le plus fragile — non par manque de volonté, mais par manque de pratiques formalisées et de temps dédié à ce travail de coordination.</Texte>
 
           <Texte>Le médecin référent joue un rôle central dans cette coordination. Mais ce rôle n&apos;est pas toujours bien défini du côté de l&apos;institution. Beaucoup d&apos;équipes contactent le médecin uniquement en cas d&apos;urgence ou pour des prescriptions. La collaboration proactive — partager les observations de l&apos;équipe sur l&apos;état fonctionnel de la personne, solliciter un avis préventif sur un changement observé, demander une synthèse médicale intégrable dans le PPA — est une pratique encore peu répandue. Elle est pourtant au cœur d&apos;un accompagnement vieillissement de qualité.</Texte>
 

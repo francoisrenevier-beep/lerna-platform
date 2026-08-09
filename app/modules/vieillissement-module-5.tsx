@@ -28,7 +28,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
             <Liste items={[
               "Identifier les principaux acteurs de la coordination en Suisse romande",
               "Comprendre le rôle pivot du médecin référent",
-              "Distinguer les missions de la Spitex, de la gériatrie, de Pro Infirmis et Pro Senectute",
+              "Distinguer les missions de la gériatrie, des thérapeutes (ergothérapie, physiothérapie), de Pro Infirmis et Pro Senectute",
               "Construire des outils de coordination efficaces (conventions, documents de transmission)",
               "Préparer et accompagner une transition de manière digne"
             ]} />
@@ -51,12 +51,12 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
             colonnes={[
               {
                 titre: "Acteur",
-                contenu: ["Spitex / NOMAD / APAC", "Gériatrie hospitalière", "Équipes mobiles gériatriques", "Psychiatrie de l'âge avancé", "Pro Infirmis", "Pro Senectute"]
+                contenu: ["Ergothérapie / physiothérapie", "Gériatrie hospitalière", "Équipes mobiles gériatriques", "Psychiatrie de l'âge avancé", "Pro Infirmis", "Pro Senectute"]
               },
               {
                 titre: "Mission principale",
                 contenu: [
-                  "Soins infirmiers, aide à domicile — peut intervenir en institution",
+                  "Mobilité, transferts, prévention des chutes, aides techniques, adaptation des gestes du quotidien",
                   "Évaluation spécialisée des syndromes gériatriques : fragilité, démence, chutes, dénutrition",
                   "Se déplacent en institution pour des évaluations — adapté aux personnes fragiles",
                   "Troubles psychiques se complexifiant avec l'âge",
@@ -67,7 +67,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
               {
                 titre: "Quand faire appel",
                 contenu: [
-                  "Besoins médicaux dépassant les compétences éducatives",
+                  "Perte de mobilité, chutes, difficultés croissantes dans les gestes du quotidien",
                   "Diagnostic gériatrique complexe, orientation thérapeutique",
                   "Personne supportant mal les déplacements ou les hospitalisations",
                   "Démence + troubles psychiques, diagnostic différentiel",
@@ -78,8 +78,9 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
             ]}
           />
 
-          <HighlightBox label="La Spitex en institution — un partenaire à mobiliser" couleur="vert">
-            <Texte>Pour les institutions dont les résidents ont des besoins médicaux croissants, la Spitex peut devenir un partenaire essentiel : injections, soins de plaies, surveillance médicale régulière, bilans infirmiers. Ces interventions permettent souvent de <strong>maintenir une personne dans son institution d'origine plus longtemps</strong>, en évitant un transfert vers un EMS.</Texte>
+          <HighlightBox label="L'ergothérapie et la physiothérapie — des partenaires à mobiliser" couleur="vert">
+            <Texte>Pour les institutions dont les résidents perdent progressivement en autonomie motrice, l'ergothérapie et la physiothérapie sont des partenaires essentiels : travail de la mobilité et des transferts, prévention des chutes, adaptation des gestes du quotidien, évaluation des aides techniques et de l'aménagement des espaces. Elles sont prescrites par un médecin, prises en charge par l'assurance-maladie de base, et peuvent intervenir sur le lieu de vie de la personne.</Texte>
+            <Texte>Ces interventions permettent souvent de <strong>maintenir une personne dans son institution d'origine plus longtemps</strong>, en évitant un transfert vers un EMS.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -94,7 +95,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
             <Texte>Une convention de collaboration est un document signé entre deux institutions qui formalise : qui fait quoi, comment s'échangent les informations, comment se déroulent les interventions, quels sont les contacts à appeler, comment se gère la facturation.</Texte>
             <Texte>Les conventions prioritaires à établir :</Texte>
             <Liste items={[
-              "Avec la Spitex ou équivalent : pour les soins infirmiers en institution",
+              "Avec des ergothérapeutes et physiothérapeutes de la région : pour des bilans et des interventions sur le lieu de vie",
               "Avec un ou plusieurs EMS de référence : pour visites préalables, accueils temporaires, transitions planifiées",
               "Avec un service de gériatrie : pour consultations spécialisées ou interventions de l'équipe mobile"
             ]} />
@@ -168,7 +169,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le médecin référent est le pivot : la communication doit être bidirectionnelle et régulière",
-              "La Spitex peut intervenir en institution pour éviter des transferts prématurés vers l'EMS",
+              "L'ergothérapie et la physiothérapie, sur prescription médicale, peuvent intervenir sur le lieu de vie et éviter des transferts prématurés vers l'EMS",
               "Une convention de collaboration protège la personne et les équipes",
               "Le document de transmission est la 'carte d'identité' de la personne pour toute transition",
               "La meilleure transition est celle qui a été préparée bien à l'avance",
@@ -193,15 +194,15 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
             explication: "Le médecin référent joue un rôle central de coordination médicale. La relation avec lui doit être active et bidirectionnelle : l'institution transmet ses observations cliniques, le médecin informe des diagnostics et traitements. Cette communication ne doit pas se limiter aux urgences."
           },
           {
-            question: "Quand la Spitex peut-elle intervenir dans une institution socio-éducative ?",
+            question: "À quelles conditions l'ergothérapie ou la physiothérapie peuvent-elles intervenir auprès d'un résident ?",
             reponses: [
-              "Jamais — la Spitex est réservée aux personnes vivant à domicile",
-              "Uniquement pour les personnes en fin de vie",
-              "Lorsque les besoins médicaux des résidents dépassent les compétences de l'équipe éducative",
-              "Uniquement à la demande des familles"
+              "Jamais en institution — ces prestations sont réservées aux personnes vivant à domicile",
+              "Uniquement après une hospitalisation",
+              "Sur prescription médicale : le médecin évalue l'indication et les prestations sont prises en charge par l'assurance-maladie de base",
+              "Uniquement à la demande et aux frais des familles"
             ],
             bonneReponse: 2,
-            explication: "La Spitex peut également intervenir en institution pour compléter l'offre de soins : injections, soins de plaies, surveillance médicale, bilans infirmiers. Ces interventions permettent souvent de maintenir une personne dans son institution d'origine plus longtemps, évitant un transfert vers un EMS."
+            explication: "L'ergothérapie et la physiothérapie sont prescrites par un médecin et prises en charge par l'assurance-maladie de base. Elles peuvent intervenir sur le lieu de vie de la personne : mobilité, transferts, prévention des chutes, aides techniques, adaptation des gestes du quotidien. Le rôle de l'équipe est de documenter les difficultés observées et de les transmettre au médecin référent, qui évalue l'indication."
           },
           {
             question: "Pourquoi la formalisation des partenariats est-elle préférable aux relations informelles ?",

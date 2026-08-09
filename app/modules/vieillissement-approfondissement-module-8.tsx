@@ -143,7 +143,7 @@ export function Module8VieillissementApprofondissement({ onValiderModule }: { on
                   "Suspicion de douleur physique ou de pathologie",
                   "Suspicion de déclin cognitif",
                   "Question sur le projet d'accompagnement ou le PPA",
-                  "Besoins dépassant les compétences de l'équipe (soins infirmiers)",
+                  "Besoins dépassant les compétences de l'équipe (mobilité, transferts, gestes du quotidien)",
                   "Transition vers un autre lieu de vie envisagée"
                 ]
               },
@@ -154,7 +154,7 @@ export function Module8VieillissementApprofondissement({ onValiderModule }: { on
                   "Médecin référent — avec une description factuelle",
                   "Médecin référent — en précisant la comparaison avec l'état de base",
                   "Référent de la personne + hiérarchie directe",
-                  "Hiérarchie directe pour initier une convention Spitex",
+                  "Médecin référent — pour évaluer l'indication d'un bilan (ergothérapie, physiothérapie) — et hiérarchie directe",
                   "Référent + hiérarchie + famille — idéalement bien avant l'urgence"
                 ]
               }
