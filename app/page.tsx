@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
+import { StatsAccueil } from "@/components/stats-accueil"
 import { DefiSection } from "@/components/defi-section"
 import { HowItWorks } from "@/components/how-it-works"
 import { BlendedLearning } from "@/components/blended-learning"
@@ -14,11 +15,17 @@ export const metadata: Metadata = {
     "Learna propose aux institutions sociales et médico-sociales de Suisse romande une plateforme de formation continue en ligne, accessible à l'ensemble des collaborateurs — handicap, pédagogie spécialisée, accompagnement, éthique.",
 }
 
+// Le bandeau de chiffres lit la base à chaque revalidation. Une heure de
+// cache : chaque nouveau compte qui termine un module remonte dans le bandeau
+// dans l'heure, pour une requête agrégée par heure au plus.
+export const revalidate = 3600
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Navigation />
       <HeroSection />
+      <StatsAccueil />
       <DefiSection />
       <HowItWorks />
       <BlendedLearning />

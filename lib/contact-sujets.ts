@@ -23,6 +23,8 @@ export const SUJETS_CONTACT: Sujet[] = [
 /** Formulaire de la page /contact → /api/demo */
 export const SUJETS_DEMO: Sujet[] = [
   { value: "demonstration", label: "Démonstration de la plateforme" },
+  // Les CTA de /tarifs arrivent avec ?sujet=licence-institutionnelle
+  { value: "licence-institutionnelle", label: "Demande de licence institutionnelle" },
   { value: "parcours-mesure", label: "Parcours sur mesure" },
   { value: "autre", label: "Autre demande" },
 ]
