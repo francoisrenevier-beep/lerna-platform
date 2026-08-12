@@ -9,9 +9,28 @@ import { createClient } from "@supabase/supabase-js"
 export type StatsPubliques = {
   /** Formations publiées et non privées, au moment de la revalidation. */
   formationsPubliees: number
-  /** Personnes distinctes ayant terminé au moins un module. */
+  /**
+   * Personnes distinctes ayant terminé au moins un module sur la plateforme,
+   * plus le socle réel de la phase pilote (`PROFESSIONNELS_PHASE_PILOTE`).
+   */
   professionnelsFormes: number
 }
+
+/**
+ * Professionnels ayant suivi une formation Learna durant la phase pilote de
+ * construction des modules (avant août 2026), hors format de licence
+ * institutionnelle. Décompte réel fourni par François Renevier ; ces personnes
+ * n'ont pas de compte dans `progression`, d'où ce socle ajouté au décompte en
+ * base.
+ *
+ * ⚠️ Ne modifier cette valeur que si le décompte réel de la phase pilote est
+ * corrigé — jamais pour « améliorer » le chiffre affiché. Si d'anciens
+ * participants pilotes ouvrent un compte et terminent un module, ils seront
+ * comptés deux fois ; l'arrondi à la dizaine inférieure absorbe les premiers
+ * cas, mais ce socle devra être revu à la baisse si le recouvrement devient
+ * significatif.
+ */
+export const PROFESSIONNELS_PHASE_PILOTE = 153
 
 /**
  * Retourne les deux chiffres, ou `null` si la base est injoignable.
@@ -46,7 +65,8 @@ export async function getStatsPubliques(): Promise<StatsPubliques | null> {
 
     return {
       formationsPubliees: Number(data.formations_publiees),
-      professionnelsFormes: Number(data.professionnels_formes),
+      professionnelsFormes:
+        PROFESSIONNELS_PHASE_PILOTE + Number(data.professionnels_formes),
     }
   } catch (e) {
     console.error("Stats publiques indisponibles:", e)
