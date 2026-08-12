@@ -1,4 +1,4 @@
-import { arrondirDizaineInferieure, getStatsPubliques } from "@/lib/stats-publiques"
+import { getStatsPubliques } from "@/lib/stats-publiques"
 
 /**
  * Bandeau de chiffres clés de l'accueil — Server Component.
@@ -12,15 +12,11 @@ import { arrondirDizaineInferieure, getStatsPubliques } from "@/lib/stats-publiq
 export async function StatsAccueil() {
   const stats = await getStatsPubliques()
 
-  const professionnels = stats
-    ? arrondirDizaineInferieure(stats.professionnelsFormes)
-    : null
-
   const entrees = [
     {
-      // Sous dix professionnels, « + de 0 » ne veut rien dire : mieux vaut
-      // taire le chiffre que d'afficher une valeur creuse.
-      chiffre: professionnels && professionnels >= 10 ? `+ de ${professionnels}` : null,
+      // Chiffre exact, pas d'arrondi : il peut retarder d'une heure au plus
+      // (revalidation de la page), jamais surestimer.
+      chiffre: stats ? String(stats.professionnelsFormes) : null,
       libelle: "professionnels ont déjà suivi une formation sur Learna",
     },
     {

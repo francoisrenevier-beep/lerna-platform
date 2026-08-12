@@ -73,14 +73,3 @@ export async function getStatsPubliques(): Promise<StatsPubliques | null> {
     return null
   }
 }
-
-/**
- * Arrondi à la dizaine inférieure.
- *
- * Le chiffre est préfixé « + de » à l'affichage : arrondir vers le bas garantit
- * que l'annonce reste vraie entre deux revalidations, y compris si le compteur
- * n'a pas encore été rafraîchi.
- */
-export function arrondirDizaineInferieure(valeur: number): number {
-  return Math.floor(valeur / 10) * 10
-}
