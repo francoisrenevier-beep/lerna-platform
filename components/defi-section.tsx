@@ -1,16 +1,7 @@
 import { XCircle, CheckCircle } from "lucide-react"
+import { constat } from "@/content/site"
 
-const problemes = [
-  "Les formations présentielles ne touchent qu'une partie des équipes — une majorité de collaborateurs reste à l'écart",
-  "Libérer un collaborateur pour une journée de formation n'est pas toujours possible — remplacements complexes, désorganisation de l'équipe",
-  "Équipes de nuit, remplaçants fixes et collaborateurs en périphérie de l'accompagnement (administratif, intendance, technique) sont rarement inclus dans les plans de formation continue",
-]
-
-const solutions = [
-  "Une offre qui complète les formations présentielles et s'adresse à l'ensemble des secteurs de l'institution",
-  "Un socle commun de réflexion pour l'ensemble des collaborateurs, avec des outils directement mobilisables sur le terrain",
-  "Sensibiliser l'ensemble des collaborateurs — y compris ceux en périphérie de l'accompagnement — à des thématiques en lien avec les personnes accompagnées",
-]
+const { problemes, solutions } = constat
 
 export function DefiSection() {
   return (
@@ -20,7 +11,7 @@ export function DefiSection() {
           {/* Colonne gauche — problèmes */}
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">
-              Et tout ce que la formation laisse d'habitude de côté
+              {constat.titre}
             </h2>
             <ul className="mt-8 space-y-5">
               {problemes.map((p, i) => (
@@ -34,7 +25,7 @@ export function DefiSection() {
 
           {/* Colonne droite — solutions */}
           <div className="rounded-2xl bg-[#3DBFA0] p-8 text-white shadow-lg">
-            <h3 className="text-xl font-bold">Learna répond à ces défis</h3>
+            <h3 className="text-xl font-bold">{constat.reponseTitre}</h3>
             <ul className="mt-6 space-y-5">
               {solutions.map((s, i) => (
                 <li key={i} className="flex items-start gap-3">

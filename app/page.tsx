@@ -1,10 +1,18 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
 import { DefiSection } from "@/components/defi-section"
 import { HowItWorks } from "@/components/how-it-works"
+import { BlendedLearning } from "@/components/blended-learning"
 import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
+
+export const metadata: Metadata = {
+  title: "Learna — Formation continue pour les institutions sociales et médico-sociales",
+  description:
+    "Learna propose aux institutions sociales et médico-sociales de Suisse romande une plateforme de formation continue en ligne, accessible à l'ensemble des collaborateurs — handicap, pédagogie spécialisée, accompagnement, éthique.",
+}
 
 export default function Home() {
   return (
@@ -13,6 +21,7 @@ export default function Home() {
       <HeroSection />
       <DefiSection />
       <HowItWorks />
+      <BlendedLearning />
 
       {/* Formations — section prose */}
       <section className="bg-[#F8FAFC] py-16 sm:py-24">

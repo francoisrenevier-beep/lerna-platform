@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { X, MessageCircle, Send, CheckCircle } from "lucide-react"
+import { SUJETS_CONTACT } from "@/lib/contact-sujets"
 
 type FormData = {
   sujet: string
@@ -11,14 +12,6 @@ type FormData = {
 }
 
 const EMPTY: FormData = { sujet: "", nom: "", email: "", message: "" }
-
-const SUJETS = [
-  { value: "support", label: "Support technique" },
-  { value: "amelioration", label: "Proposition d'amélioration" },
-  { value: "formation", label: "Question sur une formation" },
-  { value: "facturation", label: "Facturation / abonnement" },
-  { value: "autre", label: "Autre demande" },
-]
 
 export function ContactModal() {
   const [open, setOpen] = useState(false)
@@ -134,7 +127,7 @@ export function ContactModal() {
                     className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#1B2D5B] outline-none focus:border-[#3DBFA0] focus:ring-2 focus:ring-[#3DBFA0]/20"
                   >
                     <option value="" disabled>Choisir un sujet…</option>
-                    {SUJETS.map((s) => (
+                    {SUJETS_CONTACT.map((s) => (
                       <option key={s.value} value={s.value}>{s.label}</option>
                     ))}
                   </select>

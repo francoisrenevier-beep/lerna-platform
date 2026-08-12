@@ -1,23 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { createClient } from '@supabase/supabase-js'
+import { SUJETS_DEMO, labelSujet } from '@/lib/contact-sujets'
 
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;')
 
 export async function POST(req: NextRequest) {
-  let body: { prenom: string; nom: string; institution: string; email: string; telephone?: string; message?: string }
+  let body: { sujet?: string; prenom: string; nom: string; institution: string; email: string; telephone?: string; message?: string }
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Corps de requête invalide' }, { status: 400 })
   }
 
-  const { prenom, nom, institution, email, telephone, message } = body
+  const { sujet, prenom, nom, institution, email, telephone, message } = body
   if (!prenom || !nom || !institution || !email) {
     return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 422 })
   }
+
+  // Le sujet remonte uniquement dans l'e-mail : la table `demandes_demo` n'a
+  // pas de colonne dédiée et ce chantier ne touche pas à la base.
+  const sujetLabel = sujet ? labelSujet(SUJETS_DEMO, sujet) : null
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -44,8 +49,8 @@ export async function POST(req: NextRequest) {
       from: 'Learna <noreply@learna.ch>',
       to: 'contact@learna.ch',
       replyTo: email,
-      subject: `Demande de démonstration — ${prenom} ${nom} (${institution})`,
-      text: `Nouvelle demande de démonstration\n\nPrénom : ${prenom}\nNom : ${nom}\nInstitution : ${institution}\nEmail : ${email}${telephone ? `\nTéléphone : ${telephone}` : ''}${message ? `\n\nMessage :\n${message}` : ''}`,
+      subject: `${sujetLabel ? `[${sujetLabel}] ` : ''}Demande de démonstration — ${prenom} ${nom} (${institution})`,
+      text: `Nouvelle demande de démonstration\n${sujetLabel ? `\nSujet : ${sujetLabel}\n` : ''}\nPrénom : ${prenom}\nNom : ${nom}\nInstitution : ${institution}\nEmail : ${email}${telephone ? `\nTéléphone : ${telephone}` : ''}${message ? `\n\nMessage :\n${message}` : ''}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
           <div style="background:#1B2D5B;padding:24px 32px;border-radius:8px 8px 0 0;">
@@ -53,6 +58,7 @@ export async function POST(req: NextRequest) {
           </div>
           <div style="background:#F8FAFC;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;">
             <table style="width:100%;border-collapse:collapse;">
+              ${sujetLabel ? `<tr><td style="padding:8px 0;color:#6b7280;font-size:14px;width:140px;">Sujet</td><td style="padding:8px 0;font-weight:600;color:#1B2D5B;">${esc(sujetLabel)}</td></tr>` : ''}
               <tr>
                 <td style="padding:8px 0;color:#6b7280;font-size:14px;width:140px;">Prénom</td>
                 <td style="padding:8px 0;color:#1B2D5B;">${esc(prenom)}</td>

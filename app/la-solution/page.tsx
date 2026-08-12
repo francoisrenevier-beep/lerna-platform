@@ -5,6 +5,7 @@ import { DefiSection } from "@/components/defi-section"
 import { HowItWorks } from "@/components/how-it-works"
 import { DirectionBloc } from "@/components/direction-bloc"
 import { CommentConcu } from "@/components/comment-concu"
+import { ParcoursPartenariat } from "@/components/parcours-partenariat"
 import { PourquoiLerna } from "@/components/pourquoi-lerna"
 import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
@@ -56,6 +57,7 @@ export default function LaSolutionPage() {
       <HowItWorks />
       <DirectionBloc />
       <CommentConcu />
+      <ParcoursPartenariat />
       <PourquoiLerna />
       <Testimonials />
 

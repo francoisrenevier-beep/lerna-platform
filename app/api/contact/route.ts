@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-
-const SUBJECT_LABELS: Record<string, string> = {
-  support: 'Support technique',
-  amelioration: "Proposition d'amélioration",
-  formation: 'Question sur une formation',
-  facturation: 'Facturation / abonnement',
-  autre: 'Autre demande',
-}
+import { SUJETS_CONTACT, labelSujet } from '@/lib/contact-sujets'
 
 export async function POST(req: NextRequest) {
   let body: { sujet: string; nom: string; email: string; message: string }
@@ -22,7 +15,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 422 })
   }
 
-  const sujetLabel = SUBJECT_LABELS[sujet] ?? sujet
+  const sujetLabel = labelSujet(SUJETS_CONTACT, sujet)
 
   const esc = (s: string) => s
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')

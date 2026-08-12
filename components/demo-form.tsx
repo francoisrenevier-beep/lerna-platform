@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { SUJETS_DEMO } from "@/lib/contact-sujets"
 
 type FormData = {
+  sujet: string
   prenom: string
   nom: string
   institution: string
@@ -11,7 +13,10 @@ type FormData = {
   message: string
 }
 
+const SUJET_DEFAUT = SUJETS_DEMO[0].value
+
 const EMPTY: FormData = {
+  sujet: SUJET_DEFAUT,
   prenom: "",
   nom: "",
   institution: "",
@@ -20,13 +25,24 @@ const EMPTY: FormData = {
   message: "",
 }
 
-export function DemoForm() {
-  const [form, setForm] = useState<FormData>(EMPTY)
+/**
+ * `sujetInitial` vient du paramètre ?sujet= lu côté serveur par la page — le
+ * CTA « Discuter d'un parcours sur mesure » arrive avec sujet=parcours-mesure.
+ * Le lire ici via useSearchParams sortirait tout le formulaire du rendu serveur.
+ */
+export function DemoForm({ sujetInitial }: { sujetInitial?: string }) {
+  const sujetPreselection = SUJETS_DEMO.some((s) => s.value === sujetInitial)
+    ? (sujetInitial as string)
+    : SUJET_DEFAUT
+
+  const [form, setForm] = useState<FormData>({ ...EMPTY, sujet: sujetPreselection })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -44,7 +60,7 @@ export function DemoForm() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? "Erreur inconnue")
       setSuccess(true)
-      setForm(EMPTY)
+      setForm({ ...EMPTY, sujet: sujetPreselection })
     } catch (e) {
       setError(
         (e instanceof Error ? e.message : null) ??
@@ -76,6 +92,25 @@ export function DemoForm() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-12 space-y-5">
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-[#1B2D5B]">
+                Sujet <span className="text-red-500">*</span>
+              </label>
+              <select
+                name="sujet"
+                required
+                value={form.sujet}
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm text-[#1B2D5B] outline-none focus:border-[#3DBFA0] focus:ring-2 focus:ring-[#3DBFA0]/20"
+              >
+                {SUJETS_DEMO.map((s) => (
+                  <option key={s.value} value={s.value}>
+                    {s.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-[#1B2D5B]">

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { hero } from "@/content/site"
 
 function DashboardIllustration() {
   return (
@@ -51,20 +52,30 @@ function DashboardIllustration() {
           </div>
         </div>
 
-        {/* Stats cards — valeurs à confirmer selon catalogue actuel */}
+        {/* Mentions — volontairement non périssables : aucune valeur chiffrée
+            liée au catalogue, qui périmerait à chaque publication. */}
         <div className="mt-6 grid grid-cols-3 gap-3">
-          <div className="rounded-lg bg-accent/10 p-3">
-            <div className="text-lg font-bold text-accent">5</div>
-            <div className="text-[10px] leading-tight text-accent/70 mt-0.5">formations</div>
-          </div>
-          <div className="rounded-lg bg-primary/10 p-3">
-            <div className="text-lg font-bold text-primary">4</div>
-            <div className="text-[10px] leading-tight text-primary/60 mt-0.5">domaines</div>
-          </div>
-          <div className="rounded-lg bg-accent/10 p-3">
-            <div className="text-lg font-bold text-accent">∞</div>
-            <div className="text-[10px] leading-tight text-accent/70 mt-0.5">accès illimité</div>
-          </div>
+          {hero.mentions.map((m, i) => (
+            <div
+              key={i}
+              className={`rounded-lg p-3 ${i === 1 ? "bg-primary/10" : "bg-accent/10"}`}
+            >
+              <div
+                className={`text-[11px] font-bold leading-tight ${
+                  i === 1 ? "text-primary" : "text-accent"
+                }`}
+              >
+                {m.mention}
+              </div>
+              <div
+                className={`mt-1 text-[10px] leading-tight ${
+                  i === 1 ? "text-primary/60" : "text-accent/70"
+                }`}
+              >
+                {m.precision}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -83,13 +94,10 @@ export function HeroSection() {
           {/* Text content */}
           <div className="max-w-xl">
             <h1 className="text-pretty text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Former les équipes, élargir les regards
+              {hero.titre}
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Learna propose aux institutions sociales et médico-sociales une
-              plateforme e-learning pensée pour le terrain, par le terrain. Des
-              formations courtes, concrètes, suivies à son rythme — avec des
-              outils directement applicables dans votre pratique.
+              {hero.soutitre}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button

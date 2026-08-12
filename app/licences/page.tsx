@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 export const metadata: Metadata = {
   title: "Licences institutionnelles — LEARNA",
   description:
-    "Tarifs annuels tout inclus pour les institutions du travail social en Suisse romande. Accès illimité pour tous vos collaborateurs, nouvelles formations comprises.",
+    "La licence institutionnelle LEARNA ouvre la plateforme à l'ensemble de vos collaborateurs, sans inscription individuelle ni frais par participant. Un abonnement annuel unique pour toute l'institution.",
 }
 
 export default function LicencesPage() {
