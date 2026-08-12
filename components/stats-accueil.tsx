@@ -26,14 +26,19 @@ export async function StatsAccueil() {
   ]
 
   return (
-    <section className="border-y border-[#1B2D5B]/10 bg-[#F8FAFC] py-10 sm:py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden border-y border-[#1B2D5B]/[0.08] bg-gradient-to-r from-[#3DBFA0]/[0.08] via-[#F8FAFC] to-[#1B2D5B]/[0.05] py-10 sm:py-12">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-16 right-[15%] h-48 w-48 rounded-full bg-[#3DBFA0]/10 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 sm:gap-12">
           {entrees.map((entree) => (
             <div key={entree.libelle} className="text-center sm:text-left">
               {entree.chiffre && (
                 <p className="text-4xl font-bold tracking-tight text-[#1B2D5B] tabular-nums sm:text-5xl">
                   {entree.chiffre}
+                  <span className="ml-1 inline-block h-2.5 w-2.5 rounded-full bg-[#3DBFA0] align-baseline" />
                 </p>
               )}
               <p

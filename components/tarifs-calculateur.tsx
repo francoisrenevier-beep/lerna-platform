@@ -40,7 +40,7 @@ export function TarifsCalculateur() {
             htmlFor="etp"
             className="block text-sm font-medium text-[#1B2D5B]"
           >
-            Nombre d&apos;équivalents plein temps (ETP)
+            Nombre d&apos;ETP
           </label>
           <input
             id="etp"

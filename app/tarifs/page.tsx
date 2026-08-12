@@ -28,8 +28,16 @@ export default function TarifsPage() {
       <Navigation />
 
       {/* Bloc 1 — Accroche */}
-      <section className="bg-background py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#3DBFA0]/[0.08] to-background py-16 sm:py-24">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-24 right-[-8%] h-80 w-80 rounded-full bg-[#3DBFA0]/15 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-32 left-[-6%] h-72 w-72 rounded-full bg-[#1B2D5B]/10 blur-3xl"
+        />
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-pretty text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl lg:text-5xl">
             La formation continue accessible à toute votre institution
           </h1>
@@ -42,7 +50,7 @@ export default function TarifsPage() {
       </section>
 
       {/* Bloc 2 — Principe tarifaire */}
-      <section className="bg-[#F8FAFC] py-16 sm:py-20">
+      <section className="border-y border-[#1B2D5B]/[0.06] bg-gradient-to-r from-[#1B2D5B]/[0.04] to-[#3DBFA0]/[0.05] py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
             Un tarif proportionnel, sans effet de seuil
@@ -52,22 +60,30 @@ export default function TarifsPage() {
             {formaterCHF(SOCLE_CHF)} francs, qui couvre l&apos;accès de
             l&apos;institution à la plateforme, et de {PRIX_PAR_ETP_SUPPLEMENTAIRE}{" "}
             francs par collaborateur
-            au-delà de cinquante équivalents plein temps. Plus l&apos;institution
+            au-delà de cinquante ETP. Plus l&apos;institution
             est grande, moins elle paie par collaborateur.
           </p>
         </div>
       </section>
 
       {/* Bloc 3 — Tableau de référence */}
-      <section className="bg-background py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-background py-16 sm:py-20">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-1/4 right-[-10%] h-96 w-96 rounded-full bg-[#3DBFA0]/[0.07] blur-3xl"
+        />
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <TarifsTableau />
         </div>
       </section>
 
       {/* Bloc 4 — Calculateur */}
-      <section className="bg-[#F8FAFC] py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#3DBFA0]/[0.09] via-[#F8FAFC] to-[#1B2D5B]/[0.05] py-16 sm:py-20">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-20 left-[-6%] h-64 w-64 rounded-full bg-[#3DBFA0]/10 blur-3xl"
+        />
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
             Combien coûterait Learna pour votre institution&nbsp;?
           </h2>
@@ -93,31 +109,27 @@ export default function TarifsPage() {
             bénéficiant durablement de conditions privilégiées.
           </p>
 
-          {/*
-            ⚠️ BLOQUANT AVANT MISE EN PRODUCTION
-            Une offre de lancement sans condition de fin annoncée n'est pas une
-            offre de lancement : il faut une date d'échéance ou un nombre
-            d'institutions. Remplacer le bloc ci-dessous par la mention retenue,
-            puis supprimer ce commentaire.
-          */}
-          <p className="mt-8 rounded-lg border border-dashed border-[#1B2D5B]/30 bg-[#F8FAFC] p-4 text-sm text-[#1B2D5B]">
-            <span className="font-semibold">À compléter avant publication</span>{" "}
-            — la condition de fin de l&apos;offre reste à définir : date
-            d&apos;échéance ou nombre d&apos;institutions bénéficiaires. Ce bloc
-            ne doit pas être publié en l&apos;état.
-          </p>
+          <div className="mt-8 rounded-xl border border-[#3DBFA0]/30 bg-[#3DBFA0]/[0.06] p-6">
+            <p className="font-semibold text-[#1B2D5B]">
+              Offre de lancement réservée aux 10 premières institutions
+              partenaires
+            </p>
+            <p className="mt-1.5 text-muted-foreground">
+              –30&nbsp;% sur la licence annuelle, tarif garanti pendant 3 ans.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Bloc 6 — Stabilité tarifaire */}
-      <section className="bg-[#F8FAFC] py-16 sm:py-20">
+      <section className="border-y border-[#1B2D5B]/[0.06] bg-gradient-to-l from-[#1B2D5B]/[0.04] to-[#3DBFA0]/[0.05] py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
             Un tarif qui ne bouge pas
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            Le tarif est calculé à la signature sur la base des équivalents plein
-            temps déclarés, et garanti pour toute la durée du contrat. Il
+            Le tarif est calculé à la signature sur la base des ETP déclarés, et
+            garanti pour toute la durée du contrat. Il
             n&apos;est réexaminé qu&apos;au renouvellement, et uniquement si
             l&apos;effectif de l&apos;institution a varié de plus de vingt pour
             cent.
@@ -126,8 +138,12 @@ export default function TarifsPage() {
       </section>
 
       {/* Bloc 7 — Appel à l'action */}
-      <section className="bg-[#1B2D5B] py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#1B2D5B] py-16 sm:py-20">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-16 right-[10%] h-64 w-64 rounded-full bg-[#3DBFA0]/20 blur-3xl"
+        />
+        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/contact?sujet=licence-institutionnelle"
