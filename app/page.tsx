@@ -15,10 +15,10 @@ export const metadata: Metadata = {
     "Learna propose aux institutions sociales et médico-sociales de Suisse romande une plateforme de formation continue en ligne, accessible à l'ensemble des collaborateurs — handicap, pédagogie spécialisée, accompagnement, éthique.",
 }
 
-// Le bandeau de chiffres lit la base à chaque revalidation. Une heure de
-// cache : chaque nouveau compte qui termine un module remonte dans le bandeau
-// dans l'heure, pour une requête agrégée par heure au plus.
-export const revalidate = 3600
+// Le bandeau de chiffres lit la base à chaque revalidation. Un jour de cache
+// (choix validé) : un nouveau compte terminant un module apparaît dans le
+// bandeau au plus tard le lendemain.
+export const revalidate = 86400
 
 export default function Home() {
   return (
