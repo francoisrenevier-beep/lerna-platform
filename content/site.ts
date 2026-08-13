@@ -74,6 +74,38 @@ export const blendedLearning = {
   ],
 }
 
+// ─── Section formation propre à l'institution (accueil) ──────────────────────
+
+// Prestation comprise dans la licence : une formation produite pour la seule
+// institution cliente, hébergée aux côtés du catalogue commun. À distinguer des
+// parcours en partenariat ci-dessous, qui enrichissent le catalogue partagé.
+export const formationInstitution = {
+  titre: "Votre propre formation, sur la plateforme",
+  introduction:
+    "Au-delà du catalogue commun, chaque licence comprend la production d'une formation propre à votre institution, accessible à vos seules équipes. Accueil des nouveaux collaborateurs, repères de fonctionnement, informations à transmettre systématiquement : nous la construisons à partir de vos documents et de vos pratiques.",
+  colonnes: [
+    {
+      titre: "Accueillir",
+      texte:
+        "Un nouveau collaborateur, un·e remplaçant·e ou un·e veilleur·euse qui prend son premier service dispose des repères de la maison dès son arrivée, à toute heure et sans mobiliser l'équipe en place.",
+    },
+    {
+      titre: "Harmoniser",
+      texte:
+        "Ce qui est transmis ne dépend plus de la personne disponible ce jour-là. Chacun reçoit les mêmes informations, dans la même forme, quelle que soit sa fonction ou son horaire.",
+    },
+    {
+      titre: "Aller plus loin",
+      texte:
+        "Une formation propre à votre institution est comprise chaque année dans la licence. D'autres peuvent être développées sur mandat, selon vos besoins.",
+    },
+  ],
+  cta: {
+    libelle: "Parler de votre besoin →",
+    href: "/contact",
+  },
+}
+
 // ─── Section parcours en partenariat (/la-solution) ──────────────────────────
 
 export const parcoursPartenariat = {
@@ -81,6 +113,7 @@ export const parcoursPartenariat = {
   paragraphes: [
     "Le catalogue Learna évolue au fil des besoins identifiés sur le terrain. Certains de ces besoins sont propres à une institution, à un secteur ou à un projet en cours. Nous développons également des parcours en partenariat, construits à partir de vos priorités et mis à disposition de vos équipes sur la plateforme.",
     "Ces parcours suivent la même démarche que les formations du catalogue : ils partent d'une question de terrain et se construisent avec les professionnel·les concerné·es.",
+    "Chaque licence comprend par ailleurs la production d'une formation propre à votre institution, visible de vos seuls collaborateurs — le plus souvent un module d'accueil des nouveaux arrivants. D'autres formations peuvent être produites sur mandat.",
   ],
   cta: {
     libelle: "Discuter d'un parcours sur mesure →",

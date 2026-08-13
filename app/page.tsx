@@ -6,6 +6,7 @@ import { StatsAccueil } from "@/components/stats-accueil"
 import { DefiSection } from "@/components/defi-section"
 import { HowItWorks } from "@/components/how-it-works"
 import { BlendedLearning } from "@/components/blended-learning"
+import { FormationInstitution } from "@/components/formation-institution"
 import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
 
@@ -53,6 +54,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <FormationInstitution />
 
       <Testimonials />
 

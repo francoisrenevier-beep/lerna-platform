@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { Check } from "lucide-react"
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
@@ -19,7 +20,7 @@ import {
 export const metadata: Metadata = {
   title:
     "Tarifs — Learna, formation continue pour les institutions sociales et médico-sociales",
-  description: `Une licence annuelle donne accès à l'ensemble du catalogue Learna à tous vos collaborateurs. Tarif proportionnel à la taille de l'institution, dès ${formaterCHF(SOCLE_CHF)} CHF par an.`,
+  description: `Licence annuelle Learna : accès au catalogue pour tous vos collaborateurs et une formation propre à votre institution. Tarif proportionnel, dès ${formaterCHF(SOCLE_CHF)} CHF par an.`,
 }
 
 export default function TarifsPage() {
@@ -74,6 +75,30 @@ export default function TarifsPage() {
         />
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <TarifsTableau />
+
+          {/* Ce que la licence comprend. Aucun tarif pour les formations sur
+              mandat : le devis est établi au cas par cas. */}
+          <div className="mt-10 rounded-xl border border-[#3DBFA0]/30 bg-[#3DBFA0]/[0.06] p-6">
+            <p className="font-semibold text-[#1B2D5B]">
+              Ce que comprend la licence annuelle
+            </p>
+            <ul className="mt-4 space-y-3">
+              {[
+                "Accès illimité pour tous vos collaborateurs",
+                "Nouvelles formations incluses, sans supplément",
+                "Une formation propre à votre institution, produite chaque année et réservée à vos équipes",
+                "Formations supplémentaires disponibles sur mandat",
+              ].map((mention) => (
+                <li key={mention} className="flex items-start gap-3">
+                  <Check
+                    aria-hidden
+                    className="mt-0.5 h-5 w-5 shrink-0 text-[#3DBFA0]"
+                  />
+                  <span className="text-muted-foreground">{mention}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 

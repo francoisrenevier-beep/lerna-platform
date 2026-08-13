@@ -15,6 +15,7 @@ export const SUJETS_CONTACT: Sujet[] = [
   { value: "support", label: "Support technique" },
   { value: "amelioration", label: "Proposition d'amélioration" },
   { value: "formation", label: "Question sur une formation" },
+  { value: "formation-institution", label: "Formation propre à notre institution" },
   { value: "parcours-mesure", label: "Parcours sur mesure" },
   { value: "facturation", label: "Facturation / abonnement" },
   { value: "autre", label: "Autre demande" },
@@ -25,6 +26,7 @@ export const SUJETS_DEMO: Sujet[] = [
   { value: "demonstration", label: "Démonstration de la plateforme" },
   // Les CTA de /tarifs arrivent avec ?sujet=licence-institutionnelle
   { value: "licence-institutionnelle", label: "Demande de licence institutionnelle" },
+  { value: "formation-institution", label: "Formation propre à notre institution" },
   { value: "parcours-mesure", label: "Parcours sur mesure" },
   { value: "autre", label: "Autre demande" },
 ]

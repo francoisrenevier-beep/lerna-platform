@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 export const metadata: Metadata = {
   title: "Questions fréquentes — LEARNA",
   description:
-    "Toutes les réponses aux questions des directions et coordinateurs de formation : fonctionnement, contenus, licences, suivi des équipes et efficacité du e-learning.",
+    "Réponses aux questions des directions : fonctionnement, contenus, licences, formation propre à votre institution, suivi des équipes, efficacité du e-learning.",
 }
 
 export default function FaqPage() {
