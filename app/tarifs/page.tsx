@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer"
 import { TarifsTableau } from "@/components/tarifs-tableau"
 import { TarifsCalculateur } from "@/components/tarifs-calculateur"
 import {
+  ETP_INCLUS,
   formaterCHF,
   PRIX_PAR_ETP_SUPPLEMENTAIRE,
   REMISE_LANCEMENT,
@@ -18,8 +19,7 @@ import {
 export const metadata: Metadata = {
   title:
     "Tarifs — Learna, formation continue pour les institutions sociales et médico-sociales",
-  description:
-    "Une licence annuelle donne accès à l'ensemble du catalogue Learna à tous vos collaborateurs. Tarif proportionnel à la taille de l'institution, dès 3'000 CHF par an.",
+  description: `Une licence annuelle donne accès à l'ensemble du catalogue Learna à tous vos collaborateurs. Tarif proportionnel à la taille de l'institution, dès ${formaterCHF(SOCLE_CHF)} CHF par an.`,
 }
 
 export default function TarifsPage() {
@@ -57,11 +57,11 @@ export default function TarifsPage() {
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
             Le tarif Learna se compose d&apos;un socle institutionnel de{" "}
-            {formaterCHF(SOCLE_CHF)} francs, qui couvre l&apos;accès de
-            l&apos;institution à la plateforme, et de {PRIX_PAR_ETP_SUPPLEMENTAIRE}{" "}
-            francs par collaborateur
-            au-delà de cinquante ETP. Plus l&apos;institution
-            est grande, moins elle paie par collaborateur.
+            {formaterCHF(SOCLE_CHF)}&nbsp;CHF, qui couvre l&apos;accès de
+            l&apos;institution à la plateforme, et de{" "}
+            {PRIX_PAR_ETP_SUPPLEMENTAIRE}&nbsp;CHF par ETP au-delà de{" "}
+            {ETP_INCLUS}&nbsp;ETP. Plus l&apos;institution est grande, moins
+            elle paie par ETP.
           </p>
         </div>
       </section>

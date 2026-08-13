@@ -9,11 +9,11 @@
 // montant par collaborateur au-delà d'un effectif inclus.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** Socle institutionnel, en francs. Couvre l'accès de l'institution. */
-export const SOCLE_CHF = 3000
+/** Socle institutionnel, en CHF. Couvre l'accès de l'institution. */
+export const SOCLE_CHF = 2000
 
 /** ETP couverts par le seul socle, sans supplément. */
-export const ETP_INCLUS = 50
+export const ETP_INCLUS = 10
 
 /** Montant par ETP au-delà de `ETP_INCLUS`, en francs. */
 export const PRIX_PAR_ETP_SUPPLEMENTAIRE = 25
@@ -32,7 +32,7 @@ export const ETP_MAX = 2000
 export const ETP_DEFAUT = 80
 
 /** Effectifs illustrés par le tableau de référence de la page /tarifs. */
-export const LIGNES_REFERENCE = [30, 50, 75, 100, 150, 200, 300, 400] as const
+export const LIGNES_REFERENCE = [10, 20, 30, 50, 75, 100, 150, 200, 300, 400] as const
 
 /** Arrondi au multiple de 100 supérieur. */
 function arrondiCentaineSuperieure(montant: number): number {

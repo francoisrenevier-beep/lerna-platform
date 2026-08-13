@@ -4,6 +4,7 @@ import {
   calculerTarif,
   bornerEtp,
   ETP_DEFAUT,
+  ETP_INCLUS,
   ETP_MAX,
   ETP_MIN,
   formaterCHF,
@@ -12,13 +13,27 @@ import {
   LIGNES_REFERENCE,
   prixCatalogue,
   prixLancement,
+  PRIX_PAR_ETP_SUPPLEMENTAIRE,
   SEUIL_DEVIS,
+  SOCLE_CHF,
 } from "./tarifs"
+
+// Prix catalogue avant arrondi, reconstruit depuis les constantes du module.
+// Sert aux tests de monotonie : c'est sur cette valeur exacte que les
+// propriétés strictes se vérifient, l'arrondi à la centaine introduisant par
+// nature des paliers de quelques francs (voir le bloc « monotonie »).
+function prixBrut(etp: number): number {
+  return etp <= ETP_INCLUS
+    ? SOCLE_CHF
+    : SOCLE_CHF + PRIX_PAR_ETP_SUPPLEMENTAIRE * (etp - ETP_INCLUS)
+}
 
 // Le tableau publié sur /tarifs. Ces valeurs sont la référence commerciale :
 // si un changement de barème les fait bouger, c'est ici que ça doit casser.
 const TABLEAU_REFERENCE = [
-  { etp: 30, catalogue: 3000, lancement: 2100, coutParEtp: "100" },
+  { etp: 10, catalogue: 2000, lancement: 1400, coutParEtp: "200" },
+  { etp: 20, catalogue: 2300, lancement: 1700, coutParEtp: "115" },
+  { etp: 30, catalogue: 2500, lancement: 1800, coutParEtp: "83" },
   { etp: 50, catalogue: 3000, lancement: 2100, coutParEtp: "60" },
   { etp: 75, catalogue: 3700, lancement: 2600, coutParEtp: "49" },
   { etp: 100, catalogue: 4300, lancement: 3100, coutParEtp: "43" },
@@ -49,20 +64,22 @@ describe("tableau de référence", () => {
 })
 
 describe("prixCatalogue", () => {
-  it("applique le seul socle jusqu'à 50 ETP inclus", () => {
-    expect(prixCatalogue(1)).toBe(3000)
-    expect(prixCatalogue(30)).toBe(3000)
-    expect(prixCatalogue(50)).toBe(3000)
+  it("applique le seul socle jusqu'à 10 ETP inclus", () => {
+    expect(prixCatalogue(1)).toBe(2000)
+    expect(prixCatalogue(5)).toBe(2000)
+    expect(prixCatalogue(10)).toBe(2000)
   })
 
-  // Borne 50/51 : le premier ETP supplémentaire coûte 25 francs, arrondis à la
-  // centaine supérieure. Un barème par tranches ferait ici un saut de 2'000.
-  it("franchit la borne 50/51 sans effet de seuil", () => {
-    expect(prixCatalogue(51)).toBe(3100)
-    expect(prixCatalogue(51) - prixCatalogue(50)).toBe(100)
+  // Borne 10/11 : le premier ETP supplémentaire coûte 25 CHF, arrondis à la
+  // centaine supérieure. Un barème par tranches ferait ici un saut brutal.
+  it("franchit la borne 10/11 sans effet de seuil", () => {
+    expect(prixCatalogue(11)).toBe(2100)
+    expect(prixCatalogue(11) - prixCatalogue(10)).toBe(100)
   })
 
   it("croît continûment au-delà du socle", () => {
+    expect(prixCatalogue(30)).toBe(2500)
+    expect(prixCatalogue(50)).toBe(3000)
     expect(prixCatalogue(75)).toBe(3700)
     expect(prixCatalogue(100)).toBe(4300)
     expect(prixCatalogue(150)).toBe(5500)
@@ -76,24 +93,16 @@ describe("prixCatalogue", () => {
       expect(prixCatalogue(etp) % 100).toBe(0)
     }
   })
-
-  it("est monotone croissant", () => {
-    for (let etp = ETP_MIN + 1; etp <= SEUIL_DEVIS; etp++) {
-      expect(prixCatalogue(etp)).toBeGreaterThanOrEqual(prixCatalogue(etp - 1))
-    }
-  })
 })
 
 describe("prixLancement", () => {
   it("applique 30 % de remise sur le catalogue déjà arrondi", () => {
-    expect(prixLancement(1)).toBe(2100)
+    expect(prixLancement(1)).toBe(1400)
+    expect(prixLancement(10)).toBe(1400)
+    expect(prixLancement(11)).toBe(1500)
+    expect(prixLancement(30)).toBe(1800)
     expect(prixLancement(50)).toBe(2100)
-    expect(prixLancement(51)).toBe(2200)
-    expect(prixLancement(75)).toBe(2600)
     expect(prixLancement(100)).toBe(3100)
-    expect(prixLancement(150)).toBe(3900)
-    expect(prixLancement(200)).toBe(4800)
-    expect(prixLancement(300)).toBe(6600)
     expect(prixLancement(400)).toBe(8300)
   })
 
@@ -110,10 +119,55 @@ describe("prixLancement", () => {
   })
 })
 
+// ─── Monotonie : la garantie « sans effet de seuil », balayée sur 1–400 ─────
+//
+// Les propriétés strictes se testent sur le prix exact (avant arrondi) : sur
+// les valeurs arrondies à la centaine, la monotonie stricte point par point est
+// mathématiquement impossible — le prix stagne entre deux paliers (2'100 CHF de
+// 11 à 14 ETP), et le coût par ETP arrondi remonte de quelques centimes au
+// passage d'un palier (2'400/26 = 92.31 < 2'500/27 = 92.59). L'arrondi borne
+// ces effets à moins de 100 CHF, ce que vérifient les tests sur les valeurs
+// arrondies.
+describe("monotonie sur l'intervalle 1–400", () => {
+  it("le prix exact ne décroît jamais, et croît strictement au-delà du socle", () => {
+    for (let etp = ETP_MIN + 1; etp <= SEUIL_DEVIS; etp++) {
+      if (etp <= ETP_INCLUS) {
+        expect(prixBrut(etp)).toBe(prixBrut(etp - 1))
+      } else {
+        expect(prixBrut(etp)).toBeGreaterThan(prixBrut(etp - 1))
+      }
+    }
+  })
+
+  it("le coût exact par ETP décroît strictement", () => {
+    for (let etp = ETP_MIN + 1; etp <= SEUIL_DEVIS; etp++) {
+      expect(prixBrut(etp) / etp).toBeLessThan(prixBrut(etp - 1) / (etp - 1))
+    }
+  })
+
+  it("le prix arrondi ne décroît jamais et ne saute jamais plus d'un palier de 100", () => {
+    for (let etp = ETP_MIN + 1; etp <= SEUIL_DEVIS; etp++) {
+      const saut = prixCatalogue(etp) - prixCatalogue(etp - 1)
+      expect(saut).toBeGreaterThanOrEqual(0)
+      expect(saut).toBeLessThanOrEqual(100)
+    }
+  })
+
+  it("le coût par ETP arrondi décroît strictement sur les lignes du tableau", () => {
+    const couts = LIGNES_REFERENCE.map((etp) => {
+      const tarif = calculerTarif(etp)
+      return tarif.surDevis ? Infinity : tarif.coutParEtpCatalogue
+    })
+
+    for (let i = 1; i < couts.length; i++) {
+      expect(couts[i]).toBeLessThan(couts[i - 1])
+    }
+  })
+})
+
 describe("seuil de devis", () => {
   it("chiffre encore 400 ETP", () => {
-    const tarif = calculerTarif(400)
-    expect(tarif.surDevis).toBe(false)
+    expect(calculerTarif(400).surDevis).toBe(false)
   })
 
   it("bascule sur devis dès 401 ETP", () => {
@@ -131,17 +185,6 @@ describe("coûts par ETP", () => {
     expect(tarif.coutParEtpLancement).toBe(31)
   })
 
-  it("décroît quand l'institution grandit", () => {
-    const couts = LIGNES_REFERENCE.map((etp) => {
-      const tarif = calculerTarif(etp)
-      return tarif.surDevis ? Infinity : tarif.coutParEtpCatalogue
-    })
-
-    for (let i = 1; i < couts.length; i++) {
-      expect(couts[i]).toBeLessThanOrEqual(couts[i - 1])
-    }
-  })
-
   it("dérive le coût mensuel du tarif de lancement", () => {
     const tarif = calculerTarif(100)
     if (tarif.surDevis) throw new Error("100 ETP devrait être chiffré")
@@ -152,15 +195,16 @@ describe("coûts par ETP", () => {
 
 describe("formatage", () => {
   it("sépare les milliers par une apostrophe suisse", () => {
-    expect(formaterCHF(3000)).toBe("3’000")
+    expect(formaterCHF(2000)).toBe("2’000")
     expect(formaterCHF(11800)).toBe("11’800")
     expect(formaterCHF(900)).toBe("900")
   })
 
   it("affiche le coût par ETP au centime seulement s'il tombe juste", () => {
-    expect(formaterCoutParEtp(100)).toBe("100")
+    expect(formaterCoutParEtp(200)).toBe("200")
+    expect(formaterCoutParEtp(115)).toBe("115")
     expect(formaterCoutParEtp(29.5)).toBe("29.50")
-    expect(formaterCoutParEtp(3700 / 75)).toBe("49")
+    expect(formaterCoutParEtp(2500 / 30)).toBe("83")
     expect(formaterCoutParEtp(5500 / 150)).toBe("37")
   })
 
