@@ -138,14 +138,16 @@ export default function AdminInstitutionDetailPage() {
   }, [institutionId, router])
 
   const sauvegarderInfos = async () => {
+    const codeAcces = formInfos.code_acces.trim()
+    if (!codeAcces) return
     setSaveInfosLoading(true)
     await supabase.from("institutions").update({
       nom: formInfos.nom,
       statut: formInfos.statut,
       licence_expiration: formInfos.licence_expiration || null,
-      code_acces: formInfos.code_acces,
+      code_acces: codeAcces,
     }).eq("id", institutionId)
-    setInstitution((prev) => prev ? { ...prev, nom: formInfos.nom, statut: formInfos.statut, code_acces: formInfos.code_acces, licence_expiration: formInfos.licence_expiration || null } : prev)
+    setInstitution((prev) => prev ? { ...prev, nom: formInfos.nom, statut: formInfos.statut, code_acces: codeAcces, licence_expiration: formInfos.licence_expiration || null } : prev)
     setSaveInfosLoading(false)
     setSaveInfosOk(true)
     setTimeout(() => setSaveInfosOk(false), 2000)
@@ -309,8 +311,8 @@ export default function AdminInstitutionDetailPage() {
                 <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Code d'accès</label>
                 <div className="flex gap-2">
                   <input type="text" value={formInfos.code_acces}
-                    onChange={(e) => setFormInfos({ ...formInfos, code_acces: e.target.value.toUpperCase().slice(0, 8) })}
-                    className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] uppercase" maxLength={8} />
+                    onChange={(e) => setFormInfos({ ...formInfos, code_acces: e.target.value.trimStart().slice(0, 20) })}
+                    className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]" maxLength={20} />
                   <button onClick={() => setFormInfos({ ...formInfos, code_acces: genererCode() })}
                     className="px-3 py-2 text-xs rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium">
                     Régénérer

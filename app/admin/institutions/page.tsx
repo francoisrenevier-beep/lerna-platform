@@ -107,12 +107,13 @@ export default function AdminInstitutionsPage() {
 
   const creerInstitution = async () => {
     if (!form.nom.trim()) { setFormError("Le nom est requis."); return }
+    if (!form.code_acces.trim()) { setFormError("Le code d'accès est requis."); return }
     setFormLoading(true)
     setFormError("")
 
     const { error } = await supabase.from("institutions").insert({
       nom: form.nom.trim(),
-      code_acces: form.code_acces,
+      code_acces: form.code_acces.trim(),
       statut: form.statut,
       licence_expiration: form.licence_expiration || null,
     })
@@ -285,14 +286,14 @@ export default function AdminInstitutionsPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Code d'accès (8 caractères)</label>
+                <label className="block text-sm font-medium text-[#1B2D5B] mb-1">Code d'accès (20 caractères max)</label>
                 <div className="flex gap-2">
                   <input
                     type="text"
                     value={form.code_acces}
-                    onChange={(e) => setForm({ ...form, code_acces: e.target.value.toUpperCase().slice(0, 8) })}
-                    className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#3DBFA0] uppercase"
-                    maxLength={8}
+                    onChange={(e) => setForm({ ...form, code_acces: e.target.value.trimStart().slice(0, 20) })}
+                    className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#3DBFA0]"
+                    maxLength={20}
                   />
                   <button
                     onClick={() => setForm({ ...form, code_acces: genererCode() })}

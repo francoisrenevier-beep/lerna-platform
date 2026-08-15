@@ -431,8 +431,8 @@ export default function ConnexionPage() {
               value={codeInstitution}
               onChange={(e) => setCodeInstitution(e.target.value)}
               placeholder="Ex: Learna2024"
-              className="uppercase"
-              hint="Code fourni par votre institution"
+              className="font-mono"
+              hint="Code fourni par votre institution (majuscules/minuscules indifférentes)"
               autoComplete="off"
             />
             <PasswordField

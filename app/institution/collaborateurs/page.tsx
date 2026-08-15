@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import { InstitutionSidebar } from "@/components/InstitutionSidebar"
 import { PageHeader } from "@/components/PageHeader"
-import { Search, Copy, Check, Download } from "lucide-react"
+import { Search, Copy, Check, Download, X, BookOpen, Award } from "lucide-react"
 
 type Collaborateur = {
   profil_id: string
@@ -20,6 +20,30 @@ type Collaborateur = {
 type ModalConfirmation = {
   profilId: string
   nomComplet: string
+}
+
+type FormationEnCours = {
+  formation_id: string
+  titre: string
+  nb_modules_termines: number
+  nb_modules_total: number
+  derniere_activite: string | null
+}
+
+type FormationTerminee = {
+  formation_id: string
+  titre: string
+  date_obtention: string | null
+}
+
+type DetailCollaborateur = {
+  profilId: string
+  nomComplet: string
+}
+
+type DonneesDetail = {
+  enCours: FormationEnCours[]
+  terminees: FormationTerminee[]
 }
 
 type FiltreStatut = "tous" | "actif" | "inactif"
@@ -44,7 +68,76 @@ export default function CollaborateursPage() {
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
   const [modal, setModal] = useState<ModalConfirmation | null>(null)
+  const [detail, setDetail] = useState<DetailCollaborateur | null>(null)
+  const [detailData, setDetailData] = useState<DonneesDetail | null>(null)
+  const [detailLoading, setDetailLoading] = useState(false)
   const router = useRouter()
+
+  const ouvrirDetail = async (c: Collaborateur) => {
+    setDetail({ profilId: c.profil_id, nomComplet: `${c.prenom} ${c.nom}` })
+    setDetailData(null)
+    setDetailLoading(true)
+
+    const [{ data: progression }, { data: attestations }] = await Promise.all([
+      supabase
+        .from("progression")
+        .select("formation_id, module_id, statut, updated_at")
+        .eq("profil_id", c.profil_id),
+      supabase
+        .from("attestations")
+        .select("formation_id, created_at")
+        .eq("profil_id", c.profil_id),
+    ])
+
+    const prog = progression ?? []
+    const atts = attestations ?? []
+    const formationIds = [...new Set([...prog.map((p) => p.formation_id), ...atts.map((a) => a.formation_id)])]
+
+    if (formationIds.length === 0) {
+      setDetailData({ enCours: [], terminees: [] })
+      setDetailLoading(false)
+      return
+    }
+
+    const [{ data: formations }, { data: modules }] = await Promise.all([
+      supabase.from("formations").select("id, titre").in("id", formationIds),
+      supabase.from("modules").select("id, formation_id").in("formation_id", formationIds),
+    ])
+
+    const titreMap = new Map(formations?.map((f) => [f.id, f.titre]) ?? [])
+    const modulesTermines = new Set(prog.filter((p) => p.statut === "termine").map((p) => p.module_id))
+
+    const terminees: FormationTerminee[] = atts
+      .map((a) => ({
+        formation_id: a.formation_id,
+        titre: titreMap.get(a.formation_id) || "Formation",
+        date_obtention: a.created_at ?? null,
+      }))
+      .sort((a, b) => (b.date_obtention || "").localeCompare(a.date_obtention || ""))
+
+    const formationsTerminees = new Set(atts.map((a) => a.formation_id))
+
+    const enCours: FormationEnCours[] = formationIds
+      .filter((fId) => !formationsTerminees.has(fId))
+      .map((fId) => {
+        const modsFormation = modules?.filter((m) => m.formation_id === fId) ?? []
+        const dates = prog
+          .filter((p) => p.formation_id === fId)
+          .map((p) => p.updated_at)
+          .filter(Boolean) as string[]
+        return {
+          formation_id: fId,
+          titre: titreMap.get(fId) || "Formation",
+          nb_modules_termines: modsFormation.filter((m) => modulesTermines.has(m.id)).length,
+          nb_modules_total: modsFormation.length,
+          derniere_activite: dates.length > 0 ? dates.sort().at(-1)! : null,
+        }
+      })
+      .sort((a, b) => (b.derniere_activite || "").localeCompare(a.derniere_activite || ""))
+
+    setDetailData({ enCours, terminees })
+    setDetailLoading(false)
+  }
 
   const loadCollaborateurs = async (instId: string) => {
     const { data: ips, error: ipsError } = await supabase
@@ -293,14 +386,20 @@ export default function CollaborateursPage() {
                     className={`border-b border-gray-50 last:border-0 transition-colors hover:bg-gray-50/50 ${c.statut === "inactif" ? "opacity-40" : ""}`}
                   >
                     <td className="px-4 py-3">
-                      <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => ouvrirDetail(c)}
+                        className="flex items-center gap-3 text-left group"
+                        title="Voir les formations de ce collaborateur"
+                      >
                         <div className="w-8 h-8 rounded-full bg-[#3DBFA0]/10 flex items-center justify-center flex-shrink-0">
                           <span className="text-[#3DBFA0] text-xs font-bold">
                             {c.prenom.charAt(0)}{c.nom.charAt(0)}
                           </span>
                         </div>
-                        <p className="font-medium text-[#1B2D5B]">{c.prenom} {c.nom}</p>
-                      </div>
+                        <p className="font-medium text-[#1B2D5B] group-hover:text-[#3DBFA0] group-hover:underline transition-colors">
+                          {c.prenom} {c.nom}
+                        </p>
+                      </button>
                     </td>
                     <td className="px-4 py-3 text-gray-500 text-sm">{c.secteur || <span className="text-gray-300 italic">—</span>}</td>
                     <td className="px-4 py-3 text-gray-500">{dateFormat(c.created_at)}</td>
@@ -346,6 +445,121 @@ export default function CollaborateursPage() {
           </div>
         </div>
       </main>
+
+      {/* Panneau de détail : formations du collaborateur */}
+      {detail && (
+        <div
+          className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4"
+          onClick={() => setDetail(null)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[85vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between px-6 pt-6 pb-4 border-b border-gray-100">
+              <div>
+                <p className="text-xs font-semibold text-[#3DBFA0] uppercase tracking-wide">Parcours de formation</p>
+                <h3 className="text-lg font-bold text-[#1B2D5B]">{detail.nomComplet}</h3>
+              </div>
+              <button
+                onClick={() => setDetail(null)}
+                className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+                aria-label="Fermer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto px-6 py-5 space-y-6">
+              {detailLoading && (
+                <div className="space-y-3">
+                  <div className="h-4 w-40 bg-gray-200 rounded animate-pulse" />
+                  <div className="h-16 bg-gray-100 rounded-xl animate-pulse" />
+                  <div className="h-16 bg-gray-100 rounded-xl animate-pulse" />
+                </div>
+              )}
+
+              {!detailLoading && detailData && (
+                <>
+                  <section>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Award className="w-4 h-4 text-[#3DBFA0]" />
+                      <h4 className="text-sm font-semibold text-[#1B2D5B]">
+                        Formations terminées
+                        <span className="ml-1.5 text-gray-400 font-normal">({detailData.terminees.length})</span>
+                      </h4>
+                    </div>
+                    {detailData.terminees.length === 0 ? (
+                      <p className="text-sm text-gray-400 italic">Aucune formation terminée pour le moment.</p>
+                    ) : (
+                      <ul className="space-y-2">
+                        {detailData.terminees.map((f) => (
+                          <li
+                            key={f.formation_id}
+                            className="flex items-start justify-between gap-3 rounded-xl border border-[#3DBFA0]/20 bg-[#3DBFA0]/5 px-3.5 py-2.5"
+                          >
+                            <span className="text-sm font-medium text-[#1B2D5B]">{f.titre}</span>
+                            <span className="text-xs text-gray-500 whitespace-nowrap pt-0.5">
+                              {dateFormat(f.date_obtention)}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
+
+                  <section>
+                    <div className="flex items-center gap-2 mb-3">
+                      <BookOpen className="w-4 h-4 text-[#1B2D5B]" />
+                      <h4 className="text-sm font-semibold text-[#1B2D5B]">
+                        Formations en cours
+                        <span className="ml-1.5 text-gray-400 font-normal">({detailData.enCours.length})</span>
+                      </h4>
+                    </div>
+                    {detailData.enCours.length === 0 ? (
+                      <p className="text-sm text-gray-400 italic">Aucune formation en cours.</p>
+                    ) : (
+                      <ul className="space-y-2">
+                        {detailData.enCours.map((f) => (
+                          <li key={f.formation_id} className="rounded-xl border border-gray-100 bg-gray-50/60 px-3.5 py-2.5">
+                            <div className="flex items-start justify-between gap-3">
+                              <span className="text-sm font-medium text-[#1B2D5B]">{f.titre}</span>
+                              <span className="text-xs text-gray-500 whitespace-nowrap pt-0.5">
+                                {f.nb_modules_total > 0
+                                  ? `${f.nb_modules_termines}/${f.nb_modules_total} modules`
+                                  : "Inscrit"}
+                              </span>
+                            </div>
+                            {f.nb_modules_total > 0 && (
+                              <div className="mt-2 h-1.5 w-full rounded-full bg-gray-200 overflow-hidden">
+                                <div
+                                  className="h-full rounded-full bg-[#3DBFA0]"
+                                  style={{ width: `${Math.round((f.nb_modules_termines / f.nb_modules_total) * 100)}%` }}
+                                />
+                              </div>
+                            )}
+                            {f.derniere_activite && (
+                              <p className="mt-1.5 text-xs text-gray-400">
+                                Dernière activité : {dateFormat(f.derniere_activite)}
+                              </p>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
+
+                  {detailData.terminees.length === 0 && detailData.enCours.length === 0 && (
+                    <p className="text-sm text-gray-500">
+                      Ce collaborateur n'a encore commencé aucune formation.
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Modal de confirmation */}
       {modal && (
