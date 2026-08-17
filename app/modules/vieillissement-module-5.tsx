@@ -16,7 +16,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
         categorie="Handicap et vieillissement"
         titre="Coordination interinstitutionnelle"
         titrePart2="en Suisse romande"
-        sousTitre="Cartographie des acteurs, outils de coordination, gestion des transitions — pour que les mondes communicent."
+        sousTitre="Cartographie des acteurs, outils de coordination, gestion des transitions, pour que les mondes communicent."
         duree="40 minutes"
         niveau="Confirmé"
       />
@@ -41,7 +41,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Cartographie des acteurs en Suisse romande">
-          <HighlightBox label="Le médecin référent — pivot incontournable" couleur="bleu">
+          <HighlightBox label="Le médecin référent : pivot incontournable" couleur="bleu">
             <Texte>Dans le système de santé suisse, le médecin de famille (ou médecin référent en contexte institutionnel) joue un rôle central de coordination médicale. C'est lui qui coordonne les différents intervenants, prescrit les bilans spécialisés et assure la continuité des soins dans le temps.</Texte>
             <Texte>La relation avec le médecin référent doit être <strong>active et bidirectionnelle</strong> : l'institution transmet ses observations cliniques, le médecin informe des diagnostics et traitements. Cette communication ne devrait pas se limiter aux situations d'urgence.</Texte>
           </HighlightBox>
@@ -58,9 +58,9 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
                 contenu: [
                   "Mobilité, transferts, prévention des chutes, aides techniques, adaptation des gestes du quotidien",
                   "Évaluation spécialisée des syndromes gériatriques : fragilité, démence, chutes, dénutrition",
-                  "Se déplacent en institution pour des évaluations — adapté aux personnes fragiles",
+                  "Se déplacent en institution pour des évaluations, adapté aux personnes fragiles",
                   "Troubles psychiques se complexifiant avec l'âge",
-                  "Démarches sociales, administratives, défense des droits — handicap",
+                  "Démarches sociales, administratives, défense des droits : handicap",
                   "Services pour personnes âgées : aide à domicile, soutien aux aidants, activités sociales"
                 ]
               },
@@ -78,7 +78,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
             ]}
           />
 
-          <HighlightBox label="L'ergothérapie et la physiothérapie — des partenaires à mobiliser" couleur="vert">
+          <HighlightBox label="L'ergothérapie et la physiothérapie : des partenaires à mobiliser" couleur="vert">
             <Texte>Pour les institutions dont les résidents perdent progressivement en autonomie motrice, l'ergothérapie et la physiothérapie sont des partenaires essentiels : travail de la mobilité et des transferts, prévention des chutes, adaptation des gestes du quotidien, évaluation des aides techniques et de l'aménagement des espaces. Elles sont prescrites par un médecin, prises en charge par l'assurance-maladie de base, et peuvent intervenir sur le lieu de vie de la personne.</Texte>
             <Texte>Ces interventions permettent souvent de <strong>maintenir une personne dans son institution d'origine plus longtemps</strong>, en évitant un transfert vers un EMS.</Texte>
           </HighlightBox>
@@ -91,7 +91,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
 
           <Texte>La formalisation des partenariats n'est pas de la bureaucratie. C'est une <strong>protection pour la personne accompagnée et pour les équipes</strong>. Elle garantit que la coordination fonctionne indépendamment des personnes en poste.</Texte>
 
-          <HighlightBox label="Les conventions de collaboration — quoi formaliser ?" couleur="bleu">
+          <HighlightBox label="Les conventions de collaboration, quoi formaliser ?" couleur="bleu">
             <Texte>Une convention de collaboration est un document signé entre deux institutions qui formalise : qui fait quoi, comment s'échangent les informations, comment se déroulent les interventions, quels sont les contacts à appeler, comment se gère la facturation.</Texte>
             <Texte>Les conventions prioritaires à établir :</Texte>
             <Liste items={[
@@ -101,8 +101,8 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
             ]} />
           </HighlightBox>
 
-          <HighlightBox label="Le document de transmission — carte d'identité pour les transitions" couleur="vert">
-            <Texte>Lorsqu'une personne change de structure — même temporairement pour une hospitalisation — elle emporte avec elle son histoire. Cette histoire ne doit pas rester dans la tête des professionnels. Un bon document de transmission comprend :</Texte>
+          <HighlightBox label="Le document de transmission : carte d'identité pour les transitions" couleur="vert">
+            <Texte>Lorsqu'une personne change de structure, même temporairement pour une hospitalisation, elle emporte avec elle son histoire. Cette histoire ne doit pas rester dans la tête des professionnels. Un bon document de transmission comprend :</Texte>
             <Liste items={[
               "Informations d'identité et de contexte : diagnostic, histoire institutionnelle, personnes de référence",
               "Description de l'état fonctionnel actuel : ce que la personne fait seule, ce qui nécessite de l'aide",
@@ -165,7 +165,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>La coordination interinstitutionnelle n'est pas une formalité optionnelle. C'est une condition de continuité et de qualité pour les personnes accompagnées. En Suisse romande, le paysage institutionnel est riche — il faut le connaître, le mobiliser, et l'organiser via des conventions formalisées et des outils de transmission rigoureux.</Texte>
+          <Texte>La coordination interinstitutionnelle n'est pas une formalité optionnelle. C'est une condition de continuité et de qualité pour les personnes accompagnées. En Suisse romande, le paysage institutionnel est riche : il faut le connaître, le mobiliser, et l'organiser via des conventions formalisées et des outils de transmission rigoureux.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le médecin référent est le pivot : la communication doit être bidirectionnelle et régulière",
@@ -196,7 +196,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
           {
             question: "À quelles conditions l'ergothérapie ou la physiothérapie peuvent-elles intervenir auprès d'un résident ?",
             reponses: [
-              "Jamais en institution — ces prestations sont réservées aux personnes vivant à domicile",
+              "Jamais en institution, ces prestations sont réservées aux personnes vivant à domicile",
               "Uniquement après une hospitalisation",
               "Sur prescription médicale : le médecin évalue l'indication et les prestations sont prises en charge par l'assurance-maladie de base",
               "Uniquement à la demande et aux frais des familles"
@@ -232,7 +232,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Pro Infirmis est cantonale, Pro Senectute est nationale",
               "Pro Infirmis intervient dans le handicap (droits, démarches sociales), Pro Senectute dans la vieillesse (aide domicile, soutien aidants)",
               "Pro Infirmis s'occupe des adultes, Pro Senectute des enfants",
-              "Il n'y a pas de différence — les deux organisations ont été fusionnées"
+              "Il n'y a pas de différence : les deux organisations ont été fusionnées"
             ],
             bonneReponse: 1,
             explication: "Pro Infirmis est spécialisée dans le handicap : démarches sociales, administratives, défense des droits, soutien aux familles. Pro Senectute est spécialisée dans la vieillesse : aide à domicile, soutien aux aidants, activités sociales. La coordination entre ces deux organisations est encore insuffisante dans de nombreuses régions."
@@ -246,7 +246,7 @@ export function Module5Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Parce que les EMS refusent souvent les personnes en situation de handicap"
             ],
             bonneReponse: 1,
-            explication: "Pour une personne ayant vécu 30 ans dans le même endroit, la perte de tous ses repères — personnes connues, rituels, espaces familiers — peut être profondément déstabilisante. Pour une personne avec difficultés cognitives ou relationnelles, ce changement peut constituer un traumatisme véritable si non préparé."
+            explication: "Pour une personne ayant vécu 30 ans dans le même endroit, la perte de tous ses repères (personnes connues, rituels, espaces familiers) peut être profondément déstabilisante. Pour une personne avec difficultés cognitives ou relationnelles, ce changement peut constituer un traumatisme véritable si non préparé."
           }
         ]}
         onValiderModule={onValiderModule}

@@ -335,7 +335,7 @@ export default function ProgressionPage() {
             recs.push({
               icone: "📚",
               titre: nextInParcours.titre,
-              detail: `Vous avez complété « ${f.titre} » — poursuivez avec la formation suivante du parcours.`,
+              detail: `Vous avez complété « ${f.titre} », poursuivez avec la formation suivante du parcours.`,
               href: `/formations/${nextInParcours.slug}`,
               cta: "Voir la formation",
             })

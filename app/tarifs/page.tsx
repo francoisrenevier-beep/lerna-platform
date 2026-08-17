@@ -19,7 +19,7 @@ import {
 // un montant faux dans les résultats de recherche.
 export const metadata: Metadata = {
   title:
-    "Tarifs — Learna, formation continue pour les institutions sociales et médico-sociales",
+    "Tarifs : Learna, formation continue pour les institutions sociales et médico-sociales",
   description: `Licence annuelle Learna : accès au catalogue pour tous vos collaborateurs et une formation propre à votre institution. Tarif proportionnel, dès ${formaterCHF(SOCLE_CHF)} CHF par an.`,
 }
 

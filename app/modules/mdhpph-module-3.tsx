@@ -23,9 +23,9 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
       <div className="max-w-3xl mx-auto px-8 py-12">
 
-        <SectionModule eyebrow="Fil rouge" titre="Lena — la crise de l'atelier cuisine">
+        <SectionModule eyebrow="Fil rouge" titre="Lena : la crise de l'atelier cuisine">
           <AccrocheScenario type="scenario">
-            <p>Suite à des travaux dans le foyer, l'atelier cuisine de Lena a été déplacé dans un local provisoire : lumineux mais bruyant, avec des ventilations intenses qui dégagent des odeurs fortes. Lena, qui n'a jamais manqué une séance depuis trois ans, refuse désormais d'y aller. Elle manifeste des comportements d'agitation et d'évitement en début de semaine — exactement les jours où l'atelier est programmé. L'équipe est désemparée. Qu'est-ce que le MDH-PPH permet de voir ici que le regard clinique habituel manque ?</p>
+            <p>Suite à des travaux dans le foyer, l'atelier cuisine de Lena a été déplacé dans un local provisoire : lumineux mais bruyant, avec des ventilations intenses qui dégagent des odeurs fortes. Lena, qui n'a jamais manqué une séance depuis trois ans, refuse désormais d'y aller. Elle manifeste des comportements d'agitation et d'évitement en début de semaine, exactement les jours où l'atelier est programmé. L'équipe est désemparée. Qu'est-ce que le MDH-PPH permet de voir ici que le regard clinique habituel manque ?</p>
           </AccrocheScenario>
         </SectionModule>
 
@@ -42,40 +42,40 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="La démarche d'analyse en trois étapes">
-          <Texte>L'analyse MDH-PPH suit une séquence en trois étapes. Aucune intervention ne devrait précéder leur achèvement — car intervenir avant d'avoir compris l'interaction, c'est risquer d'agir sur la mauvaise cible.</Texte>
+          <Texte>L'analyse MDH-PPH suit une séquence en trois étapes. Aucune intervention ne devrait précéder leur achèvement, car intervenir avant d'avoir compris l'interaction, c'est risquer d'agir sur la mauvaise cible.</Texte>
 
           <SchemaEtapes
             titre="Les trois étapes de l'analyse MDH-PPH"
             etapes={[
-              { niveau: "Étape 1", nom: "Identifier les facteurs personnels", definition: "Collecter des informations sur les systèmes organiques (déficiences constatées), les aptitudes (ce que la personne peut ou ne peut pas accomplir) et surtout les facteurs identitaires (histoire, valeurs, priorités de vie). Cette dernière dimension exige un entretien qualitatif approfondi — souvent négligé au profit des données médicales." },
+              { niveau: "Étape 1", nom: "Identifier les facteurs personnels", definition: "Collecter des informations sur les systèmes organiques (déficiences constatées), les aptitudes (ce que la personne peut ou ne peut pas accomplir) et surtout les facteurs identitaires (histoire, valeurs, priorités de vie). Cette dernière dimension exige un entretien qualitatif approfondi, souvent négligé au profit des données médicales." },
               { niveau: "Étape 2", nom: "Cartographier les facteurs environnementaux", definition: "Pour chaque sphère (micro, méso, macro), lister les obstacles et les facilitateurs, en précisant s'ils sont physiques ou sociaux. Une grille structurée aide à ne rien oublier : espace de vie, équipes, transports, réseaux de soutien, règles institutionnelles, ressources communautaires." },
               { niveau: "Étape 3", nom: "Analyser les habitudes de vie", definition: "Pour chacune des douze catégories, évaluer le niveau de réalisation (de la pleine participation à la non-réalisation) et le niveau de satisfaction. Les habitudes de vie pour lesquelles la personne exprime à la fois une forte importance et une forte insatisfaction deviennent les priorités du plan d'accompagnement." },
             ]}
-            note="C'est seulement après ces trois étapes qu'il devient possible d'identifier les interactions clés — là où les facteurs personnels rencontrent les obstacles environnementaux pour produire une situation de handicap"
+            note="C'est seulement après ces trois étapes qu'il devient possible d'identifier les interactions clés, là où les facteurs personnels rencontrent les obstacles environnementaux pour produire une situation de handicap"
           />
 
-          <HighlightBox label="L'analyse du cas de Lena — étape par étape" couleur="bleu">
-            <Texte><strong>Étape 1 — Facteurs personnels :</strong> Trisomie 21, hypersensibilité sensorielle (bruits forts, odeurs intenses), aptitudes langagières réduites, mémoire procédurale préservée. Facteur identitaire central : la cuisine est liée à des rituels familiaux profonds, c'est le lieu où Lena se sent compétente et reconnue.</Texte>
-            <Texte><strong>Étape 2 — Environnement :</strong> Obstacle physique micro : le nouveau local est inadapté sensoriellement (bruit, odeurs). Facilitateur perdu : l'ancien local calme et familier était un facilitateur physique majeur pour Lena.</Texte>
-            <Texte><strong>Étape 3 — Habitudes de vie :</strong> L'habitude de vie « loisirs » est non réalisée depuis les travaux. La satisfaction de Lena est nulle. Cette habitude de vie est la plus importante pour elle — et la plus insatisfaisante actuellement. C'est donc la priorité absolue du plan d'accompagnement.</Texte>
+          <HighlightBox label="L'analyse du cas de Lena : étape par étape" couleur="bleu">
+            <Texte><strong>Étape 1, Facteurs personnels :</strong> Trisomie 21, hypersensibilité sensorielle (bruits forts, odeurs intenses), aptitudes langagières réduites, mémoire procédurale préservée. Facteur identitaire central : la cuisine est liée à des rituels familiaux profonds, c'est le lieu où Lena se sent compétente et reconnue.</Texte>
+            <Texte><strong>Étape 2, Environnement :</strong> Obstacle physique micro : le nouveau local est inadapté sensoriellement (bruit, odeurs). Facilitateur perdu : l'ancien local calme et familier était un facilitateur physique majeur pour Lena.</Texte>
+            <Texte><strong>Étape 3, Habitudes de vie :</strong> L'habitude de vie « loisirs » est non réalisée depuis les travaux. La satisfaction de Lena est nulle. Cette habitude de vie est la plus importante pour elle, et la plus insatisfaisante actuellement. C'est donc la priorité absolue du plan d'accompagnement.</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Situations complexes : comportements défis et santé mentale">
-          <Texte>Le MDH-PPH est particulièrement puissant dans l'analyse des situations dites « complexes » : comportements défis, troubles du comportement associés à une pathologie psychiatrique, crises d'agitation ou d'automutilation. Ces situations sont naturellement abordées d'abord sous l'angle clinique — un réflexe légitime, et parfois indispensable : écarter une cause somatique (une douleur, un problème de santé non exprimé) est toujours une première vérification nécessaire. Le MDH-PPH n'écarte pas cette lecture : il lui ajoute une seconde grille, complémentaire, qui interroge systématiquement l'environnement.</Texte>
+          <Texte>Le MDH-PPH est particulièrement puissant dans l'analyse des situations dites « complexes » : comportements défis, troubles du comportement associés à une pathologie psychiatrique, crises d'agitation ou d'automutilation. Ces situations sont naturellement abordées d'abord sous l'angle clinique, un réflexe légitime, et parfois indispensable : écarter une cause somatique (une douleur, un problème de santé non exprimé) est toujours une première vérification nécessaire. Le MDH-PPH n'écarte pas cette lecture : il lui ajoute une seconde grille, complémentaire, qui interroge systématiquement l'environnement.</Texte>
 
           <PullQuote>
-            Lorsqu'un résident s'agite, un professionnel attentif se demande : « Que s'est-il passé dans son environnement ? Qu'est-ce qui, autour de lui, a changé ? » — C'est exactement la logique du MDH-PPH.
+            Lorsqu'un résident s'agite, un professionnel attentif se demande : « Que s'est-il passé dans son environnement ? Qu'est-ce qui, autour de lui, a changé ? » : C'est exactement la logique du MDH-PPH.
           </PullQuote>
 
           <Texte>Les comportements défis sont souvent des indicateurs d'une situation de handicap non résolue : une habitude de vie importante pour la personne est entravée par un obstacle environnemental qu'elle ne peut pas nommer verbalement ou résoudre par elle-même. Le comportement devient le seul langage disponible pour exprimer cette inadéquation.</Texte>
 
-          <ConceptBox label="Lena — relire l'agitation" titre="Ce que le comportement dit réellement">
-            <Texte>L'agitation de Lena en début de semaine n'est pas une aggravation de sa trisomie. C'est une réponse comportementale à une situation de handicap environnementale : l'incapacité d'accéder à une habitude de vie valorisée (la cuisine) à cause d'un obstacle physique micro (le local inadapté). Une fois l'obstacle identifié — et une cause somatique écartée avec les collègues du soin — la solution devient claire : elle se situe d'abord dans l'environnement.</Texte>
+          <ConceptBox label="Lena : relire l'agitation" titre="Ce que le comportement dit réellement">
+            <Texte>L'agitation de Lena en début de semaine n'est pas une aggravation de sa trisomie. C'est une réponse comportementale à une situation de handicap environnementale : l'incapacité d'accéder à une habitude de vie valorisée (la cuisine) à cause d'un obstacle physique micro (le local inadapté). Une fois l'obstacle identifié, et une cause somatique écartée avec les collègues du soin, la solution devient claire : elle se situe d'abord dans l'environnement.</Texte>
           </ConceptBox>
 
           <HighlightBox label="Ce raisonnement s'applique largement" couleur="bleu">
-            <Texte>Un professionnel expérimenté sait souvent, d'instinct, que la résistance d'une personne aux soins n'est pas uniquement une question de pathologie — c'est peut-être un signal que quelque chose dans le cadre de soin n'est pas adapté à ses besoins. Le MDH-PPH donne le vocabulaire précis pour nommer ce signal et agir dessus de façon structurée.</Texte>
+            <Texte>Un professionnel expérimenté sait souvent, d'instinct, que la résistance d'une personne aux soins n'est pas uniquement une question de pathologie : c'est peut-être un signal que quelque chose dans le cadre de soin n'est pas adapté à ses besoins. Le MDH-PPH donne le vocabulaire précis pour nommer ce signal et agir dessus de façon structurée.</Texte>
           </HighlightBox>
 
           <div className="grid grid-cols-2 gap-4 my-8">
@@ -85,21 +85,21 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             </div>
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
               <p className="text-3xl font-bold text-[#3DBFA0] mb-2">Complément</p>
-              <p className="text-sm text-white/70 leading-snug">la lecture environnementale ne remplace pas l'évaluation clinique — elle la complète, en interrogeant l'interaction personne-environnement</p>
+              <p className="text-sm text-white/70 leading-snug">la lecture environnementale ne remplace pas l'évaluation clinique, elle la complète, en interrogeant l'interaction personne-environnement</p>
             </div>
           </div>
         </SectionModule>
 
         <AccrocheScenario type="reflexion">
-          <p>Pensez à une personne que vous accompagnez et qui présente des comportements difficiles à comprendre. Avez-vous cartographié systématiquement les facteurs environnementaux physiques et sociaux de son contexte de vie — à chacun des trois niveaux ? Qu'est-ce que vous ne savez peut-être pas encore sur ce qui l'entrave quotidiennement ?</p>
+          <p>Pensez à une personne que vous accompagnez et qui présente des comportements difficiles à comprendre. Avez-vous cartographié systématiquement les facteurs environnementaux physiques et sociaux de son contexte de vie, à chacun des trois niveaux ? Qu'est-ce que vous ne savez peut-être pas encore sur ce qui l'entrave quotidiennement ?</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Section 3" titre="Vieillissement, transitions et situations de handicap émergentes">
           <Texte>Une des forces du MDH-PPH 2010 est de s'appliquer tout au long du parcours de vie, y compris dans la période du vieillissement. Pour les institutions accueillant des adultes en situation de handicap, cette dimension est de plus en plus centrale : les personnes accompagnées vieillissent, et le vieillissement modifie profondément l'équation personne-environnement.</Texte>
 
-          <Texte>Une personne qui était en situation de participation sociale à 30 ans peut se retrouver progressivement en situation de handicap à 50 ans — non pas parce que son handicap d'origine s'est aggravé, mais parce que ses capacités organiques ont diminué avec l'âge et que son environnement n'a pas été adapté en conséquence.</Texte>
+          <Texte>Une personne qui était en situation de participation sociale à 30 ans peut se retrouver progressivement en situation de handicap à 50 ans, non pas parce que son handicap d'origine s'est aggravé, mais parce que ses capacités organiques ont diminué avec l'âge et que son environnement n'a pas été adapté en conséquence.</Texte>
 
-          <HighlightBox label="Les signaux à surveiller — ne pas attribuer à la pathologie" couleur="jaune">
+          <HighlightBox label="Les signaux à surveiller : ne pas attribuer à la pathologie" couleur="jaune">
             <Liste items={[
               "Retraits progressifs des activités autrefois appréciées",
               "Refus ou difficultés nouvelles dans des habitudes de vie maîtrisées",
@@ -110,20 +110,20 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           </HighlightBox>
 
           <PullQuote>
-            Ces signaux ne sont pas uniquement médicaux. Ils peuvent indiquer que l'environnement n'est plus adapté aux nouvelles capacités de la personne — et qu'une réévaluation MDH-PPH s'impose.
+            Ces signaux ne sont pas uniquement médicaux. Ils peuvent indiquer que l'environnement n'est plus adapté aux nouvelles capacités de la personne, et qu'une réévaluation MDH-PPH s'impose.
           </PullQuote>
 
           <HighlightBox label="Anticiper plutôt que subir" couleur="vert">
-            <Texte>Le MDH-PPH invite les équipes à planifier des réévaluations régulières de la situation de chaque personne accompagnée — en pratique, un rythme annuel est couramment recommandé, avec un rythme plus rapproché pour les situations qui évoluent vite. Ces réévaluations doivent être proactives, pas seulement déclenchées par des crises. Chaque transition (déménagement, changement d'équipe, retraite d'un proche aidant) reconfigure les interactions personne-environnement et mérite une analyse dédiée.</Texte>
+            <Texte>Le MDH-PPH invite les équipes à planifier des réévaluations régulières de la situation de chaque personne accompagnée, en pratique, un rythme annuel est couramment recommandé, avec un rythme plus rapproché pour les situations qui évoluent vite. Ces réévaluations doivent être proactives, pas seulement déclenchées par des crises. Chaque transition (déménagement, changement d'équipe, retraite d'un proche aidant) reconfigure les interactions personne-environnement et mérite une analyse dédiée.</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="L'analyse interprofessionnelle : un langage commun">
-          <Texte>L'une des contributions majeures du MDH-PPH dans les institutions est de fournir un langage commun à des équipes interdisciplinaires. Éducateurs, infirmiers, ergothérapeutes, psychologues, responsables de secteur : chaque professionnel arrive avec sa propre grille de lecture — et chacune de ces lectures est juste dans son domaine. Sans cadre commun, elles peinent toutefois à s'articuler entre elles : on juxtapose des observations pertinentes sans réussir à en faire une analyse partagée.</Texte>
+          <Texte>L'une des contributions majeures du MDH-PPH dans les institutions est de fournir un langage commun à des équipes interdisciplinaires. Éducateurs, infirmiers, ergothérapeutes, psychologues, responsables de secteur : chaque professionnel arrive avec sa propre grille de lecture, et chacune de ces lectures est juste dans son domaine. Sans cadre commun, elles peinent toutefois à s'articuler entre elles : on juxtapose des observations pertinentes sans réussir à en faire une analyse partagée.</Texte>
 
           <ConceptBox label="Le MDH-PPH comme traducteur" titre="Reformuler pour agir ensemble">
-            <Texte>Quand un éducateur dit « Marco est agité depuis le changement d'équipe » et qu'un infirmier dit « Marco montre des signes d'anxiété », le MDH-PPH permet de reformuler : <em>« Un obstacle environnemental social de niveau micro — le changement de l'équipe directe — a généré une situation de handicap pour Marco dans ses habitudes de vie relationnelles. »</em></Texte>
-            <Texte>Ce reformatage déplace le débat de la pathologie vers l'interaction — et ouvre immédiatement l'espace de discussion vers des solutions concrètes plutôt que vers des explications diagnostiques.</Texte>
+            <Texte>Quand un éducateur dit « Marco est agité depuis le changement d'équipe » et qu'un infirmier dit « Marco montre des signes d'anxiété », le MDH-PPH permet de reformuler : <em>« Un obstacle environnemental social de niveau micro, le changement de l'équipe directe, a généré une situation de handicap pour Marco dans ses habitudes de vie relationnelles. »</em></Texte>
+            <Texte>Ce reformatage déplace le débat de la pathologie vers l'interaction, et ouvre immédiatement l'espace de discussion vers des solutions concrètes plutôt que vers des explications diagnostiques.</Texte>
           </ConceptBox>
 
           <HighlightBox label="Les conditions du changement de langage" couleur="bleu">
@@ -136,18 +136,18 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Lena — retour au fil rouge" titre="L'équipe réunit ses observations">
-          <Texte>Avec la grille MDH-PPH, l'équipe de Lena peut maintenant nommer clairement ce qui se passe : l'obstacle physique du nouveau local (bruit, odeurs) rencontre l'hypersensibilité sensorielle de Lena (facteur personnel organique), et entrave une habitude de vie centrale à son identité (les loisirs — cuisine). Le comportement d'agitation est un signal, pas un symptôme.</Texte>
+        <SectionModule eyebrow="Lena : retour au fil rouge" titre="L'équipe réunit ses observations">
+          <Texte>Avec la grille MDH-PPH, l'équipe de Lena peut maintenant nommer clairement ce qui se passe : l'obstacle physique du nouveau local (bruit, odeurs) rencontre l'hypersensibilité sensorielle de Lena (facteur personnel organique), et entrave une habitude de vie centrale à son identité (les loisirs, cuisine). Le comportement d'agitation est un signal, pas un symptôme.</Texte>
           <Texte>Dans le module suivant, l'équipe va construire avec Lena un plan d'accompagnement qui lève cet obstacle et renforce les facilitateurs.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>L'analyse MDH-PPH est une démarche de lecture systémique en trois étapes — facteurs personnels, facteurs environnementaux, habitudes de vie — qui permet d'identifier les vrais leviers d'action. Les comportements défis sont souvent aussi des signaux d'une interaction inadéquate — une lecture qui complète l'évaluation clinique sans s'y substituer. Le vieillissement appelle des réévaluations proactives. Et le MDH-PPH offre à l'équipe interdisciplinaire un langage commun pour agir ensemble.</Texte>
+          <Texte>L'analyse MDH-PPH est une démarche de lecture systémique en trois étapes (facteurs personnels, facteurs environnementaux, habitudes de vie) qui permet d'identifier les vrais leviers d'action. Les comportements défis sont souvent aussi des signaux d'une interaction inadéquate, une lecture qui complète l'évaluation clinique sans s'y substituer. Le vieillissement appelle des réévaluations proactives. Et le MDH-PPH offre à l'équipe interdisciplinaire un langage commun pour agir ensemble.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
-              "Avant d'intervenir : décrire l'interaction personne-environnement avant de conclure — et écarter une cause somatique avec les collègues du soin",
+              "Avant d'intervenir : décrire l'interaction personne-environnement avant de conclure, et écarter une cause somatique avec les collègues du soin",
               "Les comportements défis sont souvent des indicateurs d'une situation de handicap non résolue",
-              "Réévaluer régulièrement et de façon proactive — ne pas attendre la crise",
+              "Réévaluer régulièrement et de façon proactive : ne pas attendre la crise",
               "Le MDH-PPH offre un langage commun à l'équipe interdisciplinaire",
               "Reformuler en termes d'interaction ouvre l'espace vers des solutions concrètes",
             ]} />
@@ -178,7 +178,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "L'agitation est un signe d'anxiété généralisée nécessitant un suivi psychiatrique",
             ],
             bonneReponse: 1,
-            explication: "L'obstacle physique (local inadapté sensoriellement) rencontre la sensibilité sensorielle de Lena (facteur personnel organique) et entrave son habitude de vie la plus valorisée (cuisine / loisirs). L'agitation est un signal comportemental — la seule façon pour Lena d'exprimer cette inadéquation environnementale.",
+            explication: "L'obstacle physique (local inadapté sensoriellement) rencontre la sensibilité sensorielle de Lena (facteur personnel organique) et entrave son habitude de vie la plus valorisée (cuisine / loisirs). L'agitation est un signal comportemental, la seule façon pour Lena d'exprimer cette inadéquation environnementale.",
           },
           {
             question: "Pour quelles habitudes de vie les interventions doivent-elles être priorisées selon le MDH-PPH ?",
@@ -217,7 +217,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             question: "Pourquoi les réévaluations MDH-PPH doivent-elles être planifiées et proactives, pas seulement réactives aux crises ?",
             reponses: [
               "Pour respecter les exigences administratives de qualité institutionnelle",
-              "Parce que le flux temporel rappelle que les situations évoluent — et que le vieillissement ou une transition peut transformer d'anciens facilitateurs en obstacles",
+              "Parce que le flux temporel rappelle que les situations évoluent, et que le vieillissement ou une transition peut transformer d'anciens facilitateurs en obstacles",
               "Pour justifier les dépenses liées à l'accompagnement auprès des financeurs",
               "Parce que les personnes en situation de handicap ne signalent jamais elles-mêmes leurs difficultés",
             ],
@@ -233,7 +233,7 @@ export function Module3MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "Parce que les habitudes de vie deviennent moins importantes pour les personnes âgées",
             ],
             bonneReponse: 1,
-            explication: "Le flux temporel du MDH-PPH intègre le vieillissement comme une évolution des facteurs personnels (capacités organiques). Si l'environnement n'est pas adapté en conséquence — mêmes horaires, mêmes trajets, mêmes formats d'activité —, la situation de handicap s'aggrave progressivement. L'enjeu est d'anticiper ces évolutions par des réévaluations proactives, pas de les traiter comme des fatalités.",
+            explication: "Le flux temporel du MDH-PPH intègre le vieillissement comme une évolution des facteurs personnels (capacités organiques). Si l'environnement n'est pas adapté en conséquence, mêmes horaires, mêmes trajets, mêmes formats d'activité —, la situation de handicap s'aggrave progressivement. L'enjeu est d'anticiper ces évolutions par des réévaluations proactives, pas de les traiter comme des fatalités.",
           },
         ]}
         onValiderModule={onValiderModule}

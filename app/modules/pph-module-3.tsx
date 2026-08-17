@@ -16,7 +16,7 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
         categorie="Agir sur l'environnement"
         titre="Du diagnostic à l'action"
         titrePart2="transformer l'environnement"
-        sousTitre="Traduire une analyse PPH en actions concrètes sur les environnements physique, social et organisationnel — avec méthode et co-construction."
+        sousTitre="Traduire une analyse PPH en actions concrètes sur les environnements physique, social et organisationnel, avec méthode et co-construction."
         duree="50 minutes"
         niveau="Tous niveaux"
       />
@@ -40,23 +40,23 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
             <p>Vous avez analysé la situation de Karine (module 2) : obstacles identifiés, hypothèses formulées. Mais l'analyse en elle-même ne change rien à la vie de Karine. Ce module franchit le pas décisif : de comprendre à agir.</p>
           </AccrocheScenario>
 
-          <Texte>Le PPH nous invite à déplacer la focale : du déficit de la personne vers la responsabilité collective de l'environnement. Ce déplacement ne reste pas philosophique — il se traduit en actes concrets, mesurables, co-construits.</Texte>
+          <Texte>Le PPH nous invite à déplacer la focale : du déficit de la personne vers la responsabilité collective de l'environnement. Ce déplacement ne reste pas philosophique, il se traduit en actes concrets, mesurables, co-construits.</Texte>
 
           <PullQuote>
-            L'analyse PPH n'a de valeur que si elle débouche sur des actions concrètes. Le modèle n'est pas un outil d'observation — c'est un modèle d'action.
+            L'analyse PPH n'a de valeur que si elle débouche sur des actions concrètes. Le modèle n'est pas un outil d'observation, c'est un modèle d'action.
           </PullQuote>
         </SectionModule>
 
         <SectionModule eyebrow="Section 3.1" titre="Les cinq types d'environnements : leviers d'action spécifiques">
-          <Texte>Chaque type d'environnement offre des leviers d'action distincts. Analyser les cinq dimensions permet de ne manquer aucun obstacle — et de ne pas se limiter aux seules barrières physiques.</Texte>
+          <Texte>Chaque type d'environnement offre des leviers d'action distincts. Analyser les cinq dimensions permet de ne manquer aucun obstacle, et de ne pas se limiter aux seules barrières physiques.</Texte>
 
           <HighlightBox label="Principe fondamental" couleur="bleu">
-            <Texte>Tout facteur environnemental peut être soit un obstacle soit un facilitateur, selon le contexte et la personne. Notre rôle est de transformer les obstacles en facilitateurs — et de renforcer ceux qui existent déjà.</Texte>
+            <Texte>Tout facteur environnemental peut être soit un obstacle soit un facilitateur, selon le contexte et la personne. Notre rôle est de transformer les obstacles en facilitateurs, et de renforcer ceux qui existent déjà.</Texte>
           </HighlightBox>
 
           {/* Environnement 1 */}
           <div className="border border-[#1B2D5B]/10 rounded-xl p-5 mb-4 bg-[#1B2D5B]/3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1B2D5B] mb-2">Environnement 1 — Physique et architectural</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#1B2D5B] mb-2">Environnement 1 : Physique et architectural</p>
             <p className="text-sm text-gray-600 leading-relaxed mb-3">Accessibilité des bâtiments, qualité acoustique, luminosité, configuration des espaces, transports, équipements disponibles.</p>
             <Liste items={[
               "Aménager les espaces pour une accessibilité universelle",
@@ -68,8 +68,8 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           {/* Environnement 2 */}
           <div className="border border-[#3DBFA0]/20 rounded-xl p-5 mb-4 bg-[#3DBFA0]/3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#3DBFA0] mb-2">Environnement 2 — Social et humain</p>
-            <p className="text-sm text-gray-600 leading-relaxed mb-3">Attitudes et comportements des proches, des professionnels et de la société. Les obstacles attitudinaux — préjugés, infantilisation, sous-estimation — sont souvent les plus invisibles et les plus impactants.</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#3DBFA0] mb-2">Environnement 2 : Social et humain</p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-3">Attitudes et comportements des proches, des professionnels et de la société. Les obstacles attitudinaux (préjugés, infantilisation, sous-estimation) sont souvent les plus invisibles et les plus impactants.</p>
             <Liste items={[
               "Former les équipes à une communication adaptée et respectueuse",
               "Travailler les représentations et les préjugés des professionnels",
@@ -80,7 +80,7 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           {/* Environnement 3 */}
           <div className="border border-amber-200 rounded-xl p-5 mb-4 bg-amber-50/50">
-            <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Environnement 3 — Institutionnel et organisationnel</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Environnement 3 : Institutionnel et organisationnel</p>
             <p className="text-sm text-gray-600 leading-relaxed mb-3">Règles internes, procédures, horaires, organisation du temps, ressources humaines allouées. Souvent négligé, c'est pourtant l'un des environnements les plus modifiables.</p>
             <Liste items={[
               "Réviser les horaires d'activités pour les adapter aux rythmes des personnes",
@@ -92,7 +92,7 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           {/* Environnement 4 */}
           <div className="border border-[#1B2D5B]/10 rounded-xl p-5 mb-4 bg-[#1B2D5B]/3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1B2D5B] mb-2">Environnement 4 — Technologique</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#1B2D5B] mb-2">Environnement 4 : Technologique</p>
             <p className="text-sm text-gray-600 leading-relaxed mb-3">Outils numériques, aides techniques, domotique, applications, supports de communication augmentée et alternative (CAA).</p>
             <Liste items={[
               "Introduire des aides techniques adaptées aux besoins identifiés dans l'analyse",
@@ -104,7 +104,7 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           {/* Environnement 5 */}
           <div className="border border-[#3DBFA0]/20 rounded-xl p-5 mb-4 bg-[#3DBFA0]/3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#3DBFA0] mb-2">Environnement 5 — Politique et juridique</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#3DBFA0] mb-2">Environnement 5 : Politique et juridique</p>
             <p className="text-sm text-gray-600 leading-relaxed mb-3">Lois, droits, financements, politiques d'inclusion, conventions collectives. Ces environnements dépassent souvent le niveau de l'équipe mais sont essentiels à connaître pour orienter et plaider.</p>
             <Liste items={[
               "Informer la personne de ses droits et des dispositifs de compensation disponibles",
@@ -116,7 +116,7 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Section 3.2" titre="Obstacles et facilitateurs : les deux faces de l'environnement">
-          <Texte>L'analyse PPH ne cherche pas seulement les obstacles. Elle identifie aussi les facilitateurs déjà en place — pour les renforcer et s'appuyer sur eux dans le plan d'action.</Texte>
+          <Texte>L'analyse PPH ne cherche pas seulement les obstacles. Elle identifie aussi les facilitateurs déjà en place, pour les renforcer et s'appuyer sur eux dans le plan d'action.</Texte>
 
           <TableauComparaison
             titre="Exemples d'obstacles et de facilitateurs par dimension"
@@ -150,25 +150,25 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Section 3.3" titre="Les trois principes d'action du PPH">
-          <HighlightBox label="Principe 1 — Co-construction avec la personne" couleur="bleu">
-            <Texte>Toute action doit être construite avec la personne, pas pour elle. L'autodétermination est le point de départ et l'horizon de toute mesure PPH. Une mesure imposée, même parfaitement conçue, ne respecte pas le modèle — et risque d'être inefficace si elle ne répond pas aux priorités réelles de la personne.</Texte>
+          <HighlightBox label="Principe 1 : Co-construction avec la personne" couleur="bleu">
+            <Texte>Toute action doit être construite avec la personne, pas pour elle. L'autodétermination est le point de départ et l'horizon de toute mesure PPH. Une mesure imposée, même parfaitement conçue, ne respecte pas le modèle, et risque d'être inefficace si elle ne répond pas aux priorités réelles de la personne.</Texte>
           </HighlightBox>
 
-          <HighlightBox label="Principe 2 — Pertinence contextuelle" couleur="vert">
-            <Texte>Une action est pertinente si et seulement si elle répond à un obstacle identifié dans l'analyse PPH. On n'agit pas sur des suppositions ou des habitudes professionnelles. La pertinence se mesure à l'adéquation entre l'action et l'obstacle documenté — pas à l'intention ou à l'effort fourni.</Texte>
+          <HighlightBox label="Principe 2 : Pertinence contextuelle" couleur="vert">
+            <Texte>Une action est pertinente si et seulement si elle répond à un obstacle identifié dans l'analyse PPH. On n'agit pas sur des suppositions ou des habitudes professionnelles. La pertinence se mesure à l'adéquation entre l'action et l'obstacle documenté, pas à l'intention ou à l'effort fourni.</Texte>
           </HighlightBox>
 
-          <HighlightBox label="Principe 3 — Durabilité des facilitateurs créés" couleur="jaune">
+          <HighlightBox label="Principe 3 : Durabilité des facilitateurs créés" couleur="jaune">
             <Texte>Les facilitateurs créés doivent s'inscrire dans la durée. Une action ponctuelle qui disparaît à la fin d'un projet n'améliore pas la participation sociale de façon pérenne. La durabilité passe par l'institutionnalisation des mesures, la formation des équipes et la mise à jour régulière du plan d'action.</Texte>
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 3.4 — Étude de cas" titre="Sophie : de l'analyse à l'action">
+        <SectionModule eyebrow="Section 3.4 : Étude de cas" titre="Sophie : de l'analyse à l'action">
           <HighlightBox label="Contexte" couleur="bleu">
             <Liste couleur="bleu" items={[
               "Sophie, 32 ans, travaille en ESAT depuis 3 ans",
               "Habitude de vie ciblée : participer aux réunions d'équipe hebdomadaires",
-              "Situation actuelle : elle n'y assiste pas — les informations lui sont transmises indirectement par son référent",
+              "Situation actuelle : elle n'y assiste pas, les informations lui sont transmises indirectement par son référent",
               "Ce que Sophie dit : 'Je voudrais savoir ce qui se passe dans l'atelier, avoir mon mot à dire'"
             ]} />
           </HighlightBox>
@@ -198,11 +198,11 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
           </AccrocheScenario>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 3.5 — Outil pratique" titre="Checklist avant toute mise en œuvre">
+        <SectionModule eyebrow="Section 3.5 : Outil pratique" titre="Checklist avant toute mise en œuvre">
           <HighlightBox label="Avant de mettre en place une mesure environnementale, vérifiez :" couleur="vert">
             <Liste items={[
               "L'habitude de vie visée est clairement identifiée et validée par la personne",
-              "L'obstacle environnemental est documenté par l'analyse PPH — pas supposé",
+              "L'obstacle environnemental est documenté par l'analyse PPH : pas supposé",
               "La mesure a été co-construite avec la personne concernée",
               "Des indicateurs de participation sociale mesurables ont été définis",
               "Un calendrier de mise en œuvre et d'évaluation est planifié",
@@ -216,16 +216,16 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
         <SectionModule eyebrow="Conclusion" titre="Ce qu'il faut retenir">
           <HighlightBox label="Les points essentiels" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "Cinq types d'environnements — cinq catégories de leviers d'action spécifiques",
+              "Cinq types d'environnements : cinq catégories de leviers d'action spécifiques",
               "Les obstacles attitudinaux (attitudes, représentations) sont souvent les plus impactants et les plus invisibles",
               "Toute action doit être co-construite, contextualisée et durable",
               "La checklist est un outil pratique pour garantir la robustesse des mesures",
-              "L'action PPH vise toujours l'environnement — jamais la correction de la personne"
+              "L'action PPH vise toujours l'environnement, jamais la correction de la personne"
             ]} />
           </HighlightBox>
 
           <PullQuote>
-            Le PPH n'est pas un modèle d'observation. C'est un modèle d'action — et cette action porte toujours sur l'environnement.
+            Le PPH n'est pas un modèle d'observation. C'est un modèle d'action, et cette action porte toujours sur l'environnement.
           </PullQuote>
         </SectionModule>
 
@@ -241,7 +241,7 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Réduire les activités trop difficiles"
             ],
             bonneReponse: 1,
-            explication: "Le PPH place l'environnement comme levier d'action principal. Transformer les obstacles environnementaux en facilitateurs est plus efficace — et respectueux — que de tenter de modifier la personne."
+            explication: "Le PPH place l'environnement comme levier d'action principal. Transformer les obstacles environnementaux en facilitateurs est plus efficace, et respectueux, que de tenter de modifier la personne."
           },
           {
             question: "Les obstacles attitudinaux (préjugés, infantilisation) appartiennent à quel type d'environnement ?",
@@ -252,7 +252,7 @@ export function Module3PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Environnement politique et juridique"
             ],
             bonneReponse: 1,
-            explication: "Les attitudes des professionnels et des proches — préjugés, infantilisation, sous-estimation — sont des obstacles attitudinaux relevant de l'environnement social et humain. Ce sont souvent les plus invisibles et les plus impactants."
+            explication: "Les attitudes des professionnels et des proches (préjugés, infantilisation, sous-estimation) sont des obstacles attitudinaux relevant de l'environnement social et humain. Ce sont souvent les plus invisibles et les plus impactants."
           },
           {
             question: "Les trois principes d'action du PPH sont :",

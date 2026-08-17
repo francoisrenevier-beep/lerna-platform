@@ -4,7 +4,7 @@ export function SchemaMDHPPH() {
   return (
     <div className="bg-gray-50 rounded-xl p-6 mb-8">
       <p className="text-sm font-semibold text-gray-500 mb-1 text-center uppercase tracking-widest">
-        MDH-PPH 2010 — Schéma conceptuel
+        MDH-PPH 2010 : Schéma conceptuel
       </p>
       <p className="text-xs text-gray-400 text-center mb-5">Modèle de Développement Humain / Processus de Production du Handicap</p>
 
@@ -143,7 +143,7 @@ export function SchemaMDHPPH() {
       </div>
 
       <p className="text-xs text-gray-400 text-center mt-2 italic">
-        Source : Fougeyrollas, MDH-PPH 2 — RIPPH, Québec, 2010
+        Source : Fougeyrollas, MDH-PPH 2, RIPPH, Québec, 2010
       </p>
     </div>
   )

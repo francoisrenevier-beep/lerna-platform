@@ -25,8 +25,8 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
       <div className="max-w-3xl mx-auto px-8 py-12">
 
         <div className="bg-gray-50 border-l-4 border-[#1B2D5B] rounded-r-xl px-6 py-5 mb-10">
-          <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge — Lena, 42 ans</p>
-          <p className="text-gray-700 text-sm leading-relaxed">L'analyse MDH-PPH conduite en équipe a mis en lumière la situation de Lena : sa trisomie 21, ses ressources affectives et créatives, et les obstacles environnementaux qui l'empêchent de vivre comme elle le souhaite. L'équipe dispose maintenant d'un tableau complet. La question qui se pose est : <strong>que fait-on avec ce tableau ?</strong> Comment passe-t-on de l'analyse à l'action ? De l'évaluation à un vrai plan de vie — co-construit avec Lena elle-même ?</p>
+          <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge : Lena, 42 ans</p>
+          <p className="text-gray-700 text-sm leading-relaxed">L'analyse MDH-PPH conduite en équipe a mis en lumière la situation de Lena : sa trisomie 21, ses ressources affectives et créatives, et les obstacles environnementaux qui l'empêchent de vivre comme elle le souhaite. L'équipe dispose maintenant d'un tableau complet. La question qui se pose est : <strong>que fait-on avec ce tableau ?</strong> Comment passe-t-on de l'analyse à l'action ? De l'évaluation à un vrai plan de vie, co-construit avec Lena elle-même ?</p>
         </div>
 
         <SectionModule eyebrow="Introduction" titre="Un plan de vie, pas un catalogue de soins">
@@ -48,7 +48,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <AccrocheScenario type="question">
-          <p>Un projet personnalisé co-construit réellement avec la personne accompagnée — est-ce possible dans votre pratique quotidienne ? Quels obstacles institutionnels, de temps ou de méthode rendent cela difficile ? Et si le MDH-PPH vous donnait un cadre précis pour y parvenir concrètement, pas seulement en intention ?</p>
+          <p>Un projet personnalisé co-construit réellement avec la personne accompagnée, est-ce possible dans votre pratique quotidienne ? Quels obstacles institutionnels, de temps ou de méthode rendent cela difficile ? Et si le MDH-PPH vous donnait un cadre précis pour y parvenir concrètement, pas seulement en intention ?</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Leçon 4.1" titre="De l'évaluation au projet personnalisé">
@@ -73,7 +73,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 definition: "Le MDH-PPH propose trois leviers complémentaires : agir sur les facteurs personnels (réadaptation, apprentissage), agir sur les facteurs environnementaux (aides techniques, aménagements, modification des règles et attitudes), ou redéfinir les objectifs de vie lorsque certains obstacles ne peuvent pas être levés."
               }
             ]}
-            note="L'action sur l'environnement est souvent un levier rapide et durable — complémentaire, et non opposé, au travail sur les aptitudes de la personne"
+            note="L'action sur l'environnement est souvent un levier rapide et durable, complémentaire, et non opposé, au travail sur les aptitudes de la personne"
           />
 
           <TableauComparaison
@@ -101,19 +101,19 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           />
 
           <HighlightBox label="La règle des priorités absolues" couleur="jaune">
-            <Texte>Quand on croise importance (ce qui compte pour la personne) et insatisfaction (ce qui ne va pas), on obtient quatre quadrants. Seul le quadrant "importance haute + insatisfaction haute" mérite une action immédiate. Lena tient par-dessus tout à sa cuisine et à ses liens avec ses amis du groupe — et elle ne peut plus y participer : c'est là que l'équipe doit agir en premier.</Texte>
+            <Texte>Quand on croise importance (ce qui compte pour la personne) et insatisfaction (ce qui ne va pas), on obtient quatre quadrants. Seul le quadrant "importance haute + insatisfaction haute" mérite une action immédiate. Lena tient par-dessus tout à sa cuisine et à ses liens avec ses amis du groupe, et elle ne peut plus y participer : c'est là que l'équipe doit agir en premier.</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Leçon 4.2" titre="Autodétermination et co-construction du projet">
           <PullQuote>
-            L'autodétermination signifie que la personne accompagnée est l'auteure principale de son projet de vie — pas le professionnel, pas l'institution, pas la famille.
+            L'autodétermination signifie que la personne accompagnée est l'auteure principale de son projet de vie, pas le professionnel, pas l'institution, pas la famille.
           </PullQuote>
 
-          <Texte>Dans la pratique, l'autodétermination rencontre des freins bien réels — et presque toujours animés de bonnes intentions. Des familles dont la volonté légitime de protéger peut, sans le vouloir, restreindre les choix. Des organisations dont les contraintes réelles (sécurité, effectifs, horaires) tendent à uniformiser les rythmes de vie. Des professionnels qui, en toute bonne foi, peuvent projeter leurs propres préférences sur celles de la personne. Ces dynamiques sont humaines et compréhensibles. Le MDH-PPH permet de les nommer sans les juger — comme des facteurs environnementaux analysables — et d'y répondre de façon structurée.</Texte>
+          <Texte>Dans la pratique, l'autodétermination rencontre des freins bien réels, et presque toujours animés de bonnes intentions. Des familles dont la volonté légitime de protéger peut, sans le vouloir, restreindre les choix. Des organisations dont les contraintes réelles (sécurité, effectifs, horaires) tendent à uniformiser les rythmes de vie. Des professionnels qui, en toute bonne foi, peuvent projeter leurs propres préférences sur celles de la personne. Ces dynamiques sont humaines et compréhensibles. Le MDH-PPH permet de les nommer sans les juger, comme des facteurs environnementaux analysables, et d'y répondre de façon structurée.</Texte>
 
           <ConceptBox label="Lena parle pour elle-même" titre="La co-construction en pratique">
-            <Texte>Avant la révision de son projet personnalisé, l'équipe de Lena conduit trois entretiens avec elle, en s'appuyant sur un support visuel adapté. Lena exprime clairement ce qu'elle veut : cuisiner avec Mia et Theo le mercredi, chanter dans la chorale le vendredi, et avoir sa propre chambre rangée "à sa façon, pas à la façon de Maëlle". Ces préférences — et non les déficits — deviennent le point de départ du plan.</Texte>
+            <Texte>Avant la révision de son projet personnalisé, l'équipe de Lena conduit trois entretiens avec elle, en s'appuyant sur un support visuel adapté. Lena exprime clairement ce qu'elle veut : cuisiner avec Mia et Theo le mercredi, chanter dans la chorale le vendredi, et avoir sa propre chambre rangée "à sa façon, pas à la façon de Maëlle". Ces préférences, et non les déficits, deviennent le point de départ du plan.</Texte>
           </ConceptBox>
 
           <HighlightBox label="La co-construction en pratique" couleur="bleu">
@@ -134,11 +134,11 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             ]} />
           </ConceptBox>
 
-          <Texte>Il ne s'agit pas de nier que la famille de Lena la connaît bien, ni que l'institution a des contraintes réelles. Il s'agit de garantir que la voix de Lena elle-même — pas seulement ce que les autres pensent pour elle — est au centre du projet.</Texte>
+          <Texte>Il ne s'agit pas de nier que la famille de Lena la connaît bien, ni que l'institution a des contraintes réelles. Il s'agit de garantir que la voix de Lena elle-même, pas seulement ce que les autres pensent pour elle, est au centre du projet.</Texte>
         </SectionModule>
 
         <AccrocheScenario type="reflexion">
-          <p>Parmi les personnes que vous accompagnez, laquelle serait la plus difficile à « faire parler d'elle-même » — à exprimer ce qu'elle veut vraiment pour sa vie ? Quel obstacle à l'autodétermination est à l'œuvre dans sa situation ? Est-il micro (votre équipe décide à sa place), méso (le règlement l'interdit) ou macro (la norme culturelle la réduit au silence) ?</p>
+          <p>Parmi les personnes que vous accompagnez, laquelle serait la plus difficile à « faire parler d'elle-même » : à exprimer ce qu'elle veut vraiment pour sa vie ? Quel obstacle à l'autodétermination est à l'œuvre dans sa situation ? Est-il micro (votre équipe décide à sa place), méso (le règlement l'interdit) ou macro (la norme culturelle la réduit au silence) ?</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Leçon 4.3" titre="Les outils MHAVIE et MQE en pratique">
@@ -147,11 +147,11 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           <div className="grid grid-cols-2 gap-4 my-8">
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
               <p className="text-3xl font-bold text-[#3DBFA0] mb-2">MHAVIE</p>
-              <p className="text-sm text-white/70 leading-snug">Mesure des Habitudes de Vie — évalue 12 catégories d'habitudes, le niveau d'aide requis et la satisfaction</p>
+              <p className="text-sm text-white/70 leading-snug">Mesure des Habitudes de Vie, évalue 12 catégories d'habitudes, le niveau d'aide requis et la satisfaction</p>
             </div>
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
               <p className="text-3xl font-bold text-[#3DBFA0] mb-2">MQE</p>
-              <p className="text-sm text-white/70 leading-snug">Mesure de la Qualité de l'Environnement — identifie et quantifie facilitateurs et obstacles dans les trois sphères</p>
+              <p className="text-sm text-white/70 leading-snug">Mesure de la Qualité de l'Environnement, identifie et quantifie facilitateurs et obstacles dans les trois sphères</p>
             </div>
           </div>
 
@@ -160,12 +160,12 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             etapes={[
               {
                 niveau: "Outil 1",
-                nom: "MHAVIE — Mesure des Habitudes de Vie",
+                nom: "MHAVIE : Mesure des Habitudes de Vie",
                 definition: "Questionnaire standardisé évaluant le niveau de réalisation des douze catégories d'habitudes de vie, le type d'aide requise (humaine ou technique) et le niveau de satisfaction de la personne. Peut être administré en entretien direct, avec soutien de communication, ou complété par un professionnel de référence en observation."
               },
               {
                 niveau: "Outil 2",
-                nom: "MQE — Mesure de la Qualité de l'Environnement",
+                nom: "MQE : Mesure de la Qualité de l'Environnement",
                 definition: "Évalue précisément les facteurs environnementaux présents dans les trois sphères (micro, méso, macro), leur rôle (facilitateur ou obstacle) et leur intensité (de mineur à majeur). Permet à l'équipe de prioriser les modifications environnementales les plus efficaces et les plus accessibles."
               }
             ]}
@@ -173,7 +173,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           />
 
           <HighlightBox label="Utilisation de la MHAVIE pour Lena" couleur="vert">
-            <Texte>Avant la révision du projet de Lena, l'équipe administre la MHAVIE. Le constat est net : sur les catégories « loisirs » et « relations interpersonnelles », le niveau de réalisation est faible (forte difficulté, aide humaine importante requise) et la satisfaction exprimée par Lena — recueillie séparément sur l'échelle en cinq points — est très basse. Six mois après les interventions, la même mesure montre une nette progression de la réalisation et de la satisfaction sur ces deux catégories. C'est un indicateur objectif que le plan fonctionne — et une base pour décider si on continue, ajuste ou réoriente.</Texte>
+            <Texte>Avant la révision du projet de Lena, l'équipe administre la MHAVIE. Le constat est net : sur les catégories « loisirs » et « relations interpersonnelles », le niveau de réalisation est faible (forte difficulté, aide humaine importante requise) et la satisfaction exprimée par Lena, recueillie séparément sur l'échelle en cinq points, est très basse. Six mois après les interventions, la même mesure montre une nette progression de la réalisation et de la satisfaction sur ces deux catégories. C'est un indicateur objectif que le plan fonctionne, et une base pour décider si on continue, ajuste ou réoriente.</Texte>
             <Texte><em>Bon à savoir :</em> dans la MHAVIE, le score de réalisation combine le niveau de difficulté et le type d'aide requise (humaine, technique, aménagement). La satisfaction est documentée à part, sur une échelle de Likert en cinq points : elle qualifie la participation, elle n'entre pas dans le calcul du score de réalisation.</Texte>
           </HighlightBox>
 
@@ -197,7 +197,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
 
           <HighlightBox label="Implications pratiques du flux temporel" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "Planifier des réévaluations régulières et structurées — pas seulement lors de crises ou de changements",
+              "Planifier des réévaluations régulières et structurées, pas seulement lors de crises ou de changements",
               "Réévaluation annuelle minimum ; semestrielle recommandée pour les situations complexes",
               "Anticiper les transitions : chaque reconfiguration (déménagement, changement d'équipe, départ d'un proche) peut transformer d'anciens facilitateurs en obstacles",
               "Intégrer les facteurs de risque (perte d'un proche, rupture de lien, déclin organique) et de protection (réseau stable, histoire de réussites, ressources identitaires)",
@@ -206,12 +206,12 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           </HighlightBox>
 
           <div className="bg-gray-50 border-l-4 border-[#3DBFA0] rounded-r-xl px-6 py-5 my-8">
-            <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge — Lena, 6 mois plus tard</p>
-            <p className="text-gray-700 text-sm leading-relaxed">Six mois après la mise en œuvre du plan co-construit, l'équipe réévalue la situation de Lena avec la MHAVIE. Les scores ont progressé significativement sur les loisirs et les relations interpersonnelles. Lena cuisine à nouveau le mercredi, elle a retrouvé ses amies, et elle est moins agitée le soir. Un nouvel obstacle est apparu : la cuisinière référente de l'atelier a changé, et Lena a du mal avec cette nouvelle personne. Le flux temporel ne signifie pas qu'on repart de zéro — il signifie qu'on reste attentif à ce qui évolue et qu'on ajuste sans attendre.</p>
+            <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge : Lena, 6 mois plus tard</p>
+            <p className="text-gray-700 text-sm leading-relaxed">Six mois après la mise en œuvre du plan co-construit, l'équipe réévalue la situation de Lena avec la MHAVIE. Les scores ont progressé significativement sur les loisirs et les relations interpersonnelles. Lena cuisine à nouveau le mercredi, elle a retrouvé ses amies, et elle est moins agitée le soir. Un nouvel obstacle est apparu : la cuisinière référente de l'atelier a changé, et Lena a du mal avec cette nouvelle personne. Le flux temporel ne signifie pas qu'on repart de zéro, il signifie qu'on reste attentif à ce qui évolue et qu'on ajuste sans attendre.</p>
           </div>
 
           <PullQuote>
-            Le flux temporel rappelle que l'accompagnement n'est jamais terminé. Ce qui fonctionne aujourd'hui doit être réévalué demain — non par défiance, mais par rigueur professionnelle.
+            Le flux temporel rappelle que l'accompagnement n'est jamais terminé. Ce qui fonctionne aujourd'hui doit être réévalué demain, non par défiance, mais par rigueur professionnelle.
           </PullQuote>
 
           <SchemaEtapes
@@ -263,7 +263,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Lena a des difficultés cognitives qui rendent la décision difficile"
                 ],
                 bonneReponse: 2,
-                explication: "Le niveau méso (communautaire) correspond à ce qui dépasse l'entourage immédiat de la personne : l'organisation d'ensemble de l'institution (règlement, horaires, services), le quartier, les ressources communautaires. Le micro (personnel) désigne l'environnement immédiat : équipe directe, proches, lieu de vie. Le macro (sociétal) désigne les systèmes larges : lois, politiques, normes culturelles. Les difficultés cognitives de Lena, elles, sont un facteur personnel — pas un facteur environnemental."
+                explication: "Le niveau méso (communautaire) correspond à ce qui dépasse l'entourage immédiat de la personne : l'organisation d'ensemble de l'institution (règlement, horaires, services), le quartier, les ressources communautaires. Le micro (personnel) désigne l'environnement immédiat : équipe directe, proches, lieu de vie. Le macro (sociétal) désigne les systèmes larges : lois, politiques, normes culturelles. Les difficultés cognitives de Lena, elles, sont un facteur personnel, pas un facteur environnemental."
               },
               {
                 question: "À quoi sert principalement le score MHAVIE dans le suivi d'un projet personnalisé ?",
@@ -274,7 +274,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "À remplacer l'observation clinique quotidienne de l'équipe éducative"
                 ],
                 bonneReponse: 2,
-                explication: "La MHAVIE est un outil de mesure standardisé qui permet de comparer deux photographies d'une même situation à des temps différents. Elle ne classe pas les personnes et ne remplace pas l'observation — elle l'objective et la rend comparable, pour valider ou ajuster la stratégie d'intervention."
+                explication: "La MHAVIE est un outil de mesure standardisé qui permet de comparer deux photographies d'une même situation à des temps différents. Elle ne classe pas les personnes et ne remplace pas l'observation, elle l'objective et la rend comparable, pour valider ou ajuster la stratégie d'intervention."
               },
               {
                 question: "Qu'est-ce que le 'flux temporel' apporte à la compréhension du handicap dans le MDH-PPH 2010 ?",
@@ -285,7 +285,7 @@ export function Module4MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Il décrit la durée pendant laquelle une personne reste dans une institution"
                 ],
                 bonneReponse: 1,
-                explication: "Le flux temporel est l'idée que la situation de handicap n'est pas figée : les facteurs personnels évoluent (vieillissement, apprentissage, santé), les facteurs environnementaux changent (déménagement, changement d'équipe, nouvelles aides). Une évaluation à T est une photographie, pas un diagnostic définitif — d'où la nécessité de réévaluations régulières."
+                explication: "Le flux temporel est l'idée que la situation de handicap n'est pas figée : les facteurs personnels évoluent (vieillissement, apprentissage, santé), les facteurs environnementaux changent (déménagement, changement d'équipe, nouvelles aides). Une évaluation à T est une photographie, pas un diagnostic définitif : d'où la nécessité de réévaluations régulières."
               },
               {
                 question: "Lequel de ces éléments correspond à un levier d'intervention sur les facteurs environnementaux selon le MDH-PPH ?",

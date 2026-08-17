@@ -6,7 +6,7 @@ import { PourquoiLerna } from "@/components/pourquoi-lerna"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Notre approche : des formations co-construites avec le terrain — LEARNA",
+  title: "Notre approche : des formations co-construites avec le terrain | LEARNA",
   description:
     "Nos formations naissent de besoins réels, développées avec des professionnels du travail social. Une démarche ancrée dans la pratique, du besoin identifié à la formation disponible pour toute l'équipe.",
 }

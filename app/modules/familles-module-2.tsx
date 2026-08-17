@@ -32,12 +32,12 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
               "Comprendre ce que ces dynamiques font vivre à la personne au cœur du triangle",
             ]} />
           </ConceptBox>
-          <Texte>Les difficultés dans la relation famille-institution sont rarement l'expression de mauvaises volontés. Elles sont plus souvent le produit de dynamiques psychiques collectives — des processus qui s'organisent en dehors de la conscience de chacun et qui, faute d'être nommés, se cristallisent en conflits ou en évitements durables.</Texte>
-          <Texte>Ce module s'appuie sur les travaux de René Kaës sur les processus groupaux, de Paul Fustier sur la subjectivité institutionnelle, et de Frédéric Perez sur la minorisation. Il propose des grilles de lecture — non pour juger, mais pour comprendre et agir autrement.</Texte>
+          <Texte>Les difficultés dans la relation famille-institution sont rarement l'expression de mauvaises volontés. Elles sont plus souvent le produit de dynamiques psychiques collectives, des processus qui s'organisent en dehors de la conscience de chacun et qui, faute d'être nommés, se cristallisent en conflits ou en évitements durables.</Texte>
+          <Texte>Ce module s'appuie sur les travaux de René Kaës sur les processus groupaux, de Paul Fustier sur la subjectivité institutionnelle, et de Frédéric Perez sur la minorisation. Il propose des grilles de lecture, non pour juger, mais pour comprendre et agir autrement.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Le pacte dénégatif : les non-dits qui organisent la relation">
-          <Texte>René Kaës a introduit le concept de <strong>pacte dénégatif</strong> pour décrire des accords implicites et inconscients au sein d'un groupe : des conventions tacites selon lesquelles certaines réalités ne seront pas nommées, certaines questions ne seront pas posées, certaines angoisses ne seront pas abordées — car les maintenir dans l'impensé est la condition du lien.</Texte>
+          <Texte>René Kaës a introduit le concept de <strong>pacte dénégatif</strong> pour décrire des accords implicites et inconscients au sein d'un groupe : des conventions tacites selon lesquelles certaines réalités ne seront pas nommées, certaines questions ne seront pas posées, certaines angoisses ne seront pas abordées, car les maintenir dans l'impensé est la condition du lien.</Texte>
 
           <ConceptBox label="Le pacte dénégatif" titre="Un accord silencieux pour ne pas penser l'insupportable">
             <Texte>Dans la relation famille-institution autour d'un adulte en situation de handicap, plusieurs réalités constituent des zones d'impensé organisé :</Texte>
@@ -50,13 +50,13 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
           </ConceptBox>
 
           <HighlightBox label="Pourquoi ce pacte se forme-t-il ?" couleur="jaune">
-            <Texte>Le pacte dénégatif n'est pas une lâcheté. Il est la réponse collective à une angoisse partagée. Nommer certaines réalités — la dépendance définitive, la mort, la sexualité d'un adulte que tout le monde traite encore comme un enfant — génère des angoisses insupportables des deux côtés. L'évitement mutuel est une solution de survie psychique à court terme. À long terme, il empêche toute élaboration et prépare des crises.</Texte>
+            <Texte>Le pacte dénégatif n'est pas une lâcheté. Il est la réponse collective à une angoisse partagée. Nommer certaines réalités (la dépendance définitive, la mort, la sexualité d'un adulte que tout le monde traite encore comme un enfant) génère des angoisses insupportables des deux côtés. L'évitement mutuel est une solution de survie psychique à court terme. À long terme, il empêche toute élaboration et prépare des crises.</Texte>
           </HighlightBox>
 
           <div className="space-y-4 my-6">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Vignette clinique</p>
-              <p className="text-gray-700 text-sm leading-relaxed"><strong>Julien et Mireille, suite.</strong> Lors des réunions de projet, l'équipe et Mireille évitent soigneusement le sujet de l'avenir de Julien "quand elle ne sera plus là". L'équipe dit : "C'est trop douloureux pour elle, on ne va pas la brusquer." Mireille dit : "Ce n'est pas à moi de leur en parler, c'est leur rôle." Et Julien, lui, entend parfois des bribes de conversations — "quand maman ne sera plus là" — sans que jamais personne ne lui parle directement de ce qui l'attend. Le pacte dénégatif fonctionne à plein, et c'est Julien qui en paye le prix.</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Julien et Mireille, suite.</strong> Lors des réunions de projet, l'équipe et Mireille évitent soigneusement le sujet de l'avenir de Julien "quand elle ne sera plus là". L'équipe dit : "C'est trop douloureux pour elle, on ne va pas la brusquer." Mireille dit : "Ce n'est pas à moi de leur en parler, c'est leur rôle." Et Julien, lui, entend parfois des bribes de conversations : "quand maman ne sera plus là", sans que jamais personne ne lui parle directement de ce qui l'attend. Le pacte dénégatif fonctionne à plein, et c'est Julien qui en paye le prix.</p>
             </div>
           </div>
 
@@ -72,7 +72,7 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="La minorisation : traiter l'adulte comme un enfant perpétuel">
-          <Texte>Le terme de <strong>minorisation</strong> désigne un ensemble de pratiques — souvent non conscientes — par lesquelles un adulte en situation de handicap se voit traiter comme un mineur, un enfant, une personne dont les désirs et décisions ne comptent pas vraiment. Frédéric Perez (2006) a analysé ce phénomène dans le secteur du handicap adulte comme une forme de violence douce, institutionnalisée et relationnelle.</Texte>
+          <Texte>Le terme de <strong>minorisation</strong> désigne un ensemble de pratiques, souvent non conscientes, par lesquelles un adulte en situation de handicap se voit traiter comme un mineur, un enfant, une personne dont les désirs et décisions ne comptent pas vraiment. Frédéric Perez (2006) a analysé ce phénomène dans le secteur du handicap adulte comme une forme de violence douce, institutionnalisée et relationnelle.</Texte>
 
           <HighlightBox label="La minorisation : de quoi s'agit-il ?" couleur="bleu">
             <Texte>La minorisation opère à plusieurs niveaux :</Texte>
@@ -85,10 +85,10 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
           </HighlightBox>
 
           <PullQuote source="Frédéric Perez, 2006">
-            La minorisation n'est pas le propre des équipes mal intentionnées. Elle est le produit d'un système qui n'a pas encore achevé de penser l'adulte avec handicap comme un adulte à part entière — avec ses désirs, ses droits, sa vie affective et sexuelle, son rapport à la mort et au futur.
+            La minorisation n'est pas le propre des équipes mal intentionnées. Elle est le produit d'un système qui n'a pas encore achevé de penser l'adulte avec handicap comme un adulte à part entière, avec ses désirs, ses droits, sa vie affective et sexuelle, son rapport à la mort et au futur.
           </PullQuote>
 
-          <Texte>La minorisation n'est pas exclusivement le fait de l'institution. Les familles, elles aussi, maintiennent parfois leur proche dans un statut d'enfant — par amour, par habitude, par peur de le voir prendre des risques. La particularité du secteur adulte, c'est que les deux systèmes — famille et institution — peuvent se renforcer mutuellement dans cette minorisation, au détriment de la personne accompagnée.</Texte>
+          <Texte>La minorisation n'est pas exclusivement le fait de l'institution. Les familles, elles aussi, maintiennent parfois leur proche dans un statut d'enfant : par amour, par habitude, par peur de le voir prendre des risques. La particularité du secteur adulte, c'est que les deux systèmes, famille et institution, peuvent se renforcer mutuellement dans cette minorisation, au détriment de la personne accompagnée.</Texte>
 
           <TableauComparaison
             titre="Expressions de la minorisation selon les acteurs"
@@ -112,46 +112,46 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
             <Texte>La minorisation chronique produit des effets sur l'identité et le comportement de la personne :</Texte>
             <Liste items={[
               "Perte progressive de l'initiative et de la confiance en soi",
-              "Comportements de régression — se conformer au statut d'enfant qu'on lui assigne",
+              "Comportements de régression : se conformer au statut d'enfant qu'on lui assigne",
               "Agressivité ou opposition comme seule façon de manifester une volonté propre",
-              "Désinvestissement des projets, des activités, de la relation — car 'ça ne sert à rien, c'est toujours les autres qui décident'",
+              "Désinvestissement des projets, des activités, de la relation, car 'ça ne sert à rien, c'est toujours les autres qui décident'",
             ]} />
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Les défenses institutionnelles face aux familles">
-          <Texte>Paul Fustier (1999) a décrit comment les institutions développent des mécanismes de défense collectifs face aux angoisses que génèrent les personnes qu'elles accompagnent — et, par extension, face aux familles de ces personnes. Ces défenses sont fonctionnelles : elles permettent aux équipes de travailler. Mais elles peuvent aussi devenir des obstacles à la relation.</Texte>
+          <Texte>Paul Fustier (1999) a décrit comment les institutions développent des mécanismes de défense collectifs face aux angoisses que génèrent les personnes qu'elles accompagnent, et, par extension, face aux familles de ces personnes. Ces défenses sont fonctionnelles : elles permettent aux équipes de travailler. Mais elles peuvent aussi devenir des obstacles à la relation.</Texte>
 
           <SchemaEtapes
             titre="Trois défenses institutionnelles fréquentes face aux familles"
             etapes={[
               { niveau: "Défense 1", nom: "La routinisation", definition: "Traiter les échanges avec la famille de façon procédurale, protocolaire, sans espace pour l'imprévu. Les réunions de projet deviennent des formalités à accomplir plutôt que des espaces de dialogue vivant. La famille s'y conforme ou s'y soustrait." },
-              { niveau: "Défense 2", nom: "L'évitement du conflit", definition: "Ne rien dire qui pourrait générer une tension avec la famille — ni sur les pratiques que l'équipe désapprouve, ni sur les difficultés observées. Ce silence protège la paix à court terme et accumule les non-dits qui explosent lors des crises." },
-              { niveau: "Défense 3", nom: "La délégation excessive", definition: "Confier à la famille des responsabilités qui relèvent de l'institution — les soins, les décisions administratives, la gestion des comportements. Sous couvert de 'partenariat', l'institution se décharge d'une partie de son travail." },
+              { niveau: "Défense 2", nom: "L'évitement du conflit", definition: "Ne rien dire qui pourrait générer une tension avec la famille, ni sur les pratiques que l'équipe désapprouve, ni sur les difficultés observées. Ce silence protège la paix à court terme et accumule les non-dits qui explosent lors des crises." },
+              { niveau: "Défense 3", nom: "La délégation excessive", definition: "Confier à la famille des responsabilités qui relèvent de l'institution, les soins, les décisions administratives, la gestion des comportements. Sous couvert de 'partenariat', l'institution se décharge d'une partie de son travail." },
             ]}
-            note="Ces défenses ne sont pas des pathologies institutionnelles — elles témoignent d'une organisation qui n'a pas encore trouvé les ressources pour travailler autrement."
+            note="Ces défenses ne sont pas des pathologies institutionnelles, elles témoignent d'une organisation qui n'a pas encore trouvé les ressources pour travailler autrement."
           />
 
           <div className="space-y-4 my-6">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Vignette clinique</p>
-              <p className="text-gray-700 text-sm leading-relaxed"><strong>L'équipe face à Mireille.</strong> Lors de la dernière réunion de projet, Mireille a évoqué son inquiétude sur la prise de médicaments de Julien — elle trouvait qu'il semblait "trop endormi". L'équipe a répondu que "c'était le médecin qui gérait ça" et a changé de sujet. En salle de réunion après le départ de Mireille, l'éducatrice référente a dit : "Elle est épuisante avec ses questions." Cette réponse défensive — délégation au médecin, clôture du sujet, dévalorisation de la famille — empêche d'entendre une observation potentiellement utile et renforce la méfiance de Mireille.</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>L'équipe face à Mireille.</strong> Lors de la dernière réunion de projet, Mireille a évoqué son inquiétude sur la prise de médicaments de Julien : elle trouvait qu'il semblait "trop endormi". L'équipe a répondu que "c'était le médecin qui gérait ça" et a changé de sujet. En salle de réunion après le départ de Mireille, l'éducatrice référente a dit : "Elle est épuisante avec ses questions." Cette réponse défensive (délégation au médecin, clôture du sujet, dévalorisation de la famille) empêche d'entendre une observation potentiellement utile et renforce la méfiance de Mireille.</p>
             </div>
           </div>
 
           <HighlightBox label="Reconnaître ses propres défenses sans se flageller" couleur="vert">
-            <Texte>L'objectif de ce module n'est pas de culpabiliser les équipes. Les défenses institutionnelles sont des réponses humaines à des situations difficiles. Reconnaître une défense, c'est pouvoir travailler avec elle — en supervision, en réunion d'équipe, dans une analyse des pratiques — plutôt que de la laisser organiser la relation à l'insu de tous.</Texte>
+            <Texte>L'objectif de ce module n'est pas de culpabiliser les équipes. Les défenses institutionnelles sont des réponses humaines à des situations difficiles. Reconnaître une défense, c'est pouvoir travailler avec elle (en supervision, en réunion d'équipe, dans une analyse des pratiques) plutôt que de la laisser organiser la relation à l'insu de tous.</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="La personne au cœur : ce que ces dynamiques lui font vivre">
-          <Texte>Le pacte dénégatif, la minorisation et les défenses institutionnelles ont en commun de se jouer autour de la personne sans véritablement l'impliquer. Elle est l'objet des arrangements implicites entre famille et institution — mais elle en est aussi le principal destinataire, souvent sans avoir les mots pour nommer ce qu'elle perçoit.</Texte>
+          <Texte>Le pacte dénégatif, la minorisation et les défenses institutionnelles ont en commun de se jouer autour de la personne sans véritablement l'impliquer. Elle est l'objet des arrangements implicites entre famille et institution, mais elle en est aussi le principal destinataire, souvent sans avoir les mots pour nommer ce qu'elle perçoit.</Texte>
 
           <HighlightBox label="Le splitting ou les loyautés impossibles" couleur="jaune">
-            <Texte>Quand la tension entre famille et institution est forte, la personne accompagnée se retrouve dans une position de loyauté impossible. Dire du bien de l'institution à sa mère, c'est la trahir. Dire du bien de sa mère aux éducateurs, c'est parfois être mal regardé. Certaines personnes développent des comportements apparemment contradictoires : elles se conforment à la norme institutionnelle en présence des professionnels, et retrouvent des comportements infantiles en présence de leurs parents. Ce phénomène de <strong>splitting</strong> n'est pas de la manipulation — c'est une réponse adaptative à deux systèmes d'attentes contradictoires.</Texte>
+            <Texte>Quand la tension entre famille et institution est forte, la personne accompagnée se retrouve dans une position de loyauté impossible. Dire du bien de l'institution à sa mère, c'est la trahir. Dire du bien de sa mère aux éducateurs, c'est parfois être mal regardé. Certaines personnes développent des comportements apparemment contradictoires : elles se conforment à la norme institutionnelle en présence des professionnels, et retrouvent des comportements infantiles en présence de leurs parents. Ce phénomène de <strong>splitting</strong> n'est pas de la manipulation, c'est une réponse adaptative à deux systèmes d'attentes contradictoires.</Texte>
           </HighlightBox>
 
-          <Texte>Denis Mellier (2006) souligne que la personne en situation de handicap perçoit souvent, sans les conceptualiser, les tensions relationnelles qui l'entourent. Son comportement — régression, agitation, retrait — peut être une réponse à cette tension plutôt qu'une expression de son handicap ou de sa pathologie.</Texte>
+          <Texte>Denis Mellier (2006) souligne que la personne en situation de handicap perçoit souvent, sans les conceptualiser, les tensions relationnelles qui l'entourent. Son comportement (régression, agitation, retrait) peut être une réponse à cette tension plutôt qu'une expression de son handicap ou de sa pathologie.</Texte>
 
           <TableauComparaison
             titre="Lire autrement les comportements de la personne"
@@ -164,7 +164,7 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
               ]},
               { titre: "Lecture systémique possible", contenu: [
                 "La visite réveille des émotions que la personne n'a pas de mots pour traverser",
-                "Elle perçoit la tension de l'événement à venir — et son exclusion implicite",
+                "Elle perçoit la tension de l'événement à venir : et son exclusion implicite",
                 "Elle exprime son désarroi face à un environnement devenu imprévisible",
                 "Elle adapte son discours selon les attentes perçues de chaque milieu",
               ]},
@@ -172,7 +172,7 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
           />
 
           <PullQuote source="Denis Mellier, 2006">
-            Ce que la personne handicapée ne peut pas dire, elle le montre. Ce qu'elle montre, elle le vit. Notre rôle n'est pas seulement de gérer le symptôme — c'est de comprendre ce qu'il signifie dans la relation.
+            Ce que la personne handicapée ne peut pas dire, elle le montre. Ce qu'elle montre, elle le vit. Notre rôle n'est pas seulement de gérer le symptôme, c'est de comprendre ce qu'il signifie dans la relation.
           </PullQuote>
 
           <HighlightBox label="Ce que le professionnel peut faire" couleur="bleu">
@@ -190,7 +190,7 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le pacte dénégatif est un accord silencieux de ne pas penser ensemble les sujets qui font peur",
-              "La minorisation est un processus qui prive l'adulte handicapé de son statut de sujet — famille et institution peuvent y contribuer ensemble",
+              "La minorisation est un processus qui prive l'adulte handicapé de son statut de sujet, famille et institution peuvent y contribuer ensemble",
               "Les défenses institutionnelles protègent les équipes mais peuvent bloquer la collaboration avec les familles",
               "La personne accompagnée perçoit les tensions qui l'entourent et y répond par ses comportements",
               "Reconnaître ces dynamiques sans culpabiliser est la première étape du changement",
@@ -206,7 +206,7 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
             question: "Qu'est-ce que le 'pacte dénégatif' dans la relation famille-institution ?",
             reponses: [
               "Un accord formel signé entre la famille et l'institution pour délimiter leurs rôles respectifs",
-              "Un accord implicite et inconscient de ne pas aborder certaines réalités anxiogènes — la mort, la sexualité, l'après-nous",
+              "Un accord implicite et inconscient de ne pas aborder certaines réalités anxiogènes, la mort, la sexualité, l'après-nous",
               "Une stratégie institutionnelle pour éviter les conflits avec les familles difficiles",
               "Un contrat de soins établi avec la famille lors de l'entrée en institution",
             ],
@@ -250,12 +250,12 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
             question: "Qu'est-ce que le 'splitting' observé chez certaines personnes accompagnées en institution ?",
             reponses: [
               "Un trouble du comportement lié à leur diagnostic psychiatrique",
-              "Une réponse adaptative à deux systèmes d'attentes contradictoires — famille et institution — qui place la personne en loyauté impossible",
+              "Une réponse adaptative à deux systèmes d'attentes contradictoires, famille et institution, qui place la personne en loyauté impossible",
               "Une technique éducative utilisée par l'équipe pour gérer les comportements difficiles",
               "Un phénomène propre aux personnes avec déficience intellectuelle sévère",
             ],
             bonneReponse: 1,
-            explication: "Le splitting n'est pas de la manipulation. Quand famille et institution sont en tension, la personne se trouve dans une position de loyauté impossible. Elle adapte ses comportements et ses discours selon l'interlocuteur — se conformant à la norme institutionnelle avec les professionnels, retrouvant des comportements infantiles avec ses parents. C'est une réponse adaptative, pas une pathologie.",
+            explication: "Le splitting n'est pas de la manipulation. Quand famille et institution sont en tension, la personne se trouve dans une position de loyauté impossible. Elle adapte ses comportements et ses discours selon l'interlocuteur, se conformant à la norme institutionnelle avec les professionnels, retrouvant des comportements infantiles avec ses parents. C'est une réponse adaptative, pas une pathologie.",
           },
           {
             question: "Selon Denis Mellier, pourquoi un comportement de régression après chaque visite familiale mérite-t-il d'être analysé systémiquement ?",
@@ -266,7 +266,7 @@ export function Module2FamillesSecteurAdulte({ onValiderModule }: { onValiderMod
               "Parce que les visites familiales perturbent toujours la stabilité émotionnelle des résidents",
             ],
             bonneReponse: 2,
-            explication: "Denis Mellier souligne que la personne en situation de handicap perçoit souvent, sans les conceptualiser, les tensions relationnelles qui l'entourent. Un comportement apparemment lié au handicap peut être une réponse à une dynamique famille-institution — ce qui invite à ne pas traiter le symptôme seul, mais à comprendre ce qu'il signifie dans la relation.",
+            explication: "Denis Mellier souligne que la personne en situation de handicap perçoit souvent, sans les conceptualiser, les tensions relationnelles qui l'entourent. Un comportement apparemment lié au handicap peut être une réponse à une dynamique famille-institution, ce qui invite à ne pas traiter le symptôme seul, mais à comprendre ce qu'il signifie dans la relation.",
           },
         ]}
         onValiderModule={onValiderModule}

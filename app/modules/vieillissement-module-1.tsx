@@ -38,12 +38,12 @@ export function Module1Vieillissement({ onValiderModule }: { onValiderModule?: (
           <PullQuote source="René Lenoir, médecin, 1976">
             Les personnes avec des déficiences intellectuelles sévères mouraient presque toutes à l'adolescence. Elles atteignent maintenant l'âge mûr et nous aurons dans dix ou quinze ans de grands handicapés du troisième âge.
           </PullQuote>
-          <Texte>Ce pronostic, formulé en 1976, s'est pleinement réalisé. Cette "révolution discrète" — parce qu'elle ne fait pas la une des journaux — est néanmoins en train de transformer profondément le paysage des institutions sociales en Suisse et dans les pays voisins.</Texte>
+          <Texte>Ce pronostic, formulé en 1976, s'est pleinement réalisé. Cette "révolution discrète", parce qu'elle ne fait pas la une des journaux, est néanmoins en train de transformer profondément le paysage des institutions sociales en Suisse et dans les pays voisins.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Définitions et terminologie : de quoi parle-t-on exactement ?">
           <HighlightBox label="Définition fondamentale" couleur="bleu">
-            <Texte>Une <strong>personne en situation de handicap vieillissante</strong> est une personne dont le handicap — quelle qu'en soit la nature ou l'origine — a précédé les effets du vieillissement. Autrement dit : la personne a d'abord vécu avec son handicap, puis le vieillissement est venu s'y superposer.</Texte>
+            <Texte>Une <strong>personne en situation de handicap vieillissante</strong> est une personne dont le handicap, quelle qu'en soit la nature ou l'origine, a précédé les effets du vieillissement. Autrement dit : la personne a d'abord vécu avec son handicap, puis le vieillissement est venu s'y superposer.</Texte>
           </HighlightBox>
           <Texte>Cette définition peut sembler évidente, mais elle a des implications pratiques importantes. Elle signifie que l'on ne parle pas de personnes âgées qui développent un handicap en vieillissant, mais de personnes qui ont grandi et vécu avec leur handicap et qui commencent maintenant à ressentir les effets de l'âge en plus.</Texte>
 
@@ -80,7 +80,7 @@ export function Module1Vieillissement({ onValiderModule }: { onValiderModule?: (
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Données démographiques : une transformation profonde">
-          <Texte>Les données disponibles en France et en Belgique — dont les systèmes sont comparables à la Suisse — montrent des évolutions spectaculaires :</Texte>
+          <Texte>Les données disponibles en France et en Belgique, dont les systèmes sont comparables à la Suisse, montrent des évolutions spectaculaires :</Texte>
 
           <div className="grid grid-cols-3 gap-4 my-8">
             <div className="bg-[#1B2D5B] text-white rounded-xl p-6 text-center">
@@ -114,11 +114,11 @@ export function Module1Vieillissement({ onValiderModule }: { onValiderModule?: (
 
         <SectionModule eyebrow="Section 3" titre="Le vieillissement prématuré : comprendre les mécanismes">
           <HighlightBox label="Concept clé" couleur="bleu">
-            <Texte>La <strong>réserve fonctionnelle</strong> désigne la capacité de notre organisme à compenser les défaillances au fil de la vie. À la naissance, chaque système — cardiaque, neurologique, musculaire, rénal — dispose d'une certaine réserve. Avec l'âge, cette réserve diminue naturellement. Chez les personnes en situation de handicap, elle peut être plus faible dès le départ, et se consommer plus rapidement.</Texte>
+            <Texte>La <strong>réserve fonctionnelle</strong> désigne la capacité de notre organisme à compenser les défaillances au fil de la vie. À la naissance, chaque système (cardiaque, neurologique, musculaire, rénal) dispose d'une certaine réserve. Avec l'âge, cette réserve diminue naturellement. Chez les personnes en situation de handicap, elle peut être plus faible dès le départ, et se consommer plus rapidement.</Texte>
           </HighlightBox>
 
           <SchemaEtapes
-            titre="L'effet additif — cascade de dépendance"
+            titre="L'effet additif : cascade de dépendance"
             etapes={[
               { niveau: "Point de départ", nom: "Réserve réduite", definition: "Handicap initial : réserve fonctionnelle déjà plus faible" },
               { niveau: "Processus", nom: "Double charge", definition: "Limitations du handicap + effets naturels du vieillissement s'additionnent" },
@@ -169,7 +169,7 @@ export function Module1Vieillissement({ onValiderModule }: { onValiderModule?: (
             ]}
           />
 
-          <HighlightBox label="Focus trisomie 21 — une vigilance dès 40 ans" couleur="vert">
+          <HighlightBox label="Focus trisomie 21 : une vigilance dès 40 ans" couleur="vert">
             <Texte>Presque toutes les personnes trisomiques développent après 40 ans des modifications anatomiques caractéristiques de la maladie d'Alzheimer. La prévalence clinique dépasse 80% après 60 ans. Il est recommandé d'établir un <strong>bilan cognitif de référence dès 40 ans</strong> avec un outil adapté (CAMCOG-DS en français) et de le renouveler régulièrement.</Texte>
           </HighlightBox>
 
@@ -226,7 +226,7 @@ export function Module1Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Le cumul de plusieurs handicaps acquis progressivement"
             ],
             bonneReponse: 1,
-            explication: "L'effet additif signifie que les déficiences préexistantes et les limitations liées à l'âge ne s'additionnent pas simplement — elles interagissent et s'amplifient mutuellement. Exemple : paralysie cérébrale + sarcopénie = perte de la marche accélérée, douleurs chroniques, dépression."
+            explication: "L'effet additif signifie que les déficiences préexistantes et les limitations liées à l'âge ne s'additionnent pas simplement, elles interagissent et s'amplifient mutuellement. Exemple : paralysie cérébrale + sarcopénie = perte de la marche accélérée, douleurs chroniques, dépression."
           },
           {
             question: "Quel est le risque spécifique majeur pour les personnes avec trisomie 21 vieillissantes ?",
@@ -259,7 +259,7 @@ export function Module1Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Un isolement social progressif dû à la perte de communication"
             ],
             bonneReponse: 1,
-            explication: "Les études norvégiennes montrent qu'une majorité de personnes avec paralysie cérébrale ambulantes constatent une dégradation de leur marche entre 35 et 45 ans — liée à une combinaison de douleurs articulaires, de spasticité accrue et de fatigue chronique. Ce n'est pas une aggravation du handicap initial mais un effet du vieillissement prématuré."
+            explication: "Les études norvégiennes montrent qu'une majorité de personnes avec paralysie cérébrale ambulantes constatent une dégradation de leur marche entre 35 et 45 ans, liée à une combinaison de douleurs articulaires, de spasticité accrue et de fatigue chronique. Ce n'est pas une aggravation du handicap initial mais un effet du vieillissement prématuré."
           }
         ]}
         onValiderModule={onValiderModule}

@@ -11,7 +11,7 @@ import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "La solution — LEARNA",
+  title: "La solution | LEARNA",
   description:
     "Découvrez LEARNA : une plateforme de formation continue conçue pour les institutions du travail social. Des parcours ancrés dans la pratique, accessibles à toute l'équipe, à tout moment.",
 }
@@ -25,7 +25,7 @@ export default function LaSolutionPage() {
       <section className="bg-[#1B2D5B] py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-[#3DBFA0]">
-            LEARNA — Formation continue e-learning
+            LEARNA : Formation continue e-learning
           </span>
           <h1 className="mt-6 text-3xl font-bold tracking-tight text-white sm:text-5xl">
             Former les équipes, élargir les regards
@@ -33,7 +33,7 @@ export default function LaSolutionPage() {
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70">
             LEARNA propose aux institutions sociales et médico-sociales une plateforme de formation
             en ligne pensée pour le terrain : des parcours courts, concrets, accessibles à
-            l&apos;ensemble des collaborateurs — y compris ceux en périphérie des plans de
+            l&apos;ensemble des collaborateurs, y compris ceux en périphérie des plans de
             formation habituels.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

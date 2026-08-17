@@ -25,7 +25,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
       <div className="max-w-3xl mx-auto px-8 py-12">
 
         <SectionModule eyebrow="Introduction" titre="Pourquoi analyser avec le PPH ?">
-          <AccrocheScenario titre="Situation de départ — Karine">
+          <AccrocheScenario titre="Situation de départ : Karine">
             <p>Karine, 29 ans, vit avec une paralysie cérébrale légère. Elle s'exprime avec quelques difficultés d'élocution et se fatigue vite en fin de journée. Son référent note dans son dossier : "Difficultés de communication, manque de motivation pour les activités collectives."</p>
             <p>Karine, de son côté, dit qu'elle adore cuisiner mais qu'elle n'arrive "jamais" à participer à l'atelier cuisine. Pourquoi ? L'atelier a lieu en fin d'après-midi. La salle est bruyante. Les consignes sont données oralement, rapidement, sans support visuel.</p>
             <p>Où est le problème ?</p>
@@ -54,7 +54,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Section 2.1" titre="Une méthode d'analyse en six étapes">
-          <Texte>Pour analyser une situation avec le PPH, la méthode se décompose en six étapes. Chaque étape prépare la suivante. Ensemble, elles constituent une discipline du regard — une façon systématique d'aller au-delà des apparences pour auditer l'écosystème de la personne.</Texte>
+          <Texte>Pour analyser une situation avec le PPH, la méthode se décompose en six étapes. Chaque étape prépare la suivante. Ensemble, elles constituent une discipline du regard : une façon systématique d'aller au-delà des apparences pour auditer l'écosystème de la personne.</Texte>
 
           <HighlightBox label="Principe fondateur de la méthode" couleur="bleu">
             <Texte>Cette méthode ne cherche pas à évaluer la personne. Elle cherche à comprendre comment l'environnement facilite ou freine sa participation sociale. L'analyse est toujours au service de l'action.</Texte>
@@ -81,17 +81,17 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Étape 1" titre="Identifier l'habitude de vie ciblée">
-          <ConceptBox label="Définition clé — MHAVIE" titre="Qu'est-ce qu'une habitude de vie ?">
+          <ConceptBox label="Définition clé : MHAVIE" titre="Qu'est-ce qu'une habitude de vie ?">
             <Texte>Une habitude de vie est une activité courante (se nourrir, se déplacer, se soigner, communiquer, s'habiller) ou un rôle social (travailler, être parent, participer à la vie citoyenne, avoir des loisirs) que la personne souhaite ou doit réaliser dans son contexte de vie.</Texte>
             <Texte>L'outil MHAVIE (Mesure des Habitudes de Vie, Fougeyrollas et al.) recense douze catégories : nutrition, communication, mobilité, soins corporels, habitation, responsabilités, loisirs, vie sociale, vie communautaire, éducation, travail, et autres rôles valorisés.</Texte>
           </ConceptBox>
 
-          <HighlightBox label="Point clé — Partir de la personne" couleur="vert">
-            <Texte>On identifie toujours l'habitude de vie à partir du projet et des désirs de la personne — jamais du regard institutionnel ou du problème perçu par le professionnel. C'est l'autodétermination comme point de départ.</Texte>
+          <HighlightBox label="Point clé : Partir de la personne" couleur="vert">
+            <Texte>On identifie toujours l'habitude de vie à partir du projet et des désirs de la personne, jamais du regard institutionnel ou du problème perçu par le professionnel. C'est l'autodétermination comme point de départ.</Texte>
           </HighlightBox>
 
           <AccrocheScenario titre="Étape 1 pour Karine">
-            <p>Habitude de vie ciblée : participer à l'atelier cuisine hebdomadaire. C'est ce que Karine souhaite — elle l'a dit clairement. Ce n'est pas l'institution qui choisit cette priorité : c'est Karine.</p>
+            <p>Habitude de vie ciblée : participer à l'atelier cuisine hebdomadaire. C'est ce que Karine souhaite, elle l'a dit clairement. Ce n'est pas l'institution qui choisit cette priorité : c'est Karine.</p>
           </AccrocheScenario>
         </SectionModule>
 
@@ -103,7 +103,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Degré de réalisation : la participation est-elle complète, partielle, ou absente ?",
               "Niveau d'aide requise : la personne est-elle autonome, ou a-t-elle besoin d'une aide humaine ou technique ?",
               "Satisfaction de la personne : comment vit-elle cette participation ? En est-elle satisfaite ?",
-              "Effort requis : quels efforts sont nécessaires — fatigue, stress, douleur, temps supplémentaire ?"
+              "Effort requis : quels efforts sont nécessaires, fatigue, stress, douleur, temps supplémentaire ?"
             ]} />
           </HighlightBox>
 
@@ -117,19 +117,19 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Étape 3" titre="Repérer les aptitudes pertinentes">
-          <Texte>Les aptitudes sont les capacités propres à la personne — l'un des facteurs personnels du PPH. Elles incluent les capacités motrices, cognitives, communicationnelles, affectives, sensorielles. Elles sont évaluées de façon fonctionnelle, dans le contexte de l'habitude de vie ciblée.</Texte>
+          <Texte>Les aptitudes sont les capacités propres à la personne, l'un des facteurs personnels du PPH. Elles incluent les capacités motrices, cognitives, communicationnelles, affectives, sensorielles. Elles sont évaluées de façon fonctionnelle, dans le contexte de l'habitude de vie ciblée.</Texte>
 
           <HighlightBox label="Ce que le PPH demande à cette étape" couleur="vert">
             <Liste items={[
-              "Cibler uniquement les aptitudes pertinentes pour l'habitude de vie visée — pas un bilan exhaustif",
+              "Cibler uniquement les aptitudes pertinentes pour l'habitude de vie visée, pas un bilan exhaustif",
               "Décrire les aptitudes de façon fonctionnelle et contextualisée, pas en termes de pathologie",
-              "Inclure les aptitudes préservées — ce que la personne sait faire, pas seulement ses limitations",
+              "Inclure les aptitudes préservées, ce que la personne sait faire, pas seulement ses limitations",
               "Ne pas dresser une liste de déficiences : cela n'est ni utile ni respectueux"
             ]} />
           </HighlightBox>
 
           <AccrocheScenario titre="Étape 3 pour Karine">
-            <p>Aptitudes pertinentes pour la cuisine : compréhension des consignes simples (préservée), capacité à suivre une recette illustrée (préservée), manipulation fine (quelques difficultés en fin de journée), communication verbale (ralentie quand fatiguée). Aptitudes préservées dominantes — les limitations sont contextuelles (heure, bruit).</p>
+            <p>Aptitudes pertinentes pour la cuisine : compréhension des consignes simples (préservée), capacité à suivre une recette illustrée (préservée), manipulation fine (quelques difficultés en fin de journée), communication verbale (ralentie quand fatiguée). Aptitudes préservées dominantes, les limitations sont contextuelles (heure, bruit).</p>
           </AccrocheScenario>
         </SectionModule>
 
@@ -137,7 +137,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
           <Texte>C'est le cœur de l'analyse PPH. L'environnement agit soit comme facilitateur, soit comme obstacle. On analyse systématiquement les cinq dimensions environnementales.</Texte>
 
           <TableauComparaison
-            titre="Les 5 dimensions environnementales — Obstacles et facilitateurs pour Karine"
+            titre="Les 5 dimensions environnementales : Obstacles et facilitateurs pour Karine"
             colonnes={[
               {
                 titre: "Dimension",
@@ -185,12 +185,12 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Identifier l'aptitude concernée (facteur personnel)",
               "Identifier l'obstacle ou le facilitateur environnemental",
               "Décrire l'effet sur la réalisation de l'habitude de vie",
-              "Formuler en termes d'interaction — pas de causalité unidirectionnelle"
+              "Formuler en termes d'interaction : pas de causalité unidirectionnelle"
             ]} />
           </HighlightBox>
 
           <AccrocheScenario titre="Hypothèses PPH pour Karine">
-            <p><strong>Hypothèse 1 :</strong> La fatigabilité accrue en fin de journée (aptitude — facteur personnel), combinée à l'horaire tardif de l'atelier (obstacle institutionnel), empêche Karine de participer à l'atelier cuisine.</p>
+            <p><strong>Hypothèse 1 :</strong> La fatigabilité accrue en fin de journée (aptitude, facteur personnel), combinée à l'horaire tardif de l'atelier (obstacle institutionnel), empêche Karine de participer à l'atelier cuisine.</p>
             <p><strong>Hypothèse 2 :</strong> Les difficultés d'élocution de Karine sous fatigue (aptitude), combinées aux consignes orales sans support visuel (obstacle organisationnel), réduisent sa capacité à suivre les étapes de la recette et à participer activement.</p>
           </AccrocheScenario>
         </SectionModule>
@@ -200,7 +200,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           <HighlightBox label="Principes du plan d'action PPH" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "Agir prioritairement sur l'environnement — pas sur la personne",
+              "Agir prioritairement sur l'environnement : pas sur la personne",
               "Co-construire chaque mesure avec Karine",
               "Définir des indicateurs mesurables en termes de participation sociale",
               "Prévoir une évaluation régulière de l'effet des actions sur la participation"
@@ -215,11 +215,11 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
           </AccrocheScenario>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 2.7 — Vigilance" titre="Les erreurs fréquentes dans l'analyse PPH">
+        <SectionModule eyebrow="Section 2.7 : Vigilance" titre="Les erreurs fréquentes dans l'analyse PPH">
           <HighlightBox label="Pièges à éviter" couleur="jaune">
             <Liste items={[
               "Partir des déficiences plutôt que de l'habitude de vie souhaitée par la personne",
-              "Oublier les aptitudes préservées — se focaliser uniquement sur ce que la personne ne peut pas faire",
+              "Oublier les aptitudes préservées, se focaliser uniquement sur ce que la personne ne peut pas faire",
               "Négliger les facteurs institutionnels et organisationnels : les horaires, les règles et les procédures sont des obstacles tout autant que les barrières physiques",
               "Formuler des hypothèses unidirectionnelles (\"c'est la fatigue qui empêche\") sans identifier le facteur environnemental qui l'amplifie",
               "Construire un plan d'action sans co-construction avec la personne"
@@ -232,7 +232,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           <HighlightBox label="À retenir" couleur="vert">
             <Liste items={[
-              "Toujours partir de l'habitude de vie et du projet de la personne — jamais de ses déficiences",
+              "Toujours partir de l'habitude de vie et du projet de la personne, jamais de ses déficiences",
               "Évaluer la qualité de la participation sur quatre dimensions : réalisation, aide, satisfaction, effort",
               "Cibler les aptitudes pertinentes sans dresser un bilan exhaustif",
               "Analyser systématiquement les cinq dimensions de l'environnement (obstacles ET facilitateurs)",
@@ -254,7 +254,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Par la consultation du dossier médical"
             ],
             bonneReponse: 1,
-            explication: "L'analyse PPH commence toujours par l'habitude de vie — ce que la personne souhaite réaliser. On part de son projet et de son autodétermination, pas de ses déficiences."
+            explication: "L'analyse PPH commence toujours par l'habitude de vie, ce que la personne souhaite réaliser. On part de son projet et de son autodétermination, pas de ses déficiences."
           },
           {
             question: "Les quatre dimensions de la qualité de participation sont :",
@@ -287,7 +287,7 @@ export function Module2PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Décrire l'objectif SMART de l'accompagnement"
             ],
             bonneReponse: 1,
-            explication: "Une hypothèse PPH relie une aptitude (facteur personnel) avec un obstacle ou facilitateur environnemental pour expliquer comment la situation de handicap est produite — en termes d'interaction, pas de causalité unidirectionnelle."
+            explication: "Une hypothèse PPH relie une aptitude (facteur personnel) avec un obstacle ou facilitateur environnemental pour expliquer comment la situation de handicap est produite, en termes d'interaction, pas de causalité unidirectionnelle."
           },
           {
             question: "Dans l'analyse de Karine, le principal obstacle identifié pour l'atelier cuisine était :",

@@ -37,7 +37,7 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
         <SectionModule eyebrow="Section 1" titre="Les signes observables courants">
           <Texte>Ces signes <strong>ne se transmettent pas comme un diagnostic</strong> mais comme des <strong>observations factuelles</strong> utiles à l&apos;équipe et aux professionnels de santé compétents. Les observer et les noter précisément est déjà une contribution précieuse.</Texte>
 
-          <HighlightBox label="Signes fréquemment observés — liste OMS" couleur="bleu">
+          <HighlightBox label="Signes fréquemment observés : liste OMS" couleur="bleu">
             <div className="space-y-3 mt-2">
               <div className="flex gap-3">
                 <span className="w-6 h-6 rounded-full bg-[#1B2D5B] text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">1</span>
@@ -50,7 +50,7 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
                 <span className="w-6 h-6 rounded-full bg-[#1B2D5B] text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">2</span>
                 <div>
                   <p className="text-sm font-semibold text-gray-800">Désorientation dans le temps et l&apos;espace</p>
-                  <p className="text-sm text-gray-600">Se perdre dans un lieu familier, ne plus savoir quel jour ou quelle saison on est. Une personne peut chercher à «rentrer chez elle» alors qu&apos;elle est dans son lieu de vie depuis des années — car elle se trouve mentalement dans un autre temps.</p>
+                  <p className="text-sm text-gray-600">Se perdre dans un lieu familier, ne plus savoir quel jour ou quelle saison on est. Une personne peut chercher à «rentrer chez elle» alors qu&apos;elle est dans son lieu de vie depuis des années, car elle se trouve mentalement dans un autre temps.</p>
                 </div>
               </div>
               <div className="flex gap-3">
@@ -77,14 +77,14 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
             </div>
           </HighlightBox>
 
-          <HighlightBox label="Le «sundowning» — l'agitation en fin de journée" couleur="jaune">
-            <Texte>De nombreuses personnes atteintes de démence présentent une aggravation de la confusion, de l&apos;agitation ou de l&apos;anxiété en fin d&apos;après-midi et en soirée — un phénomène appelé «sundowning» (du coucher de soleil). La fatigue cognitive accumulée dans la journée, la diminution de la lumière naturelle, et la perturbation des repères temporels contribuent à ce phénomène. Le savoir aide à mieux l&apos;anticiper : un environnement plus calme, une activité douce, une présence rassurante à ces moments-là peuvent faire une vraie différence.</Texte>
+          <HighlightBox label="Le «sundowning» : l'agitation en fin de journée" couleur="jaune">
+            <Texte>De nombreuses personnes atteintes de démence présentent une aggravation de la confusion, de l&apos;agitation ou de l&apos;anxiété en fin d&apos;après-midi et en soirée, un phénomène appelé «sundowning» (du coucher de soleil). La fatigue cognitive accumulée dans la journée, la diminution de la lumière naturelle, et la perturbation des repères temporels contribuent à ce phénomène. Le savoir aide à mieux l&apos;anticiper : un environnement plus calme, une activité douce, une présence rassurante à ces moments-là peuvent faire une vraie différence.</Texte>
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 2" titre="Le comportement comme communication — le principe fondateur">
+        <SectionModule eyebrow="Section 2" titre="Le comportement comme communication : le principe fondateur">
           <Texte>Voici le principe le plus important de ce module : <strong>un comportement qui semble «difficile» est presque toujours une tentative d&apos;exprimer un besoin non satisfait.</strong></Texte>
-          <Texte>La personne atteinte de démence n&apos;a pas les outils habituels pour communiquer sa détresse, sa douleur ou son malaise. Quand le langage devient insuffisant, le corps et les comportements prennent le relais. L&apos;agitation, le refus, les cris, la déambulation — tout cela «dit» quelque chose.</Texte>
+          <Texte>La personne atteinte de démence n&apos;a pas les outils habituels pour communiquer sa détresse, sa douleur ou son malaise. Quand le langage devient insuffisant, le corps et les comportements prennent le relais. L&apos;agitation, le refus, les cris, la déambulation : tout cela «dit» quelque chose.</Texte>
 
           <HighlightBox label="Les besoins derrière les comportements les plus fréquents" couleur="bleu">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
@@ -125,17 +125,17 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
               {
                 n: "2",
                 titre: "Phrases courtes, une information à la fois",
-                texte: "Éviter les phrases longues ou les questions multiples. «Il est midi. On va manger.» plutôt que «Tu te rappelles qu'il est midi et qu'on devait aller au réfectoire parce que le repas est servi maintenant ?» Laisser le temps de répondre — la personne peut avoir besoin de plusieurs secondes.",
+                texte: "Éviter les phrases longues ou les questions multiples. «Il est midi. On va manger.» plutôt que «Tu te rappelles qu'il est midi et qu'on devait aller au réfectoire parce que le repas est servi maintenant ?» Laisser le temps de répondre, la personne peut avoir besoin de plusieurs secondes.",
               },
               {
                 n: "3",
                 titre: "Ne pas corriger, ne pas argumenter",
-                texte: "Si la personne croit que sa mère est en vie, qu'elle est encore au travail, ou qu'elle est dans sa maison d'enfance — ne pas la corriger frontalement. Cela ne «remet pas les choses en ordre» : ça provoque seulement de la détresse et de la confusion supplémentaire. Entrer dans son monde, accueillir l'émotion, rassurer.",
+                texte: "Si la personne croit que sa mère est en vie, qu'elle est encore au travail, ou qu'elle est dans sa maison d'enfance : ne pas la corriger frontalement. Cela ne «remet pas les choses en ordre» : ça provoque seulement de la détresse et de la confusion supplémentaire. Entrer dans son monde, accueillir l'émotion, rassurer.",
               },
               {
                 n: "4",
                 titre: "Préserver les routines et les repères",
-                texte: "Un environnement stable et prévisible est sécurisant pour une personne dont le cerveau ne peut plus créer de nouveaux repères efficacement. Les rituels du quotidien — même simples — aident à structurer la journée et à réduire l'anxiété.",
+                texte: "Un environnement stable et prévisible est sécurisant pour une personne dont le cerveau ne peut plus créer de nouveaux repères efficacement. Les rituels du quotidien, même simples, aident à structurer la journée et à réduire l'anxiété.",
               },
               {
                 n: "5",
@@ -144,8 +144,8 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
               },
               {
                 n: "6",
-                titre: "Soigner le non-verbal — il prime sur les mots",
-                texte: "Le ton de voix, le rythme, le sourire, la posture, le geste doux — tout cela est perçu et ressenti bien au-delà des mots, souvent jusqu'aux stades très avancés. Un professionnel pressé et tendu transmet sa tension. Un professionnel calme et chaleureux transmet sa sécurité.",
+                titre: "Soigner le non-verbal : il prime sur les mots",
+                texte: "Le ton de voix, le rythme, le sourire, la posture, le geste doux : tout cela est perçu et ressenti bien au-delà des mots, souvent jusqu'aux stades très avancés. Un professionnel pressé et tendu transmet sa tension. Un professionnel calme et chaleureux transmet sa sécurité.",
               },
             ].map(({ n, titre, texte }) => (
               <div key={n} className="flex gap-4 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
@@ -163,7 +163,7 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
           <div className="space-y-4 my-4">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation</p>
-              <p className="text-gray-700 text-sm leading-relaxed"><strong>Madame R., 79 ans, Alzheimer modéré.</strong> Elle demande dix fois en une heure à quelle heure sa fille vient la voir. À chaque fois, l&apos;équipe lui répond — et quelques minutes plus tard, Madame R. pose à nouveau la question, comme si elle ne l&apos;avait jamais posée.</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Madame R., 79 ans, Alzheimer modéré.</strong> Elle demande dix fois en une heure à quelle heure sa fille vient la voir. À chaque fois, l&apos;équipe lui répond, et quelques minutes plus tard, Madame R. pose à nouveau la question, comme si elle ne l&apos;avait jamais posée.</p>
             </div>
             <div className="border-l-4 border-red-300 bg-red-50 rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-red-600 mb-1">❌ À éviter</p>
@@ -173,15 +173,15 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
             <div className="border-l-4 border-[#3DBFA0] bg-[#F0FDF4] rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-1">✓ Attitude juste</p>
               <Liste items={[
-                "Répondre calmement à chaque fois, d'un ton constant — Madame R. n'a pas accès au souvenir de sa question précédente",
-                "Explorer ce qui se cache derrière : «Vous avez hâte de la voir ? Elle vous manque ?» — souvent, la répétition exprime une inquiétude ou un besoin de connexion",
+                "Répondre calmement à chaque fois, d'un ton constant : Madame R. n'a pas accès au souvenir de sa question précédente",
+                "Explorer ce qui se cache derrière : «Vous avez hâte de la voir ? Elle vous manque ?», souvent, la répétition exprime une inquiétude ou un besoin de connexion",
                 "Proposer un repère concret : un post-it visible indiquant l'heure de la visite, un objet qui rappelle la fille",
                 "Détourner doucement vers une activité valorisante en attendant",
               ]} />
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Comprendre</p>
-              <p className="text-sm text-gray-700">Madame R. ne «fait pas exprès» de répéter. Sa mémoire de travail ne peut plus enregistrer la réponse. Mais son anxiété de fond — «est-ce que ma fille viendra ?» — persiste. C&apos;est cette anxiété qu&apos;il faut adresser, pas seulement l&apos;information manquante.</p>
+              <p className="text-sm text-gray-700">Madame R. ne «fait pas exprès» de répéter. Sa mémoire de travail ne peut plus enregistrer la réponse. Mais son anxiété de fond, «est-ce que ma fille viendra ?», persiste. C&apos;est cette anxiété qu&apos;il faut adresser, pas seulement l&apos;information manquante.</p>
             </div>
           </div>
         </SectionModule>
@@ -200,15 +200,15 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
             <div className="border-l-4 border-[#3DBFA0] bg-[#F0FDF4] rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-1">✓ Attitude juste</p>
               <Liste items={[
-                "Reculer, baisser la tension — dire «D'accord, je reviens dans un moment» et respecter ce temps",
+                "Reculer, baisser la tension : dire «D'accord, je reviens dans un moment» et respecter ce temps",
                 "Chercher la cause : douleur ? fatigue particulière ? mauvaise nuit ? contrariété antérieure ? médicament ?",
                 "Revenir quelques minutes plus tard avec une approche différente : ton plus léger, proposition d'un choix simple",
-                "Si possible, proposer le repas autrement — dans sa chambre, avec un aliment préféré en premier",
+                "Si possible, proposer le repas autrement : dans sa chambre, avec un aliment préféré en premier",
                 "Transmettre l'observation à l'équipe si le refus se répète sur plusieurs repas",
               ]} />
             </div>
             <HighlightBox label="Repère LEARNA" couleur="jaune">
-              <Texte>Face à un refus de soin répété, à une douleur suspectée ou à un changement brusque de comportement, on <strong>transmet</strong> aux professionnels compétents — on ne décide pas seul·e.</Texte>
+              <Texte>Face à un refus de soin répété, à une douleur suspectée ou à un changement brusque de comportement, on <strong>transmet</strong> aux professionnels compétents, on ne décide pas seul·e.</Texte>
             </HighlightBox>
           </div>
         </SectionModule>
@@ -217,16 +217,16 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
           <div className="space-y-4 my-4">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation</p>
-              <p className="text-gray-700 text-sm leading-relaxed"><strong>Madame S., 76 ans, démence à corps de Lewy.</strong> Elle pleure depuis une heure, ne répond pas aux questions, semble chercher quelqu&apos;un. Elle dit qu&apos;elle a peur. L&apos;équipe ne comprend pas ce qui a déclenché cet état — le matin s&apos;était passé normalement.</p>
+              <p className="text-gray-700 text-sm leading-relaxed"><strong>Madame S., 76 ans, démence à corps de Lewy.</strong> Elle pleure depuis une heure, ne répond pas aux questions, semble chercher quelqu&apos;un. Elle dit qu&apos;elle a peur. L&apos;équipe ne comprend pas ce qui a déclenché cet état, le matin s&apos;était passé normalement.</p>
             </div>
             <div className="border-l-4 border-[#3DBFA0] bg-[#F0FDF4] rounded-r-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-1">✓ Attitude juste</p>
               <Liste items={[
-                "S'asseoir à côté d'elle, à sa hauteur, sans urgence — la seule présence calme est déjà thérapeutique",
+                "S'asseoir à côté d'elle, à sa hauteur, sans urgence : la seule présence calme est déjà thérapeutique",
                 "Accueillir l'émotion sans chercher à l'expliquer immédiatement : «Je suis là. Vous n'êtes pas seule.»",
-                "Ne pas chercher à «raisonner» la peur — la peur est réelle même si son objet n'est pas identifiable",
+                "Ne pas chercher à «raisonner» la peur, la peur est réelle même si son objet n'est pas identifiable",
                 "Chercher des repères rassurants : un objet familier, une musique connue, le nom d'une personne chère",
-                "Si l'agitation persiste ou s'intensifie, signaler à l'infirmier·ère référent·e — une douleur physique peut se manifester ainsi",
+                "Si l'agitation persiste ou s'intensifie, signaler à l'infirmier·ère référent·e : une douleur physique peut se manifester ainsi",
               ]} />
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
@@ -236,7 +236,7 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
           </div>
         </SectionModule>
 
-        <SectionModule eyebrow="Situation concrète 4" titre="La déambulation — «je veux rentrer chez moi»">
+        <SectionModule eyebrow="Situation concrète 4" titre="La déambulation : «je veux rentrer chez moi»">
           <div className="space-y-4 my-4">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Situation</p>
@@ -253,12 +253,12 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
                 "Entrer dans son monde : «Vous pensez à elle ? Elle vous manque ?»",
                 "Détourner doucement vers l'émotion plutôt que vers les faits : l'accompagner dans son sentiment de manque",
                 "Proposer une activité de transition : «Avant de partir, vous voulez bien venir prendre quelque chose à boire avec moi ?»",
-                "Utiliser des éléments de sa vie : une photo, un objet personnel, une musique qu'il aimait — pour le ramener dans le présent par les émotions positives",
+                "Utiliser des éléments de sa vie : une photo, un objet personnel, une musique qu'il aimait, pour le ramener dans le présent par les émotions positives",
               ]} />
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">Comprendre</p>
-              <p className="text-sm text-gray-700">Monsieur F. ne «veut pas rentrer chez lui» au sens littéral — il exprime un besoin de retourner vers quelque chose de connu et de sécurisant. «Chez moi» représente souvent la sécurité, l&apos;amour, la familiarité. L&apos;accompagnement juste cherche à répondre à ce besoin sous-jacent, pas à corriger le désir exprimé.</p>
+              <p className="text-sm text-gray-700">Monsieur F. ne «veut pas rentrer chez lui» au sens littéral, il exprime un besoin de retourner vers quelque chose de connu et de sécurisant. «Chez moi» représente souvent la sécurité, l&apos;amour, la familiarité. L&apos;accompagnement juste cherche à répondre à ce besoin sous-jacent, pas à corriger le désir exprimé.</p>
             </div>
           </div>
         </SectionModule>
@@ -268,10 +268,10 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
             <Liste items={[
               "Un comportement «difficile» est presque toujours une tentative d'exprimer un besoin",
               "La bonne question : «qu'est-ce que la personne cherche à me dire ?»",
-              "Approche calme, phrases courtes, non-verbal soigné — les bases de toute interaction",
+              "Approche calme, phrases courtes, non-verbal soigné : les bases de toute interaction",
               "Ne pas corriger ni argumenter : entrer dans le monde de la personne",
-              "La répétition exprime souvent une inquiétude — y répondre calmement à chaque fois",
-              "Face à un refus, reculer et revenir — jamais forcer",
+              "La répétition exprime souvent une inquiétude, y répondre calmement à chaque fois",
+              "Face à un refus, reculer et revenir : jamais forcer",
               "«Je veux rentrer chez moi» est un besoin de sécurité, pas une demande littérale",
               "Tout changement persistant ou brusque se transmet à l'équipe soignante",
             ]} />
@@ -286,7 +286,7 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
             question: "Monsieur T. refuse de se lever pour le repas et hausse le ton. La meilleure réaction est de reculer et de revenir plus tard. Pourquoi cette approche est-elle plus efficace qu'insister ?",
             reponses: [
               "Parce que l'insistance est toujours interdite dans les EMS par la réglementation",
-              "Parce que le refus cache souvent un besoin non identifié — douleur, peur, fatigue — et que la confrontation ferme la porte à cette exploration",
+              "Parce que le refus cache souvent un besoin non identifié (douleur, peur, fatigue), et que la confrontation ferme la porte à cette exploration",
               "Parce qu'un repas manqué est sans conséquence médicale à court terme",
               "Parce qu'il faut respecter l'autonomie totale de la personne, même si elle s'affame",
             ],
@@ -296,35 +296,35 @@ export function Module3Demence({ onValiderModule }: { onValiderModule?: () => vo
           {
             question: "Madame R. demande pour la dixième fois à quelle heure vient sa fille. Une collègue propose de lui répondre «je vous l'ai déjà dit» pour l'aider à prendre conscience de ses répétitions. Est-ce une bonne idée ?",
             reponses: [
-              "Oui — lui faire remarquer peut l'aider à mieux mémoriser par la suite",
-              "Oui — si on ne le dit pas, elle va continuer indéfiniment et c'est épuisant pour l'équipe",
-              "Non — elle n'a pas accès au souvenir de ses questions précédentes, donc cette réponse provoque de la honte sans apporter de réassurance",
-              "Non — uniquement parce que cela pourrait la mettre en colère",
+              "Oui : lui faire remarquer peut l'aider à mieux mémoriser par la suite",
+              "Oui, si on ne le dit pas, elle va continuer indéfiniment et c'est épuisant pour l'équipe",
+              "Non, elle n'a pas accès au souvenir de ses questions précédentes, donc cette réponse provoque de la honte sans apporter de réassurance",
+              "Non : uniquement parce que cela pourrait la mettre en colère",
             ],
             bonneReponse: 2,
-            explication: "Dire «je vous l'ai déjà dit» suppose que la personne peut se souvenir d'avoir posé la question — ce qu'elle ne peut pas faire. La démence a effacé cette information. La réponse provoque de la honte ou de la confusion sans aucun bénéfice. Ce qui est utile : répondre calmement à chaque fois, explorer l'anxiété sous-jacente («vous avez hâte de la voir ?»), et proposer un repère concret comme un post-it avec l'heure.",
+            explication: "Dire «je vous l'ai déjà dit» suppose que la personne peut se souvenir d'avoir posé la question, ce qu'elle ne peut pas faire. La démence a effacé cette information. La réponse provoque de la honte ou de la confusion sans aucun bénéfice. Ce qui est utile : répondre calmement à chaque fois, explorer l'anxiété sous-jacente («vous avez hâte de la voir ?»), et proposer un repère concret comme un post-it avec l'heure.",
           },
           {
-            question: "Monsieur F. veut «rentrer chez lui voir sa femme» — décédée il y a six ans. Un collègue suggère de lui rappeler gentiment ce deuil. Quelle est la limite de cette approche ?",
+            question: "Monsieur F. veut «rentrer chez lui voir sa femme», décédée il y a six ans. Un collègue suggère de lui rappeler gentiment ce deuil. Quelle est la limite de cette approche ?",
             reponses: [
-              "Aucune — rappeler la réalité avec douceur est toujours préférable à entrer dans son monde",
-              "Elle suppose que la personne peut intégrer une information nouvelle, ce qu'elle ne peut plus faire — chaque rappel devient une première annonce du décès",
+              "Aucune, rappeler la réalité avec douceur est toujours préférable à entrer dans son monde",
+              "Elle suppose que la personne peut intégrer une information nouvelle, ce qu'elle ne peut plus faire : chaque rappel devient une première annonce du décès",
               "Elle est valable dans les stades légers, mais pas dans les stades avancés",
               "Elle fonctionne si on l'accompagne d'une preuve concrète comme une photo",
             ],
             bonneReponse: 1,
-            explication: "La démence altère la capacité à créer de nouveaux souvenirs. Annoncer à Monsieur F. que sa femme est décédée ne l'aide pas à «accepter» — il l'oubliera quelques minutes plus tard et vivra à nouveau ce deuil. C'est une souffrance répétée pour rien. L'attitude juste consiste à entrer dans son émotion (le manque, le besoin de sécurité), à accueillir ce ressenti, et à détourner doucement vers quelque chose de rassurant.",
+            explication: "La démence altère la capacité à créer de nouveaux souvenirs. Annoncer à Monsieur F. que sa femme est décédée ne l'aide pas à «accepter», il l'oubliera quelques minutes plus tard et vivra à nouveau ce deuil. C'est une souffrance répétée pour rien. L'attitude juste consiste à entrer dans son émotion (le manque, le besoin de sécurité), à accueillir ce ressenti, et à détourner doucement vers quelque chose de rassurant.",
           },
           {
-            question: "Depuis lundi, Madame A. devient très agitée chaque jour entre 16h et 18h — alors que ses matins se passent normalement. L'équipe pense que «sa démence évolue». Quelle lecture est plus précise ?",
+            question: "Depuis lundi, Madame A. devient très agitée chaque jour entre 16h et 18h, alors que ses matins se passent normalement. L'équipe pense que «sa démence évolue». Quelle lecture est plus précise ?",
             reponses: [
-              "L'équipe a raison — une aggravation progressive à heures fixes est un signe d'Alzheimer avancé",
+              "L'équipe a raison, une aggravation progressive à heures fixes est un signe d'Alzheimer avancé",
               "C'est probablement un effet secondaire de ses médicaments du matin qui s'estompe en fin de journée",
-              "Ce pattern horaire prévisible évoque un sundowning — un phénomène atténuable par des adaptations en fin de journée",
+              "Ce pattern horaire prévisible évoque un sundowning, un phénomène atténuable par des adaptations en fin de journée",
               "Cela signifie qu'elle anticipe quelque chose de désagréable qui se passe à 16h",
             ],
             bonneReponse: 2,
-            explication: "Une aggravation régulière et prévisible en fin d'après-midi est caractéristique du sundowning — lié à la fatigue cognitive accumulée et à la baisse de lumière naturelle. Ce n'est pas une «évolution» générale de la maladie, c'est un pattern temporel identifiable. Le reconnaître permet d'agir : environnement plus calme, activité douce, présence rassurante dans ce créneau — ce qui peut significativement réduire l'agitation.",
+            explication: "Une aggravation régulière et prévisible en fin d'après-midi est caractéristique du sundowning, lié à la fatigue cognitive accumulée et à la baisse de lumière naturelle. Ce n'est pas une «évolution» générale de la maladie, c'est un pattern temporel identifiable. Le reconnaître permet d'agir : environnement plus calme, activité douce, présence rassurante dans ce créneau, ce qui peut significativement réduire l'agitation.",
           },
         ]}
         onValiderModule={onValiderModule}

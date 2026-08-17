@@ -10,10 +10,10 @@ export function Module4GestionProjetAvance({ onValiderModule }: { onValiderModul
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={4}
-        categorie="Gestion de projet — Niveau Avancé"
+        categorie="Gestion de projet : Niveau Avancé"
         titre="Conduire le changement"
         titrePart2="et accompagner les résistances"
-        sousTitre="On ne décrète pas un changement : on l'accompagne. Une transformation, aussi bien pensée soit-elle, ne se réalise que si des personnes acceptent de modifier leur manière de travailler — et cette acceptation ne s'obtient pas par la contrainte."
+        sousTitre="On ne décrète pas un changement : on l'accompagne. Une transformation, aussi bien pensée soit-elle, ne se réalise que si des personnes acceptent de modifier leur manière de travailler, et cette acceptation ne s'obtient pas par la contrainte."
         duree="≈ 25-30 minutes"
         niveau="Avancé"
       />
@@ -21,7 +21,7 @@ export function Module4GestionProjetAvance({ onValiderModule }: { onValiderModul
       <div className="max-w-3xl mx-auto px-8 py-12">
 
         <SectionModule eyebrow="Introduction" titre="Embarquer les équipes plutôt que d'imposer">
-          <Texte>Le module 1 l'a posé : une transformation touche aux habitudes, aux repères, parfois à l'identité professionnelle des personnes. C'est ce qui la distingue radicalement d'un projet technique, et ce qui explique une vérité que tout pilote finit par rencontrer : <strong>un changement décrété d'en haut, sans l'adhésion de ceux qui doivent le vivre, ne se réalise pas vraiment</strong>. Il peut s'imposer en surface — les procédures changent, les organigrammes sont redessinés — mais les pratiques réelles, elles, résistent, contournent, reviennent insidieusement à l'état antérieur.</Texte>
+          <Texte>Le module 1 l'a posé : une transformation touche aux habitudes, aux repères, parfois à l'identité professionnelle des personnes. C'est ce qui la distingue radicalement d'un projet technique, et ce qui explique une vérité que tout pilote finit par rencontrer : <strong>un changement décrété d'en haut, sans l'adhésion de ceux qui doivent le vivre, ne se réalise pas vraiment</strong>. Il peut s'imposer en surface (les procédures changent, les organigrammes sont redessinés), mais les pratiques réelles, elles, résistent, contournent, reviennent insidieusement à l'état antérieur.</Texte>
 
           <Texte>La raison est profonde. Une manière de travailler n'est pas un simple ensemble de procédures interchangeables : c'est un équilibre que les professionnels ont construit, qui leur donne des repères, un sentiment de compétence, une identité. Demander à quelqu'un de changer sa façon de travailler, c'est lui demander de renoncer à une part de cet équilibre pour entrer dans un inconnu où il se sentira, au moins temporairement, moins compétent et moins assuré. Vu ainsi, <strong>la résistance au changement n'est pas de la mauvaise volonté : c'est une réaction humaine compréhensible</strong> face à la perte de repères.</Texte>
 
@@ -33,14 +33,14 @@ export function Module4GestionProjetAvance({ onValiderModule }: { onValiderModul
         <SectionModule eyebrow="Section 1" titre="Les leviers de l'adhésion : sens, participation, rythme">
           <Texte>Si la contrainte ne fonctionne pas, qu'est-ce qui fait qu'une équipe s'engage dans un changement ? Trois leviers principaux, qu'un pilote avisé actionne ensemble.</Texte>
 
-          <Texte>Le premier levier est le <strong>sens</strong>. Une personne accepte d'autant mieux de changer qu'elle comprend pourquoi, et qu'elle adhère à ce pourquoi. Un changement dont la raison reste obscure, ou qui semble n'obéir qu'à une logique gestionnaire déconnectée du terrain, suscite légitimement la résistance. À l'inverse, un changement relié à une finalité qui parle aux professionnels — mieux accompagner les personnes, retrouver du sens dans le travail — mobilise. Le premier travail du pilote est donc un travail de sens : expliquer, relier le changement aux valeurs partagées, montrer en quoi il sert ce à quoi les équipes tiennent.</Texte>
+          <Texte>Le premier levier est le <strong>sens</strong>. Une personne accepte d'autant mieux de changer qu'elle comprend pourquoi, et qu'elle adhère à ce pourquoi. Un changement dont la raison reste obscure, ou qui semble n'obéir qu'à une logique gestionnaire déconnectée du terrain, suscite légitimement la résistance. À l'inverse, un changement relié à une finalité qui parle aux professionnels (mieux accompagner les personnes, retrouver du sens dans le travail) mobilise. Le premier travail du pilote est donc un travail de sens : expliquer, relier le changement aux valeurs partagées, montrer en quoi il sert ce à quoi les équipes tiennent.</Texte>
 
-          <Texte>Le deuxième levier est la <strong>participation</strong>. On adhère à ce qu'on a contribué à construire ; on résiste à ce qu'on subit. Associer les équipes à la conception du changement — recueillir leur expérience, tenir compte de leurs objections, leur laisser une marge pour façonner la mise en œuvre — transforme leur posture : de destinataires passifs, elles deviennent actrices. Un changement co-construit n'est pas seulement mieux accepté : il est souvent meilleur, parce qu'il intègre la connaissance du terrain que le pilote seul n'a pas.</Texte>
+          <Texte>Le deuxième levier est la <strong>participation</strong>. On adhère à ce qu'on a contribué à construire ; on résiste à ce qu'on subit. Associer les équipes à la conception du changement (recueillir leur expérience, tenir compte de leurs objections, leur laisser une marge pour façonner la mise en œuvre) transforme leur posture : de destinataires passifs, elles deviennent actrices. Un changement co-construit n'est pas seulement mieux accepté : il est souvent meilleur, parce qu'il intègre la connaissance du terrain que le pilote seul n'a pas.</Texte>
 
           <Texte>Le troisième levier est le <strong>rythme</strong>. Un changement imposé trop vite ne laisse pas le temps de l'adaptation et provoque le rejet ; un changement trop lent s'enlise et perd son élan. Le bon rythme tient compte de la capacité réelle des personnes à absorber le changement, sans les brusquer ni les épuiser. Il rejoint la logique itérative du module 2 : avancer par étapes assimilables, laisser à chacune le temps de se stabiliser avant la suivante, plutôt que tout bouleverser d'un coup.</Texte>
 
           <HighlightBox label="Point de réflexion" couleur="jaune">
-            <Texte>Pensez à un changement bien accepté dans votre institution, et à un autre qui a échoué ou résisté. En quoi différaient-ils du point de vue de ces trois leviers — le sens était-il clair et partagé, les équipes ont-elles participé à la conception, le rythme était-il tenable ? Le plus souvent, l'échec d'un changement se lit dans l'absence d'un ou plusieurs de ces leviers.</Texte>
+            <Texte>Pensez à un changement bien accepté dans votre institution, et à un autre qui a échoué ou résisté. En quoi différaient-ils du point de vue de ces trois leviers, le sens était-il clair et partagé, les équipes ont-elles participé à la conception, le rythme était-il tenable ? Le plus souvent, l'échec d'un changement se lit dans l'absence d'un ou plusieurs de ces leviers.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -50,7 +50,7 @@ export function Module4GestionProjetAvance({ onValiderModule }: { onValiderModul
           <Texte>Que nous dit une résistance ? Souvent, l'une de ces choses. Elle peut signaler un <strong>besoin légitime</strong> que le changement néglige : la personne qui résiste défend quelque chose d'important qu'on n'avait pas pris en compte. Elle peut révéler un <strong>effet de bord non anticipé</strong> : celui qui résiste a vu une conséquence problématique que le pilote, à sa hauteur, n'avait pas perçue. Elle peut exprimer une <strong>crainte réelle</strong> qui, si elle n'est pas entendue, minera le changement souterrainement. Dans tous ces cas, la résistance porte un message que le pilote a intérêt à recevoir.</Texte>
 
           <ConceptBox label="Concept clé" titre="Écouter une résistance avant de chercher à la surmonter.">
-            <p>La résistance n'est pas l'ennemi du changement : elle en est souvent le meilleur informateur. Celui qui résiste voit quelque chose — un besoin, un risque, une crainte — que le pilote gagnerait à comprendre. La première réponse à une résistance n'est donc pas de la combattre, mais de l'interroger : qu'est-ce qui s'exprime ici, et qu'est-ce que cela m'apprend ? Cette écoute, loin d'affaiblir le changement, le solidifie — et rallie fréquemment celui qui résistait, parce qu'il se sent entendu.</p>
+            <p>La résistance n'est pas l'ennemi du changement : elle en est souvent le meilleur informateur. Celui qui résiste voit quelque chose (un besoin, un risque, une crainte) que le pilote gagnerait à comprendre. La première réponse à une résistance n'est donc pas de la combattre, mais de l'interroger : qu'est-ce qui s'exprime ici, et qu'est-ce que cela m'apprend ? Cette écoute, loin d'affaiblir le changement, le solidifie, et rallie fréquemment celui qui résistait, parce qu'il se sent entendu.</p>
           </ConceptBox>
 
           <HighlightBox label="Toutes les résistances ne se valent pas, mais toutes méritent d'être entendues." couleur="bleu">
@@ -59,16 +59,16 @@ export function Module4GestionProjetAvance({ onValiderModule }: { onValiderModul
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="La posture du pilote face aux tensions">
-          <Texte>Conduire un changement expose inévitablement à des tensions — entre des personnes, entre des points de vue, entre l'ancien et le nouveau. La manière dont le pilote habite ces tensions détermine largement le climat de la transformation. Quelques traits de posture sont décisifs, et ils relèvent de l'accompagnement, non de la technique managériale.</Texte>
+          <Texte>Conduire un changement expose inévitablement à des tensions, entre des personnes, entre des points de vue, entre l'ancien et le nouveau. La manière dont le pilote habite ces tensions détermine largement le climat de la transformation. Quelques traits de posture sont décisifs, et ils relèvent de l'accompagnement, non de la technique managériale.</Texte>
 
-          <Texte>Le premier est la <strong>constance dans le cap, la souplesse dans les moyens</strong> — on retrouve ce principe à chaque niveau du parcours, ici à son échelle la plus exigeante. Le pilote tient fermement la direction et le sens, ce qui rassure dans la tourmente, tout en restant ouvert sur la manière d'y parvenir. Une institution en changement a besoin de sentir que quelqu'un tient le cap ; elle a aussi besoin de sentir que ce quelqu'un écoute.</Texte>
+          <Texte>Le premier est la <strong>constance dans le cap, la souplesse dans les moyens</strong>, on retrouve ce principe à chaque niveau du parcours, ici à son échelle la plus exigeante. Le pilote tient fermement la direction et le sens, ce qui rassure dans la tourmente, tout en restant ouvert sur la manière d'y parvenir. Une institution en changement a besoin de sentir que quelqu'un tient le cap ; elle a aussi besoin de sentir que ce quelqu'un écoute.</Texte>
 
           <Texte>Le deuxième est la <strong>présence dans la durée</strong>. Une transformation se joue dans le temps long, et les équipes ont besoin de sentir que le pilote ne les lâchera pas à mi-chemin, au premier obstacle ou dès que l'attention se portera ailleurs. La constance de la présence est en soi un facteur de sécurité : elle signale que le changement est sérieux et qu'on ne sera pas laissé seul à le porter.</Texte>
 
           <Texte>Le troisième est l'<strong>exemplarité</strong>. Dans un changement, les équipes observent moins ce que le pilote dit que ce qu'il fait. Un pilote qui demande aux autres de changer sans changer lui-même, ou qui prône une valeur qu'il ne respecte pas dans sa propre manière de conduire, perd toute crédibilité. La cohérence entre le discours et la pratique est, dans la conduite du changement, le socle de la confiance.</Texte>
 
           <HighlightBox label="La frontière du métier" couleur="bleu">
-            <Texte>Conduire le changement relève de l'accompagnement humain : donner du sens, écouter, sécuriser, tenir le cap. Cela ne recouvre pas la gestion technique des ressources humaines — les entretiens formels, les questions statutaires, le cadre juridique du travail — qui relève d'une autre expertise. Quand une situation de changement soulève ces questions, le pilote les oriente vers la compétence RH appropriée, sans chercher à les traiter lui-même. Le pilote accompagne le changement ; il n'est pas le gestionnaire du personnel.</Texte>
+            <Texte>Conduire le changement relève de l'accompagnement humain : donner du sens, écouter, sécuriser, tenir le cap. Cela ne recouvre pas la gestion technique des ressources humaines (les entretiens formels, les questions statutaires, le cadre juridique du travail) qui relève d'une autre expertise. Quand une situation de changement soulève ces questions, le pilote les oriente vers la compétence RH appropriée, sans chercher à les traiter lui-même. Le pilote accompagne le changement ; il n'est pas le gestionnaire du personnel.</Texte>
           </HighlightBox>
 
           <HighlightBox label="Ce qu'il faut retenir" couleur="vert">

@@ -37,9 +37,9 @@ export const hero = {
 export const constat = {
   titre: "Une offre riche, un accès inégal",
   problemes: [
-    "Formations continues, journées thématiques, cursus spécialisés : l'offre est nombreuse et de qualité. Elle repose sur des inscriptions individuelles — une ou deux personnes partent, l'équipe reste.",
+    "Formations continues, journées thématiques, cursus spécialisés : l'offre est nombreuse et de qualité. Elle repose sur des inscriptions individuelles, une ou deux personnes partent, l'équipe reste.",
     "Libérer un collaborateur suppose un remplacement, un budget, une réorganisation du service. Toutes les fonctions n'y ont pas le même accès.",
-    "Équipes de nuit, remplaçant·es, personnel administratif, intendance et technique figurent rarement dans les plans de formation — alors qu'ils croisent quotidiennement les personnes accompagnées.",
+    "Équipes de nuit, remplaçant·es, personnel administratif, intendance et technique figurent rarement dans les plans de formation : alors qu'ils croisent quotidiennement les personnes accompagnées.",
   ],
   reponseTitre: "Ce que Learna ajoute",
   solutions: [
@@ -54,7 +54,7 @@ export const constat = {
 export const blendedLearning = {
   titre: "Avant, pendant, après le présentiel",
   introduction:
-    "Le numérique ne remplace pas la formation en présentiel — il ouvre de nouvelles complémentarités. C'est la logique du blended learning, appliquée aux réalités institutionnelles.",
+    "Le numérique ne remplace pas la formation en présentiel, il ouvre de nouvelles complémentarités. C'est la logique du blended learning, appliquée aux réalités institutionnelles.",
   colonnes: [
     {
       titre: "Préparer",
@@ -69,7 +69,7 @@ export const blendedLearning = {
     {
       titre: "Nourrir les échanges",
       texte:
-        "Un module suivi par toute l'équipe devient un point de départ en colloque — un support de discussion partagé plutôt qu'un savoir individuel.",
+        "Un module suivi par toute l'équipe devient un point de départ en colloque, un support de discussion partagé plutôt qu'un savoir individuel.",
     },
   ],
 }
@@ -113,7 +113,7 @@ export const parcoursPartenariat = {
   paragraphes: [
     "Le catalogue Learna évolue au fil des besoins identifiés sur le terrain. Certains de ces besoins sont propres à une institution, à un secteur ou à un projet en cours. Nous développons également des parcours en partenariat, construits à partir de vos priorités et mis à disposition de vos équipes sur la plateforme.",
     "Ces parcours suivent la même démarche que les formations du catalogue : ils partent d'une question de terrain et se construisent avec les professionnel·les concerné·es.",
-    "Chaque licence comprend par ailleurs la production d'une formation propre à votre institution, visible de vos seuls collaborateurs — le plus souvent un module d'accueil des nouveaux arrivants. D'autres formations peuvent être produites sur mandat.",
+    "Chaque licence comprend par ailleurs la production d'une formation propre à votre institution, visible de vos seuls collaborateurs : le plus souvent un module d'accueil des nouveaux arrivants. D'autres formations peuvent être produites sur mandat.",
   ],
   cta: {
     libelle: "Discuter d'un parcours sur mesure →",

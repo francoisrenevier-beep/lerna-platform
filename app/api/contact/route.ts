@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
           <div style="background:#1B2D5B;padding:24px 32px;border-radius:8px 8px 0 0;">
-            <h1 style="color:white;margin:0;font-size:18px;">Nouveau message — Learna</h1>
+            <h1 style="color:white;margin:0;font-size:18px;">Nouveau message : Learna</h1>
           </div>
           <div style="background:#F8FAFC;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;">
             <table style="width:100%;border-collapse:collapse;">
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
             <p style="color:#6b7280;font-size:13px;margin:0 0 8px 0;">Message</p>
             <div style="background:white;border:1px solid #e5e7eb;border-radius:6px;padding:16px;color:#1B2D5B;font-size:14px;white-space:pre-wrap;">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
             <p style="margin:24px 0 0;font-size:12px;color:#9ca3af;">
-              Pour répondre directement à cet utilisateur, cliquez sur Répondre — l'adresse de retour est préremplie.
+              Pour répondre directement à cet utilisateur, cliquez sur Répondre : l'adresse de retour est préremplie.
             </p>
           </div>
         </div>

@@ -349,7 +349,7 @@ export default function ModulePage() {
             <div className="h-4 w-px bg-gray-200" />
             <div>
               <p className="text-xs text-gray-400">{formation?.titre}</p>
-              <p className="text-sm font-semibold text-[#1B2D5B]">Module {moduleOrdre} — {moduleTitre}</p>
+              <p className="text-sm font-semibold text-[#1B2D5B]">Module {moduleOrdre}, {moduleTitre}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">

@@ -11,7 +11,7 @@ export const hero = {
   titre: "La logique de prévention",
   titrePart2: "Lire les situations à risque",
   sousTitre:
-    "Une institution apprenante ne cherche pas un coupable après un incident — elle cherche tout ce qui a rendu l'incident possible.",
+    "Une institution apprenante ne cherche pas un coupable après un incident, elle cherche tout ce qui a rendu l'incident possible.",
   duree: "40 minutes",
   niveau: "Base",
 }
@@ -39,9 +39,9 @@ export const sIntroduction = {
     "Situer la prévention de la violence dans le cadre légal suisse (LTr art. 6, CO art. 328)",
   ],
   texte1:
-    "Tant que la prévention de la violence repose sur l'habileté individuelle de chacun·e (« être bon avec les situations difficiles »), elle reste une loterie : elle dépend de qui est de service ce jour-là. La prévention devient fiable quand elle devient **organisationnelle** : quand l'institution elle-même — ses horaires, ses lieux, ses procédures, sa façon d'annoncer les décisions difficiles — est pensée pour réduire les occasions d'escalade.",
+    "Tant que la prévention de la violence repose sur l'habileté individuelle de chacun·e (« être bon avec les situations difficiles »), elle reste une loterie : elle dépend de qui est de service ce jour-là. La prévention devient fiable quand elle devient **organisationnelle** : quand l'institution elle-même (ses horaires, ses lieux, ses procédures, sa façon d'annoncer les décisions difficiles) est pensée pour réduire les occasions d'escalade.",
   texte2:
-    "Ce déplacement n'est pas seulement une bonne idée : en Suisse, c'est une **obligation légale**. L'article 6 de la Loi sur le travail impose à l'employeur de prendre toutes les mesures nécessaires pour protéger la santé physique et psychique des travailleurs et travailleuses ; l'article 328 du Code des obligations le tient à protéger leur personnalité. La violence émanant des usager·ères est un risque professionnel comme un autre : il doit être évalué, prévenu, et suivi. Ce mouvement est désormais mondial : la Convention n° 190 de l'Organisation internationale du Travail (2019), premier instrument international consacré à la violence et au harcèlement dans le monde du travail, inclut explicitement la violence émanant de tiers — clients, patients, usagers — dans le champ de la prévention que les employeurs doivent organiser.",
+    "Ce déplacement n'est pas seulement une bonne idée : en Suisse, c'est une **obligation légale**. L'article 6 de la Loi sur le travail impose à l'employeur de prendre toutes les mesures nécessaires pour protéger la santé physique et psychique des travailleurs et travailleuses ; l'article 328 du Code des obligations le tient à protéger leur personnalité. La violence émanant des usager·ères est un risque professionnel comme un autre : il doit être évalué, prévenu, et suivi. Ce mouvement est désormais mondial : la Convention n° 190 de l'Organisation internationale du Travail (2019), premier instrument international consacré à la violence et au harcèlement dans le monde du travail, inclut explicitement la violence émanant de tiers (clients, patients, usagers) dans le champ de la prévention que les employeurs doivent organiser.",
   pullquote_texte:
     "La prévention de la violence n'est pas une compétence individuelle héroïque. C'est une propriété de l'organisation.",
 }
@@ -50,7 +50,7 @@ export const sApprenante = {
   eyebrow: "Section 1",
   titre: "L'organisation apprenante : apprendre de ce qui arrive",
   texte_intro:
-    "Le concept d'organisation apprenante (Senge, 1990), dont la recherche contemporaine sur la sécurité psychologique a confirmé et précisé les intuitions (Edmondson, 2019), désigne une organisation capable de transformer son expérience — y compris ses échecs et ses incidents — en apprentissage collectif. Appliqué à la violence, il repose sur une conviction : **chaque incident contient de l'information précieuse sur le fonctionnement de l'institution.** La question n'est pas « qui a fauté ? » mais « qu'est-ce que cet incident nous apprend ? » Argyris et Schön (1978) distinguent deux niveaux d'apprentissage, qui donnent une grille très concrète :",
+    "Le concept d'organisation apprenante (Senge, 1990), dont la recherche contemporaine sur la sécurité psychologique a confirmé et précisé les intuitions (Edmondson, 2019), désigne une organisation capable de transformer son expérience, y compris ses échecs et ses incidents, en apprentissage collectif. Appliqué à la violence, il repose sur une conviction : **chaque incident contient de l'information précieuse sur le fonctionnement de l'institution.** La question n'est pas « qui a fauté ? » mais « qu'est-ce que cet incident nous apprend ? » Argyris et Schön (1978) distinguent deux niveaux d'apprentissage, qui donnent une grille très concrète :",
   tableau_titre: "Simple boucle ou double boucle : deux façons de répondre à l'incident de vendredi",
   tableau_col1_titre: "Apprentissage en simple boucle",
   tableau_col1_items: [
@@ -68,14 +68,14 @@ export const sApprenante = {
   ],
   highlight_label: "Le préalable culturel : la sécurité de parole",
   highlight_texte:
-    "Une organisation ne peut apprendre de ses incidents que si les gens osent les déclarer et les raconter honnêtement. Or la recherche sur la violence envers les travailleurs sociaux montre une sous-déclaration massive, alimentée par la peur d'être jugé incompétent et par la banalisation ambiante (Littlechild, 2005). La toute première mesure de prévention n'est donc ni un outil ni une procédure : c'est **un climat où déclarer un incident est un acte professionnel valorisé, jamais un aveu de faiblesse.** La recherche organisationnelle récente a donné un nom à ce climat : la **sécurité psychologique** (Edmondson, 2019) — la conviction partagée qu'on peut, dans cette équipe, signaler un problème, admettre une difficulté ou poser une question sans risque d'humiliation ni de sanction. Les travaux d'Amy Edmondson montrent que les équipes qui déclarent le plus d'incidents ne sont pas les plus défaillantes : ce sont celles où l'on ose en parler — et donc celles qui apprennent.",
+    "Une organisation ne peut apprendre de ses incidents que si les gens osent les déclarer et les raconter honnêtement. Or la recherche sur la violence envers les travailleurs sociaux montre une sous-déclaration massive, alimentée par la peur d'être jugé incompétent et par la banalisation ambiante (Littlechild, 2005). La toute première mesure de prévention n'est donc ni un outil ni une procédure : c'est **un climat où déclarer un incident est un acte professionnel valorisé, jamais un aveu de faiblesse.** La recherche organisationnelle récente a donné un nom à ce climat : la **sécurité psychologique** (Edmondson, 2019), la conviction partagée qu'on peut, dans cette équipe, signaler un problème, admettre une difficulté ou poser une question sans risque d'humiliation ni de sanction. Les travaux d'Amy Edmondson montrent que les équipes qui déclarent le plus d'incidents ne sont pas les plus défaillantes : ce sont celles où l'on ose en parler, et donc celles qui apprennent.",
 }
 
 export const sArbre = {
   eyebrow: "Section 2",
   titre: "L'arbre des causes : analyser sans culpabiliser",
   texte_intro:
-    "L'arbre des causes est une méthode d'analyse d'incident développée pour la sécurité au travail et formalisée notamment par l'INRS. Son principe fondateur : **un incident n'a jamais une seule cause.** Il résulte de la combinaison de plusieurs facteurs qui, pris isolément, seraient restés sans conséquence. La méthode consiste à remonter, à partir du fait final, la chaîne des faits qui l'ont rendu possible — en s'en tenant à des **faits** (observables, vérifiables) et non à des jugements ou des interprétations.",
+    "L'arbre des causes est une méthode d'analyse d'incident développée pour la sécurité au travail et formalisée notamment par l'INRS. Son principe fondateur : **un incident n'a jamais une seule cause.** Il résulte de la combinaison de plusieurs facteurs qui, pris isolément, seraient restés sans conséquence. La méthode consiste à remonter, à partir du fait final, la chaîne des faits qui l'ont rendu possible : en s'en tenant à des **faits** (observables, vérifiables) et non à des jugements ou des interprétations.",
   schema_titre: "La démarche de l'arbre des causes en quatre étapes",
   schema_etapes: [
     {
@@ -94,7 +94,7 @@ export const sArbre = {
       niveau: "Étape 3",
       nom: "Identifier les facteurs sur lesquels agir",
       definition:
-        "Parmi toutes les branches, repérer celles qui relèvent de l'organisation — car ce sont les plus durables à traiter.",
+        "Parmi toutes les branches, repérer celles qui relèvent de l'organisation, car ce sont les plus durables à traiter.",
     },
     {
       niveau: "Étape 4",
@@ -104,14 +104,14 @@ export const sArbre = {
     },
   ],
   texte_milieu:
-    "Appliquons la logique à notre situation. Le fait final : Noah jette une chaise. En remontant, l'analyse fait apparaître plusieurs branches — toutes factuelles, aucune culpabilisante :",
+    "Appliquons la logique à notre situation. Le fait final : Noah jette une chaise. En remontant, l'analyse fait apparaître plusieurs branches, toutes factuelles, aucune culpabilisante :",
   concept_label: "Exemple travaillé",
   concept_titre: "L'arbre des causes de l'incident de vendredi (extrait)",
   concept_items: [
-    "**Branche « décision »** : le retour en famille a été annulé en synthèse de réseau (équipe et référente de l'autorité de protection) sans Noah — il découvre la décision et ses motifs en même temps — il n'a eu aucune prise sur le processus",
-    "**Branche « moment »** : l'annonce a lieu vendredi à 17h15, à la veille d'un week-end symboliquement chargé (le retour en famille) — aucun temps de reprise possible — la frustration n'a nulle part où aller",
-    "**Branche « configuration »** : bureau exigu, porte fermée, Léa seule — pas de possibilité de recul, pas de collègue en soutien, sentiment d'enfermement pour les deux",
-    "**Branche « histoire »** : deux appels téléphoniques à sa mère déjà écourtés ce mois-ci — accumulation de frustration non repérée car non tracée",
+    "**Branche « décision »** : le retour en famille a été annulé en synthèse de réseau (équipe et référente de l'autorité de protection) sans Noah, il découvre la décision et ses motifs en même temps, il n'a eu aucune prise sur le processus",
+    "**Branche « moment »** : l'annonce a lieu vendredi à 17h15, à la veille d'un week-end symboliquement chargé (le retour en famille), aucun temps de reprise possible, la frustration n'a nulle part où aller",
+    "**Branche « configuration »** : bureau exigu, porte fermée, Léa seule, pas de possibilité de recul, pas de collègue en soutien, sentiment d'enfermement pour les deux",
+    "**Branche « histoire »** : deux appels téléphoniques à sa mère déjà écourtés ce mois-ci, accumulation de frustration non repérée car non tracée",
   ],
   highlight_label: "Ce que l'arbre change",
   highlight_texte:
@@ -122,7 +122,7 @@ export const sSituations = {
   eyebrow: "Section 3",
   titre: "Les situations à risque : ce que la recherche et le terrain repèrent",
   texte_intro:
-    "La prévention ne consiste pas à surveiller des « personnes à risque » — lecture stigmatisante et peu prédictive — mais à repérer des **situations à risque** : des configurations où la probabilité d'escalade augmente pour n'importe qui. La littérature internationale et l'expérience des institutions convergent sur plusieurs familles de situations (OIT/CII/OMS/ISP, 2002 ; Duxbury & Whittington, 2005) :",
+    "La prévention ne consiste pas à surveiller des « personnes à risque », lecture stigmatisante et peu prédictive, mais à repérer des **situations à risque** : des configurations où la probabilité d'escalade augmente pour n'importe qui. La littérature internationale et l'expérience des institutions convergent sur plusieurs familles de situations (OIT/CII/OMS/ISP, 2002 ; Duxbury & Whittington, 2005) :",
   tableau_titre: "Familles de situations à risque et exemples de mesures organisationnelles",
   tableau_col1_titre: "Situation à risque",
   tableau_col1_items: [
@@ -141,25 +141,25 @@ export const sSituations = {
     "Tracer les frustrations et tensions dans les transmissions ; se donner un langage commun pour signaler une montée en tension avant la crise",
   ],
   texte_milieu:
-    "Ces leviers organisationnels ne relèvent pas du vœu pieux : ils ont été testés. Le modèle **Safewards** (Bowers, 2014), développé au King's College de Londres, repose exactement sur cette logique — identifier les « points de friction » (flashpoints) où les conflits naissent, et agir sur ce que l'équipe peut modifier : la qualité des interactions, la prévisibilité, la manière de poser les limites, l'environnement. Testé dans un essai randomisé contrôlé portant sur 31 unités de 15 hôpitaux (Bowers et al., 2015), un ensemble d'interventions simples et peu coûteuses centrées sur la relation équipe-usagers a réduit significativement la fréquence des conflits et le recours aux mesures de contrainte. Le résultat a depuis été répliqué en Australie et en Allemagne. Le message pour nos institutions est direct : **des ajustements modestes, mais systémiques et portés par toute l'équipe, changent mesurablement la fréquence des incidents.**",
+    "Ces leviers organisationnels ne relèvent pas du vœu pieux : ils ont été testés. Le modèle **Safewards** (Bowers, 2014), développé au King's College de Londres, repose exactement sur cette logique, identifier les « points de friction » (flashpoints) où les conflits naissent, et agir sur ce que l'équipe peut modifier : la qualité des interactions, la prévisibilité, la manière de poser les limites, l'environnement. Testé dans un essai randomisé contrôlé portant sur 31 unités de 15 hôpitaux (Bowers et al., 2015), un ensemble d'interventions simples et peu coûteuses centrées sur la relation équipe-usagers a réduit significativement la fréquence des conflits et le recours aux mesures de contrainte. Le résultat a depuis été répliqué en Australie et en Allemagne. Le message pour nos institutions est direct : **des ajustements modestes, mais systémiques et portés par toute l'équipe, changent mesurablement la fréquence des incidents.**",
   texte_fin:
-    "À ces facteurs situationnels s'ajoutent les **signaux précurseurs individuels**, observables dans les heures ou jours qui précèdent : agitation motrice inhabituelle, ton qui monte, propos de plus en plus centrés sur une injustice vécue, repli inhabituel, refus des activités habituelles. Aucun de ces signes ne prédit une agression — mais leur accumulation justifie d'ajuster l'accompagnement, d'en parler en équipe et de ne pas programmer, précisément à ce moment-là, une annonce difficile.",
+    "À ces facteurs situationnels s'ajoutent les **signaux précurseurs individuels**, observables dans les heures ou jours qui précèdent : agitation motrice inhabituelle, ton qui monte, propos de plus en plus centrés sur une injustice vécue, repli inhabituel, refus des activités habituelles. Aucun de ces signes ne prédit une agression, mais leur accumulation justifie d'ajuster l'accompagnement, d'en parler en équipe et de ne pas programmer, précisément à ce moment-là, une annonce difficile.",
   pullquote_texte:
-    "On ne prédit pas la violence. On repère des configurations — et on les désamorce avant qu'elles ne rencontrent une étincelle.",
+    "On ne prédit pas la violence. On repère des configurations, et on les désamorce avant qu'elles ne rencontrent une étincelle.",
 }
 
 export const sConclusion = {
   eyebrow: "Conclusion",
   titre: "Ce que ce module a posé",
   texte:
-    "La prévention de la violence change de nature quand elle passe de l'individu à l'organisation. Une institution apprenante déclare ses incidents sans honte, les analyse avec la logique de l'arbre des causes — des faits, plusieurs causes, aucun coupable — et en tire des mesures suivies dans le temps. Elle connaît ses situations à risque : annonces de refus, attentes, transitions, travail isolé, accumulations silencieuses. Et elle sait que ce travail n'est pas une option managériale, mais une obligation légale de protection de la santé.",
+    "La prévention de la violence change de nature quand elle passe de l'individu à l'organisation. Une institution apprenante déclare ses incidents sans honte, les analyse avec la logique de l'arbre des causes (des faits, plusieurs causes, aucun coupable), et en tire des mesures suivies dans le temps. Elle connaît ses situations à risque : annonces de refus, attentes, transitions, travail isolé, accumulations silencieuses. Et elle sait que ce travail n'est pas une option managériale, mais une obligation légale de protection de la santé.",
   retenir_label: "À retenir pour la pratique",
   retenir_items: [
     "Déclarer un incident est un acte professionnel, jamais un aveu de faiblesse",
-    "Un incident n'a jamais une seule cause — chercher LA cause, c'est presque toujours chercher UN coupable",
+    "Un incident n'a jamais une seule cause, chercher LA cause, c'est presque toujours chercher UN coupable",
     "L'analyse s'appuie sur des faits observables, pas sur des jugements",
     "Les mesures les plus durables sont organisationnelles : moments, lieux, processus de décision, transmissions",
-    "La question en double boucle — « faisons-nous la bonne chose ? » — est plus féconde que « comment mieux faire la même chose ? »",
+    "La question en double boucle, « faisons-nous la bonne chose ? », est plus féconde que « comment mieux faire la même chose ? »",
   ],
 }
 
@@ -174,20 +174,20 @@ export const quiz = [
     ],
     bonneReponse: 1,
     explication:
-      "L'arbre des causes (INRS) repose sur la multicausalité : c'est la rencontre de plusieurs facteurs — organisationnels, situationnels, relationnels — qui produit l'incident. Chercher LA cause conduit presque toujours à chercher UN coupable ; identifier LES causes multiplie les leviers d'action.",
+      "L'arbre des causes (INRS) repose sur la multicausalité : c'est la rencontre de plusieurs facteurs (organisationnels, situationnels, relationnels) qui produit l'incident. Chercher LA cause conduit presque toujours à chercher UN coupable ; identifier LES causes multiplie les leviers d'action.",
   },
   {
     question:
       "« Léa s'est imprudemment enfermée seule avec Noah. » Dans une analyse par arbre des causes, cette formulation pose problème parce que :",
     reponses: [
       "Elle est trop courte pour être utile",
-      "C'est un jugement, pas un fait — la formulation factuelle serait : « l'entretien s'est déroulé porte fermée, sans autre professionnel·le à proximité »",
+      "C'est un jugement, pas un fait, la formulation factuelle serait : « l'entretien s'est déroulé porte fermée, sans autre professionnel·le à proximité »",
       "Elle ne mentionne pas la réaction de Noah",
       "Elle devrait préciser l'heure exacte",
     ],
     bonneReponse: 1,
     explication:
-      "La méthode exige de s'en tenir aux faits observables et vérifiables. « Imprudemment » est une interprétation qui clôt l'analyse en désignant une fautive. Le fait brut — porte fermée, professionnelle seule — ouvre au contraire des mesures organisationnelles concrètes.",
+      "La méthode exige de s'en tenir aux faits observables et vérifiables. « Imprudemment » est une interprétation qui clôt l'analyse en désignant une fautive. Le fait brut (porte fermée, professionnelle seule) ouvre au contraire des mesures organisationnelles concrètes.",
   },
   {
     question:
@@ -200,7 +200,7 @@ export const quiz = [
     ],
     bonneReponse: 1,
     explication:
-      "La première mesure corrige l'action sans questionner la règle (simple boucle). Le second questionnement interroge le présupposé lui-même — décider pour plutôt que faire avec — et peut transformer les conditions qui produisent les incidents (double boucle, Argyris & Schön).",
+      "La première mesure corrige l'action sans questionner la règle (simple boucle). Le second questionnement interroge le présupposé lui-même, décider pour plutôt que faire avec, et peut transformer les conditions qui produisent les incidents (double boucle, Argyris & Schön).",
   },
   {
     question: "En droit suisse, la prévention de la violence envers les collaborateurs et collaboratrices :",
@@ -212,7 +212,7 @@ export const quiz = [
     ],
     bonneReponse: 1,
     explication:
-      "L'employeur doit prendre toutes les mesures nécessaires pour protéger la santé physique et psychique de son personnel. La violence des usager·ères est un risque professionnel : il doit être évalué, prévenu et suivi — la banalisation (« ça fait partie du métier ») est incompatible avec cette obligation.",
+      "L'employeur doit prendre toutes les mesures nécessaires pour protéger la santé physique et psychique de son personnel. La violence des usager·ères est un risque professionnel : il doit être évalué, prévenu et suivi, la banalisation (« ça fait partie du métier ») est incompatible avec cette obligation.",
   },
   {
     question: "La prévention proposée dans ce module cible en priorité :",
@@ -224,6 +224,6 @@ export const quiz = [
     ],
     bonneReponse: 1,
     explication:
-      "Cibler des « personnes à risque » est stigmatisant et peu prédictif. La prévention efficace repère des configurations situationnelles et organisationnelles où la probabilité d'escalade augmente pour n'importe qui — et les désamorce en amont.",
+      "Cibler des « personnes à risque » est stigmatisant et peu prédictif. La prévention efficace repère des configurations situationnelles et organisationnelles où la probabilité d'escalade augmente pour n'importe qui, et les désamorce en amont.",
   },
 ]

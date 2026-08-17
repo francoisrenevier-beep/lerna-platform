@@ -5,7 +5,7 @@ const benefices = [
     icon: LayoutDashboard,
     titre: "Une vue d'ensemble sur vos équipes",
     texte:
-      "Votre espace institution vous donne une vision claire de la participation de vos collaborateurs — par formation, par secteur, par période.",
+      "Votre espace institution vous donne une vision claire de la participation de vos collaborateurs, par formation, par secteur, par période.",
   },
   {
     icon: FileText,
@@ -23,7 +23,7 @@ const benefices = [
     icon: Shield,
     titre: "Une preuve concrète à portée de main",
     texte:
-      "Montrez que vos équipes partagent un socle commun de réflexion — un appui tangible pour vos bilans, vos accréditations et votre pilotage interne.",
+      "Montrez que vos équipes partagent un socle commun de réflexion, un appui tangible pour vos bilans, vos accréditations et votre pilotage interne.",
   },
 ]
 

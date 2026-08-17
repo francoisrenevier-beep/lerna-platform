@@ -7,7 +7,7 @@ import { DOMAINES_VITRINE } from "@/components/vitrine/domaines"
 import { getFormationsPubliees, type FormationPublique } from "@/lib/catalogue-public"
 
 export const metadata: Metadata = {
-  title: "Formations & ressources — LEARNA",
+  title: "Formations & ressources | LEARNA",
   description:
     "Le catalogue LEARNA pour les institutions sociales et médico-sociales : des formations en ligne conçues pour l'ensemble des équipes, du champ éducatif à la veille de nuit, à l'intendance et à l'administration.",
 }
@@ -110,7 +110,7 @@ export default async function FormationsRessourcesPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
             Le catalogue s&apos;adresse à l&apos;ensemble des personnes qui composent une
-            institution — équipes éducatives, veille de nuit, intendance, administration.
+            institution, équipes éducatives, veille de nuit, intendance, administration.
             L&apos;enjeu n&apos;est pas de former quelques spécialistes, mais d&apos;installer une
             culture commune : des repères partagés, un même vocabulaire, une lecture des
             situations qui ne s&apos;arrête pas aux frontières des fonctions.
@@ -208,7 +208,7 @@ export default async function FormationsRessourcesPage() {
             LEARNA ne remplace pas les journées de formation, la supervision ni l&apos;analyse de
             pratique. La plateforme prend en charge ce que le présentiel peine à couvrir : donner
             à toute une équipe, y compris aux fonctions rarement inscrites aux plans de formation,
-            les mêmes repères de départ — pour que le temps passé ensemble serve au travail
+            les mêmes repères de départ, pour que le temps passé ensemble serve au travail
             clinique plutôt qu&apos;à la mise à niveau.
           </p>
 
@@ -232,7 +232,7 @@ export default async function FormationsRessourcesPage() {
               Votre institution n&apos;a pas encore de licence&nbsp;?
             </p>
             <p className="mt-2 text-sm text-white/70">
-              Demandez une démonstration — nous vous présentons la plateforme en 30 minutes.
+              Demandez une démonstration, nous vous présentons la plateforme en 30 minutes.
             </p>
             <Link
               href="/contact"

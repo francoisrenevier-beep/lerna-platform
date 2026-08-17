@@ -11,10 +11,10 @@ export function Module2GestionProjetIntermediaire({ onValiderModule }: { onValid
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={2}
-        categorie="Gestion de projet — Niveau Intermédiaire"
+        categorie="Gestion de projet : Niveau Intermédiaire"
         titre="Identifier les parties"
         titrePart2="prenantes"
-        sousTitre="Qui est concerné par ce projet — et comment l'impliquer justement. Oublier une partie prenante, c'est préparer un blocage."
+        sousTitre="Qui est concerné par ce projet, et comment l'impliquer justement. Oublier une partie prenante, c'est préparer un blocage."
         duree="≈ 20-25 minutes"
         niveau="Intermédiaire"
       />
@@ -23,16 +23,16 @@ export function Module2GestionProjetIntermediaire({ onValiderModule }: { onValid
 
         <SectionModule eyebrow="Introduction" titre="Pourquoi cartographier les personnes concernées">
           <Texte>Le module précédent a clarifié le quoi du projet : le besoin, le périmètre, le livrable. Ce module s'intéresse au <strong>qui</strong> : toutes les personnes que le projet concerne, d'une manière ou d'une autre. On les appelle les <strong>parties prenantes</strong>.</Texte>
-          <Texte>L'enjeu est très concret. Un projet réussit ou échoue rarement pour des raisons purement techniques ; il réussit ou échoue à cause des personnes — celles qu'on a associées et qui le portent, celles qu'on a oubliées et qui le bloquent, celles qu'on a mal impliquées et qui s'en désintéressent ou s'y opposent. <strong>Identifier les parties prenantes dès le départ, c'est anticiper là où le projet va se jouer réellement.</strong></Texte>
+          <Texte>L'enjeu est très concret. Un projet réussit ou échoue rarement pour des raisons purement techniques ; il réussit ou échoue à cause des personnes, celles qu'on a associées et qui le portent, celles qu'on a oubliées et qui le bloquent, celles qu'on a mal impliquées et qui s'en désintéressent ou s'y opposent. <strong>Identifier les parties prenantes dès le départ, c'est anticiper là où le projet va se jouer réellement.</strong></Texte>
 
           <ConceptBox label="Concept clé" titre="Une partie prenante est toute personne ou tout groupe que le projet concerne.">
             <p>Qui sera touché par son résultat, qui peut l'influencer, ou dont la contribution est nécessaire. Le mot recouvre large : ceux qui décident, ceux qui réalisent, ceux qui subissent les effets, ceux qui peuvent aider ou faire obstacle. Cartographier les parties prenantes, c'est dresser la liste de tous ces acteurs avant de se lancer, pour n'oublier personne d'important.</p>
           </ConceptBox>
 
-          <Texte>Le réflexe naturel est de ne penser qu'aux personnes directement impliquées dans la réalisation — l'équipe projet. Mais c'est insuffisant. Un projet a presque toujours un cercle de personnes plus large : celles qui devront vivre avec son résultat, celles qui détiennent une information ou une autorisation nécessaire, celles dont l'opposition pourrait tout arrêter. Oublier ce cercle élargi, c'est se condamner à le redécouvrir en cours de route, souvent sous la forme d'un obstacle imprévu.</Texte>
+          <Texte>Le réflexe naturel est de ne penser qu'aux personnes directement impliquées dans la réalisation, l'équipe projet. Mais c'est insuffisant. Un projet a presque toujours un cercle de personnes plus large : celles qui devront vivre avec son résultat, celles qui détiennent une information ou une autorisation nécessaire, celles dont l'opposition pourrait tout arrêter. Oublier ce cercle élargi, c'est se condamner à le redécouvrir en cours de route, souvent sous la forme d'un obstacle imprévu.</Texte>
 
           <HighlightBox label="Point de réflexion" couleur="jaune">
-            <Texte>Repensez à un projet qui a buté sur un obstacle « venu de nulle part » : un service pas prévenu, une autorisation manquante, une résistance inattendue. Avec le recul, cet obstacle était-il vraiment imprévisible — ou s'agissait-il d'une partie prenante qu'on n'avait pas identifiée au départ ? La plupart des « imprévus » de ce type sont en réalité des oublis de cartographie.</Texte>
+            <Texte>Repensez à un projet qui a buté sur un obstacle « venu de nulle part » : un service pas prévenu, une autorisation manquante, une résistance inattendue. Avec le recul, cet obstacle était-il vraiment imprévisible, ou s'agissait-il d'une partie prenante qu'on n'avait pas identifiée au départ ? La plupart des « imprévus » de ce type sont en réalité des oublis de cartographie.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -41,7 +41,7 @@ export function Module2GestionProjetIntermediaire({ onValiderModule }: { onValid
           <Texte>Ce point prolonge directement le « faire avec plutôt que pour » vu au niveau base. Une personne accompagnée n'est pas seulement quelqu'un <em>sur qui</em> le projet aura des effets ; c'est quelqu'un <em>avec qui</em> le projet doit, autant que possible, se construire. La considérer comme une partie prenante à part entière, c'est lui reconnaître une voix dans les projets qui la concernent.</Texte>
 
           <ConceptBox label="Concept clé" titre="Dans le secteur, la personne accompagnée et ses proches sont des parties prenantes de plein droit, pas de simples bénéficiaires.">
-            <p>Un projet qui modifie l'organisation d'un lieu de vie, les horaires, les espaces communs, les activités, concerne au premier chef ceux qui y vivent. Les associer — recueillir leur avis, tenir compte de leur expérience, parfois les faire participer aux décisions — n'est pas une option de courtoisie : c'est une exigence éthique et un facteur de réussite, car un projet imposé sans la parole de ceux qu'il touche rencontre résistance et désengagement.</p>
+            <p>Un projet qui modifie l'organisation d'un lieu de vie, les horaires, les espaces communs, les activités, concerne au premier chef ceux qui y vivent. Les associer (recueillir leur avis, tenir compte de leur expérience, parfois les faire participer aux décisions) n'est pas une option de courtoisie : c'est une exigence éthique et un facteur de réussite, car un projet imposé sans la parole de ceux qu'il touche rencontre résistance et désengagement.</p>
           </ConceptBox>
 
           <Texte>Cette exigence demande du discernement. Associer la personne accompagnée se fait <strong>à la mesure de ses capacités et de la nature du projet</strong>. Pour certaines personnes et certains sujets, cela signifie une participation directe aux décisions ; pour d'autres, cela passe par l'écoute attentive de leurs réactions, par la médiation d'un proche ou d'un représentant légal. Le principe reste constant ; ses modalités s'adaptent.</Texte>
@@ -53,7 +53,7 @@ export function Module2GestionProjetIntermediaire({ onValiderModule }: { onValid
 
         <SectionModule eyebrow="Section 2" titre="Tous les métiers, et les partenaires extérieurs">
           <Texte>Au-delà des personnes accompagnées, la cartographie doit ratisser large du côté des professionnels et des partenaires.</Texte>
-          <Texte>Du côté interne, le réflexe à prendre est de <strong>balayer tous les métiers de l'institution</strong>, y compris ceux qu'on n'associe pas spontanément aux projets. Un projet qui touche aux repas concerne la cuisine ; un projet qui modifie les rythmes concerne la veille de nuit ; un projet qui change une organisation concerne l'administration et parfois la maintenance. Se demander systématiquement « quels métiers ce projet touche-t-il, même indirectement ? » fait apparaître des parties prenantes qu'on aurait oubliées — et dont l'oubli aurait coûté cher.</Texte>
+          <Texte>Du côté interne, le réflexe à prendre est de <strong>balayer tous les métiers de l'institution</strong>, y compris ceux qu'on n'associe pas spontanément aux projets. Un projet qui touche aux repas concerne la cuisine ; un projet qui modifie les rythmes concerne la veille de nuit ; un projet qui change une organisation concerne l'administration et parfois la maintenance. Se demander systématiquement « quels métiers ce projet touche-t-il, même indirectement ? » fait apparaître des parties prenantes qu'on aurait oubliées, et dont l'oubli aurait coûté cher.</Texte>
           <Texte>Du côté externe, beaucoup de projets impliquent des <strong>partenaires</strong> : d'autres institutions, des services de l'État ou du canton, des intervenants extérieurs, des bénévoles, des familles au sens large. Ces partenaires sont des parties prenantes réelles, dont dépend parfois une autorisation, un financement, une coordination. Les identifier tôt évite de découvrir tardivement qu'une étape clé dépendait de quelqu'un qu'on n'avait pas prévenu.</Texte>
 
           <HighlightBox label="Une question simple pour ne oublier personne" couleur="bleu">
@@ -63,7 +63,7 @@ export function Module2GestionProjetIntermediaire({ onValiderModule }: { onValid
               "« Qui doit contribuer ou autoriser ? » (métiers internes, hiérarchie, partenaires)",
               "« Qui pourrait freiner ou bloquer ? » (toute personne dont l'opposition compterait)",
             ]} />
-            <Texte>Ces trois questions, posées au départ, font apparaître l'essentiel des parties prenantes — et transforment des blocages futurs en points d'attention anticipés.</Texte>
+            <Texte>Ces trois questions, posées au départ, font apparaître l'essentiel des parties prenantes, et transforment des blocages futurs en points d'attention anticipés.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -71,9 +71,9 @@ export function Module2GestionProjetIntermediaire({ onValiderModule }: { onValid
           <Texte>Identifier les parties prenantes ne signifie pas qu'il faille toutes les impliquer de la même façon. Ce serait ingérable, et inutile. Le discernement consiste à <strong>ajuster le niveau d'implication de chacun</strong> selon ce que le projet exige et ce que la personne peut apporter.</Texte>
 
           <ConceptBox label="Concept clé" titre="Trois niveaux d'implication à distinguer :">
-            <p><strong>Informer</strong> — tenir au courant. Certaines parties prenantes n'ont pas à participer aux décisions, mais doivent savoir ce qui se passe pour ne pas être prises au dépourvu.</p>
-            <p><strong>Consulter</strong> — recueillir l'avis. D'autres ont un point de vue, une expérience ou une information précieuse ; on les sollicite pour nourrir le projet, sans qu'elles décident pour autant.</p>
-            <p><strong>Associer</strong> — faire participer activement. Certaines parties prenantes sont au cœur du projet : on les implique dans les décisions et la réalisation.</p>
+            <p><strong>Informer</strong>, tenir au courant. Certaines parties prenantes n'ont pas à participer aux décisions, mais doivent savoir ce qui se passe pour ne pas être prises au dépourvu.</p>
+            <p><strong>Consulter</strong>, recueillir l'avis. D'autres ont un point de vue, une expérience ou une information précieuse ; on les sollicite pour nourrir le projet, sans qu'elles décident pour autant.</p>
+            <p><strong>Associer</strong>, faire participer activement. Certaines parties prenantes sont au cœur du projet : on les implique dans les décisions et la réalisation.</p>
           </ConceptBox>
 
           <Texte>Le bon niveau dépend de chaque partie prenante et de chaque projet. Mal calibrer ce niveau produit deux erreurs symétriques. <strong>Trop peu impliquer</strong> une partie prenante importante, c'est risquer son opposition ou sa démobilisation : la personne qu'on aurait dû associer, et qu'on s'est contenté d'informer, se sentira mise à l'écart d'un projet qui la concerne. <strong>Trop impliquer</strong> tout le monde, à l'inverse, alourdit le projet, dilue les responsabilités et épuise les bonnes volontés en réunions inutiles.</Texte>
@@ -113,7 +113,7 @@ export function Module2GestionProjetIntermediaire({ onValiderModule }: { onValid
                 "Seule sa famille compte comme partie prenante",
               ],
               bonneReponse: 1,
-              explication: "La personne accompagnée n'est pas seulement destinataire d'un projet : elle en est une partie prenante à part entière. L'associer — selon ses capacités et la nature du projet — est une exigence éthique et un facteur de réussite.",
+              explication: "La personne accompagnée n'est pas seulement destinataire d'un projet : elle en est une partie prenante à part entière. L'associer, selon ses capacités et la nature du projet, est une exigence éthique et un facteur de réussite.",
             },
             {
               question: "Que se passe-t-il si l'on implique trop peu une partie prenante importante ?",

@@ -12,7 +12,7 @@ export function Module3GestionProjetIntermediaire({ onValiderModule }: { onValid
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={3}
-        categorie="Gestion de projet — Niveau Intermédiaire"
+        categorie="Gestion de projet : Niveau Intermédiaire"
         titre="Définir objectifs"
         titrePart2="et sous-objectifs"
         sousTitre="Transformer une intention en buts concrets et atteignables. Entre le souhait et l'action, il manque un maillon : l'objectif."
@@ -23,10 +23,10 @@ export function Module3GestionProjetIntermediaire({ onValiderModule }: { onValid
       <div className="max-w-3xl mx-auto px-8 py-12">
 
         <SectionModule eyebrow="Introduction" titre="Du flou de l'intention à la précision de l'objectif">
-          <Texte>Le premier module a clarifié le besoin ; ce module-ci s'attaque à la suite logique : transformer ce besoin en <strong>objectifs</strong>. C'est une étape qu'on croit souvent évidente, et qui ne l'est pas. Beaucoup de projets restent bloqués au stade de l'intention généreuse mais vague — « améliorer la vie des résidents », « renforcer la cohésion d'équipe » — sans jamais la traduire en buts précis. Or une intention qu'on ne précise pas reste un vœu : on ne sait ni par où commencer, ni quand on l'a atteinte.</Texte>
+          <Texte>Le premier module a clarifié le besoin ; ce module-ci s'attaque à la suite logique : transformer ce besoin en <strong>objectifs</strong>. C'est une étape qu'on croit souvent évidente, et qui ne l'est pas. Beaucoup de projets restent bloqués au stade de l'intention généreuse mais vague (« améliorer la vie des résidents », « renforcer la cohésion d'équipe ») sans jamais la traduire en buts précis. Or une intention qu'on ne précise pas reste un vœu : on ne sait ni par où commencer, ni quand on l'a atteinte.</Texte>
 
           <ConceptBox label="Concept clé" titre="L'intention indique une direction générale ; l'objectif la traduit en un but précis qu'on peut viser et reconnaître.">
-            <p>« Que les résidents s'ennuient moins l'après-midi » est une intention. « Mettre en place, d'ici trois mois, deux temps d'activité hebdomadaires adaptés aux envies des résidents » est un objectif. Le second n'est pas plus ambitieux que le premier — il est plus précis, donc actionnable et vérifiable.</p>
+            <p>« Que les résidents s'ennuient moins l'après-midi » est une intention. « Mettre en place, d'ici trois mois, deux temps d'activité hebdomadaires adaptés aux envies des résidents » est un objectif. Le second n'est pas plus ambitieux que le premier, il est plus précis, donc actionnable et vérifiable.</p>
           </ConceptBox>
 
           <Texte>Pourquoi cette précision change tout ? Parce qu'un objectif précis rend trois choses possibles que l'intention vague interdit. Il rend l'<strong>action</strong> possible : on sait quoi faire concrètement. Il rend le <strong>suivi</strong> possible : on peut mesurer où on en est par rapport au but. Et il rend l'<strong>évaluation</strong> possible : on saura, à la fin, si on a réussi. Tant qu'on en reste à l'intention, ces trois choses restent hors de portée.</Texte>
@@ -37,17 +37,17 @@ export function Module3GestionProjetIntermediaire({ onValiderModule }: { onValid
           <Texte>Comment reconnaître un objectif bien formulé ? Il existe un repère classique, résumé par le mot <strong>SMART</strong>, qui liste les qualités d'un objectif solide. Présentons-le pour ce qu'il est : une grille utile, à manier avec discernement, pas une formule rigide à appliquer mécaniquement.</Texte>
 
           <ConceptBox label="Concept clé" titre="Un bon objectif est généralement SMART :">
-            <p><strong>Spécifique</strong> — précis, clair, sans ambiguïté sur ce qu'on vise.</p>
-            <p><strong>Mesurable</strong> — on peut constater s'il est atteint, par un repère observable.</p>
-            <p><strong>Atteignable</strong> — réaliste au regard des moyens et du contexte.</p>
-            <p><strong>Réaliste / pertinent</strong> — utile, en lien réel avec le besoin de départ.</p>
-            <p><strong>Temporellement défini</strong> — assorti d'un horizon de temps, d'une échéance.</p>
+            <p><strong>Spécifique</strong>, précis, clair, sans ambiguïté sur ce qu'on vise.</p>
+            <p><strong>Mesurable</strong>, on peut constater s'il est atteint, par un repère observable.</p>
+            <p><strong>Atteignable</strong>, réaliste au regard des moyens et du contexte.</p>
+            <p><strong>Réaliste / pertinent</strong>, utile, en lien réel avec le besoin de départ.</p>
+            <p><strong>Temporellement défini</strong>, assorti d'un horizon de temps, d'une échéance.</p>
           </ConceptBox>
 
           <Texte>Ces cinq qualités méritent qu'on s'y arrête, parce que chacune corrige un défaut courant. <strong>Spécifique</strong> corrige le flou : « améliorer l'ambiance » ne dit rien d'actionnable, « instaurer un temps d'accueil convivial le matin » oui. <strong>Mesurable</strong> corrige l'impossibilité d'évaluer : si rien d'observable ne permet de dire si l'objectif est atteint, on ne saura jamais si le projet a réussi. <strong>Atteignable</strong> corrige l'irréalisme qui démoralise : un objectif hors de portée décourage l'équipe avant même de commencer. <strong>Pertinent</strong> corrige le hors-sujet : un objectif peut être parfaitement formulé et ne pas répondre au vrai besoin. <strong>Temporellement défini</strong> corrige l'étirement sans fin : sans échéance, un projet se dilue.</Texte>
 
           <HighlightBox label="SMART est un garde-fou, pas un carcan" couleur="bleu">
-            <Texte>La grille SMART rend service en signalant ce qui manque à un objectif mal posé. Mais l'appliquer mécaniquement peut conduire à des dérives : à force de vouloir tout rendre « mesurable », on risque de ne retenir que ce qui se compte facilement, et de passer à côté de l'essentiel — qui, dans nos métiers, est souvent qualitatif. Le mieux-être d'une personne, la qualité d'une relation, le sens retrouvé d'une activité ne se réduisent pas à des chiffres. Utilisez SMART pour vérifier qu'un objectif est clair et réaliste, jamais pour évacuer ce qui compte vraiment sous prétexte qu'il est difficile à mesurer.</Texte>
+            <Texte>La grille SMART rend service en signalant ce qui manque à un objectif mal posé. Mais l'appliquer mécaniquement peut conduire à des dérives : à force de vouloir tout rendre « mesurable », on risque de ne retenir que ce qui se compte facilement, et de passer à côté de l'essentiel, qui, dans nos métiers, est souvent qualitatif. Le mieux-être d'une personne, la qualité d'une relation, le sens retrouvé d'une activité ne se réduisent pas à des chiffres. Utilisez SMART pour vérifier qu'un objectif est clair et réaliste, jamais pour évacuer ce qui compte vraiment sous prétexte qu'il est difficile à mesurer.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -66,12 +66,12 @@ export function Module3GestionProjetIntermediaire({ onValiderModule }: { onValid
               {
                 niveau: "INTENTION",
                 nom: "La direction générale",
-                definition: "« Que les résidents s'ennuient moins » — le sens, le pourquoi profond",
+                definition: "« Que les résidents s'ennuient moins » : le sens, le pourquoi profond",
               },
               {
                 niveau: "OBJECTIF",
                 nom: "Le but précis et daté",
-                definition: "« Deux temps d'activité hebdo d'ici trois mois » — actionnable et vérifiable",
+                definition: "« Deux temps d'activité hebdo d'ici trois mois » : actionnable et vérifiable",
               },
               {
                 niveau: "SOUS-OBJECTIFS",
@@ -95,10 +95,10 @@ export function Module3GestionProjetIntermediaire({ onValiderModule }: { onValid
           <HighlightBox label="Ce qu'il faut retenir" couleur="vert">
             <Liste items={[
               "L'intention indique une direction ; l'objectif la traduit en un but précis qu'on peut viser, suivre et reconnaître. Une intention non précisée reste un vœu.",
-              "Préciser n'est pas rapetisser : l'objectif donne un corps à l'intention. Les deux sont nécessaires — une intention sans objectif reste un rêve, un objectif sans intention devient une tâche vide de sens.",
+              "Préciser n'est pas rapetisser : l'objectif donne un corps à l'intention. Les deux sont nécessaires, une intention sans objectif reste un rêve, un objectif sans intention devient une tâche vide de sens.",
               "La grille SMART (spécifique, mesurable, atteignable, pertinent, temporellement défini) aide à vérifier qu'un objectif est solide ; mais c'est un garde-fou, pas un carcan.",
               "Attention à la dérive de la mesure : dans nos métiers, l'essentiel est souvent qualitatif. Un bon objectif reste relié au sens et ne réduit pas l'accompagnement à ce qui se compte.",
-              "Décomposer en sous-objectifs rend le projet praticable, permet de suivre l'avancement et révèle l'ordre logique des étapes — sans sur-découper.",
+              "Décomposer en sous-objectifs rend le projet praticable, permet de suivre l'avancement et révèle l'ordre logique des étapes, sans sur-découper.",
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -115,7 +115,7 @@ export function Module3GestionProjetIntermediaire({ onValiderModule }: { onValid
                 "L'intention se définit à la fin du projet",
               ],
               bonneReponse: 1,
-              explication: "L'intention (« que les résidents s'ennuient moins ») donne le sens et la direction. L'objectif (« deux temps d'activité hebdo d'ici trois mois ») la traduit en un but actionnable et vérifiable. Le second n'est pas moins ambitieux — il est plus précis.",
+              explication: "L'intention (« que les résidents s'ennuient moins ») donne le sens et la direction. L'objectif (« deux temps d'activité hebdo d'ici trois mois ») la traduit en un but actionnable et vérifiable. Le second n'est pas moins ambitieux, il est plus précis.",
             },
             {
               question: "Comment faut-il utiliser la grille SMART dans le secteur social et médico-social ?",
@@ -126,7 +126,7 @@ export function Module3GestionProjetIntermediaire({ onValiderModule }: { onValid
                 "L'utiliser uniquement pour les objectifs financiers",
               ],
               bonneReponse: 1,
-              explication: "SMART est utile pour repérer ce qui manque à un objectif mal posé. Mais vouloir tout rendre mesurable risque de passer à côté de l'essentiel qualitatif — mieux-être, qualité de la relation, sens retrouvé — qui ne se réduit pas à des chiffres.",
+              explication: "SMART est utile pour repérer ce qui manque à un objectif mal posé. Mais vouloir tout rendre mesurable risque de passer à côté de l'essentiel qualitatif (mieux-être, qualité de la relation, sens retrouvé) qui ne se réduit pas à des chiffres.",
             },
             {
               question: "À quoi sert de décomposer un objectif en sous-objectifs ?",

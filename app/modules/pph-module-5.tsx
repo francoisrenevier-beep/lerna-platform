@@ -41,9 +41,9 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           <HighlightBox label="Les 4 modules en un coup d'œil" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "Module 1 : Nous avons quitté le modèle biomédical pour adopter une conception interactionniste du handicap — le PPH de Fougeyrollas",
+              "Module 1 : Nous avons quitté le modèle biomédical pour adopter une conception interactionniste du handicap, le PPH de Fougeyrollas",
               "Module 2 : Nous avons appris à analyser les situations en partant de l'habitude de vie, avec la méthode en six étapes",
-              "Module 3 : Nous avons compris que notre levier principal est l'environnement — avec cinq dimensions à analyser et à transformer",
+              "Module 3 : Nous avons compris que notre levier principal est l'environnement, avec cinq dimensions à analyser et à transformer",
               "Module 4 : Nous avons appris à formuler des objectifs PPH-SMART qui rendent nos actions évaluables et co-construites"
             ]} />
           </HighlightBox>
@@ -52,11 +52,11 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Section 5.1" titre="Le modèle MDH-PPH : une dernière lecture globale">
-          <Texte>Avant de passer à la posture professionnelle, revoyons le modèle dans sa globalité — cette fois avec le recul des quatre modules.</Texte>
+          <Texte>Avant de passer à la posture professionnelle, revoyons le modèle dans sa globalité : cette fois avec le recul des quatre modules.</Texte>
 
           <SchemaMDHPPH />
 
-          <Texte>Ce schéma résume tout ce que nous avons vu : les facteurs personnels et environnementaux interagissent pour produire soit la participation sociale, soit la situation de handicap dans la réalisation des habitudes de vie. Notre rôle professionnel est de déplacer la situation vers la participation — en agissant sur les facteurs environnementaux.</Texte>
+          <Texte>Ce schéma résume tout ce que nous avons vu : les facteurs personnels et environnementaux interagissent pour produire soit la participation sociale, soit la situation de handicap dans la réalisation des habitudes de vie. Notre rôle professionnel est de déplacer la situation vers la participation, en agissant sur les facteurs environnementaux.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 5.2" titre="Du réparer au permettre : le changement fondamental">
@@ -90,31 +90,31 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
             ]}
           />
 
-          <Texte>Ce déplacement n'est pas seulement conceptuel. Il change nos questions, nos observations, nos écrits professionnels, nos réunions d'équipe et notre relation aux personnes accompagnées — au quotidien.</Texte>
+          <Texte>Ce déplacement n'est pas seulement conceptuel. Il change nos questions, nos observations, nos écrits professionnels, nos réunions d'équipe et notre relation aux personnes accompagnées : au quotidien.</Texte>
 
           <PullQuote>
-            Notre rôle devient celui d'un ingénieur de l'environnement social — quelqu'un qui audite les milieux de vie, identifie les obstacles, et conçoit des facilitateurs durables.
+            Notre rôle devient celui d'un ingénieur de l'environnement social, quelqu'un qui audite les milieux de vie, identifie les obstacles, et conçoit des facilitateurs durables.
           </PullQuote>
         </SectionModule>
 
         <SectionModule eyebrow="Section 5.3" titre="L'autodétermination : la boussole de toute action PPH">
-          <Texte>L'autodétermination est la capacité d'une personne à faire ses propres choix, à définir ses objectifs de vie et à agir en fonction de ses valeurs, préférences et projets. Elle est au cœur du modèle PPH — et au cœur de l'éthique de l'accompagnement contemporain.</Texte>
+          <Texte>L'autodétermination est la capacité d'une personne à faire ses propres choix, à définir ses objectifs de vie et à agir en fonction de ses valeurs, préférences et projets. Elle est au cœur du modèle PPH, et au cœur de l'éthique de l'accompagnement contemporain.</Texte>
 
           <HighlightBox label="Ce qu'est l'autodétermination" couleur="bleu">
             <Texte>Wehmeyer (1996, 2003) définit l'autodétermination comme "la combinaison d'habiletés, de connaissances et de croyances qui permettent à une personne d'adopter des comportements autonomes, autorégulés et dirigés vers des buts." Elle inclut : la capacité à faire des choix, à prendre des décisions, à résoudre des problèmes, à se fixer des objectifs, à s'auto-défendre et à exercer un contrôle sur sa propre vie.</Texte>
           </HighlightBox>
 
           <AccrocheScenario titre="Autodétermination et PPH : le lien essentiel">
-            <p>L'analyse PPH n'a de sens que si elle est mise au service de l'autodétermination de la personne. Ce n'est pas nous qui décidons quelles habitudes de vie sont importantes — c'est elle. Si nous analysons une situation sans partir de ce que la personne veut, nous faisons du PPH pour l'institution, pas pour la personne.</p>
+            <p>L'analyse PPH n'a de sens que si elle est mise au service de l'autodétermination de la personne. Ce n'est pas nous qui décidons quelles habitudes de vie sont importantes, c'est elle. Si nous analysons une situation sans partir de ce que la personne veut, nous faisons du PPH pour l'institution, pas pour la personne.</p>
           </AccrocheScenario>
 
           <HighlightBox label="En pratique, soutenir l'autodétermination signifie :" couleur="vert">
             <Liste items={[
-              "Demander à la personne ce qu'elle veut faire — pas ce que vous pensez qu'elle devrait faire",
+              "Demander à la personne ce qu'elle veut faire, pas ce que vous pensez qu'elle devrait faire",
               "Co-construire l'analyse PPH avec elle, pas sur elle ni pour elle",
               "Respecter ses choix, même quand ils diffèrent de vos recommandations professionnelles",
               "Reconnaître son droit à l'expérience, y compris le droit à l'erreur",
-              "Évaluer les actions à l'aune de sa satisfaction — pas seulement de vos critères professionnels"
+              "Évaluer les actions à l'aune de sa satisfaction, pas seulement de vos critères professionnels"
             ]} />
           </HighlightBox>
 
@@ -147,17 +147,17 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
           <HighlightBox label="Ce que le PPH transforme dans le travail d'équipe" couleur="vert">
             <Liste items={[
               "Les réunions cliniques passent de 'ce qui ne va pas chez la personne' à 'quels obstacles identifier et modifier'",
-              "Les projets de vie sont rédigés à partir des habitudes de vie et des désirs de la personne — pas des déficiences",
-              "Les transmissions professionnelles décrivent des obstacles et facilitateurs — pas des comportements problématiques",
+              "Les projets de vie sont rédigés à partir des habitudes de vie et des désirs de la personne, pas des déficiences",
+              "Les transmissions professionnelles décrivent des obstacles et facilitateurs, pas des comportements problématiques",
               "Les désaccords d'équipe ont un cadre commun pour être tranchés : est-ce que c'est ce que la personne veut ?"
             ]} />
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 5.6 — Référence" titre="Glossaire essentiel de la formation">
+        <SectionModule eyebrow="Section 5.6 : Référence" titre="Glossaire essentiel de la formation">
           <HighlightBox label="Les concepts clés à maîtriser" couleur="bleu">
             <Liste couleur="bleu" items={[
-              "MDH-PPH : Modèle de Développement Humain — Processus de Production du Handicap (Fougeyrollas et al., RIPPH, 2010)",
+              "MDH-PPH : Modèle de Développement Humain, Processus de Production du Handicap (Fougeyrollas et al., RIPPH, 2010)",
               "Habitudes de vie : activités courantes et rôles sociaux que la personne souhaite ou doit réaliser (12 catégories MHAVIE)",
               "Facteurs personnels : systèmes organiques, aptitudes et facteurs identitaires propres à la personne",
               "Facteurs environnementaux : éléments extérieurs à la personne agissant comme obstacles ou facilitateurs (5 dimensions)",
@@ -165,7 +165,7 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Situation de handicap : des obstacles environnementaux perturbent ou empêchent la réalisation des habitudes de vie",
               "Autodétermination : capacité de la personne à faire ses propres choix et à agir selon ses valeurs et projets de vie",
               "Objectif PPH-SMART : objectif spécifique, mesurable, atteignable, pertinent et temporellement défini, à deux niveaux (participation + environnemental)",
-              "MHAVIE : Mesure des Habitudes de Vie — outil d'évaluation de la participation sociale développé par le RIPPH"
+              "MHAVIE : Mesure des Habitudes de Vie, outil d'évaluation de la participation sociale développé par le RIPPH"
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -176,19 +176,19 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
           <HighlightBox label="Actions concrètes à mettre en place dès maintenant" couleur="vert">
             <Liste items={[
               "Utiliser le vocabulaire PPH dans vos écrits et réunions professionnels : 'obstacle', 'facilitateur', 'habitude de vie'",
-              "Appliquer la méthode en six étapes à une situation d'accompagnement en cours — choisissez une habitude de vie",
+              "Appliquer la méthode en six étapes à une situation d'accompagnement en cours, choisissez une habitude de vie",
               "Formuler un objectif PPH-SMART pour un accompagnement en cours : participation + environnemental",
               "Identifier un obstacle attitudinal dans votre équipe et ouvrir un dialogue sur ses effets",
-              "Partager les concepts clés avec un collègue — l'ambassadeur PPH, c'est vous"
+              "Partager les concepts clés avec un collègue : l'ambassadeur PPH, c'est vous"
             ]} />
           </HighlightBox>
 
           <AccrocheScenario type="reflexion">
-            <p>Le PPH ne demande pas une transformation institutionnelle immédiate. Il demande une transformation du regard — qui commence avec vous, maintenant, dans votre prochain échange avec une personne accompagnée.</p>
+            <p>Le PPH ne demande pas une transformation institutionnelle immédiate. Il demande une transformation du regard, qui commence avec vous, maintenant, dans votre prochain échange avec une personne accompagnée.</p>
           </AccrocheScenario>
 
           <PullQuote>
-            Le PPH n'est pas une théorie de plus. C'est une invitation à regarder autrement — et à agir autrement. Votre mission : identifier les obstacles, transformer les environnements, et ouvrir les portes du possible.
+            Le PPH n'est pas une théorie de plus. C'est une invitation à regarder autrement, et à agir autrement. Votre mission : identifier les obstacles, transformer les environnements, et ouvrir les portes du possible.
           </PullQuote>
         </SectionModule>
 
@@ -215,7 +215,7 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
               "L'absence de toute aide technique ou humaine"
             ],
             bonneReponse: 2,
-            explication: "L'autodétermination (Wehmeyer, 1996) est la capacité à faire ses propres choix et à agir selon ses valeurs. Elle est la boussole de toute action PPH — on part de ce que la personne veut, pas de ce qu'on pense bon pour elle."
+            explication: "L'autodétermination (Wehmeyer, 1996) est la capacité à faire ses propres choix et à agir selon ses valeurs. Elle est la boussole de toute action PPH, on part de ce que la personne veut, pas de ce qu'on pense bon pour elle."
           },
           {
             question: "Le rôle du professionnel dans le PPH est celui de :",
@@ -226,7 +226,7 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Coordinateur administratif qui gère les dossiers MDPH"
             ],
             bonneReponse: 2,
-            explication: "Le PPH définit le professionnel comme un ingénieur de l'environnement social — un observateur, analyste, concepteur, évaluateur et ambassadeur qui transforme les obstacles en facilitateurs pour ouvrir les portes du possible."
+            explication: "Le PPH définit le professionnel comme un ingénieur de l'environnement social, un observateur, analyste, concepteur, évaluateur et ambassadeur qui transforme les obstacles en facilitateurs pour ouvrir les portes du possible."
           },
           {
             question: "Le PPH transforme le travail d'équipe en :",
@@ -248,7 +248,7 @@ export function Module5PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Demander une validation de la direction avant toute action PPH"
             ],
             bonneReponse: 2,
-            explication: "Le PPH peut s'intégrer progressivement : utiliser le vocabulaire dans les écrits, appliquer la méthode à une situation concrète, formuler un objectif PPH-SMART. Le changement commence par votre regard — maintenant."
+            explication: "Le PPH peut s'intégrer progressivement : utiliser le vocabulaire dans les écrits, appliquer la méthode à une situation concrète, formuler un objectif PPH-SMART. Le changement commence par votre regard, maintenant."
           }
         ]}
         onValiderModule={onValiderModule}

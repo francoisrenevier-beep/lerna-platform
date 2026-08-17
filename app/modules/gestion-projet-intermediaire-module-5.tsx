@@ -11,10 +11,10 @@ export function Module5GestionProjetIntermediaire({ onValiderModule }: { onValid
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={5}
-        categorie="Gestion de projet — Niveau Intermédiaire"
+        categorie="Gestion de projet : Niveau Intermédiaire"
         titre="Clarifier les"
         titrePart2="responsabilités"
-        sousTitre="Répondre clairement au « qui fait quoi » en équipe pluridisciplinaire — sans alourdir ni hiérarchiser."
+        sousTitre="Répondre clairement au « qui fait quoi » en équipe pluridisciplinaire, sans alourdir ni hiérarchiser."
         duree="≈ 20-25 minutes"
         niveau="Intermédiaire"
       />
@@ -32,17 +32,17 @@ export function Module5GestionProjetIntermediaire({ onValiderModule }: { onValid
         </PullQuote>
 
         <SectionModule eyebrow="Section 1" titre="Distinguer les types de responsabilité">
-          <Texte>Pour clarifier le « qui fait quoi », il faut d'abord comprendre qu'il existe <strong>plusieurs façons d'être responsable</strong> d'une chose dans un projet — et que les confondre est précisément ce qui crée le flou. Une personne peut réaliser une tâche, une autre en répondre, une troisième être consultée, une quatrième simplement informée. Ce sont quatre rôles distincts par rapport à une même action.</Texte>
+          <Texte>Pour clarifier le « qui fait quoi », il faut d'abord comprendre qu'il existe <strong>plusieurs façons d'être responsable</strong> d'une chose dans un projet, et que les confondre est précisément ce qui crée le flou. Une personne peut réaliser une tâche, une autre en répondre, une troisième être consultée, une quatrième simplement informée. Ce sont quatre rôles distincts par rapport à une même action.</Texte>
 
           <ConceptBox label="Concept clé" titre="Quatre types de responsabilité face à une tâche (RACI) :">
-            <p><strong>Réaliser</strong> — celui qui fait concrètement le travail.</p>
-            <p><strong>Répondre / porter</strong> — celui qui est garant que la tâche soit faite, qui en répond même s'il ne la réalise pas lui-même. Pour chaque tâche, il est essentiel qu'une seule personne porte cette responsabilité, sans quoi elle se dilue.</p>
-            <p><strong>Être consulté</strong> — celui dont on sollicite l'avis ou l'expertise avant d'agir, sans qu'il décide.</p>
-            <p><strong>Être informé</strong> — celui qu'on tient au courant du résultat, sans qu'il intervienne.</p>
+            <p><strong>Réaliser</strong>, celui qui fait concrètement le travail.</p>
+            <p><strong>Répondre / porter</strong>, celui qui est garant que la tâche soit faite, qui en répond même s'il ne la réalise pas lui-même. Pour chaque tâche, il est essentiel qu'une seule personne porte cette responsabilité, sans quoi elle se dilue.</p>
+            <p><strong>Être consulté</strong>, celui dont on sollicite l'avis ou l'expertise avant d'agir, sans qu'il décide.</p>
+            <p><strong>Être informé</strong>, celui qu'on tient au courant du résultat, sans qu'il intervienne.</p>
           </ConceptBox>
 
           <Texte>Cette distinction est précieuse parce qu'elle dissout la plupart des malentendus. Beaucoup de tensions naissent d'une confusion entre ces rôles : quelqu'un croyait devoir réaliser alors qu'il devait seulement être consulté ; quelqu'un pensait être informé alors qu'on attendait qu'il porte la tâche. Nommer, pour chaque tâche importante, qui réalise et surtout <strong>qui en répond</strong>, suffit à éviter l'essentiel de ces malentendus.</Texte>
-          <Texte>Le point le plus important, s'il ne fallait en retenir qu'un, est celui-ci : <strong>pour chaque tâche, une personne et une seule doit en être garante.</strong> Ce n'est pas qu'elle fait tout — d'autres peuvent réaliser — mais elle veille à ce que ce soit fait. Quand cette responsabilité de garant est partagée entre plusieurs, elle s'évapore : chacun compte sur l'autre. Quand elle n'est attribuée à personne, la tâche tombe dans le vide.</Texte>
+          <Texte>Le point le plus important, s'il ne fallait en retenir qu'un, est celui-ci : <strong>pour chaque tâche, une personne et une seule doit en être garante.</strong> Ce n'est pas qu'elle fait tout, d'autres peuvent réaliser, mais elle veille à ce que ce soit fait. Quand cette responsabilité de garant est partagée entre plusieurs, elle s'évapore : chacun compte sur l'autre. Quand elle n'est attribuée à personne, la tâche tombe dans le vide.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="La matrice des responsabilités : un outil de clarté">
@@ -52,7 +52,7 @@ export function Module5GestionProjetIntermediaire({ onValiderModule }: { onValid
             <p>Pour chaque tâche, elle indique le rôle de chacun : qui réalise, qui en répond, qui est consulté, qui est informé. D'un coup d'œil, on voit si chaque tâche a bien un garant, si personne n'est oublié, et si la charge est équilibrée.</p>
           </ConceptBox>
 
-          <Texte>L'intérêt de poser ce tableau, même sommaire, n'est pas le tableau lui-même : c'est la <strong>conversation qu'il oblige à avoir</strong>. En remplissant la matrice avec l'équipe, on est forcé de dire explicitement, pour chaque tâche, qui en répond — et c'est précisément cette explicitation qui dissipe les malentendus. Souvent, c'est au moment de remplir la matrice qu'on découvre qu'une tâche importante n'avait été attribuée à personne, ou que deux personnes pensaient toutes deux en être chargées.</Texte>
+          <Texte>L'intérêt de poser ce tableau, même sommaire, n'est pas le tableau lui-même : c'est la <strong>conversation qu'il oblige à avoir</strong>. En remplissant la matrice avec l'équipe, on est forcé de dire explicitement, pour chaque tâche, qui en répond, et c'est précisément cette explicitation qui dissipe les malentendus. Souvent, c'est au moment de remplir la matrice qu'on découvre qu'une tâche importante n'avait été attribuée à personne, ou que deux personnes pensaient toutes deux en être chargées.</Texte>
 
           <HighlightBox label="La matrice est un déclencheur de clarté, pas une fin en soi" couleur="bleu">
             <Texte>Inutile d'en faire un document exhaustif et figé. Pour un projet d'équipe modeste, lister les quelques tâches importantes et nommer, pour chacune, qui en répond suffit déjà à éviter la plupart des angles morts. Ce qui compte, ce n'est pas la beauté du tableau, mais que la question « qui est garant de ça ? » ait été posée et tranchée pour chaque tâche qui compte.</Texte>
@@ -60,7 +60,7 @@ export function Module5GestionProjetIntermediaire({ onValiderModule }: { onValid
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Clarifier les rôles sans hiérarchiser les métiers">
-          <Texte>Il faut conclure ce module sur un point qui touche au cœur du positionnement du secteur. Clarifier les responsabilités pourrait laisser croire qu'on établit une hiérarchie — qui commande, qui exécute. Ce serait un contresens, et il importe de le dissiper.</Texte>
+          <Texte>Il faut conclure ce module sur un point qui touche au cœur du positionnement du secteur. Clarifier les responsabilités pourrait laisser croire qu'on établit une hiérarchie, qui commande, qui exécute. Ce serait un contresens, et il importe de le dissiper.</Texte>
           <Texte>Répartir les responsabilités dans un projet, ce n'est pas classer les personnes par ordre d'importance ; c'est <strong>organiser une collaboration</strong>. Le fait qu'une personne porte une tâche et qu'une autre soit consultée ne dit rien de leur valeur respective : cela dit seulement leur rôle sur cette tâche précise. Sur la tâche suivante, les rôles peuvent s'inverser. Dans une équipe pluridisciplinaire qui fonctionne bien, la responsabilité circule selon les compétences et les sujets, sans s'attacher à un statut.</Texte>
           <Texte>Au contraire, une répartition qui reconnaît à chaque métier la responsabilité de ce qu'il sait le mieux faire fait vivre concrètement la culture commune. Clarifier les responsabilités, bien compris, n'hiérarchise pas : cela permet à chacun de contribuer pleinement, à sa juste place.</Texte>
 
@@ -122,7 +122,7 @@ export function Module5GestionProjetIntermediaire({ onValiderModule }: { onValid
                 "Faux",
               ],
               bonneReponse: 1,
-              explication: "Clarifier les responsabilités organise une collaboration, pas une hiérarchie. Les rôles portent sur des tâches précises et peuvent s'inverser d'une tâche à l'autre. La responsabilité circule selon les compétences — ce qui fait vivre la culture commune plutôt que de l'étouffer.",
+              explication: "Clarifier les responsabilités organise une collaboration, pas une hiérarchie. Les rôles portent sur des tâches précises et peuvent s'inverser d'une tâche à l'autre. La responsabilité circule selon les compétences, ce qui fait vivre la culture commune plutôt que de l'étouffer.",
             },
           ]}
         />

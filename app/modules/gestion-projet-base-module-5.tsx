@@ -11,7 +11,7 @@ export function Module5GestionProjetBase({ onValiderModule }: { onValiderModule?
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={5}
-        categorie="Gestion de projet — Niveau Base"
+        categorie="Gestion de projet : Niveau Base"
         titre="Le vocabulaire de base"
         titrePart2="du projet"
         sousTitre="Quelques mots clés pour parler le même langage et participer pleinement à une démarche projet."
@@ -23,39 +23,39 @@ export function Module5GestionProjetBase({ onValiderModule }: { onValiderModule?
 
         <SectionModule eyebrow="Introduction" titre="Pourquoi les mots comptent">
           <Texte>Vous voici au dernier module du niveau base. Le chemin parcouru est déjà considérable : vous savez reconnaître un projet, vous en connaissez les phases, vous le voyez à l'œuvre dans l'accompagnement, vous comprenez pourquoi tous les métiers y ont leur place. Il reste un dernier outil à partager, et c'est le plus simple en apparence, mais loin d'être le moins important : <strong>les mots.</strong></Texte>
-          <Texte>On pourrait croire le vocabulaire secondaire, une question de forme. C'est une erreur. Quand plusieurs personnes travaillent ensemble sur un projet, les mots qu'elles emploient sont le matériau même de leur coordination. Si l'un dit « objectif » en pensant à une grande intention générale, et l'autre en pensant à une petite action très concrète, ils croiront se comprendre tout en parlant de deux choses différentes — et le malentendu ne se révélera, parfois, qu'au moment où il produit une déception.</Texte>
-          <Texte>Un langage commun minimal a donc une fonction très précise : il garantit que, lorsqu'un mot est prononcé dans une réunion de projet, <strong>tout le monde comprend la même chose.</strong> Cela permet à chacun — quel que soit son métier, quelle que soit son habitude des projets — de suivre les échanges, de comprendre un plan d'action, et de poser les bonnes questions sans se sentir perdu ni illégitime. Le vocabulaire est, en ce sens, un outil d'inclusion : il abaisse la barrière d'entrée dans la démarche projet.</Texte>
+          <Texte>On pourrait croire le vocabulaire secondaire, une question de forme. C'est une erreur. Quand plusieurs personnes travaillent ensemble sur un projet, les mots qu'elles emploient sont le matériau même de leur coordination. Si l'un dit « objectif » en pensant à une grande intention générale, et l'autre en pensant à une petite action très concrète, ils croiront se comprendre tout en parlant de deux choses différentes, et le malentendu ne se révélera, parfois, qu'au moment où il produit une déception.</Texte>
+          <Texte>Un langage commun minimal a donc une fonction très précise : il garantit que, lorsqu'un mot est prononcé dans une réunion de projet, <strong>tout le monde comprend la même chose.</strong> Cela permet à chacun (quel que soit son métier, quelle que soit son habitude des projets) de suivre les échanges, de comprendre un plan d'action, et de poser les bonnes questions sans se sentir perdu ni illégitime. Le vocabulaire est, en ce sens, un outil d'inclusion : il abaisse la barrière d'entrée dans la démarche projet.</Texte>
           <Texte>L'idée n'est surtout pas de vous transformer en spécialistes qui manieraient un jargon. C'est l'inverse : vous donner <strong>six mots clés, et six seulement,</strong> qui reviennent constamment dans tout projet, avec pour chacun une définition simple et un repère pour le retenir. Six mots suffisent à se sentir chez soi dans une démarche projet.</Texte>
         </SectionModule>
 
         <PullQuote source="">
-          Partager un vocabulaire, ce n'est pas faire du jargon — c'est tout le contraire. C'est s'assurer que, quand on prononce un mot, chacun y met bien la même chose.
+          Partager un vocabulaire, ce n'est pas faire du jargon : c'est tout le contraire. C'est s'assurer que, quand on prononce un mot, chacun y met bien la même chose.
         </PullQuote>
 
         <SectionModule eyebrow="Section 1" titre="Les six mots clés du projet">
           <Texte>Voici les six mots à retenir. Chacun répond à une question simple ; c'est par cette question, plus que par une définition abstraite, qu'on les retient le mieux.</Texte>
 
-          <ConceptBox label="Mot clé 1" titre="L'objectif — « Pour aller où ? »">
+          <ConceptBox label="Mot clé 1" titre="L'objectif, « Pour aller où ? »">
             <p>C'est ce que le projet cherche à obtenir, le résultat visé, la direction. L'objectif est la traduction concrète de l'intention dont on parlait au module 1. Tout, dans un projet, se rapporte à lui : si une action ne sert pas l'objectif, on peut légitimement se demander pourquoi on la mène.</p>
           </ConceptBox>
 
-          <ConceptBox label="Mot clé 2" titre="L'étape — « Par où passe-t-on ? »">
+          <ConceptBox label="Mot clé 2" titre="L'étape, « Par où passe-t-on ? »">
             <p>C'est une grande phase du projet, un palier sur le chemin vers l'objectif. Un projet ne se franchit pas d'un bond : il se découpe en étapes successives, qui rendent le chemin praticable. Découper en étapes, c'est transformer un objectif intimidant en une suite de pas réalisables.</p>
           </ConceptBox>
 
-          <ConceptBox label="Mot clé 3" titre="Le jalon — « Quels rendez-vous clés ? »">
-            <p>C'est un point de repère marquant : un moment où l'on vérifie que tout avance comme prévu, ou une échéance importante à ne pas manquer. Là où l'étape est un segment du chemin, le jalon est un point précis — le rendez-vous du projet, celui où l'on fait le point avant de continuer.</p>
+          <ConceptBox label="Mot clé 3" titre="Le jalon, « Quels rendez-vous clés ? »">
+            <p>C'est un point de repère marquant : un moment où l'on vérifie que tout avance comme prévu, ou une échéance importante à ne pas manquer. Là où l'étape est un segment du chemin, le jalon est un point précis : le rendez-vous du projet, celui où l'on fait le point avant de continuer.</p>
           </ConceptBox>
 
-          <ConceptBox label="Mot clé 4" titre="Le rôle — « Qui fait quoi ? »">
+          <ConceptBox label="Mot clé 4" titre="Le rôle, « Qui fait quoi ? »">
             <p>C'est la fonction de chacun dans le projet : qui porte, qui contribue, qui décide, comme on l'a vu au module 4. Le rôle répartit le travail et les responsabilités, pour que chacun sache ce qu'on attend de lui et que rien ne tombe entre les mailles.</p>
           </ConceptBox>
 
-          <ConceptBox label="Mot clé 5" titre="Le livrable — « Qu'est-ce qu'on produit ? »">
+          <ConceptBox label="Mot clé 5" titre="Le livrable, « Qu'est-ce qu'on produit ? »">
             <p>C'est ce que le projet produit concrètement, le résultat tangible auquel on reconnaît qu'une étape, ou le projet entier, est « fait ». Le livrable est important parce qu'il rend l'avancement vérifiable : tant qu'on ne sait pas ce qu'on doit produire, on ne peut pas savoir si on l'a produit.</p>
           </ConceptBox>
 
-          <ConceptBox label="Mot clé 6" titre="L'échéance — « Pour quand ? »">
+          <ConceptBox label="Mot clé 6" titre="L'échéance, « Pour quand ? »">
             <p>C'est la date limite, le moment où quelque chose doit être terminé. L'échéance donne le tempo : sans elle, un projet a tendance à s'étirer indéfiniment, faute d'un horizon qui mette sous tension. Une échéance réaliste n'est pas une pression abusive ; c'est ce qui donne au projet sa réalité dans le temps.</p>
           </ConceptBox>
 
@@ -84,7 +84,7 @@ export function Module5GestionProjetBase({ onValiderModule }: { onValiderModule?
 
         <SectionModule eyebrow="Conclusion" titre="Le chemin parcouru, et la suite">
           <Texte>Vous arrivez au terme du niveau base. Il vaut la peine de mesurer ce qui est désormais acquis, car c'est un socle réel.</Texte>
-          <Texte>Vous savez reconnaître un projet et le distinguer d'une tâche ou d'une routine — vous ne confondez plus l'activité et l'avancement. Vous connaissez les quatre phases du cycle de vie et vous savez qu'aucune n'est facultative. Vous voyez la démarche projet à l'œuvre au cœur de votre métier, dans l'accompagnement des personnes, et vous mesurez ce que change le fait de « faire avec » plutôt que « pour ». Vous comprenez pourquoi tous les métiers comptent et ce qu'est le regard partagé. Et vous disposez maintenant d'un vocabulaire commun pour participer pleinement à une démarche projet.</Texte>
+          <Texte>Vous savez reconnaître un projet et le distinguer d'une tâche ou d'une routine, vous ne confondez plus l'activité et l'avancement. Vous connaissez les quatre phases du cycle de vie et vous savez qu'aucune n'est facultative. Vous voyez la démarche projet à l'œuvre au cœur de votre métier, dans l'accompagnement des personnes, et vous mesurez ce que change le fait de « faire avec » plutôt que « pour ». Vous comprenez pourquoi tous les métiers comptent et ce qu'est le regard partagé. Et vous disposez maintenant d'un vocabulaire commun pour participer pleinement à une démarche projet.</Texte>
           <Texte>Ce socle a une qualité particulière : il est <strong>commun.</strong> Si vos collègues, quels que soient leurs métiers, ont suivi ce même niveau, alors vous partagez désormais une même façon de penser et de nommer les projets. C'est exactement ce que vise la culture commune : non pas que chacun devienne expert, mais que tous parlent le même langage et partagent les mêmes repères de base. C'est sur ce socle partagé que tout le reste peut se construire.</Texte>
 
           <HighlightBox label="Ce qu'il faut retenir" couleur="vert">
@@ -93,7 +93,7 @@ export function Module5GestionProjetBase({ onValiderModule }: { onValiderModule?
               "Un langage commun minimal garantit que chacun comprend la même chose, et abaisse la barrière d'entrée dans la démarche projet : c'est un outil d'inclusion.",
               "Six mots clés, retenus par six questions : objectif (pour aller où), étape (par où passe-t-on), jalon (quels rendez-vous clés), rôle (qui fait quoi), livrable (qu'est-ce qu'on produit), échéance (pour quand).",
               "Ces six mots s'articulent et se répondent ; ensemble, ils forment aussi une grille de lecture qui révèle la solidité d'un projet.",
-              "Le niveau base est complété : vous disposez d'un socle commun — compréhension, repères et vocabulaire — sur lequel le niveau intermédiaire construira le passage à l'action.",
+              "Le niveau base est complété : vous disposez d'un socle commun (compréhension, repères et vocabulaire) sur lequel le niveau intermédiaire construira le passage à l'action.",
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -121,13 +121,13 @@ export function Module5GestionProjetBase({ onValiderModule }: { onValiderModule?
                 "Qu'est-ce qu'on produit ? (c'est le livrable)",
               ],
               bonneReponse: 2,
-              explication: "Le jalon est un point de repère marquant : un moment de vérification ou une échéance importante. Là où l'étape est un segment du chemin, le jalon est un point précis — le rendez-vous du projet.",
+              explication: "Le jalon est un point de repère marquant : un moment de vérification ou une échéance importante. Là où l'étape est un segment du chemin, le jalon est un point précis : le rendez-vous du projet.",
             },
             {
               question: "Pourquoi dit-on que les six mots forment aussi une « grille de lecture » de la solidité d'un projet ?",
               reponses: [
                 "Parce qu'ils permettent de noter les collègues",
-                "Parce qu'en les passant en revue, on repère ce qui manque à un projet — livrable non nommé, échéance absente, rôles flous — autant de signes de difficultés à venir",
+                "Parce qu'en les passant en revue, on repère ce qui manque à un projet (livrable non nommé, échéance absente, rôles flous), autant de signes de difficultés à venir",
                 "Parce qu'ils remplacent le travail de préparation",
                 "Parce qu'ils ne servent qu'aux grands projets",
               ],

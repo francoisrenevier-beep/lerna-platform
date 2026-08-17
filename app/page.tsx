@@ -11,9 +11,9 @@ import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Learna — Formation continue pour les institutions sociales et médico-sociales",
+  title: "Learna | Formation continue pour les institutions sociales et médico-sociales",
   description:
-    "Learna propose aux institutions sociales et médico-sociales de Suisse romande une plateforme de formation continue en ligne, accessible à l'ensemble des collaborateurs — handicap, pédagogie spécialisée, accompagnement, éthique.",
+    "Learna propose aux institutions sociales et médico-sociales de Suisse romande une plateforme de formation continue en ligne, accessible à l'ensemble des collaborateurs : handicap, pédagogie spécialisée, accompagnement, éthique.",
 }
 
 // Le bandeau de chiffres lit la base à chaque revalidation. Une heure de cache :
@@ -67,7 +67,7 @@ export default function Home() {
             Une licence pour tous vos collaborateurs
           </h2>
           <p className="mt-4 text-lg text-white/70">
-            Tarif annuel tout inclus — accès illimité pour l&apos;ensemble de vos collaborateurs,
+            Tarif annuel tout inclus, accès illimité pour l&apos;ensemble de vos collaborateurs,
             nouvelles formations comprises.
           </p>
           <Link

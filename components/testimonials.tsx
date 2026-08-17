@@ -46,7 +46,7 @@ export function Testimonials() {
                 <div className="font-semibold text-[#1B2D5B]">{testimonial.author}</div>
                 <div className="text-sm text-muted-foreground">
                   {testimonial.typeInstitution
-                    ? `${testimonial.role} — ${testimonial.typeInstitution}`
+                    ? `${testimonial.role}, ${testimonial.typeInstitution}`
                     : testimonial.role}
                 </div>
                 {testimonial.institution && (

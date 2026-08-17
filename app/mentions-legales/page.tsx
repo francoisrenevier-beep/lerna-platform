@@ -3,7 +3,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Mentions légales — LEARNA",
+  title: "Mentions légales | LEARNA",
   description: "Mentions légales et informations juridiques de la plateforme LEARNA.",
 }
 

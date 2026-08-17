@@ -196,7 +196,7 @@ export default function BilanPage() {
       })
     } catch (e) {
       console.error("Erreur attestation:", e)
-      alert("Erreur lors de la génération — réessayez dans quelques instants")
+      alert("Erreur lors de la génération : réessayez dans quelques instants")
     } finally {
       setDownloadingAttestation(false)
     }

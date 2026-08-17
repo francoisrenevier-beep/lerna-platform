@@ -20,7 +20,7 @@ const etapes = [
     number: "3",
     title: "Publier et mettre à disposition de toute l'équipe",
     description:
-      "Une fois conçue, la formation rejoint la plateforme. Elle devient accessible à l'ensemble des collaborateurs, à leur rythme — pour construire un regard partagé au sein de l'institution.",
+      "Une fois conçue, la formation rejoint la plateforme. Elle devient accessible à l'ensemble des collaborateurs, à leur rythme, pour construire un regard partagé au sein de l'institution.",
   },
 ]
 

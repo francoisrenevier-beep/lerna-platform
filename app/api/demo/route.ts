@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       from: 'Learna <noreply@learna.ch>',
       to: 'contact@learna.ch',
       replyTo: email,
-      subject: `${sujetLabel ? `[${sujetLabel}] ` : ''}Demande de démonstration — ${prenom} ${nom} (${institution})`,
+      subject: `${sujetLabel ? `[${sujetLabel}] ` : ''}Demande de démonstration, ${prenom} ${nom} (${institution})`,
       text: `Nouvelle demande de démonstration\n${sujetLabel ? `\nSujet : ${sujetLabel}\n` : ''}\nPrénom : ${prenom}\nNom : ${nom}\nInstitution : ${institution}\nEmail : ${email}${telephone ? `\nTéléphone : ${telephone}` : ''}${message ? `\n\nMessage :\n${message}` : ''}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
             <div style="background:white;border:1px solid #e5e7eb;border-radius:6px;padding:16px;color:#1B2D5B;font-size:14px;white-space:pre-wrap;">${esc(message)}</div>
             ` : ''}
             <p style="margin:24px 0 0;font-size:12px;color:#9ca3af;">
-              Pour répondre à cette personne, cliquez sur Répondre — l'adresse de retour est préremplie.
+              Pour répondre à cette personne, cliquez sur Répondre : l'adresse de retour est préremplie.
             </p>
           </div>
         </div>

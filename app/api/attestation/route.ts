@@ -219,7 +219,7 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string, signatureDataU
     <div class="title-block">
       <div class="accent-bar"></div>
       <h1>Attestation de suivi</h1>
-      <p class="subtitle">Formation en ligne — Plateforme Learna</p>
+      <p class="subtitle">Formation en ligne : Plateforme Learna</p>
     </div>
     <div class="body-block">
       <p>Learna atteste que</p>
@@ -241,7 +241,7 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string, signatureDataU
       </div>
     </div>
     <div class="footer">
-      <span>Attestation générée par la plateforme Learna — learna.ch</span>
+      <span>Attestation générée par la plateforme Learna, learna.ch</span>
       <span>Document non contractuel · Vérifiable avec le code Learna</span>
     </div>
   </div>

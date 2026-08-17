@@ -34,8 +34,8 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Comprendre les enjeux de la fin de vie en contexte de handicap"
             ]} />
           </ConceptBox>
-          <Texte>Comprendre et reconnaître le vieillissement, c'est nécessaire. Mais ce que les professionnels attendent — et c'est tout à fait légitime — c'est de savoir quoi faire concrètement. Comment adapter son accompagnement ? Comment modifier le projet de la personne ? Comment parler à quelqu'un qui commence à perdre ses mots ? Comment préparer une famille à ce que vit leur proche ?</Texte>
-          <Texte>Ce module entre dans le vif du sujet. Il ne propose pas de recettes universelles — il n'en existe pas — mais des principes, des méthodes et des exemples concrets qui peuvent être adaptés à chaque situation.</Texte>
+          <Texte>Comprendre et reconnaître le vieillissement, c'est nécessaire. Mais ce que les professionnels attendent, et c'est tout à fait légitime, c'est de savoir quoi faire concrètement. Comment adapter son accompagnement ? Comment modifier le projet de la personne ? Comment parler à quelqu'un qui commence à perdre ses mots ? Comment préparer une famille à ce que vit leur proche ?</Texte>
+          <Texte>Ce module entre dans le vif du sujet. Il ne propose pas de recettes universelles, il n'en existe pas, mais des principes, des méthodes et des exemples concrets qui peuvent être adaptés à chaque situation.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Réévaluer le projet personnalisé d'accompagnement">
@@ -91,7 +91,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
           <HighlightBox label="Exemples concrets d'adaptation d'activités" couleur="vert">
             <Texte><strong>L'atelier cuisine :</strong> La personne qui ne peut plus rester debout 45 minutes peut rester assis à table, surveiller la cuisson, superviser les autres résidents, choisir les recettes. Son rôle change, mais sa participation reste réelle et valorisante.</Texte>
             <Texte><strong>Le jardinage :</strong> Tables surélevées avec bacs de terre, outils à long manche, arrosoir léger, étiquetage des plants, participation à la conversation pendant l'activité.</Texte>
-            <Texte><strong>Le sport :</strong> Passer d'une activité intense à une gym douce assise, des étirements, une marche courte mais régulière, ou de la relaxation — maintient les bénéfices physiologiques et sociaux sans exposer la personne à des risques.</Texte>
+            <Texte><strong>Le sport :</strong> Passer d'une activité intense à une gym douce assise, des étirements, une marche courte mais régulière, ou de la relaxation : maintient les bénéfices physiologiques et sociaux sans exposer la personne à des risques.</Texte>
             <Texte><strong>Les sorties culturelles :</strong> Réduire la durée, choisir des lieux accessibles, prévoir des moments de repos, adapter le transport.</Texte>
           </HighlightBox>
 
@@ -135,9 +135,9 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
           <SchemaEtapes
             titre="Principes fondamentaux de la communication adaptée"
             etapes={[
-              { niveau: "Principe 1", nom: "Ralentir", definition: "Parler plus lentement que d'habitude — le débit rapide provoque une surcharge cognitive" },
-              { niveau: "Principe 2", nom: "Simplifier", definition: "Phrases courtes, vocabulaire concret — sans jamais infantiliser" },
-              { niveau: "Principe 3", nom: "Donner du temps", definition: "Attendre après une question — le silence est un temps de traitement, pas un vide à combler" }
+              { niveau: "Principe 1", nom: "Ralentir", definition: "Parler plus lentement que d'habitude, le débit rapide provoque une surcharge cognitive" },
+              { niveau: "Principe 2", nom: "Simplifier", definition: "Phrases courtes, vocabulaire concret : sans jamais infantiliser" },
+              { niveau: "Principe 3", nom: "Donner du temps", definition: "Attendre après une question, le silence est un temps de traitement, pas un vide à combler" }
             ]}
           />
 
@@ -162,7 +162,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="Soutenir les proches et les aidants naturels">
-          <Texte>Des parents de 80 ou 85 ans continuent d'assurer un soutien quotidien à leur enfant de 55 ou 60 ans. Ces parents vieillissants sont eux-mêmes en perte d'autonomie progressive. Ce phénomène — parfois appelé "l'épuisement de la triple génération" — mérite toute l'attention des équipes.</Texte>
+          <Texte>Des parents de 80 ou 85 ans continuent d'assurer un soutien quotidien à leur enfant de 55 ou 60 ans. Ces parents vieillissants sont eux-mêmes en perte d'autonomie progressive. Ce phénomène, parfois appelé "l'épuisement de la triple génération", mérite toute l'attention des équipes.</Texte>
 
           <TableauComparaison
             titre="Comment l'institution peut soutenir les proches"
@@ -174,7 +174,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
               {
                 titre: "Comment faire",
                 contenu: [
-                  "Informer sans attendre les crises — les familles informées anticipent mieux",
+                  "Informer sans attendre les crises : les familles informées anticipent mieux",
                   "Entretiens accueillants émotionnellement, pas uniquement informatifs",
                   "Aborder l'avenir en moment de calme, pas dans l'urgence d'une hospitalisation",
                   "Pro Infirmis, Pro Senectute, services cantonaux de répit, groupes de soutien"
@@ -188,7 +188,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
           <Texte>Aujourd'hui, des personnes accompagnées depuis 30 ou 40 ans dans la même institution y vieillissent et y meurent. Les équipes se retrouvent face à des questions pour lesquelles elles n'ont souvent pas été formées.</Texte>
 
           <HighlightBox label="3 défis spécifiques" couleur="bleu">
-            <Texte><strong>1. Consentement et expression des volontés :</strong> Une personne avec une déficience intellectuelle a le droit d'exprimer ses volontés — avec des adaptations : FALC, supports visuels, présence d'une personne de confiance. Les directives anticipées sont accessibles aux personnes avec DI légère ou modérée si le processus est adapté.</Texte>
+            <Texte><strong>1. Consentement et expression des volontés :</strong> Une personne avec une déficience intellectuelle a le droit d'exprimer ses volontés, avec des adaptations : FALC, supports visuels, présence d'une personne de confiance. Les directives anticipées sont accessibles aux personnes avec DI légère ou modérée si le processus est adapté.</Texte>
             <Texte><strong>2. Évaluation de la douleur :</strong> Des grilles comportementales (DOLOPLUS, grilles polyhandicap) permettent d'objectiver la douleur chez les personnes ne pouvant pas la verbaliser. Ces outils doivent être connus et utilisés.</Texte>
             <Texte><strong>3. Formation des équipes :</strong> Les professionnels peuvent se sentir démunis face à la mort imminente d'une personne accompagnée depuis des années. Des espaces de parole et de supervision sont indispensables.</Texte>
           </HighlightBox>
@@ -199,7 +199,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>Adapter l'accompagnement d'une personne vieillissante est un travail quotidien, collectif et exigeant. Il repose sur des principes clairs — partir des capacités préservées, respecter l'autodétermination, communiquer avec justesse, soutenir les proches — et sur des pratiques concrètes que chaque professionnel peut mettre en œuvre dès aujourd'hui.</Texte>
+          <Texte>Adapter l'accompagnement d'une personne vieillissante est un travail quotidien, collectif et exigeant. Il repose sur des principes clairs (partir des capacités préservées, respecter l'autodétermination, communiquer avec justesse, soutenir les proches), et sur des pratiques concrètes que chaque professionnel peut mettre en œuvre dès aujourd'hui.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le PPA est un outil vivant : réévaluez dès qu'un changement est observé",
@@ -207,7 +207,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
               "La fatigue est réelle et légitime : respecter les rythmes est une forme de soin",
               "Communiquer : ralentir, simplifier, donner du temps",
               "Les proches aidants méritent aussi d'être accompagnés",
-              "La fin de vie se prépare en institution — ne pas attendre l'urgence"
+              "La fin de vie se prépare en institution : ne pas attendre l'urgence"
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -236,7 +236,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Proposer uniquement des activités adaptées aux personnes âgées en général"
             ],
             bonneReponse: 2,
-            explication: "Se focaliser sur ce qu'une personne ne peut plus faire est contre-productif. Partir des capacités préservées permet de maintenir une participation active — même modifiée — qui préserve l'estime de soi, les liens sociaux et ralentit le déclin fonctionnel."
+            explication: "Se focaliser sur ce qu'une personne ne peut plus faire est contre-productif. Partir des capacités préservées permet de maintenir une participation active, même modifiée, qui préserve l'estime de soi, les liens sociaux et ralentit le déclin fonctionnel."
           },
           {
             question: "Pourquoi 'simplifier sans infantiliser' est-il un principe important de la communication adaptée ?",
@@ -247,7 +247,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Parce que l'institution doit adapter son langage à toutes les personnes accompagnées"
             ],
             bonneReponse: 1,
-            explication: "Simplifier signifie utiliser des phrases courtes et un vocabulaire concret — mais parler à un adulte de 60 ans comme à un enfant de 5 ans est dégradant et nuit à la relation. La simplification s'applique à la structure du langage, pas au respect dû à la personne."
+            explication: "Simplifier signifie utiliser des phrases courtes et un vocabulaire concret, mais parler à un adulte de 60 ans comme à un enfant de 5 ans est dégradant et nuit à la relation. La simplification s'applique à la structure du langage, pas au respect dû à la personne."
           },
           {
             question: "Qu'est-ce que l'épuisement de la 'triple génération' ?",
@@ -258,7 +258,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
               "La difficulté de gérer simultanément trois générations de résidents dans une institution"
             ],
             bonneReponse: 1,
-            explication: "Ce phénomène décrit la fragilité de la situation où des parents très âgés (80-85 ans) continuent d'assurer un soutien quotidien à leur enfant de 55-60 ans — alors qu'ils sont eux-mêmes en perte d'autonomie progressive. La question 'qui prendra le relais ?' est omniprésente et angoissante."
+            explication: "Ce phénomène décrit la fragilité de la situation où des parents très âgés (80-85 ans) continuent d'assurer un soutien quotidien à leur enfant de 55-60 ans, alors qu'ils sont eux-mêmes en perte d'autonomie progressive. La question 'qui prendra le relais ?' est omniprésente et angoissante."
           },
           {
             question: "Concernant la fin de vie en institution, quelle est l'attitude recommandée ?",
@@ -274,7 +274,7 @@ export function Module3Vieillissement({ onValiderModule }: { onValiderModule?: (
           {
             question: "Dans les soins personnels (toilette, habillage), comment reconnaître un refus exprimé par une personne ne pouvant plus verbaliser ?",
             reponses: [
-              "On ne peut pas — si la personne ne dit pas non verbalement, c'est qu'elle est d'accord",
+              "On ne peut pas, si la personne ne dit pas non verbalement, c'est qu'elle est d'accord",
               "Par une crispation, un regard de détresse ou un mouvement de retrait",
               "Uniquement par des cris ou pleurs",
               "Par une demande de la famille en amont"

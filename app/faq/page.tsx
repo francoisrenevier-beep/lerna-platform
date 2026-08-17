@@ -5,7 +5,7 @@ import { FaqDirecteurs } from "@/components/faq-directeurs"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Questions fréquentes — LEARNA",
+  title: "Questions fréquentes | LEARNA",
   description:
     "Réponses aux questions des directions : fonctionnement, contenus, licences, formation propre à votre institution, suivi des équipes, efficacité du e-learning.",
 }

@@ -12,7 +12,7 @@ export function Module2GestionProjetBase({ onValiderModule }: { onValiderModule?
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={2}
-        categorie="Gestion de projet — Niveau Base"
+        categorie="Gestion de projet : Niveau Base"
         titre="Le cycle de vie"
         titrePart2="d'un projet"
         sousTitre="Quatre phases pour ne pas avancer à l'aveugle. Chaque phase évite une catégorie d'erreurs."
@@ -34,7 +34,7 @@ export function Module2GestionProjetBase({ onValiderModule }: { onValiderModule?
         </PullQuote>
 
         <SectionModule eyebrow="Section 1" titre="Les quatre phases du cycle de vie">
-          <Texte>Nous retiendrons une formulation simple en quatre temps — <strong>imaginer, préparer, réaliser, évaluer</strong> — valable pour tout projet quelle que soit son ampleur. L'important n'est pas le nom des phases, mais de comprendre ce qui se joue dans chacune, et pourquoi aucune n'est facultative.</Texte>
+          <Texte>Nous retiendrons une formulation simple en quatre temps (<strong>imaginer, préparer, réaliser, évaluer</strong>) valable pour tout projet quelle que soit son ampleur. L'important n'est pas le nom des phases, mais de comprendre ce qui se joue dans chacune, et pourquoi aucune n'est facultative.</Texte>
 
           <SchemaEtapes
             titre="Le cycle de vie d'un projet en 4 phases"
@@ -65,29 +65,29 @@ export function Module2GestionProjetBase({ onValiderModule }: { onValiderModule?
 
         <SectionModule eyebrow="Section 2" titre="Imaginer : comprendre avant de vouloir résoudre">
           <Texte>C'est le point de départ, et c'est une phase de retenue plus que d'action. Un besoin émerge, une difficulté se fait sentir, une envie d'améliorer apparaît. La tentation naturelle est de sauter immédiatement à la solution. Or la première phase demande exactement l'inverse : <strong>prendre le temps de comprendre le besoin avant de chercher comment y répondre.</strong></Texte>
-          <Texte>Cette retenue est difficile, parce qu'elle va contre un réflexe professionnel légitime — celui d'agir, de régler les choses. Mais une solution apportée à un besoin mal compris est une solution qui rate sa cible. La phase « imaginer » consiste donc à creuser : d'où vient réellement ce besoin ? Qu'est-ce qu'on cherche vraiment à changer, derrière le symptôme visible ? Et, question décisive, est-ce que c'est réaliste avec nos moyens ?</Texte>
-          <Texte>C'est ici qu'on décide, en conscience, si un projet vaut la peine d'être lancé — et il est parfaitement sain qu'une partie des idées s'arrêtent à ce stade, faute de besoin réel ou de moyens suffisants.</Texte>
+          <Texte>Cette retenue est difficile, parce qu'elle va contre un réflexe professionnel légitime : celui d'agir, de régler les choses. Mais une solution apportée à un besoin mal compris est une solution qui rate sa cible. La phase « imaginer » consiste donc à creuser : d'où vient réellement ce besoin ? Qu'est-ce qu'on cherche vraiment à changer, derrière le symptôme visible ? Et, question décisive, est-ce que c'est réaliste avec nos moyens ?</Texte>
+          <Texte>C'est ici qu'on décide, en conscience, si un projet vaut la peine d'être lancé, et il est parfaitement sain qu'une partie des idées s'arrêtent à ce stade, faute de besoin réel ou de moyens suffisants.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Préparer : la phase qu'on néglige et qui change tout">
           <Texte>Une fois l'intention clarifiée, on organise. C'est la phase où une idée devient un plan : on précise l'objectif, on découpe le projet en étapes, on répartit les rôles, on estime le temps nécessaire, on anticipe les difficultés.</Texte>
-          <Texte>C'est, de loin, <strong>la phase la plus négligée</strong> — et le paradoxe mérite qu'on s'y arrête. On la néglige précisément parce qu'elle ne « produit » rien de visible : pendant qu'on prépare, rien ne semble avancer, et l'impatience d'agir pousse à l'écourter. Pourtant, c'est l'investissement le plus rentable de tout le projet. <strong>Un projet bien préparé se réalise beaucoup plus facilement</strong>, parce que les difficultés ont été anticipées plutôt que découvertes en pleine action, là où elles coûtent le plus cher à corriger.</Texte>
+          <Texte>C'est, de loin, <strong>la phase la plus négligée</strong>, et le paradoxe mérite qu'on s'y arrête. On la néglige précisément parce qu'elle ne « produit » rien de visible : pendant qu'on prépare, rien ne semble avancer, et l'impatience d'agir pousse à l'écourter. Pourtant, c'est l'investissement le plus rentable de tout le projet. <strong>Un projet bien préparé se réalise beaucoup plus facilement</strong>, parce que les difficultés ont été anticipées plutôt que découvertes en pleine action, là où elles coûtent le plus cher à corriger.</Texte>
           <Texte>Le temps « perdu » à préparer est presque toujours du temps gagné sur la réalisation. C'est une des leçons les plus contre-intuitives, et les plus précieuses, de la conduite de projet.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="Réaliser : agir tout en restant attentif">
           <Texte>On passe à l'action ; les choses se concrétisent. Cette phase, la plus visible, demande la tenue simultanée de deux postures qui peuvent sembler en tension.</Texte>
-          <Texte>D'un côté, <strong>avancer</strong> : faire ce qui était prévu, tenir le rythme, ne pas se laisser distraire. De l'autre, <strong>rester attentif</strong> : observer ce qui se passe réellement, repérer ce qui dévie du plan. Car un projet ne se déroule presque jamais exactement comme prévu — des imprévus surgissent, des hypothèses de départ se révèlent fausses, le contexte bouge. Savoir ajuster en cours de route, sans pour autant abandonner le cap, fait partie intégrante du métier.</Texte>
+          <Texte>D'un côté, <strong>avancer</strong> : faire ce qui était prévu, tenir le rythme, ne pas se laisser distraire. De l'autre, <strong>rester attentif</strong> : observer ce qui se passe réellement, repérer ce qui dévie du plan. Car un projet ne se déroule presque jamais exactement comme prévu, des imprévus surgissent, des hypothèses de départ se révèlent fausses, le contexte bouge. Savoir ajuster en cours de route, sans pour autant abandonner le cap, fait partie intégrante du métier.</Texte>
           <Texte>La réalisation n'est donc pas l'exécution aveugle d'un plan : c'est un pilotage, qui combine la fermeté sur l'objectif et la souplesse sur les moyens.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 5" titre="Évaluer : la phase oubliée qui fait grandir">
           <Texte>Le projet touche à sa fin. Avant de tourner la page, on prend un temps pour regarder en arrière : qu'est-ce qui a changé ? A-t-on atteint l'objectif ? Qu'a-t-on appris pour la prochaine fois ?</Texte>
           <Texte>C'est la phase <strong>la plus systématiquement oubliée</strong>, et c'est un vrai gâchis, car c'est elle qui transforme une simple action en expérience. Quand un projet se termine, l'élan naturel est d'enchaîner sur le suivant ; l'évaluation paraît un luxe qu'on n'a pas le temps de s'offrir. Mais sans elle, deux choses se perdent. <strong>On répète les mêmes erreurs</strong>, faute d'en avoir tiré les leçons. Et <strong>on ne consolide pas les réussites</strong>, faute d'avoir identifié ce qui a marché et pourquoi.</Texte>
-          <Texte>L'évaluation est ce qui capitalise : elle fait que l'équipe ressort d'un projet un peu plus compétente qu'elle n'y était entrée. Elle ne réclame pas forcément un grand dispositif — souvent, un échange honnête de trente minutes suffit à tirer l'essentiel.</Texte>
+          <Texte>L'évaluation est ce qui capitalise : elle fait que l'équipe ressort d'un projet un peu plus compétente qu'elle n'y était entrée. Elle ne réclame pas forcément un grand dispositif, souvent, un échange honnête de trente minutes suffit à tirer l'essentiel.</Texte>
 
           <HighlightBox label="Le déséquilibre à corriger" couleur="jaune">
-            <Texte>Spontanément, les équipes consacrent l'essentiel de leur énergie à la phase « réaliser » — la plus visible, la plus gratifiante. « Imaginer », « préparer » et « évaluer » sont compressées au minimum. Or ce sont précisément ces trois phases discrètes qui font la différence entre un projet qui aboutit durablement et une agitation sans lendemain. Rééquilibrer son attention vers elles est l'un des progrès les plus rentables qu'on puisse faire.</Texte>
+            <Texte>Spontanément, les équipes consacrent l'essentiel de leur énergie à la phase « réaliser » : la plus visible, la plus gratifiante. « Imaginer », « préparer » et « évaluer » sont compressées au minimum. Or ce sont précisément ces trois phases discrètes qui font la différence entre un projet qui aboutit durablement et une agitation sans lendemain. Rééquilibrer son attention vers elles est l'un des progrès les plus rentables qu'on puisse faire.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -95,10 +95,10 @@ export function Module2GestionProjetBase({ onValiderModule }: { onValiderModule?
           <Texte>Il serait tentant de voir ces quatre phases comme une procédure un peu formelle, et de penser qu'on gagne du temps en sautant celles qui paraissent superflues. C'est l'inverse qui est vrai : <strong>chaque phase protège contre une catégorie d'erreurs bien identifiée.</strong></Texte>
 
           <ConceptBox label="Ce qui se perd quand on saute une phase" titre="Quatre erreurs, quatre causes">
-            <p><strong>Sauter « imaginer »</strong>, c'est se lancer dans un projet dont on n'a pas cerné le vrai besoin. On risque de déployer beaucoup d'énergie pour résoudre un faux problème — l'erreur la plus coûteuse de toutes, parce qu'elle se révèle tard.</p>
+            <p><strong>Sauter « imaginer »</strong>, c'est se lancer dans un projet dont on n'a pas cerné le vrai besoin. On risque de déployer beaucoup d'énergie pour résoudre un faux problème, l'erreur la plus coûteuse de toutes, parce qu'elle se révèle tard.</p>
             <p><strong>Sauter « préparer »</strong>, c'est agir dans le désordre. On découvre les obstacles en pleine action, au moment où il est le plus difficile de les contourner.</p>
             <p><strong>Bâcler « réaliser »</strong>, c'est livrer quelque chose d'incomplet ou de fragile, qui ne produira pas vraiment le changement visé.</p>
-            <p><strong>Oublier « évaluer »</strong>, c'est se priver de tout apprentissage — et souvent laisser le changement se déliter, faute d'avoir vérifié qu'il tenait.</p>
+            <p><strong>Oublier « évaluer »</strong>, c'est se priver de tout apprentissage, et souvent laisser le changement se déliter, faute d'avoir vérifié qu'il tenait.</p>
           </ConceptBox>
         </SectionModule>
 
@@ -108,8 +108,8 @@ export function Module2GestionProjetBase({ onValiderModule }: { onValiderModule?
 
         <SectionModule eyebrow="Section 7" titre="Un cycle, pas une ligne droite">
           <Texte>Une précision importante, pour éviter une lecture trop rigide. Les quatre phases se suivent dans un ordre logique, mais un projet réel n'est pas un long fleuve tranquille où l'on passerait proprement d'une case à la suivante.</Texte>
-          <Texte>Il arrive — et c'est fréquent, et c'est sain — qu'on doive <strong>revenir en arrière</strong>. On peut découvrir, en pleine réalisation, que l'objectif fixé pendant la préparation n'était pas le bon, et qu'il faut donc réajuster. On peut, au moment d'évaluer, réaliser que le besoin de départ a évolué, et qu'un nouveau cycle doit s'amorcer. Ces allers-retours ne sont pas des ratés : ils sont la marque d'un projet vivant, qui s'adapte à la réalité au lieu de s'enfermer dans un plan initial devenu faux.</Texte>
-          <Texte>Ce que le cycle de vie apporte, ce n'est donc pas une procédure rigide, mais <strong>une boussole</strong>. Il donne un cap et un ordre de référence, tout en laissant la place aux ajustements. L'essentiel n'est pas de ne jamais revenir en arrière — c'est de toujours savoir où l'on se trouve et pourquoi on y revient. Un retour en arrière conscient et décidé est une force ; une dérive dont on n'a pas conscience est un danger.</Texte>
+          <Texte>Il arrive (et c'est fréquent, et c'est sain) qu'on doive <strong>revenir en arrière</strong>. On peut découvrir, en pleine réalisation, que l'objectif fixé pendant la préparation n'était pas le bon, et qu'il faut donc réajuster. On peut, au moment d'évaluer, réaliser que le besoin de départ a évolué, et qu'un nouveau cycle doit s'amorcer. Ces allers-retours ne sont pas des ratés : ils sont la marque d'un projet vivant, qui s'adapte à la réalité au lieu de s'enfermer dans un plan initial devenu faux.</Texte>
+          <Texte>Ce que le cycle de vie apporte, ce n'est donc pas une procédure rigide, mais <strong>une boussole</strong>. Il donne un cap et un ordre de référence, tout en laissant la place aux ajustements. L'essentiel n'est pas de ne jamais revenir en arrière, c'est de toujours savoir où l'on se trouve et pourquoi on y revient. Un retour en arrière conscient et décidé est une force ; une dérive dont on n'a pas conscience est un danger.</Texte>
 
           <HighlightBox label="Ce qu'il faut retenir" couleur="vert">
             <Liste items={[
@@ -165,7 +165,7 @@ export function Module2GestionProjetBase({ onValiderModule }: { onValiderModule?
                 "Faux",
               ],
               bonneReponse: 1,
-              explication: "Les allers-retours sont fréquents et sains : ils marquent un projet vivant qui s'adapte à la réalité. Ce qui compte, c'est de revenir en arrière en conscience, en sachant où l'on est et pourquoi — un retour décidé est une force, une dérive inconsciente est un danger.",
+              explication: "Les allers-retours sont fréquents et sains : ils marquent un projet vivant qui s'adapte à la réalité. Ce qui compte, c'est de revenir en arrière en conscience, en sachant où l'on est et pourquoi : un retour décidé est une force, une dérive inconsciente est un danger.",
             },
           ]}
         />

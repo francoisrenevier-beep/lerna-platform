@@ -25,8 +25,8 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
       <div className="max-w-3xl mx-auto px-8 py-12">
 
         <div className="bg-gray-50 border-l-4 border-[#1B2D5B] rounded-r-xl px-6 py-5 mb-10">
-          <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge — Lena, 42 ans — Un an plus tard</p>
-          <p className="text-gray-700 text-sm leading-relaxed">Le plan co-construit avec Lena a fonctionné. Elle cuisine à nouveau, elle a retrouvé ses amies, elle chante dans la chorale. Mais en analysant sa situation collectivement, l'équipe a remarqué quelque chose d'important : <strong>plusieurs autres résidents rencontraient les mêmes obstacles</strong>. Les horaires peu flexibles, les activités attribuées plutôt que choisies, les changements d'équipe non anticipés — ce n'était pas propre à la situation de Lena. C'étaient des enjeux d'organisation. Et c'est une bonne nouvelle : ce qui relève de l'organisation peut être amélioré par l'organisation, au bénéfice de tous. Le MDH-PPH venait de passer du projet individuel à la question organisationnelle.</p>
+          <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge (Lena, 42 ans) Un an plus tard</p>
+          <p className="text-gray-700 text-sm leading-relaxed">Le plan co-construit avec Lena a fonctionné. Elle cuisine à nouveau, elle a retrouvé ses amies, elle chante dans la chorale. Mais en analysant sa situation collectivement, l'équipe a remarqué quelque chose d'important : <strong>plusieurs autres résidents rencontraient les mêmes obstacles</strong>. Les horaires peu flexibles, les activités attribuées plutôt que choisies, les changements d'équipe non anticipés : ce n'était pas propre à la situation de Lena. C'étaient des enjeux d'organisation. Et c'est une bonne nouvelle : ce qui relève de l'organisation peut être amélioré par l'organisation, au bénéfice de tous. Le MDH-PPH venait de passer du projet individuel à la question organisationnelle.</p>
         </div>
 
         <AccrocheScenario type="question">
@@ -43,7 +43,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               "Articuler le MDH-PPH avec les partenaires extérieurs à l'institution"
             ]} />
           </ConceptBox>
-          <Texte>Le MDH-PPH n'est pas seulement un outil d'analyse individuelle. Il a une portée organisationnelle et stratégique. Lorsqu'une équipe analyse systématiquement les situations à travers son prisme, elle commence à révéler des patterns d'obstacles environnementaux récurrents — des obstacles qui relèvent du fonctionnement collectif et qu'aucun professionnel, pris isolément dans le quotidien, ne peut voir ni résoudre seul. Les repérer n'est pas une mise en cause : c'est l'ouverture d'un nouveau terrain d'action, plus large et plus durable.</Texte>
+          <Texte>Le MDH-PPH n'est pas seulement un outil d'analyse individuelle. Il a une portée organisationnelle et stratégique. Lorsqu'une équipe analyse systématiquement les situations à travers son prisme, elle commence à révéler des patterns d'obstacles environnementaux récurrents, des obstacles qui relèvent du fonctionnement collectif et qu'aucun professionnel, pris isolément dans le quotidien, ne peut voir ni résoudre seul. Les repérer n'est pas une mise en cause : c'est l'ouverture d'un nouveau terrain d'action, plus large et plus durable.</Texte>
 
           <PullQuote>
             Quand plusieurs personnes rencontrent le même obstacle, c'est un signal précieux : une opportunité d'amélioration collective qui bénéficiera à tous.
@@ -81,7 +81,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 contenu: [
                   "Plusieurs résidents refusent les activités du vendredi car l'équipe directe change (obstacle social micro)",
                   "Les habitudes alimentaires culturelles ou personnelles ne sont pas prises en compte dans l'organisation des repas (obstacle méso)",
-                  "Les personnes ne peuvent pas choisir leurs activités de loisirs (obstacle social méso — organisation laissant peu de place aux choix)",
+                  "Les personnes ne peuvent pas choisir leurs activités de loisirs (obstacle social méso, organisation laissant peu de place aux choix)",
                   "Les changements non annoncés dans l'organisation génèrent de l'anxiété chez plusieurs résidents (obstacle social micro)"
                 ]
               },
@@ -97,7 +97,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             ]}
           />
 
-          <Texte>Cette lecture organisationnelle ouvre la voie à des modifications durables — de règlements, de procédures, de répartitions de ressources — qui bénéficient à l'ensemble des personnes accompagnées, pas seulement à celles dont la situation a été analysée individuellement.</Texte>
+          <Texte>Cette lecture organisationnelle ouvre la voie à des modifications durables (de règlements, de procédures, de répartitions de ressources) qui bénéficient à l'ensemble des personnes accompagnées, pas seulement à celles dont la situation a été analysée individuellement.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Leçon 5.2" titre="Construire une culture institutionnelle inclusive">
@@ -107,9 +107,9 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
             <Liste items={[
               "On parle des personnes accompagnées avec respect et en termes de capacités, même dans les espaces informels",
               "Les décisions qui les concernent intègrent leur point de vue, même quand c'est un effort d'organisation",
-              "Le langage utilisé en équipe reflète une vision globale de la personne — pas seulement son diagnostic",
+              "Le langage utilisé en équipe reflète une vision globale de la personne, pas seulement son diagnostic",
               "Les valeurs affichées dans le projet institutionnel se retrouvent dans les choix concrets du quotidien",
-              "Les personnes accompagnées sont invitées à être actrices — pas seulement sujets — des réunions qui les concernent"
+              "Les personnes accompagnées sont invitées à être actrices, pas seulement sujets, des réunions qui les concernent"
             ]} />
           </HighlightBox>
 
@@ -119,7 +119,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               {
                 niveau: "Levier 1",
                 nom: "Formation pratique et ancrée",
-                definition: "La formation initiale et continue des équipes est indispensable — mais elle doit être pratique, ancrée dans les situations réelles de l'institution, et non purement théorique. Une formation sur le MDH-PPH sans analyse de situations vécues reste abstraite et ne change pas les pratiques."
+                definition: "La formation initiale et continue des équipes est indispensable, mais elle doit être pratique, ancrée dans les situations réelles de l'institution, et non purement théorique. Une formation sur le MDH-PPH sans analyse de situations vécues reste abstraite et ne change pas les pratiques."
               },
               {
                 niveau: "Levier 2",
@@ -137,7 +137,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                 definition: "La direction doit incarner les valeurs d'inclusion dans ses processus de décision, ses allocations de ressources et ses politiques de personnel. La cohérence entre le discours et les marges de manœuvre concrètement accordées aux équipes est ce qui rend le changement crédible et durable."
               }
             ]}
-            note="Le changement de paradigme prend du temps — et il demande de la persévérance institutionnelle, pas seulement des bonnes intentions"
+            note="Le changement de paradigme prend du temps, et il demande de la persévérance institutionnelle, pas seulement des bonnes intentions"
           />
 
           <PullQuote>
@@ -146,15 +146,15 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
         </SectionModule>
 
         <AccrocheScenario type="reflexion">
-          <p>Pensez à un moment récent dans votre institution où vous avez vu un collègue faire quelque chose de remarquable pour une personne accompagnée — un geste d'écoute, une adaptation spontanée, une attention au détail. Ce type de moment révèle ce que vos équipes savent déjà faire. Comment le MDH-PPH pourrait-il vous aider à le faire encore plus souvent, de façon plus systématique et partagée ?</p>
+          <p>Pensez à un moment récent dans votre institution où vous avez vu un collègue faire quelque chose de remarquable pour une personne accompagnée, un geste d'écoute, une adaptation spontanée, une attention au détail. Ce type de moment révèle ce que vos équipes savent déjà faire. Comment le MDH-PPH pourrait-il vous aider à le faire encore plus souvent, de façon plus systématique et partagée ?</p>
         </AccrocheScenario>
 
         <SectionModule eyebrow="Leçon 5.3" titre="La coordination interprofessionnelle au service de la participation">
-          <Texte>La mise en œuvre du MDH-PPH dans les pratiques institutionnelles suppose une coordination interprofessionnelle efficace. Les situations complexes — polyhandicap, double diagnostic, vieillissement — nécessitent la mobilisation de compétences multiples, qui ne peuvent s'articuler que si elles partagent un cadre commun d'analyse.</Texte>
+          <Texte>La mise en œuvre du MDH-PPH dans les pratiques institutionnelles suppose une coordination interprofessionnelle efficace. Les situations complexes (polyhandicap, double diagnostic, vieillissement) nécessitent la mobilisation de compétences multiples, qui ne peuvent s'articuler que si elles partagent un cadre commun d'analyse.</Texte>
 
           <ConceptBox label="La réunion de synthèse transformée" titre="D'un rapport disciplinaire à une analyse collective">
             <Texte>Avec le MDH-PPH, la réunion de synthèse n'est plus un moment où chaque professionnel reporte ses observations disciplinaires en silo. Elle devient un espace collectif d'analyse interactionnelle : ensemble, l'équipe cartographie les facteurs personnels, identifie les obstacles et facilitateurs environnementaux, évalue les habitudes de vie et décide des interventions prioritaires.</Texte>
-            <Texte>Ce type de réunion exige une animation structurée, une clarification des rôles de chacun, un espace de parole équitable entre professions, et — dans l'idéal — la participation ou l'avis direct de la personne accompagnée.</Texte>
+            <Texte>Ce type de réunion exige une animation structurée, une clarification des rôles de chacun, un espace de parole équitable entre professions, et, dans l'idéal, la participation ou l'avis direct de la personne accompagnée.</Texte>
           </ConceptBox>
 
           <TableauComparaison
@@ -184,12 +184,12 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
           />
 
           <HighlightBox label="Coordination avec les partenaires extérieurs" couleur="bleu">
-            <Texte>La coordination avec les partenaires extérieurs — proches aidants, médecins, services de soins ambulatoires, institutions scolaires ou professionnelles — est essentielle. Le MDH-PPH offre un cadre de communication qui facilite ces échanges en fournissant un vocabulaire commun et une logique d'analyse partagée. Quand l'institution parle d'obstacles environnementaux et que le médecin parle de symptômes, les deux doivent pouvoir s'articuler sans se contredire.</Texte>
+            <Texte>La coordination avec les partenaires extérieurs (proches aidants, médecins, services de soins ambulatoires, institutions scolaires ou professionnelles) est essentielle. Le MDH-PPH offre un cadre de communication qui facilite ces échanges en fournissant un vocabulaire commun et une logique d'analyse partagée. Quand l'institution parle d'obstacles environnementaux et que le médecin parle de symptômes, les deux doivent pouvoir s'articuler sans se contredire.</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Leçon 5.4" titre="Le rôle de la direction dans le portage du changement">
-          <Texte>Le changement de paradigme — du modèle médical vers le modèle socio-environnemental du MDH-PPH — ne peut pas reposer uniquement sur la bonne volonté des équipes de terrain. Il demande un portage institutionnel clair.</Texte>
+          <Texte>Le changement de paradigme, du modèle médical vers le modèle socio-environnemental du MDH-PPH, ne peut pas reposer uniquement sur la bonne volonté des équipes de terrain. Il demande un portage institutionnel clair.</Texte>
 
           <SchemaEtapes
             titre="Ce que la direction doit incarner"
@@ -197,29 +197,29 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
               {
                 niveau: "Dimension 1",
                 nom: "Cohérence entre discours et décisions",
-                definition: "Toute décision de gestion envoie un message sur ce qui compte vraiment dans l'institution. L'allocation du temps de réunion, la formation accordée ou refusée, la flexibilité des horaires — chaque décision est un acte de politique institutionnelle."
+                definition: "Toute décision de gestion envoie un message sur ce qui compte vraiment dans l'institution. L'allocation du temps de réunion, la formation accordée ou refusée, la flexibilité des horaires : chaque décision est un acte de politique institutionnelle."
               },
               {
                 niveau: "Dimension 2",
                 nom: "Soutien visible aux équipes en transition",
-                definition: "Le passage du modèle médical au modèle MDH-PPH génère des résistances légitimes. Les équipes ont besoin d'entendre que l'institution les accompagne dans ce processus, qu'elles ont le droit de se tromper et d'apprendre, et que le changement est un projet institutionnel partagé — pas une injonction descendante."
+                definition: "Le passage du modèle médical au modèle MDH-PPH génère des résistances légitimes. Les équipes ont besoin d'entendre que l'institution les accompagne dans ce processus, qu'elles ont le droit de se tromper et d'apprendre, et que le changement est un projet institutionnel partagé, pas une injonction descendante."
               },
               {
                 niveau: "Dimension 3",
                 nom: "Mesure et reddition de comptes sur la participation",
-                definition: "L'institution doit se doter d'indicateurs de résultats centrés sur la participation sociale — pas seulement sur la conformité aux procédures ou la satisfaction de la famille. Des questions comme 'quel pourcentage de résidents participent à des activités de leur choix ?' doivent devenir des indicateurs de pilotage."
+                definition: "L'institution doit se doter d'indicateurs de résultats centrés sur la participation sociale, pas seulement sur la conformité aux procédures ou la satisfaction de la famille. Des questions comme 'quel pourcentage de résidents participent à des activités de leur choix ?' doivent devenir des indicateurs de pilotage."
               }
             ]}
             note="Une institution qui mesure seulement la conformité procédurale ne sait pas si elle contribue à la participation de ses résidents"
           />
 
           <div className="bg-gray-50 border-l-4 border-[#3DBFA0] rounded-r-xl px-6 py-5 my-8">
-            <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge — Le foyer de Lena, un an après</p>
+            <p className="text-xs font-semibold text-[#1B2D5B] uppercase tracking-wider mb-2">Fil rouge : Le foyer de Lena, un an après</p>
             <p className="text-gray-700 text-sm leading-relaxed">En partant de l'analyse de la situation de Lena, la directrice du foyer a convoqué une réunion institutionnelle. Les équipes ont cartographié les obstacles récurrents sur l'ensemble des résidents. Trois modifications organisationnelles ont été décidées : stabilisation des équipes en fin de semaine, création d'un conseil de participation des résidents pour co-décider des activités, et formation de tous les éducateurs à la communication alternative. Six mois plus tard, le taux de participation aux activités a augmenté significativement. L'histoire de Lena a transformé une institution.</p>
           </div>
 
           <PullQuote>
-            Chaque professionnel qui comprend que le handicap n'est pas dans la personne mais dans l'interaction, que son rôle est d'agir sur l'environnement autant que sur la personne, que la participation sociale est le seul indicateur qui compte vraiment — ce professionnel devient un acteur de l'inclusion.
+            Chaque professionnel qui comprend que le handicap n'est pas dans la personne mais dans l'interaction, que son rôle est d'agir sur l'environnement autant que sur la personne, que la participation sociale est le seul indicateur qui compte vraiment : ce professionnel devient un acteur de l'inclusion.
           </PullQuote>
         </SectionModule>
 
@@ -238,7 +238,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Supprimer les activités du vendredi qui ne conviennent manifestement pas à cette population"
                 ],
                 bonneReponse: 1,
-                explication: "L'analyse MDH-PPH a identifié deux obstacles environnementaux : un obstacle social micro (le roulement de l'équipe directe) et un obstacle social méso (une organisation des activités laissant peu de place aux choix). La priorité est d'agir sur ces obstacles environnementaux — pas de traiter un symptôme médical inexistant, ni de supprimer une opportunité de participation."
+                explication: "L'analyse MDH-PPH a identifié deux obstacles environnementaux : un obstacle social micro (le roulement de l'équipe directe) et un obstacle social méso (une organisation des activités laissant peu de place aux choix). La priorité est d'agir sur ces obstacles environnementaux, pas de traiter un symptôme médical inexistant, ni de supprimer une opportunité de participation."
               },
               {
                 question: "Comment le MDH-PPH contribue-t-il à renforcer la culture inclusive d'une institution ?",
@@ -260,7 +260,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Déléguer les décisions au professionnel ayant le plus d'expérience avec la personne"
                 ],
                 bonneReponse: 2,
-                explication: "La réunion MDH-PPH n'est plus une juxtaposition de rapports disciplinaires. Elle devient un espace d'analyse collective interactionnelle : tous analysent ensemble les facteurs personnels, les obstacles et facilitateurs environnementaux, et décident ensemble des priorités d'intervention. Le cadre partagé permet une vraie coordination — pas seulement une succession de monologues."
+                explication: "La réunion MDH-PPH n'est plus une juxtaposition de rapports disciplinaires. Elle devient un espace d'analyse collective interactionnelle : tous analysent ensemble les facteurs personnels, les obstacles et facilitateurs environnementaux, et décident ensemble des priorités d'intervention. Le cadre partagé permet une vraie coordination, pas seulement une succession de monologues."
               },
               {
                 question: "Lequel de ces éléments correspond au rôle de la direction dans le portage du changement MDH-PPH ?",
@@ -282,7 +282,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Parce qu'il simplifie la situation de la personne pour la rendre compréhensible aux non-spécialistes"
                 ],
                 bonneReponse: 1,
-                explication: "Le MDH-PPH offre un cadre d'analyse qui peut être partagé entre professionnels de disciplines différentes — éducateurs, médecins, thérapeutes, familles. Le vocabulaire commun (facteurs personnels, obstacles environnementaux, habitudes de vie, participation) permet des échanges plus structurés et une coordination plus efficace entre acteurs qui travaillent habituellement avec des référentiels différents."
+                explication: "Le MDH-PPH offre un cadre d'analyse qui peut être partagé entre professionnels de disciplines différentes, éducateurs, médecins, thérapeutes, familles. Le vocabulaire commun (facteurs personnels, obstacles environnementaux, habitudes de vie, participation) permet des échanges plus structurés et une coordination plus efficace entre acteurs qui travaillent habituellement avec des référentiels différents."
               },
               {
                 question: "Quel est le passage clé opéré dans ce module par rapport aux modules précédents ?",
@@ -304,7 +304,7 @@ export function Module5MDHPPH({ onValiderModule }: { onValiderModule?: () => voi
                   "Parce que seuls les indicateurs financiers reflètent réellement la qualité institutionnelle"
                 ],
                 bonneReponse: 1,
-                explication: "Une institution peut respecter toutes les procédures administratives et documenter parfaitement ses interventions, sans que cela garantisse pour autant la participation sociale effective des personnes accompagnées. Le MDH-PPH propose de compléter les indicateurs de conformité par une mesure centrée sur les résultats de participation — combien de personnes réalisent leurs habitudes de vie de façon satisfaisante ? C'est un enrichissement fondamental des indicateurs de qualité."
+                explication: "Une institution peut respecter toutes les procédures administratives et documenter parfaitement ses interventions, sans que cela garantisse pour autant la participation sociale effective des personnes accompagnées. Le MDH-PPH propose de compléter les indicateurs de conformité par une mesure centrée sur les résultats de participation, combien de personnes réalisent leurs habitudes de vie de façon satisfaisante ? C'est un enrichissement fondamental des indicateurs de qualité."
               }
             ]}
             onValiderModule={onValiderModule}

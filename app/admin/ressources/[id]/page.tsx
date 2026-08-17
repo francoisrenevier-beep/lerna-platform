@@ -446,7 +446,7 @@ export default function AdminRessourceDetailPage() {
                         <div>
                           <p className="text-xs text-gray-400 mb-0.5">{link.formation_titre}</p>
                           <p className="font-semibold text-[#1B2D5B] text-sm">
-                            Module {link.module_ordre} — {link.module_titre}
+                            Module {link.module_ordre}, {link.module_titre}
                           </p>
                         </div>
                         <button
@@ -518,7 +518,7 @@ export default function AdminRessourceDetailPage() {
                   {modulesForFormation(newModuleFormationId)
                     .filter(m => !linkedModuleIds.has(m.id))
                     .map(m => (
-                      <option key={m.id} value={m.id}>Module {m.ordre} — {m.titre}</option>
+                      <option key={m.id} value={m.id}>Module {m.ordre}, {m.titre}</option>
                     ))
                   }
                 </select>

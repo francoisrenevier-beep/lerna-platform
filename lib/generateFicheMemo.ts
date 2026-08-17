@@ -143,7 +143,7 @@ export async function generateFicheMemo(data: FicheMemoData): Promise<Blob> {
     doc.setTextColor(...navy)
     doc.setFont("helvetica", "bold")
     doc.setFontSize(11)
-    doc.text("Points clés — Quiz de la formation", 20, y)
+    doc.text("Points clés : Quiz de la formation", 20, y)
     y += 3
 
     const scoreTotal = data.quizRecap.reduce((a, q) => a + q.score, 0)
@@ -224,7 +224,7 @@ export async function generateFicheMemo(data: FicheMemoData): Promise<Blob> {
     doc.setTextColor(255, 255, 255)
     doc.setFont("helvetica", "normal")
     doc.setFontSize(7)
-    doc.text("LEARNA — " + data.formationTitre, 20, 293)
+    doc.text("LEARNA : " + data.formationTitre, 20, 293)
     doc.text(i + " / " + pageCount, W - 20, 293, { align: "right" })
   }
 

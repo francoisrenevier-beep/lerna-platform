@@ -14,7 +14,7 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
         categorie="Démence : sensibilisation générale"
         titre="Communiquer entre professionnel·le·s :"
         titrePart2="ce que l'on voit, tel qu'on le voit"
-        sousTitre="Chacun·e perçoit une partie de la réalité d'une personne. Partager ce que l'on observe — de façon factuelle, sans interprétation — est ce qui permet à l'équipe d'agir de façon cohérente et adaptée."
+        sousTitre="Chacun·e perçoit une partie de la réalité d'une personne. Partager ce que l'on observe (de façon factuelle, sans interprétation) est ce qui permet à l'équipe d'agir de façon cohérente et adaptée."
         duree="25 minutes"
         niveau="Sensibilisation"
       />
@@ -30,19 +30,19 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
               "Reconnaître la valeur de ce que vous observez, quel que soit votre secteur d'activité",
             ]} />
           </ConceptBox>
-          <Texte>Dans l&apos;accompagnement des personnes atteintes de démence, plusieurs professionnel·le·s interviennent — parfois de secteurs très différents. Chacun·e voit la personne dans un contexte particulier, à un moment particulier. Seule, chaque observation est partielle. Ensemble, elles permettent de construire une image plus complète et de mieux soutenir la personne dans son quotidien.</Texte>
+          <Texte>Dans l&apos;accompagnement des personnes atteintes de démence, plusieurs professionnel·le·s interviennent : parfois de secteurs très différents. Chacun·e voit la personne dans un contexte particulier, à un moment particulier. Seule, chaque observation est partielle. Ensemble, elles permettent de construire une image plus complète et de mieux soutenir la personne dans son quotidien.</Texte>
           <Texte>Ce module ne porte pas sur les décisions à prendre ni sur les rôles de chacun·e. Il porte sur <strong>la qualité de ce qui est partagé</strong> entre collègues et équipes.</Texte>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 1" titre="Chaque professionnel·le a une vue partielle — et c'est normal">
-          <Texte>Une personne atteinte de démence n&apos;est jamais observée de la même façon par tout le monde. Elle se comporte différemment selon les moments de la journée, selon les personnes présentes, selon les activités. Ce n&apos;est pas une incohérence — c&apos;est la réalité de la démence.</Texte>
+        <SectionModule eyebrow="Section 1" titre="Chaque professionnel·le a une vue partielle : et c'est normal">
+          <Texte>Une personne atteinte de démence n&apos;est jamais observée de la même façon par tout le monde. Elle se comporte différemment selon les moments de la journée, selon les personnes présentes, selon les activités. Ce n&apos;est pas une incohérence, c&apos;est la réalité de la démence.</Texte>
 
           <HighlightBox label="Des regards différents sur la même personne" couleur="bleu">
             <Texte>L&apos;infirmier·ère de nuit sait comment Monsieur D. dort et s&apos;il se lève. L&apos;animatrice sait comment il réagit dans un groupe. La personne qui prépare les repas sait ce qu&apos;il mange vraiment. Le membre du pool qui l&apos;a accompagné le week-end a vu comment il était dimanche matin.</Texte>
-            <Texte>Aucun de ces regards n&apos;est plus légitime que les autres. Tous ensemble, ils permettent de comprendre comment Monsieur D. va — vraiment — et d&apos;ajuster l&apos;accompagnement en conséquence.</Texte>
+            <Texte>Aucun de ces regards n&apos;est plus légitime que les autres. Tous ensemble, ils permettent de comprendre comment Monsieur D. va, vraiment, et d&apos;ajuster l&apos;accompagnement en conséquence.</Texte>
           </HighlightBox>
 
-          <Texte>Ce qui relie ces regards partiels, c&apos;est la communication entre professionnel·le·s. Quand elle fonctionne bien — quand ce qui est observé est partagé, de façon précise et sans filtre interprétatif — l&apos;équipe dispose d&apos;une base solide pour accompagner. Quand elle est défaillante, chacun·e travaille dans son coin avec une image fragmentée.</Texte>
+          <Texte>Ce qui relie ces regards partiels, c&apos;est la communication entre professionnel·le·s. Quand elle fonctionne bien (quand ce qui est observé est partagé, de façon précise et sans filtre interprétatif), l&apos;équipe dispose d&apos;une base solide pour accompagner. Quand elle est défaillante, chacun·e travaille dans son coin avec une image fragmentée.</Texte>
 
           <PullQuote>
             Ce n&apos;est pas ce que vous savez faire qui détermine la valeur de ce que vous observez. C&apos;est la précision avec laquelle vous le partagez avec l&apos;équipe.
@@ -50,19 +50,19 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="La différence entre observer et interpréter">
-          <Texte>C&apos;est le point central de ce module. Une observation factuelle et une interprétation ne sont pas la même chose — et les confondre dans une transmission a des conséquences réelles sur l&apos;équipe qui la reçoit.</Texte>
+          <Texte>C&apos;est le point central de ce module. Une observation factuelle et une interprétation ne sont pas la même chose, et les confondre dans une transmission a des conséquences réelles sur l&apos;équipe qui la reçoit.</Texte>
 
-          <Texte>Une observation décrit ce qui est visible, audible, mesurable. Une interprétation explique pourquoi — et cette explication peut être fausse, partielle, ou teintée d&apos;un a priori.</Texte>
+          <Texte>Une observation décrit ce qui est visible, audible, mesurable. Une interprétation explique pourquoi, et cette explication peut être fausse, partielle, ou teintée d&apos;un a priori.</Texte>
 
           <div className="space-y-4 my-6">
             <div className="rounded-xl overflow-hidden border border-gray-200">
               <div className="px-5 py-3 bg-gray-50 border-b border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 1 — Comportement alimentaire</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 1 : Comportement alimentaire</p>
               </div>
               <div className="grid grid-cols-2 divide-x divide-gray-200">
                 <div className="p-4">
                   <p className="text-xs font-semibold text-red-600 mb-2">❌ Interprétation</p>
-                  <p className="text-sm text-gray-700 italic">«Elle ne mange plus — elle déprime.»</p>
+                  <p className="text-sm text-gray-700 italic">«Elle ne mange plus, elle déprime.»</p>
                   <p className="text-xs text-gray-400 mt-2">La cause est supposée, pas observée.</p>
                 </div>
                 <div className="p-4">
@@ -75,7 +75,7 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
 
             <div className="rounded-xl overflow-hidden border border-gray-200">
               <div className="px-5 py-3 bg-gray-50 border-b border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 2 — Comportement physique</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 2 : Comportement physique</p>
               </div>
               <div className="grid grid-cols-2 divide-x divide-gray-200">
                 <div className="p-4">
@@ -93,7 +93,7 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
 
             <div className="rounded-xl overflow-hidden border border-gray-200">
               <div className="px-5 py-3 bg-gray-50 border-b border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 3 — Humeur et comportement</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Exemple 3 : Humeur et comportement</p>
               </div>
               <div className="grid grid-cols-2 divide-x divide-gray-200">
                 <div className="p-4">
@@ -111,8 +111,8 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
           </div>
 
           <HighlightBox label="Pourquoi cette distinction est importante" couleur="jaune">
-            <Texte>Une interprétation transmise comme un fait peut orienter l&apos;évaluation d&apos;un·e collègue dans une direction qui n&apos;est peut-être pas la bonne. Si vous dites «elle déprime», les personnes qui reçoivent cette information commencent peut-être à chercher une cause psychologique — alors que la vraie raison est une douleur physique non identifiée.</Texte>
-            <Texte>Les observations factuelles laissent le champ ouvert. Elles donnent à l&apos;équipe les éléments bruts à partir desquels construire une évaluation juste — sans a priori, sans filtres.</Texte>
+            <Texte>Une interprétation transmise comme un fait peut orienter l&apos;évaluation d&apos;un·e collègue dans une direction qui n&apos;est peut-être pas la bonne. Si vous dites «elle déprime», les personnes qui reçoivent cette information commencent peut-être à chercher une cause psychologique, alors que la vraie raison est une douleur physique non identifiée.</Texte>
+            <Texte>Les observations factuelles laissent le champ ouvert. Elles donnent à l&apos;équipe les éléments bruts à partir desquels construire une évaluation juste, sans a priori, sans filtres.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -122,7 +122,7 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
           <div className="space-y-3 my-4">
             <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-5">
               <p className="text-sm font-bold text-[#5B21B6] mb-2">À qui ?</p>
-              <p className="text-sm text-gray-700 leading-relaxed">Aux professionnel·le·s concerné·e·s dans votre contexte — équipe soignante, référent·e, responsable, selon les structures de votre institution. Pas besoin de savoir exactement à qui : si vous ne savez pas, adressez-vous à votre supérieur·e direct·e ou à l&apos;infirmier·ère disponible.</p>
+              <p className="text-sm text-gray-700 leading-relaxed">Aux professionnel·le·s concerné·e·s dans votre contexte, équipe soignante, référent·e, responsable, selon les structures de votre institution. Pas besoin de savoir exactement à qui : si vous ne savez pas, adressez-vous à votre supérieur·e direct·e ou à l&apos;infirmier·ère disponible.</p>
             </div>
             <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-5">
               <p className="text-sm font-bold text-[#5B21B6] mb-2">Quand ?</p>
@@ -142,7 +142,7 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Formulation adaptée</p>
               <p className="text-gray-700 text-sm italic leading-relaxed">«Monsieur L. m&apos;a dit hier et aujourd&apos;hui qu&apos;il a une douleur dans le bas du dos quand il se lève. Il ne l&apos;a pas signalé lui-même à l&apos;équipe soignante à ma connaissance.»</p>
-              <p className="text-gray-700 text-sm leading-relaxed mt-2">Ni diagnostic, ni conclusion, ni jugement. Des faits, datés, transmis aux personnes concernées. C&apos;est suffisant — et c&apos;est précieux pour l&apos;équipe.</p>
+              <p className="text-gray-700 text-sm leading-relaxed mt-2">Ni diagnostic, ni conclusion, ni jugement. Des faits, datés, transmis aux personnes concernées. C&apos;est suffisant, et c&apos;est précieux pour l&apos;équipe.</p>
             </div>
           </div>
 
@@ -151,8 +151,8 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
           </HighlightBox>
         </SectionModule>
 
-        <SectionModule eyebrow="Section 4" titre="Ce que la communication entre équipes change — concrètement">
-          <Texte>La qualité de la communication professionnelle a un impact direct sur la qualité de l&apos;accompagnement. Ce ne sont pas des généralités — voici trois exemples concrets de ce qui se passe quand les observations circulent bien dans une équipe.</Texte>
+        <SectionModule eyebrow="Section 4" titre="Ce que la communication entre équipes change : concrètement">
+          <Texte>La qualité de la communication professionnelle a un impact direct sur la qualité de l&apos;accompagnement. Ce ne sont pas des généralités, voici trois exemples concrets de ce qui se passe quand les observations circulent bien dans une équipe.</Texte>
 
           <div className="space-y-3 my-4">
             <div className="flex gap-4 items-start border border-gray-200 rounded-xl p-4">
@@ -166,14 +166,14 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
               <span className="text-xl flex-shrink-0 mt-0.5">→</span>
               <div>
                 <p className="text-sm font-semibold text-gray-800 mb-1">Un changement est détecté à temps</p>
-                <p className="text-sm text-gray-600 leading-relaxed">Madame R. a toujours participé à l&apos;atelier du mardi. Depuis deux semaines, elle refuse. L&apos;animatrice le signale à l&apos;équipe soignante. Une évaluation révèle un début d&apos;infection urinaire — fréquente dans la démence, et qui peut se manifester d&apos;abord par un changement comportemental. Le traitement est mis en place rapidement.</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Madame R. a toujours participé à l&apos;atelier du mardi. Depuis deux semaines, elle refuse. L&apos;animatrice le signale à l&apos;équipe soignante. Une évaluation révèle un début d&apos;infection urinaire, fréquente dans la démence, et qui peut se manifester d&apos;abord par un changement comportemental. Le traitement est mis en place rapidement.</p>
               </div>
             </div>
             <div className="flex gap-4 items-start border border-gray-200 rounded-xl p-4">
               <span className="text-xl flex-shrink-0 mt-0.5">→</span>
               <div>
                 <p className="text-sm font-semibold text-gray-800 mb-1">L&apos;équipe agit de façon cohérente</p>
-                <p className="text-sm text-gray-600 leading-relaxed">Plusieurs professionnel·le·s remarquent que Monsieur D. est plus calme quand on lui parle avec une voix douce et lente. Cette observation, une fois partagée et intégrée dans les transmissions, devient une pratique commune. Chacun·e adopte cette approche — et les situations d&apos;agitation se raréfient.</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Plusieurs professionnel·le·s remarquent que Monsieur D. est plus calme quand on lui parle avec une voix douce et lente. Cette observation, une fois partagée et intégrée dans les transmissions, devient une pratique commune. Chacun·e adopte cette approche, et les situations d&apos;agitation se raréfient.</p>
               </div>
             </div>
           </div>
@@ -186,11 +186,11 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
         <SectionModule eyebrow="Synthèse de la formation" titre="Les 5 idées essentielles à emporter">
           <HighlightBox label="Ce que cette formation a posé" couleur="vert">
             <Liste items={[
-              "La démence touche ~161'100 personnes en Suisse — en forte hausse. Ce n'est ni de la folie, ni une étape normale du vieillissement.",
+              "La démence touche ~161'100 personnes en Suisse, en forte hausse. Ce n'est ni de la folie, ni une étape normale du vieillissement.",
               "La conscience et les émotions restent. Derrière chaque comportement difficile, il y a un besoin à identifier.",
               "Une posture calme, des mots simples, les routines préservées et le non-verbal soigné font une différence réelle au quotidien.",
-              "Tout comportement inhabituel est une tentative de communication — cherchez le besoin avant d'agir sur le comportement.",
-              "Partager ce que vous observez — de façon factuelle, sans interprétation — permet à l'équipe d'agir de façon cohérente et adaptée.",
+              "Tout comportement inhabituel est une tentative de communication, cherchez le besoin avant d'agir sur le comportement.",
+              "Partager ce que vous observez (de façon factuelle, sans interprétation) permet à l'équipe d'agir de façon cohérente et adaptée.",
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -203,23 +203,23 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
             question: "Plusieurs professionnel·le·s observent une personne atteinte de démence dans des contextes différents. Pourquoi cette multiplicité de regards est-elle utile ?",
             reponses: [
               "Pour s'assurer que les informations importantes sont confirmées par plusieurs sources avant d'agir",
-              "Parce que la personne se comporte différemment selon les contextes — chaque regard partiel contribue à une image plus complète",
+              "Parce que la personne se comporte différemment selon les contextes, chaque regard partiel contribue à une image plus complète",
               "Pour que l'équipe soignante puisse déléguer l'observation aux autres professionnel·le·s",
               "Parce que la démence affecte la personne de façon homogène dans tous les contextes",
             ],
             bonneReponse: 1,
-            explication: "La démence peut se manifester différemment selon les moments, les personnes présentes et les activités. L'animatrice voit quelque chose que l'infirmière de nuit ne verra pas, et réciproquement. Ce n'est pas une redondance — c'est une complémentarité. La communication entre professionnel·le·s permet de relier ces vues partielles pour construire une image cohérente de comment la personne va réellement.",
+            explication: "La démence peut se manifester différemment selon les moments, les personnes présentes et les activités. L'animatrice voit quelque chose que l'infirmière de nuit ne verra pas, et réciproquement. Ce n'est pas une redondance, c'est une complémentarité. La communication entre professionnel·le·s permet de relier ces vues partielles pour construire une image cohérente de comment la personne va réellement.",
           },
           {
             question: "Une collègue transmet : «Madame K. est anxieuse depuis hier.» Quelle limite présente cette formulation ?",
             reponses: [
-              "Elle est trop courte — une transmission utile doit toujours comporter au moins cinq éléments",
-              "«Anxieuse» est une interprétation qui peut orienter à tort l'évaluation — ce qui a été observé concrètement n'est pas décrit",
+              "Elle est trop courte, une transmission utile doit toujours comporter au moins cinq éléments",
+              "«Anxieuse» est une interprétation qui peut orienter à tort l'évaluation, ce qui a été observé concrètement n'est pas décrit",
               "Elle ne précise pas le secteur d'activité de la collègue qui transmet",
               "Elle n'indique pas si Madame K. a été informée de la transmission",
             ],
             bonneReponse: 1,
-            explication: "«Anxieuse» est une interprétation d'un état intérieur — pas une description d'un comportement observable. L'équipe qui reçoit cette information ne sait pas ce qui a réellement été observé : la personne ne mangeait plus ? elle marchait dans les couloirs ? elle pleurait ? elle répétait la même phrase ? Ces éléments sont ceux qui permettent une évaluation juste — pas une étiquette affective.",
+            explication: "«Anxieuse» est une interprétation d'un état intérieur, pas une description d'un comportement observable. L'équipe qui reçoit cette information ne sait pas ce qui a réellement été observé : la personne ne mangeait plus ? elle marchait dans les couloirs ? elle pleurait ? elle répétait la même phrase ? Ces éléments sont ceux qui permettent une évaluation juste, pas une étiquette affective.",
           },
           {
             question: "Vous travaillez dans la cuisine d'un EMS. Vous remarquez que Madame L. laisse systématiquement son assiette à moitié pleine depuis lundi, alors qu'elle mangeait bien avant. Que faites-vous ?",
@@ -230,14 +230,14 @@ export function Module4Demence({ onValiderModule }: { onValiderModule?: () => vo
               "Vous en parlez à la famille lors de la prochaine visite pour avoir leur avis",
             ],
             bonneReponse: 0,
-            explication: "L'observation d'un changement dans les habitudes alimentaires — même faite par quelqu'un qui n'est pas soignant·e — est une information précieuse pour l'équipe. La transmettre de façon factuelle (depuis quand, à quels repas, en quoi c'est différent de l'habituel) permet aux personnes concernées de l'évaluer. Attendre, adapter les portions ou contourner ne remplace pas la transmission.",
+            explication: "L'observation d'un changement dans les habitudes alimentaires, même faite par quelqu'un qui n'est pas soignant·e, est une information précieuse pour l'équipe. La transmettre de façon factuelle (depuis quand, à quels repas, en quoi c'est différent de l'habituel) permet aux personnes concernées de l'évaluer. Attendre, adapter les portions ou contourner ne remplace pas la transmission.",
           },
           {
             question: "Quelle formulation est la plus utile pour une équipe soignante qui reçoit une transmission ?",
             reponses: [
-              "«Monsieur P. n'est vraiment pas bien depuis quelques jours — vous devriez aller le voir.»",
-              "«Je pense que Monsieur P. a besoin d'un ajustement de son traitement — il est très agité.»",
-              "«Depuis mardi, Monsieur P. est agité entre 15h et 17h — il marche dans les couloirs et répète «je veux partir». Ce comportement est nouveau pour lui.»",
+              "«Monsieur P. n'est vraiment pas bien depuis quelques jours, vous devriez aller le voir.»",
+              "«Je pense que Monsieur P. a besoin d'un ajustement de son traitement, il est très agité.»",
+              "«Depuis mardi, Monsieur P. est agité entre 15h et 17h, il marche dans les couloirs et répète «je veux partir». Ce comportement est nouveau pour lui.»",
               "«Monsieur P. fait une crise en ce moment, c'est urgent.»",
             ],
             bonneReponse: 2,

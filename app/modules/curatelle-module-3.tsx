@@ -56,7 +56,7 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
                   "Référent du quotidien et de la relation d'accompagnement",
                   "Accompagnez la personne dans ses activités, relations, développement, bien-être",
                   "Pas de mandat légal de représentation",
-                  "Observez la personne au quotidien — information précieuse",
+                  "Observez la personne au quotidien : information précieuse",
                   "Êtes présent au moment où les décisions ont des effets concrets",
                 ],
               },
@@ -64,13 +64,13 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
           />
 
           <HighlightBox label="Le risque du brouillage des rôles" couleur="jaune">
-            <Texte>Si vous commencez à gérer l'argent de la personne, à signer des documents à sa place, ou à prendre des décisions qui relèvent du mandat du curateur, vous créez une confusion des rôles qui peut nuire à la personne — et vous exposer à des responsabilités pour lesquelles vous n'êtes pas mandaté.</Texte>
+            <Texte>Si vous commencez à gérer l'argent de la personne, à signer des documents à sa place, ou à prendre des décisions qui relèvent du mandat du curateur, vous créez une confusion des rôles qui peut nuire à la personne, et vous exposer à des responsabilités pour lesquelles vous n'êtes pas mandaté.</Texte>
             <Texte>À l'inverse, attendre que le curateur règle tous les problèmes de la personne serait aussi une erreur : votre rôle d'accompagnement au quotidien reste entier, et sa valeur est irremplaçable.</Texte>
           </HighlightBox>
 
           <div className="space-y-4 my-6">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge — Fabrice et Nadia</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge : Fabrice et Nadia</p>
               <p className="text-gray-700 text-sm leading-relaxed">Quelques semaines après la mise en place de la curatelle, Nadia demande à Fabrice de l'aider à écrire un message à son curateur pour lui demander une avance sur son argent de poche. Elle a besoin d'acheter un cadeau pour l'anniversaire d'une amie.</p>
               <p className="text-gray-700 text-sm leading-relaxed mt-3">Fabrice aurait pu gérer lui-même la situation en donnant à Nadia l'argent de sa propre poche, "pour cette fois". Ce serait rapide et gentil. Mais ce serait aussi se substituer au curateur, court-circuiter le dispositif, et empêcher Nadia d'apprendre à naviguer dans ce nouveau cadre.</p>
               <p className="text-gray-700 text-sm leading-relaxed mt-3">Ce que Fabrice fait à la place : il aide Nadia à formuler sa demande par message. Il lui explique que le curateur a probablement un délai de réponse. Il discute avec elle de ce qui pourrait se passer si la réponse est non. Il la soutient dans ce processus sans le faire à sa place. Cette approche est plus longue, parfois frustrante. Mais elle respecte le cadre légal, maintient le rôle de chacun, et développe la capacité de Nadia à interagir avec son curateur.</p>
@@ -79,7 +79,7 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Maintenir l'autodétermination au quotidien">
-          <Texte>L'un des risques les plus insidieux dans l'accompagnement d'une personne sous curatelle est la <strong>sur-protection</strong>. Parce qu'une mesure légale a reconnu une certaine fragilité de la personne, les équipes peuvent — avec les meilleures intentions — commencer à décider pour elle dans des domaines où elle est parfaitement capable de décider seule.</Texte>
+          <Texte>L'un des risques les plus insidieux dans l'accompagnement d'une personne sous curatelle est la <strong>sur-protection</strong>. Parce qu'une mesure légale a reconnu une certaine fragilité de la personne, les équipes peuvent, avec les meilleures intentions, commencer à décider pour elle dans des domaines où elle est parfaitement capable de décider seule.</Texte>
 
           <HighlightBox label="La sur-protection : contraire au droit et à l'éthique" couleur="jaune">
             <Texte>La sur-protection est contraire aux principes du droit de la protection de l'adulte (subsidiarité, proportionnalité) et à l'éthique professionnelle du travail social, qui place l'autodétermination de la personne au cœur de la relation d'accompagnement.</Texte>
@@ -87,13 +87,13 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
           </HighlightBox>
 
           <ConceptBox label="Outil pratique" titre="Distinguer ce qui relève de la curatelle et ce qui n'en relève pas">
-            <Texte>Dans votre accompagnement quotidien, vous devez avoir une idée claire de ce que couvre la curatelle de la personne que vous accompagnez — et de ce qu'elle ne couvre pas.</Texte>
+            <Texte>Dans votre accompagnement quotidien, vous devez avoir une idée claire de ce que couvre la curatelle de la personne que vous accompagnez, et de ce qu'elle ne couvre pas.</Texte>
             <Texte>Si Nadia a une curatelle de représentation portant uniquement sur la gestion financière, cela signifie que son curateur gère son argent. Cela ne signifie pas que son curateur décide où elle passe ses vacances, avec qui elle se lie d'amitié, si elle veut changer de coiffure ou si elle veut participer à une activité. Ces décisions lui appartiennent entièrement.</Texte>
             <Texte><strong>En pratique :</strong> lisez attentivement le mandat de curatelle de chaque personne que vous accompagnez. Si ce document n'est pas accessible dans le dossier, demandez à votre responsable. Comprendre l'étendue précise de la mesure vous permet d'accompagner la personne de manière cohérente avec son cadre légal.</Texte>
           </ConceptBox>
 
           <PullQuote>
-            La mesure de protection est au service de la personne — pas l'inverse. Ce principe vaut autant pour le curateur que pour le professionnel d'institution.
+            La mesure de protection est au service de la personne, pas l'inverse. Ce principe vaut autant pour le curateur que pour le professionnel d'institution.
           </PullQuote>
         </SectionModule>
 
@@ -103,14 +103,14 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
           <HighlightBox label="Les bases d'une collaboration constructive" couleur="bleu">
             <Liste items={[
               "Connaître son interlocuteur : lorsqu'une personne est sous curatelle, prendre l'initiative de contacter le curateur pour se présenter et établir un premier contact",
-              "Partager les informations pertinentes : vous observez la personne au quotidien, le curateur ne la voit que ponctuellement — vos observations sont précieuses",
+              "Partager les informations pertinentes : vous observez la personne au quotidien, le curateur ne la voit que ponctuellement, vos observations sont précieuses",
               "Établir un canal de communication régulier : un email mensuel, un appel trimestriel, pour partager les évolutions importantes",
               "Respecter les décisions du curateur même si vous n'y adhérez pas : votre rôle n'est pas de contourner ses décisions, mais d'aider la personne à les comprendre et, si elle est en désaccord, à l'exprimer",
             ]} />
           </HighlightBox>
 
           <HighlightBox label="Quand signaler un problème sérieux" couleur="jaune">
-            <Texte>Si vous observez que le curateur ne remplit pas correctement sa mission — absence de contact avec la personne, décisions contraires à ses intérêts, rupture évidente de la relation de confiance — vous avez la <strong>responsabilité de le signaler</strong> à votre hiérarchie et, si nécessaire, à l'APEA.</Texte>
+            <Texte>Si vous observez que le curateur ne remplit pas correctement sa mission (absence de contact avec la personne, décisions contraires à ses intérêts, rupture évidente de la relation de confiance), vous avez la <strong>responsabilité de le signaler</strong> à votre hiérarchie et, si nécessaire, à l'APEA.</Texte>
             <Texte>Ce n'est pas de la délation : c'est l'exercice de votre responsabilité professionnelle envers la personne accompagnée. L'APEA exerce une surveillance continue sur les curateurs et peut prendre des mesures si la mission est mal exercée.</Texte>
           </HighlightBox>
         </SectionModule>
@@ -158,14 +158,14 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
 
           <HighlightBox label="Parler de la curatelle avec la personne accompagnée" couleur="bleu">
             <Texte>La personne sous curatelle a le droit de savoir et de comprendre sa situation. Si elle ne comprend pas ce que signifie sa curatelle, ses droits et les responsabilités de son curateur, elle ne peut pas exercer ses droits de manière éclairée.</Texte>
-            <Texte>Votre rôle peut inclure d'aider la personne à comprendre sa situation dans un langage accessible — explications orales simples, supports visuels, documents en FALC (Facile à Lire et à Comprendre). <strong>Pro Infirmis</strong> propose en Suisse des ressources en FALC sur les droits des personnes en situation de handicap et sur la protection de l'adulte — des ressources précieuses pour votre pratique.</Texte>
+            <Texte>Votre rôle peut inclure d'aider la personne à comprendre sa situation dans un langage accessible, explications orales simples, supports visuels, documents en FALC (Facile à Lire et à Comprendre). <strong>Pro Infirmis</strong> propose en Suisse des ressources en FALC sur les droits des personnes en situation de handicap et sur la protection de l'adulte, des ressources précieuses pour votre pratique.</Texte>
           </HighlightBox>
 
           <div className="space-y-4 my-6">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge — Nadia, un an après</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Un an après la mise en place de la curatelle, Nadia participe à une réunion de son projet personnalisé. Pour la première fois, elle dit elle-même : "Je suis contente d'avoir Monsieur B. comme curateur, maintenant je comprends mieux mes factures. Mais j'aimerais qu'on revoie combien d'argent j'ai par semaine — je voudrais pouvoir mettre un peu de côté pour partir en vacances l'été prochain."</p>
-              <p className="text-gray-700 text-sm leading-relaxed mt-3">Fabrice l'accompagne ensuite pour préparer une lettre à son curateur sur ce sujet. Ce n'est plus Fabrice qui parle pour Nadia — c'est Nadia qui parle, avec le soutien de Fabrice.</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge : Nadia, un an après</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Un an après la mise en place de la curatelle, Nadia participe à une réunion de son projet personnalisé. Pour la première fois, elle dit elle-même : "Je suis contente d'avoir Monsieur B. comme curateur, maintenant je comprends mieux mes factures. Mais j'aimerais qu'on revoie combien d'argent j'ai par semaine, je voudrais pouvoir mettre un peu de côté pour partir en vacances l'été prochain."</p>
+              <p className="text-gray-700 text-sm leading-relaxed mt-3">Fabrice l'accompagne ensuite pour préparer une lettre à son curateur sur ce sujet. Ce n'est plus Fabrice qui parle pour Nadia, c'est Nadia qui parle, avec le soutien de Fabrice.</p>
             </div>
           </div>
         </SectionModule>
@@ -174,16 +174,16 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
           <HighlightBox label="Les points clés de la formation" couleur="vert">
             <Liste items={[
               "Le droit suisse de la protection de l'adulte depuis 2013 repose sur trois principes : subsidiarité, proportionnalité, complémentarité",
-              "Les quatre types de curatelles sont des outils modulaires — connaître le contenu exact du mandat de chaque personne est indispensable",
-              "Une curatelle n'est pas l'ensemble des droits d'une personne — les droits strictement personnels lui appartiennent si elle a le discernement",
+              "Les quatre types de curatelles sont des outils modulaires, connaître le contenu exact du mandat de chaque personne est indispensable",
+              "Une curatelle n'est pas l'ensemble des droits d'une personne, les droits strictement personnels lui appartiennent si elle a le discernement",
               "Votre rôle est distinct de celui du curateur : vous accompagnez le quotidien, il exerce des actes juridiques précis",
-              "Maintenir l'autodétermination au quotidien est votre responsabilité professionnelle — pas seulement celle du curateur",
+              "Maintenir l'autodétermination au quotidien est votre responsabilité professionnelle, pas seulement celle du curateur",
               "Soutenir la personne dans ses démarches sans vous y substituer est la posture juste",
             ]} />
           </HighlightBox>
 
           <PullQuote>
-            La mesure de protection est un outil. C'est la relation d'accompagnement qui lui donne — ou non — un sens au service de la personne.
+            La mesure de protection est un outil. C'est la relation d'accompagnement qui lui donne, ou non, un sens au service de la personne.
           </PullQuote>
         </SectionModule>
 
@@ -211,7 +211,7 @@ export function Module3Curatelle({ onValiderModule }: { onValiderModule?: () => 
               "La famille",
             ],
             bonneReponse: 2,
-            explication: "La curatelle porte uniquement sur la gestion financière. Les activités de loisirs, les sorties, les relations relèvent de l'autodétermination de la personne — ils ne sont pas couverts par ce type de mandat. La sur-protection consisterait à laisser croire que le curateur décide de tout.",
+            explication: "La curatelle porte uniquement sur la gestion financière. Les activités de loisirs, les sorties, les relations relèvent de l'autodétermination de la personne : ils ne sont pas couverts par ce type de mandat. La sur-protection consisterait à laisser croire que le curateur décide de tout.",
           },
           {
             question: "Vous observez que le curateur d'une personne accompagnée ne la contacte jamais et prend des décisions contraires à ses souhaits exprimés. Quelle est votre responsabilité ?",

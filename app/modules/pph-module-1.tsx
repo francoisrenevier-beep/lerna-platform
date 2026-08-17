@@ -18,7 +18,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
         categorie="Handicap et participation sociale"
         titre="Du handicap-attribut"
         titrePart2="au handicap-situation"
-        sousTitre="Comprendre le Processus de Production du Handicap pour voir la personne autrement — et transformer nos pratiques."
+        sousTitre="Comprendre le Processus de Production du Handicap pour voir la personne autrement, et transformer nos pratiques."
         duree="50 minutes"
         niveau="Tous niveaux"
       />
@@ -60,7 +60,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           <HighlightBox label="Ce que ce modèle impliquait en pratique" couleur="jaune">
             <Liste items={[
-              "La personne est la source du problème — c'est sa déficience qui produit le désavantage",
+              "La personne est la source du problème, c'est sa déficience qui produit le désavantage",
               "La réponse est médicale ou rééducative : corriger, compenser, pallier",
               "L'environnement est considéré comme neutre ou secondaire",
               "Le professionnel est un expert qui prescrit des solutions pour la personne"
@@ -71,18 +71,18 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
             Le désavantage social est la conséquence directe de la déficience ou de l'incapacité de la personne.
           </PullQuote>
 
-          <Texte>Ce cadre a structuré des décennies de politiques publiques et de pratiques institutionnelles. Il n'était pas faux dans sa description des corps et de leurs atteintes — il était incomplet : il oubliait l'environnement comme variable d'action.</Texte>
+          <Texte>Ce cadre a structuré des décennies de politiques publiques et de pratiques institutionnelles. Il n'était pas faux dans sa description des corps et de leurs atteintes, il était incomplet : il oubliait l'environnement comme variable d'action.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1.2" titre="La naissance du PPH : une révolution québécoise">
-          <Texte>C'est au Québec, à partir de la fin des années 1980, que Patrick Fougeyrollas — physiothérapeute et chercheur — engage un travail de refondation. En collaboration étroite avec des personnes en situation de handicap, des chercheurs et des professionnels, il développe le Processus de Production du Handicap au sein du RIPPH (Réseau International sur le Processus de Production du Handicap).</Texte>
+          <Texte>C'est au Québec, à partir de la fin des années 1980, que Patrick Fougeyrollas, physiothérapeute et chercheur, engage un travail de refondation. En collaboration étroite avec des personnes en situation de handicap, des chercheurs et des professionnels, il développe le Processus de Production du Handicap au sein du RIPPH (Réseau International sur le Processus de Production du Handicap).</Texte>
 
           <HighlightBox label="Repères historiques" couleur="bleu">
             <Liste couleur="bleu" items={[
               "1987 : Premières publications sur la Classification québécoise du handicap",
-              "1998 : Publication de la Classification québécoise — Processus de Production du Handicap (RIPPH)",
+              "1998 : Publication de la Classification québécoise, Processus de Production du Handicap (RIPPH)",
               "2001 : La CIF de l'OMS s'inspire du PPH et adopte une lecture interactionniste",
-              "2010 : Publication du MDH-PPH 2.0 — version actuelle du modèle, intégrant les facteurs identitaires"
+              "2010 : Publication du MDH-PPH 2.0, version actuelle du modèle, intégrant les facteurs identitaires"
             ]} />
           </HighlightBox>
 
@@ -90,29 +90,29 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Section 1.3" titre="Les trois composantes du MDH-PPH">
-          <Texte>Le MDH-PPH (Modèle de Développement Humain — Processus de Production du Handicap) articule trois grandes composantes. Leur interaction détermine si la personne est en situation de participation sociale ou en situation de handicap.</Texte>
+          <Texte>Le MDH-PPH (Modèle de Développement Humain : Processus de Production du Handicap) articule trois grandes composantes. Leur interaction détermine si la personne est en situation de participation sociale ou en situation de handicap.</Texte>
 
           <SchemaMDHPPH />
 
-          <HighlightBox label="Composante 1 — Facteurs personnels" couleur="bleu">
+          <HighlightBox label="Composante 1 : Facteurs personnels" couleur="bleu">
             <Texte>Les facteurs personnels regroupent trois sous-dimensions :</Texte>
             <Liste couleur="bleu" items={[
               "Systèmes organiques : structures et fonctions du corps, sur un continuum intégrité ↔ déficience",
               "Aptitudes : capacités à accomplir des activités mentales ou physiques, sur un continuum capacité ↔ incapacité",
-              "Facteurs identitaires : âge, sexe, identité socioculturelle — souvent oubliés, mais déterminants dans la façon dont l'environnement répond à la personne"
+              "Facteurs identitaires : âge, sexe, identité socioculturelle, souvent oubliés, mais déterminants dans la façon dont l'environnement répond à la personne"
             ]} />
           </HighlightBox>
 
-          <HighlightBox label="Composante 2 — Facteurs environnementaux" couleur="vert">
+          <HighlightBox label="Composante 2 : Facteurs environnementaux" couleur="vert">
             <Texte>Les facteurs environnementaux sont tout ce qui est extérieur à la personne. Ils agissent sur un continuum : de l'obstacle maximal au facilitateur optimal. Cinq dimensions les structurent : physique et architectural, social et humain (attitudes, relations), institutionnel et organisationnel, technologique, politique et juridique.</Texte>
           </HighlightBox>
 
-          <HighlightBox label="Composante 3 — Habitudes de vie" couleur="jaune">
+          <HighlightBox label="Composante 3 : Habitudes de vie" couleur="jaune">
             <Texte>Les habitudes de vie sont les activités courantes (nutrition, mobilité, communication, soins corporels, habitation) et les rôles sociaux (travail, loisirs, vie citoyenne, éducation, parentalité) que la personne souhaite ou doit réaliser. Ce sont elles qui mesurent la participation sociale. L'outil MHAVIE (Mesure des Habitudes de Vie) en recense douze catégories évaluables.</Texte>
           </HighlightBox>
 
           <AccrocheScenario titre="Ce que ça change pour Marc">
-            <p>Avec la CIH, le fauteuil de Marc est une incapacité qui produit un désavantage. Avec le MDH-PPH, son fauteuil est un facteur personnel — et c'est l'accessibilité des transports (facteur environnemental) qui détermine si Marc est en participation sociale ou en situation de handicap pour cette habitude de vie. Même personne, même corps : deux situations radicalement différentes selon l'environnement.</p>
+            <p>Avec la CIH, le fauteuil de Marc est une incapacité qui produit un désavantage. Avec le MDH-PPH, son fauteuil est un facteur personnel, et c'est l'accessibilité des transports (facteur environnemental) qui détermine si Marc est en participation sociale ou en situation de handicap pour cette habitude de vie. Même personne, même corps : deux situations radicalement différentes selon l'environnement.</p>
           </AccrocheScenario>
         </SectionModule>
 
@@ -126,7 +126,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
               { niveau: "Résultat intermédiaire", nom: "Participation partielle", definition: "Réalisation incomplète, avec effort accru ou aide nécessaire" },
               { niveau: "Résultat négatif", nom: "Situation de handicap", definition: "Des obstacles environnementaux empêchent ou réduisent fortement la réalisation" }
             ]}
-            note="Une même personne peut se situer différemment selon les habitudes de vie et les contextes — le handicap n'est pas une identité fixe"
+            note="Une même personne peut se situer différemment selon les habitudes de vie et les contextes, le handicap n'est pas une identité fixe"
           />
 
           <HighlightBox label="Ce que ce continuum implique" couleur="vert">
@@ -144,7 +144,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Section 1.5" titre="PPH et CIF : convergences et divergences essentielles">
-          <Texte>Le PPH a fortement influencé la Classification Internationale du Fonctionnement (CIF) adoptée par l'OMS en 2001 — qui adopte elle aussi une vision interactionniste. Mais les deux outils poursuivent des objectifs différents et présentent des divergences importantes.</Texte>
+          <Texte>Le PPH a fortement influencé la Classification Internationale du Fonctionnement (CIF) adoptée par l'OMS en 2001, qui adopte elle aussi une vision interactionniste. Mais les deux outils poursuivent des objectifs différents et présentent des divergences importantes.</Texte>
 
           <TableauComparaison
             titre="MDH-PPH (2010) vs CIF (OMS, 2001)"
@@ -188,7 +188,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que le PPH change pour votre pratique">
-          <Texte>Le changement de paradigme opéré par le PPH transforme concrètement nos pratiques au quotidien — nos questions, nos observations, nos écrits professionnels, nos réunions d'équipe et notre relation aux personnes accompagnées.</Texte>
+          <Texte>Le changement de paradigme opéré par le PPH transforme concrètement nos pratiques au quotidien, nos questions, nos observations, nos écrits professionnels, nos réunions d'équipe et notre relation aux personnes accompagnées.</Texte>
 
           <TableauComparaison
             titre="Avant / Après le PPH : le changement de regard"
@@ -218,9 +218,9 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
 
           <HighlightBox label="Les points essentiels à retenir" couleur="vert">
             <Liste items={[
-              "Le PPH est un modèle explicatif — il explique comment se produit le handicap, pas seulement comment le classer",
+              "Le PPH est un modèle explicatif, il explique comment se produit le handicap, pas seulement comment le classer",
               "Trois composantes : facteurs personnels (systèmes organiques + aptitudes + identité), facteurs environnementaux, habitudes de vie",
-              "Le handicap est une situation contextuelle et modifiable — pas une identité permanente",
+              "Le handicap est une situation contextuelle et modifiable, pas une identité permanente",
               "L'environnement est le principal levier d'action professionnelle",
               "La même personne peut être en participation sociale dans un contexte et en situation de handicap dans un autre"
             ]} />
@@ -243,7 +243,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
               "Un statut administratif reconnu par la MDPH"
             ],
             bonneReponse: 1,
-            explication: "Le PPH définit le handicap comme une situation produite par l'interaction entre les facteurs personnels (systèmes organiques, aptitudes, identité) et les facteurs environnementaux — pas comme une caractéristique intrinsèque de la personne."
+            explication: "Le PPH définit le handicap comme une situation produite par l'interaction entre les facteurs personnels (systèmes organiques, aptitudes, identité) et les facteurs environnementaux, pas comme une caractéristique intrinsèque de la personne."
           },
           {
             question: "Les facteurs personnels dans le MDH-PPH 2.0 incluent :",
@@ -265,7 +265,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
               "La CIF intègre mieux les facteurs environnementaux"
             ],
             bonneReponse: 1,
-            explication: "Le MDH-PPH est un modèle explicatif qui distingue les aptitudes (capacité intrinsèque) de la participation sociale (résultat de l'interaction). La CIF, classification statistique, fusionne activité et participation — ce qui affaiblit son pouvoir analytique."
+            explication: "Le MDH-PPH est un modèle explicatif qui distingue les aptitudes (capacité intrinsèque) de la participation sociale (résultat de l'interaction). La CIF, classification statistique, fusionne activité et participation : ce qui affaiblit son pouvoir analytique."
           },
           {
             question: "Dans le modèle PPH, l'environnement peut être :",
@@ -283,7 +283,7 @@ export function Module1PPH({ onValiderModule }: { onValiderModule?: () => void }
             reponses: [
               "La personne a une déficience permanente reconnue",
               "Le handicap est une identité stable qui ne change pas",
-              "Le handicap est contextuel — une même personne peut alterner entre participation et situation de handicap",
+              "Le handicap est contextuel, une même personne peut alterner entre participation et situation de handicap",
               "Seules les personnes reconnues MDPH sont concernées"
             ],
             bonneReponse: 2,

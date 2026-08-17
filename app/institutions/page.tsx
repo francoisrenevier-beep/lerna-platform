@@ -8,7 +8,7 @@ import { FaqDirecteurs } from "@/components/faq-directeurs"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Former toutes vos équipes — LEARNA pour les institutions",
+  title: "Former toutes vos équipes | LEARNA pour les institutions",
   description:
     "LEARNA aide les institutions du travail social à former l'ensemble de leurs collaborateurs, y compris les équipes de nuit et le personnel administratif, avec une licence annuelle simple.",
 }

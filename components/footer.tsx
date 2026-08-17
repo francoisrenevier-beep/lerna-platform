@@ -19,7 +19,7 @@ export function Footer() {
           <div>
             <img src="/logo-learna-bleu.png" alt="LEARNA" className="h-20 w-auto" />
             <p className="mt-3 text-sm text-white/60">
-              Learna — Suisse romande
+              Learna : Suisse romande
               <br />
               contact@learna.ch
             </p>

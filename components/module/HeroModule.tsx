@@ -45,7 +45,7 @@ export function HeroModule({ numero, categorie, titre, titrePart2, sousTitre, du
             <iframe
               className="absolute inset-0 w-full h-full"
               src={"https://www.youtube.com/embed/" + videoYoutube}
-              title={"Vidéo d'introduction — Module " + numero + " : " + titre}
+              title={"Vidéo d'introduction, Module " + numero + " : " + titre}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />

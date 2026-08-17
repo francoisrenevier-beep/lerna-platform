@@ -33,7 +33,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Adopter les postures professionnelles adaptées en situation de crise"
             ]} />
           </ConceptBox>
-          <Texte>Parmi les défis les plus difficiles que rencontrent les équipes, les comportements dits "défis" occupent une place particulière. Ces comportements — agression, automutilation, agitation, repli extrême, comportements stéréotypés — sont non seulement éprouvants pour l'équipe, mais ils signalent souvent une souffrance réelle de la personne qui mérite une réponse sérieuse et structurée.</Texte>
+          <Texte>Parmi les défis les plus difficiles que rencontrent les équipes, les comportements dits "défis" occupent une place particulière. Ces comportements (agression, automutilation, agitation, repli extrême, comportements stéréotypés) sont non seulement éprouvants pour l'équipe, mais ils signalent souvent une souffrance réelle de la personne qui mérite une réponse sérieuse et structurée.</Texte>
           <Texte>Ce module propose une approche qui prend le contre-pied des réponses instinctives (contrainte, médication, isolement) pour revenir à l'essentiel :</Texte>
           <PullQuote>
             Comprendre avant d'intervenir.
@@ -88,7 +88,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
             titre="Le modèle A-B-C (Antécédent – Comportement – Conséquence)"
             etapes={[
               { niveau: "A", nom: "Antécédent", definition: "Tout ce qui précède : lieu, heure, activité, personnes présentes, état physique, événements récents" },
-              { niveau: "B", nom: "Comportement", definition: "Description factuelle et précise, sans interprétation — 'Robert frappe la table' plutôt que 'Robert est agressif'" },
+              { niveau: "B", nom: "Comportement", definition: "Description factuelle et précise, sans interprétation : 'Robert frappe la table' plutôt que 'Robert est agressif'" },
               { niveau: "C", nom: "Conséquence", definition: "Ce qui se passe immédiatement après : réaction de l'équipe, ce que la personne obtient ou subit" }
             ]}
           />
@@ -130,7 +130,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
                   "Pas de bras croisés, pas de regard fixe et menaçant, distance respectueuse",
                   "Phrases très courtes, nommer la personne, débit lent",
                   "'Je vois que tu es en colère, veux-tu aller dans ta chambre calme ?'",
-                  "Jamais répondre à la violence par la contrainte physique — sauf danger immédiat"
+                  "Jamais répondre à la violence par la contrainte physique : sauf danger immédiat"
                 ]
               }
             ]}
@@ -162,7 +162,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
           <Texte>Les comportements défis, particulièrement lorsqu'ils apparaissent ou s'intensifient avec le vieillissement, sont des signaux qui méritent une réponse structurée et collective. La méthode A-B-C offre un cadre rigoureux pour comprendre avant d'intervenir, et le débriefing d'équipe permet de prendre soin à la fois des personnes accompagnées et des professionnels.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
-              "Tout comportement est une communication — chercher ce que la personne exprime",
+              "Tout comportement est une communication : chercher ce que la personne exprime",
               "La douleur est le facteur le plus fréquemment sous-estimé chez les personnes vieillissantes",
               "La méthode A-B-C structure l'observation : Antécédent, Comportement factuel, Conséquence",
               "En crise : réguler sa propre émotion d'abord",
@@ -185,7 +185,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Un manque de stimulation ou d'activités adaptées"
             ],
             bonneReponse: 1,
-            explication: "Tout comportement, aussi difficile soit-il à vivre pour l'entourage, constitue une forme de communication. La personne exprime quelque chose. Cette perspective est fondamentale — elle oriente vers la compréhension plutôt que vers la gestion ou la suppression du comportement."
+            explication: "Tout comportement, aussi difficile soit-il à vivre pour l'entourage, constitue une forme de communication. La personne exprime quelque chose. Cette perspective est fondamentale, elle oriente vers la compréhension plutôt que vers la gestion ou la suppression du comportement."
           },
           {
             question: "Pourquoi la douleur est-elle considérée comme le facteur le plus sous-estimé dans les comportements défis ?",
@@ -207,7 +207,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
               "La cause probable du comportement selon le contexte"
             ],
             bonneReponse: 2,
-            explication: "'Robert est agressif' n'est pas une description comportementale utile — c'est une interprétation. 'Robert frappe la table avec son poing, crie, et repousse les professionnels qui s'approchent' permet à toute l'équipe de parler de la même chose et de travailler ensemble."
+            explication: "'Robert est agressif' n'est pas une description comportementale utile, c'est une interprétation. 'Robert frappe la table avec son poing, crie, et repousse les professionnels qui s'approchent' permet à toute l'équipe de parler de la même chose et de travailler ensemble."
           },
           {
             question: "Pourquoi la Conséquence (C) est-elle importante dans le modèle A-B-C ?",
@@ -218,7 +218,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Elle permet d'identifier le diagnostic médical sous-jacent"
             ],
             bonneReponse: 1,
-            explication: "Si une personne obtient systématiquement la fin d'une activité pénible en se comportant de manière agressive, elle a toutes les raisons de répéter ce comportement. La conséquence peut donc involontairement renforcer le comportement — il faut l'analyser pour ne pas reproduire ce schéma."
+            explication: "Si une personne obtient systématiquement la fin d'une activité pénible en se comportant de manière agressive, elle a toutes les raisons de répéter ce comportement. La conséquence peut donc involontairement renforcer le comportement, il faut l'analyser pour ne pas reproduire ce schéma."
           },
           {
             question: "En situation de crise, quelle est la première ressource professionnelle ?",
@@ -240,7 +240,7 @@ export function Module4Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Une réunion de sanction pour analyser les erreurs commises"
             ],
             bonneReponse: 2,
-            explication: "Le débriefing d'équipe est une nécessité professionnelle — pas un luxe. Il permet de prendre soin des professionnels (exprimer ce qu'on a vécu), d'améliorer la compréhension de la situation (observations A-B-C), et de préparer des réponses plus cohérentes. Sans cet espace, les équipes s'épuisent."
+            explication: "Le débriefing d'équipe est une nécessité professionnelle, pas un luxe. Il permet de prendre soin des professionnels (exprimer ce qu'on a vécu), d'améliorer la compréhension de la situation (observations A-B-C), et de préparer des réponses plus cohérentes. Sans cet espace, les équipes s'épuisent."
           }
         ]}
         onValiderModule={onValiderModule}

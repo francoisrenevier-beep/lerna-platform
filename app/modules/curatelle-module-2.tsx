@@ -15,7 +15,7 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
         categorie="Curatelles et protection de l'adulte"
         titre="Ce que vit la personne"
         titrePart2="la mesure de protection au quotidien"
-        sousTitre="Les impacts concrets d'une curatelle sur la vie quotidienne, l'identité et l'autonomie de la personne accompagnée — pour mieux y répondre."
+        sousTitre="Les impacts concrets d'une curatelle sur la vie quotidienne, l'identité et l'autonomie de la personne accompagnée, pour mieux y répondre."
         duree="35 minutes"
         niveau="Tous niveaux"
       />
@@ -33,7 +33,7 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
             ]} />
           </ConceptBox>
           <Texte>Comprendre le cadre légal, c'est indispensable. Mais ce qui compte le plus dans votre pratique quotidienne, c'est de comprendre ce que vit concrètement la personne que vous accompagnez lorsqu'une mesure de protection est en place.</Texte>
-          <Texte>Une curatelle n'est pas un événement neutre. Elle touche à des dimensions fondamentales de la vie : la liberté de décider, la relation à l'argent, le sentiment de compétence et d'autonomie, le regard des autres, la confiance en soi. Pour certaines personnes, l'annonce est vécue comme un soulagement. Pour d'autres, c'est une épreuve douloureuse. Ce module vous invite à vous mettre à la place de la personne accompagnée, pour mieux comprendre ce qu'elle traverse — et mieux y répondre.</Texte>
+          <Texte>Une curatelle n'est pas un événement neutre. Elle touche à des dimensions fondamentales de la vie : la liberté de décider, la relation à l'argent, le sentiment de compétence et d'autonomie, le regard des autres, la confiance en soi. Pour certaines personnes, l'annonce est vécue comme un soulagement. Pour d'autres, c'est une épreuve douloureuse. Ce module vous invite à vous mettre à la place de la personne accompagnée, pour mieux comprendre ce qu'elle traverse, et mieux y répondre.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="L'annonce de la mesure : un moment charnière">
@@ -64,13 +64,13 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
           />
 
           <HighlightBox label="Le rôle de l'équipe dans ce moment" couleur="bleu">
-            <Texte>En tant que professionnel de terrain, vous n'êtes généralement pas celui qui annonce la mesure — c'est le rôle de l'APEA. Mais vous êtes souvent présent dans les jours et semaines qui suivent, quand la personne digère l'information, pose des questions, exprime des émotions.</Texte>
+            <Texte>En tant que professionnel de terrain, vous n'êtes généralement pas celui qui annonce la mesure : c'est le rôle de l'APEA. Mais vous êtes souvent présent dans les jours et semaines qui suivent, quand la personne digère l'information, pose des questions, exprime des émotions.</Texte>
             <Texte>Votre rôle dans ce moment est précieux : être un espace de parole, permettre à la personne d'exprimer ce qu'elle ressent sans minimiser ni dramatiser. L'aider à comprendre concrètement ce que change et ne change pas la mesure dans son quotidien, avec des mots simples, des exemples concrets, des supports adaptés si nécessaire.</Texte>
           </HighlightBox>
 
           <div className="space-y-4 my-6">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge — Nadia</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge : Nadia</p>
               <p className="text-gray-700 text-sm leading-relaxed">Nadia a appris la décision lors d'une séance à l'APEA. Une curatelle de représentation portant sur la gestion de ses finances a été instaurée. Un curateur professionnel a été désigné. Elle est rentrée au foyer silencieuse, visiblement perturbée. C'est <strong>Fabrice</strong>, son éducateur référent, qui a passé la soirée avec elle. Il ne cherche pas à "expliquer" la mesure. Il est là. Il écoute. Il lui pose des questions simples : "Est-ce qu'il y a des choses que tu n'as pas comprises aujourd'hui ?" "Est-ce qu'il y a quelque chose qui t'inquiète en particulier ?"</p>
             </div>
           </div>
@@ -81,12 +81,12 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
           <Texte>Sur le papier, cela peut sembler simple. Dans la réalité du quotidien, c'est une transformation profonde. Nadia ne voit plus son compte en banque. Elle doit demander à son curateur si elle veut faire un achat un peu plus important. Pour certaines personnes, cette prise en charge est vécue positivement. Pour Nadia, c'est d'abord une sensation d'infantilisation, un sentiment de perte de contrôle.</Texte>
 
           <HighlightBox label="Ce que vous devez savoir : les droits qui restent" couleur="vert">
-            <Texte>L'une des confusions les plus fréquentes — chez les personnes concernées, chez les familles, et parfois chez les professionnels eux-mêmes — est de croire qu'une curatelle retire à la personne l'ensemble de ses droits. C'est faux.</Texte>
+            <Texte>L'une des confusions les plus fréquentes (chez les personnes concernées, chez les familles, et parfois chez les professionnels eux-mêmes) est de croire qu'une curatelle retire à la personne l'ensemble de ses droits. C'est faux.</Texte>
             <Liste items={[
-              "La gestion quotidienne de l'argent de poche reste dans les mains de la personne — le curateur ne contrôle pas chaque achat",
+              "La gestion quotidienne de l'argent de poche reste dans les mains de la personne, le curateur ne contrôle pas chaque achat",
               "Les « affaires mineures du quotidien » sont protégées par la loi, même sous curatelle de portée générale",
               "Les droits strictement personnels (religion, relations, loisirs, soins médicaux) appartiennent à la personne si elle a le discernement",
-              "La personne reste actrice de sa propre vie — le curateur est un partenaire, pas un remplaçant",
+              "La personne reste actrice de sa propre vie, le curateur est un partenaire, pas un remplaçant",
             ]} />
           </HighlightBox>
 
@@ -99,14 +99,14 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
         <SectionModule eyebrow="Section 3" titre="Les émotions et l'identité : ce qui se joue en profondeur">
           <HighlightBox label="La question du regard des autres" couleur="jaune">
             <Texte>Pour Nadia, l'un des aspects les plus difficiles à vivre est le regard des autres résidents du foyer. Certains savent qu'elle est sous curatelle. L'un d'eux lui a dit un jour, sans malveillance mais avec maladresse : "Toi, tu n'as pas le droit de gérer ton argent tout seul." Cette phrase a résonné longtemps.</Texte>
-            <Texte>La curatelle peut devenir une étiquette — un marqueur de différence dans un lieu où les personnes accompagnées ont déjà souvent l'impression d'être différentes de "la norme". La façon dont vous parlez de la curatelle — avec neutralité, sans la présenter comme une "sanction" ou une "preuve d'incapacité" — influence la façon dont la personne et ses pairs la perçoivent.</Texte>
+            <Texte>La curatelle peut devenir une étiquette, un marqueur de différence dans un lieu où les personnes accompagnées ont déjà souvent l'impression d'être différentes de "la norme". La façon dont vous parlez de la curatelle, avec neutralité, sans la présenter comme une "sanction" ou une "preuve d'incapacité", influence la façon dont la personne et ses pairs la perçoivent.</Texte>
           </HighlightBox>
 
           <Texte>Beaucoup de personnes sous curatelle ressentent de la honte, au moins dans un premier temps. Honte de ne pas "savoir gérer", honte d'avoir besoin d'aide pour des choses que les autres font seuls. Cette honte est compréhensible, mais elle n'est pas inévitable. Elle peut évoluer avec le temps, avec un bon accompagnement, et avec une compréhension progressive de ce que la mesure apporte réellement.</Texte>
 
           <div className="space-y-4 my-6">
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge — Nadia, quelques mois plus tard</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Fil rouge : Nadia, quelques mois plus tard</p>
               <p className="text-gray-700 text-sm leading-relaxed">Plusieurs mois après le début de la curatelle, Nadia commence à parler différemment de sa situation. Elle dit : "Maintenant j'ai de l'argent jusqu'à la fin de la semaine. Avant, j'avais tout dépensé le mardi." Cette phrase est le signe qu'elle commence à percevoir la mesure comme un outil au service de sa qualité de vie, et non plus uniquement comme une restriction.</p>
             </div>
           </div>
@@ -124,9 +124,9 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="Le placement à des fins d'assistance (PAFA) : la mesure de dernière extrémité">
-          <Texte>Le Placement à des fins d'assistance (PAFA, ou PLA selon les cantons) est la mesure la plus restrictive du dispositif. Elle consiste à placer une personne dans une institution — hôpital psychiatrique, EMS ou autre structure adaptée — <strong>contre son gré</strong>.</Texte>
+          <Texte>Le Placement à des fins d'assistance (PAFA, ou PLA selon les cantons) est la mesure la plus restrictive du dispositif. Elle consiste à placer une personne dans une institution (hôpital psychiatrique, EMS ou autre structure adaptée) <strong>contre son gré</strong>.</Texte>
 
-          <ConceptBox label="Conditions légales — art. 426 CC" titre="Trois conditions cumulatives sont requises">
+          <ConceptBox label="Conditions légales, art. 426 CC" titre="Trois conditions cumulatives sont requises">
             <Liste items={[
               "La présence de troubles psychiques, d'une déficience mentale, ou d'un grave état d'abandon",
               "L'insuffisance de toute aide ambulatoire pour protéger la personne",
@@ -147,7 +147,7 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
             <Liste items={[
               "Droit d'être entendue avant toute décision",
               "Droit de désigner une personne de confiance (art. 432 CC) pour l'accompagner dans la procédure",
-              "Délai de recours de 10 jours — et le recours n'a pas besoin d'être motivé pour être recevable",
+              "Délai de recours de 10 jours, et le recours n'a pas besoin d'être motivé pour être recevable",
               "L'APEA doit vérifier régulièrement la proportionnalité du maintien du placement",
               "Toute personne placée peut demander sa libération en tout temps",
             ]} />
@@ -160,7 +160,7 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
             <Liste items={[
               "L'annonce d'une curatelle est un moment charnière qui demande présence et écoute, pas d'abord des explications",
               "Une curatelle ne retire pas l'ensemble des droits : les droits strictement personnels et la gestion du quotidien restent à la personne",
-              "La honte et l'infantilisation sont des risques réels — la façon dont vous nommez la mesure compte",
+              "La honte et l'infantilisation sont des risques réels, la façon dont vous nommez la mesure compte",
               "La personne sous curatelle a des droits de recours effectifs : les connaître et l'y aider est votre rôle",
               "Le PAFA est une mesure de dernière extrémité, entourée de garanties importantes, mais que vous pouvez rencontrer dans votre pratique",
             ]} />
@@ -175,7 +175,7 @@ export function Module2Curatelle({ onValiderModule }: { onValiderModule?: () => 
             question: "Une personne sous curatelle de portée générale peut-elle décider seule de ses activités de loisirs ?",
             reponses: [
               "Non, le curateur décide de tout",
-              "Oui, si elle a le discernement pour ces actes — ce sont des droits strictement personnels",
+              "Oui, si elle a le discernement pour ces actes : ce sont des droits strictement personnels",
               "Seulement avec l'accord de l'institution",
               "Non, elle doit toujours demander l'autorisation de son curateur",
             ],

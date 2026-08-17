@@ -39,7 +39,7 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
         <SectionModule eyebrow="Section 1" titre="Évaluer la maturité de son institution face au vieillissement">
           <Texte>Avant de vouloir changer les choses, il faut savoir d'où l'on part. Il ne s'agit pas de porter des jugements de valeur sur l'institution ou ses dirigeants, mais de mesurer lucidement l'écart entre la réalité actuelle et ce qui serait nécessaire pour accompagner dignement une population vieillissante.</Texte>
 
-          <HighlightBox label="Auto-diagnostic institutionnel — 5 dimensions" couleur="bleu">
+          <HighlightBox label="Auto-diagnostic institutionnel : 5 dimensions" couleur="bleu">
             <Texte><strong>1. Connaissance de la population :</strong> Sait-on combien de personnes ont plus de 45, 50, 55, 60 ans ? A-t-on analysé comment cette proportion évoluera dans les 5 prochaines années ?</Texte>
             <Texte><strong>2. Compétences de l'équipe :</strong> Les professionnels ont-ils bénéficié d'une formation sur le vieillissement ? Sait-on utiliser les grilles d'évaluation de la douleur adaptées ?</Texte>
             <Texte><strong>3. Outils et procédures :</strong> Les PPA intègrent-ils une dimension vieillissement à partir de 45 ans ? Existe-t-il un protocole de signalement ? Les documents de transmission sont-ils standardisés ?</Texte>
@@ -56,7 +56,7 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
             etapes={[
               { niveau: "Court terme", nom: "Adaptations immédiates", definition: "Sans ressources supplémentaires, avec la volonté de l'équipe et de l'encadrement" },
               { niveau: "12-24 mois", nom: "Adaptations à moyen terme", definition: "Nécessitent planification et ressources, mais restent accessibles" },
-              { niveau: "Long terme", nom: "Transformations structurelles", definition: "Modifient le fonctionnement même de l'institution — dialogue avec les autorités de financement" }
+              { niveau: "Long terme", nom: "Transformations structurelles", definition: "Modifient le fonctionnement même de l'institution, dialogue avec les autorités de financement" }
             ]}
           />
 
@@ -104,7 +104,7 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
           />
 
           <HighlightBox label="La pyramide des âges comme outil stratégique" couleur="vert">
-            <Texte>Analyser la pyramide des âges de sa propre structure — c'est-à-dire regarder combien de personnes ont plus de 45, 50, 55, 60 ans — permet de <strong>prévoir ce qui va se passer dans 5 ou 10 ans</strong> et de commencer à y répondre maintenant. Ce travail ne se fait pas du jour au lendemain, ce qui rend l'anticipation d'autant plus nécessaire.</Texte>
+            <Texte>Analyser la pyramide des âges de sa propre structure (c'est-à-dire regarder combien de personnes ont plus de 45, 50, 55, 60 ans) permet de <strong>prévoir ce qui va se passer dans 5 ou 10 ans</strong> et de commencer à y répondre maintenant. Ce travail ne se fait pas du jour au lendemain, ce qui rend l'anticipation d'autant plus nécessaire.</Texte>
           </HighlightBox>
         </SectionModule>
 
@@ -117,12 +117,12 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
 
           <HighlightBox label="Ce que cette formation vous a donné" couleur="bleu">
             <Liste items={[
-              "Module 1 — Comprendre : les mécanismes du vieillissement prématuré et les profils spécifiques",
-              "Module 2 — Observer : les signaux physiques, cognitifs et comportementaux, le biais d'overshadowing",
-              "Module 3 — Adapter : PPA, activités, rythmes, communication, soutien aux proches",
-              "Module 4 — Intervenir : comportements défis, méthode A-B-C, postures professionnelles",
-              "Module 5 — Coordonner : acteurs suisses romands, outils, transitions dignes",
-              "Module 6 — Transformer : maturité institutionnelle, niveaux d'adaptation, rôle de chacun"
+              "Module 1, Comprendre : les mécanismes du vieillissement prématuré et les profils spécifiques",
+              "Module 2, Observer : les signaux physiques, cognitifs et comportementaux, le biais d'overshadowing",
+              "Module 3, Adapter : PPA, activités, rythmes, communication, soutien aux proches",
+              "Module 4, Intervenir : comportements défis, méthode A-B-C, postures professionnelles",
+              "Module 5, Coordonner : acteurs suisses romands, outils, transitions dignes",
+              "Module 6, Transformer : maturité institutionnelle, niveaux d'adaptation, rôle de chacun"
             ]} />
           </HighlightBox>
 
@@ -147,10 +147,10 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
           {
             question: "Parmi les 5 dimensions de l'auto-diagnostic institutionnel, laquelle est souvent la plus facile à améliorer rapidement ?",
             reponses: [
-              "L'environnement physique — travaux d'aménagement",
-              "Les partenariats — nécessitent des conventions signées",
-              "La connaissance de la population — analyse de données existantes",
-              "Les compétences de l'équipe — nécessite un plan de formation pluriannuel"
+              "L'environnement physique : travaux d'aménagement",
+              "Les partenariats : nécessitent des conventions signées",
+              "La connaissance de la population : analyse de données existantes",
+              "Les compétences de l'équipe : nécessite un plan de formation pluriannuel"
             ],
             bonneReponse: 2,
             explication: "La connaissance de la population (pyramide des âges, évolution sur 5 ans) repose sur des données déjà disponibles dans l'institution et peut être réalisée rapidement avec les ressources existantes. C'est souvent le premier pas concret vers une anticipation institutionnelle."
@@ -175,7 +175,7 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Consulter les familles avant toute modification de pratique"
             ],
             bonneReponse: 2,
-            explication: "Les changements institutionnels les plus durables s'enracinent dans la pratique quotidienne du terrain. En documentant, en proposant, en partageant ses observations, un professionnel de terrain contribue concrètement à construire une culture institutionnelle différente — sans attendre que tout vienne d'en haut."
+            explication: "Les changements institutionnels les plus durables s'enracinent dans la pratique quotidienne du terrain. En documentant, en proposant, en partageant ses observations, un professionnel de terrain contribue concrètement à construire une culture institutionnelle différente, sans attendre que tout vienne d'en haut."
           },
           {
             question: "Pourquoi l'analyse de la pyramide des âges de son institution est-elle un outil stratégique ?",
@@ -186,7 +186,7 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Elle permet de décider quelles personnes doivent être transférées en EMS"
             ],
             bonneReponse: 1,
-            explication: "Analyser combien de personnes ont plus de 45, 50, 55, 60 ans permet de prévoir ce qui va se passer dans 5 ou 10 ans et de commencer à y répondre maintenant — en formant les équipes, en adaptant les locaux, en construisant des partenariats. Ce travail d'anticipation ne se fait pas du jour au lendemain."
+            explication: "Analyser combien de personnes ont plus de 45, 50, 55, 60 ans permet de prévoir ce qui va se passer dans 5 ou 10 ans et de commencer à y répondre maintenant : en formant les équipes, en adaptant les locaux, en construisant des partenariats. Ce travail d'anticipation ne se fait pas du jour au lendemain."
           },
           {
             question: "Quelle est la conviction centrale portée par l'ensemble de cette formation ?",
@@ -197,7 +197,7 @@ export function Module6Vieillissement({ onValiderModule }: { onValiderModule?: (
               "La coordination interinstitutionnelle est suffisante pour répondre aux besoins du vieillissement"
             ],
             bonneReponse: 2,
-            explication: "La conviction centrale de cette formation est que le vieillissement des personnes en situation de handicap n'est pas un problème à gérer — c'est une étape de vie à honorer. Ces personnes méritent une vieillesse digne, entourée de personnes qui les connaissent, dans des lieux qui leur sont familiers. Cette conviction se construit dans chaque geste professionnel quotidien."
+            explication: "La conviction centrale de cette formation est que le vieillissement des personnes en situation de handicap n'est pas un problème à gérer, c'est une étape de vie à honorer. Ces personnes méritent une vieillesse digne, entourée de personnes qui les connaissent, dans des lieux qui leur sont familiers. Cette conviction se construit dans chaque geste professionnel quotidien."
           }
         ]}
         onValiderModule={onValiderModule}

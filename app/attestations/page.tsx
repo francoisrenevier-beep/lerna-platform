@@ -160,7 +160,7 @@ export default function AttestationsPage() {
       })
     } catch (e) {
       console.error("Erreur téléchargement PDF:", e)
-      setDownloadError("Erreur lors de la génération — réessayez dans quelques instants")
+      setDownloadError("Erreur lors de la génération : réessayez dans quelques instants")
     } finally {
       setDownloadingId(null)
     }

@@ -79,7 +79,7 @@ export default function TestAttestationPage() {
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-[#1B2D5B]">Test génération attestation</h1>
           <p className="text-gray-500 text-sm mt-1">
-            Page de test — modifie les données et génère le PDF directement.
+            Page de test, modifie les données et génère le PDF directement.
           </p>
         </div>
 

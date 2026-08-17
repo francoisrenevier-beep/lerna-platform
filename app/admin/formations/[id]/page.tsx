@@ -570,7 +570,7 @@ export default function AdminFormationDetailPage() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">
-                    Titre court <span className="normal-case font-normal text-gray-400">(optionnel — sinon généré automatiquement depuis le titre)</span>
+                    Titre court <span className="normal-case font-normal text-gray-400">(optionnel, sinon généré automatiquement depuis le titre)</span>
                   </label>
                   <input
                     type="text"

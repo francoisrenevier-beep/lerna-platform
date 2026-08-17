@@ -13,10 +13,10 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={4}
-        categorie="Accompagner le vieillissement en institution — Les bases"
+        categorie="Accompagner le vieillissement en institution : Les bases"
         titre="Ne pas rester seul :"
         titrePart2="s'appuyer sur le réseau"
-        sousTitre="À qui s'adresser, quand, et comment transmettre une observation utile — les réflexes professionnels du quotidien."
+        sousTitre="À qui s'adresser, quand, et comment transmettre une observation utile : les réflexes professionnels du quotidien."
         duree="30 minutes"
         niveau="Sensibilisation"
       />
@@ -30,13 +30,13 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
               "Savoir quand et comment solliciter le médecin référent",
               "Comprendre le rôle des partenaires externes (gériatrie, ergothérapie et physiothérapie, Pro Infirmis, Pro Senectute)",
               "Formuler une observation transmissible et utile",
-              "Comprendre que travailler en réseau protège la personne accompagnée — et le professionnel"
+              "Comprendre que travailler en réseau protège la personne accompagnée, et le professionnel"
             ]} />
           </ConceptBox>
           <Texte>Les trois modules précédents vous ont donné des bases pour comprendre, observer et adapter votre pratique face au vieillissement. Ce quatrième module répond à une question pratique essentielle : quand j&apos;observe quelque chose, à qui est-ce que je m&apos;adresse ? Et comment ?</Texte>
           <Texte>Accompagner une personne en situation de handicap vieillissante dépasse toujours les seules compétences d&apos;un professionnel, d&apos;une équipe, ou même d&apos;une institution. Tôt ou tard, cela nécessite de faire appel à d&apos;autres acteurs. Savoir qui appeler, quand, et avec quelle information, c&apos;est une compétence professionnelle concrète.</Texte>
           <HighlightBox label="Une posture professionnelle fondamentale" couleur="bleu">
-            <Texte>En tant que professionnel du travail social et éducatif, votre rôle face au vieillissement n&apos;est pas de diagnostiquer ni de traiter. Il est d&apos;<strong>observer, de documenter et de transmettre</strong> — et de contribuer activement au réseau de personnes qui entoure et protège la personne accompagnée.</Texte>
+            <Texte>En tant que professionnel du travail social et éducatif, votre rôle face au vieillissement n&apos;est pas de diagnostiquer ni de traiter. Il est d&apos;<strong>observer, de documenter et de transmettre</strong>, et de contribuer activement au réseau de personnes qui entoure et protège la personne accompagnée.</Texte>
             <Texte>Rester seul avec une observation inquiétante sans la partager n&apos;est pas une posture professionnelle. C&apos;est une surcharge inutile pour vous, et un risque pour la personne.</Texte>
           </HighlightBox>
         </SectionModule>
@@ -45,7 +45,7 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
           <Texte>Avant même de penser aux acteurs externes, le réseau commence à l&apos;intérieur de l&apos;institution. C&apos;est là que se fait la majorité du travail de détection et de coordination au quotidien.</Texte>
 
           <HighlightBox label="Les transmissions d'équipe : première étape indispensable" couleur="vert">
-            <Texte>Lorsque vous observez un changement chez une personne accompagnée, la première étape n&apos;est pas d&apos;appeler le médecin — c&apos;est de partager votre observation avec l&apos;équipe. Deux raisons :</Texte>
+            <Texte>Lorsque vous observez un changement chez une personne accompagnée, la première étape n&apos;est pas d&apos;appeler le médecin, c&apos;est de partager votre observation avec l&apos;équipe. Deux raisons :</Texte>
             <Liste items={[
               "Valider l'observation : d'autres collègues ont peut-être observé la même chose. La confrontation des regards affine la compréhension.",
               "Construire une tendance : une observation isolée peut être un incident. La même observation rapportée par trois professionnels sur deux semaines est un signal qui mérite d'être transmis au médecin."
@@ -59,15 +59,15 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
               { niveau: "Étape 1", nom: "Vous observez", definition: "Un changement, un signal, quelque chose d'inhabituel par rapport à l'état de base de la personne" },
               { niveau: "Étape 2", nom: "Vous notez", definition: "Dans les transmissions, avec précision : quoi, quand, depuis quand, par rapport à quoi" },
               { niveau: "Étape 3", nom: "L'équipe valide", definition: "En réunion ou lors d'une transmission, les observations sont croisées et une tendance se dessine" },
-              { niveau: "Étape 4", nom: "Le médecin est informé", definition: "Avec une description factuelle et documentée — pas une interprétation médicale" }
+              { niveau: "Étape 4", nom: "Le médecin est informé", definition: "Avec une description factuelle et documentée : pas une interprétation médicale" }
             ]}
           />
 
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-2">Situation</p>
-              <p className="text-gray-700 text-sm font-semibold mb-2">Vous avez observé quelque chose — mais vous ne savez pas si c&apos;est important</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Depuis une semaine, vous avez remarqué que Monique, 57 ans, déficience intellectuelle modérée, mange beaucoup plus lentement qu&apos;avant et tousse deux ou trois fois pendant le repas. Ce n&apos;est pas spectaculaire, mais c&apos;est différent. Vous hésitez à en parler — vous ne voulez pas &quot;faire une montagne de rien&quot;.</p>
+              <p className="text-gray-700 text-sm font-semibold mb-2">Vous avez observé quelque chose, mais vous ne savez pas si c&apos;est important</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Depuis une semaine, vous avez remarqué que Monique, 57 ans, déficience intellectuelle modérée, mange beaucoup plus lentement qu&apos;avant et tousse deux ou trois fois pendant le repas. Ce n&apos;est pas spectaculaire, mais c&apos;est différent. Vous hésitez à en parler, vous ne voulez pas &quot;faire une montagne de rien&quot;.</p>
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Question de réflexion</p>
@@ -75,7 +75,7 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             </div>
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Réponse guidée</p>
-              <p className="text-gray-700 text-sm leading-relaxed">La bonne décision est de noter et de partager. La règle professionnelle est simple : si vous vous posez la question de savoir si c&apos;est important, c&apos;est que c&apos;est important. C&apos;est à l&apos;équipe et au médecin de juger de la suite — pas à vous de filtrer l&apos;information en amont. Si Monique développe un trouble de la déglutition non détecté, les conséquences peuvent être graves. Vous avez l&apos;information en premier — c&apos;est votre responsabilité de la transmettre.</p>
+              <p className="text-gray-700 text-sm leading-relaxed">La bonne décision est de noter et de partager. La règle professionnelle est simple : si vous vous posez la question de savoir si c&apos;est important, c&apos;est que c&apos;est important. C&apos;est à l&apos;équipe et au médecin de juger de la suite, pas à vous de filtrer l&apos;information en amont. Si Monique développe un trouble de la déglutition non détecté, les conséquences peuvent être graves. Vous avez l&apos;information en premier, c&apos;est votre responsabilité de la transmettre.</p>
             </div>
           </div>
         </SectionModule>
@@ -91,10 +91,10 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
           <HighlightBox label="Comment transmettre une observation au médecin de façon utile" couleur="vert">
             <Texte>Une transmission efficace au médecin contient quatre éléments :</Texte>
             <Liste items={[
-              "Ce que vous avez observé — description factuelle, sans interprétation médicale",
-              "Depuis quand — date approximative du début du changement",
-              "La fréquence — tous les jours, plusieurs fois par semaine, une fois isolée ?",
-              "L'écart avec l'habituel — en quoi c'est différent du comportement habituel de cette personne"
+              "Ce que vous avez observé : description factuelle, sans interprétation médicale",
+              "Depuis quand : date approximative du début du changement",
+              "La fréquence, tous les jours, plusieurs fois par semaine, une fois isolée ?",
+              "L'écart avec l'habituel, en quoi c'est différent du comportement habituel de cette personne"
             ]} />
           </HighlightBox>
 
@@ -102,12 +102,12 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             <div className="bg-red-50 border border-red-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-red-600 mb-2">À éviter</p>
               <p className="text-gray-700 text-sm leading-relaxed italic">&quot;Je pense que Jean-Paul fait peut-être une dépression, il faudrait changer son traitement.&quot;</p>
-              <p className="text-gray-500 text-xs mt-2">Interprétation médicale + prescription — ce n&apos;est pas votre rôle</p>
+              <p className="text-gray-500 text-xs mt-2">Interprétation médicale + prescription, ce n&apos;est pas votre rôle</p>
             </div>
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">À privilégier</p>
               <p className="text-gray-700 text-sm leading-relaxed italic">&quot;Depuis environ 3 semaines, Jean-Paul (63 ans, déficience intellectuelle légère) refuse de venir aux ateliers alors qu&apos;il y participait tous les jours depuis des années. Il mange moins et a perdu environ 2-3 kg. Il dit &apos;j&apos;ai pas envie&apos; quand on l&apos;encourage. Ce comportement est nouveau pour lui.&quot;</p>
-              <p className="text-gray-500 text-xs mt-2">Description factuelle + écart avec l&apos;habituel — le médecin peut travailler avec ça</p>
+              <p className="text-gray-500 text-xs mt-2">Description factuelle + écart avec l&apos;habituel, le médecin peut travailler avec ça</p>
             </div>
           </div>
 
@@ -133,8 +133,8 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
                   "Évaluation spécialisée : démence, fragilité, chutes, dénutrition",
                   "Se déplacent en institution pour des évaluations",
                   "Troubles psychiques se complexifiant avec l'âge",
-                  "Démarches sociales, défense des droits — champ handicap",
-                  "Aide à domicile, soutien aux aidants — champ vieillesse"
+                  "Démarches sociales, défense des droits : champ handicap",
+                  "Aide à domicile, soutien aux aidants : champ vieillesse"
                 ]
               },
               {
@@ -151,7 +151,7 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             ]}
           />
 
-          <HighlightBox label="L&apos;ergothérapie et la physiothérapie — des ressources souvent sous-utilisées" couleur="jaune">
+          <HighlightBox label="L&apos;ergothérapie et la physiothérapie, des ressources souvent sous-utilisées" couleur="jaune">
             <Texte>L&apos;ergothérapie et la physiothérapie sont prescrites par un médecin et prises en charge par l&apos;assurance-maladie de base. Elles peuvent intervenir sur le lieu de vie de la personne : travail de la mobilité et des transferts, prévention des chutes, adaptation des gestes du quotidien (repas, toilette, habillage), évaluation des aides techniques et de l&apos;aménagement des espaces.</Texte>
             <Texte>Ces interventions permettent souvent de <strong>maintenir une personne dans son institution d&apos;origine plus longtemps</strong>, en évitant un transfert vers un EMS parfois prématuré. Elles restent pourtant peu demandées en institution socio-éducative : lorsqu&apos;une perte de mobilité s&apos;installe, proposer que le médecin référent évalue l&apos;indication d&apos;un bilan est un réflexe professionnel utile.</Texte>
           </HighlightBox>
@@ -159,7 +159,7 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-2">Situation</p>
-              <p className="text-gray-700 text-sm font-semibold mb-2">Daniel, 68 ans — des besoins que l&apos;équipe ne peut pas couvrir seule</p>
+              <p className="text-gray-700 text-sm font-semibold mb-2">Daniel, 68 ans, des besoins que l&apos;équipe ne peut pas couvrir seule</p>
               <p className="text-gray-700 text-sm leading-relaxed">Daniel a une lésion médullaire. Depuis quelques mois, ses transferts du lit au fauteuil sont beaucoup plus difficiles : il se fatigue vite, deux professionnels sont désormais nécessaires, et il a glissé deux fois lors du transfert. L&apos;équipe éducative improvise des solutions au jour le jour, sans compétence technique en la matière. La direction hésite à faire appel à des intervenants externes, craignant de trop &quot;médicaliser&quot; l&apos;accompagnement.</p>
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
@@ -168,7 +168,7 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             </div>
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Réponse guidée</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Solliciter le médecin référent pour qu&apos;il évalue l&apos;indication d&apos;un bilan d&apos;ergothérapie ou de physiothérapie ne transforme pas l&apos;institution en EMS — cela lui permet de maintenir sa mission éducative en s&apos;appuyant sur des compétences complémentaires. Une évaluation des transferts, du positionnement et des aides techniques sécurise à la fois Daniel et les professionnels qui l&apos;accompagnent. C&apos;est précisément cette complémentarité qui permet à Daniel de rester dans son environnement familier, auprès des personnes qu&apos;il connaît depuis des années. Rester dans son institution est la meilleure chose pour Daniel — à condition que ses besoins soient correctement couverts.</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Solliciter le médecin référent pour qu&apos;il évalue l&apos;indication d&apos;un bilan d&apos;ergothérapie ou de physiothérapie ne transforme pas l&apos;institution en EMS, cela lui permet de maintenir sa mission éducative en s&apos;appuyant sur des compétences complémentaires. Une évaluation des transferts, du positionnement et des aides techniques sécurise à la fois Daniel et les professionnels qui l&apos;accompagnent. C&apos;est précisément cette complémentarité qui permet à Daniel de rester dans son environnement familier, auprès des personnes qu&apos;il connaît depuis des années. Rester dans son institution est la meilleure chose pour Daniel, à condition que ses besoins soient correctement couverts.</p>
             </div>
           </div>
         </SectionModule>
@@ -179,13 +179,13 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
           <div className="bg-gray-50 rounded-xl p-6 my-6 border-l-4 border-[#3DBFA0]">
             <p className="text-sm text-gray-500 uppercase tracking-widest font-medium mb-3">Mise en situation</p>
             <p className="text-gray-700 leading-relaxed italic">Imaginez que vous avez vécu dans le même endroit depuis 30 ans. Vous connaissez chaque recoin, chaque visage, chaque bruit familier. Vous savez qu&apos;après le repas du midi il y a toujours une période de calme, que le mercredi c&apos;est la sortie au marché, que c&apos;est Fatima qui vous aide le matin et qu&apos;elle est douce. Tout cela structure votre monde et vous donne un sentiment de sécurité.</p>
-            <p className="text-gray-700 leading-relaxed italic mt-3">Maintenant imaginez que tout cela disparaisse en quelques jours. Pour une personne avec des difficultés cognitives ou relationnelles, ce changement peut être profondément déstabilisant — particulièrement si la transition n&apos;a pas été préparée.</p>
+            <p className="text-gray-700 leading-relaxed italic mt-3">Maintenant imaginez que tout cela disparaisse en quelques jours. Pour une personne avec des difficultés cognitives ou relationnelles, ce changement peut être profondément déstabilisant : particulièrement si la transition n&apos;a pas été préparée.</p>
           </div>
 
           <SchemaEtapes
             titre="Principes d'une transition préparée et digne"
             etapes={[
-              { niveau: "Étape 1", nom: "Anticiper tôt", definition: "Idéalement plusieurs mois avant que la transition soit urgente — pas dans l'urgence d'une hospitalisation" },
+              { niveau: "Étape 1", nom: "Anticiper tôt", definition: "Idéalement plusieurs mois avant que la transition soit urgente, pas dans l'urgence d'une hospitalisation" },
               { niveau: "Étape 2", nom: "Introduire progressivement", definition: "Visites non médicalisées dans le futur lieu, en atmosphère détendue, pour se familiariser" },
               { niveau: "Étape 3", nom: "Préparer avec supports", definition: "Album photo du nouveau lieu, vidéo courte, rencontre avec des résidents de la structure d'accueil" },
               { niveau: "Étape 4", nom: "Maintenir le lien", definition: "Un professionnel connu accompagne lors du déménagement et maintient le contact dans les premières semaines" }
@@ -194,13 +194,13 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
           />
 
           <HighlightBox label="La transition AI → AVS : une étape à anticiper" couleur="jaune">
-            <Texte>Parmi les transitions importantes dans le parcours d&apos;une personne en situation de handicap vieillissante, celle des 65 ans est particulière : c&apos;est une transition administrative, souvent invisible, mais qui peut avoir des conséquences très concrètes. À 65 ans, les prestations AI s&apos;arrêtent. La personne passe du régime de l&apos;Assurance Invalidité — pensé pour développer les capacités et soutenir l&apos;autonomie — à celui de l&apos;Assurance Vieillesse et Survivants, conçu pour le maintien du revenu à la retraite. Ce changement de logique s&apos;accompagne d&apos;un changement d&apos;interlocuteurs administratifs : de l&apos;Office AI cantonal vers la caisse AVS compétente, et souvent un recalcul des droits aux prestations complémentaires.</Texte>
+            <Texte>Parmi les transitions importantes dans le parcours d&apos;une personne en situation de handicap vieillissante, celle des 65 ans est particulière : c&apos;est une transition administrative, souvent invisible, mais qui peut avoir des conséquences très concrètes. À 65 ans, les prestations AI s&apos;arrêtent. La personne passe du régime de l&apos;Assurance Invalidité, pensé pour développer les capacités et soutenir l&apos;autonomie, à celui de l&apos;Assurance Vieillesse et Survivants, conçu pour le maintien du revenu à la retraite. Ce changement de logique s&apos;accompagne d&apos;un changement d&apos;interlocuteurs administratifs : de l&apos;Office AI cantonal vers la caisse AVS compétente, et souvent un recalcul des droits aux prestations complémentaires.</Texte>
             <Texte>Pour la personne accompagnée, les effets concrets peuvent varier selon le canton et la situation individuelle : montant de la rente potentiellement différent, recalcul de la participation aux frais de séjour, changements dans certaines prestations disponibles. Ces modifications, même techniques, peuvent créer une inquiétude chez une personne qui perçoit que &quot;quelque chose change&quot; sans comprendre exactement quoi.</Texte>
-            <Texte>En tant que professionnel de terrain, votre rôle n&apos;est pas d&apos;assurer le suivi administratif de cette transition — c&apos;est celui de la direction et des assistants sociaux. Mais vous pouvez être attentif à ses effets sur la personne : exprime-t-elle de l&apos;inquiétude autour de &quot;ses papiers&quot; ou de sa situation ? Perçoit-elle des changements sans pouvoir les nommer ? Lui proposer des explications simples — en FALC si nécessaire — fait partie de l&apos;accompagnement. Et alerter si quelque chose semble la perturber, c&apos;est votre rôle.</Texte>
+            <Texte>En tant que professionnel de terrain, votre rôle n&apos;est pas d&apos;assurer le suivi administratif de cette transition, c&apos;est celui de la direction et des assistants sociaux. Mais vous pouvez être attentif à ses effets sur la personne : exprime-t-elle de l&apos;inquiétude autour de &quot;ses papiers&quot; ou de sa situation ? Perçoit-elle des changements sans pouvoir les nommer ? Lui proposer des explications simples, en FALC si nécessaire, fait partie de l&apos;accompagnement. Et alerter si quelque chose semble la perturber, c&apos;est votre rôle.</Texte>
           </HighlightBox>
 
-          <HighlightBox label="Le document de transmission — la carte d'identité de la personne" couleur="bleu">
-            <Texte>Lorsqu&apos;une personne change de structure — même temporairement pour une hospitalisation — son histoire ne doit pas rester dans la tête des professionnels qui la connaissent. Un bon document de transmission contient :</Texte>
+          <HighlightBox label="Le document de transmission : la carte d'identité de la personne" couleur="bleu">
+            <Texte>Lorsqu&apos;une personne change de structure, même temporairement pour une hospitalisation, son histoire ne doit pas rester dans la tête des professionnels qui la connaissent. Un bon document de transmission contient :</Texte>
             <Liste items={[
               "Informations d'identité et histoire institutionnelle, personnes de référence",
               "État fonctionnel actuel : ce que la personne fait seule, ce qui nécessite de l'aide",
@@ -217,16 +217,16 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>Accompagner le vieillissement en institution, c&apos;est un travail d&apos;équipe — et de réseau. Vous n&apos;êtes pas seul à décider, seul à observer, seul à agir. Vous êtes un maillon essentiel dans une chaîne qui protège la personne.</Texte>
+          <Texte>Accompagner le vieillissement en institution, c&apos;est un travail d&apos;équipe, et de réseau. Vous n&apos;êtes pas seul à décider, seul à observer, seul à agir. Vous êtes un maillon essentiel dans une chaîne qui protège la personne.</Texte>
           <Texte>Vos observations quotidiennes, partagées avec rigueur, transmises avec précision, sont irremplaçables. Elles sont ce que le système médical ne peut pas produire sans vous.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
-              "Partager une observation avec l'équipe est la première étape — avant d'appeler le médecin",
+              "Partager une observation avec l'équipe est la première étape, avant d'appeler le médecin",
               "Si vous vous posez la question de savoir si c'est important, c'est que c'est important",
               "Une description factuelle (quoi, quand, depuis quand, par rapport à quoi) est plus utile qu'une interprétation",
               "Connaître les acteurs du réseau suisse romand vous permet de savoir vers qui orienter",
               "Le document de transmission protège la personne lors de chaque transition",
-              "Travailler en réseau vous protège aussi — vous n'êtes plus seul à porter la responsabilité"
+              "Travailler en réseau vous protège aussi, vous n'êtes plus seul à porter la responsabilité"
             ]} />
           </HighlightBox>
         </SectionModule>
@@ -251,11 +251,11 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
             reponses: [
               "\"Je pense que Sylvie fait une dépression, il faudrait changer son traitement.\"",
               "\"Sylvie n'est plus la même depuis quelque temps, quelque chose a changé.\"",
-              "\"Depuis 3 semaines, Sylvie refuse de venir aux ateliers — elle y allait tous les jours. Elle mange moins et dit 'j'ai pas envie'. Ce comportement est nouveau pour elle.\"",
+              "\"Depuis 3 semaines, Sylvie refuse de venir aux ateliers : elle y allait tous les jours. Elle mange moins et dit 'j'ai pas envie'. Ce comportement est nouveau pour elle.\"",
               "\"Sylvie devrait voir un spécialiste, elle ne répond plus bien aux activités.\""
             ],
             bonneReponse: 2,
-            explication: "Une bonne transmission médicale décrit les faits (quoi), la durée (depuis quand), la fréquence, et l'écart avec le comportement habituel. Elle ne contient pas d'interprétation diagnostique ni de prescription. C'est le rôle du médecin d'interpréter — pas le vôtre."
+            explication: "Une bonne transmission médicale décrit les faits (quoi), la durée (depuis quand), la fréquence, et l'écart avec le comportement habituel. Elle ne contient pas d'interprétation diagnostique ni de prescription. C'est le rôle du médecin d'interpréter, pas le vôtre."
           },
           {
             question: "Une personne accompagnée perd progressivement en mobilité et ses transferts deviennent difficiles. Comment mobiliser l'ergothérapie ou la physiothérapie ?",
@@ -293,13 +293,13 @@ export function Module4VieillissementBases({ onValiderModule }: { onValiderModul
           {
             question: "Vous avez 'un feeling' que quelque chose ne va pas, mais rien de concret à formuler. Que faites-vous ?",
             reponses: [
-              "Vous ne dites rien — sans élément concret, vous risquez de vous tromper",
+              "Vous ne dites rien : sans élément concret, vous risquez de vous tromper",
               "Vous appelez immédiatement le médecin pour lui faire part de votre impression",
               "Vous observez de manière plus structurée pendant quelques jours pour transformer votre impression en observation factualisable, puis vous partagez",
               "Vous notez \"impression que ça ne va pas\" dans le dossier et vous passez à autre chose"
             ],
             bonneReponse: 2,
-            explication: "Une impression professionnelle est le point de départ d'une observation, pas son aboutissement. En cherchant à préciser ce qui vous dérange — est-il plus silencieux ? mange-t-il moins ? — vous transformez une intuition diffuse en observation transmissible. Si toute l'équipe partage cette impression, c'est déjà un signal collectif significatif."
+            explication: "Une impression professionnelle est le point de départ d'une observation, pas son aboutissement. En cherchant à préciser ce qui vous dérange, est-il plus silencieux ? mange-t-il moins ? — vous transformez une intuition diffuse en observation transmissible. Si toute l'équipe partage cette impression, c'est déjà un signal collectif significatif."
           }
         ]}
         onValiderModule={onValiderModule}

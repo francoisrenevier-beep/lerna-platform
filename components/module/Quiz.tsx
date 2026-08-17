@@ -93,8 +93,8 @@ export function Quiz({ questions, onValiderModule }: QuizProps) {
           </h3>
           <p className="text-gray-500 text-sm">
             {reussi
-              ? "Vous avez obtenu au moins 70% — vous pouvez valider ce module."
-              : "Score insuffisant — il faut au moins 70% de bonnes reponses pour valider ce module."}
+              ? "Vous avez obtenu au moins 70%, vous pouvez valider ce module."
+              : "Score insuffisant, il faut au moins 70% de bonnes reponses pour valider ce module."}
           </p>
         </div>
 

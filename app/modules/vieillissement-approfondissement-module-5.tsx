@@ -16,7 +16,7 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
         categorie="Handicap et vieillissement"
         titre="Coordination interinstitutionnelle"
         titrePart2="en Suisse romande"
-        sousTitre="Cartographie des acteurs, outils de coordination, gestion des transitions — pour que les mondes communicent."
+        sousTitre="Cartographie des acteurs, outils de coordination, gestion des transitions, pour que les mondes communicent."
         duree="40 minutes"
         niveau="Confirmé"
       />
@@ -41,16 +41,16 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Cartographie des acteurs en Suisse romande">
-          <HighlightBox label="Le médecin référent — pivot incontournable" couleur="bleu">
+          <HighlightBox label="Le médecin référent : pivot incontournable" couleur="bleu">
             <Texte>Dans le système de santé suisse, le médecin de famille (ou médecin référent en contexte institutionnel) joue un rôle central de coordination médicale. C'est lui qui coordonne les différents intervenants, prescrit les bilans spécialisés et assure la continuité des soins dans le temps.</Texte>
             <Texte>La relation avec le médecin référent doit être <strong>active et bidirectionnelle</strong> : l'institution transmet ses observations cliniques, le médecin informe des diagnostics et traitements. Cette communication ne devrait pas se limiter aux situations d'urgence.</Texte>
           </HighlightBox>
 
-          <Texte>Dans la pratique, cette relation bidirectionnelle est souvent asymétrique. L&apos;institution transmet — parfois trop peu, parfois trop tardivement — et le médecin informe en retour lors de visites courtes. Pour que cette relation fonctionne vraiment, elle demande une clarté sur ce que chacun apporte.</Texte>
+          <Texte>Dans la pratique, cette relation bidirectionnelle est souvent asymétrique. L&apos;institution transmet (parfois trop peu, parfois trop tardivement), et le médecin informe en retour lors de visites courtes. Pour que cette relation fonctionne vraiment, elle demande une clarté sur ce que chacun apporte.</Texte>
 
           <Texte>Ce que vous apportez au médecin : la connaissance longitudinale de la personne. Vous savez comment elle était il y a trois ans, ce qu&apos;elle pouvait faire, comment elle communiquait. Un médecin qui reçoit &quot;elle va moins bien depuis quelque temps&quot; ne peut pas agir. Un médecin qui reçoit &quot;depuis six semaines, elle ne reconnaît plus le trajet vers l&apos;atelier qu&apos;elle fait seule depuis 12 ans, et demande plusieurs fois par jour quel jour on est&quot; — peut agir.</Texte>
 
-          <Texte>Ce que le médecin apporte à l&apos;institution : l&apos;expertise clinique, la capacité à poser ou écarter des diagnostics, à prescrire des bilans spécialisés, à coordonner les intervenants médicaux. L&apos;enjeu n&apos;est pas de savoir qui décide — c&apos;est de construire une compréhension partagée de la situation de la personne, où chacun contribue ce qu&apos;il est le seul à pouvoir apporter.</Texte>
+          <Texte>Ce que le médecin apporte à l&apos;institution : l&apos;expertise clinique, la capacité à poser ou écarter des diagnostics, à prescrire des bilans spécialisés, à coordonner les intervenants médicaux. L&apos;enjeu n&apos;est pas de savoir qui décide, c&apos;est de construire une compréhension partagée de la situation de la personne, où chacun contribue ce qu&apos;il est le seul à pouvoir apporter.</Texte>
 
           <TableauComparaison
             titre="Acteurs clés et leurs missions"
@@ -64,9 +64,9 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
                 contenu: [
                   "Mobilité, transferts, prévention des chutes, aides techniques, adaptation des gestes du quotidien",
                   "Évaluation spécialisée des syndromes gériatriques : fragilité, démence, chutes, dénutrition",
-                  "Se déplacent en institution pour des évaluations — adapté aux personnes fragiles",
+                  "Se déplacent en institution pour des évaluations, adapté aux personnes fragiles",
                   "Troubles psychiques se complexifiant avec l'âge",
-                  "Démarches sociales, administratives, défense des droits — handicap",
+                  "Démarches sociales, administratives, défense des droits : handicap",
                   "Services pour personnes âgées : aide à domicile, soutien aux aidants, activités sociales"
                 ]
               },
@@ -84,7 +84,7 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
             ]}
           />
 
-          <HighlightBox label="L'ergothérapie et la physiothérapie — des partenaires à mobiliser" couleur="vert">
+          <HighlightBox label="L'ergothérapie et la physiothérapie : des partenaires à mobiliser" couleur="vert">
             <Texte>Pour les institutions dont les résidents perdent progressivement en autonomie motrice, l'ergothérapie et la physiothérapie sont des partenaires essentiels : travail de la mobilité et des transferts, prévention des chutes, adaptation des gestes du quotidien, évaluation des aides techniques et de l'aménagement des espaces. Elles sont prescrites par un médecin, prises en charge par l'assurance-maladie de base, et peuvent intervenir sur le lieu de vie de la personne.</Texte>
             <Texte>Ces interventions permettent souvent de <strong>maintenir une personne dans son institution d'origine plus longtemps</strong>, en évitant un transfert vers un EMS.</Texte>
           </HighlightBox>
@@ -97,7 +97,7 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
 
           <Texte>La formalisation des partenariats n'est pas de la bureaucratie. C'est une <strong>protection pour la personne accompagnée et pour les équipes</strong>. Elle garantit que la coordination fonctionne indépendamment des personnes en poste.</Texte>
 
-          <HighlightBox label="Les conventions de collaboration — quoi formaliser ?" couleur="bleu">
+          <HighlightBox label="Les conventions de collaboration, quoi formaliser ?" couleur="bleu">
             <Texte>Une convention de collaboration est un document signé entre deux institutions qui formalise : qui fait quoi, comment s'échangent les informations, comment se déroulent les interventions, quels sont les contacts à appeler, comment se gère la facturation.</Texte>
             <Texte>Les conventions prioritaires à établir :</Texte>
             <Liste items={[
@@ -107,13 +107,13 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
             ]} />
           </HighlightBox>
 
-          <Texte>Initier une convention de collaboration peut sembler intimidant. En réalité, c&apos;est souvent plus simple que prévu — à condition de ne pas attendre qu&apos;une crise l&apos;impose. Un premier contact informel — une visite, un appel téléphonique, une rencontre lors d&apos;une journée de réseau — suffit souvent pour poser les bases d&apos;une collaboration. Ce premier contact permet de comprendre les modalités d&apos;intervention du partenaire, ses limites, ses délais. Il humanise aussi la relation : quand une situation d&apos;urgence survient, vous appelez quelqu&apos;un que vous connaissez.</Texte>
+          <Texte>Initier une convention de collaboration peut sembler intimidant. En réalité, c&apos;est souvent plus simple que prévu, à condition de ne pas attendre qu&apos;une crise l&apos;impose. Un premier contact informel, une visite, un appel téléphonique, une rencontre lors d&apos;une journée de réseau, suffit souvent pour poser les bases d&apos;une collaboration. Ce premier contact permet de comprendre les modalités d&apos;intervention du partenaire, ses limites, ses délais. Il humanise aussi la relation : quand une situation d&apos;urgence survient, vous appelez quelqu&apos;un que vous connaissez.</Texte>
 
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-2">Situation</p>
-              <p className="text-gray-700 text-sm font-semibold mb-2">L&apos;institution n&apos;a aucune convention formalisée — et une situation se complexifie</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Votre institution accompagne 45 résidents, dont 18 ont plus de 50 ans. Aucune collaboration formalisée n&apos;existe avec des thérapeutes de la région ni avec un EMS de référence. Cette semaine, un résident de 67 ans ne parvient plus à se déplacer seul jusqu&apos;au réfectoire et a chuté deux fois. L&apos;équipe ne sait pas vers qui se tourner. Parallèlement, une résidente de 72 ans montre des signes de déclin rapide — une transition vers un EMS pourrait être nécessaire dans les prochains mois, mais aucun EMS n&apos;a été identifié en amont.</p>
+              <p className="text-gray-700 text-sm font-semibold mb-2">L&apos;institution n&apos;a aucune convention formalisée, et une situation se complexifie</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Votre institution accompagne 45 résidents, dont 18 ont plus de 50 ans. Aucune collaboration formalisée n&apos;existe avec des thérapeutes de la région ni avec un EMS de référence. Cette semaine, un résident de 67 ans ne parvient plus à se déplacer seul jusqu&apos;au réfectoire et a chuté deux fois. L&apos;équipe ne sait pas vers qui se tourner. Parallèlement, une résidente de 72 ans montre des signes de déclin rapide : une transition vers un EMS pourrait être nécessaire dans les prochains mois, mais aucun EMS n&apos;a été identifié en amont.</p>
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Question de réflexion</p>
@@ -121,12 +121,12 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
             </div>
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Réponse guidée</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Les conséquences sont déjà visibles : la situation du résident de 67 ans traîne alors qu&apos;un bilan de physiothérapie ou d&apos;ergothérapie, prescrit par le médecin référent, pourrait sécuriser ses déplacements. Pour la résidente de 72 ans, le risque est d&apos;agir dans l&apos;urgence quand la transition sera inévitable. En tant que référent, vous pouvez : documenter précisément les chutes et les difficultés de déplacement et les transmettre au médecin référent, signaler à votre hiérarchie la nécessité d&apos;identifier des partenaires en amont, et demander qu&apos;une visite d&apos;un EMS soit organisée pour la résidente de 72 ans — non pour décider d&apos;une transition, mais pour la préparer.</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Les conséquences sont déjà visibles : la situation du résident de 67 ans traîne alors qu&apos;un bilan de physiothérapie ou d&apos;ergothérapie, prescrit par le médecin référent, pourrait sécuriser ses déplacements. Pour la résidente de 72 ans, le risque est d&apos;agir dans l&apos;urgence quand la transition sera inévitable. En tant que référent, vous pouvez : documenter précisément les chutes et les difficultés de déplacement et les transmettre au médecin référent, signaler à votre hiérarchie la nécessité d&apos;identifier des partenaires en amont, et demander qu&apos;une visite d&apos;un EMS soit organisée pour la résidente de 72 ans, non pour décider d&apos;une transition, mais pour la préparer.</p>
             </div>
           </div>
 
-          <HighlightBox label="Le document de transmission — carte d'identité pour les transitions" couleur="vert">
-            <Texte>Lorsqu'une personne change de structure — même temporairement pour une hospitalisation — elle emporte avec elle son histoire. Cette histoire ne doit pas rester dans la tête des professionnels. Un bon document de transmission comprend :</Texte>
+          <HighlightBox label="Le document de transmission : carte d'identité pour les transitions" couleur="vert">
+            <Texte>Lorsqu'une personne change de structure, même temporairement pour une hospitalisation, elle emporte avec elle son histoire. Cette histoire ne doit pas rester dans la tête des professionnels. Un bon document de transmission comprend :</Texte>
             <Liste items={[
               "Informations d'identité et de contexte : diagnostic, histoire institutionnelle, personnes de référence",
               "Description de l'état fonctionnel actuel : ce que la personne fait seule, ce qui nécessite de l'aide",
@@ -190,8 +190,8 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
           <div className="space-y-3 my-6">
             <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-2">Situation</p>
-              <p className="text-gray-700 text-sm font-semibold mb-2">Hélène, 71 ans — une hospitalisation d&apos;urgence sans document de transmission</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Hélène, 71 ans, polyhandicap, est hospitalisée en urgence suite à une pneumonie. L&apos;ambulancier demande ses allergies, ses médicaments, comment elle communique. L&apos;équipe de nuit ne connaît pas tous ces détails. À l&apos;hôpital, le personnel ne comprend pas pourquoi Hélène s&apos;agite et refuse les soins — comportements pourtant bien connus de l&apos;équipe institutionnelle.</p>
+              <p className="text-gray-700 text-sm font-semibold mb-2">Hélène, 71 ans : une hospitalisation d&apos;urgence sans document de transmission</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Hélène, 71 ans, polyhandicap, est hospitalisée en urgence suite à une pneumonie. L&apos;ambulancier demande ses allergies, ses médicaments, comment elle communique. L&apos;équipe de nuit ne connaît pas tous ces détails. À l&apos;hôpital, le personnel ne comprend pas pourquoi Hélène s&apos;agite et refuse les soins, comportements pourtant bien connus de l&apos;équipe institutionnelle.</p>
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Question de réflexion</p>
@@ -199,13 +199,13 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
             </div>
             <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#15803D] mb-2">Réponse guidée</p>
-              <p className="text-gray-700 text-sm leading-relaxed">Cette situation révèle l&apos;absence d&apos;un document de transmission accessible et à jour. Hélène subit les conséquences de cette lacune. Deux propositions concrètes : créer une fiche de transmission standardisée pour chaque résident, mise à jour régulièrement et accessible à toute l&apos;équipe y compris de nuit. Et prévoir une version résumée d&apos;une page qui accompagne physiquement la personne à chaque hospitalisation. Ce n&apos;est pas un travail de direction uniquement — les professionnels de terrain qui connaissent le mieux les personnes sont les mieux placés pour alimenter ces fiches.</p>
+              <p className="text-gray-700 text-sm leading-relaxed">Cette situation révèle l&apos;absence d&apos;un document de transmission accessible et à jour. Hélène subit les conséquences de cette lacune. Deux propositions concrètes : créer une fiche de transmission standardisée pour chaque résident, mise à jour régulièrement et accessible à toute l&apos;équipe y compris de nuit. Et prévoir une version résumée d&apos;une page qui accompagne physiquement la personne à chaque hospitalisation. Ce n&apos;est pas un travail de direction uniquement, les professionnels de terrain qui connaissent le mieux les personnes sont les mieux placés pour alimenter ces fiches.</p>
             </div>
           </div>
         </SectionModule>
 
         <SectionModule eyebrow="Conclusion" titre="Ce que ce module a posé">
-          <Texte>La coordination interinstitutionnelle n'est pas une formalité optionnelle. C'est une condition de continuité et de qualité pour les personnes accompagnées. En Suisse romande, le paysage institutionnel est riche — il faut le connaître, le mobiliser, et l'organiser via des conventions formalisées et des outils de transmission rigoureux.</Texte>
+          <Texte>La coordination interinstitutionnelle n'est pas une formalité optionnelle. C'est une condition de continuité et de qualité pour les personnes accompagnées. En Suisse romande, le paysage institutionnel est riche : il faut le connaître, le mobiliser, et l'organiser via des conventions formalisées et des outils de transmission rigoureux.</Texte>
           <HighlightBox label="À retenir pour la pratique" couleur="vert">
             <Liste items={[
               "Le médecin référent est le pivot : la communication doit être bidirectionnelle et régulière",
@@ -236,7 +236,7 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
           {
             question: "À quelles conditions l'ergothérapie ou la physiothérapie peuvent-elles intervenir auprès d'un résident ?",
             reponses: [
-              "Jamais en institution — ces prestations sont réservées aux personnes vivant à domicile",
+              "Jamais en institution, ces prestations sont réservées aux personnes vivant à domicile",
               "Uniquement après une hospitalisation",
               "Sur prescription médicale : le médecin évalue l'indication et les prestations sont prises en charge par l'assurance-maladie de base",
               "Uniquement à la demande et aux frais des familles"
@@ -272,7 +272,7 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
               "Pro Infirmis est cantonale, Pro Senectute est nationale",
               "Pro Infirmis intervient dans le handicap (droits, démarches sociales), Pro Senectute dans la vieillesse (aide domicile, soutien aidants)",
               "Pro Infirmis s'occupe des adultes, Pro Senectute des enfants",
-              "Il n'y a pas de différence — les deux organisations ont été fusionnées"
+              "Il n'y a pas de différence : les deux organisations ont été fusionnées"
             ],
             bonneReponse: 1,
             explication: "Pro Infirmis est spécialisée dans le handicap : démarches sociales, administratives, défense des droits, soutien aux familles. Pro Senectute est spécialisée dans la vieillesse : aide à domicile, soutien aux aidants, activités sociales. La coordination entre ces deux organisations est encore insuffisante dans de nombreuses régions."
@@ -286,7 +286,7 @@ export function Module5VieillissementApprofondissement({ onValiderModule }: { on
               "Parce que les EMS refusent souvent les personnes en situation de handicap"
             ],
             bonneReponse: 1,
-            explication: "Pour une personne ayant vécu 30 ans dans le même endroit, la perte de tous ses repères — personnes connues, rituels, espaces familiers — peut être profondément déstabilisante. Pour une personne avec difficultés cognitives ou relationnelles, ce changement peut constituer un traumatisme véritable si non préparé."
+            explication: "Pour une personne ayant vécu 30 ans dans le même endroit, la perte de tous ses repères (personnes connues, rituels, espaces familiers) peut être profondément déstabilisante. Pour une personne avec difficultés cognitives ou relationnelles, ce changement peut constituer un traumatisme véritable si non préparé."
           }
         ]}
         onValiderModule={onValiderModule}

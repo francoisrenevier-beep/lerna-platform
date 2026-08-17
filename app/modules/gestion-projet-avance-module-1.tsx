@@ -11,7 +11,7 @@ export function Module1GestionProjetAvance({ onValiderModule }: { onValiderModul
     <div className="min-h-screen bg-white">
       <HeroModule
         numero={1}
-        categorie="Gestion de projet — Niveau Avancé"
+        categorie="Gestion de projet : Niveau Avancé"
         titre="Du projet d'équipe"
         titrePart2="au projet d'établissement"
         sousTitre="Conduire un projet d'équipe et piloter une transformation d'établissement ne sont pas la même activité à deux tailles différentes : ce sont deux métiers, qui demandent des postures distinctes."
@@ -23,7 +23,7 @@ export function Module1GestionProjetAvance({ onValiderModule }: { onValiderModul
 
         <SectionModule eyebrow="Introduction" titre="Changer d'échelle, de complexité et d'horizon">
           <Texte>Aux niveaux précédents, vous avez appris à reconnaître, comprendre et conduire des projets. Le niveau avancé suppose un déplacement : vous n'êtes plus seulement celui qui mène un projet, mais celui qui <strong>pilote des projets structurants</strong>, ceux qui engagent l'institution dans la durée et transforment ses manières de faire. Ce déplacement n'est pas qu'une affaire d'ampleur. Il change la nature même de l'activité.</Texte>
-          <Texte>Un projet d'équipe a des contours relativement nets : un besoin identifiable, un périmètre maîtrisable, une équipe restreinte, un horizon de quelques semaines ou quelques mois. Un projet d'établissement — réorganiser un service, faire évoluer un mode d'accompagnement, transformer une culture de travail — obéit à une autre logique. Ses contours sont flous, ses effets se diffusent dans tout le système, son horizon se compte en années, et personne ne peut en tenir seul tous les fils. <strong>On ne le conduit pas, on le pilote</strong> : on lui donne une direction et un cap, sans maîtriser chacun de ses mouvements.</Texte>
+          <Texte>Un projet d'équipe a des contours relativement nets : un besoin identifiable, un périmètre maîtrisable, une équipe restreinte, un horizon de quelques semaines ou quelques mois. Un projet d'établissement (réorganiser un service, faire évoluer un mode d'accompagnement, transformer une culture de travail) obéit à une autre logique. Ses contours sont flous, ses effets se diffusent dans tout le système, son horizon se compte en années, et personne ne peut en tenir seul tous les fils. <strong>On ne le conduit pas, on le pilote</strong> : on lui donne une direction et un cap, sans maîtriser chacun de ses mouvements.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Un changement de nature, pas seulement de taille">
@@ -31,7 +31,7 @@ export function Module1GestionProjetAvance({ onValiderModule }: { onValiderModul
             <p>Conduire un projet, c'est maîtriser un déroulé qu'on peut embrasser. Piloter une transformation, c'est orienter un système qu'on ne maîtrise pas entièrement : on fixe une direction, on crée des conditions, on ajuste en continu, mais on accepte de ne pas tout contrôler. Le pilote agit moins par l'exécution directe que par les conditions qu'il met en place pour que le changement advienne.</p>
           </ConceptBox>
 
-          <Texte>Cette distinction a des conséquences très concrètes sur la posture. Celui qui croit pouvoir piloter une transformation comme il conduisait un projet d'équipe — en tenant tous les fils, en contrôlant chaque détail — s'épuise et échoue, parce que le système lui échappe par nature. Celui qui comprend qu'il pilote adopte une autre posture : il accepte une part d'incertitude, il travaille sur les conditions plus que sur les actions, il fait confiance à d'autres pour porter des pans du changement qu'il ne peut tenir lui-même. <strong>Le passage à l'échelle institutionnelle est d'abord un passage de posture.</strong></Texte>
+          <Texte>Cette distinction a des conséquences très concrètes sur la posture. Celui qui croit pouvoir piloter une transformation comme il conduisait un projet d'équipe (en tenant tous les fils, en contrôlant chaque détail) s'épuise et échoue, parce que le système lui échappe par nature. Celui qui comprend qu'il pilote adopte une autre posture : il accepte une part d'incertitude, il travaille sur les conditions plus que sur les actions, il fait confiance à d'autres pour porter des pans du changement qu'il ne peut tenir lui-même. <strong>Le passage à l'échelle institutionnelle est d'abord un passage de posture.</strong></Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Les spécificités des projets structurants">
@@ -46,12 +46,12 @@ export function Module1GestionProjetAvance({ onValiderModule }: { onValiderModul
           <Texte>La quatrième est l'<strong>irréductible incertitude</strong>. Une transformation comporte une part d'inconnu : on ne sait pas entièrement, au départ, où elle mènera, ni quels obstacles surgiront. Le pilote avance avec une vision claire de la direction, mais sans carte complète du chemin. Cette incertitude n'est pas un défaut de préparation : elle est inhérente à la nature des transformations, et savoir l'habiter sans s'y dissoudre fait partie du métier.</Texte>
 
           <HighlightBox label="Point de réflexion" couleur="jaune">
-            <Texte>Pensez à une transformation que votre institution a traversée (ou tente de traverser). Reconnaissez-vous ces quatre caractéristiques — diffusion des effets au-delà du prévu, temps long difficile à tenir, implication profonde des personnes, part d'incertitude ? Et la difficulté rencontrée venait-elle souvent d'avoir piloté cette transformation comme un projet ordinaire, en sous-estimant l'une de ces dimensions ?</Texte>
+            <Texte>Pensez à une transformation que votre institution a traversée (ou tente de traverser). Reconnaissez-vous ces quatre caractéristiques, diffusion des effets au-delà du prévu, temps long difficile à tenir, implication profonde des personnes, part d'incertitude ? Et la difficulté rencontrée venait-elle souvent d'avoir piloté cette transformation comme un projet ordinaire, en sous-estimant l'une de ces dimensions ?</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Le projet d'établissement comme cadre de référence">
-          <Texte>Dans le secteur, les transformations ne flottent pas dans le vide : elles s'inscrivent — ou devraient s'inscrire — dans un cadre qui leur donne sens et cohérence, le <strong>projet d'établissement</strong>. Comprendre son rôle est essentiel pour qui pilote, car c'est lui qui distingue une transformation cohérente d'une succession de changements dispersés.</Texte>
+          <Texte>Dans le secteur, les transformations ne flottent pas dans le vide : elles s'inscrivent, ou devraient s'inscrire, dans un cadre qui leur donne sens et cohérence, le <strong>projet d'établissement</strong>. Comprendre son rôle est essentiel pour qui pilote, car c'est lui qui distingue une transformation cohérente d'une succession de changements dispersés.</Texte>
 
           <ConceptBox label="Concept clé" titre="Le projet d'établissement est la boussole des projets de transformation.">
             <p>Il exprime les valeurs, les missions et les orientations d'une institution. Il dit ce que l'institution est, ce qu'elle vise, et la manière dont elle entend accompagner. Un projet structurant pertinent est celui qui sert les orientations du projet d'établissement, et non celui qui les contredit ou s'en écarte au gré des opportunités.</p>
@@ -63,7 +63,7 @@ export function Module1GestionProjetAvance({ onValiderModule }: { onValiderModul
         </SectionModule>
 
         <SectionModule eyebrow="Section 4" titre="Articuler les échelles : du quotidien aux orientations">
-          <Texte>Le pilote de transformation occupe une position particulière : il fait le lien entre des échelles qui, sans lui, ne se parleraient pas. En haut, les orientations institutionnelles, abstraites et de long terme. En bas, le quotidien des équipes et des personnes accompagnées, concret et immédiat. <strong>Le travail du pilote est précisément d'articuler ces deux mondes</strong> — de traduire les orientations en changements concrets, et de faire remonter ce que le terrain enseigne sur la pertinence de ces orientations.</Texte>
+          <Texte>Le pilote de transformation occupe une position particulière : il fait le lien entre des échelles qui, sans lui, ne se parleraient pas. En haut, les orientations institutionnelles, abstraites et de long terme. En bas, le quotidien des équipes et des personnes accompagnées, concret et immédiat. <strong>Le travail du pilote est précisément d'articuler ces deux mondes</strong>, de traduire les orientations en changements concrets, et de faire remonter ce que le terrain enseigne sur la pertinence de ces orientations.</Texte>
 
           <Texte>Cette articulation se joue dans les deux sens. Dans le sens descendant, il s'agit de <strong>traduire</strong> : une orientation institutionnelle (« développer le pouvoir d'agir des personnes accompagnées ») ne devient réelle que déclinée en changements concrets dans les pratiques quotidiennes. Dans le sens ascendant, il s'agit d'<strong>écouter le terrain</strong> : ce que les équipes vivent, ce qui résiste, ce qui fonctionne, informe en retour la pertinence des orientations. Un pilote qui n'écoute que le haut applique mécaniquement des directives déconnectées ; un pilote qui n'écoute que le bas perd le cap. Tenir les deux est l'essence du métier.</Texte>
 
@@ -75,7 +75,7 @@ export function Module1GestionProjetAvance({ onValiderModule }: { onValiderModul
             <Liste items={[
               "Passer du projet d'équipe au projet d'établissement n'est pas un changement de taille mais de nature : on pilote un système qu'on ne contrôle pas entièrement.",
               "Piloter, c'est orienter par les conditions plus que par l'exécution directe, et accepter une part d'incertitude inhérente aux transformations.",
-              "Les projets structurants ont quatre spécificités : diffusion systémique des effets, temporalité longue, implication humaine profonde, irréductible incertitude. Les sous-estimer, c'est piloter une transformation comme un projet ordinaire — et échouer.",
+              "Les projets structurants ont quatre spécificités : diffusion systémique des effets, temporalité longue, implication humaine profonde, irréductible incertitude. Les sous-estimer, c'est piloter une transformation comme un projet ordinaire, et échouer.",
               "Le projet d'établissement est la boussole : source de légitimité et critère de cohérence pour arbitrer entre des projets qui pourraient diverger.",
               "Le pilote est un passeur entre les échelles : il traduit les orientations en changements concrets et fait remonter ce que le terrain enseigne.",
             ]} />
@@ -94,7 +94,7 @@ export function Module1GestionProjetAvance({ onValiderModule }: { onValiderModul
                 "Cela ne demande aucune posture particulière",
               ],
               bonneReponse: 1,
-              explication: "Piloter n'est pas conduire à plus grande échelle : c'est un changement de nature. On oriente un système qu'on ne peut pas entièrement maîtriser — on fixe la direction, on crée des conditions, on ajuste en continu, mais on accepte de ne pas tout contrôler.",
+              explication: "Piloter n'est pas conduire à plus grande échelle : c'est un changement de nature. On oriente un système qu'on ne peut pas entièrement maîtriser, on fixe la direction, on crée des conditions, on ajuste en continu, mais on accepte de ne pas tout contrôler.",
             },
             {
               question: "Quelles sont les quatre spécificités d'un projet structurant ?",

@@ -390,7 +390,7 @@ function DomainSection({
             onClick={handleShowAll}
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#1B2D5B] hover:text-[#3DBFA0] transition-colors border border-[#1B2D5B]/20 hover:border-[#3DBFA0] px-6 py-2.5 rounded-full"
           >
-            Voir toutes les formations — {getDomaineMeta(domaine).label} →
+            Voir toutes les formations : {getDomaineMeta(domaine).label} →
           </button>
         </div>
       )}

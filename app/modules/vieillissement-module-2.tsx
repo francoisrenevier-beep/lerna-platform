@@ -16,7 +16,7 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
         categorie="Handicap et vieillissement"
         titre="Reconnaître les signaux"
         titrePart2="du vieillissement en institution"
-        sousTitre="Signes physiques, cognitifs et comportementaux — et comment éviter le piège de l'overshadowing."
+        sousTitre="Signes physiques, cognitifs et comportementaux, et comment éviter le piège de l'overshadowing."
         duree="45 minutes"
         niveau="Tous niveaux"
       />
@@ -33,17 +33,17 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Adopter une posture d'observation rigoureuse et systématique"
             ]} />
           </ConceptBox>
-          <Texte>Reconnaître les signaux du vieillissement est l'une des compétences les plus importantes — et les plus délicates — dans l'accompagnement des personnes en situation de handicap vieillissantes.</Texte>
+          <Texte>Reconnaître les signaux du vieillissement est l'une des compétences les plus importantes, et les plus délicates, dans l'accompagnement des personnes en situation de handicap vieillissantes.</Texte>
           <Texte>Délicate, parce que ces signaux sont souvent progressifs, discrets, et facilement confondus avec d'autres phénomènes : une "mauvaise période", une aggravation du handicap, un comportement habituel qui s'intensifie.</Texte>
           <PullQuote>
             Un trouble de la déglutition détecté tôt permet d'adapter l'alimentation avant la première fausse route grave. Une démence identifiée à ses débuts permet d'adapter l'environnement avant que les symptômes deviennent ingérables.
           </PullQuote>
-          <Texte>Vous êtes, en tant que professionnel du quotidien, souvent le premier à percevoir ces changements. Votre connaissance intime de la personne — ses habitudes, ses capacités habituelles, ses petits rituels — vous permet de détecter des changements infimes qu'un médecin, vu la personne une fois par trimestre, ne pourrait pas percevoir.</Texte>
+          <Texte>Vous êtes, en tant que professionnel du quotidien, souvent le premier à percevoir ces changements. Votre connaissance intime de la personne (ses habitudes, ses capacités habituelles, ses petits rituels), vous permet de détecter des changements infimes qu'un médecin, vu la personne une fois par trimestre, ne pourrait pas percevoir.</Texte>
         </SectionModule>
 
         <SectionModule eyebrow="Section 1" titre="Signes physiques et fonctionnels : ce que le corps exprime">
 
-          <HighlightBox label="La mobilité et l'équilibre — signal d'alerte central" couleur="bleu">
+          <HighlightBox label="La mobilité et l'équilibre : signal d'alerte central" couleur="bleu">
             <Texte>L'une des premières manifestations du vieillissement est souvent une modification de la mobilité. Soyez attentif aux signes suivants :</Texte>
             <Liste items={[
               "Ralentissement général du pas, marche moins assurée",
@@ -54,7 +54,7 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
             <Texte><strong>Les chutes peuvent avoir des conséquences catastrophiques</strong> : fractures, hospitalisations prolongées, perte définitive de la marche. Signalez immédiatement tout changement observé.</Texte>
           </HighlightBox>
 
-          <HighlightBox label="Les troubles de la déglutition (dysphagie) — un risque souvent invisible" couleur="jaune">
+          <HighlightBox label="Les troubles de la déglutition (dysphagie) : un risque souvent invisible" couleur="jaune">
             <Texte>Fréquents chez les personnes avec paralysie cérébrale, polyhandicap ou trisomie 21. Une fausse route répétée peut entraîner des pneumonies d'aspiration potentiellement mortelles. Signes à surveiller :</Texte>
             <Liste items={[
               "Mange plus lentement qu'avant, tousse pendant ou après les repas",
@@ -96,17 +96,17 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
             <Texte>Un examen visuel et un audiogramme réalisés régulièrement <strong>à partir de 50 ans</strong> peuvent prévenir de nombreuses situations de dégradation évitable. Une perte auditive non corrigée peut être confondue avec une démence débutante.</Texte>
           </HighlightBox>
 
-          <HighlightBox label="Observer, noter, transmettre — la triade indispensable" couleur="bleu">
+          <HighlightBox label="Observer, noter, transmettre : la triade indispensable" couleur="bleu">
             <Texte>La détection précoce repose sur une pratique rigoureuse : <strong>observer, noter, transmettre</strong>. Une chute, c'est un incident. Trois chutes en deux mois, c'est un signal. Un refus alimentaire répété deux semaines de suite, c'est quelque chose à investiguer.</Texte>
             <Texte>Prenez l'habitude de noter dans les transmissions tout changement fonctionnel que vous observez, même s'il vous semble mineur.</Texte>
           </HighlightBox>
         </SectionModule>
 
         <SectionModule eyebrow="Section 2" titre="Troubles cognitifs et neurodégénératifs : reconnaître ce qui change">
-          <Texte>Reconnaître les débuts d'un trouble cognitif chez une personne en situation de déficience intellectuelle est l'un des défis les plus difficiles. Les outils d'évaluation cognitive standard ont été conçus pour la population générale — ils sont souvent inadaptés.</Texte>
+          <Texte>Reconnaître les débuts d'un trouble cognitif chez une personne en situation de déficience intellectuelle est l'un des défis les plus difficiles. Les outils d'évaluation cognitive standard ont été conçus pour la population générale, ils sont souvent inadaptés.</Texte>
 
-          <HighlightBox label="Le concept d'état de base — clé de l'évaluation" couleur="bleu">
-            <Texte>L'<strong>état de base</strong> désigne l'ensemble des capacités, comportements, habitudes et compétences propres à une personne à un moment donné, documenté comme référence. Si vous accompagnez une personne depuis 10 ans, vous connaissez son état de base. C'est par la <strong>comparaison avec cet état de base</strong> que vous pouvez détecter un déclin cognitif — et non par des tests standardisés inadaptés.</Texte>
+          <HighlightBox label="Le concept d'état de base : clé de l'évaluation" couleur="bleu">
+            <Texte>L'<strong>état de base</strong> désigne l'ensemble des capacités, comportements, habitudes et compétences propres à une personne à un moment donné, documenté comme référence. Si vous accompagnez une personne depuis 10 ans, vous connaissez son état de base. C'est par la <strong>comparaison avec cet état de base</strong> que vous pouvez détecter un déclin cognitif, et non par des tests standardisés inadaptés.</Texte>
           </HighlightBox>
 
           <SchemaEtapes
@@ -128,9 +128,9 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
         </SectionModule>
 
         <SectionModule eyebrow="Section 3" titre="Manifestations psychiques : la dimension émotionnelle du vieillissement">
-          <Texte>Le vieillissement n'est pas uniquement une réalité biologique. C'est aussi une expérience subjective : l'expérience de la perte, du changement, de la finitude. Les personnes en situation de handicap perçoivent les changements dans leur corps, dans leurs capacités, dans leur vie sociale — même si elles ne peuvent pas toujours les nommer.</Texte>
+          <Texte>Le vieillissement n'est pas uniquement une réalité biologique. C'est aussi une expérience subjective : l'expérience de la perte, du changement, de la finitude. Les personnes en situation de handicap perçoivent les changements dans leur corps, dans leurs capacités, dans leur vie sociale, même si elles ne peuvent pas toujours les nommer.</Texte>
 
-          <HighlightBox label="La dépression — un risque majeur et sous-estimé" couleur="jaune">
+          <HighlightBox label="La dépression : un risque majeur et sous-estimé" couleur="jaune">
             <Texte>Chez les personnes avec des difficultés de communication, la dépression s'exprime souvent de manière somatique et comportementale :</Texte>
             <Liste items={[
               "Refus alimentaire, perturbations du sommeil",
@@ -175,7 +175,7 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
 
         <SectionModule eyebrow="Section 4" titre="Le phénomène d'overshadowing : le biais qui cache la réalité">
           <HighlightBox label="Définition" couleur="bleu">
-            <Texte>L'<strong>overshadowing</strong> (ou "effet d'éclipse") désigne la tendance à attribuer automatiquement tout changement observé chez une personne en situation de handicap à son handicap initial, sans chercher d'autres causes possibles. Ce biais touche les médecins, les infirmiers, et les professionnels du quotidien. Il n'est pas une faute — c'est un biais cognitif naturel. Mais ses conséquences peuvent être graves.</Texte>
+            <Texte>L'<strong>overshadowing</strong> (ou "effet d'éclipse") désigne la tendance à attribuer automatiquement tout changement observé chez une personne en situation de handicap à son handicap initial, sans chercher d'autres causes possibles. Ce biais touche les médecins, les infirmiers, et les professionnels du quotidien. Il n'est pas une faute, c'est un biais cognitif naturel. Mais ses conséquences peuvent être graves.</Texte>
           </HighlightBox>
 
           <Texte>Voici trois situations d'overshadowing typiques :</Texte>
@@ -225,7 +225,7 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Observer, noter, transmettre : la triade de la détection précoce",
               "L'état de base documenté est l'outil de référence pour détecter un déclin cognitif",
               "La dépression s'exprime souvent par le corps chez les personnes avec peu de mots",
-              "L'overshadowing est un biais naturel — en avoir conscience est le premier pas pour s'en prémunir",
+              "L'overshadowing est un biais naturel, en avoir conscience est le premier pas pour s'en prémunir",
               "Signaler un changement, même mineur, c'est une responsabilité professionnelle"
             ]} />
           </HighlightBox>
@@ -244,7 +244,7 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
               "Parce qu'ils ont accès aux dossiers médicaux complets"
             ],
             bonneReponse: 1,
-            explication: "La connaissance intime de la personne — ses habitudes, ses capacités habituelles, ses petits rituels — permet aux professionnels de terrain de percevoir des changements infimes. Un médecin qui voit la personne une fois par trimestre ne dispose pas de cette perspective longitudinale."
+            explication: "La connaissance intime de la personne (ses habitudes, ses capacités habituelles, ses petits rituels) permet aux professionnels de terrain de percevoir des changements infimes. Un médecin qui voit la personne une fois par trimestre ne dispose pas de cette perspective longitudinale."
           },
           {
             question: "Parmi ces signes, lequel est le plus évocateur d'un trouble de la déglutition ?",
@@ -266,7 +266,7 @@ export function Module2Vieillissement({ onValiderModule }: { onValiderModule?: (
               "La liste des médicaments pris par une personne à un moment donné"
             ],
             bonneReponse: 1,
-            explication: "L'état de base est la référence individuelle propre à chaque personne. C'est par la comparaison avec cet état de base — et non par des tests standardisés inadaptés — que l'on peut détecter un déclin cognitif chez une personne avec déficience intellectuelle."
+            explication: "L'état de base est la référence individuelle propre à chaque personne. C'est par la comparaison avec cet état de base, et non par des tests standardisés inadaptés, que l'on peut détecter un déclin cognitif chez une personne avec déficience intellectuelle."
           },
           {
             question: "Comment la dépression se manifeste-t-elle souvent chez les personnes avec peu de capacités de communication ?",
