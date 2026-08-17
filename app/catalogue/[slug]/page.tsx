@@ -224,9 +224,7 @@ export default function CatalogueFormationDetailPage() {
         formation_titre: formation.titre,
         formation_categorie: firstDomaine || "Formation",
         duree_heures: dureeHeuresFromMinutes(formation.duree_estimee_minutes || 0),
-        date_obtention: attestation.created_at
-          ? new Date(attestation.created_at).toLocaleDateString("fr-FR")
-          : new Date().toLocaleDateString("fr-FR"),
+        date_obtention: attestation.created_at ?? new Date().toISOString(),
         modules_completes: nbTermines,
         modules_total: nbModules,
         institution_nom: institutionNom || "Institution",

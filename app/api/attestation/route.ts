@@ -29,10 +29,9 @@ interface AttestationPayload {
   numero_verification: string
 }
 
-function getLogoBase64(): string {
+function getPublicPngBase64(filename: string): string {
   try {
-    const logoPath = join(process.cwd(), 'public', 'logo-learna-couleur.png')
-    const buffer = readFileSync(logoPath)
+    const buffer = readFileSync(join(process.cwd(), 'public', filename))
     return `data:image/png;base64,${buffer.toString('base64')}`
   } catch {
     return ''
@@ -48,23 +47,26 @@ function formatDuree(duree: string): string {
   return duree
 }
 
-function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
+function buildHtml(data: AttestationPayload, logoDataUrl: string, signatureDataUrl: string): string {
   const nomComplet = `${escHtml(data.prenom)} ${escHtml(data.nom)}`.trim() || 'Apprenant(e)'
   const dateFormatted = (() => {
-    try {
-      return new Date(data.date_obtention).toLocaleDateString('fr-FR', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      })
-    } catch {
-      return data.date_obtention
-    }
+    const parsed = new Date(data.date_obtention)
+    // Une date illisible ne doit jamais imprimer « Invalid Date » sur l'attestation
+    if (Number.isNaN(parsed.getTime())) return data.date_obtention
+    return parsed.toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
   })()
 
   const logoHtml = logoDataUrl
     ? `<img src="${logoDataUrl}" alt="Learna" style="width: 190px; display: block;">`
     : `<span style="font-size: 24px; font-weight: 800; color: #0d1f4b;">LEARNA</span>`
+
+  const signatureHtml = signatureDataUrl
+    ? `<img class="signature-img" src="${signatureDataUrl}" alt="Signature Learna">`
+    : ''
 
   const institutionHtml = data.institution_nom
     ? `<div><div class="info-label">Institution</div><div class="info-value">${escHtml(data.institution_nom)}</div></div>`
@@ -175,9 +177,19 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
   }
   .signature {
     text-align: center;
-    width: 240px;
+    width: 260px;
   }
-  .signature-space { height: 72px; }
+  .signature-space {
+    height: 70px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .signature-img {
+    max-width: 210px;
+    max-height: 70px;
+    object-fit: contain;
+  }
   .signature-name {
     border-top: 1px solid #0d1f4b;
     margin-top: 8px;
@@ -223,7 +235,7 @@ function buildHtml(data: AttestationPayload, logoDataUrl: string): string {
     <div class="spacer"></div>
     <div class="signature-row">
       <div class="signature">
-        <div class="signature-space"></div>
+        <div class="signature-space">${signatureHtml}</div>
         <div class="signature-name">Learna</div>
         <div class="signature-role">Organisme de formation</div>
       </div>
@@ -284,8 +296,9 @@ export async function POST(req: NextRequest) {
     })
 
     const page = await browser.newPage()
-    const logoDataUrl = getLogoBase64()
-    const html = buildHtml(data, logoDataUrl)
+    const logoDataUrl = getPublicPngBase64('logo-learna-couleur.png')
+    const signatureDataUrl = getPublicPngBase64('signature-learna.png')
+    const html = buildHtml(data, logoDataUrl, signatureDataUrl)
 
     await page.setContent(html, { waitUntil: 'networkidle0', timeout: 20000 })
     const pdf = await page.pdf({
