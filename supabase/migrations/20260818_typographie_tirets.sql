@@ -1,18 +1,21 @@
 -- Typographie : remplace le tiret cadratin par une ponctuation francaise courante
--- dans les contenus deja presents en base (titres et descriptions de formations,
--- de modules et de ressources). Les migrations anterieures ne sont pas modifiees :
--- elles ont deja ete appliquees, seul l'etat courant des tables est corrige ici.
+-- dans les contenus deja presents en base. Les migrations anterieures ne sont pas
+-- modifiees : elles ont deja ete appliquees, seul l'etat courant des tables l'est.
 --
--- Defensive : chaque couple table/colonne n'est traite que s'il existe reellement.
+-- Table de travail ordinaire (et non TEMPORARY) : l'editeur SQL Supabase repartit
+-- les instructions sur des connexions poolees, ou une table temporaire creee par
+-- une instruction n'est plus visible par la suivante.
+--
 -- La table v1 `ressources` a ete supprimee par 20260516_resources_new.sql apres
--- recopie de ses lignes dans `resources` (titre -> title), d'ou les deux variantes.
+-- recopie de ses lignes dans `resources` (titre -> title). Seule `resources` est
+-- donc ciblee ici.
 --
 -- Idempotent : chaque UPDATE ne touche que les lignes encore dans l'ancienne forme.
+-- Sans transaction englobante, pour qu'un echec eventuel sur une table n'annule
+-- pas les corrections deja appliquees aux autres.
 
-begin;
-
-create temporary table _fix_tirets (ancien text primary key, nouveau text not null)
-  on commit drop;
+drop table if exists _fix_tirets;
+create table _fix_tirets (ancien text primary key, nouveau text not null);
 
 insert into _fix_tirets (ancien, nouveau) values
   ('Accompagner dignement la fin de vie des personnes en situation de handicap vieillissantes — sans sortir du champ du travail social.', 'Accompagner dignement la fin de vie des personnes en situation de handicap vieillissantes, sans sortir du champ du travail social.'),
@@ -69,45 +72,30 @@ insert into _fix_tirets (ancien, nouveau) values
   ('Équipe de test interne — non destiné aux apprenants', 'Équipe de test interne, non destiné aux apprenants'),
   ('Éveiller le regard : dans une institution sociale ou médico-sociale, les données sont partout — et presque toujours sensibles. Distinguer données personnelles et données sensibles, identifier les trois canaux de circulation (oral, papier, écran) et comprendre la responsabilité partagée.', 'Éveiller le regard : dans une institution sociale ou médico-sociale, les données sont partout, et presque toujours sensibles. Distinguer données personnelles et données sensibles, identifier les trois canaux de circulation (oral, papier, écran) et comprendre la responsabilité partagée.');
 
-do $$
-declare
-  cible  record;
-  n      int;
-  total  int := 0;
-begin
-  for cible in
-    select * from (values
-      ('formations', 'titre'),
-      ('formations', 'description'),
-      ('formations', 'description_courte'),
-      ('formations', 'public_cible'),
-      ('modules',    'titre'),
-      ('modules',    'description'),
-      ('resources',  'title'),
-      ('resources',  'description'),
-      ('ressources', 'titre'),
-      ('ressources', 'description')
-    ) as t(tbl, col)
-  loop
-    if exists (
-      select 1 from information_schema.columns
-      where table_schema = 'public'
-        and table_name   = cible.tbl
-        and column_name  = cible.col
-    ) then
-      execute format(
-        'update %I d set %I = x.nouveau from _fix_tirets x where d.%I = x.ancien',
-        cible.tbl, cible.col, cible.col);
-      get diagnostics n = row_count;
-      total := total + n;
-      if n > 0 then
-        raise notice '%.% : % ligne(s) corrigee(s)', cible.tbl, cible.col, n;
-      end if;
-    else
-      raise notice '%.% : absente, ignoree', cible.tbl, cible.col;
-    end if;
-  end loop;
-  raise notice 'Total : % ligne(s) corrigee(s)', total;
-end $$;
+update formations d set titre = x.nouveau from _fix_tirets x where d.titre = x.ancien;
+update formations d set description = x.nouveau from _fix_tirets x where d.description = x.ancien;
+update formations d set description_courte = x.nouveau from _fix_tirets x where d.description_courte = x.ancien;
+update formations d set public_cible = x.nouveau from _fix_tirets x where d.public_cible = x.ancien;
+update modules d set titre = x.nouveau from _fix_tirets x where d.titre = x.ancien;
+update modules d set description = x.nouveau from _fix_tirets x where d.description = x.ancien;
+update resources d set title = x.nouveau from _fix_tirets x where d.title = x.ancien;
+update resources d set description = x.nouveau from _fix_tirets x where d.description = x.ancien;
 
-commit;
+drop table _fix_tirets;
+
+-- Verification : doit renvoyer 0 partout.
+select 'formations.titre' as champ, count(*) as tirets_restants from formations where titre like '%—%'
+union all
+select 'formations.description' as champ, count(*) as tirets_restants from formations where description like '%—%'
+union all
+select 'formations.description_courte' as champ, count(*) as tirets_restants from formations where description_courte like '%—%'
+union all
+select 'formations.public_cible' as champ, count(*) as tirets_restants from formations where public_cible like '%—%'
+union all
+select 'modules.titre' as champ, count(*) as tirets_restants from modules where titre like '%—%'
+union all
+select 'modules.description' as champ, count(*) as tirets_restants from modules where description like '%—%'
+union all
+select 'resources.title' as champ, count(*) as tirets_restants from resources where title like '%—%'
+union all
+select 'resources.description' as champ, count(*) as tirets_restants from resources where description like '%—%';
