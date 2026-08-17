@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, LogIn } from "lucide-react"
 
 const navLinks = [
   { label: "Accueil", href: "/" },
@@ -38,16 +38,19 @@ export function Navigation() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/connexion"
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-            >
-              Connexion
-            </Link>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
+          {/* Accès : connexion (visiteurs déjà clients) puis CTA commercial.
+              La connexion est sortie de la liste de liens — noyée parmi eux,
+              un collaborateur ne repérait pas où se connecter. */}
+          <div className="hidden lg:flex lg:items-center lg:gap-3">
+            <Link
+              href="/connexion"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-[#1B2D5B] px-4 py-2 text-sm font-semibold text-[#1B2D5B] transition-colors hover:bg-[#1B2D5B] hover:text-white whitespace-nowrap"
+            >
+              <LogIn className="h-4 w-4" />
+              Se connecter
+            </Link>
             <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
               <Link href="/contact">Demander un accès</Link>
             </Button>
@@ -87,12 +90,13 @@ export function Navigation() {
             ))}
             <Link
               href="/connexion"
-              className="block py-2 text-sm font-medium text-foreground/80"
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border-2 border-[#1B2D5B] px-4 py-2.5 text-sm font-semibold text-[#1B2D5B] transition-colors hover:bg-[#1B2D5B] hover:text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Connexion
+              <LogIn className="h-4 w-4" />
+              Se connecter
             </Link>
-            <Button asChild className="mt-4 w-full bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button asChild className="mt-2 w-full bg-accent text-accent-foreground hover:bg-accent/90">
               <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                 Demander un accès
               </Link>
