@@ -5,11 +5,12 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import {
   GraduationCap, LayoutGrid, TrendingUp, Library, Award, User,
-  Clock, Users, Heart, Star, ArrowRight,
+  Clock, Users, Heart, Star, ArrowRight, ChevronDown,
 } from "lucide-react"
 import { Sidebar } from "@/components/Sidebar"
 import { BottomNav } from "@/components/BottomNav"
 import { PageHeader } from "@/components/PageHeader"
+import { BesoinsTeaser } from "@/components/BesoinsTeaser"
 import { getDomaineMeta } from "@/lib/formationMeta"
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -152,6 +153,36 @@ function RangBadge({ rang, accent }: { rang: number; accent: string }) {
   )
 }
 
+// Nombre de formations montrées d'emblée dans les classements. Le reste se
+// déplie à la demande : l'aperçu doit rester lisible sans cacher le classement.
+const APERCU_POPULAIRES = 4
+
+function BoutonVoirPlus({
+  deplie,
+  restants,
+  onClick,
+  accent,
+}: {
+  deplie: boolean
+  restants: number
+  onClick: () => void
+  accent: string
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="mt-4 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl border border-gray-100 text-xs font-semibold transition-colors hover:bg-gray-50"
+      style={{ color: accent }}
+    >
+      {deplie ? "Réduire la liste" : `Voir ${restants} de plus`}
+      <ChevronDown
+        className="w-3.5 h-3.5 transition-transform"
+        style={{ transform: deplie ? "rotate(180deg)" : undefined }}
+      />
+    </button>
+  )
+}
+
 function StarsDisplay({ rating }: { rating: number }) {
   const pleines = Math.round(rating)
   return (
@@ -208,6 +239,8 @@ function DashboardSkeleton() {
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [voirToutSuivies, setVoirToutSuivies] = useState(false)
+  const [voirToutAimees, setVoirToutAimees] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -383,14 +416,15 @@ export default function DashboardPage() {
     },
   ]
 
-  const plusSuivies = formationsPopulaires
+  const plusSuiviesTout = formationsPopulaires
     .filter((f) => f.participantsCount > 0)
     .sort((a, b) => b.participantsCount - a.participantsCount)
-    .slice(0, 4)
-  const plusAimees = formationsPopulaires
+  const plusAimeesTout = formationsPopulaires
     .filter((f) => f.nbEvaluations > 0 && f.noteMoyenne !== null)
     .sort((a, b) => (b.noteMoyenne ?? 0) - (a.noteMoyenne ?? 0))
-    .slice(0, 4)
+
+  const plusSuivies = voirToutSuivies ? plusSuiviesTout : plusSuiviesTout.slice(0, APERCU_POPULAIRES)
+  const plusAimees = voirToutAimees ? plusAimeesTout : plusAimeesTout.slice(0, APERCU_POPULAIRES)
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex overflow-x-hidden">
@@ -555,6 +589,14 @@ export default function DashboardPage() {
                 ) : (
                   <p className="text-xs text-gray-400">Pas encore assez de données pour ce classement.</p>
                 )}
+                {plusSuiviesTout.length > APERCU_POPULAIRES && (
+                  <BoutonVoirPlus
+                    deplie={voirToutSuivies}
+                    restants={plusSuiviesTout.length - APERCU_POPULAIRES}
+                    onClick={() => setVoirToutSuivies(!voirToutSuivies)}
+                    accent="#3DBFA0"
+                  />
+                )}
               </div>
 
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
@@ -580,6 +622,14 @@ export default function DashboardPage() {
                 ) : (
                   <p className="text-xs text-gray-400">Pas encore assez de données pour ce classement.</p>
                 )}
+                {plusAimeesTout.length > APERCU_POPULAIRES && (
+                  <BoutonVoirPlus
+                    deplie={voirToutAimees}
+                    restants={plusAimeesTout.length - APERCU_POPULAIRES}
+                    onClick={() => setVoirToutAimees(!voirToutAimees)}
+                    accent="#BE123C"
+                  />
+                )}
               </div>
             </div>
 
@@ -587,6 +637,9 @@ export default function DashboardPage() {
               Voir tout le catalogue →
             </a>
           </section>
+
+          {/* ── Mur des besoins (co-construction du catalogue) ────────────── */}
+          <BesoinsTeaser />
 
         </div>
       </main>

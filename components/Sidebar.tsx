@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
 type SidebarProps = {
-  pageActive: "dashboard" | "formations" | "catalogue" | "progression" | "attestations" | "profil" | "ressources"
+  pageActive: "dashboard" | "formations" | "catalogue" | "progression" | "attestations" | "profil" | "ressources" | "besoins"
   institution?: string
   prenom?: string
 }
@@ -63,6 +63,16 @@ function IconAttestations() {
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="8" r="6"/>
       <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+    </svg>
+  )
+}
+
+function IconBesoins() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 18h6"/>
+      <path d="M10 22h4"/>
+      <path d="M12 2a7 7 0 0 0-4 12.7V18h8v-3.3A7 7 0 0 0 12 2z"/>
     </svg>
   )
 }
@@ -150,6 +160,7 @@ export function Sidebar({ pageActive, institution }: SidebarProps) {
     { href: "/ressources",   label: "Ressources",      Icon: IconRessources,   id: "ressources"   },
     { href: "/attestations", label: "Attestations",    Icon: IconAttestations, id: "attestations" },
     { href: "/progression",  label: "Ma progression",  Icon: IconProgression,  id: "progression"  },
+    { href: "/besoins",      label: "Mur des besoins", Icon: IconBesoins,      id: "besoins"      },
     { href: "/profil",       label: "Mon profil",      Icon: IconProfil,       id: "profil"       },
   ]
 

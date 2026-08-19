@@ -8,6 +8,7 @@ import { BottomNav } from "@/components/BottomNav"
 import { DOMAINES as DOMAINES_META, getDomaineMeta, getNiveauMeta, titreVignette } from "@/lib/formationMeta"
 import { VignetteTypo } from "@/components/formations-preview"
 import { Signal } from "lucide-react"
+import { BesoinCTA } from "@/components/BesoinCTA"
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -861,6 +862,20 @@ export default function CataloguePage() {
                     >
                       Effacer tous les filtres
                     </button>
+
+                    {/* Une recherche sans résultat est le moment le plus utile
+                        pour recueillir un besoin : la personne sait exactement
+                        ce qu'elle cherchait. */}
+                    <div className="mt-8 pt-8 border-t border-gray-100 w-full max-w-md">
+                      <p className="text-sm font-semibold text-[#1B2D5B]">
+                        Cette formation n'existe pas encore ?
+                      </p>
+                      <p className="text-xs text-gray-400 mt-1 mb-4 leading-relaxed">
+                        Le catalogue Learna se construit à partir des besoins remontés du
+                        terrain. Dites-nous ce qui vous manque, en une phrase.
+                      </p>
+                      <BesoinCTA titreInitial={search} label="Proposer cette formation" />
+                    </div>
                   </div>
                 )}
               </>
