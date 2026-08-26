@@ -13,8 +13,8 @@ import {
  * diverger du calculateur ni du contrat. Ne jamais y réintroduire de valeur
  * saisie à la main.
  *
- * Le coût par ETP est volontairement calculé sur le tarif catalogue : c'est la
- * grandeur structurelle du barème, indépendante de la remise de lancement.
+ * Le coût par ETP est calculé sur la licence annuelle pleine : c'est la
+ * grandeur structurelle du barème.
  */
 export function TarifsTableau() {
   const lignes = LIGNES_REFERENCE.map((etp) => {
@@ -23,14 +23,13 @@ export function TarifsTableau() {
     // LIGNES_REFERENCE s'arrête au seuil de devis ; le garde-fou n'est là que
     // pour le typage, et pour casser visiblement si quelqu'un ajoute 500.
     if (tarif.surDevis) {
-      return { etp, catalogue: "—", lancement: "—", coutParEtp: "sur devis" }
+      return { etp, catalogue: "—", coutParEtp: "sur devis" }
     }
 
     return {
       etp,
       catalogue: formaterCHF(tarif.catalogue),
-      lancement: formaterCHF(tarif.lancement),
-      coutParEtp: formaterCoutParEtp(tarif.coutParEtpCatalogue),
+      coutParEtp: formaterCoutParEtp(tarif.coutParEtp),
     }
   })
 
@@ -46,9 +45,6 @@ export function TarifsTableau() {
               </th>
               <th scope="col" className="px-5 py-4 text-right font-semibold">
                 Licence annuelle
-              </th>
-              <th scope="col" className="px-5 py-4 text-right font-semibold">
-                Tarif de lancement
               </th>
               <th scope="col" className="px-5 py-4 text-right font-semibold">
                 Coût par ETP / an
@@ -67,11 +63,8 @@ export function TarifsTableau() {
                 >
                   {ligne.etp}
                 </th>
-                <td className="px-5 py-4 text-right text-muted-foreground tabular-nums">
-                  {ligne.catalogue} CHF
-                </td>
                 <td className="px-5 py-4 text-right font-bold text-[#1B2D5B] tabular-nums">
-                  {ligne.lancement} CHF
+                  {ligne.catalogue} CHF
                 </td>
                 <td className="px-5 py-4 text-right text-muted-foreground tabular-nums">
                   {ligne.coutParEtp} CHF
@@ -82,7 +75,7 @@ export function TarifsTableau() {
         </table>
       </div>
 
-      {/* Cartes empilées — sous 640 px, où quatre colonnes deviennent illisibles */}
+      {/* Cartes empilées — sous 640 px, où le tableau devient illisible */}
       <ul className="space-y-3 sm:hidden">
         {lignes.map((ligne) => (
           <li
@@ -94,15 +87,9 @@ export function TarifsTableau() {
             </p>
             <dl className="mt-3 space-y-1.5 text-sm">
               <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Licence annuelle</dt>
-                <dd className="text-muted-foreground tabular-nums">
-                  {ligne.catalogue} CHF
-                </dd>
-              </div>
-              <div className="flex items-baseline justify-between gap-3">
-                <dt className="font-medium text-[#1B2D5B]">Tarif de lancement</dt>
+                <dt className="font-medium text-[#1B2D5B]">Licence annuelle</dt>
                 <dd className="font-bold text-[#1B2D5B] tabular-nums">
-                  {ligne.lancement} CHF
+                  {ligne.catalogue} CHF
                 </dd>
               </div>
               <div className="flex items-baseline justify-between gap-3">
@@ -119,6 +106,15 @@ export function TarifsTableau() {
       <p className="mt-6 text-sm text-muted-foreground">
         Au-delà de {SEUIL_DEVIS} ETP, nous établissons une proposition adaptée à
         votre organisation.
+      </p>
+      <p className="mt-3 text-sm text-muted-foreground">
+        Les institutions dont la situation le justifie peuvent nous contacter
+        pour examiner ensemble les conditions d&apos;un partenariat.
+      </p>
+      <p className="mt-3 text-sm text-muted-foreground">
+        La licence couvre l&apos;ensemble des collaborateurs de
+        l&apos;institution, et non un nombre d&apos;ETP&nbsp;: le tarif est
+        calculé sur les ETP par souci de simplicité.
       </p>
     </div>
   )

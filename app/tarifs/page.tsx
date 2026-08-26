@@ -10,7 +10,6 @@ import {
   ETP_INCLUS,
   formaterCHF,
   PRIX_PAR_ETP_SUPPLEMENTAIRE,
-  REMISE_LANCEMENT,
   SOCLE_CHF,
 } from "@/lib/tarifs"
 
@@ -118,35 +117,7 @@ export default function TarifsPage() {
         </div>
       </section>
 
-      {/* Bloc 5 — Tarif de lancement */}
-      <section className="bg-background py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
-            Tarif de lancement
-          </h2>
-          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            Les institutions qui rejoignent Learna durant sa phase de lancement
-            bénéficient de {REMISE_LANCEMENT * 100} % de réduction sur leur
-            licence annuelle, avec un tarif garanti pendant trois ans.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Une manière de rejoindre Learna dès aujourd&apos;hui tout en
-            bénéficiant durablement de conditions privilégiées.
-          </p>
-
-          <div className="mt-8 rounded-xl border border-[#3DBFA0]/30 bg-[#3DBFA0]/[0.06] p-6">
-            <p className="font-semibold text-[#1B2D5B]">
-              Offre de lancement réservée aux 10 premières institutions
-              partenaires
-            </p>
-            <p className="mt-1.5 text-muted-foreground">
-              –30&nbsp;% sur la licence annuelle, tarif garanti pendant 3 ans.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Bloc 6 — Stabilité tarifaire */}
+      {/* Bloc 5 — Stabilité tarifaire */}
       <section className="border-y border-[#1B2D5B]/[0.06] bg-gradient-to-l from-[#1B2D5B]/[0.04] to-[#3DBFA0]/[0.05] py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
@@ -162,7 +133,7 @@ export default function TarifsPage() {
         </div>
       </section>
 
-      {/* Bloc 7 — Appel à l'action */}
+      {/* Bloc 6 — Appel à l'action */}
       <section className="relative overflow-hidden bg-[#1B2D5B] py-16 sm:py-20">
         <div
           aria-hidden

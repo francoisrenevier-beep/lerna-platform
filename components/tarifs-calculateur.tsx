@@ -6,6 +6,9 @@ import Link from "next/link"
 import {
   bornerEtp,
   calculerTarif,
+  COLLABORATEURS_MAX,
+  COLLABORATEURS_MIN,
+  coutParCollaborateur,
   ETP_DEFAUT,
   ETP_MAX,
   ETP_MIN,
@@ -28,36 +31,80 @@ export function TarifsCalculateur() {
   // et au blur pour recaler visuellement une valeur hors bornes.
   const [saisie, setSaisie] = useState(String(ETP_DEFAUT))
 
+  // Champ facultatif : vide par défaut, et jamais pré-rempli ni déduit des ETP.
+  // Un effectif proposé par le site serait un ratio implicite que nous
+  // n'avançons pas ; c'est à l'institution de donner son propre chiffre. Pas de
+  // recalage au blur non plus : le champ doit pouvoir rester vide.
+  const [saisieCollaborateurs, setSaisieCollaborateurs] = useState("")
+
   const etp = bornerEtp(Number.parseInt(saisie, 10))
   const tarif = calculerTarif(etp)
+
+  // `null` dès que la saisie est vide, nulle, non numérique, hors bornes ou
+  // inférieure aux ETP : aucun coût par collaborateur n'est alors affiché.
+  const parCollaborateur = tarif.surDevis
+    ? null
+    : coutParCollaborateur(
+        tarif.catalogue,
+        Number.parseInt(saisieCollaborateurs, 10),
+        etp
+      )
 
   return (
     <div className="rounded-2xl border border-[#1B2D5B]/10 bg-white p-6 shadow-sm sm:p-8">
       <div className="grid gap-8 sm:grid-cols-2 sm:items-start">
         {/* Saisie */}
-        <div>
-          <label
-            htmlFor="etp"
-            className="block text-sm font-medium text-[#1B2D5B]"
-          >
-            Nombre d&apos;ETP
-          </label>
-          <input
-            id="etp"
-            name="etp"
-            type="number"
-            inputMode="numeric"
-            min={ETP_MIN}
-            max={ETP_MAX}
-            step={1}
-            value={saisie}
-            onChange={(e) => setSaisie(e.target.value)}
-            onBlur={() => setSaisie(String(etp))}
-            className="mt-3 w-full rounded-lg border border-[#1B2D5B]/20 bg-white px-4 py-3 text-2xl font-bold text-[#1B2D5B] tabular-nums outline-none transition-colors focus:border-[#3DBFA0] focus:ring-2 focus:ring-[#3DBFA0]/30"
-          />
-          <p className="mt-2 text-xs text-muted-foreground">
-            De {ETP_MIN} à {formaterCHF(ETP_MAX)} ETP.
-          </p>
+        <div className="space-y-6">
+          <div>
+            <label
+              htmlFor="etp"
+              className="block text-sm font-medium text-[#1B2D5B]"
+            >
+              Nombre d&apos;ETP
+            </label>
+            <input
+              id="etp"
+              name="etp"
+              type="number"
+              inputMode="numeric"
+              min={ETP_MIN}
+              max={ETP_MAX}
+              step={1}
+              value={saisie}
+              onChange={(e) => setSaisie(e.target.value)}
+              onBlur={() => setSaisie(String(etp))}
+              className="mt-3 w-full rounded-lg border border-[#1B2D5B]/20 bg-white px-4 py-3 text-2xl font-bold text-[#1B2D5B] tabular-nums outline-none transition-colors focus:border-[#3DBFA0] focus:ring-2 focus:ring-[#3DBFA0]/30"
+            />
+            <p className="mt-2 text-xs text-muted-foreground">
+              De {ETP_MIN} à {formaterCHF(ETP_MAX)} ETP.
+            </p>
+          </div>
+
+          <div>
+            <label
+              htmlFor="collaborateurs"
+              className="block text-sm font-medium text-[#1B2D5B]"
+            >
+              Nombre de collaborateurs (facultatif)
+            </label>
+            <input
+              id="collaborateurs"
+              name="collaborateurs"
+              type="number"
+              inputMode="numeric"
+              min={COLLABORATEURS_MIN}
+              max={COLLABORATEURS_MAX}
+              step={1}
+              value={saisieCollaborateurs}
+              onChange={(e) => setSaisieCollaborateurs(e.target.value)}
+              className="mt-3 w-full rounded-lg border border-[#1B2D5B]/20 bg-white px-4 py-3 text-2xl font-bold text-[#1B2D5B] tabular-nums outline-none transition-colors focus:border-[#3DBFA0] focus:ring-2 focus:ring-[#3DBFA0]/30"
+            />
+            <p className="mt-2 text-xs text-muted-foreground">
+              De {COLLABORATEURS_MIN} à {formaterCHF(COLLABORATEURS_MAX)}{" "}
+              collaborateurs. La licence les couvre tous ; le montant ne change
+              pas.
+            </p>
+          </div>
         </div>
 
         {/* Résultat */}
@@ -77,33 +124,39 @@ export function TarifsCalculateur() {
             </div>
           ) : (
             <dl className="space-y-3">
-              <div className="flex items-baseline justify-between gap-4">
-                <dt className="text-sm text-muted-foreground">Licence annuelle</dt>
-                <dd className="text-lg font-medium text-muted-foreground tabular-nums">
-                  {formaterCHF(tarif.catalogue)} CHF
-                </dd>
-              </div>
-
               <div className="flex items-baseline justify-between gap-4 rounded-lg bg-[#3DBFA0]/10 px-4 py-3">
                 <dt className="text-sm font-semibold text-[#1B2D5B]">
-                  Tarif de lancement
+                  Licence annuelle
                 </dt>
                 <dd className="text-2xl font-bold text-[#1B2D5B] tabular-nums">
-                  {formaterCHF(tarif.lancement)} CHF
+                  {formaterCHF(tarif.catalogue)} CHF
                 </dd>
               </div>
 
               <div className="flex items-baseline justify-between gap-4 border-t border-[#1B2D5B]/10 pt-3">
                 <dt className="text-sm text-muted-foreground">Soit</dt>
                 <dd className="text-right text-sm text-[#1B2D5B] tabular-nums">
-                  {formaterCoutParEtp(tarif.coutParEtpLancement)} CHF par ETP et
-                  par an
+                  {formaterCoutParEtp(tarif.coutParEtp)} CHF par ETP et par an
                   <span className="mt-0.5 block text-muted-foreground">
-                    {formaterCoutMensuel(tarif.coutParEtpMoisLancement)} CHF par
-                    ETP et par mois
+                    {formaterCoutMensuel(tarif.coutParEtpMois)} CHF par ETP et
+                    par mois
                   </span>
                 </dd>
               </div>
+
+              {parCollaborateur && (
+                <div className="flex items-baseline justify-between gap-4 border-t border-[#1B2D5B]/10 pt-3">
+                  <dt className="text-sm text-muted-foreground">Ou encore</dt>
+                  <dd className="text-right text-sm text-[#1B2D5B] tabular-nums">
+                    {formaterCoutParEtp(parCollaborateur.an)} CHF par
+                    collaborateur et par an
+                    <span className="mt-0.5 block text-muted-foreground">
+                      {formaterCoutMensuel(parCollaborateur.mois)} CHF par
+                      collaborateur et par mois
+                    </span>
+                  </dd>
+                </div>
+              )}
             </dl>
           )}
         </div>

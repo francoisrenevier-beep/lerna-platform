@@ -3,6 +3,9 @@ import { describe, expect, it } from "vitest"
 import {
   calculerTarif,
   bornerEtp,
+  COLLABORATEURS_MAX,
+  COLLABORATEURS_MIN,
+  coutParCollaborateur,
   ETP_DEFAUT,
   ETP_INCLUS,
   ETP_MAX,
@@ -12,7 +15,6 @@ import {
   formaterCoutParEtp,
   LIGNES_REFERENCE,
   prixCatalogue,
-  prixLancement,
   PRIX_PAR_ETP_SUPPLEMENTAIRE,
   SEUIL_DEVIS,
   SOCLE_CHF,
@@ -31,16 +33,15 @@ function prixBrut(etp: number): number {
 // Le tableau publié sur /tarifs. Ces valeurs sont la référence commerciale :
 // si un changement de barème les fait bouger, c'est ici que ça doit casser.
 const TABLEAU_REFERENCE = [
-  { etp: 10, catalogue: 2000, lancement: 1400, coutParEtp: "200" },
-  { etp: 20, catalogue: 2300, lancement: 1700, coutParEtp: "115" },
-  { etp: 30, catalogue: 2500, lancement: 1800, coutParEtp: "83" },
-  { etp: 50, catalogue: 3000, lancement: 2100, coutParEtp: "60" },
-  { etp: 75, catalogue: 3700, lancement: 2600, coutParEtp: "49" },
-  { etp: 100, catalogue: 4300, lancement: 3100, coutParEtp: "43" },
-  { etp: 150, catalogue: 5500, lancement: 3900, coutParEtp: "37" },
-  { etp: 200, catalogue: 6800, lancement: 4800, coutParEtp: "34" },
-  { etp: 300, catalogue: 9300, lancement: 6600, coutParEtp: "31" },
-  { etp: 400, catalogue: 11800, lancement: 8300, coutParEtp: "29.50" },
+  { etp: 20, catalogue: 2300, coutParEtp: "115" },
+  { etp: 30, catalogue: 2500, coutParEtp: "83" },
+  { etp: 50, catalogue: 3000, coutParEtp: "60" },
+  { etp: 75, catalogue: 3700, coutParEtp: "49" },
+  { etp: 100, catalogue: 4300, coutParEtp: "43" },
+  { etp: 150, catalogue: 5500, coutParEtp: "37" },
+  { etp: 200, catalogue: 6800, coutParEtp: "34" },
+  { etp: 300, catalogue: 9300, coutParEtp: "31" },
+  { etp: 400, catalogue: 11800, coutParEtp: "29.50" },
 ] as const
 
 describe("tableau de référence", () => {
@@ -49,16 +50,15 @@ describe("tableau de référence", () => {
   })
 
   it.each(TABLEAU_REFERENCE)(
-    "$etp ETP → $catalogue catalogue / $lancement lancement / $coutParEtp par ETP",
-    ({ etp, catalogue, lancement, coutParEtp }) => {
+    "$etp ETP → $catalogue de licence / $coutParEtp par ETP",
+    ({ etp, catalogue, coutParEtp }) => {
       const tarif = calculerTarif(etp)
 
       expect(tarif.surDevis).toBe(false)
       if (tarif.surDevis) return
 
       expect(tarif.catalogue).toBe(catalogue)
-      expect(tarif.lancement).toBe(lancement)
-      expect(formaterCoutParEtp(tarif.coutParEtpCatalogue)).toBe(coutParEtp)
+      expect(formaterCoutParEtp(tarif.coutParEtp)).toBe(coutParEtp)
     }
   )
 })
@@ -91,30 +91,6 @@ describe("prixCatalogue", () => {
   it("ne renvoie que des multiples de 100", () => {
     for (let etp = ETP_MIN; etp <= SEUIL_DEVIS; etp++) {
       expect(prixCatalogue(etp) % 100).toBe(0)
-    }
-  })
-})
-
-describe("prixLancement", () => {
-  it("applique 30 % de remise sur le catalogue déjà arrondi", () => {
-    expect(prixLancement(1)).toBe(1400)
-    expect(prixLancement(10)).toBe(1400)
-    expect(prixLancement(11)).toBe(1500)
-    expect(prixLancement(30)).toBe(1800)
-    expect(prixLancement(50)).toBe(2100)
-    expect(prixLancement(100)).toBe(3100)
-    expect(prixLancement(400)).toBe(8300)
-  })
-
-  it("ne renvoie que des multiples de 100", () => {
-    for (let etp = ETP_MIN; etp <= SEUIL_DEVIS; etp++) {
-      expect(prixLancement(etp) % 100).toBe(0)
-    }
-  })
-
-  it("reste toujours inférieur au catalogue", () => {
-    for (let etp = ETP_MIN; etp <= SEUIL_DEVIS; etp++) {
-      expect(prixLancement(etp)).toBeLessThan(prixCatalogue(etp))
     }
   })
 })
@@ -156,7 +132,7 @@ describe("monotonie sur l'intervalle 1–400", () => {
   it("le coût par ETP arrondi décroît strictement sur les lignes du tableau", () => {
     const couts = LIGNES_REFERENCE.map((etp) => {
       const tarif = calculerTarif(etp)
-      return tarif.surDevis ? Infinity : tarif.coutParEtpCatalogue
+      return tarif.surDevis ? Infinity : tarif.coutParEtp
     })
 
     for (let i = 1; i < couts.length; i++) {
@@ -177,19 +153,67 @@ describe("seuil de devis", () => {
 })
 
 describe("coûts par ETP", () => {
-  it("calcule le coût annuel sur le catalogue et sur le lancement", () => {
+  it("calcule le coût annuel sur la licence annuelle pleine", () => {
     const tarif = calculerTarif(100)
     if (tarif.surDevis) throw new Error("100 ETP devrait être chiffré")
 
-    expect(tarif.coutParEtpCatalogue).toBe(43)
-    expect(tarif.coutParEtpLancement).toBe(31)
+    expect(tarif.coutParEtp).toBe(43)
   })
 
-  it("dérive le coût mensuel du tarif de lancement", () => {
+  it("dérive le coût mensuel de la licence annuelle", () => {
     const tarif = calculerTarif(100)
     if (tarif.surDevis) throw new Error("100 ETP devrait être chiffré")
 
-    expect(formaterCoutMensuel(tarif.coutParEtpMoisLancement)).toBe("2.60")
+    expect(formaterCoutMensuel(tarif.coutParEtpMois)).toBe("3.60")
+  })
+})
+
+// ─── Coût par collaborateur ──────────────────────────────────────────────────
+//
+// Le champ « collaborateurs » du calculateur est facultatif et purement
+// informatif : il ne doit jamais changer le montant de la licence, et doit
+// rester muet dès que la saisie ne permet pas un affichage honnête.
+describe("coutParCollaborateur", () => {
+  const licence = 4300 // 100 ETP
+
+  it("divise la licence par l'effectif déclaré", () => {
+    const cout = coutParCollaborateur(licence, 150, 100)
+    expect(cout).not.toBeNull()
+    expect(cout?.an).toBeCloseTo(4300 / 150)
+    expect(cout?.mois).toBeCloseTo(4300 / 150 / 12)
+  })
+
+  it("accepte un effectif égal au nombre d'ETP", () => {
+    expect(coutParCollaborateur(licence, 100, 100)?.an).toBe(43)
+  })
+
+  // Moins de collaborateurs que d'ETP : le chiffre serait calculable mais
+  // trompeur. On n'affiche rien, sans bloquer la saisie.
+  it("reste muet si l'effectif est inférieur au nombre d'ETP", () => {
+    expect(coutParCollaborateur(licence, 80, 100)).toBeNull()
+    expect(coutParCollaborateur(licence, 1, 100)).toBeNull()
+  })
+
+  it("reste muet sur une saisie vide, nulle ou non numérique", () => {
+    expect(coutParCollaborateur(licence, Number.NaN, 100)).toBeNull()
+    expect(coutParCollaborateur(licence, 0, 100)).toBeNull()
+    expect(coutParCollaborateur(licence, -20, 100)).toBeNull()
+    expect(coutParCollaborateur(licence, Number.POSITIVE_INFINITY, 100)).toBeNull()
+  })
+
+  it("ne renvoie jamais NaN ni Infinity quand il renvoie un montant", () => {
+    for (let effectif = COLLABORATEURS_MIN; effectif <= 500; effectif++) {
+      const cout = coutParCollaborateur(licence, effectif, 1)
+      expect(cout).not.toBeNull()
+      expect(Number.isFinite(cout!.an)).toBe(true)
+      expect(Number.isFinite(cout!.mois)).toBe(true)
+    }
+  })
+
+  it("respecte ses bornes", () => {
+    expect(coutParCollaborateur(licence, COLLABORATEURS_MIN - 1, 1)).toBeNull()
+    expect(coutParCollaborateur(licence, COLLABORATEURS_MAX, 1)).not.toBeNull()
+    expect(coutParCollaborateur(licence, COLLABORATEURS_MAX + 1, 1)).toBeNull()
   })
 })
 
