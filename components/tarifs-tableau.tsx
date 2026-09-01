@@ -3,7 +3,6 @@ import {
   formaterCHF,
   formaterCoutParEtp,
   LIGNES_REFERENCE,
-  SEUIL_DEVIS,
 } from "@/lib/tarifs"
 
 /**
@@ -35,12 +34,6 @@ export function TarifsTableau() {
 
   return (
     <div>
-      <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
-        Le tarif est calculé de la même manière pour toutes les institutions.
-        Pas de palier, pas de conditions particulières selon
-        l&apos;interlocuteur.
-      </p>
-
       {/* Tableau — à partir de 640 px */}
       <div className="hidden overflow-hidden rounded-2xl border border-[#1B2D5B]/10 sm:block">
         <table className="w-full text-sm">
@@ -112,14 +105,6 @@ export function TarifsTableau() {
         ))}
       </ul>
 
-      <p className="mt-6 text-sm text-muted-foreground">
-        Au-delà de {SEUIL_DEVIS} ETP, nous établissons une proposition adaptée à
-        votre organisation.
-      </p>
-      <p className="mt-3 text-sm text-muted-foreground">
-        Les institutions dont la situation le justifie peuvent nous contacter
-        pour examiner ensemble les conditions d&apos;un partenariat.
-      </p>
     </div>
   )
 }

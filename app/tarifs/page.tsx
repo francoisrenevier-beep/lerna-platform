@@ -1,39 +1,35 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Check } from "lucide-react"
+import { BookOpen, Check, ChevronDown, PenLine } from "lucide-react"
 
-import { formationSignature } from "@/content/site"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { TarifsFormule } from "@/components/tarifs-formule"
 import { TarifsTableau } from "@/components/tarifs-tableau"
 import { TarifsCalculateur } from "@/components/tarifs-calculateur"
 import { TarifsFormationSignature } from "@/components/tarifs-formation-signature"
 import { TarifsQuestions } from "@/components/tarifs-questions"
-import {
-  ETP_INCLUS,
-  formaterCHF,
-  PRIX_PAR_ETP_SUPPLEMENTAIRE,
-  SOCLE_CHF,
-} from "@/lib/tarifs"
+import { SEUIL_DEVIS } from "@/lib/tarifs"
 
 // Pas de données structurées Offer/Product : le tarif dépend de l'effectif de
 // l'institution, ce n'est pas un prix fixe. Les annoncer comme tel exposerait
 // un montant faux dans les résultats de recherche. Le seul balisage de la page
 // est le FAQPage émis par `TarifsQuestions`, qui ne porte aucun montant.
+//
+// La description ne cite plus de montant plancher non plus : « dès 2’000 CHF »
+// se lisait comme une offre accessible à toutes les tailles d'institution.
 export const metadata: Metadata = {
   title:
     "Tarifs : Learna, formation continue pour les institutions sociales et médico-sociales",
-  description: `Licence annuelle Learna : accès au catalogue pour tous vos collaborateurs et votre formation signature, conçue pour votre institution. Tarif proportionnel, dès ${formaterCHF(SOCLE_CHF)} CHF par an.`,
+  description:
+    "Licence annuelle Learna : le catalogue pour tous vos collaborateurs et votre formation signature, conçue pour votre institution. Un tarif calculé sur votre effectif, garanti pendant toute la durée du contrat.",
 }
 
-/** Ce que la licence comprend. Aucun tarif pour les formations sur mandat : le
- *  devis est établi au cas par cas. */
-const inclus = [
-  "Votre formation signature, produite chaque année et réservée à vos équipes",
-  "L'accès illimité de tous vos collaborateurs au catalogue",
-  "Toutes les formations publiées pendant la durée du contrat, sans supplément",
-  "Les attestations de suivi individuelles",
-  "Le suivi institutionnel pour la direction",
+const garanties = [
+  "Nouvelles formations comprises",
+  "Attestations individuelles",
+  "Suivi institutionnel pour la direction",
+  "Aucune licence nominative",
 ]
 
 export default function TarifsPage() {
@@ -41,7 +37,8 @@ export default function TarifsPage() {
     <main className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Section 1 — Hero */}
+      {/* 1 — Accroche. Aucun montant : le prix se lit plus bas, avec le terme
+             qui le complète. */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#3DBFA0]/[0.08] to-background py-16 sm:py-24">
         <div
           aria-hidden
@@ -53,134 +50,153 @@ export default function TarifsPage() {
         />
         <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-pretty text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl lg:text-5xl">
-            Une licence annuelle. Deux choses qui n&apos;existent nulle part
-            ailleurs ensemble.
+            Tout votre personnel formé. Et chaque année, une formation qui
+            n&apos;appartient qu&apos;à vous.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            Un catalogue accessible à l&apos;ensemble de vos collaborateurs, sans
-            limite de nombre. Et chaque année, une formation signature conçue
-            pour votre institution, réservée à vos équipes.
+            Une licence annuelle, calculée sur votre effectif. Elle ouvre le
+            catalogue à l&apos;ensemble de vos collaborateurs et finance la
+            production de votre formation signature.
           </p>
-          <p className="mt-8 inline-flex items-baseline rounded-full border border-[#3DBFA0]/40 bg-[#3DBFA0]/10 px-5 py-2 text-base font-semibold text-[#1B2D5B]">
-            Dès {formaterCHF(SOCLE_CHF)}&nbsp;CHF par an.
-          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="#tarif"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#1B2D5B] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1B2D5B]/90"
+            >
+              Calculer notre tarif
+            </Link>
+            <Link
+              href="/contact?sujet=licence-institutionnelle"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#1B2D5B]/20 px-6 py-3 text-sm font-semibold text-[#1B2D5B] transition-colors hover:border-[#1B2D5B]/40 hover:bg-[#1B2D5B]/[0.04]"
+            >
+              Demander une proposition →
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Section 2 — Le socle institutionnel. Développe ce que le socle finance
-          réellement : deux prestations, et non un droit d'accès. */}
-      <section className="border-y border-[#1B2D5B]/[0.06] bg-gradient-to-r from-[#1B2D5B]/[0.04] to-[#3DBFA0]/[0.05] py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      {/* 2 — Les deux prestations, d'un coup d'œil. */}
+      <section className="bg-background py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
-            Le socle institutionnel — {formaterCHF(SOCLE_CHF)}&nbsp;CHF
+            Deux prestations, un seul contrat
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Il ne finance pas un droit d&apos;accès. Il finance deux choses.
-          </p>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {/* Accent émeraude sur la première colonne : la formation signature
-                est l'argument de la page, pas une prestation de second rang. */}
-            <div className="rounded-2xl border border-[#3DBFA0]/40 bg-[#3DBFA0]/[0.08] p-6 sm:p-7">
-              <h3 className="text-balance text-lg font-semibold text-[#1B2D5B]">
-                Votre formation signature, produite chaque année
+            {/* Accent émeraude : la formation signature est l'argument de la
+                page, pas une prestation de second rang. */}
+            <div className="rounded-2xl border border-[#3DBFA0]/40 bg-[#3DBFA0]/[0.08] p-7">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#3DBFA0]/20">
+                <PenLine aria-hidden className="h-6 w-6 text-[#1B2D5B]" />
+              </div>
+              <h3 className="mt-5 text-lg font-semibold text-[#1B2D5B]">
+                Votre formation signature
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                {formationSignature.delaiEnTete} de travail avec vous, sur un
-                sujet que vous choisissez, réservée à vos équipes.
+                Un sujet que vous choisissez, construit à partir de vos documents
+                et avec vos équipes. Visible par vos seuls collaborateurs. Une
+                par an, comprise dans la licence.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-[#1B2D5B]/10 bg-white p-6 sm:p-7">
-              <h3 className="text-balance text-lg font-semibold text-[#1B2D5B]">
-                L&apos;ouverture de la plateforme à tout votre personnel
+            <div className="rounded-2xl border border-[#1B2D5B]/10 bg-card p-7">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#1B2D5B]/10">
+                <BookOpen aria-hidden className="h-6 w-6 text-[#1B2D5B]" />
+              </div>
+              <h3 className="mt-5 text-lg font-semibold text-[#1B2D5B]">
+                Le catalogue, pour tout le monde
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Le catalogue complet, pour l&apos;ensemble des collaborateurs,
-                sans licence nominative et sans limite de nombre.
+                Tous vos collaborateurs y accèdent, y compris les équipes de
+                nuit, l&apos;intendance et l&apos;administration. Sans limite de
+                nombre, sans compte nominatif à gérer.
               </p>
             </div>
           </div>
 
-          <p className="mt-8 text-base leading-relaxed text-muted-foreground">
-            Au-delà de {ETP_INCLUS}&nbsp;ETP, chaque ETP supplémentaire est
-            facturé {PRIX_PAR_ETP_SUPPLEMENTAIRE}&nbsp;CHF. Il n&apos;y a pas
-            d&apos;autre ligne.
-          </p>
-        </div>
-      </section>
-
-      {/* Section 3 — Votre formation signature */}
-      <TarifsFormationSignature />
-
-      {/* Section 4 — Simulateur */}
-      <section className="relative overflow-hidden bg-background py-16 sm:py-20">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-20 left-[-6%] h-64 w-64 rounded-full bg-[#3DBFA0]/10 blur-3xl"
-        />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
-            Combien coûterait Learna pour votre institution&nbsp;?
-          </h2>
-          <div className="mt-8">
-            <TarifsCalculateur />
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5 — Grille tarifaire */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#3DBFA0]/[0.09] via-[#F8FAFC] to-[#1B2D5B]/[0.05] py-16 sm:py-20">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-1/4 right-[-10%] h-96 w-96 rounded-full bg-[#3DBFA0]/[0.07] blur-3xl"
-        />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
-            La grille complète
-          </h2>
-          <TarifsTableau />
-        </div>
-      </section>
-
-      {/* Section 6 — Ce que comprend la licence */}
-      <section className="bg-background py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
-            Ce que comprend la licence
-          </h2>
-
-          <ul className="mt-8 space-y-4">
-            {inclus.map((mention) => (
-              <li key={mention} className="flex items-start gap-3">
+          <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            {garanties.map((garantie) => (
+              <li key={garantie} className="flex items-start gap-2.5">
                 <Check
                   aria-hidden
-                  className="mt-1 h-5 w-5 shrink-0 text-[#3DBFA0]"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[#3DBFA0]"
                 />
-                <span className="text-lg leading-relaxed text-muted-foreground">
-                  {mention}
-                </span>
+                <span className="text-muted-foreground">{garantie}</span>
               </li>
             ))}
           </ul>
-
-          {/* Reprend, en encadré, la précision qui figurait sous le tableau :
-              elle porte l'argument de couverture, pas une note de bas de page. */}
-          <div className="mt-10 rounded-xl border border-[#3DBFA0]/30 bg-[#3DBFA0]/[0.06] p-6">
-            <p className="leading-relaxed text-[#1B2D5B]">
-              La licence couvre tout le personnel, y compris celui qui ne part
-              jamais en formation&nbsp;: équipes de nuit, intendance,
-              administration, remplaçants. Le tarif est calculé sur les ETP par
-              simplicité, mais aucun collaborateur n&apos;est décompté.
-            </p>
-          </div>
         </div>
       </section>
 
-      {/* Section 7 — Questions sur la licence */}
+      {/* 3 — Le tarif. La formule d'abord, pour que le socle ne soit jamais lu
+             seul, puis le simulateur, puis la grille en repli. */}
+      <section
+        id="tarif"
+        className="scroll-mt-40 border-y border-[#1B2D5B]/[0.06] bg-gradient-to-br from-[#3DBFA0]/[0.09] via-[#F8FAFC] to-[#1B2D5B]/[0.05] py-16 sm:py-20"
+      >
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold tracking-tight text-[#1B2D5B] sm:text-3xl">
+            Ce que ça coûte
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+            Un seul contrat, calculé de la même manière pour toutes les
+            institutions. Pas de palier, pas de conditions particulières selon
+            l&apos;interlocuteur.
+          </p>
+
+          <div className="mt-10">
+            <TarifsFormule />
+          </div>
+
+          <p className="mt-6 leading-relaxed text-muted-foreground">
+            Le socle couvre les institutions jusqu&apos;à dix ETP&nbsp;;
+            au-delà, le tarif suit l&apos;effectif. La formation signature et
+            l&apos;accès au catalogue ne se souscrivent pas séparément. Le calcul
+            se fait sur les ETP par simplicité&nbsp;: aucun collaborateur
+            n&apos;est décompté.
+          </p>
+
+          <div className="mt-10">
+            <TarifsCalculateur />
+          </div>
+
+          {/* Grille repliée : le simulateur répond mieux à la question que le
+              tableau, qui reste une référence à vérifier. Un `details` natif
+              plutôt qu'un accordéon — le contenu reste dans le HTML servi. */}
+          <details className="group mt-6 rounded-2xl border border-[#1B2D5B]/10 bg-white/70">
+            <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 list-none text-sm font-semibold text-[#1B2D5B] marker:content-none [&::-webkit-details-marker]:hidden">
+              Voir la grille complète, de 20 à {SEUIL_DEVIS} ETP
+              <ChevronDown
+                aria-hidden
+                className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
+              />
+            </summary>
+            <div className="border-t border-[#1B2D5B]/10 px-6 pb-6 pt-6">
+              <TarifsTableau />
+            </div>
+          </details>
+
+          {/* Ces deux mentions doivent rester lisibles sans ouvrir la grille :
+              la première cadre l'attente des grandes institutions, la seconde
+              ouvre la porte à celles qui ne peuvent pas suivre le barème. */}
+          <p className="mt-8 text-sm text-muted-foreground">
+            Au-delà de {SEUIL_DEVIS} ETP, nous établissons une proposition
+            adaptée à votre organisation.
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Les institutions dont la situation le justifie peuvent nous contacter
+            pour examiner ensemble les conditions d&apos;un partenariat.
+          </p>
+        </div>
+      </section>
+
+      {/* 4 — Votre formation signature */}
+      <TarifsFormationSignature />
+
+      {/* 5 — Questions sur la licence */}
       <TarifsQuestions />
 
-      {/* Section 8 — Appel à l'action */}
+      {/* 6 — Appel à l'action */}
       <section className="relative overflow-hidden bg-[#1B2D5B] py-16 sm:py-20">
         <div
           aria-hidden
@@ -191,9 +207,9 @@ export default function TarifsPage() {
             Un sujet en tête pour votre formation signature&nbsp;?
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/75">
-            Dites-nous lequel. Nous vous répondons avec une proposition chiffrée
-            pour votre institution et une première esquisse de ce que cette
-            formation pourrait couvrir.
+            Dites-nous lequel. Vous recevez une proposition chiffrée pour votre
+            institution et une première esquisse de ce que cette formation
+            pourrait couvrir.
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -201,7 +217,7 @@ export default function TarifsPage() {
               href="/contact?sujet=licence-institutionnelle"
               className="inline-flex items-center gap-2 rounded-lg bg-[#3DBFA0] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#3DBFA0]/90"
             >
-              Recevoir une proposition pour mon institution →
+              Recevoir une proposition →
             </Link>
             <Link
               href="/formations-ressources"
