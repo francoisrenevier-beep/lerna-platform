@@ -5,6 +5,7 @@ import { SUJETS_DEMO } from "@/lib/contact-sujets"
 
 type FormData = {
   sujet: string
+  sujetFormation: string
   prenom: string
   nom: string
   institution: string
@@ -17,6 +18,7 @@ const SUJET_DEFAUT = SUJETS_DEMO[0].value
 
 const EMPTY: FormData = {
   sujet: SUJET_DEFAUT,
+  sujetFormation: "",
   prenom: "",
   nom: "",
   institution: "",
@@ -109,6 +111,31 @@ export function DemoForm({ sujetInitial }: { sujetInitial?: string }) {
                   </option>
                 ))}
               </select>
+            </div>
+
+            {/* Facultatif et toujours visible : le CTA de /tarifs invite à nommer
+                un sujet, et une direction qui en a un en tête ne doit pas avoir
+                à le chercher dans le champ « Message ». Transmis dans l'e-mail
+                uniquement — `demandes_demo` n'a pas de colonne dédiée. */}
+            <div>
+              <label
+                htmlFor="sujetFormation"
+                className="mb-1.5 block text-sm font-medium text-[#1B2D5B]"
+              >
+                Le sujet que vous aimeriez traiter (optionnel)
+              </label>
+              <input
+                type="text"
+                id="sujetFormation"
+                name="sujetFormation"
+                value={form.sujetFormation}
+                onChange={handleChange}
+                placeholder="Par exemple : l'accueil des nouveaux collaborateurs"
+                className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm text-[#1B2D5B] outline-none focus:border-[#3DBFA0] focus:ring-2 focus:ring-[#3DBFA0]/20"
+              />
+              <p className="mt-1.5 text-xs text-muted-foreground">
+                Si vous avez déjà une idée pour votre formation signature.
+              </p>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">

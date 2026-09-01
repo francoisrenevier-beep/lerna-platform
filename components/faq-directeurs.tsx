@@ -1,5 +1,7 @@
 "use client"
 
+import { formationSignature } from "@/content/site"
+import { FaqJsonLd } from "@/components/faq-jsonld"
 import {
   Accordion,
   AccordionContent,
@@ -29,9 +31,11 @@ const questions = [
   },
   {
     id: "q4",
-    question: "Pouvons-nous faire produire une formation propre à notre institution ?",
+    question: "Pouvons-nous faire produire une formation signature, conçue pour notre institution ?",
     reponse:
-      "Oui. Chaque licence annuelle comprend la production d'une formation propre à votre institution, visible uniquement par vos collaborateurs et hébergée sur la plateforme aux côtés du catalogue commun.\n\nL'usage le plus fréquent est l'accueil des nouveaux collaborateurs : présentation de l'institution, repères de fonctionnement, informations que vous souhaitez transmettre à chaque arrivée. Vous nous fournissez les contenus (documents internes, procédures, éléments de présentation), et nous les mettons en forme selon les standards pédagogiques de la plateforme. Le contenu reste votre propriété ; nous en assurons la mise en forme, l'hébergement et le suivi des consultations.\n\nComptez quelques semaines à partir de la réception des contenus validés. Une révision annuelle est comprise, pour tenir compte des évolutions de votre organisation. Des formations supplémentaires peuvent être produites sur mandat, sur devis.",
+      "Oui. Chaque licence annuelle comprend la production de votre formation signature, conçue pour votre institution, visible uniquement par vos collaborateurs et hébergée sur la plateforme aux côtés du catalogue commun.\n\nL'usage le plus fréquent est l'accueil des nouveaux collaborateurs : présentation de l'institution, repères de fonctionnement, informations que vous souhaitez transmettre à chaque arrivée. Vous nous fournissez les contenus (documents internes, procédures, éléments de présentation), et nous les mettons en forme selon les standards pédagogiques de la plateforme. Le contenu reste votre propriété ; nous en assurons la mise en forme, l'hébergement et le suivi des consultations.\n\n" +
+      formationSignature.reponseDelai +
+      "\n\nUne révision annuelle est comprise, pour tenir compte des évolutions de votre organisation. Des formations supplémentaires peuvent être produites sur mandat, sur devis.",
   },
   {
     id: "q5",
@@ -70,6 +74,7 @@ export function FaqDirecteurs({ limit }: { limit?: number } = {}) {
 
   return (
     <section className="bg-[#F8FAFC] py-16 sm:py-24">
+      <FaqJsonLd questions={liste} />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl">

@@ -13,7 +13,6 @@ import {
   ETP_MAX,
   ETP_MIN,
   formaterCHF,
-  formaterCoutMensuel,
   formaterCoutParEtp,
   SEUIL_DEVIS,
 } from "@/lib/tarifs"
@@ -134,36 +133,46 @@ export function TarifsCalculateur() {
               </div>
 
               <div className="flex items-baseline justify-between gap-4 border-t border-[#1B2D5B]/10 pt-3">
-                <dt className="text-sm text-muted-foreground">Soit</dt>
+                <dt className="text-sm text-muted-foreground">Par ETP</dt>
                 <dd className="text-right text-sm text-[#1B2D5B] tabular-nums">
-                  {formaterCoutParEtp(tarif.coutParEtp)} CHF par ETP et par an
-                  <span className="mt-0.5 block text-muted-foreground">
-                    {formaterCoutMensuel(tarif.coutParEtpMois)} CHF par ETP et
-                    par mois
-                  </span>
+                  {formaterCoutParEtp(tarif.coutParEtp)} CHF par an
                 </dd>
               </div>
 
+              {/* Rapporté aux personnes, et non aux ETP : le chiffre qui parle
+                  à une direction. Absent tant que le champ facultatif est vide.
+                  Arrondi au franc via `formaterCHF` — le coût par collaborateur
+                  est un ordre de grandeur, pas un montant facturé. */}
               {parCollaborateur && (
                 <div className="flex items-baseline justify-between gap-4 border-t border-[#1B2D5B]/10 pt-3">
-                  <dt className="text-sm text-muted-foreground">Ou encore</dt>
+                  <dt className="text-sm text-muted-foreground">
+                    Par collaborateur
+                  </dt>
                   <dd className="text-right text-sm text-[#1B2D5B] tabular-nums">
-                    {formaterCoutParEtp(parCollaborateur.an)} CHF par
-                    collaborateur et par an
-                    <span className="mt-0.5 block text-muted-foreground">
-                      {formaterCoutMensuel(parCollaborateur.mois)} CHF par
-                      collaborateur et par mois
-                    </span>
+                    {formaterCHF(parCollaborateur.an)} CHF par an
                   </dd>
                 </div>
               )}
+
+              <p className="border-t border-[#1B2D5B]/10 pt-3 text-sm leading-relaxed text-muted-foreground">
+                Comprend votre formation signature annuelle, l&apos;accès de tous
+                vos collaborateurs au catalogue, et toutes les formations
+                publiées pendant la durée du contrat.
+              </p>
             </dl>
           )}
         </div>
       </div>
 
-      <p className="mt-6 border-t border-[#1B2D5B]/10 pt-4 text-sm text-muted-foreground">
-        Ce tarif est garanti pendant toute la durée de votre contrat.
+      {/* La règle de stabilité tarifaire est reprise en clair ici, et pas
+          seulement dans l'accordéon « Questions sur la licence » : c'est à cet
+          endroit que la question se pose au lecteur, et Radix ne monte pas le
+          contenu d'un accordéon fermé — la règle serait absente du HTML servi.
+          La redondance est un service rendu, pas un doublon. */}
+      <p className="mt-6 border-t border-[#1B2D5B]/10 pt-4 text-sm leading-relaxed text-muted-foreground">
+        Ce tarif est garanti pendant toute la durée de votre contrat. Il
+        n&apos;est réexaminé qu&apos;au renouvellement, et uniquement si
+        l&apos;effectif de votre institution a varié de plus de vingt pour cent.
       </p>
     </div>
   )

@@ -10,13 +10,25 @@ export type Sujet = {
   label: string
 }
 
+// « Formation signature » et « Parcours co-développé pour le catalogue » se
+// suivent dans les deux listes : le second libellé doit dire de lui-même ce qui
+// l'en distingue. Une formation signature est réservée aux équipes de
+// l'institution et comprise dans la licence ; un parcours co-développé rejoint
+// le catalogue commun et se réalise sur mandat. « Parcours sur mesure » ne le
+// disait pas.
+//
+// Les `value` sont des identifiants de transport : les renommer casserait les
+// liens ?sujet=… déjà en circulation, sans rien changer pour le destinataire.
+// Seuls les `label` portent la terminologie du site — « Formation signature »
+// remonte donc jusqu'à l'objet de l'e-mail Resend, qui les reprend.
+
 /** Modale de contact flottante, présente sur toutes les pages → /api/contact */
 export const SUJETS_CONTACT: Sujet[] = [
   { value: "support", label: "Support technique" },
   { value: "amelioration", label: "Proposition d'amélioration" },
   { value: "formation", label: "Question sur une formation" },
-  { value: "formation-institution", label: "Formation propre à notre institution" },
-  { value: "parcours-mesure", label: "Parcours sur mesure" },
+  { value: "formation-institution", label: "Formation signature" },
+  { value: "parcours-mesure", label: "Parcours co-développé pour le catalogue" },
   { value: "facturation", label: "Facturation / abonnement" },
   { value: "autre", label: "Autre demande" },
 ]
@@ -26,8 +38,8 @@ export const SUJETS_DEMO: Sujet[] = [
   { value: "demonstration", label: "Démonstration de la plateforme" },
   // Les CTA de /tarifs arrivent avec ?sujet=licence-institutionnelle
   { value: "licence-institutionnelle", label: "Demande de licence institutionnelle" },
-  { value: "formation-institution", label: "Formation propre à notre institution" },
-  { value: "parcours-mesure", label: "Parcours sur mesure" },
+  { value: "formation-institution", label: "Formation signature" },
+  { value: "parcours-mesure", label: "Parcours co-développé pour le catalogue" },
   { value: "autre", label: "Autre demande" },
 ]
 

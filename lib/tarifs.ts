@@ -73,7 +73,15 @@ export type TarifChiffre = {
   catalogue: number
   /** Coût annuel par ETP, calculé sur la licence annuelle pleine. */
   coutParEtp: number
-  /** Coût mensuel par ETP, calculé sur la licence annuelle pleine. */
+  /**
+   * Coût mensuel par ETP, calculé sur la licence annuelle pleine.
+   *
+   * @deprecated Retiré de l'interface, volontairement. Mensualiser un montant
+   * annuel facturé en une fois affaiblit la crédibilité institutionnelle : la
+   * licence se négocie et se budgète à l'année, pas au mois. Conservé et testé
+   * pour le seul cas où un devis écrit en aurait l'usage. Ne pas le réafficher
+   * sur /tarifs sans décision explicite.
+   */
   coutParEtpMois: number
 }
 
@@ -175,6 +183,12 @@ export function formaterCoutParEtp(montant: number): string {
 /**
  * Coût mensuel par ETP, arrondi aux 5 centimes — l'usage suisse.
  * 2,583… → « 2.60 ».
+ *
+ * @deprecated Retiré de l'interface, volontairement. Mensualiser un montant
+ * annuel facturé en une fois affaiblit la crédibilité institutionnelle : la
+ * licence se négocie et se budgète à l'année, pas au mois. Conservé et testé
+ * pour le seul cas où un devis écrit en aurait l'usage. Ne pas le réafficher
+ * sur /tarifs sans décision explicite.
  */
 export function formaterCoutMensuel(montant: number): string {
   return (Math.round(montant * 20) / 20).toFixed(2)

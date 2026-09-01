@@ -35,6 +35,12 @@ export function TarifsTableau() {
 
   return (
     <div>
+      <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
+        Le tarif est calculé de la même manière pour toutes les institutions.
+        Pas de palier, pas de conditions particulières selon
+        l&apos;interlocuteur.
+      </p>
+
       {/* Tableau — à partir de 640 px */}
       <div className="hidden overflow-hidden rounded-2xl border border-[#1B2D5B]/10 sm:block">
         <table className="w-full text-sm">
@@ -46,7 +52,10 @@ export function TarifsTableau() {
               <th scope="col" className="px-5 py-4 text-right font-semibold">
                 Licence annuelle
               </th>
-              <th scope="col" className="px-5 py-4 text-right font-semibold">
+              <th
+                scope="col"
+                className="px-5 py-4 text-right font-semibold text-[#3DBFA0]"
+              >
                 Coût par ETP / an
               </th>
             </tr>
@@ -66,7 +75,7 @@ export function TarifsTableau() {
                 <td className="px-5 py-4 text-right font-bold text-[#1B2D5B] tabular-nums">
                   {ligne.catalogue} CHF
                 </td>
-                <td className="px-5 py-4 text-right text-muted-foreground tabular-nums">
+                <td className="px-5 py-4 text-right font-semibold text-[#2ea88b] tabular-nums">
                   {ligne.coutParEtp} CHF
                 </td>
               </tr>
@@ -93,8 +102,8 @@ export function TarifsTableau() {
                 </dd>
               </div>
               <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Coût par ETP / an</dt>
-                <dd className="text-muted-foreground tabular-nums">
+                <dt className="font-medium text-[#2ea88b]">Coût par ETP / an</dt>
+                <dd className="font-semibold text-[#2ea88b] tabular-nums">
                   {ligne.coutParEtp} CHF
                 </dd>
               </div>
@@ -110,11 +119,6 @@ export function TarifsTableau() {
       <p className="mt-3 text-sm text-muted-foreground">
         Les institutions dont la situation le justifie peuvent nous contacter
         pour examiner ensemble les conditions d&apos;un partenariat.
-      </p>
-      <p className="mt-3 text-sm text-muted-foreground">
-        La licence couvre l&apos;ensemble des collaborateurs de
-        l&apos;institution, et non un nombre d&apos;ETP&nbsp;: le tarif est
-        calculé sur les ETP par souci de simplicité.
       </p>
     </div>
   )
