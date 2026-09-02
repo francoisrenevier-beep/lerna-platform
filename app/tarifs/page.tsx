@@ -50,8 +50,7 @@ export default function TarifsPage() {
         />
         <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-pretty text-3xl font-bold tracking-tight text-[#1B2D5B] sm:text-4xl lg:text-5xl">
-            Tout votre personnel formé. Et chaque année, une formation qui
-            n&apos;appartient qu&apos;à vous.
+            Votre licence annuelle, votre formation signature.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
             Une licence annuelle, calculée sur votre effectif. Elle ouvre le
