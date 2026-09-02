@@ -17,16 +17,25 @@ const FENETRE_MS = 60 * 60 * 1000
 const MAX_PAR_IP = 5
 const envois = new Map<string, number[]>()
 
-function tropDEnvois(ip: string): boolean {
+function recents(ip: string): number[] {
   const maintenant = Date.now()
-  const recents = (envois.get(ip) ?? []).filter((t) => maintenant - t < FENETRE_MS)
-  if (recents.length >= MAX_PAR_IP) {
-    envois.set(ip, recents)
-    return true
-  }
-  recents.push(maintenant)
-  envois.set(ip, recents)
-  return false
+  const gardes = (envois.get(ip) ?? []).filter((t) => maintenant - t < FENETRE_MS)
+  envois.set(ip, gardes)
+  return gardes
+}
+
+function limiteAtteinte(ip: string): boolean {
+  return recents(ip).length >= MAX_PAR_IP
+}
+
+/**
+ * N'est appelé qu'après un envoi réussi. Compter les tentatives échouées
+ * reviendrait à bloquer une heure durant un visiteur légitime qui retente
+ * pendant une panne du service d'envoi — alors que c'est l'envoi effectif, et
+ * lui seul, qui constitue l'abus dont on se protège.
+ */
+function enregistrerEnvoi(ip: string): void {
+  envois.set(ip, [...recents(ip), Date.now()])
 }
 
 const esc = (s: string) =>
@@ -79,7 +88,7 @@ export async function POST(req: NextRequest) {
   }
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'inconnue'
-  if (tropDEnvois(ip)) {
+  if (limiteAtteinte(ip)) {
     return NextResponse.json(
       { error: 'Trop de demandes depuis cet appareil. Réessayez plus tard.' },
       { status: 429 },
@@ -180,6 +189,7 @@ export async function POST(req: NextRequest) {
       console.error('Notification interne module libre non envoyée:', err)
     }
 
+    enregistrerEnvoi(ip)
     return NextResponse.json({ ok: true })
   } catch (err) {
     const detail = err instanceof Error ? err.message : String(err)
