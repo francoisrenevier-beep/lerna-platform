@@ -40,6 +40,11 @@ export const SUJETS_DEMO: Sujet[] = [
   { value: "licence-institutionnelle", label: "Demande de licence institutionnelle" },
   { value: "formation-institution", label: "Formation signature" },
   { value: "parcours-mesure", label: "Parcours co-développé pour le catalogue" },
+  // L'écran de fin du module en accès libre arrive avec ?sujet=decouverte-module-libre.
+  // Le libellé remonte jusqu'à l'objet de l'e-mail : c'est ce qui permet de
+  // distinguer, dans la boîte de réception, une demande née du module libre
+  // d'une demande de démonstration ordinaire.
+  { value: "decouverte-module-libre", label: "Suite au module en accès libre" },
   { value: "autre", label: "Autre demande" },
 ]
 

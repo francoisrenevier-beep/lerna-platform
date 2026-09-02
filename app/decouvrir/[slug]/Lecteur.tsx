@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
 import { BandeauProgression } from "@/components/decouverte/BandeauProgression"
+import { EcranFin } from "@/components/decouverte/EcranFin"
 import { HeroDecouverte } from "@/components/decouverte/HeroDecouverte"
+import { QuizLibre } from "@/components/decouverte/QuizLibre"
 import { RenduBloc } from "@/components/decouverte/RenduBloc"
 import { SommaireModule } from "@/components/decouverte/SommaireModule"
 import { mesure } from "@/lib/decouverte/analytics"
@@ -16,7 +18,7 @@ import {
   pourcentage,
   type EtatProgression,
 } from "@/lib/decouverte/progression"
-import type { ModuleLibre } from "@/lib/decouverte/types"
+import type { ModuleLibre, QuestionQuiz } from "@/lib/decouverte/types"
 
 /**
  * Lecteur du module en accès libre.
@@ -39,7 +41,19 @@ export function Lecteur({ module: moduleLibre }: { module: ModuleLibre }) {
   const [stockageDisponible, setStockageDisponible] = useState(true)
   const [charge, setCharge] = useState(false)
 
+  // Le détail des réponses n'est pas conservé d'une visite à l'autre : les
+  // questions sont remélangées à chaque tentative, un détail enregistré ne
+  // correspondrait plus à ce qui a été répondu. Seul le score l'est.
+  const [detailQuiz, setDetailQuiz] = useState<{
+    questions: QuestionQuiz[]
+    reponses: number[]
+  } | null>(null)
+  // Force le remontage du questionnaire, et donc un nouveau mélange, quand le
+  // visiteur choisit de le refaire.
+  const [tentative, setTentative] = useState(0)
+
   const refsSections = useRef<(HTMLElement | null)[]>([])
+  const refFin = useRef<HTMLDivElement>(null)
   // Miroir de `etat` lisible immédiatement : plusieurs sections peuvent être
   // franchies avant que React n'ait rendu la mise à jour précédente, et un
   // jalon émis deux fois fausserait la mesure.
@@ -128,6 +142,24 @@ export function Lecteur({ module: moduleLibre }: { module: ModuleLibre }) {
     return () => observateur.disconnect()
   }, [franchir])
 
+  const terminerQuiz = useCallback(
+    (score: number, total: number, detail: { questions: QuestionQuiz[]; reponses: number[] }) => {
+      mesure.quizTermine(slug, score, total)
+      setDetailQuiz(detail)
+      appliquer({ ...etatRef.current, quiz: { score, total } })
+      // Le questionnaire cède la place à l'écran de fin : sans cela le visiteur
+      // reste au milieu d'un bloc qui a changé de contenu sous ses yeux.
+      requestAnimationFrame(() => refFin.current?.scrollIntoView({ behavior: "smooth" }))
+    },
+    [appliquer, slug],
+  )
+
+  const recommencerQuiz = useCallback(() => {
+    setDetailQuiz(null)
+    setTentative((n) => n + 1)
+    appliquer({ ...etatRef.current, quiz: null })
+  }, [appliquer])
+
   const reprendre = useCallback(() => {
     refsSections.current[etatRef.current.sectionMax]?.scrollIntoView({ behavior: "smooth" })
   }, [])
@@ -184,6 +216,24 @@ export function Lecteur({ module: moduleLibre }: { module: ModuleLibre }) {
             </div>
           </section>
         ))}
+
+        <div ref={refFin} className="scroll-mt-48">
+          {etat.quiz ? (
+            <EcranFin
+              module={moduleLibre}
+              score={etat.quiz.score}
+              total={etat.quiz.total}
+              detail={detailQuiz}
+              onRecommencer={recommencerQuiz}
+            />
+          ) : (
+            <QuizLibre
+              key={tentative}
+              questions={moduleLibre.quiz}
+              onTermine={terminerQuiz}
+            />
+          )}
+        </div>
       </div>
     </>
   )
