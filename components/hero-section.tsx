@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
 import { hero } from "@/content/site"
 
@@ -105,6 +107,18 @@ export function HeroSection() {
                 className="bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 Découvrir les formations
+              </Button>
+              {/* Un accès, pas une demande : le seul bouton de ce bloc qui
+                  donne quelque chose immédiatement, sans compte ni formulaire. */}
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-accent text-accent hover:bg-accent/10"
+              >
+                <Link href="/decouvrir/comprendre-la-violence">
+                  Suivre un module complet, gratuitement
+                </Link>
               </Button>
               <Button
                 size="lg"

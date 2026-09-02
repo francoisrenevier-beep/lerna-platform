@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 import { formationSignature } from "@/content/site"
 import { FaqJsonLd } from "@/components/faq-jsonld"
 import {
@@ -9,7 +11,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
-const questions = [
+const questions: {
+  id: string
+  question: string
+  reponse: string
+  /** Lien affiché sous la réponse. Absent du balisage FAQPage, qui n'attend que du texte. */
+  lien?: { href: string; libelle: string }
+}[] = [
   {
     id: "q1",
     question: "Comment les institutions utilisent-elles concrètement LEARNA au quotidien ?",
@@ -65,7 +73,11 @@ const questions = [
     id: "q9",
     question: "Quel est le format des formations ?",
     reponse:
-      "Les formations se suivent en ligne, en tout temps et sur tous les supports (ordinateur, tablette, téléphone). Elles sont organisées en modules courts, généralement d'une vingtaine de minutes, que l'on peut suivre d'une traite ou reprendre en plusieurs fois. Chaque parcours alterne contenus, exemples concrets et points de validation, et donne lieu à une attestation une fois terminé. Certaines formations sont structurées en niveaux progressifs, pour avancer à son rythme sans décrochage.",
+      "Les formations se suivent en ligne, en tout temps et sur tous les supports (ordinateur, tablette, téléphone). Elles sont organisées en modules courts, généralement d'une vingtaine de minutes, que l'on peut suivre d'une traite ou reprendre en plusieurs fois. Chaque parcours alterne contenus, exemples concrets et points de validation, et donne lieu à une attestation une fois terminé. Certaines formations sont structurées en niveaux progressifs, pour avancer à son rythme sans décrochage.\n\nLe plus simple reste de le constater : un module complet est en accès libre sur le site, sans compte ni formulaire.",
+    lien: {
+      href: "/decouvrir/comprendre-la-violence",
+      libelle: "Suivre ce module maintenant",
+    },
   },
 ]
 
@@ -97,6 +109,14 @@ export function FaqDirecteurs({ limit }: { limit?: number } = {}) {
                     par \n\n, que HTML réduirait sinon à une espace. */}
                 <AccordionContent className="whitespace-pre-line text-muted-foreground leading-relaxed pb-5">
                   {q.reponse}
+                  {q.lien && (
+                    <Link
+                      href={q.lien.href}
+                      className="mt-4 block font-semibold text-[#3DBFA0] hover:underline"
+                    >
+                      {q.lien.libelle} →
+                    </Link>
+                  )}
                 </AccordionContent>
               </AccordionItem>
             ))}

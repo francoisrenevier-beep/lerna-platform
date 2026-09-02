@@ -1,3 +1,6 @@
+import Link from "next/link"
+
+import { moduleLibreDeFormation } from "@/content/decouverte"
 import type { FormationPublique } from "@/lib/catalogue-public"
 import { BandeauDomaine, getDomaineVitrine } from "@/components/vitrine/domaines"
 
@@ -21,6 +24,9 @@ function formaterDuree(minutes: number): string {
 
 export function CarteFormationPublique({ formation }: { formation: FormationPublique }) {
   const domaine = getDomaineVitrine(formation.domaine)
+  // `undefined` pour toute formation sans module ouvert : la carte est alors
+  // rendue exactement comme avant.
+  const libre = moduleLibreDeFormation(formation.slug)
 
   const metadonnees: string[] = []
   if (formation.nbModules !== null) {
@@ -38,11 +44,21 @@ export function CarteFormationPublique({ formation }: { formation: FormationPubl
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        {domaine && (
-          <span className="self-start rounded-full bg-[#1B2D5B]/[0.07] px-3 py-1 text-xs font-semibold text-[#1B2D5B]">
-            {domaine.label}
-          </span>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          {domaine && (
+            <span className="rounded-full bg-[#1B2D5B]/[0.07] px-3 py-1 text-xs font-semibold text-[#1B2D5B]">
+              {domaine.label}
+            </span>
+          )}
+          {libre && (
+            <Link
+              href={`/decouvrir/${libre.slug}`}
+              className="rounded-full bg-[#3DBFA0] px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-[#2ea88b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3DBFA0]"
+            >
+              Un module en accès libre
+            </Link>
+          )}
+        </div>
 
         <h3 className="mt-3 text-base font-semibold leading-snug text-[#1B2D5B]">
           {formation.titre}

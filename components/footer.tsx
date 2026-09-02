@@ -3,6 +3,7 @@ import Link from "next/link"
 const links = [
   { label: "Accueil", href: "/" },
   { label: "Formations & Ressources", href: "/formations-ressources" },
+  { label: "Module en accès libre", href: "/decouvrir/comprendre-la-violence" },
   { label: "La solution", href: "/la-solution" },
   { label: "FAQ", href: "/faq" },
   { label: "Tarifs", href: "/tarifs" },

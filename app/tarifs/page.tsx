@@ -195,6 +195,23 @@ export default function TarifsPage() {
       {/* 5 — Questions sur la licence */}
       <TarifsQuestions />
 
+      {/* Avant de demander quoi que ce soit, donner : un directeur peut juger
+          sur pièce plutôt que sur argument. */}
+      <section className="bg-background py-10">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+          <p className="text-base leading-relaxed text-muted-foreground">
+            Avant d&apos;engager quoi que ce soit, vous pouvez juger sur pièce :{" "}
+            <Link
+              href="/decouvrir/comprendre-la-violence"
+              className="font-semibold text-[#3DBFA0] underline-offset-4 hover:underline"
+            >
+              suivre un module complet, gratuitement et sans compte
+            </Link>
+            . Quarante minutes, questionnaire compris.
+          </p>
+        </div>
+      </section>
+
       {/* 6 — Appel à l'action */}
       <section className="relative overflow-hidden bg-[#1B2D5B] py-16 sm:py-20">
         <div
