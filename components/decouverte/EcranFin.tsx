@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 
-import { FormulaireAttestation } from "@/components/decouverte/FormulaireAttestation"
 import { PartagerModule } from "@/components/decouverte/PartagerModule"
 import { mesure } from "@/lib/decouverte/analytics"
 import type { ModuleLibre, QuestionQuiz } from "@/lib/decouverte/types"
@@ -11,9 +10,12 @@ import type { ModuleLibre, QuestionQuiz } from "@/lib/decouverte/types"
  * Écran de fin du module libre.
  *
  * L'ordre est le fond du sujet : ce que le visiteur a appris d'abord, ce que la
- * licence ajoute ensuite, les appels à l'action après, et le champ e-mail en
- * dernier. Rien de commercial ne s'interpose avant le résultat, et rien ne se
- * paie d'une adresse.
+ * licence ajoute ensuite, les appels à l'action en dernier. Rien de commercial
+ * ne s'interpose avant le résultat.
+ *
+ * Aucune adresse n'est demandée, à aucun moment. Un module isolé ne donne pas
+ * lieu à une attestation, et il n'y avait pas d'autre motif de collecte qui
+ * tienne : le visiteur repart avec ce qu'il est venu chercher, sans contrepartie.
  */
 export function EcranFin({
   module: moduleLibre,
@@ -156,10 +158,6 @@ export function EcranFin({
         </div>
       </div>
 
-      {/* 4 — Le champ e-mail, en dernier et jamais avant le résultat. */}
-      <div className="mt-6">
-        <FormulaireAttestation module={moduleLibre} score={score} total={total} />
-      </div>
     </section>
   )
 }

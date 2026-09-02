@@ -14,8 +14,8 @@ import { track } from "@vercel/analytics"
 /**
  * L'écran de fin compte trois appels à l'action cliquables : le partage par
  * e-mail et la copie du lien, qui sont les deux mécanismes de « Envoyer ce
- * module à mes collègues », puis le contact. Le dépôt d'e-mail est mesuré à
- * part, c'est un formulaire et non un appel à l'action.
+ * module à mes collègues », puis le contact. Il n'y en a pas de quatrième :
+ * le module ne collecte aucune adresse.
  */
 export type EvenementDecouverte =
   | "decouverte_page_vue"
@@ -25,7 +25,6 @@ export type EvenementDecouverte =
   | "decouverte_partage_email"
   | "decouverte_partage_copie"
   | "decouverte_contact"
-  | "decouverte_email_depose"
 
 type Proprietes = Record<string, string | number | boolean | null>
 
@@ -54,6 +53,4 @@ export const mesure = {
   partageCopie: (slug: string) => envoyer("decouverte_partage_copie", { module: slug }),
 
   contact: (slug: string) => envoyer("decouverte_contact", { module: slug }),
-
-  emailDepose: (slug: string) => envoyer("decouverte_email_depose", { module: slug }),
 }

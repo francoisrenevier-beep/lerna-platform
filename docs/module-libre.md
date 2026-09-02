@@ -209,8 +209,8 @@ un avancement incohérent.
 ## Mesure
 
 Les événements partent vers Vercel Analytics, déjà en place. Ils ne portent que
-le slug du module et des valeurs agrégées — jamais d'adresse e-mail ni de
-contenu de réponse. Voir [`lib/decouverte/analytics.ts`](../lib/decouverte/analytics.ts).
+le slug du module et des valeurs agrégées — jamais de contenu de réponse. La
+question de l'adresse e-mail ne se pose pas : le module n'en collecte aucune. Voir [`lib/decouverte/analytics.ts`](../lib/decouverte/analytics.ts).
 
 | Événement | Déclenchement |
 |---|---|
@@ -221,7 +221,6 @@ contenu de réponse. Voir [`lib/decouverte/analytics.ts`](../lib/decouverte/anal
 | `decouverte_partage_email` | Clic sur « Envoyer par e-mail » |
 | `decouverte_partage_copie` | Clic sur « Copier le message » |
 | `decouverte_contact` | Clic sur « Prendre contact » |
-| `decouverte_email_depose` | Attestation envoyée avec succès |
 
 Les événements ne remontent qu'en production : `<Analytics />` n'est monté que
 là, dans [`app/layout.tsx`](../app/layout.tsx).
