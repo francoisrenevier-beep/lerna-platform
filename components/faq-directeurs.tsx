@@ -41,9 +41,8 @@ const questions: {
     id: "q4",
     question: "Pouvons-nous faire adapter une formation à notre institution ?",
     reponse:
-      "Oui. Chaque licence annuelle comprend votre formation signature : " +
-      formationSignature.definition.charAt(0).toLowerCase() +
-      formationSignature.definition.slice(1) +
+      "Oui. Chaque licence annuelle comprend votre formation signature. " +
+      formationSignature.definition +
       " Elle est visible de vos seuls collaborateurs et hébergée aux côtés du catalogue commun.\n\nVous nous transmettez vos éléments (situations rencontrées, procédures, vocabulaire interne, documents de référence), et nous retravaillons le module. Le contenu que vous fournissez reste votre propriété ; nous en assurons la mise en forme, l'hébergement et le suivi des consultations.\n\n" +
       formationSignature.reponseDelai +
       "\n\nUn module écrit entièrement sur mesure, sur un sujet absent du catalogue, est une prestation distincte et facturée : forfait selon l'ampleur, sur devis, dans une fourchette indicative de " +

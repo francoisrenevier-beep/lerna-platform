@@ -79,9 +79,10 @@ export function TarifsFormationSignature() {
           Votre formation signature
         </h2>
         <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/75">
-          Le catalogue traite ce qui est commun au secteur. {formationSignature.definition}{" "}
-          Un module qui parle de votre maison est suivi autrement qu&apos;un
-          module qui parle du secteur en général.
+          Le catalogue traite ce qui est commun au secteur. Votre formation
+          signature comble l&apos;écart qui reste. {formationSignature.definition}{" "}
+          Une formation qui parle de votre maison est suivie autrement
+          qu&apos;une formation qui parle du secteur en général.
         </p>
 
         {/* Les quatre étapes, en frise. Le trait de liaison n'apparaît qu'à
