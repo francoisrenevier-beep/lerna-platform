@@ -1,7 +1,15 @@
+"use client"
+
 import React from "react"
+
+import { useTitreFormation } from "@/components/module/TitreFormation"
 
 type HeroModuleProps = {
   numero: number
+  /**
+   * Nom de la formation, écrit dans le module. Sert de repli : la page impose
+   * le titre que porte la base — voir components/module/TitreFormation.tsx.
+   */
   categorie: string
   titre: string
   titrePart2?: string
@@ -12,6 +20,8 @@ type HeroModuleProps = {
 }
 
 export function HeroModule({ numero, categorie, titre, titrePart2, sousTitre, duree, niveau, videoYoutube }: HeroModuleProps) {
+  const nomFormation = useTitreFormation(categorie)
+
   return (
     <>
       <div className="bg-[#1B2D5B] text-white px-16 py-20 relative overflow-hidden">
@@ -19,7 +29,7 @@ export function HeroModule({ numero, categorie, titre, titrePart2, sousTitre, du
         <div className="absolute bottom-0 right-48 w-56 h-56 rounded-full bg-[#3DBFA0]/20 translate-y-1/2" />
         <div className="relative z-10 max-w-3xl">
           <p className="text-xs font-medium tracking-widest uppercase text-white/50 mb-6">
-            Module {numero} · {categorie}
+            Module {numero} · {nomFormation}
           </p>
           <h1 className="font-bold text-4xl leading-tight mb-6">
             {titre}

@@ -36,6 +36,7 @@ import { Module5FamillesSecteurAdulte } from "@/app/modules/familles-module-5"
 import { Module1Curatelle } from "@/app/modules/curatelle-module-1"
 import { Module2Curatelle } from "@/app/modules/curatelle-module-2"
 import { Module3Curatelle } from "@/app/modules/curatelle-module-3"
+import { TitreFormationFourni } from "@/components/module/TitreFormation"
 import { Module1VieillissementBases } from "@/app/modules/vieillissement-bases-module-1"
 import { Module2VieillissementBases } from "@/app/modules/vieillissement-bases-module-2"
 import { Module3VieillissementBases } from "@/app/modules/vieillissement-bases-module-3"
@@ -386,7 +387,12 @@ export default function ModulePage() {
 
       <div className="pb-24">
         {ModuleContent ? (
-          <ModuleContent onValiderModule={marquerTermine} />
+          // Le titre lu en base l'emporte sur celui écrit dans le module : une
+          // formation renommée depuis l'admin l'est partout, sans toucher au
+          // fichier du module.
+          <TitreFormationFourni titre={formation?.titre ?? null}>
+            <ModuleContent onValiderModule={marquerTermine} />
+          </TitreFormationFourni>
         ) : (
           <div className="max-w-3xl mx-auto px-8 py-12">
             <p className="text-gray-500 text-center">Contenu en cours de préparation...</p>

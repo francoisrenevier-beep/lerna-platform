@@ -39,8 +39,8 @@ export const vieillissementEtHandicap: ModuleLibre = {
   },
 
   formationSlug: "vieillissement-bases",
-  // Titre tel que la base le porte aujourd'hui, et donc tel que la carte du
-  // catalogue l'affiche. La migration 20260515 l'avait créée sous un autre nom.
+  // Repli si la base est injoignable : la page affiche sinon le titre qu'elle
+  // y lit. La migration 20260515 avait créé la formation sous un autre nom.
   formationTitre: "Handicap et vieillissement - base",
 
   // Les `id` sont des ancres publiques et l'unité de mesure de la progression :

@@ -133,3 +133,17 @@ export async function getFormationsPubliees(): Promise<FormationPublique[]> {
     return []
   }
 }
+
+/**
+ * Titre d'une formation publiée, tel que la base le porte. `null` si la
+ * formation est introuvable — non publiée, privée, à venir — ou si la base est
+ * injoignable.
+ *
+ * Sert aux pages qui nomment une formation ailleurs que dans le catalogue : le
+ * module en accès libre, notamment, dont le fichier porte un libellé figé le
+ * jour de sa rédaction. `null` laisse ce libellé s'afficher, plutôt que rien.
+ */
+export async function getTitreFormation(slug: string): Promise<string | null> {
+  const formations = await getFormationsPubliees()
+  return formations.find((f) => f.slug === slug)?.titre ?? null
+}

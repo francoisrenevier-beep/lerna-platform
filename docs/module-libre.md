@@ -57,7 +57,7 @@ export const monModule: ModuleLibre = {
   },
 
   formationSlug: "slug-de-la-formation-en-base",   // pour le badge du catalogue
-  formationTitre: "Titre complet de la formation",
+  formationTitre: "Titre complet de la formation", // repli, voir plus bas
 
   sections: [
     {
@@ -84,6 +84,18 @@ export const monModule: ModuleLibre = {
   contactSujet: "decouverte-module-libre",
 }
 ```
+
+### Le nom de la formation vient de la base
+
+`formationTitre` n'est qu'un repli. La page lit le titre dans la base à chaque
+revalidation — toutes les heures — et l'impose à l'en-tête du module et au
+message de partage, via le contexte de
+[`components/module/TitreFormation.tsx`](../components/module/TitreFormation.tsx).
+Renommer une formation dans l'admin corrige donc le site sans redéploiement, et
+`hero.categorie` du fichier `content/` n'a pas à être retouché.
+
+Le repli ne sert que si la base est injoignable, ou si la formation n'est pas
+publiée : la page affiche alors l'ancien nom plutôt qu'aucun.
 
 ### Les identifiants de section ne se changent pas
 

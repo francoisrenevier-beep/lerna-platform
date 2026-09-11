@@ -115,6 +115,11 @@ export type ModuleLibre = {
   }
   /** Formation dont ce module est extrait, pour le badge du catalogue public. */
   formationSlug: string
+  /**
+   * Repli seulement : la page lit le titre en base, et ne retombe sur celui-ci
+   * que si la formation n'y est pas publiée ou si la base est injoignable.
+   * Voir components/module/TitreFormation.tsx.
+   */
   formationTitre: string
   sections: SectionLibre[]
   quiz: QuestionQuiz[]

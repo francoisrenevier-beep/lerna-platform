@@ -1,3 +1,6 @@
+"use client"
+
+import { useTitreFormation } from "@/components/module/TitreFormation"
 import type { HeroLibre } from "@/lib/decouverte/types"
 
 /**
@@ -13,6 +16,10 @@ import type { HeroLibre } from "@/lib/decouverte/types"
  * lit avant le premier paragraphe.
  */
 export function HeroDecouverte({ hero, dureeMinutes }: { hero: HeroLibre; dureeMinutes: number }) {
+  // Le nom que porte la base l'emporte sur celui écrit dans le module, pour que
+  // l'en-tête et la carte du catalogue nomment la formation de la même façon.
+  const nomFormation = useTitreFormation(hero.categorie)
+
   return (
     <header className="relative overflow-hidden bg-[#1B2D5B] px-5 py-12 text-white sm:px-8 sm:py-16 lg:px-16 lg:py-20">
       <div
@@ -30,7 +37,7 @@ export function HeroDecouverte({ hero, dureeMinutes }: { hero: HeroLibre; dureeM
         </p>
 
         <p className="mb-5 text-xs font-medium uppercase tracking-widest text-white/50">
-          Module {hero.numero} · {hero.categorie}
+          Module {hero.numero} · {nomFormation}
         </p>
 
         <h1 className="mb-5 text-3xl font-bold leading-tight sm:text-4xl">

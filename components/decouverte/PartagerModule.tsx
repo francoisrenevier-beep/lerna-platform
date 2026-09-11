@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 
+import { useTitreFormation } from "@/components/module/TitreFormation"
 import { mesure } from "@/lib/decouverte/analytics"
 import type { ModuleLibre } from "@/lib/decouverte/types"
 import { urlModuleLibre } from "@/lib/decouverte/url"
@@ -19,7 +20,7 @@ import { urlModuleLibre } from "@/lib/decouverte/url"
  * s'affiche, présélectionné, prêt à être copié à la main — plutôt qu'un bouton
  * qui ne fait rien.
  */
-function messagePartage(m: ModuleLibre): { sujet: string; corps: string } {
+function messagePartage(m: ModuleLibre, nomFormation: string): { sujet: string; corps: string } {
   const url = urlModuleLibre(m.slug)
   const titre = m.hero.titrePart2 ? `${m.hero.titre} — ${m.hero.titrePart2}` : m.hero.titre
 
@@ -33,13 +34,16 @@ function messagePartage(m: ModuleLibre): { sujet: string; corps: string } {
       `Il dure environ ${m.dureeMinutes} minutes et se termine par un questionnaire. Il n'y a ni compte à créer ni formulaire à remplir :`,
       url,
       "",
-      `Ce module est le premier de la formation « ${m.formationTitre} ».`,
+      `Ce module est le premier de la formation « ${nomFormation} ».`,
     ].join("\n"),
   }
 }
 
 export function PartagerModule({ module: moduleLibre }: { module: ModuleLibre }) {
-  const { sujet, corps } = messagePartage(moduleLibre)
+  // Le message annonce la formation sous le nom que porte la base : celui que
+  // le destinataire retrouvera au catalogue.
+  const nomFormation = useTitreFormation(moduleLibre.formationTitre)
+  const { sujet, corps } = messagePartage(moduleLibre, nomFormation)
   const [copie, setCopie] = useState(false)
   const [copieManuelle, setCopieManuelle] = useState(false)
   const zoneManuelle = useRef<HTMLTextAreaElement>(null)
