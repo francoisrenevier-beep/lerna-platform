@@ -18,14 +18,21 @@ export type FormationPublique = {
   nbModules: number | null
   /** Durée déclarée sur la formation ; `null` si non renseignée. */
   dureeMinutes: number | null
-  /** Libellés de niveau. Vide si le niveau est absent ou inconnu. */
-  niveaux: string[]
+  /** Niveau normalisé (`base`, `intermediaire`, …), `null` si absent ou inconnu. */
+  niveau: string | null
+  /**
+   * Titre court saisi en base, pour la vignette de la carte. `null` si absent :
+   * la vignette le déduit alors du titre complet.
+   */
+  titreCourt: string | null
 }
 
 /** Ligne brute renvoyée par `get_catalogue_public()`. */
 type LigneCatalogue = {
   slug: string
   titre: string
+  /** Ajouté par la migration 20260911 ; absent tant qu'elle n'est pas appliquée. */
+  titre_court?: string | null
   description: string | null
   domaine: string[] | string | null
   nb_modules: number | string | null
@@ -34,20 +41,19 @@ type LigneCatalogue = {
 }
 
 /**
- * Libellés affichables des niveaux stockés en base.
+ * Niveaux canoniques, tels que `NIVEAUX` les déclare dans lib/formationMeta.ts.
  *
- * Reprend `NIVEAUX` de lib/formationMeta.ts, qui est un module `"use client"`
- * et ne peut donc pas être appelé depuis un Server Component. Un niveau absent
- * de cette table ne produit aucune étiquette : mieux vaut ne rien afficher
- * qu'une valeur technique brute sur une page commerciale.
+ * La base porte quelques variantes historiques (« confirmé » pour « avancé »)
+ * que cette table ramène à la valeur canonique. Un niveau absent d'ici n'est
+ * pas affiché : mieux vaut ne rien annoncer qu'une valeur technique brute sur
+ * une page commerciale.
  */
-const NIVEAU_LABELS: Record<string, string> = {
-  base: "Base",
-  intermediaire: "Intermédiaire",
-  "intermédiaire": "Intermédiaire",
-  avance: "Avancé",
-  confirme: "Avancé",
-  tous: "Tous niveaux",
+const NIVEAUX_CANONIQUES: Record<string, string> = {
+  base: "base",
+  intermediaire: "intermediaire",
+  avance: "avance",
+  confirme: "avance",
+  tous: "tous",
 }
 
 function normaliser(valeur: string): string {
@@ -67,10 +73,9 @@ function premierDomaine(domaine: string[] | string | null): string | null {
   return normaliser(brut)
 }
 
-function niveauxDepuis(niveau: string | null): string[] {
-  if (!niveau) return []
-  const label = NIVEAU_LABELS[niveau.trim().toLowerCase()] ?? NIVEAU_LABELS[normaliser(niveau)]
-  return label ? [label] : []
+function niveauDepuis(niveau: string | null): string | null {
+  if (!niveau) return null
+  return NIVEAUX_CANONIQUES[normaliser(niveau)] ?? null
 }
 
 /**
@@ -120,7 +125,8 @@ export async function getFormationsPubliees(): Promise<FormationPublique[]> {
       domaine: premierDomaine(ligne.domaine),
       nbModules: nbModulesDepuis(ligne.nb_modules),
       dureeMinutes: ligne.duree_minutes ?? null,
-      niveaux: niveauxDepuis(ligne.niveau),
+      niveau: niveauDepuis(ligne.niveau),
+      titreCourt: ligne.titre_court?.trim() || null,
     }))
   } catch (e) {
     console.error("Catalogue public indisponible:", e)
