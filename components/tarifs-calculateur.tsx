@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { Check } from "lucide-react"
 
 import {
   bornerEtp,
@@ -14,8 +15,26 @@ import {
   ETP_MIN,
   formaterCHF,
   formaterCoutParEtp,
-  SEUIL_DEVIS,
+  PLAFOND_DEVIS_ETP,
+  RATIO_COLLABORATEURS_PAR_ETP,
 } from "@/lib/tarifs"
+
+/** Ratio en écriture française : 1.4 → « 1,4 ». */
+const RATIO_AFFICHE = String(RATIO_COLLABORATEURS_PAR_ETP).replace(".", ",")
+
+/**
+ * Ce que le montant couvre, rappelé sous le résultat.
+ *
+ * Sans cette liste, le socle se lit comme un droit d'entrée à payer avant
+ * d'accéder à quoi que ce soit. Rester court : c'est un rappel, pas la page
+ * « ce qui est compris ».
+ */
+const COUVERTURE = [
+  "L'accès de tous vos collaborateurs au catalogue, sans compte nominatif",
+  "Votre formation signature, adaptée à votre institution chaque année",
+  "Les formations publiées pendant la durée du contrat",
+  "Les attestations individuelles et le suivi pour la direction",
+]
 
 /**
  * Calculateur de licence — unique îlot client de la page /tarifs.
@@ -111,7 +130,7 @@ export function TarifsCalculateur() {
           {tarif.surDevis ? (
             <div className="rounded-xl bg-[#F8FAFC] p-5">
               <p className="text-base leading-relaxed text-[#1B2D5B]">
-                Au-delà de {SEUIL_DEVIS} ETP, contactez-nous pour une proposition
+                Au-delà de {PLAFOND_DEVIS_ETP} ETP, contactez-nous pour une proposition
                 adaptée.
               </p>
               <Link
@@ -154,15 +173,57 @@ export function TarifsCalculateur() {
                 </div>
               )}
 
-              <p className="border-t border-[#1B2D5B]/10 pt-3 text-sm leading-relaxed text-muted-foreground">
-                Comprend votre formation signature annuelle, l&apos;accès de tous
-                vos collaborateurs au catalogue, et toutes les formations
-                publiées pendant la durée du contrat.
-              </p>
+              {/* L'estimation au ratio moyen ne s'affiche que tant que
+                  l'institution n'a pas donné son propre effectif : deux coûts
+                  par collaborateur différents affichés côte à côte, l'un
+                  déclaré et l'autre moyen, se liraient comme une contradiction.
+                  Le chiffre déclaré est toujours le plus juste des deux. */}
+              {!parCollaborateur && (
+                <p className="border-t border-[#1B2D5B]/10 pt-3 text-sm leading-relaxed text-muted-foreground">
+                  Soit environ{" "}
+                  <span className="font-semibold text-[#1B2D5B] tabular-nums">
+                    {formaterCHF(tarif.coutParCollaborateurEstime)} francs
+                  </span>{" "}
+                  par collaborateur et par année, sur la base d&apos;un ratio
+                  moyen de {RATIO_AFFICHE} collaborateur par équivalent plein
+                  temps.
+                </p>
+              )}
             </dl>
           )}
         </div>
       </div>
+
+      {/* Ce que le montant couvre. Placé sous les deux colonnes plutôt que dans
+          la colonne de résultat : la liste vaut aussi pour les institutions
+          renvoyées vers un devis, dont la licence couvre exactement la même
+          chose. */}
+      <div className="mt-6 border-t border-[#1B2D5B]/10 pt-5">
+        <p className="text-sm font-semibold text-[#1B2D5B]">
+          Ce que couvre ce montant
+        </p>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+          {COUVERTURE.map((ligne) => (
+            <li
+              key={ligne}
+              className="flex items-start gap-2 text-sm leading-relaxed text-muted-foreground"
+            >
+              <Check aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-[#3DBFA0]" />
+              <span>{ligne}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Ordre de grandeur, en texte statique et volontairement sans calcul :
+          le coût d'une journée en groupe varie trop d'un organisme et d'une
+          taille d'équipe à l'autre pour qu'un chiffre dérivé du barème soit
+          défendable. Une fourchette assumée vaut mieux qu'une fausse précision. */}
+      <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+        Une licence annuelle donnant accès à l&apos;ensemble de vos
+        collaborateurs représente l&apos;équivalent de deux à trois journées de
+        formation en groupe.
+      </p>
 
       {/* La règle de stabilité tarifaire est reprise en clair ici, et pas
           seulement dans l'accordéon « Questions sur la licence » : c'est à cet
@@ -170,9 +231,10 @@ export function TarifsCalculateur() {
           contenu d'un accordéon fermé — la règle serait absente du HTML servi.
           La redondance est un service rendu, pas un doublon. */}
       <p className="mt-6 border-t border-[#1B2D5B]/10 pt-4 text-sm leading-relaxed text-muted-foreground">
-        Ce tarif est garanti pendant toute la durée de votre contrat. Il
-        n&apos;est réexaminé qu&apos;au renouvellement, et uniquement si
-        l&apos;effectif de votre institution a varié de plus de vingt pour cent.
+        Ce tarif est garanti pendant toute la durée de votre contrat. Au
+        renouvellement, il n&apos;est recalculé que si l&apos;effectif de votre
+        institution a varié de plus de vingt pour cent, et ne peut être indexé
+        que dans les limites précisées sous la grille.
       </p>
     </div>
   )

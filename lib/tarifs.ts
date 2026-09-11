@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Modèle tarifaire Learna — source unique de vérité.
 //
-// Toute la page /tarifs (tableau de référence et calculateur) dérive de ce
+// Toute la page /tarifs (formule, calculateur, grille, conditions) dérive de ce
 // module. Aucun montant ne doit être saisi en dur ailleurs : deux barèmes qui
 // divergent, c'est un prix annoncé au prospect qui ne correspond pas au contrat.
 //
@@ -10,16 +10,16 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Socle institutionnel, en CHF. Couvre l'accès de l'institution. */
-export const SOCLE_CHF = 2000
+export const SOCLE_CHF = 1500
 
 /** ETP couverts par le seul socle, sans supplément. */
-export const ETP_INCLUS = 10
+export const SEUIL_SOCLE_ETP = 10
 
-/** Montant par ETP au-delà de `ETP_INCLUS`, en francs. */
-export const PRIX_PAR_ETP_SUPPLEMENTAIRE = 25
+/** Montant par ETP au-delà de `SEUIL_SOCLE_ETP`, en francs. */
+export const TAUX_PAR_ETP = 27
 
 /** Au-delà de cet effectif, aucun montant n'est affiché : proposition sur mesure. */
-export const SEUIL_DEVIS = 400
+export const PLAFOND_DEVIS_ETP = 400
 
 /** Bornes du champ de saisie du calculateur. */
 export const ETP_MIN = 1
@@ -37,8 +37,68 @@ export const ETP_DEFAUT = 80
 export const COLLABORATEURS_MIN = 1
 export const COLLABORATEURS_MAX = 5000
 
+/**
+ * Ratio moyen collaborateurs / ETP du secteur social et médico-social, où le
+ * temps partiel est la norme.
+ *
+ * Sert au seul coût par collaborateur *estimé*, affiché tant que l'institution
+ * n'a pas donné son propre effectif. Toujours l'annoncer comme une moyenne :
+ * ce n'est pas le ratio d'une institution particulière, et le montant qui en
+ * découle n'est pas un prix contractuel.
+ */
+export const RATIO_COLLABORATEURS_PAR_ETP = 1.4
+
 /** Effectifs illustrés par le tableau de référence de la page /tarifs. */
 export const LIGNES_REFERENCE = [20, 30, 50, 75, 100, 150, 200, 300, 400] as const
+
+// ─── Prestations de production ───────────────────────────────────────────────
+//
+// L'ancienne « formation signature » couvrait deux choses très inégales en
+// charge de production : retravailler un module du catalogue aux couleurs de
+// l'institution, et écrire un module entier à partir de ses documents. Les
+// facturer à l'identique — c'est-à-dire les inclure toutes deux dans le socle —
+// rendait la charge annuelle impossible à borner.
+//
+// Les deux prestations sont donc distinctes : l'adaptation contextuelle est
+// comprise dans toute licence, le module entièrement sur mesure est facturé à
+// part. La terminologie publique « votre formation signature » désigne
+// désormais la première.
+
+/** Bornes de l'enveloppe de travail d'une adaptation contextuelle, en heures. */
+export const ADAPTATION_HEURES_MIN = 8
+export const ADAPTATION_HEURES_MAX = 10
+
+/**
+ * Mois de licence à partir duquel l'adaptation contextuelle est ouverte.
+ *
+ * Les premiers mois servent à l'appropriation du catalogue : adapter un module
+ * avant que l'institution sache lesquels comptent pour elle produit un travail
+ * mal ciblé.
+ */
+export const ADAPTATION_DISPONIBLE_DES_MOIS = 6
+
+/**
+ * Fourchette indicative du module entièrement sur mesure, en CHF.
+ *
+ * Indicative et non contractuelle : le forfait est arrêté sur devis, selon
+ * l'ampleur. Ne jamais l'afficher comme un prix ferme.
+ */
+export const SUR_MESURE_MIN_CHF = 3500
+export const SUR_MESURE_MAX_CHF = 4500
+
+/** Effectif à partir duquel le module sur mesure est compris sans supplément. */
+export const SUR_MESURE_INCLUS_DES_ETP = 150
+
+/** Durée d'engagement ouvrant le gel du tarif, en années. */
+export const ENGAGEMENT_GEL_ANNEES = 3
+
+/** Plafond de l'indexation annuelle, en pourcent. */
+export const INDEXATION_PLAFOND_POURCENT = 3
+
+/** Préavis d'annonce de l'indexation avant échéance, en mois. */
+export const INDEXATION_PREAVIS_MOIS = 3
+
+// ─── Calcul ──────────────────────────────────────────────────────────────────
 
 /** Arrondi au multiple de 100 supérieur. */
 function arrondiCentaineSuperieure(montant: number): number {
@@ -48,15 +108,15 @@ function arrondiCentaineSuperieure(montant: number): number {
 /**
  * Licence annuelle, en francs.
  *
- * Définie pour tout effectif, y compris au-delà de `SEUIL_DEVIS` : c'est
+ * Définie pour tout effectif, y compris au-delà de `PLAFOND_DEVIS_ETP` : c'est
  * `calculerTarif` qui décide de ne pas l'afficher. Garder la fonction totale
  * permet de la tester sur ses propres bornes.
  */
 export function prixCatalogue(etp: number): number {
   const brut =
-    etp <= ETP_INCLUS
+    etp <= SEUIL_SOCLE_ETP
       ? SOCLE_CHF
-      : SOCLE_CHF + PRIX_PAR_ETP_SUPPLEMENTAIRE * (etp - ETP_INCLUS)
+      : SOCLE_CHF + TAUX_PAR_ETP * (etp - SEUIL_SOCLE_ETP)
 
   return arrondiCentaineSuperieure(brut)
 }
@@ -74,15 +134,12 @@ export type TarifChiffre = {
   /** Coût annuel par ETP, calculé sur la licence annuelle pleine. */
   coutParEtp: number
   /**
-   * Coût mensuel par ETP, calculé sur la licence annuelle pleine.
+   * Coût annuel estimé par collaborateur, sur `RATIO_COLLABORATEURS_PAR_ETP`.
    *
-   * @deprecated Retiré de l'interface, volontairement. Mensualiser un montant
-   * annuel facturé en une fois affaiblit la crédibilité institutionnelle : la
-   * licence se négocie et se budgète à l'année, pas au mois. Conservé et testé
-   * pour le seul cas où un devis écrit en aurait l'usage. Ne pas le réafficher
-   * sur /tarifs sans décision explicite.
+   * Estimation, jamais un montant facturé : l'institution qui déclare son
+   * effectif réel obtient un chiffre plus juste via `coutParCollaborateur`.
    */
-  coutParEtpMois: number
+  coutParCollaborateurEstime: number
 }
 
 export type Tarif = TarifSurDevis | TarifChiffre
@@ -90,11 +147,11 @@ export type Tarif = TarifSurDevis | TarifChiffre
 /**
  * Tarification complète pour un effectif donné.
  *
- * Au-delà de `SEUIL_DEVIS`, aucun montant n'est renvoyé : l'interface doit
- * inviter au contact plutôt qu'extrapoler un barème qui n'engage personne.
+ * Au-delà de `PLAFOND_DEVIS_ETP`, aucun montant n'est renvoyé : l'interface
+ * doit inviter au contact plutôt qu'extrapoler un barème qui n'engage personne.
  */
 export function calculerTarif(etp: number): Tarif {
-  if (etp > SEUIL_DEVIS) return { surDevis: true, etp }
+  if (etp > PLAFOND_DEVIS_ETP) return { surDevis: true, etp }
 
   const catalogue = prixCatalogue(etp)
 
@@ -103,7 +160,7 @@ export function calculerTarif(etp: number): Tarif {
     etp,
     catalogue,
     coutParEtp: catalogue / etp,
-    coutParEtpMois: catalogue / etp / 12,
+    coutParCollaborateurEstime: catalogue / (etp * RATIO_COLLABORATEURS_PAR_ETP),
   }
 }
 
@@ -164,9 +221,9 @@ export function formaterCHF(montant: number): string {
 /**
  * Coût par ETP.
  *
- * Affiché au centime lorsque le montant tombe juste (29,5 → « 29.50 »), sinon
- * arrondi au franc (36,66… → « 37 »). Un coût par ETP n'est pas un montant
- * facturé mais un ordre de grandeur : afficher « 49.33 » suggérerait une
+ * Affiché au centime lorsque le montant tombe juste (33,5 → « 33.50 »), sinon
+ * arrondi au franc (35,33… → « 35 »). Un coût par ETP n'est pas un montant
+ * facturé mais un ordre de grandeur : afficher « 35.33 » suggérerait une
  * précision que le barème n'a pas.
  */
 export function formaterCoutParEtp(montant: number): string {
@@ -178,18 +235,4 @@ export function formaterCoutParEtp(montant: number): string {
   }
 
   return String(Math.round(montant))
-}
-
-/**
- * Coût mensuel par ETP, arrondi aux 5 centimes — l'usage suisse.
- * 2,583… → « 2.60 ».
- *
- * @deprecated Retiré de l'interface, volontairement. Mensualiser un montant
- * annuel facturé en une fois affaiblit la crédibilité institutionnelle : la
- * licence se négocie et se budgète à l'année, pas au mois. Conservé et testé
- * pour le seul cas où un devis écrit en aurait l'usage. Ne pas le réafficher
- * sur /tarifs sans décision explicite.
- */
-export function formaterCoutMensuel(montant: number): string {
-  return (Math.round(montant * 20) / 20).toFixed(2)
 }

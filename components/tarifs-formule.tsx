@@ -1,19 +1,19 @@
 import { Plus, Equal } from "lucide-react"
 
 import {
-  ETP_INCLUS,
   formaterCHF,
-  PRIX_PAR_ETP_SUPPLEMENTAIRE,
+  SEUIL_SOCLE_ETP,
   SOCLE_CHF,
+  TAUX_PAR_ETP,
 } from "@/lib/tarifs"
 
 /**
  * Le barème posé comme une opération, sur la page /tarifs.
  *
- * Le socle était auparavant annoncé seul, en tête de page (« Dès 2’000 CHF »).
- * Une grande institution pouvait en conclure qu’elle obtiendrait la formation
- * signature pour ce montant : le socle se lisait comme une offre, alors qu’il
- * n’est que le premier terme d’une addition.
+ * Le socle était auparavant annoncé seul, en tête de page (« Dès … CHF »). Une
+ * grande institution pouvait en conclure qu’elle obtiendrait tout pour ce
+ * montant : le socle se lisait comme une offre, alors qu’il n’est que le
+ * premier terme d’une addition.
  *
  * Le montrer comme une opération rend cette lecture impossible : le socle n’est
  * jamais visible sans le terme qui le suit, et le libellé « jusqu’à 10 ETP »
@@ -27,7 +27,7 @@ export function TarifsFormule() {
           {formaterCHF(SOCLE_CHF)}&nbsp;CHF
         </p>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          jusqu&apos;à {ETP_INCLUS}&nbsp;ETP
+          jusqu&apos;à {SEUIL_SOCLE_ETP}&nbsp;ETP
         </p>
       </div>
 
@@ -37,10 +37,10 @@ export function TarifsFormule() {
 
       <div className="rounded-2xl border border-[#1B2D5B]/10 bg-white p-5 text-center">
         <p className="text-2xl font-bold text-[#1B2D5B] tabular-nums sm:text-3xl">
-          {PRIX_PAR_ETP_SUPPLEMENTAIRE}&nbsp;CHF
+          {TAUX_PAR_ETP}&nbsp;CHF
         </p>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          par ETP au-delà de {ETP_INCLUS}
+          par ETP au-delà de {SEUIL_SOCLE_ETP}
         </p>
       </div>
 

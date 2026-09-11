@@ -193,7 +193,7 @@ export const comprendreLaViolence: ModuleLibre = {
     {
       titre: "Votre formation signature",
       texte:
-        "Chaque licence comprend la production d'une formation conçue pour votre institution, visible par vos seules équipes et hébergée aux côtés du catalogue commun. Accueil des nouveaux collaborateurs, repères de fonctionnement, procédures internes.",
+        "Chaque licence comprend l'adaptation d'un module à votre institution : vos situations, votre vocabulaire, vos références internes à la place des exemples génériques. Visible par vos seules équipes, hébergée aux côtés du catalogue commun.",
     },
   ],
 

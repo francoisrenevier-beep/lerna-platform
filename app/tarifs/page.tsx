@@ -9,20 +9,21 @@ import { TarifsTableau } from "@/components/tarifs-tableau"
 import { TarifsCalculateur } from "@/components/tarifs-calculateur"
 import { TarifsFormationSignature } from "@/components/tarifs-formation-signature"
 import { TarifsQuestions } from "@/components/tarifs-questions"
-import { SEUIL_DEVIS } from "@/lib/tarifs"
+import { conditionsLicence } from "@/content/site"
+import { PLAFOND_DEVIS_ETP } from "@/lib/tarifs"
 
 // Pas de données structurées Offer/Product : le tarif dépend de l'effectif de
 // l'institution, ce n'est pas un prix fixe. Les annoncer comme tel exposerait
 // un montant faux dans les résultats de recherche. Le seul balisage de la page
 // est le FAQPage émis par `TarifsQuestions`, qui ne porte aucun montant.
 //
-// La description ne cite plus de montant plancher non plus : « dès 2’000 CHF »
-// se lisait comme une offre accessible à toutes les tailles d'institution.
+// La description ne cite aucun montant plancher non plus : un « dès … CHF » se
+// lirait comme une offre accessible à toutes les tailles d'institution.
 export const metadata: Metadata = {
   title:
     "Tarifs : Learna, formation continue pour les institutions sociales et médico-sociales",
   description:
-    "Licence annuelle Learna : le catalogue pour tous vos collaborateurs et votre formation signature, conçue pour votre institution. Un tarif calculé sur votre effectif, garanti pendant toute la durée du contrat.",
+    "Licence annuelle Learna : le catalogue pour tous vos collaborateurs et votre formation signature, adaptée à votre institution. Un tarif calculé sur votre effectif, garanti pendant toute la durée du contrat.",
 }
 
 const garanties = [
@@ -54,8 +55,8 @@ export default function TarifsPage() {
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
             Une licence annuelle, calculée sur votre effectif. Elle ouvre le
-            catalogue à l&apos;ensemble de vos collaborateurs et finance la
-            production de votre formation signature.
+            catalogue à l&apos;ensemble de vos collaborateurs et comprend votre
+            formation signature, adaptée à votre institution.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -92,9 +93,10 @@ export default function TarifsPage() {
                 Votre formation signature
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Un sujet que vous choisissez, construit à partir de vos documents
-                et avec vos équipes. Visible par vos seuls collaborateurs. Une
-                par an, comprise dans la licence.
+                Un module du catalogue retravaillé avec vos situations, votre
+                vocabulaire et vos références. Visible par vos seuls
+                collaborateurs. Une par année de licence, comprise dans le
+                montant.
               </p>
             </div>
 
@@ -164,7 +166,7 @@ export default function TarifsPage() {
               plutôt qu'un accordéon — le contenu reste dans le HTML servi. */}
           <details className="group mt-6 rounded-2xl border border-[#1B2D5B]/10 bg-white/70">
             <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 list-none text-sm font-semibold text-[#1B2D5B] marker:content-none [&::-webkit-details-marker]:hidden">
-              Voir la grille complète, de 20 à {SEUIL_DEVIS} ETP
+              Voir la grille complète, de 20 à {PLAFOND_DEVIS_ETP} ETP
               <ChevronDown
                 aria-hidden
                 className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
@@ -179,13 +181,35 @@ export default function TarifsPage() {
               la première cadre l'attente des grandes institutions, la seconde
               ouvre la porte à celles qui ne peuvent pas suivre le barème. */}
           <p className="mt-8 text-sm text-muted-foreground">
-            Au-delà de {SEUIL_DEVIS} ETP, nous établissons une proposition
+            Au-delà de {PLAFOND_DEVIS_ETP} ETP, nous établissons une proposition
             adaptée à votre organisation.
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
             Les institutions dont la situation le justifie peuvent nous contacter
             pour examiner ensemble les conditions d&apos;un partenariat.
           </p>
+
+          {/* Conditions. Trois règles que la direction cherchera de toute façon
+              avant de porter la licence au budget : autant les poser sous la
+              grille plutôt que de les laisser se découvrir au contrat. Texte
+              sobre, sans mise en avant : ce sont des règles, pas des arguments.
+              Les mêmes formulations alimentent l'accordéon FAQ et son balisage
+              FAQPage, depuis `content/site`. */}
+          <div className="mt-12 border-t border-[#1B2D5B]/10 pt-10">
+            <h3 className="text-lg font-semibold text-[#1B2D5B]">Conditions</h3>
+            <dl className="mt-6 grid gap-6 sm:grid-cols-3">
+              {conditionsLicence.map((condition) => (
+                <div key={condition.id}>
+                  <dt className="text-sm font-semibold text-[#1B2D5B]">
+                    {condition.titre}
+                  </dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {condition.texte}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </section>
 

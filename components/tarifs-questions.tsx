@@ -1,4 +1,8 @@
-import { formationSignature } from "@/content/site"
+import {
+  conditionsLicence,
+  formationSignature,
+  moduleSurMesure,
+} from "@/content/site"
 import { FaqJsonLd } from "@/components/faq-jsonld"
 import {
   Accordion,
@@ -15,17 +19,19 @@ import {
  * la formation signature. Deux listes séparées évitent d'imposer aux visiteurs
  * de /tarifs une FAQ générale, et à ceux de /faq des questions de facturation.
  *
- * Les entrées 1 et 2 portent la règle de stabilité tarifaire (garantie pendant
- * le contrat, réexamen au renouvellement au-delà de vingt pour cent de
- * variation d'effectif) : elle ne doit pas disparaître d'ici.
+ * La règle de stabilité tarifaire (garantie pendant le contrat, réexamen au
+ * renouvellement au-delà de vingt pour cent de variation d'effectif) doit
+ * rester lisible ici. Elle est portée par l'entrée « effectif-evolution » et
+ * par la condition « indexation », reprise de `content/site` — les trois
+ * conditions de la licence sont écrites une seule fois, et alimentent à la fois
+ * cet accordéon, son balisage FAQPage et la section « Conditions » de la page.
  */
 const questions = [
-  {
-    id: "tarif-augmentation",
-    question: "Le tarif peut-il augmenter en cours de contrat ?",
-    reponse:
-      "Non. Il est fixé à la signature et garanti pour toute la durée du contrat.",
-  },
+  ...conditionsLicence.map((condition) => ({
+    id: condition.id,
+    question: condition.question,
+    reponse: condition.reponse,
+  })),
   {
     id: "effectif-evolution",
     question: "Que se passe-t-il si notre effectif évolue ?",
@@ -39,19 +45,23 @@ const questions = [
       "Non. La licence est institutionnelle et couvre tous vos collaborateurs.",
   },
   {
+    id: "signature-nature",
+    question: "Qu'est-ce que la formation signature comprise dans la licence ?",
+    reponse: `${formationSignature.definition} Elle est comprise dans toute licence : ${formationSignature.rythme}, ouverte ${formationSignature.disponibilite}, pour une enveloppe de ${formationSignature.enveloppe} de travail.`,
+  },
+  {
     id: "delai-signature",
-    question: "Combien de temps pour obtenir notre formation signature ?",
+    question: "Quand pouvons-nous demander notre formation signature ?",
     reponse: formationSignature.reponseDelai,
   },
   {
-    id: "plusieurs-signatures",
-    question: "Peut-on en demander plusieurs ?",
-    reponse:
-      "Une formation signature est incluse chaque année. Les suivantes sont réalisées sur mandat.",
+    id: "module-sur-mesure",
+    question: "Et si le sujet n'existe pas au catalogue ?",
+    reponse: `${moduleSurMesure.definition} C'est une prestation distincte de la formation signature, facturée à part : un forfait selon l'ampleur, arrêté sur devis, dans une fourchette indicative de ${moduleSurMesure.fourchette}. Il est compris sans supplément ${moduleSurMesure.inclusionSansSupplement}.`,
   },
   {
     id: "fin-de-licence",
-    question: "Que devient notre formation signature si nous arrêtons ?",
+    question: "Que deviennent nos contenus si nous arrêtons ?",
     reponse:
       "Le contenu vous est remis sous forme de document complet, avec les ressources associées. Vous en conservez l'usage libre au sein de votre institution. Seuls l'hébergement en ligne, le suivi des parcours et les attestations cessent avec la licence.",
   },

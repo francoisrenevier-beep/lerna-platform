@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-import { formationSignature } from "@/content/site"
+import { formationSignature, moduleSurMesure } from "@/content/site"
 import { FaqJsonLd } from "@/components/faq-jsonld"
 import {
   Accordion,
@@ -39,11 +39,18 @@ const questions: {
   },
   {
     id: "q4",
-    question: "Pouvons-nous faire produire une formation signature, conçue pour notre institution ?",
+    question: "Pouvons-nous faire adapter une formation à notre institution ?",
     reponse:
-      "Oui. Chaque licence annuelle comprend la production de votre formation signature, conçue pour votre institution, visible uniquement par vos collaborateurs et hébergée sur la plateforme aux côtés du catalogue commun.\n\nL'usage le plus fréquent est l'accueil des nouveaux collaborateurs : présentation de l'institution, repères de fonctionnement, informations que vous souhaitez transmettre à chaque arrivée. Vous nous fournissez les contenus (documents internes, procédures, éléments de présentation), et nous les mettons en forme selon les standards pédagogiques de la plateforme. Le contenu reste votre propriété ; nous en assurons la mise en forme, l'hébergement et le suivi des consultations.\n\n" +
+      "Oui. Chaque licence annuelle comprend votre formation signature : " +
+      formationSignature.definition.charAt(0).toLowerCase() +
+      formationSignature.definition.slice(1) +
+      " Elle est visible de vos seuls collaborateurs et hébergée aux côtés du catalogue commun.\n\nVous nous transmettez vos éléments (situations rencontrées, procédures, vocabulaire interne, documents de référence), et nous retravaillons le module. Le contenu que vous fournissez reste votre propriété ; nous en assurons la mise en forme, l'hébergement et le suivi des consultations.\n\n" +
       formationSignature.reponseDelai +
-      "\n\nUne révision annuelle est comprise, pour tenir compte des évolutions de votre organisation. Des formations supplémentaires peuvent être produites sur mandat, sur devis.",
+      "\n\nUn module écrit entièrement sur mesure, sur un sujet absent du catalogue, est une prestation distincte et facturée : forfait selon l'ampleur, sur devis, dans une fourchette indicative de " +
+      moduleSurMesure.fourchette +
+      ". Il est compris sans supplément " +
+      moduleSurMesure.inclusionSansSupplement +
+      ".",
   },
   {
     id: "q5",

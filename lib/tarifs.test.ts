@@ -7,17 +7,17 @@ import {
   COLLABORATEURS_MIN,
   coutParCollaborateur,
   ETP_DEFAUT,
-  ETP_INCLUS,
   ETP_MAX,
   ETP_MIN,
   formaterCHF,
-  formaterCoutMensuel,
   formaterCoutParEtp,
   LIGNES_REFERENCE,
+  PLAFOND_DEVIS_ETP,
   prixCatalogue,
-  PRIX_PAR_ETP_SUPPLEMENTAIRE,
-  SEUIL_DEVIS,
+  RATIO_COLLABORATEURS_PAR_ETP,
+  SEUIL_SOCLE_ETP,
   SOCLE_CHF,
+  TAUX_PAR_ETP,
 } from "./tarifs"
 
 // Prix catalogue avant arrondi, reconstruit depuis les constantes du module.
@@ -25,23 +25,58 @@ import {
 // propriétés strictes se vérifient, l'arrondi à la centaine introduisant par
 // nature des paliers de quelques francs (voir le bloc « monotonie »).
 function prixBrut(etp: number): number {
-  return etp <= ETP_INCLUS
+  return etp <= SEUIL_SOCLE_ETP
     ? SOCLE_CHF
-    : SOCLE_CHF + PRIX_PAR_ETP_SUPPLEMENTAIRE * (etp - ETP_INCLUS)
+    : SOCLE_CHF + TAUX_PAR_ETP * (etp - SEUIL_SOCLE_ETP)
 }
+
+// ─── Pivots du barème ────────────────────────────────────────────────────────
+//
+// Les valeurs arrêtées avec la direction, y compris celles que la page
+// n'affiche pas. Elles sont écrites en clair, et non dérivées des constantes :
+// un test qui recalculerait le barème avec la formule du module validerait
+// n'importe quelle erreur de barème. C'est ici que doit casser tout changement
+// de socle ou de taux qui n'aurait pas été décidé.
+const PIVOTS = [
+  { etp: 1, licence: 1500 },
+  { etp: 10, licence: 1500 },
+  { etp: 11, licence: 1600 },
+  { etp: 25, licence: 2000 },
+  { etp: 50, licence: 2600 },
+  { etp: 100, licence: 4000 },
+  { etp: 150, licence: 5300 },
+  { etp: 200, licence: 6700 },
+  { etp: 300, licence: 9400 },
+  { etp: 400, licence: 12100 },
+] as const
+
+describe("pivots du barème", () => {
+  it.each(PIVOTS)("$etp ETP → $licence CHF", ({ etp, licence }) => {
+    const tarif = calculerTarif(etp)
+
+    expect(tarif.surDevis).toBe(false)
+    if (tarif.surDevis) return
+
+    expect(tarif.catalogue).toBe(licence)
+  })
+
+  it("renvoie vers le devis à 401 ETP", () => {
+    expect(calculerTarif(401)).toEqual({ surDevis: true, etp: 401 })
+  })
+})
 
 // Le tableau publié sur /tarifs. Ces valeurs sont la référence commerciale :
 // si un changement de barème les fait bouger, c'est ici que ça doit casser.
 const TABLEAU_REFERENCE = [
-  { etp: 20, catalogue: 2300, coutParEtp: "115" },
-  { etp: 30, catalogue: 2500, coutParEtp: "83" },
-  { etp: 50, catalogue: 3000, coutParEtp: "60" },
-  { etp: 75, catalogue: 3700, coutParEtp: "49" },
-  { etp: 100, catalogue: 4300, coutParEtp: "43" },
-  { etp: 150, catalogue: 5500, coutParEtp: "37" },
-  { etp: 200, catalogue: 6800, coutParEtp: "34" },
-  { etp: 300, catalogue: 9300, coutParEtp: "31" },
-  { etp: 400, catalogue: 11800, coutParEtp: "29.50" },
+  { etp: 20, catalogue: 1800, coutParEtp: "90" },
+  { etp: 30, catalogue: 2100, coutParEtp: "70" },
+  { etp: 50, catalogue: 2600, coutParEtp: "52" },
+  { etp: 75, catalogue: 3300, coutParEtp: "44" },
+  { etp: 100, catalogue: 4000, coutParEtp: "40" },
+  { etp: 150, catalogue: 5300, coutParEtp: "35" },
+  { etp: 200, catalogue: 6700, coutParEtp: "33.50" },
+  { etp: 300, catalogue: 9400, coutParEtp: "31" },
+  { etp: 400, catalogue: 12100, coutParEtp: "30.25" },
 ] as const
 
 describe("tableau de référence", () => {
@@ -65,31 +100,20 @@ describe("tableau de référence", () => {
 
 describe("prixCatalogue", () => {
   it("applique le seul socle jusqu'à 10 ETP inclus", () => {
-    expect(prixCatalogue(1)).toBe(2000)
-    expect(prixCatalogue(5)).toBe(2000)
-    expect(prixCatalogue(10)).toBe(2000)
+    expect(prixCatalogue(1)).toBe(1500)
+    expect(prixCatalogue(5)).toBe(1500)
+    expect(prixCatalogue(10)).toBe(1500)
   })
 
-  // Borne 10/11 : le premier ETP supplémentaire coûte 25 CHF, arrondis à la
+  // Borne 10/11 : le premier ETP supplémentaire coûte 27 CHF, arrondis à la
   // centaine supérieure. Un barème par tranches ferait ici un saut brutal.
   it("franchit la borne 10/11 sans effet de seuil", () => {
-    expect(prixCatalogue(11)).toBe(2100)
+    expect(prixCatalogue(11)).toBe(1600)
     expect(prixCatalogue(11) - prixCatalogue(10)).toBe(100)
   })
 
-  it("croît continûment au-delà du socle", () => {
-    expect(prixCatalogue(30)).toBe(2500)
-    expect(prixCatalogue(50)).toBe(3000)
-    expect(prixCatalogue(75)).toBe(3700)
-    expect(prixCatalogue(100)).toBe(4300)
-    expect(prixCatalogue(150)).toBe(5500)
-    expect(prixCatalogue(200)).toBe(6800)
-    expect(prixCatalogue(300)).toBe(9300)
-    expect(prixCatalogue(400)).toBe(11800)
-  })
-
   it("ne renvoie que des multiples de 100", () => {
-    for (let etp = ETP_MIN; etp <= SEUIL_DEVIS; etp++) {
+    for (let etp = ETP_MIN; etp <= PLAFOND_DEVIS_ETP; etp++) {
       expect(prixCatalogue(etp) % 100).toBe(0)
     }
   })
@@ -99,15 +123,14 @@ describe("prixCatalogue", () => {
 //
 // Les propriétés strictes se testent sur le prix exact (avant arrondi) : sur
 // les valeurs arrondies à la centaine, la monotonie stricte point par point est
-// mathématiquement impossible — le prix stagne entre deux paliers (2'100 CHF de
-// 11 à 14 ETP), et le coût par ETP arrondi remonte de quelques centimes au
-// passage d'un palier (2'400/26 = 92.31 < 2'500/27 = 92.59). L'arrondi borne
-// ces effets à moins de 100 CHF, ce que vérifient les tests sur les valeurs
-// arrondies.
+// mathématiquement impossible — le prix stagne entre deux paliers (1'600 CHF de
+// 11 à 13 ETP), et le coût par ETP arrondi remonte de quelques centimes au
+// passage d'un palier. L'arrondi borne ces effets à moins de 100 CHF, ce que
+// vérifient les tests sur les valeurs arrondies.
 describe("monotonie sur l'intervalle 1–400", () => {
   it("le prix exact ne décroît jamais, et croît strictement au-delà du socle", () => {
-    for (let etp = ETP_MIN + 1; etp <= SEUIL_DEVIS; etp++) {
-      if (etp <= ETP_INCLUS) {
+    for (let etp = ETP_MIN + 1; etp <= PLAFOND_DEVIS_ETP; etp++) {
+      if (etp <= SEUIL_SOCLE_ETP) {
         expect(prixBrut(etp)).toBe(prixBrut(etp - 1))
       } else {
         expect(prixBrut(etp)).toBeGreaterThan(prixBrut(etp - 1))
@@ -116,13 +139,13 @@ describe("monotonie sur l'intervalle 1–400", () => {
   })
 
   it("le coût exact par ETP décroît strictement", () => {
-    for (let etp = ETP_MIN + 1; etp <= SEUIL_DEVIS; etp++) {
+    for (let etp = ETP_MIN + 1; etp <= PLAFOND_DEVIS_ETP; etp++) {
       expect(prixBrut(etp) / etp).toBeLessThan(prixBrut(etp - 1) / (etp - 1))
     }
   })
 
   it("le prix arrondi ne décroît jamais et ne saute jamais plus d'un palier de 100", () => {
-    for (let etp = ETP_MIN + 1; etp <= SEUIL_DEVIS; etp++) {
+    for (let etp = ETP_MIN + 1; etp <= PLAFOND_DEVIS_ETP; etp++) {
       const saut = prixCatalogue(etp) - prixCatalogue(etp - 1)
       expect(saut).toBeGreaterThanOrEqual(0)
       expect(saut).toBeLessThanOrEqual(100)
@@ -152,19 +175,33 @@ describe("seuil de devis", () => {
   })
 })
 
-describe("coûts par ETP", () => {
-  it("calcule le coût annuel sur la licence annuelle pleine", () => {
+describe("coûts unitaires", () => {
+  it("calcule le coût par ETP sur la licence annuelle pleine", () => {
     const tarif = calculerTarif(100)
     if (tarif.surDevis) throw new Error("100 ETP devrait être chiffré")
 
-    expect(tarif.coutParEtp).toBe(43)
+    expect(tarif.coutParEtp).toBe(40)
   })
 
-  it("dérive le coût mensuel de la licence annuelle", () => {
+  // Le coût par collaborateur estimé n'est pas un montant facturé : il rapporte
+  // la licence à l'effectif que produit le ratio moyen du secteur.
+  it("estime le coût par collaborateur sur le ratio moyen", () => {
     const tarif = calculerTarif(100)
     if (tarif.surDevis) throw new Error("100 ETP devrait être chiffré")
 
-    expect(formaterCoutMensuel(tarif.coutParEtpMois)).toBe("3.60")
+    expect(tarif.coutParCollaborateurEstime).toBeCloseTo(4000 / 140)
+    expect(formaterCHF(tarif.coutParCollaborateurEstime)).toBe("29")
+  })
+
+  it("reste inférieur au coût par ETP, le ratio étant supérieur à 1", () => {
+    expect(RATIO_COLLABORATEURS_PAR_ETP).toBeGreaterThan(1)
+
+    for (const etp of LIGNES_REFERENCE) {
+      const tarif = calculerTarif(etp)
+      if (tarif.surDevis) throw new Error(`${etp} ETP devrait être chiffré`)
+
+      expect(tarif.coutParCollaborateurEstime).toBeLessThan(tarif.coutParEtp)
+    }
   })
 })
 
@@ -174,17 +211,17 @@ describe("coûts par ETP", () => {
 // informatif : il ne doit jamais changer le montant de la licence, et doit
 // rester muet dès que la saisie ne permet pas un affichage honnête.
 describe("coutParCollaborateur", () => {
-  const licence = 4300 // 100 ETP
+  const licence = 4000 // 100 ETP
 
   it("divise la licence par l'effectif déclaré", () => {
     const cout = coutParCollaborateur(licence, 150, 100)
     expect(cout).not.toBeNull()
-    expect(cout?.an).toBeCloseTo(4300 / 150)
-    expect(cout?.mois).toBeCloseTo(4300 / 150 / 12)
+    expect(cout?.an).toBeCloseTo(4000 / 150)
+    expect(cout?.mois).toBeCloseTo(4000 / 150 / 12)
   })
 
   it("accepte un effectif égal au nombre d'ETP", () => {
-    expect(coutParCollaborateur(licence, 100, 100)?.an).toBe(43)
+    expect(coutParCollaborateur(licence, 100, 100)?.an).toBe(40)
   })
 
   // Moins de collaborateurs que d'ETP : le chiffre serait calculable mais
@@ -219,23 +256,17 @@ describe("coutParCollaborateur", () => {
 
 describe("formatage", () => {
   it("sépare les milliers par une apostrophe suisse", () => {
-    expect(formaterCHF(2000)).toBe("2’000")
-    expect(formaterCHF(11800)).toBe("11’800")
+    expect(formaterCHF(1500)).toBe("1’500")
+    expect(formaterCHF(12100)).toBe("12’100")
     expect(formaterCHF(900)).toBe("900")
   })
 
   it("affiche le coût par ETP au centime seulement s'il tombe juste", () => {
     expect(formaterCoutParEtp(200)).toBe("200")
-    expect(formaterCoutParEtp(115)).toBe("115")
-    expect(formaterCoutParEtp(29.5)).toBe("29.50")
-    expect(formaterCoutParEtp(2500 / 30)).toBe("83")
-    expect(formaterCoutParEtp(5500 / 150)).toBe("37")
-  })
-
-  it("arrondit le coût mensuel aux 5 centimes", () => {
-    expect(formaterCoutMensuel(2.5833)).toBe("2.60")
-    expect(formaterCoutMensuel(5.8333)).toBe("5.85")
-    expect(formaterCoutMensuel(3)).toBe("3.00")
+    expect(formaterCoutParEtp(90)).toBe("90")
+    expect(formaterCoutParEtp(33.5)).toBe("33.50")
+    expect(formaterCoutParEtp(30.25)).toBe("30.25")
+    expect(formaterCoutParEtp(5300 / 150)).toBe("35")
   })
 })
 
