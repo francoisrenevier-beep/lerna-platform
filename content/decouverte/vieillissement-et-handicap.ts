@@ -39,7 +39,9 @@ export const vieillissementEtHandicap: ModuleLibre = {
   },
 
   formationSlug: "vieillissement-bases",
-  formationTitre: "Accompagner le vieillissement en institution — Les bases",
+  // Titre tel que la base le porte aujourd'hui, et donc tel que la carte du
+  // catalogue l'affiche. La migration 20260515 l'avait créée sous un autre nom.
+  formationTitre: "Handicap et vieillissement - base",
 
   // Les `id` sont des ancres publiques et l'unité de mesure de la progression :
   // les renommer casserait les liens partagés et remettrait à zéro la
