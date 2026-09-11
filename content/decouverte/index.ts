@@ -9,8 +9,9 @@
 import type { ModuleLibre } from "@/lib/decouverte/types"
 
 import { comprendreLaViolence } from "./comprendre-la-violence"
+import { vieillissementEtHandicap } from "./vieillissement-et-handicap"
 
-export const MODULES_LIBRES: ModuleLibre[] = [comprendreLaViolence]
+export const MODULES_LIBRES: ModuleLibre[] = [comprendreLaViolence, vieillissementEtHandicap]
 
 export function moduleLibre(slug: string): ModuleLibre | undefined {
   return MODULES_LIBRES.find((m) => m.slug === slug)

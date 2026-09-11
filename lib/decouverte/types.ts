@@ -45,6 +45,19 @@ export type Bloc =
     }
   | { type: "tableau"; titre?: string; colonnes: { titre: string; contenu: string[] }[] }
   | {
+      type: "statistiques"
+      /** Deux à trois chiffres. Au-delà, la ligne devient illisible sur téléphone. */
+      items: { valeur: string; libelle: string }[]
+    }
+  | {
+      type: "scenario"
+      /** Le cas, en une phrase — « Ahmed, 47 ans, se plaint de fatigue ». */
+      titre: string
+      situation: string
+      question: string
+      reponse: string
+    }
+  | {
       type: "schema"
       titre: string
       etapes: { niveau: string; nom: string; definition: string }[]

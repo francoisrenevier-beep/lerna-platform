@@ -10,6 +10,7 @@ describe("registre des modules libres", () => {
 
   it("retrouve un module par son slug", () => {
     expect(moduleLibre("comprendre-la-violence")?.slug).toBe("comprendre-la-violence")
+    expect(moduleLibre("vieillissement-et-handicap")?.slug).toBe("vieillissement-et-handicap")
     expect(moduleLibre("inexistant")).toBeUndefined()
   })
 
@@ -20,6 +21,15 @@ describe("registre des modules libres", () => {
     expect(moduleLibreDeFormation("violence-envers-professionnels")?.slug).toBe(
       "comprendre-la-violence",
     )
+    // Slug issu de 20260515_formation_vieillissement_bases.sql.
+    expect(moduleLibreDeFormation("vieillissement-bases")?.slug).toBe("vieillissement-et-handicap")
+  })
+
+  it("n'ouvre qu'un module par formation", () => {
+    // `moduleLibreDeFormation` renvoie le premier trouvé : deux modules libres
+    // issus de la même formation en rendraient un inatteignable depuis la carte.
+    const slugs = MODULES_LIBRES.map((m) => m.formationSlug)
+    expect(new Set(slugs).size).toBe(slugs.length)
   })
 
   it("ne renvoie rien pour une formation sans module ouvert", () => {

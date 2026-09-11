@@ -11,11 +11,13 @@ import type { Bloc } from "@/lib/decouverte/types"
  * Rendu d'un bloc de module libre.
  *
  * Réutilise les primitives de components/module/ pour que le module libre soit
- * visuellement identique à la plateforme. Deux blocs sont réimplémentés ici,
- * uniquement parce que leur version plateforme n'est pas utilisable sur un
- * téléphone : le schéma d'étapes (cartes de largeur fixe) et les listes à
- * puces (qui n'interprètent pas le gras). Les composants d'origine ne sont pas
- * modifiés, la plateforme n'est pas touchée par ce chantier.
+ * visuellement identique à la plateforme. Quelques blocs sont réimplémentés
+ * ici, uniquement parce que leur version plateforme n'est pas utilisable sur
+ * un téléphone ou n'existe pas en composant partagé : le schéma d'étapes
+ * (cartes de largeur fixe), les listes à puces (qui n'interprètent pas le
+ * gras), le bandeau de chiffres et le cas pratique (écrits en dur dans les
+ * modules). Les composants d'origine ne sont pas modifiés, la plateforme n'est
+ * pas touchée par ce chantier.
  */
 
 /** Interprète la syntaxe **gras** des fichiers content/. */
@@ -80,6 +82,55 @@ function SchemaEtapesResponsive({
         ))}
       </ol>
       {note && <p className="mt-4 text-center text-xs italic text-gray-400">{note}</p>}
+    </div>
+  )
+}
+
+/**
+ * Bandeau de chiffres. Empilé sur téléphone, en ligne à partir de `sm` : la
+ * version plateforme impose trois colonnes, qui écrasent les libellés sous
+ * 400 px.
+ */
+function Statistiques({ items }: { items: { valeur: string; libelle: string }[] }) {
+  return (
+    <div className="my-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      {items.map((stat, i) => (
+        <div key={i} className="rounded-xl bg-[#1B2D5B] p-6 text-center text-white">
+          <p className="mb-2 text-4xl font-bold text-[#3DBFA0]">{stat.valeur}</p>
+          <p className="text-sm leading-snug text-white/70">{stat.libelle}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/**
+ * Cas pratique : une situation, une question de réflexion, puis la réponse
+ * guidée. La réponse est visible d'emblée, comme sur la plateforme — un
+ * repliement inviterait à sauter l'étape de réflexion sans la remplacer.
+ */
+function Scenario({ bloc }: { bloc: Extract<Bloc, { type: "scenario" }> }) {
+  return (
+    <div className="my-6 space-y-3">
+      <div className="rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] p-5">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#1D4ED8]">
+          Situation
+        </p>
+        <p className="mb-2 text-sm font-semibold text-gray-700">{gras(bloc.titre)}</p>
+        <p className="text-sm leading-relaxed text-gray-700">{gras(bloc.situation)}</p>
+      </div>
+      <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
+          Question de réflexion
+        </p>
+        <p className="text-sm italic leading-relaxed text-gray-700">{gras(bloc.question)}</p>
+      </div>
+      <div className="rounded-xl border border-[#BBF7D0] bg-[#F0FDF4] p-5">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#15803D]">
+          Réponse guidée
+        </p>
+        <p className="text-sm leading-relaxed text-gray-700">{gras(bloc.reponse)}</p>
+      </div>
     </div>
   )
 }
@@ -163,6 +214,12 @@ export function RenduBloc({ bloc }: { bloc: Bloc }) {
 
     case "tableau":
       return <TableauComparaison titre={bloc.titre} colonnes={bloc.colonnes} />
+
+    case "statistiques":
+      return <Statistiques items={bloc.items} />
+
+    case "scenario":
+      return <Scenario bloc={bloc} />
 
     case "schema":
       return <SchemaEtapesResponsive titre={bloc.titre} etapes={bloc.etapes} note={bloc.note} />

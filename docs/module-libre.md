@@ -4,8 +4,11 @@ Un module en accès libre est un module complet de la plateforme, publié sur le
 site vitrine à l'adresse `/decouvrir/<slug>` : sans compte, sans formulaire,
 indexable par les moteurs.
 
-Ouvrir un second module ne demande **ni composant ni page** : un fichier
+Ouvrir un module de plus ne demande **ni composant ni page** : un fichier
 descripteur, et une ligne dans le registre.
+
+Deux modules sont ouverts aujourd'hui : `comprendre-la-violence` et
+`vieillissement-et-handicap`.
 
 ---
 
@@ -23,6 +26,7 @@ Les modules déjà externalisés au moment d'écrire ces lignes :
 - `content/sommeil-module-1.ts`
 - `content/transition-module-1.ts`
 - `content/deliberation-module-1-v2.ts`
+- `content/vieillissement-bases-module-1.ts`
 
 > **Ne recopiez jamais de texte de formation dans le descripteur.** Le
 > descripteur importe le fichier `content/`, il ne le duplique pas. C'est ce qui
@@ -97,6 +101,8 @@ la progression déjà enregistrée chez les visiteurs. Choisissez-les une fois.
 | `concept` | L'encadré « Concept clé » | `label`, `titre`, `items?`, `textes?` |
 | `highlight` | L'encadré coloré | `label`, `couleur?`, `textes?`, `items?` |
 | `tableau` | Un tableau comparatif | `titre?`, `colonnes` |
+| `statistiques` | Le bandeau de chiffres | `items` (`valeur`, `libelle`) |
+| `scenario` | Le cas pratique en trois temps | `titre`, `situation`, `question`, `reponse` |
 | `schema` | Le schéma d'étapes fléché | `titre`, `etapes`, `note?` |
 | `media` | Un lecteur vidéo ou audio | voir plus bas |
 
@@ -111,8 +117,16 @@ Dans [`content/decouverte/index.ts`](../content/decouverte/index.ts) :
 ```ts
 import { monModule } from "./mon-module"
 
-export const MODULES_LIBRES: ModuleLibre[] = [comprendreLaViolence, monModule]
+export const MODULES_LIBRES: ModuleLibre[] = [
+  comprendreLaViolence,
+  vieillissementEtHandicap,
+  monModule,
+]
 ```
+
+**Une formation, un module libre.** `moduleLibreDeFormation()` renvoie le
+premier module trouvé : deux modules ouverts sur la même formation en rendraient
+un inatteignable depuis le catalogue. Un test du registre le vérifie.
 
 C'est tout. En découlent automatiquement :
 
@@ -149,9 +163,11 @@ catalogue est le seul point d'entrée déduit du registre. Les quatre autres son
 | FAQ, réponse sur le format | [`components/faq-directeurs.tsx`](../components/faq-directeurs.tsx) |
 | Pied de page | [`components/footer.tsx`](../components/footer.tsx) |
 
-Ouvrir un second module n'oblige pas à les changer : à un moment, mieux vaut
-sans doute que ces liens mènent à une page listant les modules libres plutôt
-qu'à l'un d'eux en particulier.
+Ouvrir un module de plus n'oblige pas à les changer, et
+`vieillissement-et-handicap` ne l'a pas fait : il s'atteint par la carte de sa
+formation, dans `/formations-ressources`. Maintenant que le registre en compte
+deux, ces quatre liens gagneraient sans doute à mener à une page listant les
+modules libres plutôt qu'à l'un d'eux en particulier.
 
 ---
 
