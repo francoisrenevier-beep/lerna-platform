@@ -404,7 +404,7 @@ export default function AdminFormationDetailPage() {
                       <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Description</th>
                       <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Durée</th>
                       <th className="text-center px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Type</th>
-                      <th className="px-4 py-3 w-48"></th>
+                      <th className="px-4 py-3 w-72"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -435,6 +435,14 @@ export default function AdminFormationDetailPage() {
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2 justify-end">
+                            <a
+                              href={`/admin/formations/${formationId}/modules/${m.id}/fiche`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs px-3 py-1.5 rounded-lg bg-[#1B2D5B]/5 text-[#1B2D5B] hover:bg-[#1B2D5B]/10 font-medium transition-colors whitespace-nowrap"
+                            >
+                              Fiche PDF
+                            </a>
                             <button
                               onClick={() => setModalModule({ ...m })}
                               className="text-xs px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium transition-colors"

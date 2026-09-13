@@ -2,6 +2,7 @@
 
 import React from "react"
 
+import { useModeFiche } from "@/components/module/ModeFiche"
 import { useTitreFormation } from "@/components/module/TitreFormation"
 
 type HeroModuleProps = {
@@ -21,6 +22,8 @@ type HeroModuleProps = {
 
 export function HeroModule({ numero, categorie, titre, titrePart2, sousTitre, duree, niveau, videoYoutube }: HeroModuleProps) {
   const nomFormation = useTitreFormation(categorie)
+  // Une vidéo ne s'imprime pas : la fiche en donne l'adresse à la place.
+  const fiche = useModeFiche()
 
   return (
     <>
@@ -48,7 +51,15 @@ export function HeroModule({ numero, categorie, titre, titrePart2, sousTitre, du
           </div>
         </div>
       </div>
-      {videoYoutube && (
+      {videoYoutube && fiche && (
+        <div className="max-w-[800px] mx-auto px-8 pt-10 pb-2">
+          <p className="text-xs font-medium tracking-widest uppercase text-[#3DBFA0] mb-3">Introduction</p>
+          <p className="text-sm text-gray-600">
+            Vidéo d'introduction : https://www.youtube.com/watch?v={videoYoutube}
+          </p>
+        </div>
+      )}
+      {videoYoutube && !fiche && (
         <div className="max-w-[800px] mx-auto px-8 pt-10 pb-2">
           <p className="text-xs font-medium tracking-widest uppercase text-[#3DBFA0] mb-3">Introduction</p>
           <div className="relative w-full overflow-hidden rounded-xl shadow-md" style={{ paddingBottom: "56.25%" }}>

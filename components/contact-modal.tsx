@@ -62,7 +62,7 @@ export function ContactModal() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Nous contacter"
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-[#1B2D5B] px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:bg-[#1B2D5B]/90 hover:shadow-xl active:scale-95"
+        className="print:hidden fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-[#1B2D5B] px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:bg-[#1B2D5B]/90 hover:shadow-xl active:scale-95"
       >
         <MessageCircle className="h-4 w-4" />
         <span className="hidden sm:inline">Nous contacter</span>
@@ -71,14 +71,14 @@ export function ContactModal() {
       {/* Backdrop */}
       {open && (
         <div
-          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
+          className="print:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
           onClick={handleClose}
         />
       )}
 
       {/* Modal */}
       <div
-        className={`fixed bottom-0 right-0 z-50 w-full sm:bottom-6 sm:right-6 sm:w-[420px] transition-all duration-300 ${
+        className={`print:hidden fixed bottom-0 right-0 z-50 w-full sm:bottom-6 sm:right-6 sm:w-[420px] transition-all duration-300 ${
           open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
         }`}
       >

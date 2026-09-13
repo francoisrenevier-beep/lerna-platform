@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 
+import { useModeFiche } from "@/components/module/ModeFiche"
+
 type Question = {
   question: string
   reponses: string[]
@@ -32,13 +34,55 @@ function melanger(questions: Question[]): Question[] {
   })
 }
 
+const LETTRES = "ABCDEFGHIJ"
+
+// Le quiz tel qu'il s'imprime : toutes les questions à la suite, dans l'ordre
+// où le module les écrit et sans mélange des réponses, pour que deux impressions
+// du même module donnent la même fiche. Voir components/module/ModeFiche.tsx.
+function QuizFiche({ questions, corrige }: { questions: Question[]; corrige: boolean }) {
+  return (
+    <div className="border border-gray-200 rounded-xl p-8 mb-6">
+      <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Quiz du module</p>
+      <h3 className="text-lg font-bold text-[#1B2D5B] mb-6">Vérifiez votre compréhension</h3>
+      <ol className="space-y-6">
+        {questions.map(function(question, i) {
+          return (
+            <li key={i} className="break-inside-avoid">
+              <p className="text-sm font-semibold text-[#1B2D5B] mb-3">{i + 1}. {question.question}</p>
+              <ul className="space-y-2">
+                {question.reponses.map(function(reponse, j) {
+                  const bonne = corrige && j === question.bonneReponse
+                  return (
+                    <li key={j} className={"flex items-start gap-3 text-sm " + (bonne ? "text-[#1B2D5B] font-semibold" : "text-gray-700")}>
+                      <span className={"w-5 h-5 mt-px rounded border text-[10px] font-bold flex items-center justify-center flex-shrink-0 " + (bonne ? "bg-[#3DBFA0] border-[#3DBFA0] text-white" : "border-gray-300 text-gray-400")}>
+                        {LETTRES[j]}
+                      </span>
+                      <span>{reponse}{bonne && <span className="text-[#3DBFA0]"> · bonne réponse</span>}</span>
+                    </li>
+                  )
+                })}
+              </ul>
+              {corrige && (
+                <p className="text-xs text-gray-500 italic mt-3 pl-8">{question.explication}</p>
+              )}
+            </li>
+          )
+        })}
+      </ol>
+    </div>
+  )
+}
+
 export function Quiz({ questions, onValiderModule }: QuizProps) {
+  const fiche = useModeFiche()
   const [etape, setEtape] = useState<"quiz" | "resultat">("quiz")
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>(() => melanger(questions))
   const [reponsesChoisies, setReponsesChoisies] = useState<number[]>(Array(questions.length).fill(-1))
   const [questionActuelle, setQuestionActuelle] = useState(0)
   const [reponseValidee, setReponseValidee] = useState(false)
   const [validated, setValidated] = useState(false)
+
+  if (fiche) return <QuizFiche questions={questions} corrige={fiche.corrige} />
 
   const choisirReponse = (index: number) => {
     if (reponseValidee) return

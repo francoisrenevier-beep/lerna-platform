@@ -70,7 +70,7 @@ export function PWAInstallPrompt() {
   if (!show) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-[#3DBFA0] bg-white shadow-lg">
+    <div className="print:hidden fixed bottom-0 left-0 right-0 z-50 border-t-2 border-[#3DBFA0] bg-white shadow-lg">
       <div className="flex items-start gap-3 px-4 py-3 max-w-lg mx-auto">
         <img
           src="/icons/icon-192.png"
