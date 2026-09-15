@@ -79,11 +79,7 @@ const questions: {
     id: "q9",
     question: "Quel est le format des formations ?",
     reponse:
-      "Les formations se suivent en ligne, en tout temps et sur tous les supports (ordinateur, tablette, téléphone). Elles sont organisées en modules courts, généralement d'une vingtaine de minutes, que l'on peut suivre d'une traite ou reprendre en plusieurs fois. Chaque parcours alterne contenus, exemples concrets et points de validation, et donne lieu à une attestation une fois terminé. Certaines formations sont structurées en niveaux progressifs, pour avancer à son rythme sans décrochage.\n\nLe plus simple reste de le constater : un module complet est en accès libre sur le site, sans compte ni formulaire.",
-    lien: {
-      href: "/decouvrir/comprendre-la-violence",
-      libelle: "Suivre ce module maintenant",
-    },
+      "Les formations se suivent en ligne, en tout temps et sur tous les supports (ordinateur, tablette, téléphone). Elles sont organisées en modules courts, généralement d'une vingtaine de minutes, que l'on peut suivre d'une traite ou reprendre en plusieurs fois. Chaque parcours alterne contenus, exemples concrets et points de validation, et donne lieu à une attestation une fois terminé. Certaines formations sont structurées en niveaux progressifs, pour avancer à son rythme sans décrochage.",
   },
 ]
 
