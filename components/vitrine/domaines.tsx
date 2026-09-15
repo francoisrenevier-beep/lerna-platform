@@ -144,7 +144,7 @@ export const DOMAINES_VITRINE: readonly DomaineVitrine[] = [
   },
   {
     value: "protection-mineurs",
-    label: "Protection des mineurs",
+    label: "Enfance et adolescence",
     tintBg: "#FFF7ED",
     iconBg: "#FED7AA",
     iconColor: "#C2410C",

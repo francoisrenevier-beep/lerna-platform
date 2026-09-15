@@ -62,7 +62,7 @@ export const DOMAINES: readonly DomaineMeta[] = [
   },
   {
     value: "protection-mineurs",
-    label: "Protection des mineurs",
+    label: "Enfance et adolescence",
     icon: ShieldCheck,
     tintBg: "#FFF7ED",
     iconBg: "#FED7AA",

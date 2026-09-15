@@ -93,7 +93,7 @@ const DOMAIN_LABELS: Record<string, string> = {
   transversal:           "Transversal",
   management:            "Management",
   pedagogie_specialisee: "Pédagogie spécialisée",
-  protection_mineurs:    "Protection des mineurs",
+  protection_mineurs:    "Enfance et adolescence",
 }
 
 function Badge({ children, color }: { children: React.ReactNode; color?: string }) {

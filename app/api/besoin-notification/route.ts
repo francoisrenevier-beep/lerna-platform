@@ -14,7 +14,7 @@ import { cookies } from 'next/headers'
 const DOMAINE_LABELS: Record<string, string> = {
   'handicap': 'Handicap',
   'pedagogie-specialisee': 'Pédagogie spécialisée',
-  'protection-mineurs': 'Protection des mineurs',
+  'protection-mineurs': 'Enfance et adolescence',
   'transversal': 'Transversal',
   'vieillissement-grand-age': 'Vieillissement et grand âge',
 }

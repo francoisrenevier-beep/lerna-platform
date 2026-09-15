@@ -29,7 +29,7 @@ const DOMAINS = [
   { value: "transversal",           label: "Transversal" },
   { value: "management",            label: "Management" },
   { value: "pedagogie_specialisee", label: "Pédagogie spécialisée" },
-  { value: "protection_mineurs",    label: "Protection des mineurs" },
+  { value: "protection_mineurs",    label: "Enfance et adolescence" },
 ]
 
 const TYPES = [
